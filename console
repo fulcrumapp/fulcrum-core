@@ -1,0 +1,24 @@
+#!/usr/bin/env node
+
+var fs = require('fs');
+
+require('source-map-support').install();
+
+var Fulcrum = require('./dist').default;
+
+// import the API into the global scope to make it easier
+for (var prop in Fulcrum) {
+  if (Fulcrum.hasOwnProperty(prop)) {
+    global[prop] = Fulcrum[prop];
+  }
+}
+
+var formJson = JSON.parse(fs.readFileSync('./test/form.json')).form;
+var recordJson = JSON.parse(fs.readFileSync('./test/record.json')).record;
+
+global.form = new Fulcrum.Form(formJson);
+global.record = new Fulcrum.Record(global.form, recordJson);
+
+var repl = require('repl');
+
+repl.start('fulcrum> ');
