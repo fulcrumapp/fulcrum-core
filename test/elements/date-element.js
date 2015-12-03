@@ -17,7 +17,7 @@ describe('date fields', () => {
 
   it('finds a date value in the record', () => {
     record.formValues.getFormValue('8fd4').should.be.instanceof(DateValue);
-    record.formValues.getFormValue('8fd4').textValue.should.eql('2015-12-01');
+    record.formValues.getFormValue('8fd4').textValue.should.eql('2015-12-02');
   });
 });
 
