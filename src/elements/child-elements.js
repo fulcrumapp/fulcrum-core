@@ -1,4 +1,4 @@
-import Mixin from '../utils/mixin';
+import Mixin from 'mixmatch';
 
 let ElementFactory = null;
 
