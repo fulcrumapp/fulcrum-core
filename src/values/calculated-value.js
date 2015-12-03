@@ -1,6 +1,5 @@
 import TextualValue from './textual-value';
 import NumberUtils from '../utils/number-utils';
-import DateUtils from '../utils/date-utils';
 
 export default class CalculatedValue extends TextualValue {
   constructor(element, value) {
@@ -31,7 +30,7 @@ export default class CalculatedValue extends TextualValue {
     if (display.isCurrency || display.isNumber) {
       return NumberUtils.parseDouble(this.textValue);
     } else if (display.isDate) {
-      const date = DateUtils.parseDate(this.textValue);
+      const date = new Date(`${this.textValue} 00:00:00Z`);
 
       if (date) {
         return date.getTime();

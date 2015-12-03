@@ -55,7 +55,7 @@ describe('calculated fields', () => {
 
     value.toJSON().should.eql('1969-12-31');
 
-    value.columnValue.should.eql(-68400000);
+    value.columnValue.should.eql(-86400000);
   });
 
   it('finds a numeric calculation value in the record', () => {
