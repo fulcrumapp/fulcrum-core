@@ -19,7 +19,6 @@ export default class ChoiceElement extends Element {
       this.choiceList = ElementFactory.getProvider().getChoiceList(this._choiceListID);
       this._choices = this.choiceList.choices.slice();
     } else {
-      console.log(attributes);
       for (let choice of attributes.choices) {
         this._choices.push(new Choice(choice));
       }
