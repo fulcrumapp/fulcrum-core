@@ -10,7 +10,7 @@ const MachineFormatterOptions = {
 let intl = null;
 
 if (typeof Intl !== 'undefined') {
-  intl = (window || global).Intl;
+  intl = global.Intl;
 }
 
 export default class NumberUtils {
