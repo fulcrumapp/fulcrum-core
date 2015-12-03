@@ -6,9 +6,9 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _mixin = require('../utils/mixin');
+var _mixmatch = require('mixmatch');
 
-var _mixin2 = _interopRequireDefault(_mixin);
+var _mixmatch2 = _interopRequireDefault(_mixmatch);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -184,7 +184,7 @@ var ChildElements = (function (_Mixin) {
   }]);
 
   return ChildElements;
-})(_mixin2.default);
+})(_mixmatch2.default);
 
 exports.default = ChildElements;
 //# sourceMappingURL=child-elements.js.map

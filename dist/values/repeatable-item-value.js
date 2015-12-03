@@ -110,7 +110,7 @@ var RepeatableItemValue = (function (_Feature) {
     key: 'formValues',
     get: function get() {
       if (!this._formValues) {
-        this._formValues = new _formValues2.default(this._element.elements, this._formValuesJSON);
+        this._formValues = new _formValues2.default(this._element, this._formValuesJSON);
       }
 
       return this._formValues;

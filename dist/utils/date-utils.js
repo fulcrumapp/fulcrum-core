@@ -21,7 +21,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 var intl = null;
 
 if (typeof Intl !== 'undefined') {
-  intl = (window || global).Intl;
+  intl = global.Intl;
 }
 
 var DateUtils = (function () {
@@ -32,7 +32,7 @@ var DateUtils = (function () {
   _createClass(DateUtils, null, [{
     key: 'parseDate',
     value: function parseDate(dateString) {
-      return new Date(dateString);
+      return new Date(dateString.replace(/-/g, '/'));
     }
   }, {
     key: 'parseTime',

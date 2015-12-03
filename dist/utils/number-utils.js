@@ -24,7 +24,7 @@ var MachineFormatterOptions = {
 var intl = null;
 
 if (typeof Intl !== 'undefined') {
-  intl = (window || global).Intl;
+  intl = global.Intl;
 }
 
 var NumberUtils = (function () {

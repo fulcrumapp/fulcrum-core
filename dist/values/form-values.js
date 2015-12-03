@@ -21,22 +21,22 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 var SearchValueSeparator = ' ';
 
 var FormValues = (function () {
-  function FormValues(elements, attributes) {
+  function FormValues(container, attributes) {
     _classCallCheck(this, FormValues);
 
     this._values = {};
-    this.elements = elements;
-    this.loadValues(this.elements, attributes);
+    this.container = container;
+    this.loadValues(container.elements, attributes);
   }
 
   _createClass(FormValues, [{
-    key: 'getFormValue',
-    value: function getFormValue(key) {
+    key: 'get',
+    value: function get(key) {
       return this._values[key];
     }
   }, {
-    key: 'setFormValue',
-    value: function setFormValue(key, value) {
+    key: 'set',
+    value: function set(key, value) {
       if (value && !(value instanceof _formValue2.default)) {
         throw new Error('Invalid value ' + value);
       }
@@ -46,6 +46,17 @@ var FormValues = (function () {
       } else {
         delete this._values[key];
       }
+    }
+  }, {
+    key: 'find',
+    value: function find(dataName) {
+      var element = this.container.elementsByDataName[dataName];
+
+      if (element) {
+        return this.get(element.key);
+      }
+
+      return null;
     }
   }, {
     key: 'loadValues',
@@ -86,7 +97,7 @@ var FormValues = (function () {
         if (rawValue != null) {
           var formValue = _formValueFactory2.default.create(element, rawValue);
 
-          this.setFormValue(element.key, formValue);
+          this.set(element.key, formValue);
         }
       }
     }
@@ -133,7 +144,7 @@ var FormValues = (function () {
   }, {
     key: 'copy',
     value: function copy() {
-      return new FormValues(this.elements, this.toJSON());
+      return new FormValues(this.container, this.toJSON());
     }
   }, {
     key: 'merge',
@@ -152,7 +163,7 @@ var FormValues = (function () {
 
           var formValue = this._values[key];
 
-          this.setFormValue(key, formValue);
+          this.set(key, formValue);
         }
       } catch (err) {
         _didIteratorError3 = true;

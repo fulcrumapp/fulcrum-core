@@ -82,6 +82,11 @@ var Record = (function (_Feature) {
       this._id = id;
     }
   }, {
+    key: 'form',
+    get: function get() {
+      return this._form;
+    }
+  }, {
     key: 'createdAt',
     get: function get() {
       return this._createdAt;
@@ -101,7 +106,7 @@ var Record = (function (_Feature) {
     key: 'formValues',
     get: function get() {
       if (this._formValues == null) {
-        this._formValues = new _formValues2.default(this._form.elements, this._formValuesJSON);
+        this._formValues = new _formValues2.default(this._form, this._formValuesJSON);
       }
 
       return this._formValues;
@@ -130,7 +135,7 @@ var Record = (function (_Feature) {
         for (var _iterator = titleFieldKeys[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
           var fieldKey = _step.value;
 
-          var value = this.formValues.getFormValue(fieldKey);
+          var value = this.formValues.get(fieldKey);
 
           if (value) {
             var displayValue = value.displayValue;

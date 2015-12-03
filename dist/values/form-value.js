@@ -6,11 +6,19 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
+var _elementTypes = require('../elements/element-types');
+
+var _elementTypes2 = _interopRequireDefault(_elementTypes);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function notImplemented() {
   throw new Error('Not implemented');
 }
+
+var FormValueFactory = null;
 
 var FormValue = (function () {
   function FormValue(element, value) {
@@ -87,6 +95,54 @@ var FormValue = (function () {
     key: 'multipleValues',
     get: function get() {
       notImplemented();
+    }
+  }], [{
+    key: 'factory',
+    value: function factory() {
+      return FormValueFactory = FormValueFactory || require('./form-value-factory').default;
+    }
+  }, {
+    key: 'create',
+    value: function create(element, attributes) {
+      return FormValue.factory().create(element, attributes);
+    }
+  }, {
+    key: 'classes',
+    value: function classes() {
+      if (FormValue._classes == null) {
+        FormValue._classes = {};
+
+        var _iteratorNormalCompletion = true;
+        var _didIteratorError = false;
+        var _iteratorError = undefined;
+
+        try {
+          for (var _iterator = Object.keys(_elementTypes2.default)[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+            var klass = _step.value;
+
+            var constructor = FormValue.factory().classes()[_elementTypes2.default[klass]];
+
+            if (constructor) {
+              FormValue._classes[constructor.name] = constructor;
+            }
+          }
+        } catch (err) {
+          _didIteratorError = true;
+          _iteratorError = err;
+        } finally {
+          try {
+            if (!_iteratorNormalCompletion && _iterator.return) {
+              _iterator.return();
+            }
+          } finally {
+            if (_didIteratorError) {
+              throw _iteratorError;
+            }
+          }
+        }
+      }
+
+      return FormValue._classes;
     }
   }]);
 
