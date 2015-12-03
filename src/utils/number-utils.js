@@ -53,7 +53,7 @@ export default class NumberUtils {
       maximumFractionDigits: 2
     };
 
-    const formatter = new (window || global).Intl.NumberFormat(Locale.currentLocale(), options);
+    const formatter = new global.Intl.NumberFormat(Locale.currentLocale(), options);
 
     return formatter.format(number);
   }
