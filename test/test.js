@@ -28,7 +28,11 @@ describe('Record', () => {
     record.should.be.instanceof(Record);
   });
 
-  it('parses form values', () => {
+  it('parses a yes/no value', () => {
     record.formValues.getFormValue('01ed').textValue.should.eql('no');
+  });
+
+  it('parses a date value', () => {
+    record.formValues.getFormValue('8fd4').textValue.should.eql('2015-12-02');
   });
 });
