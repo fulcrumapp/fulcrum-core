@@ -1,0 +1,1 @@
+{"version":3,"sources":["../../src/values/status-value.js"],"names":[],"mappings":";;;;;;;;;;;;;;;;;;IAEqB,WAAW;YAAX,WAAW;;WAAX,WAAW;0BAAX,WAAW;;kEAAX,WAAW;;;SAAX,WAAW;;;kBAAX,WAAW","file":"status-value.js","sourcesContent":["import TextualValue from './form-value';\n\nexport default class StatusValue extends TextualValue {\n}\n"]}

@@ -1,0 +1,82 @@
+'use strict';
+
+var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _textualValue = require('./textual-value');
+
+var _textualValue2 = _interopRequireDefault(_textualValue);
+
+var _numberUtils = require('../utils/number-utils');
+
+var _numberUtils2 = _interopRequireDefault(_numberUtils);
+
+var _dateUtils = require('../utils/date-utils');
+
+var _dateUtils2 = _interopRequireDefault(_dateUtils);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var CalculatedValue = (function (_TextualValue) {
+  _inherits(CalculatedValue, _TextualValue);
+
+  function CalculatedValue(element, value) {
+    _classCallCheck(this, CalculatedValue);
+
+    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(CalculatedValue).call(this, element, value));
+
+    _this.error = null;
+    return _this;
+  }
+
+  _createClass(CalculatedValue, [{
+    key: 'displayValue',
+    get: function get() {
+      if (this.hasError) {
+        return this.error;
+      }
+
+      return this.element.display.format(this.textValue);
+    }
+  }, {
+    key: 'hasError',
+    get: function get() {
+      return this.error != null;
+    }
+  }, {
+    key: 'columnValue',
+    get: function get() {
+      var display = this.element.display;
+
+      // - for currency or number display, return the numeric value
+      // - for date calculations return the UTC epoch seconds
+      // - for text (and anything else) just return the string value
+
+      if (display.isCurrency || display.isNumber) {
+        return _numberUtils2.default.parseDouble(this.textValue);
+      } else if (display.isDate) {
+        var date = _dateUtils2.default.parseDate(this.textValue);
+
+        if (date) {
+          return date.getTime();
+        }
+      }
+
+      return this.textValue;
+    }
+  }]);
+
+  return CalculatedValue;
+})(_textualValue2.default);
+
+exports.default = CalculatedValue;
+//# sourceMappingURL=calculated-value.js.map

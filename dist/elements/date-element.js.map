@@ -1,0 +1,1 @@
+{"version":3,"sources":["../../src/elements/date-element.js"],"names":[],"mappings":";;;;;;;;;;;;;;;;;;IAEqB,WAAW;YAAX,WAAW;;WAAX,WAAW;0BAAX,WAAW;;kEAAX,WAAW;;;SAAX,WAAW;;;kBAAX,WAAW","file":"date-element.js","sourcesContent":["import TextualElement from './textual-element';\n\nexport default class DateElement extends TextualElement {\n}\n\n"]}

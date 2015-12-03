@@ -1,0 +1,1 @@
+{"version":3,"sources":["../../src/values/barcode-value.js"],"names":[],"mappings":";;;;;;;;;;;;;;;;;;IAEqB,YAAY;YAAZ,YAAY;;WAAZ,YAAY;0BAAZ,YAAY;;kEAAZ,YAAY;;;SAAZ,YAAY;;;kBAAZ,YAAY","file":"barcode-value.js","sourcesContent":["import TextualValue from './textual-value';\n\nexport default class BarcodeValue extends TextualValue {\n}\n"]}

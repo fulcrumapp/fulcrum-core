@@ -27,4 +27,8 @@ describe('Record', () => {
   it('parses a record', () => {
     record.should.be.instanceof(Record);
   });
+
+  it('parses form values', () => {
+    record.formValues.getFormValue('01ed').textValue.should.eql('no');
+  });
 });

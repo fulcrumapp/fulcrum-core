@@ -1,0 +1,77 @@
+'use strict';
+
+var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _textualValue = require('./textual-value');
+
+var _textualValue2 = _interopRequireDefault(_textualValue);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var YesNoValue = (function (_TextualValue) {
+  _inherits(YesNoValue, _TextualValue);
+
+  function YesNoValue() {
+    _classCallCheck(this, YesNoValue);
+
+    return _possibleConstructorReturn(this, Object.getPrototypeOf(YesNoValue).apply(this, arguments));
+  }
+
+  _createClass(YesNoValue, [{
+    key: 'isPositive',
+    get: function get() {
+      if (this.element.positiveChoice) {
+        return this.textValue === this.element.positiveChoice.value;
+      }
+
+      return false;
+    }
+  }, {
+    key: 'isNegative',
+    get: function get() {
+      if (this.element.negativeChoice) {
+        return this.textValue === this.element.negativeChoice.value;
+      }
+
+      return false;
+    }
+  }, {
+    key: 'isNeutral',
+    get: function get() {
+      if (this.element.neutralChoice) {
+        return this.textValue === this.element.neutralChoice.value;
+      }
+
+      return false;
+    }
+  }, {
+    key: 'displayValue',
+    get: function get() {
+      switch (true) {
+        case this.isPositive:
+          return this.yesNoElement.positiveChoice.label;
+        case this.isNegative:
+          return this.yesNoElement.negativeChoice.label;
+        case this.isNeutral:
+          return this.yesNoElement.neutralChoice.label;
+        default:
+          return this.textValue;
+      }
+    }
+  }]);
+
+  return YesNoValue;
+})(_textualValue2.default);
+
+exports.default = YesNoValue;
+//# sourceMappingURL=yes-no-value.js.map
