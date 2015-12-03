@@ -9,7 +9,7 @@ if (typeof Intl !== 'undefined') {
 
 export default class DateUtils {
   static parseDate(dateString) {
-    return new Date(dateString);
+    return new Date(dateString.replace(/-/g, '/'));
   }
 
   static parseTime(timeString) {
