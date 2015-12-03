@@ -62,44 +62,6 @@ var Address = (function () {
       return !(_textUtils2.default.isPresent(this.streetNumber) || _textUtils2.default.isPresent(this.streetName) || _textUtils2.default.isPresent(this.suite) || _textUtils2.default.isPresent(this.city) || _textUtils2.default.isPresent(this.county) || _textUtils2.default.isPresent(this.state) || _textUtils2.default.isPresent(this.postalCode) || _textUtils2.default.isPresent(this.country));
     }
   }, {
-    key: 'lines',
-    value: function lines() {
-      var result = [];
-
-      var line1 = this.line1();
-      var line2 = this.line2();
-      var line3 = this.line3();
-
-      if (_textUtils2.default.isPresent(line1)) {
-        result.push(line1);
-      }
-
-      if (_textUtils2.default.isPresent(line2)) {
-        result.push(line2);
-      }
-
-      if (_textUtils2.default.isPresent(line3)) {
-        result.push(line3);
-      }
-
-      return result;
-    }
-  }, {
-    key: 'line1',
-    value: function line1() {
-      return this.line(this.streetNumber, this.streetName, this.suite);
-    }
-  }, {
-    key: 'line2',
-    value: function line2() {
-      return this.line(this.city, this.state, this.postalCode);
-    }
-  }, {
-    key: 'line3',
-    value: function line3() {
-      return this.line(this.country);
-    }
-  }, {
     key: 'line',
     value: function line() {
       var result = [];
@@ -136,6 +98,44 @@ var Address = (function () {
       }
 
       return result.join(' ');
+    }
+  }, {
+    key: 'lines',
+    get: function get() {
+      var result = [];
+
+      var line1 = this.line1;
+      var line2 = this.line2;
+      var line3 = this.line3;
+
+      if (_textUtils2.default.isPresent(line1)) {
+        result.push(line1);
+      }
+
+      if (_textUtils2.default.isPresent(line2)) {
+        result.push(line2);
+      }
+
+      if (_textUtils2.default.isPresent(line3)) {
+        result.push(line3);
+      }
+
+      return result;
+    }
+  }, {
+    key: 'line1',
+    get: function get() {
+      return this.line(this.streetNumber, this.streetName, this.suite);
+    }
+  }, {
+    key: 'line2',
+    get: function get() {
+      return this.line(this.city, this.state, this.postalCode);
+    }
+  }, {
+    key: 'line3',
+    get: function get() {
+      return this.line(this.country);
     }
   }]);
 

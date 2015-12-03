@@ -72,12 +72,12 @@ var AddressValue = (function (_FormValue) {
   }, {
     key: 'displayValue',
     get: function get() {
-      return this.address.lines().join('\n');
+      return this.address.lines.join('\n');
     }
   }, {
     key: 'searchableValue',
     get: function get() {
-      return this.address.lines().join(' ');
+      return this.address.lines.join(' ');
     }
   }, {
     key: 'length',

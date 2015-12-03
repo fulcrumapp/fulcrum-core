@@ -49,6 +49,11 @@ var TextElement = (function (_TextualElement) {
   }
 
   _createClass(TextElement, [{
+    key: 'isLengthValidationSupported',
+    get: function get() {
+      return true;
+    }
+  }, {
     key: 'isDecimalFormat',
     get: function get() {
       return this.numeric && this.format === 'decimal';

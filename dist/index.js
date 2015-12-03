@@ -20,14 +20,23 @@ var _formValue = require('./values/form-value');
 
 var _formValue2 = _interopRequireDefault(_formValue);
 
+var _choice = require('./elements/choice');
+
+var _choice2 = _interopRequireDefault(_choice);
+
+var _classification = require('./elements/classification');
+
+var _classification2 = _interopRequireDefault(_classification);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var api = {
   Form: _form2.default,
-  Record: _record2.default
-  // Condition: require('./elements/condition'),
-  // NumberUtils: require('./utils/number-utils'),
-  // CalculatedElement: require('./elements/calculated-element')
+  Record: _record2.default,
+  Element: _element2.default,
+  FormValue: _formValue2.default,
+  Choice: _choice2.default,
+  Classification: _classification2.default
 };
 
 var elements = _element2.default.classes();

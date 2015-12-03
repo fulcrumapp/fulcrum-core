@@ -77,7 +77,7 @@ var NumberUtils = (function () {
         maximumFractionDigits: 2
       };
 
-      var formatter = new (window || global).Intl.NumberFormat(_locale2.default.currentLocale(), options);
+      var formatter = new global.Intl.NumberFormat(_locale2.default.currentLocale(), options);
 
       return formatter.format(number);
     }

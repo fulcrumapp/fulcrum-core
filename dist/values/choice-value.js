@@ -183,7 +183,7 @@ var ChoiceValue = (function (_FormValue) {
         for (var _iterator5 = this._choiceValues[Symbol.iterator](), _step5; !(_iteratorNormalCompletion5 = (_step5 = _iterator5.next()).done); _iteratorNormalCompletion5 = true) {
           var rawValue = _step5.value;
 
-          var choice = this.choiceElement.choiceByValue(rawValue);
+          var choice = this.element.choiceByValue(rawValue);
 
           var label = choice != null ? choice.label : rawValue;
 
@@ -246,7 +246,7 @@ var ChoiceValue = (function (_FormValue) {
         for (var _iterator7 = this._choiceValues[Symbol.iterator](), _step7; !(_iteratorNormalCompletion7 = (_step7 = _iterator7.next()).done); _iteratorNormalCompletion7 = true) {
           var rawValue = _step7.value;
 
-          var choice = this.choiceElement.choiceByValue(rawValue);
+          var choice = this.element.choiceByValue(rawValue);
 
           if (choice != null) {
             values.push(choice.label);

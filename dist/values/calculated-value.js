@@ -14,10 +14,6 @@ var _numberUtils = require('../utils/number-utils');
 
 var _numberUtils2 = _interopRequireDefault(_numberUtils);
 
-var _dateUtils = require('../utils/date-utils');
-
-var _dateUtils2 = _interopRequireDefault(_dateUtils);
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -64,7 +60,7 @@ var CalculatedValue = (function (_TextualValue) {
       if (display.isCurrency || display.isNumber) {
         return _numberUtils2.default.parseDouble(this.textValue);
       } else if (display.isDate) {
-        var date = _dateUtils2.default.parseDate(this.textValue);
+        var date = new Date(this.textValue + ' 00:00:00Z');
 
         if (date) {
           return date.getTime();

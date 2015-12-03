@@ -14,6 +14,10 @@ var _textUtils = require('../utils/text-utils');
 
 var _textUtils2 = _interopRequireDefault(_textUtils);
 
+var _classification = require('../elements/classification');
+
+var _classification2 = _interopRequireDefault(_classification);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -97,7 +101,7 @@ var ClassificationValue = (function (_FormValue) {
   _createClass(ClassificationValue, [{
     key: 'toJSON',
     value: function toJSON() {
-      if (this.isEmpty()) {
+      if (this.isEmpty) {
         return null;
       }
 
@@ -110,74 +114,19 @@ var ClassificationValue = (function (_FormValue) {
       };
     }
   }, {
-    key: 'columnValue',
-    value: function columnValue() {
-      var allValues = [];
-
-      var _iteratorNormalCompletion3 = true;
-      var _didIteratorError3 = false;
-      var _iteratorError3 = undefined;
-
-      try {
-        for (var _iterator3 = this._choiceValues[Symbol.iterator](), _step3; !(_iteratorNormalCompletion3 = (_step3 = _iterator3.next()).done); _iteratorNormalCompletion3 = true) {
-          var value = _step3.value;
-
-          allValues.push(value);
-        }
-      } catch (err) {
-        _didIteratorError3 = true;
-        _iteratorError3 = err;
-      } finally {
-        try {
-          if (!_iteratorNormalCompletion3 && _iterator3.return) {
-            _iterator3.return();
-          }
-        } finally {
-          if (_didIteratorError3) {
-            throw _iteratorError3;
-          }
-        }
+    key: 'setSelectedClassification',
+    value: function setSelectedClassification(classification, otherValue) {
+      if (classification instanceof _classification2.default) {
+        this._choiceValues = classification.toJSON();
+      } else {
+        this._choiceValues = [];
       }
 
-      var _iteratorNormalCompletion4 = true;
-      var _didIteratorError4 = false;
-      var _iteratorError4 = undefined;
-
-      try {
-        for (var _iterator4 = this._otherValues[Symbol.iterator](), _step4; !(_iteratorNormalCompletion4 = (_step4 = _iterator4.next()).done); _iteratorNormalCompletion4 = true) {
-          var value = _step4.value;
-
-          allValues.push(value);
-        }
-      } catch (err) {
-        _didIteratorError4 = true;
-        _iteratorError4 = err;
-      } finally {
-        try {
-          if (!_iteratorNormalCompletion4 && _iterator4.return) {
-            _iterator4.return();
-          }
-        } finally {
-          if (_didIteratorError4) {
-            throw _iteratorError4;
-          }
-        }
+      if (otherValue) {
+        this._otherValues = [otherValue.toString()];
+      } else {
+        this._otherVaues = [];
       }
-
-      if (allValues.length === 0) {
-        return null;
-      }
-
-      if (!this.element.multiple) {
-        return allValues[0];
-      }
-
-      return allValues.join('\t');
-    }
-  }, {
-    key: 'hasOtherValue',
-    value: function hasOtherValue() {
-      return this._otherValues.length !== 0;
     }
   }, {
     key: 'isEmpty',
@@ -195,21 +144,110 @@ var ClassificationValue = (function (_FormValue) {
   }, {
     key: 'displayValue',
     get: function get() {
-      var labels = [];
+      var values = [];
+
+      var classification = this.selectedClassification;
+
+      if (classification) {
+        var _iteratorNormalCompletion3 = true;
+        var _didIteratorError3 = false;
+        var _iteratorError3 = undefined;
+
+        try {
+          for (var _iterator3 = classification.exploded[Symbol.iterator](), _step3; !(_iteratorNormalCompletion3 = (_step3 = _iterator3.next()).done); _iteratorNormalCompletion3 = true) {
+            var item = _step3.value;
+
+            if (item.label) {
+              values.push(item.label);
+            }
+          }
+        } catch (err) {
+          _didIteratorError3 = true;
+          _iteratorError3 = err;
+        } finally {
+          try {
+            if (!_iteratorNormalCompletion3 && _iterator3.return) {
+              _iterator3.return();
+            }
+          } finally {
+            if (_didIteratorError3) {
+              throw _iteratorError3;
+            }
+          }
+        }
+      }
+
+      if (this.hasOtherValue) {
+        values.push(this.otherValue);
+      }
+
+      return values.join(DisplaySeparator);
+    }
+  }, {
+    key: 'searchableValue',
+    get: function get() {
+      var values = [];
+
+      var classification = this.selectedClassification;
+
+      if (classification) {
+        var _iteratorNormalCompletion4 = true;
+        var _didIteratorError4 = false;
+        var _iteratorError4 = undefined;
+
+        try {
+          for (var _iterator4 = classification.exploded[Symbol.iterator](), _step4; !(_iteratorNormalCompletion4 = (_step4 = _iterator4.next()).done); _iteratorNormalCompletion4 = true) {
+            var item = _step4.value;
+
+            if (item.label) {
+              values.push(item.label);
+            }
+
+            if (item.value) {
+              values.push(item.value);
+            }
+          }
+        } catch (err) {
+          _didIteratorError4 = true;
+          _iteratorError4 = err;
+        } finally {
+          try {
+            if (!_iteratorNormalCompletion4 && _iterator4.return) {
+              _iterator4.return();
+            }
+          } finally {
+            if (_didIteratorError4) {
+              throw _iteratorError4;
+            }
+          }
+        }
+      }
+
+      if (this.hasOtherValue) {
+        values.push(this.otherValue);
+      }
+
+      return values.join(SearchSeparator);
+    }
+  }, {
+    key: 'length',
+    get: function get() {
+      return this._choiceValues.length + this._otherValues.length;
+    }
+  }, {
+    key: 'columnValue',
+    get: function get() {
+      var allValues = [];
+
       var _iteratorNormalCompletion5 = true;
       var _didIteratorError5 = false;
       var _iteratorError5 = undefined;
 
       try {
         for (var _iterator5 = this._choiceValues[Symbol.iterator](), _step5; !(_iteratorNormalCompletion5 = (_step5 = _iterator5.next()).done); _iteratorNormalCompletion5 = true) {
-          var rawValue = _step5.value;
+          var value = _step5.value;
 
-          var classification = this.element.classificationByValue(rawValue);
-          var label = classification != null ? classification.label : rawValue;
-
-          if (_textUtils2.default.isPresent(label)) {
-            labels.push(label);
-          }
+          allValues.push(value);
         }
       } catch (err) {
         _didIteratorError5 = true;
@@ -234,7 +272,7 @@ var ClassificationValue = (function (_FormValue) {
         for (var _iterator6 = this._otherValues[Symbol.iterator](), _step6; !(_iteratorNormalCompletion6 = (_step6 = _iterator6.next()).done); _iteratorNormalCompletion6 = true) {
           var value = _step6.value;
 
-          labels.push(value);
+          allValues.push(value);
         }
       } catch (err) {
         _didIteratorError6 = true;
@@ -251,27 +289,76 @@ var ClassificationValue = (function (_FormValue) {
         }
       }
 
-      return labels.join(DisplaySeparator);
+      if (allValues.length === 0) {
+        return null;
+      }
+
+      return allValues.join('\t');
     }
   }, {
-    key: 'searchableValue',
+    key: 'multipleValues',
     get: function get() {
-      var values = [];
+      return null;
+    }
+  }, {
+    key: 'hasOtherValue',
+    get: function get() {
+      return this._otherValues.length !== 0;
+    }
+  }, {
+    key: 'otherValue',
+    get: function get() {
+      if (!this.hasOtherValue) {
+        return null;
+      }
+
+      return this._otherValues[0];
+    }
+  }, {
+    key: 'selectedClassification',
+    get: function get() {
+      var result = null;
+
+      if (this._choiceValues.length === 0) {
+        return null;
+      }
+
+      var currentClassifications = this.element.classificationItems;
+
       var _iteratorNormalCompletion7 = true;
       var _didIteratorError7 = false;
       var _iteratorError7 = undefined;
 
       try {
         for (var _iterator7 = this._choiceValues[Symbol.iterator](), _step7; !(_iteratorNormalCompletion7 = (_step7 = _iterator7.next()).done); _iteratorNormalCompletion7 = true) {
-          var rawValue = _step7.value;
+          var classificationValue = _step7.value;
+          var _iteratorNormalCompletion8 = true;
+          var _didIteratorError8 = false;
+          var _iteratorError8 = undefined;
 
-          var classification = this.element.classificationByValue(rawValue);
+          try {
+            for (var _iterator8 = currentClassifications[Symbol.iterator](), _step8; !(_iteratorNormalCompletion8 = (_step8 = _iterator8.next()).done); _iteratorNormalCompletion8 = true) {
+              var classification = _step8.value;
 
-          if (classification != null) {
-            values.push(classification.label);
-            values.push(classification.value);
-          } else {
-            values.push(rawValue);
+              if (classification.value === classificationValue) {
+                result = classification;
+                currentClassifications = classification.children;
+                break;
+              }
+            }
+          } catch (err) {
+            _didIteratorError8 = true;
+            _iteratorError8 = err;
+          } finally {
+            try {
+              if (!_iteratorNormalCompletion8 && _iterator8.return) {
+                _iterator8.return();
+              }
+            } finally {
+              if (_didIteratorError8) {
+                throw _iteratorError8;
+              }
+            }
           }
         }
       } catch (err) {
@@ -289,42 +376,7 @@ var ClassificationValue = (function (_FormValue) {
         }
       }
 
-      var _iteratorNormalCompletion8 = true;
-      var _didIteratorError8 = false;
-      var _iteratorError8 = undefined;
-
-      try {
-        for (var _iterator8 = this._otherValues[Symbol.iterator](), _step8; !(_iteratorNormalCompletion8 = (_step8 = _iterator8.next()).done); _iteratorNormalCompletion8 = true) {
-          var value = _step8.value;
-
-          values.push(value);
-        }
-      } catch (err) {
-        _didIteratorError8 = true;
-        _iteratorError8 = err;
-      } finally {
-        try {
-          if (!_iteratorNormalCompletion8 && _iterator8.return) {
-            _iterator8.return();
-          }
-        } finally {
-          if (_didIteratorError8) {
-            throw _iteratorError8;
-          }
-        }
-      }
-
-      return values.join(SearchSeparator);
-    }
-  }, {
-    key: 'length',
-    get: function get() {
-      return this._choiceValues.length + this._otherValues.length;
-    }
-  }, {
-    key: 'multipleValues',
-    get: function get() {
-      return null;
+      return result;
     }
   }]);
 

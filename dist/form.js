@@ -25,10 +25,25 @@ var Form = (function () {
   }
 
   _createClass(Form, [{
+    key: 'get',
+    value: function get(key) {
+      return this.elementsByKey[key];
+    }
+  }, {
+    key: 'find',
+    value: function find(dataName) {
+      return this.elementsByDataName[dataName];
+    }
+  }, {
     key: 'toJSON',
     value: function toJSON() {
       // TODO(zhm) actually implement this so it returns a copy
       return this._json;
+    }
+  }, {
+    key: 'hasHiddenParent',
+    get: function get() {
+      return false;
     }
   }]);
 
