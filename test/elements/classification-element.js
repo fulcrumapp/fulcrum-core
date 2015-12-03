@@ -22,39 +22,47 @@ describe('choice fields', () => {
     field.classificationItems[1].children[0].should.be.instanceof(Classification);
   });
 
-  // it('supports overriding the choices', () => {
-  //   const field = record.form.find('single_choice');
+  it('supports overriding the choices', () => {
+    const field = record.form.find('os');
 
-  //   field.overrideChoices = [ { label: 'red' },
-  //                             { label: 'green' },
-  //                             { label: 'blue' }];
+    field.overrideClassificationItems = [ { label: 'No Color' },
+                                          { label: 'Colors',
+                                            child_classifications: [ { label: 'Red' },
+                                                                     { label: 'Green' },
+                                                                     { label: 'Blue' } ] },
+                                          { label: 'Test' } ];
 
-  //   field.choices[0].label.should.eql('red');
-  //   field.choices[1].label.should.eql('green');
-  //   field.choices[2].label.should.eql('blue');
+    // override the options on the fly
+    field.classificationItems[1].children[0].should.be.instanceof(Classification);
+    field.classificationItems[1].children[0].value.should.eql('Red');
+    field.classificationItems[1].children[1].value.should.eql('Green');
+    field.classificationItems[1].children[2].value.should.eql('Blue');
 
-  //   field.overrideChoices = null;
+    // now bring the original items back
+    field.overrideClassificationItems = null;
 
-  //   field.choices[0].label.should.eql('Safety Critical');
-  // });
+    field.classificationItems[1].children[0].value.should.eql('Server');
+    field.classificationItems[2].children[0].value.should.eql('Ubuntu');
+  });
 
-  // it('supports filtering the choices', () => {
-  //   const field = record.form.find('single_choice');
+  it('supports filtering the choices', () => {
+    const field = record.form.find('os');
 
-  //   field.choices.length.should.eql(4);
+    // should be unfiltered
+    field.classificationItems[0].value.should.eql('Unknown');
 
-  //   field.choiceFilter = ['crit'];
+    // filter by 'windows'
+    field.classificationFilter = ['windows'];
+    field.classificationItems[0].value.should.eql('Windows');
 
-  //   field.choices.length.should.eql(3);
+    // filter by 'linux'
+    field.classificationFilter = ['linux'];
+    field.classificationItems[0].value.should.eql('Linux');
 
-  //   field.choiceFilter = ['important'];
-
-  //   field.choices.length.should.eql(1);
-
-  //   field.choiceFilter = null;
-
-  //   field.choices.length.should.eql(4);
-  // });
+    // back to unfiltered
+    field.classificationFilter = null;
+    field.classificationItems[0].value.should.eql('Unknown');
+  });
 
   it('finds a single choice value in the record', () => {
     const value = record.formValues.find('os');

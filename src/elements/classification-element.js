@@ -9,7 +9,7 @@ export default class ClassificationElement extends Element {
     this.allowOther = !!attributes.allowOther;
     this.choiceFilter = null;
 
-    this.overrideClassificationItems = null;
+    this._overrideClassificationItems = null;
 
     this._classificationSetID = attributes.classification_set_id;
 
@@ -24,7 +24,7 @@ export default class ClassificationElement extends Element {
 
   set overrideClassificationItems(overrideClassificationSetItems) {
     if (!overrideClassificationSetItems || overrideClassificationSetItems.length < 1) {
-      this._overrideClassificationSetItems = null;
+      this._overrideClassificationItems = null;
       return;
     }
 
@@ -36,7 +36,7 @@ export default class ClassificationElement extends Element {
       classificationItems.push(classification);
     }
 
-    this._overrideClassificationSetItems = classificationItems;
+    this._overrideClassificationItems = classificationItems;
   }
 
   get filteredClassifications() {
