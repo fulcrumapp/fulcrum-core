@@ -40,7 +40,7 @@ export default class ChoiceValue extends FormValue {
     const labels = [];
 
     for (let rawValue of this._choiceValues) {
-      const choice = this.choiceElement.choiceByValue(rawValue);
+      const choice = this.element.choiceByValue(rawValue);
 
       const label = (choice != null ? choice.label : rawValue);
 
@@ -60,7 +60,7 @@ export default class ChoiceValue extends FormValue {
     const values = [];
 
     for (let rawValue of this._choiceValues) {
-      const choice = this.choiceElement.choiceByValue(rawValue);
+      const choice = this.element.choiceByValue(rawValue);
 
       if (choice != null) {
         values.push(choice.label);

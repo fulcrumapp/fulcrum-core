@@ -141,7 +141,9 @@
   "globals": {
     "document": false,
     "navigator": false,
-    "window": false
+    "window": false,
+    "shouldBeUndefined": true,
+    "shouldBeNull": true
   },
   "extends": "eslint:recommended"
 }

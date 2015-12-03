@@ -1,7 +1,6 @@
 import Element from './element';
 import ElementFactory from './element-factory';
 import Choice from './choice';
-import _ from 'lodash';
 
 export default class ChoiceElement extends Element {
   constructor(parent, attributes) {
@@ -43,8 +42,10 @@ export default class ChoiceElement extends Element {
     const filteredItems = [];
 
     for (let item of items) {
-      if (_.contains(this.choiceFilter, item.value.toLowerCase())) {
-        filteredItems.push(item);
+      for (let filter of this.choiceFilter) {
+        if (item.value.toLowerCase().indexOf(filter.toLowerCase()) !== -1) {
+          filteredItems.push(item);
+        }
       }
     }
 
@@ -56,7 +57,7 @@ export default class ChoiceElement extends Element {
   }
 
   set overrideChoices(overrideChoices) {
-    this.choicesByValue = null;
+    this._choicesByValue = null;
 
     if (!overrideChoices || overrideChoices.length < 1) {
       this._overrideChoices = null;
@@ -72,5 +73,17 @@ export default class ChoiceElement extends Element {
     }
 
     this._overrideChoices = choices;
+  }
+
+  choiceByValue(value) {
+    if (!this._choicesByValue) {
+      this._choicesByValue = {};
+
+      for (let choice of this.choices) {
+        this._choicesByValue[choice.value] = choice;
+      }
+    }
+
+    return this._choicesByValue[value];
   }
 }

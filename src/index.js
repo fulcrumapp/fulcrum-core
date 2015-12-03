@@ -2,13 +2,16 @@ import Form from './form';
 import Record from './record';
 import Element from './elements/element';
 import FormValue from './values/form-value';
+import Choice from './elements/choice';
+import Classification from './elements/classification';
 
 const api = {
   Form: Form,
-  Record: Record
-  // Condition: require('./elements/condition'),
-  // NumberUtils: require('./utils/number-utils'),
-  // CalculatedElement: require('./elements/calculated-element')
+  Record: Record,
+  Element: Element,
+  FormValue: FormValue,
+  Choice: Choice,
+  Classification: Classification
 };
 
 const elements = Element.classes();
@@ -22,8 +25,5 @@ const values = FormValue.classes();
 for (let prop of Object.keys(values)) {
   api[prop] = values[prop];
 }
-
-api.Element = Element;
-api.FormValue = FormValue;
 
 export default api;
