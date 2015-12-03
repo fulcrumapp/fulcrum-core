@@ -17,6 +17,8 @@ import BarcodeElement from './barcode-element';
 import CalculatedElement from './calculated-element';
 import RecordLinkElement from './record-link-element';
 
+let SchemaProvider = null;
+
 const Constructors = {
   Section: Section,
   ChoiceField: ChoiceElement,
@@ -52,5 +54,13 @@ export default class ElementFactory {
 
   static classes() {
     return Constructors;
+  }
+
+  static setProvider(provider) {
+    SchemaProvider = provider;
+  }
+
+  static getProvider() {
+    return SchemaProvider;
   }
 }

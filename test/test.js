@@ -11,7 +11,7 @@ let record = null;
 let recordJson = null;
 
 beforeEach((done) => {
-  formJson = JSON.parse(fs.readFileSync('./test/form.json')).form;
+  formJson = JSON.parse(fs.readFileSync('./test/fixtures/forms/18300cfb-20e3-4e8b-9aef-878636b09ac4.json')).form;
   recordJson = JSON.parse(fs.readFileSync('./test/record.json')).record;
 
   form = new Form(formJson);
