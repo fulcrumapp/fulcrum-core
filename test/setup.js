@@ -2,6 +2,10 @@
 
 require('babel-core/register')();
 
+var chai = require('chai');
+
+chai.should();
+
 global.shouldBeNull = function (value) {
   (value == null).should.be.true;
 };

@@ -8,6 +8,14 @@ export default class Form {
     this.titleFieldKeys = attributes.titile_field_keys;
   }
 
+  elementByKey(key) {
+    for (let element of this.elements) {
+      if (element.key === key) {
+        return element;
+      }
+    }
+  }
+
   toJSON() {
     // TODO(zhm) actually implement this so it returns a copy
     return this._json;

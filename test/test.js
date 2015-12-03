@@ -1,8 +1,5 @@
 import fs from 'fs';
-import chai from 'chai';
 import Fulcrum from '../src';
-
-chai.should();
 
 const Form = Fulcrum.Form;
 const Record = Fulcrum.Record;

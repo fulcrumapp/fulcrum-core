@@ -24,6 +24,10 @@ export default class Record extends Feature {
     this._id = id;
   }
 
+  get form() {
+    return this._form;
+  }
+
   get createdAt() {
     return this._createdAt;
   }
