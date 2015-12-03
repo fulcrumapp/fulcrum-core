@@ -30,7 +30,7 @@
   },
   "dependencies": {
     "lodash": "^3.10.1",
-    "mixmatch": "0.0.1"
+    "mixmatch": "0.0.2"
   },
   "keywords": [
     "fulcrum"
