@@ -1,4 +1,4 @@
-import Classification from './elements/choice';
+import Classification from './elements/classification';
 
 export default class ClassificationSet {
   constructor(attributes) {
@@ -9,9 +9,8 @@ export default class ClassificationSet {
 
     if (attributes.items) {
       for (let item of attributes.items) {
-        this.items.push(new Classification(item));
+        this.items.push(new Classification(null, item));
       }
     }
   }
 }
-

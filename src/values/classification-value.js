@@ -1,5 +1,6 @@
 import FormValue from './form-value';
 import TextUtils from '../utils/text-utils';
+import Classification from '../elements/classification';
 
 const DisplaySeparator = ' ▸ ';
 
@@ -38,38 +39,44 @@ export default class ClassificationValue extends FormValue {
   }
 
   get displayValue() {
-    const labels = [];
-    for (let rawValue of this._choiceValues) {
-      const classification = this.element.classificationByValue(rawValue);
-      const label = classification != null ? classification.label : rawValue;
+    const values = [];
 
-      if (TextUtils.isPresent(label)) {
-        labels.push(label);
+    const classification = this.selectedClassification;
+
+    if (classification) {
+      for (let item of classification.exploded) {
+        if (item.label) {
+          values.push(item.label);
+        }
       }
     }
 
-    for (let value of this._otherValues) {
-      labels.push(value);
+    if (this.hasOtherValue) {
+      values.push(this.otherValue);
     }
 
-    return labels.join(DisplaySeparator);
+    return values.join(DisplaySeparator);
   }
 
   get searchableValue() {
     const values = [];
-    for (let rawValue of this._choiceValues) {
-      const classification = this.element.classificationByValue(rawValue);
 
-      if (classification != null) {
-        values.push(classification.label);
-        values.push(classification.value);
-      } else {
-        values.push(rawValue);
+    const classification = this.selectedClassification;
+
+    if (classification) {
+      for (let item of classification.exploded) {
+        if (item.label) {
+          values.push(item.label);
+        }
+
+        if (item.value) {
+          values.push(item.value);
+        }
       }
     }
 
-    for (let value of this._otherValues) {
-      values.push(value);
+    if (this.hasOtherValue) {
+      values.push(this.otherValue);
     }
 
     return values.join(SearchSeparator);
@@ -80,7 +87,7 @@ export default class ClassificationValue extends FormValue {
   }
 
   toJSON() {
-    if (this.isEmpty()) {
+    if (this.isEmpty) {
       return null;
     }
 
@@ -93,7 +100,7 @@ export default class ClassificationValue extends FormValue {
     };
   }
 
-  columnValue() {
+  get columnValue() {
     const allValues = [];
 
     for (let value of this._choiceValues) {
@@ -108,10 +115,6 @@ export default class ClassificationValue extends FormValue {
       return null;
     }
 
-    if (!this.element.multiple) {
-      return allValues[0];
-    }
-
     return allValues.join('\t');
   }
 
@@ -119,7 +122,51 @@ export default class ClassificationValue extends FormValue {
     return null;
   }
 
-  hasOtherValue() {
+  get hasOtherValue() {
     return this._otherValues.length !== 0;
+  }
+
+  get otherValue() {
+    if (!this.hasOtherValue) {
+      return null;
+    }
+
+    return this._otherValues[0];
+  }
+
+  get selectedClassification() {
+    let result = null;
+
+    if (this._choiceValues.length === 0) {
+      return null;
+    }
+
+    let currentClassifications = this.element.classificationItems;
+
+    for (let classificationValue of this._choiceValues) {
+      for (let classification of currentClassifications) {
+        if (classification.value === classificationValue) {
+          result = classification;
+          currentClassifications = classification.children;
+          break;
+        }
+      }
+    }
+
+    return result;
+  }
+
+  setSelectedClassification(classification, otherValue) {
+    if (classification instanceof Classification) {
+      this._choiceValues = classification.toJSON();
+    } else {
+      this._choiceValues = [];
+    }
+
+    if (otherValue) {
+      this._otherValues = [ otherValue.toString() ];
+    } else {
+      this._otherVaues = [];
+    }
   }
 }
