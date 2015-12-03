@@ -9,4 +9,7 @@ clean:
 test:
 	npm test
 
-.PHONY: build clean test
+simpletest:
+	npm run simpletest
+
+.PHONY: build clean test simpletest
