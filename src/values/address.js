@@ -49,12 +49,12 @@ export default class Address {
              TextUtils.isPresent(this.country));
   }
 
-  lines() {
+  get lines() {
     const result = [];
 
-    const line1 = this.line1();
-    const line2 = this.line2();
-    const line3 = this.line3();
+    const line1 = this.line1;
+    const line2 = this.line2;
+    const line3 = this.line3;
 
     if (TextUtils.isPresent(line1)) {
       result.push(line1);
@@ -71,15 +71,15 @@ export default class Address {
     return result;
   }
 
-  line1() {
+  get line1() {
     return this.line(this.streetNumber, this.streetName, this.suite);
   }
 
-  line2() {
+  get line2() {
     return this.line(this.city, this.state, this.postalCode);
   }
 
-  line3() {
+  get line3() {
     return this.line(this.country);
   }
 

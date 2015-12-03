@@ -13,11 +13,11 @@ export default class AddressValue extends FormValue {
   }
 
   get displayValue() {
-    return this.address.lines().join('\n');
+    return this.address.lines.join('\n');
   }
 
   get searchableValue() {
-    return this.address.lines().join(' ');
+    return this.address.lines.join(' ');
   }
 
   get length() {
