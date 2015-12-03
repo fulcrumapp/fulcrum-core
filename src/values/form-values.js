@@ -4,17 +4,17 @@ import FormValue from './form-value';
 const SearchValueSeparator = ' ';
 
 export default class FormValues {
-  constructor(elements, attributes) {
+  constructor(container, attributes) {
     this._values = {};
-    this.elements = elements;
-    this.loadValues(this.elements, attributes);
+    this.container = container;
+    this.loadValues(container.elements, attributes);
   }
 
-  getFormValue(key) {
+  get(key) {
     return this._values[key];
   }
 
-  setFormValue(key, value) {
+  set(key, value) {
     if (value && !(value instanceof FormValue)) {
       throw new Error('Invalid value ' + value);
     }
@@ -24,6 +24,16 @@ export default class FormValues {
     } else {
       delete this._values[key];
     }
+  }
+
+  find(dataName) {
+    const element = this.container.elementsByDataName[dataName];
+
+    if (element) {
+      return this.get(element.key);
+    }
+
+    return null;
   }
 
   loadValues(elements, attributes) {
@@ -41,7 +51,7 @@ export default class FormValues {
       if (rawValue != null) {
         const formValue = FormValueFactory.create(element, rawValue);
 
-        this.setFormValue(element.key, formValue);
+        this.set(element.key, formValue);
       }
     }
   }
@@ -65,7 +75,7 @@ export default class FormValues {
   }
 
   copy() {
-    return new FormValues(this.elements, this.toJSON());
+    return new FormValues(this.container, this.toJSON());
   }
 
   merge(formValues) {
@@ -76,7 +86,7 @@ export default class FormValues {
     for (let key of Object.keys(this._values)) {
       const formValue = this._values[key];
 
-      this.setFormValue(key, formValue);
+      this.set(key, formValue);
     }
   }
 

@@ -46,7 +46,7 @@ export default class Record extends Feature {
 
   get formValues() {
     if (this._formValues == null) {
-      this._formValues = new FormValues(this._form.elements, this._formValuesJSON);
+      this._formValues = new FormValues(this._form, this._formValuesJSON);
     }
 
     return this._formValues;
@@ -88,7 +88,7 @@ export default class Record extends Feature {
     const titles = [];
 
     for (let fieldKey of titleFieldKeys) {
-      const value = this.formValues.getFormValue(fieldKey);
+      const value = this.formValues.get(fieldKey);
 
       if (value) {
         const displayValue = value.displayValue;

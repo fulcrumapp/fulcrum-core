@@ -37,7 +37,7 @@ export default class RepeatableItemValue extends Feature {
 
   get formValues() {
     if (!this._formValues) {
-      this._formValues = new FormValues(this._element.elements, this._formValuesJSON);
+      this._formValues = new FormValues(this._element, this._formValuesJSON);
     }
 
     return this._formValues;
