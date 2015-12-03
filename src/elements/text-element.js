@@ -25,6 +25,10 @@ export default class TextElement extends TextualElement {
     this.patternDescription = attributes.pattern_description;
   }
 
+  get isLengthValidationSupported() {
+    return true;
+  }
+
   get isDecimalFormat() {
     return this.numeric && this.format === 'decimal';
   }

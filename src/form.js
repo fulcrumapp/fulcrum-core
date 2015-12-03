@@ -8,6 +8,18 @@ export default class Form {
     this.titleFieldKeys = attributes.titile_field_keys;
   }
 
+  get(key) {
+    return this.elementsByKey[key];
+  }
+
+  find(dataName) {
+    return this.elementsByDataName[dataName];
+  }
+
+  get hasHiddenParent() {
+    return false;
+  }
+
   toJSON() {
     // TODO(zhm) actually implement this so it returns a copy
     return this._json;

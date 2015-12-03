@@ -12,7 +12,7 @@ beforeEach((done) => {
 
 describe('date fields', () => {
   it('finds a date field in the form', () => {
-    record.form.elementsByKey['8fd4'].should.be.instanceof(DateElement);
+    record.form.get('8fd4').should.be.instanceof(DateElement);
   });
 
   it('finds a date value in the record by key', () => {

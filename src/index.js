@@ -23,4 +23,7 @@ for (let prop of Object.keys(values)) {
   api[prop] = values[prop];
 }
 
+api.Element = Element;
+api.FormValue = FormValue;
+
 export default api;
