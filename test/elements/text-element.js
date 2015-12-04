@@ -1,4 +1,5 @@
 import setup from '../helper';
+import fuzz from '../fuzz';
 
 const { TextElement, TextValue } = setup();
 
@@ -173,6 +174,12 @@ describe('text fields', () => {
     value.isGreaterThan('14').should.eql(false);
     value.isGreaterThan('a').should.eql(false);
     value.isGreaterThan(null).should.eql(false);
+
+    fuzz(v => value.isEqual(v));
+    fuzz(v => value.contains(v));
+    fuzz(v => value.startsWith(v));
+    fuzz(v => value.isLessThan(v));
+    fuzz(v => value.isGreaterThan(v));
   });
 
   it('implements comparisons for decimal numeric fields', () => {

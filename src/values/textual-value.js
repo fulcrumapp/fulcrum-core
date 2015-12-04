@@ -50,9 +50,7 @@ export default class TextualValue extends FormValue {
       return TextUtils.isEmpty(stringValue);
     }
 
-    if (stringValue == null) {
-      stringValue = '';
-    }
+    stringValue = (stringValue == null ? '' : stringValue.toString());
 
     return this.textValue.toLowerCase() === stringValue.toLowerCase();
   }
@@ -62,6 +60,12 @@ export default class TextualValue extends FormValue {
       return TextUtils.isEmpty(stringValue);
     }
 
+    if (stringValue == null) {
+      return false;
+    }
+
+    stringValue = stringValue.toString();
+
     return TextUtils.contains(this.textValue, stringValue);
   }
 
@@ -70,12 +74,22 @@ export default class TextualValue extends FormValue {
       return TextUtils.isEmpty(stringValue);
     }
 
+    if (stringValue == null) {
+      return false;
+    }
+
+    stringValue = stringValue.toString();
+
     return TextUtils.startsWith(this.textValue, stringValue);
   }
 
   isLessThan(stringValue) {
     if (this.textValue == null || stringValue == null) {
       return false;
+    }
+
+    if (stringValue != null) {
+      stringValue = stringValue.toString();
     }
 
     const thisValue = NumberUtils.parseDouble(this.textValue);
@@ -88,6 +102,8 @@ export default class TextualValue extends FormValue {
     if (this.textValue == null || stringValue == null) {
       return false;
     }
+
+    stringValue = (stringValue == null ? '' : stringValue.toString());
 
     const thisValue = NumberUtils.parseDouble(this.textValue);
     const thatValue = NumberUtils.parseDouble(stringValue);
