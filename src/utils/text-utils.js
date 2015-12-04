@@ -18,10 +18,18 @@ export default class TextUtils {
   }
 
   static contains(haystack, needle) {
+    if (needle === null) {
+      return false;
+    }
+
     return _.contains(haystack.toLowerCase(), needle.toLowerCase());
   }
 
   static startsWith(haystack, needle) {
+    if (needle === null) {
+      return false;
+    }
+
     return _.startsWith(haystack, needle);
   }
 

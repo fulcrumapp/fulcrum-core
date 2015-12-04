@@ -50,6 +50,10 @@ export default class TextualValue extends FormValue {
       return TextUtils.isEmpty(stringValue);
     }
 
+    if (stringValue == null) {
+      stringValue = '';
+    }
+
     return this.textValue.toLowerCase() === stringValue.toLowerCase();
   }
 
@@ -70,7 +74,7 @@ export default class TextualValue extends FormValue {
   }
 
   isLessThan(stringValue) {
-    if (this.textValue == null) {
+    if (this.textValue == null || stringValue == null) {
       return false;
     }
 
@@ -81,7 +85,7 @@ export default class TextualValue extends FormValue {
   }
 
   isGreaterThan(stringValue) {
-    if (this.textValue == null) {
+    if (this.textValue == null || stringValue == null) {
       return false;
     }
 

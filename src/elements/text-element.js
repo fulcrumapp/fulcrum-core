@@ -46,6 +46,6 @@ export default class TextElement extends TextualElement {
   }
 
   get hasPattern() {
-    return (this.pattern && this.pattern.length);
+    return this.pattern && this.pattern.length;
   }
 }

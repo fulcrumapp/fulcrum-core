@@ -1,5 +1,5 @@
 import ChoiceValue from './choice-value';
-import TextValue from './textual-value';
+import TextValue from './text-value';
 import DateValue from './date-value';
 import TimeValue from './time-value';
 import PhotoValue from './photo-value';
