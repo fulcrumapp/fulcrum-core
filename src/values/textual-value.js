@@ -14,15 +14,15 @@ export default class TextualValue extends FormValue {
   }
 
   get displayValue() {
-    return this.textValue;
+    return this.textValue || '';
   }
 
   get searchableValue() {
-    return this.textValue;
+    return this.textValue || '';
   }
 
   get length() {
-    if (this.textValue) {
+    if (this.textValue != null) {
       return this.textValue.length;
     }
 
@@ -30,7 +30,7 @@ export default class TextualValue extends FormValue {
   }
 
   get columnValue() {
-    return this.textValue;
+    return this.textValue || null;
   }
 
   get multipleValues() {
