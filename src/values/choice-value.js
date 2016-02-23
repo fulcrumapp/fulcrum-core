@@ -1,5 +1,6 @@
 import FormValue from './form-value';
 import TextUtils from '../utils/text-utils';
+import _ from 'lodash';
 
 const ChoiceDisplaySeparator = ', ';
 const ChoiceSearchSeparator = ' ';
@@ -160,4 +161,28 @@ export default class ChoiceValue extends FormValue {
 
     return this._otherValues[0];
   }
+
+  isEqual(value) {
+    if (_.includes(this.selectedValues, value)) {
+      return true;
+    }
+
+    return this.otherValue === value;
+  }
+
+  contains(value) {
+    return this.isEqual(value);
+  }
+
+  startsWith(value) {
+    return this.contains(value);
+  }
+
+  // isLessThan(value) {
+  //   notImplemented();
+  // }
+
+  // isGreaterThan(value) {
+  //   notImplemented();
+  // }
 }

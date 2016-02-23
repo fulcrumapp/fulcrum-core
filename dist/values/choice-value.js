@@ -12,6 +12,10 @@ var _textUtils = require('../utils/text-utils');
 
 var _textUtils2 = _interopRequireDefault(_textUtils);
 
+var _lodash = require('lodash');
+
+var _lodash2 = _interopRequireDefault(_lodash);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 const ChoiceDisplaySeparator = ', ';
@@ -173,6 +177,30 @@ class ChoiceValue extends _formValue2.default {
 
     return this._otherValues[0];
   }
+
+  isEqual(value) {
+    if (_lodash2.default.includes(this.selectedValues, value)) {
+      return true;
+    }
+
+    return this.otherValue === value;
+  }
+
+  contains(value) {
+    return this.isEqual(value);
+  }
+
+  startsWith(value) {
+    return this.contains(value);
+  }
+
+  // isLessThan(value) {
+  //   notImplemented();
+  // }
+
+  // isGreaterThan(value) {
+  //   notImplemented();
+  // }
 }
 exports.default = ChoiceValue;
 //# sourceMappingURL=choice-value.js.map
