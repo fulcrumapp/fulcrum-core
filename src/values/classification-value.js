@@ -13,15 +13,17 @@ export default class ClassificationValue extends FormValue {
     this._choiceValues = [];
     this._otherValues = [];
 
-    for (let choice of attributes.choice_values) {
-      if (TextUtils.isPresent(choice)) {
-        this._choiceValues.push(choice);
+    if (attributes) {
+      for (let choice of attributes.choice_values) {
+        if (TextUtils.isPresent(choice)) {
+          this._choiceValues.push(choice);
+        }
       }
-    }
 
-    for (let choice of attributes.other_values) {
-      if (TextUtils.isPresent(choice)) {
-        this._otherValues.push(choice);
+      for (let choice of attributes.other_values) {
+        if (TextUtils.isPresent(choice)) {
+          this._otherValues.push(choice);
+        }
       }
     }
   }

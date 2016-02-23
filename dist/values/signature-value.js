@@ -14,8 +14,10 @@ class SignatureValue extends _formValue2.default {
   constructor(element, attributes) {
     super(element, attributes);
 
-    this._identifier = attributes.signature_id;
-    this._timestamp = attributes.timestamp;
+    if (attributes) {
+      this._identifier = attributes.signature_id;
+      this._timestamp = attributes.timestamp;
+    }
   }
 
   get isEmpty() {

@@ -29,15 +29,17 @@ class ClassificationValue extends _formValue2.default {
     this._choiceValues = [];
     this._otherValues = [];
 
-    for (let choice of attributes.choice_values) {
-      if (_textUtils2.default.isPresent(choice)) {
-        this._choiceValues.push(choice);
+    if (attributes) {
+      for (let choice of attributes.choice_values) {
+        if (_textUtils2.default.isPresent(choice)) {
+          this._choiceValues.push(choice);
+        }
       }
-    }
 
-    for (let choice of attributes.other_values) {
-      if (_textUtils2.default.isPresent(choice)) {
-        this._otherValues.push(choice);
+      for (let choice of attributes.other_values) {
+        if (_textUtils2.default.isPresent(choice)) {
+          this._otherValues.push(choice);
+        }
       }
     }
   }

@@ -2,14 +2,16 @@ import TextUtils from '../utils/text-utils';
 
 export default class Address {
   constructor(attributes) {
-    this.streetNumber = attributes.sub_thoroughfare;
-    this.streetName = attributes.thoroughfare;
-    this.suite = attributes.suite;
-    this.city = attributes.locality;
-    this.county = attributes.sub_admin_area;
-    this.state = attributes.admin_area;
-    this.postalCode = attributes.postal_code;
-    this.country = attributes.country;
+    if (attributes) {
+      this.streetNumber = attributes.sub_thoroughfare;
+      this.streetName = attributes.thoroughfare;
+      this.suite = attributes.suite;
+      this.city = attributes.locality;
+      this.county = attributes.sub_admin_area;
+      this.state = attributes.admin_area;
+      this.postalCode = attributes.postal_code;
+      this.country = attributes.country;
+    }
   }
 
   toJSON() {

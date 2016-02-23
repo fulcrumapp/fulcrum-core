@@ -19,6 +19,13 @@ describe('address fields', () => {
     record.form.find('address').autoPopulate.should.eql(true);
   });
 
+  it('creates an empty value', () => {
+    const value = new AddressValue(record.form.find('address'));
+
+    value.should.be.instanceof(AddressValue);
+    value.isEmpty.should.eql(true);
+  });
+
   it('finds a date value in the record by key', () => {
     const value = record.formValues.find('address');
 

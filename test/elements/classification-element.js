@@ -66,6 +66,13 @@ describe('classification fields', () => {
     field.classificationItems[0].value.should.eql('Unknown');
   });
 
+  it('supports creating a value from null', () => {
+    const value = new ClassificationValue(record.form.find('os'));
+
+    value.should.be.instanceof(ClassificationValue);
+    value.isEmpty.should.eql(true);
+  });
+
   it('finds a single choice value in the record', () => {
     const value = record.formValues.find('os');
 
