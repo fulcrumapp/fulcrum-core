@@ -1,6 +1,6 @@
 import setup from '../helper';
 
-const { AddressElement, AddressValue } = setup();
+import { AddressElement, AddressValue } from '../../src';
 
 let record = null;
 

@@ -1,7 +1,7 @@
 import setup from '../helper';
 import fuzz from '../fuzz';
 
-const { TextElement, TextValue } = setup();
+import { TextElement, TextValue } from '../../src';
 
 let record = null;
 

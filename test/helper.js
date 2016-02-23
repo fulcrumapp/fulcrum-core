@@ -1,6 +1,6 @@
 import fs from 'fs';
 import path from 'path';
-import Fulcrum from '../src';
+import {Form, Record} from '../src';
 import ElementFactory from '../src/elements/element-factory';
 import FileProvider from '../src/utils/file-provider';
 
@@ -9,9 +9,6 @@ const fileRoot = path.join('.', 'test', 'fixtures');
 ElementFactory.setProvider(new FileProvider(fileRoot));
 
 export default function setup() {
-  const Form = Fulcrum.Form;
-  const Record = Fulcrum.Record;
-
   let form = null;
   let formJson = null;
 
@@ -22,15 +19,18 @@ export default function setup() {
   recordJson = JSON.parse(fs.readFileSync('./test/record.json')).record;
 
   form = new Form(formJson);
-  record = new Record(form, recordJson);
+  record = new Record(recordJson);
+
+  record._form = form;
+  record._formValuesJSON = recordJson.form_values;
 
   const result = { record: record };
 
-  for (let prop in Fulcrum) {
-    if (Fulcrum.hasOwnProperty(prop)) {
-      result[prop] = Fulcrum[prop];
-    }
-  }
+  // for (let prop in Fulcrum) {
+  //   if (Fulcrum.hasOwnProperty(prop)) {
+  //     result[prop] = Fulcrum[prop];
+  //   }
+  // }
 
   return result;
 }

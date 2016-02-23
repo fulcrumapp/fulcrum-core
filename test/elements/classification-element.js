@@ -1,16 +1,18 @@
 import setup from '../helper';
 
-const { ClassificationElement, ClassificationValue, Classification } = setup();
+import { ClassificationElement, ClassificationValue, Classification } from '../../src';
 
 let record = null;
 
 beforeEach((done) => {
   ({ record } = setup());
 
-  done();
+  const field = record.form.find('os');
+
+  field.load().then(done);
 });
 
-describe('choice fields', () => {
+describe('classification fields', () => {
   it('finds a classification field in the form', () => {
     record.form.find('os').should.be.instanceof(ClassificationElement);
   });

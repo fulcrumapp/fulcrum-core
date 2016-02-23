@@ -1,6 +1,6 @@
 import setup from '../helper';
 
-const { Element } = setup();
+import { Element } from '../../src';
 
 let record = null;
 

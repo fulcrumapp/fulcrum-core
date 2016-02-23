@@ -1,6 +1,6 @@
 import setup from '../helper';
 
-const { BarcodeElement, BarcodeValue } = setup();
+import { BarcodeElement, BarcodeValue } from '../../src';
 
 let record = null;
 

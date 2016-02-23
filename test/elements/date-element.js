@@ -1,6 +1,6 @@
 import setup from '../helper';
 
-const { DateElement, DateValue } = setup();
+import { DateElement, DateValue } from '../../src';
 
 let record = null;
 

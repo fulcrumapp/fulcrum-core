@@ -1,7 +1,7 @@
 import setup from '../helper';
 import DisplayOptions from '../../src/elements/display-options';
 
-const { CalculatedElement, CalculatedValue } = setup();
+import { CalculatedElement, CalculatedValue } from '../../src';
 
 let record = null;
 

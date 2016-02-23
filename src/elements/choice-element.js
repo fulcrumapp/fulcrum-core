@@ -34,6 +34,8 @@ export default class ChoiceElement extends Element {
         this._choices.push(new Choice(choice));
       }
     }
+
+    this._choicesByValue = null;
   }
 
   get isLengthValidationSupported() {

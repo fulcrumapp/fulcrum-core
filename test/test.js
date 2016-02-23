@@ -12,7 +12,10 @@ beforeEach((done) => {
   recordJson = JSON.parse(fs.readFileSync('./test/record.json')).record;
 
   form = new Form(formJson);
-  record = new Record(form, recordJson);
+  record = new Record(recordJson);
+
+  record._form = form;
+  record._formValuesJSON = recordJson.form_values;
 
   done();
 });

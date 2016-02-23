@@ -30,10 +30,11 @@ export default class DisplayOptions {
     }
 
     switch (true) {
-      case this.isNumber:
+      case this.isNumber: {
         return NumberUtils.localizedStringFromMachineString(value, true);
+      }
 
-      case this.isDate:
+      case this.isDate: {
         const date = DateUtils.parseDate(value);
 
         if (date != null) {
@@ -41,9 +42,11 @@ export default class DisplayOptions {
         }
 
         break;
+      }
 
-      case this.isCurrency:
+      case this.isCurrency: {
         return NumberUtils.formatCurrency(value, this.currency);
+      }
 
       default:
         break;
