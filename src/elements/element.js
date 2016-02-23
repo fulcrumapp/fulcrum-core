@@ -96,7 +96,7 @@ export default class Element {
   }
 
   get hasVisibilityConditions() {
-    return this.requiredConditions.length !== 0;
+    return this.visibleConditions.length !== 0;
   }
 
   get hasHiddenParent() {
