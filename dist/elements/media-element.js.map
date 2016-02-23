@@ -1,1 +1,1 @@
-{"version":3,"sources":["../../src/elements/media-element.js"],"names":[],"mappings":";;;;;;;;;;;;AAEe,MAAM,YAAY,2BAAiB,EACjD;kBADoB,YAAY","file":"media-element.js","sourcesContent":["import Element from './element';\n\nexport default class MediaElement extends Element {\n}\n"]}
+{"version":3,"sources":["../../src/elements/media-element.js"],"names":[],"mappings":";;;;;;;;;;;;AAEe,MAAM,YAAN,2BAAmC,EAAnC;kBAAM","file":"media-element.js","sourcesContent":["import Element from './element';\n\nexport default class MediaElement extends Element {\n}\n"]}

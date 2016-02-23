@@ -1,1 +1,1 @@
-{"version":3,"sources":["../../src/elements/label-element.js"],"names":[],"mappings":";;;;;;;;;;;;AAEe,MAAM,YAAY,2BAAiB,EACjD;kBADoB,YAAY","file":"label-element.js","sourcesContent":["import Element from './element';\n\nexport default class LabelElement extends Element {\n}\n"]}
+{"version":3,"sources":["../../src/elements/label-element.js"],"names":[],"mappings":";;;;;;;;;;;;AAEe,MAAM,YAAN,2BAAmC,EAAnC;kBAAM","file":"label-element.js","sourcesContent":["import Element from './element';\n\nexport default class LabelElement extends Element {\n}\n"]}

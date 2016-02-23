@@ -47,19 +47,25 @@ class DisplayOptions {
 
     switch (true) {
       case this.isNumber:
-        return _numberUtils2.default.localizedStringFromMachineString(value, true);
-
-      case this.isDate:
-        const date = _dateUtils2.default.parseDate(value);
-
-        if (date != null) {
-          return _dateUtils2.default.formatLocalizedDate(date);
+        {
+          return _numberUtils2.default.localizedStringFromMachineString(value, true);
         }
 
-        break;
+      case this.isDate:
+        {
+          const date = _dateUtils2.default.parseDate(value);
+
+          if (date != null) {
+            return _dateUtils2.default.formatLocalizedDate(date);
+          }
+
+          break;
+        }
 
       case this.isCurrency:
-        return _numberUtils2.default.formatCurrency(value, this.currency);
+        {
+          return _numberUtils2.default.formatCurrency(value, this.currency);
+        }
 
       default:
         break;
