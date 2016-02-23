@@ -26,11 +26,5 @@ export default function setup() {
 
   const result = { record: record };
 
-  // for (let prop in Fulcrum) {
-  //   if (Fulcrum.hasOwnProperty(prop)) {
-  //     result[prop] = Fulcrum[prop];
-  //   }
-  // }
-
   return result;
 }
