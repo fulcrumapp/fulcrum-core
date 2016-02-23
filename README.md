@@ -6,6 +6,12 @@
 npm install fulcrum-core
 ```
 
+### Tests
+
+```sh
+npm test
+```
+
 ### Build
 
 ```sh
