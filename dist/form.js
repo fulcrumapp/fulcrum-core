@@ -1,7 +1,5 @@
 'use strict';
 
-var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
-
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
@@ -12,45 +10,47 @@ var _childElements2 = _interopRequireDefault(_childElements);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } step("next"); }); }; }
 
-var Form = (function () {
-  function Form(attributes) {
-    _classCallCheck(this, Form);
-
+class Form {
+  constructor(attributes) {
     // TODO(zhm) remove json attr
     this._json = attributes;
+    // TODO(zhm) this might need to go away
+    this.titleFieldKeys = attributes.title_field_keys;
     this.createChildElements(attributes.elements);
-    this.titleFieldKeys = attributes.titile_field_keys;
   }
 
-  _createClass(Form, [{
-    key: 'get',
-    value: function get(key) {
-      return this.elementsByKey[key];
-    }
-  }, {
-    key: 'find',
-    value: function find(dataName) {
-      return this.elementsByDataName[dataName];
-    }
-  }, {
-    key: 'toJSON',
-    value: function toJSON() {
-      // TODO(zhm) actually implement this so it returns a copy
-      return this._json;
-    }
-  }, {
-    key: 'hasHiddenParent',
-    get: function get() {
-      return false;
-    }
-  }]);
+  load() {
+    var _this = this;
 
-  return Form;
-})();
+    return _asyncToGenerator(function* () {
+      for (const element of _this.allElements) {
+        if (element.load) {
+          yield element.load();
+        }
+      }
+    })();
+  }
+
+  get(key) {
+    return this.elementsByKey[key];
+  }
+
+  find(dataName) {
+    return this.elementsByDataName[dataName];
+  }
+
+  get hasHiddenParent() {
+    return false;
+  }
+
+  toJSON() {
+    // TODO(zhm) actually implement this so it returns a copy
+    return this._json;
+  }
+}
 
 exports.default = Form;
-
 _childElements2.default.includeInto(Form);
 //# sourceMappingURL=form.js.map

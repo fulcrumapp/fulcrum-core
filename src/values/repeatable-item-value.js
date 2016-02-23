@@ -73,12 +73,20 @@ export default class RepeatableItemValue extends Feature {
     return this._element.isGeometryEnabled;
   }
 
+  get latitude() {
+    return this._latitude;
+  }
+
+  get longitude() {
+    return this._longitude;
+  }
+
   get displayValue() {
-    const titleFieldKeys = this.repeatableElement.titleFieldKeys;
+    const titleFieldKeys = this._element.titleFieldKeys;
     const titles = [];
 
     for (let fieldKey of titleFieldKeys) {
-      const formValue = this.formValues.getFormValue(fieldKey);
+      const formValue = this.formValues.get(fieldKey);
 
       if (formValue) {
         const displayValue = formValue.displayValue;

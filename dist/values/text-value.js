@@ -10,6 +10,13 @@ var _textualValue2 = _interopRequireDefault(_textualValue);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-class BarcodeValue extends _textualValue2.default {}
-exports.default = BarcodeValue;
-//# sourceMappingURL=barcode-value.js.map
+class TextValue extends _textualValue2.default {
+  get columnValue() {
+    if (this.element.numeric) {
+      return this.numericValue;
+    }
+    return super.columnValue;
+  }
+}
+exports.default = TextValue;
+//# sourceMappingURL=text-value.js.map

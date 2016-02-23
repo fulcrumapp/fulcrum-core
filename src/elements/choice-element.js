@@ -14,11 +14,23 @@ export default class ChoiceElement extends Element {
     this._choiceListID = attributes.choice_list_id;
     this._choices = [];
 
+    // TODO(zhm) the loading needs to be re-worked to support choice lists
+    if (attributes.choices) {
+      for (let choice of this.attributes.choices) {
+        this._choices.push(new Choice(choice));
+      }
+    }
+  }
+
+  async load() {
+    // TODO(zhm) once babel gets fixed this can be removed
+    // https://phabricator.babeljs.io/T2765
+
     if (this._choiceListID) {
-      this.choiceList = ElementFactory.getProvider().getChoiceList(this._choiceListID);
+      this.choiceList = await ElementFactory.getProvider().getChoiceList(this._choiceListID);
       this._choices = this.choiceList.choices.slice();
     } else {
-      for (let choice of attributes.choices) {
+      for (let choice of this.attributes.choices) {
         this._choices.push(new Choice(choice));
       }
     }

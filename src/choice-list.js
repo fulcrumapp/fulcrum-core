@@ -2,6 +2,8 @@ import Choice from './elements/choice';
 
 export default class ChoiceList {
   constructor(attributes) {
+    attributes = attributes || {};
+
     this.id = attributes.id;
     this.name = attributes.name;
     this.description = attributes.description;

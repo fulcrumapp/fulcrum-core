@@ -12,10 +12,12 @@ export default class ClassificationElement extends Element {
     this._overrideClassificationItems = null;
 
     this._classificationSetID = attributes.classification_set_id;
+  }
 
-    if (this._classificationSetID) {
-      this.classificationSet = ElementFactory.getProvider().getClassificationSet(this._classificationSetID);
-    }
+  async load() {
+    // const self = this;
+
+    this.classificationSet = await ElementFactory.getProvider().getClassificationSet(this._classificationSetID);
   }
 
   get classificationItems() {

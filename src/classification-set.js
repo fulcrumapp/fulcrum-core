@@ -2,6 +2,8 @@ import Classification from './elements/classification';
 
 export default class ClassificationSet {
   constructor(attributes) {
+    attributes = attributes || {};
+
     this.id = attributes.id;
     this.name = attributes.name;
     this.description = attributes.description;

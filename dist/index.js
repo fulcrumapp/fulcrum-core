@@ -3,6 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+exports.VideoValue = exports.VideoItemValue = exports.PhotoValue = exports.PhotoItemValue = exports.AudioValue = exports.AudioItemValue = exports.RepeatableElement = exports.CalculatedElement = exports.Condition = exports.ChildElements = exports.NumberUtils = exports.DateUtils = exports.TextUtils = exports.FormValues = exports.Feature = exports.RepeatableValue = exports.RepeatableItemValue = exports.ElementFactory = exports.ClassificationSet = exports.Classification = exports.ChoiceList = exports.Choice = exports.FormValue = exports.Element = exports.Record = exports.Form = undefined;
 
 var _form = require('./form');
 
@@ -24,74 +25,142 @@ var _choice = require('./elements/choice');
 
 var _choice2 = _interopRequireDefault(_choice);
 
+var _choiceList = require('./choice-list');
+
+var _choiceList2 = _interopRequireDefault(_choiceList);
+
 var _classification = require('./elements/classification');
 
 var _classification2 = _interopRequireDefault(_classification);
 
+var _classificationSet = require('./classification-set');
+
+var _classificationSet2 = _interopRequireDefault(_classificationSet);
+
+var _elementFactory = require('./elements/element-factory');
+
+var _elementFactory2 = _interopRequireDefault(_elementFactory);
+
+var _repeatableItemValue = require('./values/repeatable-item-value');
+
+var _repeatableItemValue2 = _interopRequireDefault(_repeatableItemValue);
+
+var _repeatableValue = require('./values/repeatable-value');
+
+var _repeatableValue2 = _interopRequireDefault(_repeatableValue);
+
+var _feature = require('./feature');
+
+var _feature2 = _interopRequireDefault(_feature);
+
+var _formValues = require('./values/form-values');
+
+var _formValues2 = _interopRequireDefault(_formValues);
+
+var _textUtils = require('./utils/text-utils');
+
+var _textUtils2 = _interopRequireDefault(_textUtils);
+
+var _dateUtils = require('./utils/date-utils');
+
+var _dateUtils2 = _interopRequireDefault(_dateUtils);
+
+var _numberUtils = require('./utils/number-utils');
+
+var _numberUtils2 = _interopRequireDefault(_numberUtils);
+
+var _childElements = require('./elements/child-elements');
+
+var _childElements2 = _interopRequireDefault(_childElements);
+
+var _condition = require('./elements/condition');
+
+var _condition2 = _interopRequireDefault(_condition);
+
+var _calculatedElement = require('./elements/calculated-element');
+
+var _calculatedElement2 = _interopRequireDefault(_calculatedElement);
+
+var _repeatableElement = require('./elements/repeatable-element');
+
+var _repeatableElement2 = _interopRequireDefault(_repeatableElement);
+
+var _audioItemValue = require('./values/audio-item-value');
+
+var _audioItemValue2 = _interopRequireDefault(_audioItemValue);
+
+var _audioValue = require('./values/audio-value');
+
+var _audioValue2 = _interopRequireDefault(_audioValue);
+
+var _photoItemValue = require('./values/photo-item-value');
+
+var _photoItemValue2 = _interopRequireDefault(_photoItemValue);
+
+var _photoValue = require('./values/photo-value');
+
+var _photoValue2 = _interopRequireDefault(_photoValue);
+
+var _videoItemValue = require('./values/video-item-value');
+
+var _videoItemValue2 = _interopRequireDefault(_videoItemValue);
+
+var _videoValue = require('./values/video-value');
+
+var _videoValue2 = _interopRequireDefault(_videoValue);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var api = {
-  Form: _form2.default,
-  Record: _record2.default,
-  Element: _element2.default,
-  FormValue: _formValue2.default,
-  Choice: _choice2.default,
-  Classification: _classification2.default
-};
+exports.Form = _form2.default;
+exports.Record = _record2.default;
+exports.Element = _element2.default;
+exports.FormValue = _formValue2.default;
+exports.Choice = _choice2.default;
+exports.ChoiceList = _choiceList2.default;
+exports.Classification = _classification2.default;
+exports.ClassificationSet = _classificationSet2.default;
+exports.ElementFactory = _elementFactory2.default;
+exports.RepeatableItemValue = _repeatableItemValue2.default;
+exports.RepeatableValue = _repeatableValue2.default;
+exports.Feature = _feature2.default;
+exports.FormValues = _formValues2.default;
+exports.TextUtils = _textUtils2.default;
+exports.DateUtils = _dateUtils2.default;
+exports.NumberUtils = _numberUtils2.default;
+exports.ChildElements = _childElements2.default;
+exports.Condition = _condition2.default;
+exports.CalculatedElement = _calculatedElement2.default;
+exports.RepeatableElement = _repeatableElement2.default;
+exports.AudioItemValue = _audioItemValue2.default;
+exports.AudioValue = _audioValue2.default;
+exports.PhotoItemValue = _photoItemValue2.default;
+exports.PhotoValue = _photoValue2.default;
+exports.VideoItemValue = _videoItemValue2.default;
+exports.VideoValue = _videoValue2.default;
 
-var elements = _element2.default.classes();
+// const api = {
+//   Form: Form,
+//   Record: Record,
+//   Element: Element,
+//   FormValue: FormValue,
+//   Choice: Choice,
+//   ChoiceList: ChoiceList,
+//   Classification: Classification,
+//   ClassificationSet: ClassificationSet,
+//   ElementFactory: ElementFactory
+// };
 
-var _iteratorNormalCompletion = true;
-var _didIteratorError = false;
-var _iteratorError = undefined;
+// const elements = Element.classes();
 
-try {
-  for (var _iterator = Object.keys(elements)[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
-    var prop = _step.value;
+// for (let prop of Object.keys(elements)) {
+//   api[prop] = elements[prop];
+// }
 
-    api[prop] = elements[prop];
-  }
-} catch (err) {
-  _didIteratorError = true;
-  _iteratorError = err;
-} finally {
-  try {
-    if (!_iteratorNormalCompletion && _iterator.return) {
-      _iterator.return();
-    }
-  } finally {
-    if (_didIteratorError) {
-      throw _iteratorError;
-    }
-  }
-}
+// const values = FormValue.classes();
 
-var values = _formValue2.default.classes();
+// for (let prop of Object.keys(values)) {
+//   api[prop] = values[prop];
+// }
 
-var _iteratorNormalCompletion2 = true;
-var _didIteratorError2 = false;
-var _iteratorError2 = undefined;
-
-try {
-  for (var _iterator2 = Object.keys(values)[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
-    var prop = _step2.value;
-
-    api[prop] = values[prop];
-  }
-} catch (err) {
-  _didIteratorError2 = true;
-  _iteratorError2 = err;
-} finally {
-  try {
-    if (!_iteratorNormalCompletion2 && _iterator2.return) {
-      _iterator2.return();
-    }
-  } finally {
-    if (_didIteratorError2) {
-      throw _iteratorError2;
-    }
-  }
-}
-
-exports.default = api;
+// export default api;
 //# sourceMappingURL=index.js.map

@@ -4,8 +4,17 @@ export default class Form {
   constructor(attributes) {
     // TODO(zhm) remove json attr
     this._json = attributes;
+    // TODO(zhm) this might need to go away
+    this.titleFieldKeys = attributes.title_field_keys;
     this.createChildElements(attributes.elements);
-    this.titleFieldKeys = attributes.titile_field_keys;
+  }
+
+  async load() {
+    for (const element of this.allElements) {
+      if (element.load) {
+        await element.load();
+      }
+    }
   }
 
   get(key) {

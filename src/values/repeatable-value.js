@@ -37,7 +37,7 @@ export default class RepeatableValue extends FormValue {
     const values = [];
 
     for (let item of this._items) {
-      const searchValue = item.searchableValue();
+      const searchValue = item.searchableValue;
 
       if (TextUtils.isPresent(searchValue)) {
         values.push(searchValue);

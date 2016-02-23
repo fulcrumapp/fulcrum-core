@@ -1,7 +1,5 @@
 'use strict';
 
-var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
-
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
@@ -24,148 +22,103 @@ var _dateUtils2 = _interopRequireDefault(_dateUtils);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+class Record extends _feature2.default {
+  constructor(attributes) {
+    super();
 
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var Record = (function (_Feature) {
-  _inherits(Record, _Feature);
-
-  function Record(form, attributes) {
-    _classCallCheck(this, Record);
-
-    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Record).call(this));
-
-    _this._form = form;
-    _this._id = attributes.id;
-    _this._createdAt = _dateUtils2.default.parseTimestamp(attributes.client_created_at);
-    _this._updatedAt = _dateUtils2.default.parseTimestamp(attributes.client_updated_at);
-    _this._formValuesJSON = attributes.form_values;
-    _this._latitude = attributes.latitude;
-    _this._longitude = attributes.longitude;
-    return _this;
+    // this._id = attributes.id;
+    // this._createdAt = DateUtils.parseTimestamp(attributes.client_created_at);
+    // this._updatedAt = DateUtils.parseTimestamp(attributes.client_updated_at);
+    // this._formValuesJSON = attributes.form_values;
+    // this._latitude = attributes.latitude;
+    // this._longitude = attributes.longitude;
   }
 
-  _createClass(Record, [{
-    key: 'toJSON',
-    value: function toJSON() {
-      var json = {};
+  get id() {
+    return this._id;
+  }
 
-      json.id = this.id;
-      json.client_created_at = _dateUtils2.default.formatTimestamp(this.createdAt);
-      json.client_updated_at = _dateUtils2.default.formatTimestamp(this.updatedAt);
-      json.form_values = this.formValues.toJSON();
-      json.latitude = this._latitude;
-      json.longitude = this._longitude;
+  set id(id) {
+    this._id = id;
+  }
 
-      return json;
+  get form() {
+    return this._form;
+  }
+
+  get createdAt() {
+    return this._createdAt;
+  }
+
+  set createdAt(createdAt) {
+    this._createdAt = createdAt;
+  }
+
+  get updatedAt() {
+    return this._updatedAt;
+  }
+
+  set updatedAt(updatedAt) {
+    this._updatedAt = updatedAt;
+  }
+
+  get formValues() {
+    if (this._formValues == null) {
+      this._formValues = new _formValues2.default(this._form, this._formValuesJSON);
     }
-  }, {
-    key: 'updateTimestamps',
-    value: function updateTimestamps() {
-      var now = new Date();
 
-      if (this._createdAt == null) {
-        this.createdAt = now;
-      }
+    return this._formValues;
+  }
 
-      this.updatedAt = now;
-    }
-  }, {
-    key: 'id',
-    get: function get() {
-      return this._id;
-    },
-    set: function set(id) {
-      this._id = id;
-    }
-  }, {
-    key: 'form',
-    get: function get() {
-      return this._form;
-    }
-  }, {
-    key: 'createdAt',
-    get: function get() {
-      return this._createdAt;
-    },
-    set: function set(createdAt) {
-      this._createdAt = createdAt;
-    }
-  }, {
-    key: 'updatedAt',
-    get: function get() {
-      return this._updatedAt;
-    },
-    set: function set(updatedAt) {
-      this._updatedAt = updatedAt;
-    }
-  }, {
-    key: 'formValues',
-    get: function get() {
-      if (this._formValues == null) {
-        this._formValues = new _formValues2.default(this._form, this._formValuesJSON);
-      }
+  get hasCoordinate() {
+    return this._latitude != null && this._longitude != null;
+  }
 
-      return this._formValues;
+  toJSON() {
+    const json = {};
+
+    json.id = this.id;
+    json.client_created_at = _dateUtils2.default.formatTimestamp(this.createdAt);
+    json.client_updated_at = _dateUtils2.default.formatTimestamp(this.updatedAt);
+    json.form_values = this.formValues.toJSON();
+    json.latitude = this._latitude;
+    json.longitude = this._longitude;
+
+    return json;
+  }
+
+  updateTimestamps() {
+    const now = new Date();
+
+    if (this._createdAt == null) {
+      this.createdAt = now;
     }
-  }, {
-    key: 'hasCoordinate',
-    get: function get() {
-      return this._latitude != null && this._longitude != null;
-    }
-  }, {
-    key: 'isGeometryEnabled',
-    get: function get() {
-      return this.form.isGeometryEnabled;
-    }
-  }, {
-    key: 'displayValue',
-    get: function get() {
-      var titleFieldKeys = this.form.titleFieldKeys;
-      var titles = [];
 
-      var _iteratorNormalCompletion = true;
-      var _didIteratorError = false;
-      var _iteratorError = undefined;
+    this.updatedAt = now;
+  }
 
-      try {
-        for (var _iterator = titleFieldKeys[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
-          var fieldKey = _step.value;
+  get isGeometryEnabled() {
+    return this.form.isGeometryEnabled;
+  }
 
-          var value = this.formValues.get(fieldKey);
+  get displayValue() {
+    const titleFieldKeys = this.form.titleFieldKeys;
+    const titles = [];
 
-          if (value) {
-            var displayValue = value.displayValue;
+    for (let fieldKey of titleFieldKeys) {
+      const value = this.formValues.get(fieldKey);
 
-            if (_textUtils2.default.isPresent(displayValue)) {
-              titles.push(displayValue);
-            }
-          }
-        }
-      } catch (err) {
-        _didIteratorError = true;
-        _iteratorError = err;
-      } finally {
-        try {
-          if (!_iteratorNormalCompletion && _iterator.return) {
-            _iterator.return();
-          }
-        } finally {
-          if (_didIteratorError) {
-            throw _iteratorError;
-          }
+      if (value) {
+        const displayValue = value.displayValue;
+
+        if (_textUtils2.default.isPresent(displayValue)) {
+          titles.push(displayValue);
         }
       }
-
-      return titles.join(', ');
     }
-  }]);
 
-  return Record;
-})(_feature2.default);
-
+    return titles.join(', ');
+  }
+}
 exports.default = Record;
 //# sourceMappingURL=record.js.map

@@ -33,6 +33,18 @@ export default class ChildElements extends Mixin {
     return this._elementsByDataName;
   }
 
+  elementsOfType(type) {
+    const result = [];
+
+    for (const element of this.allElements) {
+      if (element.type === type) {
+        result.push(element);
+      }
+    }
+
+    return result;
+  }
+
   _flattenElements(elements) {
     let flat = [];
 

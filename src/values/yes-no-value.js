@@ -28,11 +28,11 @@ export default class YesNoValue extends TextualValue {
   get displayValue() {
     switch (true) {
       case this.isPositive:
-        return this.yesNoElement.positiveChoice.label;
+        return this.element.positiveChoice.label;
       case this.isNegative:
-        return this.yesNoElement.negativeChoice.label;
+        return this.element.negativeChoice.label;
       case this.isNeutral:
-        return this.yesNoElement.neutralChoice.label;
+        return this.element.neutralChoice.label;
       default:
         return this.textValue;
     }

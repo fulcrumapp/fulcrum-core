@@ -1,7 +1,5 @@
 'use strict';
 
-var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
-
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
@@ -24,152 +22,113 @@ var _textUtils2 = _interopRequireDefault(_textUtils);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+class RepeatableItemValue extends _feature2.default {
+  constructor(element, item, index) {
+    super();
 
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+    this.index = index;
 
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+    this._element = element;
+    this._id = item.id;
+    this._createdAt = _dateUtils2.default.parseTimestamp(item.created_at);
+    this._updatedAt = _dateUtils2.default.parseTimestamp(item.updated_at);
+    this._formValuesJSON = item.form_values;
 
-var RepeatableItemValue = (function (_Feature) {
-  _inherits(RepeatableItemValue, _Feature);
-
-  function RepeatableItemValue(element, item, index) {
-    _classCallCheck(this, RepeatableItemValue);
-
-    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(RepeatableItemValue).call(this));
-
-    _this.index = index;
-
-    _this._element = element;
-    _this._id = item.id;
-    _this._createdAt = _dateUtils2.default.parseTimestamp(item.created_at);
-    _this._updatedAt = _dateUtils2.default.parseTimestamp(item.updated_at);
-    _this._formValuesJSON = item.form_values;
-
-    var geometry = item.geometry;
+    const geometry = item.geometry;
 
     if (geometry != null && geometry.type === 'Point') {
-      _this._latitude = geometry.coordinates[1];
-      _this._longitude = geometry.coordinates[0];
+      this._latitude = geometry.coordinates[1];
+      this._longitude = geometry.coordinates[0];
     }
-    return _this;
   }
 
-  _createClass(RepeatableItemValue, [{
-    key: 'toJSON',
-    value: function toJSON() {
-      var json = {};
+  get identifier() {
+    return this._id;
+  }
 
-      json.id = this.identifier;
-      json.created_at = _dateUtils2.default.formatTimestamp(this.createdAt);
-      json.updated_at = _dateUtils2.default.formatTimestamp(this.updatedAt);
-      json.form_values = this.formValues.toJSON();
-      json.geometry = this.geometryAsGeoJSON();
+  get createdAt() {
+    return this._createdAt;
+  }
 
-      return json;
+  get updatedAt() {
+    return this._updatedAt;
+  }
+
+  get formValues() {
+    if (!this._formValues) {
+      this._formValues = new _formValues2.default(this._element, this._formValuesJSON);
     }
-  }, {
-    key: 'updateTimestamps',
-    value: function updateTimestamps() {
-      var now = new Date();
 
-      if (!this._createdAt) {
-        this._createdAt = now;
-      }
+    return this._formValues;
+  }
 
-      this._updatedAt = now;
+  get hasCoordinate() {
+    return this._latitude != null && this._longitude != null;
+  }
+
+  toJSON() {
+    const json = {};
+
+    json.id = this.identifier;
+    json.created_at = _dateUtils2.default.formatTimestamp(this.createdAt);
+    json.updated_at = _dateUtils2.default.formatTimestamp(this.updatedAt);
+    json.form_values = this.formValues.toJSON();
+    json.geometry = this.geometryAsGeoJSON();
+
+    return json;
+  }
+
+  updateTimestamps() {
+    const now = new Date();
+
+    if (!this._createdAt) {
+      this._createdAt = now;
     }
-  }, {
-    key: 'geometryAsGeoJSON',
-    value: function geometryAsGeoJSON() {
-      if (!this.hasCoordinate) {
-        return null;
-      }
 
-      return {
-        type: 'Point',
-        coordinates: [this._longitude, this._latitude]
-      };
-    }
-  }, {
-    key: 'identifier',
-    get: function get() {
-      return this._id;
-    }
-  }, {
-    key: 'createdAt',
-    get: function get() {
-      return this._createdAt;
-    }
-  }, {
-    key: 'updatedAt',
-    get: function get() {
-      return this._updatedAt;
-    }
-  }, {
-    key: 'formValues',
-    get: function get() {
-      if (!this._formValues) {
-        this._formValues = new _formValues2.default(this._element, this._formValuesJSON);
-      }
+    this._updatedAt = now;
+  }
 
-      return this._formValues;
-    }
-  }, {
-    key: 'hasCoordinate',
-    get: function get() {
-      return this._latitude != null && this._longitude != null;
-    }
-  }, {
-    key: 'isGeometryEnabled',
-    get: function get() {
-      return this._element.isGeometryEnabled;
-    }
-  }, {
-    key: 'displayValue',
-    get: function get() {
-      var titleFieldKeys = this.repeatableElement.titleFieldKeys;
-      var titles = [];
+  get isGeometryEnabled() {
+    return this._element.isGeometryEnabled;
+  }
 
-      var _iteratorNormalCompletion = true;
-      var _didIteratorError = false;
-      var _iteratorError = undefined;
+  get latitude() {
+    return this._latitude;
+  }
 
-      try {
-        for (var _iterator = titleFieldKeys[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
-          var fieldKey = _step.value;
+  get longitude() {
+    return this._longitude;
+  }
 
-          var formValue = this.formValues.getFormValue(fieldKey);
+  get displayValue() {
+    const titleFieldKeys = this._element.titleFieldKeys;
+    const titles = [];
 
-          if (formValue) {
-            var displayValue = formValue.displayValue;
+    for (let fieldKey of titleFieldKeys) {
+      const formValue = this.formValues.get(fieldKey);
 
-            if (_textUtils2.default.isPresent(displayValue)) {
-              titles.push(displayValue);
-            }
-          }
-        }
-      } catch (err) {
-        _didIteratorError = true;
-        _iteratorError = err;
-      } finally {
-        try {
-          if (!_iteratorNormalCompletion && _iterator.return) {
-            _iterator.return();
-          }
-        } finally {
-          if (_didIteratorError) {
-            throw _iteratorError;
-          }
+      if (formValue) {
+        const displayValue = formValue.displayValue;
+
+        if (_textUtils2.default.isPresent(displayValue)) {
+          titles.push(displayValue);
         }
       }
-
-      return titles.join(', ');
     }
-  }]);
 
-  return RepeatableItemValue;
-})(_feature2.default);
+    return titles.join(', ');
+  }
 
+  geometryAsGeoJSON() {
+    if (!this.hasCoordinate) {
+      return null;
+    }
+
+    return {
+      type: 'Point',
+      coordinates: [this._longitude, this._latitude]
+    };
+  }
+}
 exports.default = RepeatableItemValue;
 //# sourceMappingURL=repeatable-item-value.js.map

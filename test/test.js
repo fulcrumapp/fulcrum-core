@@ -1,8 +1,5 @@
 import fs from 'fs';
-import Fulcrum from '../src';
-
-const Form = Fulcrum.Form;
-const Record = Fulcrum.Record;
+import {Form, Record} from '../src';
 
 let form = null;
 let formJson = null;

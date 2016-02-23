@@ -10,6 +10,16 @@ export default class FormValues {
     this.loadValues(container.elements, attributes);
   }
 
+  get all() {
+    const result = [];
+
+    for (const key of Object.keys(this._values)) {
+      result.push(this._values[key]);
+    }
+
+    return result;
+  }
+
   get(key) {
     return this._values[key];
   }
@@ -101,7 +111,7 @@ export default class FormValues {
       const formValue = this._values[key];
 
       if (formValue) {
-        const searchValue = formValue.searchableValue();
+        const searchValue = formValue.searchableValue;
 
         if (searchValue != null) {
           searchValues.push(searchValue);

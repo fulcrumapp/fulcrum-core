@@ -12,7 +12,7 @@ export default class DateValue extends TextualValue {
       return null;
     }
 
-    const date = this.dateValue();
+    const date = this.dateValue;
 
     if (date == null) {
       return null;
@@ -30,7 +30,7 @@ export default class DateValue extends TextualValue {
       return TextUtils.isEmpty(stringValue);
     }
 
-    const thisDate = this.dateValue();
+    const thisDate = this.dateValue;
     const thatDate = DateUtils.parseDate(stringValue);
 
     if (thisDate == null || thatDate == null) {
@@ -45,7 +45,7 @@ export default class DateValue extends TextualValue {
       return TextUtils.isEmpty(stringValue);
     }
 
-    const thisDate = this.dateValue();
+    const thisDate = this.dateValue;
     const thatDate = DateUtils.parseDate(stringValue);
 
     if (thisDate == null || thatDate == null) {

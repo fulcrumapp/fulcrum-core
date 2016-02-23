@@ -56,7 +56,7 @@ export default class Condition {
 
     let shouldBeVisible = Condition.shouldElementBeVisibleRecursive(element, record, values, cache);
 
-    if (element.isSectionElement()) {
+    if (element.isSectionElement) {
       let hasVisibleChildren = false;
 
       for (let childElement of element.elements) {
@@ -183,7 +183,7 @@ export default class Condition {
     if (condition.fieldKey === '@status') {
       return record.statusValue();
     }
-    return values.getFormValue(condition.fieldKey);
+    return values.get(condition.fieldKey);
   }
 
   static elementForCondition(condition, record) {

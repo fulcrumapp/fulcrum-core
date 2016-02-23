@@ -25,11 +25,15 @@ export default class AddressValue extends FormValue {
   }
 
   get columnValue() {
-    throw new Error('Not implemented');
+    return null;
+    // TODO(zhm) implement
+    // throw new Error('Not implemented');
   }
 
   get multipleValues() {
-    throw new Error('Not implemented');
+    return null;
+    // TODO(zhm) implement
+    // throw new Error('Not implemented');
   }
 
   toJSON() {

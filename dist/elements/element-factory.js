@@ -1,7 +1,5 @@
 'use strict';
 
-var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
-
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
@@ -80,11 +78,9 @@ var _recordLinkElement2 = _interopRequireDefault(_recordLinkElement);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+let SchemaProvider = null;
 
-var SchemaProvider = null;
-
-var Constructors = {
+const Constructors = {
   Section: _sectionElement2.default,
   ChoiceField: _choiceElement2.default,
   TextField: _textElement2.default,
@@ -106,41 +102,28 @@ var Constructors = {
   RecordLinkField: _recordLinkElement2.default
 };
 
-var ElementFactory = (function () {
-  function ElementFactory() {
-    _classCallCheck(this, ElementFactory);
+class ElementFactory {
+  static create(parent, attributes) {
+    const constructor = Constructors[attributes.type];
+
+    if (constructor == null) {
+      throw new Error('Unsupported element ' + attributes.type);
+    }
+
+    return new constructor(parent, attributes);
   }
 
-  _createClass(ElementFactory, null, [{
-    key: 'create',
-    value: function create(parent, attributes) {
-      var constructor = Constructors[attributes.type];
+  static classes() {
+    return Constructors;
+  }
 
-      if (constructor == null) {
-        throw new Error('Unsupported element ' + attributes.type);
-      }
+  static setProvider(provider) {
+    SchemaProvider = provider;
+  }
 
-      return new constructor(parent, attributes);
-    }
-  }, {
-    key: 'classes',
-    value: function classes() {
-      return Constructors;
-    }
-  }, {
-    key: 'setProvider',
-    value: function setProvider(provider) {
-      SchemaProvider = provider;
-    }
-  }, {
-    key: 'getProvider',
-    value: function getProvider() {
-      return SchemaProvider;
-    }
-  }]);
-
-  return ElementFactory;
-})();
-
+  static getProvider() {
+    return SchemaProvider;
+  }
+}
 exports.default = ElementFactory;
 //# sourceMappingURL=element-factory.js.map

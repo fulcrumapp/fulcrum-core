@@ -11,9 +11,9 @@ export default class CalculatedElement extends TextualElement {
 
   static findCalculatedElementRoot(form, container) {
     if (container.type != null) {
-      if (container.isSectionElement()) {
+      if (container.isSectionElement) {
         return CalculatedElement.findCalculatedElementRoot(form, container.parent);
-      } else if (container.isRepeatableElement()) {
+      } else if (container.isRepeatableElement) {
         return container;
       }
     }
@@ -24,9 +24,9 @@ export default class CalculatedElement extends TextualElement {
     let elements = [];
 
     for (let element of container.elements) {
-      if (element.isCalculatedElement()) {
+      if (element.isCalculatedElement) {
         elements.push(element);
-      } else if (element.isSectionElement()) {
+      } else if (element.isSectionElement) {
         elements = elements.concat(CalculatedElement.findCalculatedElementsForContainer(element));
       }
     }

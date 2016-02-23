@@ -1,7 +1,5 @@
 'use strict';
 
-var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
-
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
@@ -16,63 +14,44 @@ var _numberUtils2 = _interopRequireDefault(_numberUtils);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+class CalculatedValue extends _textualValue2.default {
+  constructor(element, value) {
+    super(element, value);
 
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var CalculatedValue = (function (_TextualValue) {
-  _inherits(CalculatedValue, _TextualValue);
-
-  function CalculatedValue(element, value) {
-    _classCallCheck(this, CalculatedValue);
-
-    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(CalculatedValue).call(this, element, value));
-
-    _this.error = null;
-    return _this;
+    this.error = null;
   }
 
-  _createClass(CalculatedValue, [{
-    key: 'displayValue',
-    get: function get() {
-      if (this.hasError) {
-        return this.error;
+  get displayValue() {
+    if (this.hasError) {
+      return this.error;
+    }
+
+    return this.element.display.format(this.textValue);
+  }
+
+  get hasError() {
+    return this.error != null;
+  }
+
+  get columnValue() {
+    const display = this.element.display;
+
+    // - for currency or number display, return the numeric value
+    // - for date calculations return the UTC epoch seconds
+    // - for text (and anything else) just return the string value
+
+    if (display.isCurrency || display.isNumber) {
+      return _numberUtils2.default.parseDouble(this.textValue);
+    } else if (display.isDate) {
+      const date = new Date(`${ this.textValue } 00:00:00Z`);
+
+      if (date) {
+        return date.getTime();
       }
-
-      return this.element.display.format(this.textValue);
     }
-  }, {
-    key: 'hasError',
-    get: function get() {
-      return this.error != null;
-    }
-  }, {
-    key: 'columnValue',
-    get: function get() {
-      var display = this.element.display;
 
-      // - for currency or number display, return the numeric value
-      // - for date calculations return the UTC epoch seconds
-      // - for text (and anything else) just return the string value
-
-      if (display.isCurrency || display.isNumber) {
-        return _numberUtils2.default.parseDouble(this.textValue);
-      } else if (display.isDate) {
-        var date = new Date(this.textValue + ' 00:00:00Z');
-
-        if (date) {
-          return date.getTime();
-        }
-      }
-
-      return this.textValue;
-    }
-  }]);
-
-  return CalculatedValue;
-})(_textualValue2.default);
-
+    return this.textValue;
+  }
+}
 exports.default = CalculatedValue;
 //# sourceMappingURL=calculated-value.js.map
