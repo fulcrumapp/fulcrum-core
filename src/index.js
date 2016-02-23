@@ -77,29 +77,3 @@ export {CalculatedElement};
 export {CalculatedValue};
 export {TextElement};
 export {TextValue};
-
-// const api = {
-//   Form: Form,
-//   Record: Record,
-//   Element: Element,
-//   FormValue: FormValue,
-//   Choice: Choice,
-//   ChoiceList: ChoiceList,
-//   Classification: Classification,
-//   ClassificationSet: ClassificationSet,
-//   ElementFactory: ElementFactory
-// };
-
-// const elements = Element.classes();
-
-// for (let prop of Object.keys(elements)) {
-//   api[prop] = elements[prop];
-// }
-
-// const values = FormValue.classes();
-
-// for (let prop of Object.keys(values)) {
-//   api[prop] = values[prop];
-// }
-
-// export default api;
