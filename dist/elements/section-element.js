@@ -18,7 +18,7 @@ class SectionElement extends _containerElement2.default {
   }
 
   get isDrillDown() {
-    return this.display === 'drill-down';
+    return this.display === 'drilldown';
   }
 
   get isInline() {
