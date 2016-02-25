@@ -4,6 +4,8 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
 var _textualValue = require('./textual-value');
 
 var _textualValue2 = _interopRequireDefault(_textualValue);
@@ -18,62 +20,82 @@ var _textUtils2 = _interopRequireDefault(_textUtils);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-class DateValue extends _textualValue2.default {
-  constructor(element, value) {
-    super(element, value);
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var DateValue = function (_TextualValue) {
+  _inherits(DateValue, _TextualValue);
+
+  function DateValue(element, value) {
+    _classCallCheck(this, DateValue);
+
+    return _possibleConstructorReturn(this, Object.getPrototypeOf(DateValue).call(this, element, value));
   }
 
-  get displayValue() {
-    if (this.isEmpty) {
-      return null;
+  _createClass(DateValue, [{
+    key: 'isLessThan',
+    value: function isLessThan(stringValue) {
+      if (this.isEmpty) {
+        return _textUtils2.default.isEmpty(stringValue);
+      }
+
+      var thisDate = this.dateValue;
+      var thatDate = _dateUtils2.default.parseDate(stringValue);
+
+      if (thisDate == null || thatDate == null) {
+        return false;
+      }
+
+      return thisDate.getTime() < thatDate.getTime();
     }
+  }, {
+    key: 'isGreaterThan',
+    value: function isGreaterThan(stringValue) {
+      if (this.isEmpty) {
+        return _textUtils2.default.isEmpty(stringValue);
+      }
 
-    const date = this.dateValue;
+      var thisDate = this.dateValue;
+      var thatDate = _dateUtils2.default.parseDate(stringValue);
 
-    if (date == null) {
-      return null;
+      if (thisDate == null || thatDate == null) {
+        return false;
+      }
+
+      return thisDate.getTime() > thatDate.getTime();
     }
+  }, {
+    key: 'displayValue',
+    get: function get() {
+      if (this.isEmpty) {
+        return null;
+      }
 
-    return _dateUtils2.default.formatLocalizedDate(date);
-  }
+      var date = this.dateValue;
 
-  get searchableValue() {
-    return this.textValue;
-  }
+      if (date == null) {
+        return null;
+      }
 
-  isLessThan(stringValue) {
-    if (this.isEmpty) {
-      return _textUtils2.default.isEmpty(stringValue);
+      return _dateUtils2.default.formatLocalizedDate(date);
     }
-
-    const thisDate = this.dateValue;
-    const thatDate = _dateUtils2.default.parseDate(stringValue);
-
-    if (thisDate == null || thatDate == null) {
-      return false;
+  }, {
+    key: 'searchableValue',
+    get: function get() {
+      return this.textValue;
     }
-
-    return thisDate.getTime() < thatDate.getTime();
-  }
-
-  isGreaterThan(stringValue) {
-    if (this.isEmpty) {
-      return _textUtils2.default.isEmpty(stringValue);
+  }, {
+    key: 'dateValue',
+    get: function get() {
+      return _dateUtils2.default.parseDate(this.textValue);
     }
+  }]);
 
-    const thisDate = this.dateValue;
-    const thatDate = _dateUtils2.default.parseDate(stringValue);
+  return DateValue;
+}(_textualValue2.default);
 
-    if (thisDate == null || thatDate == null) {
-      return false;
-    }
-
-    return thisDate.getTime() > thatDate.getTime();
-  }
-
-  get dateValue() {
-    return _dateUtils2.default.parseDate(this.textValue);
-  }
-}
 exports.default = DateValue;
 //# sourceMappingURL=date-value.js.map

@@ -4,6 +4,8 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
 var _choiceValue = require('./choice-value');
 
 var _choiceValue2 = _interopRequireDefault(_choiceValue);
@@ -70,7 +72,9 @@ var _recordLinkValue2 = _interopRequireDefault(_recordLinkValue);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-const Constructors = {
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var Constructors = {
   ChoiceField: _choiceValue2.default,
   TextField: _textValue2.default,
   DateTimeField: _dateValue2.default,
@@ -90,20 +94,31 @@ const Constructors = {
   RecordLinkField: _recordLinkValue2.default
 };
 
-class FormValueFactory {
-  static create(element, attributes) {
-    const constructor = Constructors[element.type];
+var FormValueFactory = function () {
+  function FormValueFactory() {
+    _classCallCheck(this, FormValueFactory);
+  }
 
-    if (constructor == null) {
-      throw new Error('Unsupported element ' + element.type);
+  _createClass(FormValueFactory, null, [{
+    key: 'create',
+    value: function create(element, attributes) {
+      var constructor = Constructors[element.type];
+
+      if (constructor == null) {
+        throw new Error('Unsupported element ' + element.type);
+      }
+
+      return new constructor(element, attributes);
     }
+  }, {
+    key: 'classes',
+    value: function classes() {
+      return Constructors;
+    }
+  }]);
 
-    return new constructor(element, attributes);
-  }
+  return FormValueFactory;
+}();
 
-  static classes() {
-    return Constructors;
-  }
-}
 exports.default = FormValueFactory;
 //# sourceMappingURL=form-value-factory.js.map

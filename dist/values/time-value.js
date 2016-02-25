@@ -4,6 +4,8 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
 var _textualValue = require('./textual-value');
 
 var _textualValue2 = _interopRequireDefault(_textualValue);
@@ -18,58 +20,82 @@ var _textUtils2 = _interopRequireDefault(_textUtils);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-class TimeValue extends _textualValue2.default {
-  get displayValue() {
-    if (this.isEmpty) {
-      return null;
-    }
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-    const time = this.timeValue();
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
-    if (time == null) {
-      return null;
-    }
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-    return time;
+var TimeValue = function (_TextualValue) {
+  _inherits(TimeValue, _TextualValue);
+
+  function TimeValue() {
+    _classCallCheck(this, TimeValue);
+
+    return _possibleConstructorReturn(this, Object.getPrototypeOf(TimeValue).apply(this, arguments));
   }
 
-  get searchableValue() {
-    return this.textValue;
-  }
+  _createClass(TimeValue, [{
+    key: 'isLessThan',
+    value: function isLessThan(stringValue) {
+      if (this.isEmpty) {
+        return _textUtils2.default.isEmpty(stringValue);
+      }
 
-  isLessThan(stringValue) {
-    if (this.isEmpty) {
-      return _textUtils2.default.isEmpty(stringValue);
+      var thisTime = this.timeValue();
+      var thatTime = _dateUtils2.default.parseTime(stringValue);
+
+      if (thisTime == null || thatTime == null) {
+        return false;
+      }
+
+      return thisTime.getTime() < thatTime.getTime();
     }
+  }, {
+    key: 'isGreaterThan',
+    value: function isGreaterThan(stringValue) {
+      if (this.isEmpty) {
+        return _textUtils2.default.isEmpty(stringValue);
+      }
 
-    const thisTime = this.timeValue();
-    const thatTime = _dateUtils2.default.parseTime(stringValue);
+      var thisTime = this.timeValue();
+      var thatTime = _dateUtils2.default.parseTime(stringValue);
 
-    if (thisTime == null || thatTime == null) {
-      return false;
+      if (thisTime == null || thatTime == null) {
+        return false;
+      }
+
+      return thisTime.getTime() > thatTime.getTime();
     }
-
-    return thisTime.getTime() < thatTime.getTime();
-  }
-
-  isGreaterThan(stringValue) {
-    if (this.isEmpty) {
-      return _textUtils2.default.isEmpty(stringValue);
+  }, {
+    key: 'timeValue',
+    value: function timeValue() {
+      return _dateUtils2.default.parseTime(this.textValue);
     }
+  }, {
+    key: 'displayValue',
+    get: function get() {
+      if (this.isEmpty) {
+        return null;
+      }
 
-    const thisTime = this.timeValue();
-    const thatTime = _dateUtils2.default.parseTime(stringValue);
+      var time = this.timeValue();
 
-    if (thisTime == null || thatTime == null) {
-      return false;
+      if (time == null) {
+        return null;
+      }
+
+      return time;
     }
+  }, {
+    key: 'searchableValue',
+    get: function get() {
+      return this.textValue;
+    }
+  }]);
 
-    return thisTime.getTime() > thatTime.getTime();
-  }
+  return TimeValue;
+}(_textualValue2.default);
 
-  timeValue() {
-    return _dateUtils2.default.parseTime(this.textValue);
-  }
-}
 exports.default = TimeValue;
 //# sourceMappingURL=time-value.js.map
