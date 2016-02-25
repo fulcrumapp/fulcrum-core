@@ -18,6 +18,7 @@ class Form {
     this._json = attributes;
     // TODO(zhm) this might need to go away
     this.titleFieldKeys = attributes.title_field_keys;
+    this.script = attributes.script;
     this.createChildElements(attributes.elements);
   }
 
