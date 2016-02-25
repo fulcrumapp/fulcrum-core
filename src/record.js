@@ -2,6 +2,7 @@ import Feature from './feature';
 import FormValues from './values/form-values';
 import TextUtils from './utils/text-utils';
 import DateUtils from './utils/date-utils';
+import StatusValue from './values/status-value';
 
 export default class Record extends Feature {
   constructor(attributes) {
@@ -80,6 +81,27 @@ export default class Record extends Feature {
 
   get isGeometryEnabled() {
     return this.form.isGeometryEnabled;
+  }
+
+  get(key, formValues) {
+    if (key === '@status') {
+      return this.statusValue;
+    }
+
+    return formValues.get(key);
+  }
+
+  set(key, value, formValues) {
+    if (key === '@status') {
+      this.status = value.textValue;
+      return;
+    }
+
+    formValues.set(key, value);
+  }
+
+  get statusValue() {
+    return new StatusValue(this.status, this.form.statusField);
   }
 
   get displayValue() {

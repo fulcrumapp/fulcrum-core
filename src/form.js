@@ -1,4 +1,7 @@
 import ChildElements from './elements/child-elements';
+import StatusElement from './elements/status-element';
+import DefaultValues from './values/default-values';
+import Record from './record';
 
 export default class Form {
   constructor(attributes) {
@@ -8,6 +11,9 @@ export default class Form {
     this.titleFieldKeys = attributes.title_field_keys;
     this.script = attributes.script;
     this.createChildElements(attributes.elements);
+
+    this._statusFieldJSON = attributes.status_field;
+    this._statusField = null;
   }
 
   async load() {
@@ -16,6 +22,27 @@ export default class Form {
         await element.load();
       }
     }
+  }
+
+  createRecord(attributes) {
+    const record = new Record(attributes);
+
+    // TODO(zhm) this might not be final
+    record._form = this;
+    record._formValuesJSON = {};
+
+    DefaultValues.applyDefaultValuesForElements(this.elements,
+                                                record.formValues,
+                                                record);
+
+    return record;
+  }
+
+  get statusField() {
+    if (!this._statusField) {
+      this._statusField = new StatusElement(this, this._statusFieldJSON);
+    }
+    return this._statusField;
   }
 
   get(key) {

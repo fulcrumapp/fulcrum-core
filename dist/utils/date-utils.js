@@ -32,6 +32,13 @@ class DateUtils {
     return timeString;
   }
 
+  static formatTime(date) {
+    const hours = _lodash2.default.padLeft(date.getHours(), 2, '0');
+    const minutes = _lodash2.default.padLeft(date.getMinutes(), 2, '0');
+
+    return hours + ':' + minutes;
+  }
+
   static parseTimestamp(timestampString) {
     return new Date(parseFloat(timestampString) * 1000);
   }
@@ -41,6 +48,14 @@ class DateUtils {
       return null;
     }
     return date.getTime().toFixed(3);
+  }
+
+  static formatDate(date) {
+    const year = date.getFullYear();
+    const month = _lodash2.default.padLeft(date.getMonth() + 1, 2, '0');
+    const day = _lodash2.default.padLeft(date.getDate(), 2, '0');
+
+    return year + '-' + month + '-' + day;
   }
 
   static formatLocalizedDate(date) {

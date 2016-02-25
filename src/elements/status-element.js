@@ -1,17 +1,35 @@
 import TextualElement from './textual-element';
+import StatusChoice from './status-choice';
 
 export default class StatusElement extends TextualElement {
   constructor(parent, attributes) {
     super(parent, attributes);
 
-    this.choices = attributes.choices;
+    this.choices = [];
 
-    this.enabled = attributes.enabled;
+    for (const choice of attributes.choices) {
+      this.choices.push(new StatusChoice(choice));
+    }
 
-    this.readOnly = !!attributes.read_only;
+    this._enabled = !!attributes.enabled;
+    this._readOnly = !!attributes.read_only;
+  }
+
+  get isEnabled() {
+    return this._enabled;
+  }
+
+  get isReadOnly() {
+    return this._readOnly;
   }
 
   statusForValue(value) {
-    throw new Error('Not implemented');
+    for (const choice of this.choices) {
+      if (choice.value === value) {
+        return choice;
+      }
+    }
+
+    return null;
   }
 }

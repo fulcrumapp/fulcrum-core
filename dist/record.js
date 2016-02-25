@@ -20,6 +20,10 @@ var _dateUtils = require('./utils/date-utils');
 
 var _dateUtils2 = _interopRequireDefault(_dateUtils);
 
+var _statusValue = require('./values/status-value');
+
+var _statusValue2 = _interopRequireDefault(_statusValue);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 class Record extends _feature2.default {
@@ -99,6 +103,27 @@ class Record extends _feature2.default {
 
   get isGeometryEnabled() {
     return this.form.isGeometryEnabled;
+  }
+
+  get(key, formValues) {
+    if (key === '@status') {
+      return this.statusValue;
+    }
+
+    return formValues.get(key);
+  }
+
+  set(key, value, formValues) {
+    if (key === '@status') {
+      this.status = value.textValue;
+      return;
+    }
+
+    formValues.set(key, value);
+  }
+
+  get statusValue() {
+    return new _statusValue2.default(this.status, this.form.statusField);
   }
 
   get displayValue() {
