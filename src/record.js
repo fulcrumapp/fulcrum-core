@@ -122,4 +122,18 @@ export default class Record extends Feature {
 
     return titles.join(', ');
   }
+
+  get isStatusFieldEnabled() {
+    // invisible if there are no statuses or the status field is marked as hidden
+    if (this.form.statusField.choices.length === 0 || this.form.statusField.isHidden) {
+      return false;
+    }
+
+    // invisible if it's readonly and there's no status (nothing for the user to read)
+    if (this.status == null && this.form.statusField.isReadOnly) {
+      return false;
+    }
+
+    return this.form.statusField.isEnabled;
+  }
 }

@@ -14,6 +14,8 @@ export default class Form {
 
     this._statusFieldJSON = attributes.status_field;
     this._statusField = null;
+
+    this._geometryRequired = !!attributes.geometry_required;
   }
 
   async load() {
@@ -60,6 +62,10 @@ export default class Form {
   toJSON() {
     // TODO(zhm) actually implement this so it returns a copy
     return this._json;
+  }
+
+  get isGeometryRequired() {
+    return this._geometryRequired;
   }
 }
 

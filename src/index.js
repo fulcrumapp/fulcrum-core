@@ -38,6 +38,7 @@ import CalculatedValue from './values/calculated-value';
 import TextElement from './elements/text-element';
 import TextValue from './values/text-value';
 import SectionElement from './elements/section-element';
+import FeatureValidator from './validation/feature-validator';
 
 export {Form};
 export {Record};
@@ -79,3 +80,4 @@ export {CalculatedValue};
 export {TextElement};
 export {TextValue};
 export {SectionElement};
+export {FeatureValidator};
