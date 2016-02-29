@@ -32,7 +32,7 @@ exports.default = {
 
   YesNoElement: 'YesNoField',
 
-  HyperlinkElement: 'HyperlinkElement',
+  HyperlinkElement: 'HyperlinkField',
 
   BarcodeElement: 'BarcodeField',
 
