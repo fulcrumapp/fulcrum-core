@@ -30,9 +30,16 @@ var TextElement = function (_TextualElement) {
 
     _this.format = attributes.format;
 
-    _this.min = +attributes.min;
+    _this.min = null;
+    _this.max = null;
 
-    _this.max = +attributes.max;
+    if (attributes.min != null) {
+      _this.min = +attributes.min;
+    }
+
+    if (attributes.max != null) {
+      _this.max = +attributes.max;
+    }
 
     if (isNaN(_this.min)) {
       _this.min = null;

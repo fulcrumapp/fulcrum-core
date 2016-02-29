@@ -1,6 +1,7 @@
 import FormValue from './form-value';
 import RepeatableItemValue from './repeatable-item-value';
 import TextUtils from '../utils/text-utils';
+import uuid from 'uuid';
 
 const SearchSeparator = ' ';
 
@@ -12,7 +13,7 @@ export default class RepeatableValue extends FormValue {
 
     if (items != null) {
       for (let item of items) {
-        this._items.push(new RepeatableItemValue(this.element, item));
+        this._items.push(new RepeatableItemValue(this.element, item, this._items.length));
       }
     }
   }
@@ -99,5 +100,18 @@ export default class RepeatableValue extends FormValue {
 
   forEachItem(callback) {
     this.mapItems(callback);
+  }
+
+  createNewItem() {
+    const attributes = {
+      id: uuid.v4(),
+      form_values: {}
+    };
+
+    const item = new RepeatableItemValue(this.element, attributes, this._items.length);
+
+    this._items.push(item);
+
+    return item;
   }
 }

@@ -34,7 +34,8 @@
   },
   "dependencies": {
     "lodash": "^3.10.1",
-    "mixmatch": "0.0.2"
+    "mixmatch": "0.0.2",
+    "uuid": "^2.0.1"
   },
   "keywords": [
     "fulcrum"

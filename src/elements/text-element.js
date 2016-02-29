@@ -8,9 +8,16 @@ export default class TextElement extends TextualElement {
 
     this.format = attributes.format;
 
-    this.min = +attributes.min;
+    this.min = null;
+    this.max = null;
 
-    this.max = +attributes.max;
+    if (attributes.min != null) {
+      this.min = +attributes.min;
+    }
+
+    if (attributes.max != null) {
+      this.max = +attributes.max;
+    }
 
     if (isNaN(this.min)) {
       this.min = null;

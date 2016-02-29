@@ -37,6 +37,7 @@ import CalculatedElement from './elements/calculated-element';
 import CalculatedValue from './values/calculated-value';
 import TextElement from './elements/text-element';
 import TextValue from './values/text-value';
+import SectionElement from './elements/section-element';
 
 export {Form};
 export {Record};
@@ -77,3 +78,4 @@ export {CalculatedElement};
 export {CalculatedValue};
 export {TextElement};
 export {TextValue};
+export {SectionElement};
