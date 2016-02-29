@@ -18,6 +18,10 @@ var _textUtils = require('../utils/text-utils');
 
 var _textUtils2 = _interopRequireDefault(_textUtils);
 
+var _uuid = require('uuid');
+
+var _uuid2 = _interopRequireDefault(_uuid);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -47,7 +51,7 @@ var RepeatableValue = function (_FormValue) {
         for (var _iterator = items[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
           var item = _step.value;
 
-          _this._items.push(new _repeatableItemValue2.default(_this.element, item));
+          _this._items.push(new _repeatableItemValue2.default(_this.element, item, _this._items.length));
         }
       } catch (err) {
         _didIteratorError = true;
@@ -137,6 +141,20 @@ var RepeatableValue = function (_FormValue) {
     key: 'forEachItem',
     value: function forEachItem(callback) {
       this.mapItems(callback);
+    }
+  }, {
+    key: 'createNewItem',
+    value: function createNewItem() {
+      var attributes = {
+        id: _uuid2.default.v4(),
+        form_values: {}
+      };
+
+      var item = new _repeatableItemValue2.default(this.element, attributes, this._items.length);
+
+      this._items.push(item);
+
+      return item;
     }
   }, {
     key: 'isEmpty',

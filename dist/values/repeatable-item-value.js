@@ -92,7 +92,12 @@ var RepeatableItemValue = function (_Feature) {
       };
     }
   }, {
-    key: 'identifier',
+    key: 'element',
+    get: function get() {
+      return this._element;
+    }
+  }, {
+    key: 'id',
     get: function get() {
       return this._id;
     }
