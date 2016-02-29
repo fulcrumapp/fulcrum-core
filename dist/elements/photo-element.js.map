@@ -1,1 +1,1 @@
-{"version":3,"sources":["../../src/elements/photo-element.js"],"names":[],"mappings":";;;;;;;;;;;;AAEe,MAAM,YAAN,gCAAwC,EAAxC;kBAAM","file":"photo-element.js","sourcesContent":["import MediaElement from './media-element';\n\nexport default class PhotoElement extends MediaElement {\n}\n"]}
+{"version":3,"sources":["../../src/elements/photo-element.js"],"names":[],"mappings":";;;;;;;;;;;;;;;;;;IAEqB","file":"photo-element.js","sourcesContent":["import MediaElement from './media-element';\n\nexport default class PhotoElement extends MediaElement {\n}\n"]}

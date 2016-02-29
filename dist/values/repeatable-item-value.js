@@ -4,6 +4,8 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
 var _feature = require('../feature');
 
 var _feature2 = _interopRequireDefault(_feature);
@@ -22,113 +24,167 @@ var _textUtils2 = _interopRequireDefault(_textUtils);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-class RepeatableItemValue extends _feature2.default {
-  constructor(element, item, index) {
-    super();
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-    this.index = index;
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
-    this._element = element;
-    this._id = item.id;
-    this._createdAt = _dateUtils2.default.parseTimestamp(item.created_at);
-    this._updatedAt = _dateUtils2.default.parseTimestamp(item.updated_at);
-    this._formValuesJSON = item.form_values;
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-    const geometry = item.geometry;
+var RepeatableItemValue = function (_Feature) {
+  _inherits(RepeatableItemValue, _Feature);
+
+  function RepeatableItemValue(element, item, index) {
+    _classCallCheck(this, RepeatableItemValue);
+
+    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(RepeatableItemValue).call(this));
+
+    _this.index = index;
+
+    _this._element = element;
+    _this._id = item.id;
+    _this._createdAt = _dateUtils2.default.parseTimestamp(item.created_at);
+    _this._updatedAt = _dateUtils2.default.parseTimestamp(item.updated_at);
+    _this._formValuesJSON = item.form_values;
+
+    var geometry = item.geometry;
 
     if (geometry != null && geometry.type === 'Point') {
-      this._latitude = geometry.coordinates[1];
-      this._longitude = geometry.coordinates[0];
+      _this._latitude = geometry.coordinates[1];
+      _this._longitude = geometry.coordinates[0];
     }
+    return _this;
   }
 
-  get identifier() {
-    return this._id;
-  }
+  _createClass(RepeatableItemValue, [{
+    key: 'toJSON',
+    value: function toJSON() {
+      var json = {};
 
-  get createdAt() {
-    return this._createdAt;
-  }
+      json.id = this.identifier;
+      json.created_at = _dateUtils2.default.formatTimestamp(this.createdAt);
+      json.updated_at = _dateUtils2.default.formatTimestamp(this.updatedAt);
+      json.form_values = this.formValues.toJSON();
+      json.geometry = this.geometryAsGeoJSON();
 
-  get updatedAt() {
-    return this._updatedAt;
-  }
-
-  get formValues() {
-    if (!this._formValues) {
-      this._formValues = new _formValues2.default(this._element, this._formValuesJSON);
+      return json;
     }
+  }, {
+    key: 'updateTimestamps',
+    value: function updateTimestamps() {
+      var now = new Date();
 
-    return this._formValues;
-  }
+      if (!this._createdAt) {
+        this._createdAt = now;
+      }
 
-  get hasCoordinate() {
-    return this._latitude != null && this._longitude != null;
-  }
-
-  toJSON() {
-    const json = {};
-
-    json.id = this.identifier;
-    json.created_at = _dateUtils2.default.formatTimestamp(this.createdAt);
-    json.updated_at = _dateUtils2.default.formatTimestamp(this.updatedAt);
-    json.form_values = this.formValues.toJSON();
-    json.geometry = this.geometryAsGeoJSON();
-
-    return json;
-  }
-
-  updateTimestamps() {
-    const now = new Date();
-
-    if (!this._createdAt) {
-      this._createdAt = now;
+      this._updatedAt = now;
     }
+  }, {
+    key: 'geometryAsGeoJSON',
+    value: function geometryAsGeoJSON() {
+      if (!this.hasCoordinate) {
+        return null;
+      }
 
-    this._updatedAt = now;
-  }
+      return {
+        type: 'Point',
+        coordinates: [this._longitude, this._latitude]
+      };
+    }
+  }, {
+    key: 'element',
+    get: function get() {
+      return this._element;
+    }
+  }, {
+    key: 'id',
+    get: function get() {
+      return this._id;
+    }
+  }, {
+    key: 'createdAt',
+    get: function get() {
+      return this._createdAt;
+    }
+  }, {
+    key: 'updatedAt',
+    get: function get() {
+      return this._updatedAt;
+    }
+  }, {
+    key: 'formValues',
+    get: function get() {
+      if (!this._formValues) {
+        this._formValues = new _formValues2.default(this._element, this._formValuesJSON);
+      }
 
-  get isGeometryEnabled() {
-    return this._element.isGeometryEnabled;
-  }
+      return this._formValues;
+    }
+  }, {
+    key: 'hasCoordinate',
+    get: function get() {
+      return this._latitude != null && this._longitude != null;
+    }
+  }, {
+    key: 'isGeometryEnabled',
+    get: function get() {
+      return this._element.isGeometryEnabled;
+    }
+  }, {
+    key: 'latitude',
+    get: function get() {
+      return this._latitude;
+    }
+  }, {
+    key: 'longitude',
+    get: function get() {
+      return this._longitude;
+    }
+  }, {
+    key: 'displayValue',
+    get: function get() {
+      var titleFieldKeys = this._element.titleFieldKeys;
+      var titles = [];
 
-  get latitude() {
-    return this._latitude;
-  }
+      var _iteratorNormalCompletion = true;
+      var _didIteratorError = false;
+      var _iteratorError = undefined;
 
-  get longitude() {
-    return this._longitude;
-  }
+      try {
+        for (var _iterator = titleFieldKeys[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+          var fieldKey = _step.value;
 
-  get displayValue() {
-    const titleFieldKeys = this._element.titleFieldKeys;
-    const titles = [];
+          var formValue = this.formValues.get(fieldKey);
 
-    for (let fieldKey of titleFieldKeys) {
-      const formValue = this.formValues.get(fieldKey);
+          if (formValue) {
+            var displayValue = formValue.displayValue;
 
-      if (formValue) {
-        const displayValue = formValue.displayValue;
-
-        if (_textUtils2.default.isPresent(displayValue)) {
-          titles.push(displayValue);
+            if (_textUtils2.default.isPresent(displayValue)) {
+              titles.push(displayValue);
+            }
+          }
+        }
+      } catch (err) {
+        _didIteratorError = true;
+        _iteratorError = err;
+      } finally {
+        try {
+          if (!_iteratorNormalCompletion && _iterator.return) {
+            _iterator.return();
+          }
+        } finally {
+          if (_didIteratorError) {
+            throw _iteratorError;
+          }
         }
       }
+
+      return titles.join(', ');
     }
+  }]);
 
-    return titles.join(', ');
-  }
+  return RepeatableItemValue;
+}(_feature2.default);
 
-  geometryAsGeoJSON() {
-    if (!this.hasCoordinate) {
-      return null;
-    }
-
-    return {
-      type: 'Point',
-      coordinates: [this._longitude, this._latitude]
-    };
-  }
-}
 exports.default = RepeatableItemValue;
 //# sourceMappingURL=repeatable-item-value.js.map

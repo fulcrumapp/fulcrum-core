@@ -23,7 +23,11 @@ export default class RepeatableItemValue extends Feature {
     }
   }
 
-  get identifier() {
+  get element() {
+    return this._element;
+  }
+
+  get id() {
     return this._id;
   }
 
