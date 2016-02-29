@@ -41,6 +41,8 @@ var Form = function () {
 
     this._statusFieldJSON = attributes.status_field;
     this._statusField = null;
+
+    this._geometryRequired = !!attributes.geometry_required;
   }
 
   _createClass(Form, [{
@@ -167,6 +169,11 @@ var Form = function () {
     key: 'hasHiddenParent',
     get: function get() {
       return false;
+    }
+  }, {
+    key: 'isGeometryRequired',
+    get: function get() {
+      return this._geometryRequired;
     }
   }]);
 

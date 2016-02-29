@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.SectionElement = exports.TextValue = exports.TextElement = exports.CalculatedValue = exports.CalculatedElement = exports.DateValue = exports.DateElement = exports.ClassificationValue = exports.ClassificationElement = exports.ChoiceValue = exports.ChoiceElement = exports.BarcodeValue = exports.BarcodeElement = exports.AddressValue = exports.AddressElement = exports.VideoValue = exports.VideoItemValue = exports.PhotoValue = exports.PhotoItemValue = exports.AudioValue = exports.AudioItemValue = exports.RepeatableElement = exports.Condition = exports.ChildElements = exports.NumberUtils = exports.DateUtils = exports.TextUtils = exports.FormValues = exports.Feature = exports.RepeatableValue = exports.RepeatableItemValue = exports.ElementFactory = exports.ClassificationSet = exports.Classification = exports.ChoiceList = exports.Choice = exports.FormValue = exports.Element = exports.Record = exports.Form = undefined;
+exports.FeatureValidator = exports.SectionElement = exports.TextValue = exports.TextElement = exports.CalculatedValue = exports.CalculatedElement = exports.DateValue = exports.DateElement = exports.ClassificationValue = exports.ClassificationElement = exports.ChoiceValue = exports.ChoiceElement = exports.BarcodeValue = exports.BarcodeElement = exports.AddressValue = exports.AddressElement = exports.VideoValue = exports.VideoItemValue = exports.PhotoValue = exports.PhotoItemValue = exports.AudioValue = exports.AudioItemValue = exports.RepeatableElement = exports.Condition = exports.ChildElements = exports.NumberUtils = exports.DateUtils = exports.TextUtils = exports.FormValues = exports.Feature = exports.RepeatableValue = exports.RepeatableItemValue = exports.ElementFactory = exports.ClassificationSet = exports.Classification = exports.ChoiceList = exports.Choice = exports.FormValue = exports.Element = exports.Record = exports.Form = undefined;
 
 var _form = require('./form');
 
@@ -165,6 +165,10 @@ var _sectionElement = require('./elements/section-element');
 
 var _sectionElement2 = _interopRequireDefault(_sectionElement);
 
+var _featureValidator = require('./validation/feature-validator');
+
+var _featureValidator2 = _interopRequireDefault(_featureValidator);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 exports.Form = _form2.default;
@@ -207,4 +211,5 @@ exports.CalculatedValue = _calculatedValue2.default;
 exports.TextElement = _textElement2.default;
 exports.TextValue = _textValue2.default;
 exports.SectionElement = _sectionElement2.default;
+exports.FeatureValidator = _featureValidator2.default;
 //# sourceMappingURL=index.js.map
