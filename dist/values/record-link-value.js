@@ -191,6 +191,11 @@ var RecordLinkValue = function (_FormValue) {
 
       return ids;
     }
+  }, {
+    key: 'items',
+    get: function get() {
+      return this._items;
+    }
   }]);
 
   return RecordLinkValue;

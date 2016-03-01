@@ -83,4 +83,8 @@ export default class RecordLinkValue extends FormValue {
   isGreaterThan(value) {
     return this.length > NumberUtils.parseDouble(value);
   }
+
+  get items() {
+    return this._items;
+  }
 }

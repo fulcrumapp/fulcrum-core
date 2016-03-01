@@ -26,10 +26,10 @@ var RecordLinkElement = function (_Element) {
 
     _this.formID = attributes.form_id;
 
-    _this.allowMultiple = !!attributes.allow_multiple;
-    _this.allowExisting = !!attributes.allow_existing;
-    _this.allowCreating = !!attributes.allow_creating;
-    _this.allowUpdating = !!attributes.allow_updating;
+    _this.allowMultiple = !!attributes.allow_multiple_records;
+    _this.allowExisting = !!attributes.allow_existing_records;
+    _this.allowCreating = !!attributes.allow_creating_records;
+    _this.allowUpdating = !!attributes.allow_updating_records;
 
     // TODO(zhm) model these
     _this.recordConditionsType = attributes.record_conditions_type;

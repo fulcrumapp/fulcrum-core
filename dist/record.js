@@ -55,6 +55,7 @@ var Record = function (_Feature) {
     value: function toJSON() {
       var json = {};
 
+      // TODO(zhm) this is incomplete
       json.id = this.id;
       json.client_created_at = _dateUtils2.default.formatTimestamp(this.createdAt);
       json.client_updated_at = _dateUtils2.default.formatTimestamp(this.updatedAt);

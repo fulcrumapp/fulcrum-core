@@ -15,6 +15,7 @@ export default class Form {
     this._statusFieldJSON = attributes.status_field;
     this._statusField = null;
 
+    this._name = attributes.name;
     this._geometryRequired = !!attributes.geometry_required;
   }
 
@@ -66,6 +67,10 @@ export default class Form {
 
   get isGeometryRequired() {
     return this._geometryRequired;
+  }
+
+  get name() {
+    return this._name;
   }
 }
 

@@ -16,6 +16,11 @@ var RecordLinkItemValue = function () {
   }
 
   _createClass(RecordLinkItemValue, [{
+    key: "id",
+    value: function id() {
+      return this._recordID;
+    }
+  }, {
     key: "toJSON",
     value: function toJSON() {
       return {

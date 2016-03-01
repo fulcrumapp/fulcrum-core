@@ -42,6 +42,7 @@ var Form = function () {
     this._statusFieldJSON = attributes.status_field;
     this._statusField = null;
 
+    this._name = attributes.name;
     this._geometryRequired = !!attributes.geometry_required;
   }
 
@@ -174,6 +175,11 @@ var Form = function () {
     key: 'isGeometryRequired',
     get: function get() {
       return this._geometryRequired;
+    }
+  }, {
+    key: 'name',
+    get: function get() {
+      return this._name;
     }
   }]);
 

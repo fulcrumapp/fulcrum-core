@@ -59,6 +59,7 @@ export default class Record extends Feature {
   toJSON() {
     const json = {};
 
+    // TODO(zhm) this is incomplete
     json.id = this.id;
     json.client_created_at = DateUtils.formatTimestamp(this.createdAt);
     json.client_updated_at = DateUtils.formatTimestamp(this.updatedAt);

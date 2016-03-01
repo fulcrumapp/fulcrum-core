@@ -6,10 +6,10 @@ export default class RecordLinkElement extends Element {
 
     this.formID = attributes.form_id;
 
-    this.allowMultiple = !!attributes.allow_multiple;
-    this.allowExisting = !!attributes.allow_existing;
-    this.allowCreating = !!attributes.allow_creating;
-    this.allowUpdating = !!attributes.allow_updating;
+    this.allowMultiple = !!attributes.allow_multiple_records;
+    this.allowExisting = !!attributes.allow_existing_records;
+    this.allowCreating = !!attributes.allow_creating_records;
+    this.allowUpdating = !!attributes.allow_updating_records;
 
     // TODO(zhm) model these
     this.recordConditionsType = attributes.record_conditions_type;
