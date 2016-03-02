@@ -43,6 +43,7 @@ import RecordLinkValue from './values/record-link-value';
 import RecordLinkItemValue from './values/record-link-item-value';
 import FeatureValidator from './validation/feature-validator';
 import DataSource from './data-source';
+import MemoryDataSource from './utils/memory-data-source';
 
 export {Form};
 export {Record};
@@ -89,3 +90,4 @@ export {RecordLinkValue};
 export {RecordLinkItemValue};
 export {FeatureValidator};
 export {DataSource};
+export {MemoryDataSource};
