@@ -43,78 +43,85 @@ function noop(...params) {
   params[params.length - 1]();
 }
 
-function store(dataSource, method, params, object, callback) {
-  if (dataSource == null) {
-    return callback(null, object);
-  }
-
-  const storeMethod = 'store' + method;
-
-  const storeCallback = (err) => {
-    if (err) {
-      return callback(err);
-    } else if (dataSource.previous) {
-      return store(dataSource.previous, method, params, object, callback);
-    } else {
-      return callback(null, object);
-    }
-  };
-
-  const storeArguments = params.concat([object, storeCallback]);
-
-  (dataSource[storeMethod] || noop).apply(dataSource, storeArguments);
-
-  return null;
-}
-
-function fetch(dataSource, method, params, callback) {
-  const fetchMethod = 'fetch' + method;
-
-  const fetchCallback = (err, object) => {
-    if (err) {
-      return callback(err);
-    } else if (object) {
-      return store(dataSource.previous, method, params, object, callback);
-    } else if (dataSource.next) {
-      return fetch(dataSource.next, method, params, callback);
-    }
-
-    return null;
-  };
-
-  const fetchArguments = params.concat([fetchCallback]);
-
-  (dataSource[fetchMethod] || noop).apply(dataSource, fetchArguments);
-}
-
 export default class DataSource {
   constructor() {
-    this.next = null;
+    this.sources = [];
   }
 
-  then(dataSource) {
-    this.next = dataSource;
-    dataSource.previous = this;
-    return dataSource;
+  invoke(dataSource, method, params, callback) {
+    const invokeCallback = (err, object) => {
+      if (err) {
+        return callback(err);
+      } else if (object) {
+        return this.process(dataSource.previous, method, params, object, callback);
+      } else if (dataSource.next) {
+        return this.invoke(dataSource.next, method, params, callback);
+      }
+
+      return callback(new Error('Unhandled request: ' + method));
+    };
+
+    const invokeArguments = params.concat([invokeCallback]);
+
+    (dataSource[method] || noop).apply(dataSource, invokeArguments);
+  }
+
+  process(dataSource, method, params, object, callback) {
+    if (dataSource == null) {
+      return callback(null, object);
+    }
+
+    const processMethod = method + 'Complete';
+
+    const processCallback = (err) => {
+      if (err) {
+        return callback(err);
+      } else if (dataSource.previous) {
+        return this.process(dataSource.previous, method, params, object, callback);
+      } else {
+        return callback(null, object);
+      }
+    };
+
+    const processArguments = params.concat([object, processCallback]);
+
+    (dataSource[processMethod] || noop).apply(dataSource, processArguments);
+
+    return null;
+  }
+
+  add(source) {
+    if (this.sources.length) {
+      this.sources[this.sources.length - 1].next = source;
+      source.previous = this.sources[this.sources.length - 1];
+    }
+
+    this.sources.push(source);
+
+    return this;
+  }
+
+  get root() {
+    return this.sources[0];
   }
 
   getChoiceList(id, callback) {
-    fetch(this, 'ChoiceList', [id], callback);
+    this.invoke(this.root, 'getChoiceList', [id], callback);
   }
 
   getClassificationSet(id, callback) {
-    fetch(this, 'ClassificationSet', [id], callback);
+    this.invoke(this.root, 'getClassificationSet', [id], callback);
   }
 
   getForm(id, callback) {
-    fetch(this, 'Form', [id], callback);
+    this.invoke(this.root, 'getForm', [id], callback);
   }
 
   getRecord(id, callback) {
-    fetch(this, 'Record', [id], callback);
+    this.invoke(this.root, 'getRecord', [id], callback);
   }
 
   getRecords(params, callback) {
-    fetch(this, 'Records', [params], callback);
+    this.invoke(this.root, 'getRecords', [params], callback);
   }
 }
