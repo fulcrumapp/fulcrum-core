@@ -39,8 +39,8 @@
 
 */
 
-function noop(callback) {
-  callback();
+function noop(...params) {
+  params[params.length - 1]();
 }
 
 function store(dataSource, method, params, object, callback) {
@@ -84,7 +84,7 @@ function fetch(dataSource, method, params, callback) {
 
   const fetchArguments = params.concat([fetchCallback]);
 
-  dataSource[fetchMethod].apply(dataSource, fetchArguments);
+  (dataSource[fetchMethod] || noop).apply(dataSource, fetchArguments);
 }
 
 export default class DataSource {
@@ -112,5 +112,9 @@ export default class DataSource {
 
   getRecord(id, callback) {
     fetch(this, 'Record', [id], callback);
+  }
+
+  getRecords(params, callback) {
+    fetch(this, 'Records', [params], callback);
   }
 }
