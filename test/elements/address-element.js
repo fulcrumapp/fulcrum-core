@@ -5,9 +5,10 @@ import { AddressElement, AddressValue } from '../../src';
 let record = null;
 
 beforeEach((done) => {
-  ({ record } = setup());
-
-  done();
+  setup((rec) => {
+    record = rec;
+    done();
+  });
 });
 
 describe('address fields', () => {

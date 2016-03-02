@@ -2,6 +2,7 @@ import ChildElements from './elements/child-elements';
 import StatusElement from './elements/status-element';
 import DefaultValues from './values/default-values';
 import Record from './record';
+import async from 'async';
 
 export default class Form {
   constructor(attributes) {
@@ -19,12 +20,18 @@ export default class Form {
     this._geometryRequired = !!attributes.geometry_required;
   }
 
-  async load() {
+  load(dataSource, callback) {
+    const loadElements = [];
+
     for (const element of this.allElements) {
       if (element.load) {
-        await element.load();
+        loadElements.push(element);
       }
     }
+
+    async.each(loadElements, (element, cb) => {
+      element.load(dataSource, cb);
+    }, callback);
   }
 
   createRecord(attributes) {

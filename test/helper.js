@@ -1,14 +1,16 @@
 import fs from 'fs';
 import path from 'path';
 import {Form, Record} from '../src';
-import ElementFactory from '../src/elements/element-factory';
-import FileProvider from '../src/utils/file-provider';
+import MemoryDataSource from '../src/utils/memory-data-source';
+import FileDataSource from '../src/utils/file-data-source';
 
 const fileRoot = path.join('.', 'test', 'fixtures');
 
-ElementFactory.setProvider(new FileProvider(fileRoot));
+const dataSource = new MemoryDataSource();
 
-export default function setup() {
+dataSource.then(new FileDataSource(fileRoot));
+
+export default function setup(callback) {
   let form = null;
   let formJson = null;
 
@@ -19,12 +21,13 @@ export default function setup() {
   recordJson = JSON.parse(fs.readFileSync('./test/record.json')).record;
 
   form = new Form(formJson);
-  record = new Record(recordJson);
 
-  record._form = form;
-  record._formValuesJSON = recordJson.form_values;
+  form.load(dataSource, () => {
+    record = new Record(recordJson);
 
-  const result = { record: record };
+    record._form = form;
+    record._formValuesJSON = recordJson.form_values;
 
-  return result;
+    callback(record);
+  });
 }

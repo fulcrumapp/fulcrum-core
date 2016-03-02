@@ -1,5 +1,4 @@
 import Element from './element';
-import ElementFactory from './element-factory';
 import Classification from './classification';
 
 export default class ClassificationElement extends Element {
@@ -14,10 +13,16 @@ export default class ClassificationElement extends Element {
     this._classificationSetID = attributes.classification_set_id;
   }
 
-  async load() {
-    // const self = this;
+  load(dataSource, callback) {
+    dataSource.getClassificationSet(this._classificationSetID, (err, classificationSet) => {
+      if (err) {
+        return callback(err);
+      }
 
-    this.classificationSet = await ElementFactory.getProvider().getClassificationSet(this._classificationSetID);
+      this.classificationSet = classificationSet;
+
+      return callback();
+    });
   }
 
   get classificationItems() {

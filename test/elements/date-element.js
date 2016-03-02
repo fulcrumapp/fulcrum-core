@@ -5,9 +5,10 @@ import { DateElement, DateValue } from '../../src';
 let record = null;
 
 beforeEach((done) => {
-  ({ record } = setup());
-
-  done();
+  setup((rec) => {
+    record = rec;
+    done();
+  });
 });
 
 describe('date fields', () => {

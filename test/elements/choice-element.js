@@ -5,12 +5,10 @@ import { ChoiceElement, ChoiceValue, Choice } from '../../src';
 let record = null;
 
 beforeEach((done) => {
-  ({ record } = setup());
-
-  const single = record.form.find('single_choice');
-  const multi = record.form.find('multiple_choice');
-
-  single.load().then(res => multi.load().then(done));
+  setup((rec) => {
+    record = rec;
+    done();
+  });
 });
 
 describe('choice fields', () => {

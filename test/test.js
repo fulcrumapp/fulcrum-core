@@ -1,5 +1,14 @@
 import fs from 'fs';
+import path from 'path';
 import {Form, Record} from '../src';
+import MemoryDataSource from '../src/utils/memory-data-source';
+import FileDataSource from '../src/utils/file-data-source';
+
+const fileRoot = path.join('.', 'test', 'fixtures');
+
+const dataSource = new MemoryDataSource();
+
+dataSource.then(new FileDataSource(fileRoot));
 
 let form = null;
 let formJson = null;
@@ -12,12 +21,15 @@ beforeEach((done) => {
   recordJson = JSON.parse(fs.readFileSync('./test/record.json')).record;
 
   form = new Form(formJson);
-  record = new Record(recordJson);
 
-  record._form = form;
-  record._formValuesJSON = recordJson.form_values;
+  form.load(dataSource, () => {
+    record = new Record(recordJson);
 
-  done();
+    record._form = form;
+    record._formValuesJSON = recordJson.form_values;
+
+    done();
+  });
 });
 
 describe('Record', () => {

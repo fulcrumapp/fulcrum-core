@@ -5,11 +5,10 @@ import { ClassificationElement, ClassificationValue, Classification } from '../.
 let record = null;
 
 beforeEach((done) => {
-  ({ record } = setup());
-
-  const field = record.form.find('os');
-
-  field.load().then(done);
+  setup((rec) => {
+    record = rec;
+    done();
+  });
 });
 
 describe('classification fields', () => {

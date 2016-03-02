@@ -1,5 +1,4 @@
 import Element from './element';
-import ElementFactory from './element-factory';
 import Choice from './choice';
 
 export default class ChoiceElement extends Element {
@@ -22,20 +21,23 @@ export default class ChoiceElement extends Element {
     }
   }
 
-  async load() {
-    // TODO(zhm) once babel gets fixed this can be removed
-    // https://phabricator.babeljs.io/T2765
+  load(dataSource, callback) {
+    this._choicesByValue = null;
 
     if (this._choiceListID) {
-      this.choiceList = await ElementFactory.getProvider().getChoiceList(this._choiceListID);
-      this._choices = this.choiceList.choices.slice();
-    } else {
-      for (let choice of this.attributes.choices) {
-        this._choices.push(new Choice(choice));
-      }
-    }
+      dataSource.getChoiceList(this._choiceListID, (err, choiceList) => {
+        if (err) {
+          return callback(err);
+        }
 
-    this._choicesByValue = null;
+        this.choiceList = choiceList;
+        this._choices = this.choiceList.choices.slice();
+
+        return callback();
+      });
+    } else {
+      setImmediate(callback);
+    }
   }
 
   get isLengthValidationSupported() {
