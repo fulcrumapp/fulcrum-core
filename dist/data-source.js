@@ -49,87 +49,106 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 */
 
-function noop(callback) {
-  callback();
-}
-
-function store(dataSource, method, params, object, callback) {
-  if (dataSource == null) {
-    return callback(null, object);
-  }
-
-  var storeMethod = 'store' + method;
-
-  var storeCallback = function storeCallback(err) {
-    if (err) {
-      return callback(err);
-    } else if (dataSource.previous) {
-      return store(dataSource.previous, method, params, object, callback);
-    } else {
-      return callback(null, object);
-    }
-  };
-
-  var storeArguments = params.concat([object, storeCallback]);
-
-  (dataSource[storeMethod] || noop).apply(dataSource, storeArguments);
-
-  return null;
-}
-
-function fetch(dataSource, method, params, callback) {
-  var fetchMethod = 'fetch' + method;
-
-  var fetchCallback = function fetchCallback(err, object) {
-    if (err) {
-      return callback(err);
-    } else if (object) {
-      return store(dataSource.previous, method, params, object, callback);
-    } else if (dataSource.next) {
-      return fetch(dataSource.next, method, params, callback);
-    }
-
-    return null;
-  };
-
-  var fetchArguments = params.concat([fetchCallback]);
-
-  dataSource[fetchMethod].apply(dataSource, fetchArguments);
+function noop() {
+  (arguments.length <= arguments.length - 1 + 0 ? undefined : arguments[arguments.length - 1 + 0])();
 }
 
 var DataSource = function () {
   function DataSource() {
     _classCallCheck(this, DataSource);
 
-    this.next = null;
+    this.sources = [];
   }
 
   _createClass(DataSource, [{
-    key: 'then',
-    value: function then(dataSource) {
-      this.next = dataSource;
-      dataSource.previous = this;
-      return dataSource;
+    key: 'invoke',
+    value: function invoke(dataSource, method, params, callback) {
+      var _this = this;
+
+      var invokeCallback = function invokeCallback(err, object) {
+        if (err) {
+          return callback(err);
+        } else if (object) {
+          return _this.process(dataSource.previous, method, params, object, callback);
+        } else if (dataSource.next) {
+          return _this.invoke(dataSource.next, method, params, callback);
+        }
+
+        return callback(new Error('Unhandled request: ' + method));
+      };
+
+      var invokeArguments = params.concat([invokeCallback]);
+
+      (dataSource[method] || noop).apply(dataSource, invokeArguments);
+    }
+  }, {
+    key: 'process',
+    value: function process(dataSource, method, params, object, callback) {
+      var _this2 = this;
+
+      if (dataSource == null) {
+        return callback(null, object);
+      }
+
+      var processMethod = method + 'Complete';
+
+      var processCallback = function processCallback(err) {
+        if (err) {
+          return callback(err);
+        } else if (dataSource.previous) {
+          return _this2.process(dataSource.previous, method, params, object, callback);
+        } else {
+          return callback(null, object);
+        }
+      };
+
+      var processArguments = params.concat([object, processCallback]);
+
+      (dataSource[processMethod] || noop).apply(dataSource, processArguments);
+
+      return null;
+    }
+  }, {
+    key: 'add',
+    value: function add(source) {
+      if (this.sources.length) {
+        this.sources[this.sources.length - 1].next = source;
+        source.previous = this.sources[this.sources.length - 1];
+      }
+
+      this.sources.push(source);
+
+      return this;
     }
   }, {
     key: 'getChoiceList',
     value: function getChoiceList(id, callback) {
-      fetch(this, 'ChoiceList', [id], callback);
+      this.invoke(this.root, 'getChoiceList', [id], callback);
     }
   }, {
     key: 'getClassificationSet',
     value: function getClassificationSet(id, callback) {
-      fetch(this, 'ClassificationSet', [id], callback);
+      this.invoke(this.root, 'getClassificationSet', [id], callback);
     }
   }, {
     key: 'getForm',
     value: function getForm(id, callback) {
-      fetch(this, 'Form', [id], callback);
+      this.invoke(this.root, 'getForm', [id], callback);
     }
   }, {
     key: 'getRecord',
     value: function getRecord(id, callback) {
-      fetch(this, 'Record', [id], callback);
+      this.invoke(this.root, 'getRecord', [id], callback);
+    }
+  }, {
+    key: 'getRecords',
+    value: function getRecords(params, callback) {
+      this.invoke(this.root, 'getRecords', [params], callback);
+    }
+  }, {
+    key: 'root',
+    get: function get() {
+      return this.sources[0];
     }
   }]);
 
