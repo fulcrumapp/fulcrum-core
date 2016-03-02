@@ -49,11 +49,11 @@ export default class DataSource {
   }
 
   invoke(dataSource, method, params, callback) {
-    const invokeCallback = (err, object) => {
+    const invokeCallback = (err, ...objects) => {
       if (err) {
         return callback(err);
-      } else if (object) {
-        return this.process(dataSource.previous, method, params, object, callback);
+      } else if (objects[0]) {
+        return this.process(dataSource.previous, method, params, objects, callback);
       } else if (dataSource.next) {
         return this.invoke(dataSource.next, method, params, callback);
       }
@@ -66,9 +66,9 @@ export default class DataSource {
     (dataSource[method] || noop).apply(dataSource, invokeArguments);
   }
 
-  process(dataSource, method, params, object, callback) {
+  process(dataSource, method, params, objects, callback) {
     if (dataSource == null) {
-      return callback(null, object);
+      return callback.apply(null, [null].concat(objects));
     }
 
     const processMethod = method + 'Complete';
@@ -77,13 +77,13 @@ export default class DataSource {
       if (err) {
         return callback(err);
       } else if (dataSource.previous) {
-        return this.process(dataSource.previous, method, params, object, callback);
+        return this.process(dataSource.previous, method, params, objects, callback);
       } else {
-        return callback(null, object);
+        return callback.apply(null, [null].concat(objects));
       }
     };
 
-    const processArguments = params.concat([object, processCallback]);
+    const processArguments = params.concat(objects.concat([processCallback]));
 
     (dataSource[processMethod] || noop).apply(dataSource, processArguments);
 
@@ -121,7 +121,7 @@ export default class DataSource {
     this.invoke(this.root, 'getRecord', [id], callback);
   }
 
-  getRecords(params, callback) {
-    this.invoke(this.root, 'getRecords', [params], callback);
+  getRecords(form, params, callback) {
+    this.invoke(this.root, 'getRecords', [form, params], callback);
   }
 }

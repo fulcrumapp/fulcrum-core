@@ -65,11 +65,15 @@ var DataSource = function () {
     value: function invoke(dataSource, method, params, callback) {
       var _this = this;
 
-      var invokeCallback = function invokeCallback(err, object) {
+      var invokeCallback = function invokeCallback(err) {
+        for (var _len = arguments.length, objects = Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
+          objects[_key - 1] = arguments[_key];
+        }
+
         if (err) {
           return callback(err);
-        } else if (object) {
-          return _this.process(dataSource.previous, method, params, object, callback);
+        } else if (objects[0]) {
+          return _this.process(dataSource.previous, method, params, objects, callback);
         } else if (dataSource.next) {
           return _this.invoke(dataSource.next, method, params, callback);
         }
@@ -83,11 +87,11 @@ var DataSource = function () {
     }
   }, {
     key: 'process',
-    value: function process(dataSource, method, params, object, callback) {
+    value: function process(dataSource, method, params, objects, callback) {
       var _this2 = this;
 
       if (dataSource == null) {
-        return callback(null, object);
+        return callback.apply(null, [null].concat(objects));
       }
 
       var processMethod = method + 'Complete';
@@ -96,13 +100,13 @@ var DataSource = function () {
         if (err) {
           return callback(err);
         } else if (dataSource.previous) {
-          return _this2.process(dataSource.previous, method, params, object, callback);
+          return _this2.process(dataSource.previous, method, params, objects, callback);
         } else {
-          return callback(null, object);
+          return callback.apply(null, [null].concat(objects));
         }
       };
 
-      var processArguments = params.concat([object, processCallback]);
+      var processArguments = params.concat(objects.concat([processCallback]));
 
       (dataSource[processMethod] || noop).apply(dataSource, processArguments);
 
@@ -142,8 +146,8 @@ var DataSource = function () {
     }
   }, {
     key: 'getRecords',
-    value: function getRecords(params, callback) {
-      this.invoke(this.root, 'getRecords', [params], callback);
+    value: function getRecords(form, params, callback) {
+      this.invoke(this.root, 'getRecords', [form, params], callback);
     }
   }, {
     key: 'root',
