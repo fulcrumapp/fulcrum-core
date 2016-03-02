@@ -22,9 +22,11 @@ var _record = require('./record');
 
 var _record2 = _interopRequireDefault(_record);
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+var _async = require('async');
 
-function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { return step("next", value); }, function (err) { return step("throw", err); }); } } return step("next"); }); }; }
+var _async2 = _interopRequireDefault(_async);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -48,87 +50,40 @@ var Form = function () {
 
   _createClass(Form, [{
     key: 'load',
-    value: function () {
-      var ref = _asyncToGenerator(regeneratorRuntime.mark(function _callee() {
-        var _iteratorNormalCompletion, _didIteratorError, _iteratorError, _iterator, _step, element;
+    value: function load(dataSource, callback) {
+      var loadElements = [];
 
-        return regeneratorRuntime.wrap(function _callee$(_context) {
-          while (1) {
-            switch (_context.prev = _context.next) {
-              case 0:
-                _iteratorNormalCompletion = true;
-                _didIteratorError = false;
-                _iteratorError = undefined;
-                _context.prev = 3;
-                _iterator = this.allElements[Symbol.iterator]();
+      var _iteratorNormalCompletion = true;
+      var _didIteratorError = false;
+      var _iteratorError = undefined;
 
-              case 5:
-                if (_iteratorNormalCompletion = (_step = _iterator.next()).done) {
-                  _context.next = 13;
-                  break;
-                }
+      try {
+        for (var _iterator = this.allElements[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+          var element = _step.value;
 
-                element = _step.value;
-
-                if (!element.load) {
-                  _context.next = 10;
-                  break;
-                }
-
-                _context.next = 10;
-                return element.load();
-
-              case 10:
-                _iteratorNormalCompletion = true;
-                _context.next = 5;
-                break;
-
-              case 13:
-                _context.next = 19;
-                break;
-
-              case 15:
-                _context.prev = 15;
-                _context.t0 = _context['catch'](3);
-                _didIteratorError = true;
-                _iteratorError = _context.t0;
-
-              case 19:
-                _context.prev = 19;
-                _context.prev = 20;
-
-                if (!_iteratorNormalCompletion && _iterator.return) {
-                  _iterator.return();
-                }
-
-              case 22:
-                _context.prev = 22;
-
-                if (!_didIteratorError) {
-                  _context.next = 25;
-                  break;
-                }
-
-                throw _iteratorError;
-
-              case 25:
-                return _context.finish(22);
-
-              case 26:
-                return _context.finish(19);
-
-              case 27:
-              case 'end':
-                return _context.stop();
-            }
+          if (element.load) {
+            loadElements.push(element);
           }
-        }, _callee, this, [[3, 15, 19, 27], [20,, 22, 26]]);
-      }));
+        }
+      } catch (err) {
+        _didIteratorError = true;
+        _iteratorError = err;
+      } finally {
+        try {
+          if (!_iteratorNormalCompletion && _iterator.return) {
+            _iterator.return();
+          }
+        } finally {
+          if (_didIteratorError) {
+            throw _iteratorError;
+          }
+        }
+      }
 
-      return function load() {
-        return ref.apply(this, arguments);
-      };
-    }()
+      _async2.default.each(loadElements, function (element, cb) {
+        element.load(dataSource, cb);
+      }, callback);
+    }
   }, {
     key: 'createRecord',
     value: function createRecord(attributes) {

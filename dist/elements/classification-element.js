@@ -10,17 +10,11 @@ var _element = require('./element');
 
 var _element2 = _interopRequireDefault(_element);
 
-var _elementFactory = require('./element-factory');
-
-var _elementFactory2 = _interopRequireDefault(_elementFactory);
-
 var _classification = require('./classification');
 
 var _classification2 = _interopRequireDefault(_classification);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { return step("next", value); }, function (err) { return step("throw", err); }); } } return step("next"); }); }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -47,30 +41,19 @@ var ClassificationElement = function (_Element) {
 
   _createClass(ClassificationElement, [{
     key: 'load',
-    value: function () {
-      var ref = _asyncToGenerator(regeneratorRuntime.mark(function _callee() {
-        return regeneratorRuntime.wrap(function _callee$(_context) {
-          while (1) {
-            switch (_context.prev = _context.next) {
-              case 0:
-                _context.next = 2;
-                return _elementFactory2.default.getProvider().getClassificationSet(this._classificationSetID);
+    value: function load(dataSource, callback) {
+      var _this2 = this;
 
-              case 2:
-                this.classificationSet = _context.sent;
+      dataSource.getClassificationSet(this._classificationSetID, function (err, classificationSet) {
+        if (err) {
+          return callback(err);
+        }
 
-              case 3:
-              case 'end':
-                return _context.stop();
-            }
-          }
-        }, _callee, this);
-      }));
+        _this2.classificationSet = classificationSet;
 
-      return function load() {
-        return ref.apply(this, arguments);
-      };
-    }()
+        return callback();
+      });
+    }
   }, {
     key: 'classificationItems',
     get: function get() {

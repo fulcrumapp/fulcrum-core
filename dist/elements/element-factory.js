@@ -82,8 +82,6 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-var SchemaProvider = null;
-
 var Constructors = {
   Section: _sectionElement2.default,
   ChoiceField: _choiceElement2.default,
@@ -126,16 +124,6 @@ var ElementFactory = function () {
     key: 'classes',
     value: function classes() {
       return Constructors;
-    }
-  }, {
-    key: 'setProvider',
-    value: function setProvider(provider) {
-      SchemaProvider = provider;
-    }
-  }, {
-    key: 'getProvider',
-    value: function getProvider() {
-      return SchemaProvider;
     }
   }]);
 

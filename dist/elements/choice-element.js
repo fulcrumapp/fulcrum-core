@@ -10,17 +10,11 @@ var _element = require('./element');
 
 var _element2 = _interopRequireDefault(_element);
 
-var _elementFactory = require('./element-factory');
+var _choice = require('./choice');
 
-var _elementFactory2 = _interopRequireDefault(_elementFactory);
-
-var _choice3 = require('./choice');
-
-var _choice4 = _interopRequireDefault(_choice3);
+var _choice2 = _interopRequireDefault(_choice);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { return step("next", value); }, function (err) { return step("throw", err); }); } } return step("next"); }); }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -54,7 +48,7 @@ var ChoiceElement = function (_Element) {
         for (var _iterator = _this.attributes.choices[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
           var choice = _step.value;
 
-          _this._choices.push(new _choice4.default(choice));
+          _this._choices.push(new _choice2.default(choice));
         }
       } catch (err) {
         _didIteratorError = true;
@@ -76,116 +70,53 @@ var ChoiceElement = function (_Element) {
 
   _createClass(ChoiceElement, [{
     key: 'load',
-    value: function () {
-      var ref = _asyncToGenerator(regeneratorRuntime.mark(function _callee() {
-        var _iteratorNormalCompletion2, _didIteratorError2, _iteratorError2, _iterator2, _step2, choice;
+    value: function load(dataSource, callback) {
+      var _this2 = this;
 
-        return regeneratorRuntime.wrap(function _callee$(_context) {
-          while (1) {
-            switch (_context.prev = _context.next) {
-              case 0:
-                if (!this._choiceListID) {
-                  _context.next = 7;
-                  break;
-                }
+      this._choicesByValue = null;
 
-                _context.next = 3;
-                return _elementFactory2.default.getProvider().getChoiceList(this._choiceListID);
-
-              case 3:
-                this.choiceList = _context.sent;
-
-                this._choices = this.choiceList.choices.slice();
-                _context.next = 26;
-                break;
-
-              case 7:
-                _iteratorNormalCompletion2 = true;
-                _didIteratorError2 = false;
-                _iteratorError2 = undefined;
-                _context.prev = 10;
-
-                for (_iterator2 = this.attributes.choices[Symbol.iterator](); !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
-                  choice = _step2.value;
-
-                  this._choices.push(new _choice4.default(choice));
-                }
-                _context.next = 18;
-                break;
-
-              case 14:
-                _context.prev = 14;
-                _context.t0 = _context['catch'](10);
-                _didIteratorError2 = true;
-                _iteratorError2 = _context.t0;
-
-              case 18:
-                _context.prev = 18;
-                _context.prev = 19;
-
-                if (!_iteratorNormalCompletion2 && _iterator2.return) {
-                  _iterator2.return();
-                }
-
-              case 21:
-                _context.prev = 21;
-
-                if (!_didIteratorError2) {
-                  _context.next = 24;
-                  break;
-                }
-
-                throw _iteratorError2;
-
-              case 24:
-                return _context.finish(21);
-
-              case 25:
-                return _context.finish(18);
-
-              case 26:
-
-                this._choicesByValue = null;
-
-              case 27:
-              case 'end':
-                return _context.stop();
-            }
+      if (this._choiceListID) {
+        dataSource.getChoiceList(this._choiceListID, function (err, choiceList) {
+          if (err) {
+            return callback(err);
           }
-        }, _callee, this, [[10, 14, 18, 26], [19,, 21, 25]]);
-      }));
 
-      return function load() {
-        return ref.apply(this, arguments);
-      };
-    }()
+          _this2.choiceList = choiceList;
+          _this2._choices = _this2.choiceList.choices.slice();
+
+          return callback();
+        });
+      } else {
+        setImmediate(callback);
+      }
+    }
   }, {
     key: 'choiceByValue',
     value: function choiceByValue(value) {
       if (!this._choicesByValue) {
         this._choicesByValue = {};
 
-        var _iteratorNormalCompletion3 = true;
-        var _didIteratorError3 = false;
-        var _iteratorError3 = undefined;
+        var _iteratorNormalCompletion2 = true;
+        var _didIteratorError2 = false;
+        var _iteratorError2 = undefined;
 
         try {
-          for (var _iterator3 = this.choices[Symbol.iterator](), _step3; !(_iteratorNormalCompletion3 = (_step3 = _iterator3.next()).done); _iteratorNormalCompletion3 = true) {
-            var _choice = _step3.value;
+          for (var _iterator2 = this.choices[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
+            var choice = _step2.value;
 
-            this._choicesByValue[_choice.value] = _choice;
+            this._choicesByValue[choice.value] = choice;
           }
         } catch (err) {
-          _didIteratorError3 = true;
-          _iteratorError3 = err;
+          _didIteratorError2 = true;
+          _iteratorError2 = err;
         } finally {
           try {
-            if (!_iteratorNormalCompletion3 && _iterator3.return) {
-              _iterator3.return();
+            if (!_iteratorNormalCompletion2 && _iterator2.return) {
+              _iterator2.return();
             }
           } finally {
-            if (_didIteratorError3) {
-              throw _iteratorError3;
+            if (_didIteratorError2) {
+              throw _iteratorError2;
             }
           }
         }
@@ -214,51 +145,51 @@ var ChoiceElement = function (_Element) {
 
       var filteredItems = [];
 
-      var _iteratorNormalCompletion4 = true;
-      var _didIteratorError4 = false;
-      var _iteratorError4 = undefined;
+      var _iteratorNormalCompletion3 = true;
+      var _didIteratorError3 = false;
+      var _iteratorError3 = undefined;
 
       try {
-        for (var _iterator4 = items[Symbol.iterator](), _step4; !(_iteratorNormalCompletion4 = (_step4 = _iterator4.next()).done); _iteratorNormalCompletion4 = true) {
-          var item = _step4.value;
-          var _iteratorNormalCompletion5 = true;
-          var _didIteratorError5 = false;
-          var _iteratorError5 = undefined;
+        for (var _iterator3 = items[Symbol.iterator](), _step3; !(_iteratorNormalCompletion3 = (_step3 = _iterator3.next()).done); _iteratorNormalCompletion3 = true) {
+          var item = _step3.value;
+          var _iteratorNormalCompletion4 = true;
+          var _didIteratorError4 = false;
+          var _iteratorError4 = undefined;
 
           try {
-            for (var _iterator5 = this.choiceFilter[Symbol.iterator](), _step5; !(_iteratorNormalCompletion5 = (_step5 = _iterator5.next()).done); _iteratorNormalCompletion5 = true) {
-              var filter = _step5.value;
+            for (var _iterator4 = this.choiceFilter[Symbol.iterator](), _step4; !(_iteratorNormalCompletion4 = (_step4 = _iterator4.next()).done); _iteratorNormalCompletion4 = true) {
+              var filter = _step4.value;
 
               if (item.value.toLowerCase().indexOf(filter.toLowerCase()) !== -1) {
                 filteredItems.push(item);
               }
             }
           } catch (err) {
-            _didIteratorError5 = true;
-            _iteratorError5 = err;
+            _didIteratorError4 = true;
+            _iteratorError4 = err;
           } finally {
             try {
-              if (!_iteratorNormalCompletion5 && _iterator5.return) {
-                _iterator5.return();
+              if (!_iteratorNormalCompletion4 && _iterator4.return) {
+                _iterator4.return();
               }
             } finally {
-              if (_didIteratorError5) {
-                throw _iteratorError5;
+              if (_didIteratorError4) {
+                throw _iteratorError4;
               }
             }
           }
         }
       } catch (err) {
-        _didIteratorError4 = true;
-        _iteratorError4 = err;
+        _didIteratorError3 = true;
+        _iteratorError3 = err;
       } finally {
         try {
-          if (!_iteratorNormalCompletion4 && _iterator4.return) {
-            _iterator4.return();
+          if (!_iteratorNormalCompletion3 && _iterator3.return) {
+            _iterator3.return();
           }
         } finally {
-          if (_didIteratorError4) {
-            throw _iteratorError4;
+          if (_didIteratorError3) {
+            throw _iteratorError3;
           }
         }
       }
@@ -280,29 +211,29 @@ var ChoiceElement = function (_Element) {
 
       var choices = [];
 
-      var _iteratorNormalCompletion6 = true;
-      var _didIteratorError6 = false;
-      var _iteratorError6 = undefined;
+      var _iteratorNormalCompletion5 = true;
+      var _didIteratorError5 = false;
+      var _iteratorError5 = undefined;
 
       try {
-        for (var _iterator6 = overrideChoices[Symbol.iterator](), _step6; !(_iteratorNormalCompletion6 = (_step6 = _iterator6.next()).done); _iteratorNormalCompletion6 = true) {
-          var choiceAttributes = _step6.value;
+        for (var _iterator5 = overrideChoices[Symbol.iterator](), _step5; !(_iteratorNormalCompletion5 = (_step5 = _iterator5.next()).done); _iteratorNormalCompletion5 = true) {
+          var choiceAttributes = _step5.value;
 
-          var _choice2 = new _choice4.default(choiceAttributes);
+          var choice = new _choice2.default(choiceAttributes);
 
-          choices.push(_choice2);
+          choices.push(choice);
         }
       } catch (err) {
-        _didIteratorError6 = true;
-        _iteratorError6 = err;
+        _didIteratorError5 = true;
+        _iteratorError5 = err;
       } finally {
         try {
-          if (!_iteratorNormalCompletion6 && _iterator6.return) {
-            _iterator6.return();
+          if (!_iteratorNormalCompletion5 && _iterator5.return) {
+            _iterator5.return();
           }
         } finally {
-          if (_didIteratorError6) {
-            throw _iteratorError6;
+          if (_didIteratorError5) {
+            throw _iteratorError5;
           }
         }
       }
