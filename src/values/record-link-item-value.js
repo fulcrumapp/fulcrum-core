@@ -12,4 +12,8 @@ export default class RecordLinkItemValue {
       record_id: this._recordID
     };
   }
+
+  get record() {
+    return this._record;
+  }
 }

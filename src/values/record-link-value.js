@@ -87,4 +87,12 @@ export default class RecordLinkValue extends FormValue {
   get items() {
     return this._items;
   }
+
+  addRecord(record) {
+    const item = new RecordLinkItemValue({record_id: record.id});
+
+    item._record = record;
+
+    this._items.push(item);
+  }
 }

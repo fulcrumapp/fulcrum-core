@@ -127,6 +127,15 @@ var RecordLinkValue = function (_FormValue) {
       return this.length > _numberUtils2.default.parseDouble(value);
     }
   }, {
+    key: 'addRecord',
+    value: function addRecord(record) {
+      var item = new _recordLinkItemValue2.default({ record_id: record.id });
+
+      item._record = record;
+
+      this._items.push(item);
+    }
+  }, {
     key: 'isEmpty',
     get: function get() {
       return this.length === 0;

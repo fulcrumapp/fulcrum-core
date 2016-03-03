@@ -27,6 +27,11 @@ var RecordLinkItemValue = function () {
         record_id: this._recordID
       };
     }
+  }, {
+    key: "record",
+    get: function get() {
+      return this._record;
+    }
   }]);
 
   return RecordLinkItemValue;
