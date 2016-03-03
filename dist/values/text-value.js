@@ -33,7 +33,9 @@ var TextValue = function (_TextualValue) {
       if (this.element.numeric) {
         return this.numericValue;
       }
-      return _TextualValue.prototype.columnValue;
+      // this does NOT work in loose mode
+      // return super.columnValue;
+      return this.textValue || null;
     }
   }]);
 

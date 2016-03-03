@@ -5,6 +5,8 @@ export default class TextValue extends TextualValue {
     if (this.element.numeric) {
       return this.numericValue;
     }
-    return super.columnValue;
+    // this does NOT work in loose mode
+    // return super.columnValue;
+    return this.textValue || null;
   }
 }

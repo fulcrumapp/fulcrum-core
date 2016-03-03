@@ -36,7 +36,7 @@
   },
   "dependencies": {
     "async": "^1.5.2",
-    "lodash": "^3.10.1",
+    "lodash": "^4.6.1",
     "mixmatch": "0.0.2",
     "uuid": "^2.0.1"
   },
