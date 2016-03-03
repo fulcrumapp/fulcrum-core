@@ -40,7 +40,7 @@ export default class MediaValue extends FormValue {
     return this._items.length;
   }
 
-  columnValue() {
+  get columnValue() {
     const ids = [];
 
     for (let item of this._items) {
