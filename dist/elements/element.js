@@ -1,8 +1,6 @@
 'use strict';
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+exports.__esModule = true;
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -51,29 +49,21 @@ var Element = function () {
     this.visibleConditions = [];
 
     if (attributes.visible_conditions) {
-      var _iteratorNormalCompletion = true;
-      var _didIteratorError = false;
-      var _iteratorError = undefined;
+      for (var _iterator = attributes.visible_conditions, _isArray = Array.isArray(_iterator), _i = 0, _iterator = _isArray ? _iterator : _iterator[Symbol.iterator]();;) {
+        var _ref;
 
-      try {
-        for (var _iterator = attributes.visible_conditions[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
-          var condition = _step.value;
+        if (_isArray) {
+          if (_i >= _iterator.length) break;
+          _ref = _iterator[_i++];
+        } else {
+          _i = _iterator.next();
+          if (_i.done) break;
+          _ref = _i.value;
+        }
 
-          this.visibleConditions.push(new _condition2.default(this, condition));
-        }
-      } catch (err) {
-        _didIteratorError = true;
-        _iteratorError = err;
-      } finally {
-        try {
-          if (!_iteratorNormalCompletion && _iterator.return) {
-            _iterator.return();
-          }
-        } finally {
-          if (_didIteratorError) {
-            throw _iteratorError;
-          }
-        }
+        var condition = _ref;
+
+        this.visibleConditions.push(new _condition2.default(this, condition));
       }
     }
 
@@ -82,29 +72,21 @@ var Element = function () {
     this.requiredConditions = [];
 
     if (attributes.required_conditions) {
-      var _iteratorNormalCompletion2 = true;
-      var _didIteratorError2 = false;
-      var _iteratorError2 = undefined;
+      for (var _iterator2 = attributes.required_conditions, _isArray2 = Array.isArray(_iterator2), _i2 = 0, _iterator2 = _isArray2 ? _iterator2 : _iterator2[Symbol.iterator]();;) {
+        var _ref2;
 
-      try {
-        for (var _iterator2 = attributes.required_conditions[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
-          var condition = _step2.value;
+        if (_isArray2) {
+          if (_i2 >= _iterator2.length) break;
+          _ref2 = _iterator2[_i2++];
+        } else {
+          _i2 = _iterator2.next();
+          if (_i2.done) break;
+          _ref2 = _i2.value;
+        }
 
-          this.requiredConditions.push(new _condition2.default(this, condition));
-        }
-      } catch (err) {
-        _didIteratorError2 = true;
-        _iteratorError2 = err;
-      } finally {
-        try {
-          if (!_iteratorNormalCompletion2 && _iterator2.return) {
-            _iterator2.return();
-          }
-        } finally {
-          if (_didIteratorError2) {
-            throw _iteratorError2;
-          }
-        }
+        var condition = _ref2;
+
+        this.requiredConditions.push(new _condition2.default(this, condition));
       }
     }
 
@@ -120,12 +102,44 @@ var Element = function () {
     }
   }
 
-  _createClass(Element, [{
-    key: 'isType',
-    value: function isType(type) {
-      return this.type === type;
+  Element.factory = function factory() {
+    return ElementFactory = ElementFactory || require('./element-factory').default;
+  };
+
+  Element.create = function create(parent, attributes) {
+    return Element.factory().create(parent, attributes);
+  };
+
+  Element.classes = function classes() {
+    if (Element._classes == null) {
+      Element._classes = {};
+
+      for (var _iterator3 = Object.keys(_elementTypes2.default), _isArray3 = Array.isArray(_iterator3), _i3 = 0, _iterator3 = _isArray3 ? _iterator3 : _iterator3[Symbol.iterator]();;) {
+        var _ref3;
+
+        if (_isArray3) {
+          if (_i3 >= _iterator3.length) break;
+          _ref3 = _iterator3[_i3++];
+        } else {
+          _i3 = _iterator3.next();
+          if (_i3.done) break;
+          _ref3 = _i3.value;
+        }
+
+        var klass = _ref3;
+
+        Element._classes[klass] = Element.factory().classes()[_elementTypes2.default[klass]];
+      }
     }
-  }, {
+
+    return Element._classes;
+  };
+
+  Element.prototype.isType = function isType(type) {
+    return this.type === type;
+  };
+
+  _createClass(Element, [{
     key: 'isLengthValidationSupported',
     get: function get() {
       return false;
@@ -247,50 +261,6 @@ var Element = function () {
     key: 'isRecordLinkElement',
     get: function get() {
       return this.isType(_elementTypes2.default.RecordLinkElement);
-    }
-  }], [{
-    key: 'factory',
-    value: function factory() {
-      return ElementFactory = ElementFactory || require('./element-factory').default;
-    }
-  }, {
-    key: 'create',
-    value: function create(parent, attributes) {
-      return Element.factory().create(parent, attributes);
-    }
-  }, {
-    key: 'classes',
-    value: function classes() {
-      if (Element._classes == null) {
-        Element._classes = {};
-
-        var _iteratorNormalCompletion3 = true;
-        var _didIteratorError3 = false;
-        var _iteratorError3 = undefined;
-
-        try {
-          for (var _iterator3 = Object.keys(_elementTypes2.default)[Symbol.iterator](), _step3; !(_iteratorNormalCompletion3 = (_step3 = _iterator3.next()).done); _iteratorNormalCompletion3 = true) {
-            var klass = _step3.value;
-
-            Element._classes[klass] = Element.factory().classes()[_elementTypes2.default[klass]];
-          }
-        } catch (err) {
-          _didIteratorError3 = true;
-          _iteratorError3 = err;
-        } finally {
-          try {
-            if (!_iteratorNormalCompletion3 && _iterator3.return) {
-              _iterator3.return();
-            }
-          } finally {
-            if (_didIteratorError3) {
-              throw _iteratorError3;
-            }
-          }
-        }
-      }
-
-      return Element._classes;
     }
   }]);
 

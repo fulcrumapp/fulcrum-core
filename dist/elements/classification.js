@@ -1,8 +1,6 @@
 "use strict";
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+exports.__esModule = true;
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -18,68 +16,51 @@ var Classification = function () {
     this.children = [];
 
     if (attributes.child_classifications) {
-      var _iteratorNormalCompletion = true;
-      var _didIteratorError = false;
-      var _iteratorError = undefined;
+      for (var _iterator = attributes.child_classifications, _isArray = Array.isArray(_iterator), _i = 0, _iterator = _isArray ? _iterator : _iterator[Symbol.iterator]();;) {
+        var _ref;
 
-      try {
-        for (var _iterator = attributes.child_classifications[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
-          var child = _step.value;
+        if (_isArray) {
+          if (_i >= _iterator.length) break;
+          _ref = _iterator[_i++];
+        } else {
+          _i = _iterator.next();
+          if (_i.done) break;
+          _ref = _i.value;
+        }
 
-          this.children.push(new Classification(this, child));
-        }
-      } catch (err) {
-        _didIteratorError = true;
-        _iteratorError = err;
-      } finally {
-        try {
-          if (!_iteratorNormalCompletion && _iterator.return) {
-            _iterator.return();
-          }
-        } finally {
-          if (_didIteratorError) {
-            throw _iteratorError;
-          }
-        }
+        var child = _ref;
+
+        this.children.push(new Classification(this, child));
       }
     }
   }
 
-  _createClass(Classification, [{
-    key: "toJSON",
-    value: function toJSON() {
-      var values = [];
+  Classification.prototype.toJSON = function toJSON() {
+    var values = [];
 
-      var _iteratorNormalCompletion2 = true;
-      var _didIteratorError2 = false;
-      var _iteratorError2 = undefined;
+    for (var _iterator2 = this.exploded, _isArray2 = Array.isArray(_iterator2), _i2 = 0, _iterator2 = _isArray2 ? _iterator2 : _iterator2[Symbol.iterator]();;) {
+      var _ref2;
 
-      try {
-        for (var _iterator2 = this.exploded[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
-          var item = _step2.value;
-
-          if (item.value) {
-            values.push(item.value);
-          }
-        }
-      } catch (err) {
-        _didIteratorError2 = true;
-        _iteratorError2 = err;
-      } finally {
-        try {
-          if (!_iteratorNormalCompletion2 && _iterator2.return) {
-            _iterator2.return();
-          }
-        } finally {
-          if (_didIteratorError2) {
-            throw _iteratorError2;
-          }
-        }
+      if (_isArray2) {
+        if (_i2 >= _iterator2.length) break;
+        _ref2 = _iterator2[_i2++];
+      } else {
+        _i2 = _iterator2.next();
+        if (_i2.done) break;
+        _ref2 = _i2.value;
       }
 
-      return values;
+      var item = _ref2;
+
+      if (item.value) {
+        values.push(item.value);
+      }
     }
-  }, {
+
+    return values;
+  };
+
+  _createClass(Classification, [{
     key: "exploded",
     get: function get() {
       // return an array of all classifications including all parent items

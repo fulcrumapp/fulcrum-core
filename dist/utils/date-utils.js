@@ -1,10 +1,6 @@
 'use strict';
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+exports.__esModule = true;
 
 var _locale = require('./locale');
 
@@ -29,76 +25,66 @@ var DateUtils = function () {
     _classCallCheck(this, DateUtils);
   }
 
-  _createClass(DateUtils, null, [{
-    key: 'parseDate',
-    value: function parseDate(dateString) {
-      return new Date(dateString.replace(/-/g, '/'));
-    }
-  }, {
-    key: 'parseTime',
-    value: function parseTime(timeString) {
-      if (!(timeString != null && timeString.length === 5)) {
-        return null;
-      }
-      return timeString;
-    }
-  }, {
-    key: 'formatTime',
-    value: function formatTime(date) {
-      var hours = _lodash2.default.padLeft(date.getHours(), 2, '0');
-      var minutes = _lodash2.default.padLeft(date.getMinutes(), 2, '0');
+  DateUtils.parseDate = function parseDate(dateString) {
+    return new Date(dateString.replace(/-/g, '/'));
+  };
 
-      return hours + ':' + minutes;
+  DateUtils.parseTime = function parseTime(timeString) {
+    if (!(timeString != null && timeString.length === 5)) {
+      return null;
     }
-  }, {
-    key: 'parseTimestamp',
-    value: function parseTimestamp(timestampString) {
-      return new Date(parseFloat(timestampString) * 1000);
+    return timeString;
+  };
+
+  DateUtils.formatTime = function formatTime(date) {
+    var hours = _lodash2.default.padLeft(date.getHours(), 2, '0');
+    var minutes = _lodash2.default.padLeft(date.getMinutes(), 2, '0');
+
+    return hours + ':' + minutes;
+  };
+
+  DateUtils.parseTimestamp = function parseTimestamp(timestampString) {
+    return new Date(parseFloat(timestampString) * 1000);
+  };
+
+  DateUtils.formatTimestamp = function formatTimestamp(date) {
+    if (date == null) {
+      return null;
     }
-  }, {
-    key: 'formatTimestamp',
-    value: function formatTimestamp(date) {
-      if (date == null) {
-        return null;
-      }
-      return date.getTime().toFixed(3);
+    return date.getTime().toFixed(3);
+  };
+
+  DateUtils.formatDate = function formatDate(date) {
+    var year = date.getFullYear();
+    var month = _lodash2.default.padLeft(date.getMonth() + 1, 2, '0');
+    var day = _lodash2.default.padLeft(date.getDate(), 2, '0');
+
+    return year + '-' + month + '-' + day;
+  };
+
+  DateUtils.formatLocalizedDate = function formatLocalizedDate(date) {
+    if (date == null) {
+      return null;
     }
-  }, {
-    key: 'formatDate',
-    value: function formatDate(date) {
+    return DateUtils.__formatLocalizedDate(date);
+  };
+
+  DateUtils.__formatLocalizedDate = function __formatLocalizedDate(date) {
+    if (!_locale2.default.supportsECMA402()) {
       var year = date.getFullYear();
       var month = _lodash2.default.padLeft(date.getMonth() + 1, 2, '0');
       var day = _lodash2.default.padLeft(date.getDate(), 2, '0');
-
       return year + '-' + month + '-' + day;
     }
-  }, {
-    key: 'formatLocalizedDate',
-    value: function formatLocalizedDate(date) {
-      if (date == null) {
-        return null;
-      }
-      return DateUtils.__formatLocalizedDate(date);
-    }
-  }, {
-    key: '__formatLocalizedDate',
-    value: function __formatLocalizedDate(date) {
-      if (!_locale2.default.supportsECMA402()) {
-        var year = date.getFullYear();
-        var month = _lodash2.default.padLeft(date.getMonth() + 1, 2, '0');
-        var day = _lodash2.default.padLeft(date.getDate(), 2, '0');
-        return year + '-' + month + '-' + day;
-      }
 
-      var options = {
-        year: 'numeric',
-        month: 'long',
-        day: 'numeric'
-      };
+    var options = {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric'
+    };
 
-      return new intl.DateTimeFormat(_locale2.default.currentLocale(), options).format(date);
-    }
-  }]);
+    return new intl.DateTimeFormat(_locale2.default.currentLocale(), options).format(date);
+  };
 
   return DateUtils;
 }();

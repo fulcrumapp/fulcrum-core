@@ -1,8 +1,6 @@
 'use strict';
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+exports.__esModule = true;
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -60,96 +58,88 @@ var DataSource = function () {
     this.sources = [];
   }
 
-  _createClass(DataSource, [{
-    key: 'invoke',
-    value: function invoke(dataSource, method, params, callback) {
-      var _this = this;
+  DataSource.prototype.invoke = function invoke(dataSource, method, params, callback) {
+    var _this = this;
 
-      var invokeCallback = function invokeCallback(err) {
-        for (var _len = arguments.length, objects = Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
-          objects[_key - 1] = arguments[_key];
-        }
+    var invokeCallback = function invokeCallback(err) {
+      for (var _len = arguments.length, objects = Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
+        objects[_key - 1] = arguments[_key];
+      }
 
-        if (err) {
-          return callback(err);
-        } else if (objects[0]) {
-          return _this.process(dataSource.previous, method, params, objects, callback);
-        } else if (dataSource.next) {
-          return _this.invoke(dataSource.next, method, params, callback);
-        }
+      if (err) {
+        return callback(err);
+      } else if (objects[0]) {
+        return _this.process(dataSource.previous, method, params, objects, callback);
+      } else if (dataSource.next) {
+        return _this.invoke(dataSource.next, method, params, callback);
+      }
 
-        return callback(new Error('Unhandled request: ' + method));
-      };
+      return callback(new Error('Unhandled request: ' + method));
+    };
 
-      var invokeArguments = params.concat([invokeCallback]);
+    var invokeArguments = params.concat([invokeCallback]);
 
-      (dataSource[method] || noop).apply(dataSource, invokeArguments);
+    (dataSource[method] || noop).apply(dataSource, invokeArguments);
+  };
+
+  DataSource.prototype.process = function process(dataSource, method, params, objects, callback) {
+    var _this2 = this;
+
+    if (dataSource == null) {
+      return callback.apply(null, [null].concat(objects));
     }
-  }, {
-    key: 'process',
-    value: function process(dataSource, method, params, objects, callback) {
-      var _this2 = this;
 
-      if (dataSource == null) {
+    var processMethod = method + 'Complete';
+
+    var processCallback = function processCallback(err) {
+      if (err) {
+        return callback(err);
+      } else if (dataSource.previous) {
+        return _this2.process(dataSource.previous, method, params, objects, callback);
+      } else {
         return callback.apply(null, [null].concat(objects));
       }
+    };
 
-      var processMethod = method + 'Complete';
+    var processArguments = params.concat(objects.concat([processCallback]));
 
-      var processCallback = function processCallback(err) {
-        if (err) {
-          return callback(err);
-        } else if (dataSource.previous) {
-          return _this2.process(dataSource.previous, method, params, objects, callback);
-        } else {
-          return callback.apply(null, [null].concat(objects));
-        }
-      };
+    (dataSource[processMethod] || noop).apply(dataSource, processArguments);
 
-      var processArguments = params.concat(objects.concat([processCallback]));
+    return null;
+  };
 
-      (dataSource[processMethod] || noop).apply(dataSource, processArguments);
+  DataSource.prototype.add = function add(source) {
+    if (this.sources.length) {
+      this.sources[this.sources.length - 1].next = source;
+      source.previous = this.sources[this.sources.length - 1];
+    }
 
-      return null;
-    }
-  }, {
-    key: 'add',
-    value: function add(source) {
-      if (this.sources.length) {
-        this.sources[this.sources.length - 1].next = source;
-        source.previous = this.sources[this.sources.length - 1];
-      }
+    this.sources.push(source);
 
-      this.sources.push(source);
+    return this;
+  };
 
-      return this;
-    }
-  }, {
-    key: 'getChoiceList',
-    value: function getChoiceList(id, callback) {
-      this.invoke(this.root, 'getChoiceList', [id], callback);
-    }
-  }, {
-    key: 'getClassificationSet',
-    value: function getClassificationSet(id, callback) {
-      this.invoke(this.root, 'getClassificationSet', [id], callback);
-    }
-  }, {
-    key: 'getForm',
-    value: function getForm(id, callback) {
-      this.invoke(this.root, 'getForm', [id], callback);
-    }
-  }, {
-    key: 'getRecord',
-    value: function getRecord(id, callback) {
-      this.invoke(this.root, 'getRecord', [id], callback);
-    }
-  }, {
-    key: 'getRecords',
-    value: function getRecords(form, params, callback) {
-      this.invoke(this.root, 'getRecords', [form, params], callback);
-    }
-  }, {
+  DataSource.prototype.getChoiceList = function getChoiceList(id, callback) {
+    this.invoke(this.root, 'getChoiceList', [id], callback);
+  };
+
+  DataSource.prototype.getClassificationSet = function getClassificationSet(id, callback) {
+    this.invoke(this.root, 'getClassificationSet', [id], callback);
+  };
+
+  DataSource.prototype.getForm = function getForm(id, callback) {
+    this.invoke(this.root, 'getForm', [id], callback);
+  };
+
+  DataSource.prototype.getRecord = function getRecord(id, callback) {
+    this.invoke(this.root, 'getRecord', [id], callback);
+  };
+
+  DataSource.prototype.getRecords = function getRecords(form, params, callback) {
+    this.invoke(this.root, 'getRecords', [form, params], callback);
+  };
+
+  _createClass(DataSource, [{
     key: 'root',
     get: function get() {
       return this.sources[0];

@@ -1,10 +1,6 @@
 'use strict';
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+exports.__esModule = true;
 
 var _lodash = require('lodash');
 
@@ -19,48 +15,41 @@ var TextUtils = function () {
     _classCallCheck(this, TextUtils);
   }
 
-  _createClass(TextUtils, null, [{
-    key: 'isEmpty',
-    value: function isEmpty(value) {
-      if (value == null) {
-        return true;
-      }
+  TextUtils.isEmpty = function isEmpty(value) {
+    if (value == null) {
+      return true;
+    }
 
-      if (TextUtils.trim(value).length < 1) {
-        return true;
-      }
+    if (TextUtils.trim(value).length < 1) {
+      return true;
+    }
 
+    return false;
+  };
+
+  TextUtils.isPresent = function isPresent(value) {
+    return !TextUtils.isEmpty(value);
+  };
+
+  TextUtils.contains = function contains(haystack, needle) {
+    if (needle === null) {
       return false;
     }
-  }, {
-    key: 'isPresent',
-    value: function isPresent(value) {
-      return !TextUtils.isEmpty(value);
-    }
-  }, {
-    key: 'contains',
-    value: function contains(haystack, needle) {
-      if (needle === null) {
-        return false;
-      }
 
-      return _lodash2.default.contains(haystack.toLowerCase(), needle.toLowerCase());
-    }
-  }, {
-    key: 'startsWith',
-    value: function startsWith(haystack, needle) {
-      if (needle === null) {
-        return false;
-      }
+    return _lodash2.default.contains(haystack.toLowerCase(), needle.toLowerCase());
+  };
 
-      return _lodash2.default.startsWith(haystack, needle);
+  TextUtils.startsWith = function startsWith(haystack, needle) {
+    if (needle === null) {
+      return false;
     }
-  }, {
-    key: 'trim',
-    value: function trim(value) {
-      return _lodash2.default.trim(value);
-    }
-  }]);
+
+    return _lodash2.default.startsWith(haystack, needle);
+  };
+
+  TextUtils.trim = function trim(value) {
+    return _lodash2.default.trim(value);
+  };
 
   return TextUtils;
 }();

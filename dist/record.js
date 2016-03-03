@@ -1,8 +1,6 @@
 'use strict';
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+exports.__esModule = true;
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -28,11 +26,13 @@ var _statusValue2 = _interopRequireDefault(_statusValue);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+function _defaults(obj, defaults) { var keys = Object.getOwnPropertyNames(defaults); for (var i = 0; i < keys.length; i++) { var key = keys[i]; var value = Object.getOwnPropertyDescriptor(defaults, key); if (value && value.configurable && obj[key] === undefined) { Object.defineProperty(obj, key, value); } } return obj; }
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : _defaults(subClass, superClass); }
 
 var Record = function (_Feature) {
   _inherits(Record, _Feature);
@@ -40,7 +40,7 @@ var Record = function (_Feature) {
   function Record(attributes) {
     _classCallCheck(this, Record);
 
-    return _possibleConstructorReturn(this, Object.getPrototypeOf(Record).call(this));
+    return _possibleConstructorReturn(this, _Feature.call(this));
 
     // this._id = attributes.id;
     // this._createdAt = DateUtils.parseTimestamp(attributes.client_created_at);
@@ -50,52 +50,48 @@ var Record = function (_Feature) {
     // this._longitude = attributes.longitude;
   }
 
+  Record.prototype.toJSON = function toJSON() {
+    var json = {};
+
+    // TODO(zhm) this is incomplete
+    json.id = this.id;
+    json.client_created_at = _dateUtils2.default.formatTimestamp(this.createdAt);
+    json.client_updated_at = _dateUtils2.default.formatTimestamp(this.updatedAt);
+    json.form_values = this.formValues.toJSON();
+    json.latitude = this._latitude;
+    json.longitude = this._longitude;
+
+    return json;
+  };
+
+  Record.prototype.updateTimestamps = function updateTimestamps() {
+    var now = new Date();
+
+    if (this._createdAt == null) {
+      this.createdAt = now;
+    }
+
+    this.updatedAt = now;
+  };
+
+  Record.prototype.get = function get(key, formValues) {
+    if (key === '@status') {
+      return this.statusValue;
+    }
+
+    return formValues.get(key);
+  };
+
+  Record.prototype.set = function set(key, value, formValues) {
+    if (key === '@status') {
+      this.status = value.textValue;
+      return;
+    }
+
+    formValues.set(key, value);
+  };
+
   _createClass(Record, [{
-    key: 'toJSON',
-    value: function toJSON() {
-      var json = {};
-
-      // TODO(zhm) this is incomplete
-      json.id = this.id;
-      json.client_created_at = _dateUtils2.default.formatTimestamp(this.createdAt);
-      json.client_updated_at = _dateUtils2.default.formatTimestamp(this.updatedAt);
-      json.form_values = this.formValues.toJSON();
-      json.latitude = this._latitude;
-      json.longitude = this._longitude;
-
-      return json;
-    }
-  }, {
-    key: 'updateTimestamps',
-    value: function updateTimestamps() {
-      var now = new Date();
-
-      if (this._createdAt == null) {
-        this.createdAt = now;
-      }
-
-      this.updatedAt = now;
-    }
-  }, {
-    key: 'get',
-    value: function get(key, formValues) {
-      if (key === '@status') {
-        return this.statusValue;
-      }
-
-      return formValues.get(key);
-    }
-  }, {
-    key: 'set',
-    value: function set(key, value, formValues) {
-      if (key === '@status') {
-        this.status = value.textValue;
-        return;
-      }
-
-      formValues.set(key, value);
-    }
-  }, {
     key: 'id',
     get: function get() {
       return this._id;
@@ -154,35 +150,27 @@ var Record = function (_Feature) {
       var titleFieldKeys = this.form.titleFieldKeys;
       var titles = [];
 
-      var _iteratorNormalCompletion = true;
-      var _didIteratorError = false;
-      var _iteratorError = undefined;
+      for (var _iterator = titleFieldKeys, _isArray = Array.isArray(_iterator), _i = 0, _iterator = _isArray ? _iterator : _iterator[Symbol.iterator]();;) {
+        var _ref;
 
-      try {
-        for (var _iterator = titleFieldKeys[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
-          var fieldKey = _step.value;
-
-          var value = this.formValues.get(fieldKey);
-
-          if (value) {
-            var displayValue = value.displayValue;
-
-            if (_textUtils2.default.isPresent(displayValue)) {
-              titles.push(displayValue);
-            }
-          }
+        if (_isArray) {
+          if (_i >= _iterator.length) break;
+          _ref = _iterator[_i++];
+        } else {
+          _i = _iterator.next();
+          if (_i.done) break;
+          _ref = _i.value;
         }
-      } catch (err) {
-        _didIteratorError = true;
-        _iteratorError = err;
-      } finally {
-        try {
-          if (!_iteratorNormalCompletion && _iterator.return) {
-            _iterator.return();
-          }
-        } finally {
-          if (_didIteratorError) {
-            throw _iteratorError;
+
+        var fieldKey = _ref;
+
+        var value = this.formValues.get(fieldKey);
+
+        if (value) {
+          var displayValue = value.displayValue;
+
+          if (_textUtils2.default.isPresent(displayValue)) {
+            titles.push(displayValue);
           }
         }
       }

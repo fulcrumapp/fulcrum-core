@@ -1,8 +1,6 @@
 'use strict';
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+exports.__esModule = true;
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -30,42 +28,41 @@ var DisplayOptions = function () {
     this.currency = attributes.currency;
   }
 
-  _createClass(DisplayOptions, [{
-    key: 'format',
-    value: function format(value) {
-      if (!_textUtils2.default.isPresent(value)) {
-        return value;
-      }
-
-      switch (true) {
-        case this.isNumber:
-          {
-            return _numberUtils2.default.localizedStringFromMachineString(value, true);
-          }
-
-        case this.isDate:
-          {
-            var date = _dateUtils2.default.parseDate(value);
-
-            if (date != null) {
-              return _dateUtils2.default.formatLocalizedDate(date);
-            }
-
-            break;
-          }
-
-        case this.isCurrency:
-          {
-            return _numberUtils2.default.formatCurrency(value, this.currency);
-          }
-
-        default:
-          break;
-      }
-
+  DisplayOptions.prototype.format = function format(value) {
+    if (!_textUtils2.default.isPresent(value)) {
       return value;
     }
-  }, {
+
+    switch (true) {
+      case this.isNumber:
+        {
+          return _numberUtils2.default.localizedStringFromMachineString(value, true);
+        }
+
+      case this.isDate:
+        {
+          var date = _dateUtils2.default.parseDate(value);
+
+          if (date != null) {
+            return _dateUtils2.default.formatLocalizedDate(date);
+          }
+
+          break;
+        }
+
+      case this.isCurrency:
+        {
+          return _numberUtils2.default.formatCurrency(value, this.currency);
+        }
+
+      default:
+        break;
+    }
+
+    return value;
+  };
+
+  _createClass(DisplayOptions, [{
     key: 'isCurrency',
     get: function get() {
       return this.style === 'currency';

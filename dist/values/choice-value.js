@@ -1,8 +1,6 @@
 'use strict';
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+exports.__esModule = true;
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -20,11 +18,13 @@ var _lodash2 = _interopRequireDefault(_lodash);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+function _defaults(obj, defaults) { var keys = Object.getOwnPropertyNames(defaults); for (var i = 0; i < keys.length; i++) { var key = keys[i]; var value = Object.getOwnPropertyDescriptor(defaults, key); if (value && value.configurable && obj[key] === undefined) { Object.defineProperty(obj, key, value); } } return obj; }
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : _defaults(subClass, superClass); }
 
 var ChoiceDisplaySeparator = ', ';
 var ChoiceSearchSeparator = ' ';
@@ -35,66 +35,50 @@ var ChoiceValue = function (_FormValue) {
   function ChoiceValue(element, attributes) {
     _classCallCheck(this, ChoiceValue);
 
-    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(ChoiceValue).call(this, element, attributes));
+    var _this = _possibleConstructorReturn(this, _FormValue.call(this, element, attributes));
 
     _this._choiceValues = [];
     _this._otherValues = [];
 
     if (attributes) {
       if (attributes.choice_values) {
-        var _iteratorNormalCompletion = true;
-        var _didIteratorError = false;
-        var _iteratorError = undefined;
+        for (var _iterator = attributes.choice_values, _isArray = Array.isArray(_iterator), _i = 0, _iterator = _isArray ? _iterator : _iterator[Symbol.iterator]();;) {
+          var _ref;
 
-        try {
-          for (var _iterator = attributes.choice_values[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
-            var choice = _step.value;
-
-            if (_textUtils2.default.isPresent(choice)) {
-              _this._choiceValues.push(choice);
-            }
+          if (_isArray) {
+            if (_i >= _iterator.length) break;
+            _ref = _iterator[_i++];
+          } else {
+            _i = _iterator.next();
+            if (_i.done) break;
+            _ref = _i.value;
           }
-        } catch (err) {
-          _didIteratorError = true;
-          _iteratorError = err;
-        } finally {
-          try {
-            if (!_iteratorNormalCompletion && _iterator.return) {
-              _iterator.return();
-            }
-          } finally {
-            if (_didIteratorError) {
-              throw _iteratorError;
-            }
+
+          var choice = _ref;
+
+          if (_textUtils2.default.isPresent(choice)) {
+            _this._choiceValues.push(choice);
           }
         }
       }
 
       if (attributes.other_values) {
-        var _iteratorNormalCompletion2 = true;
-        var _didIteratorError2 = false;
-        var _iteratorError2 = undefined;
+        for (var _iterator2 = attributes.other_values, _isArray2 = Array.isArray(_iterator2), _i2 = 0, _iterator2 = _isArray2 ? _iterator2 : _iterator2[Symbol.iterator]();;) {
+          var _ref2;
 
-        try {
-          for (var _iterator2 = attributes.other_values[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
-            var choice = _step2.value;
-
-            if (_textUtils2.default.isPresent(choice)) {
-              _this._otherValues.push(choice);
-            }
+          if (_isArray2) {
+            if (_i2 >= _iterator2.length) break;
+            _ref2 = _iterator2[_i2++];
+          } else {
+            _i2 = _iterator2.next();
+            if (_i2.done) break;
+            _ref2 = _i2.value;
           }
-        } catch (err) {
-          _didIteratorError2 = true;
-          _iteratorError2 = err;
-        } finally {
-          try {
-            if (!_iteratorNormalCompletion2 && _iterator2.return) {
-              _iterator2.return();
-            }
-          } finally {
-            if (_didIteratorError2) {
-              throw _iteratorError2;
-            }
+
+          var choice = _ref2;
+
+          if (_textUtils2.default.isPresent(choice)) {
+            _this._otherValues.push(choice);
           }
         }
       }
@@ -102,100 +86,80 @@ var ChoiceValue = function (_FormValue) {
     return _this;
   }
 
+  ChoiceValue.prototype.toJSON = function toJSON() {
+    if (this.isEmpty) {
+      return null;
+    }
+
+    var choiceValues = [];
+    var otherValues = [];
+
+    for (var _iterator3 = this._choiceValues, _isArray3 = Array.isArray(_iterator3), _i3 = 0, _iterator3 = _isArray3 ? _iterator3 : _iterator3[Symbol.iterator]();;) {
+      var _ref3;
+
+      if (_isArray3) {
+        if (_i3 >= _iterator3.length) break;
+        _ref3 = _iterator3[_i3++];
+      } else {
+        _i3 = _iterator3.next();
+        if (_i3.done) break;
+        _ref3 = _i3.value;
+      }
+
+      var rawValue = _ref3;
+
+      choiceValues.push(rawValue);
+    }
+
+    for (var _iterator4 = this._otherValues, _isArray4 = Array.isArray(_iterator4), _i4 = 0, _iterator4 = _isArray4 ? _iterator4 : _iterator4[Symbol.iterator]();;) {
+      var _ref4;
+
+      if (_isArray4) {
+        if (_i4 >= _iterator4.length) break;
+        _ref4 = _iterator4[_i4++];
+      } else {
+        _i4 = _iterator4.next();
+        if (_i4.done) break;
+        _ref4 = _i4.value;
+      }
+
+      var otherValue = _ref4;
+
+      otherValues.push(otherValue);
+    }
+
+    return {
+      choice_values: choiceValues,
+      other_values: otherValues
+    };
+  };
+
+  ChoiceValue.prototype.isEqual = function isEqual(value) {
+    if (_lodash2.default.includes(this.selectedValues, value)) {
+      return true;
+    }
+
+    return this.otherValue === value;
+  };
+
+  ChoiceValue.prototype.contains = function contains(value) {
+    return this.isEqual(value);
+  };
+
+  ChoiceValue.prototype.startsWith = function startsWith(value) {
+    return this.contains(value);
+  };
+
+  // isLessThan(value) {
+  //   notImplemented();
+  // }
+
+  // isGreaterThan(value) {
+  //   notImplemented();
+  // }
+
+
   _createClass(ChoiceValue, [{
-    key: 'toJSON',
-    value: function toJSON() {
-      if (this.isEmpty) {
-        return null;
-      }
-
-      var choiceValues = [];
-      var otherValues = [];
-
-      var _iteratorNormalCompletion3 = true;
-      var _didIteratorError3 = false;
-      var _iteratorError3 = undefined;
-
-      try {
-        for (var _iterator3 = this._choiceValues[Symbol.iterator](), _step3; !(_iteratorNormalCompletion3 = (_step3 = _iterator3.next()).done); _iteratorNormalCompletion3 = true) {
-          var rawValue = _step3.value;
-
-          choiceValues.push(rawValue);
-        }
-      } catch (err) {
-        _didIteratorError3 = true;
-        _iteratorError3 = err;
-      } finally {
-        try {
-          if (!_iteratorNormalCompletion3 && _iterator3.return) {
-            _iterator3.return();
-          }
-        } finally {
-          if (_didIteratorError3) {
-            throw _iteratorError3;
-          }
-        }
-      }
-
-      var _iteratorNormalCompletion4 = true;
-      var _didIteratorError4 = false;
-      var _iteratorError4 = undefined;
-
-      try {
-        for (var _iterator4 = this._otherValues[Symbol.iterator](), _step4; !(_iteratorNormalCompletion4 = (_step4 = _iterator4.next()).done); _iteratorNormalCompletion4 = true) {
-          var otherValue = _step4.value;
-
-          otherValues.push(otherValue);
-        }
-      } catch (err) {
-        _didIteratorError4 = true;
-        _iteratorError4 = err;
-      } finally {
-        try {
-          if (!_iteratorNormalCompletion4 && _iterator4.return) {
-            _iterator4.return();
-          }
-        } finally {
-          if (_didIteratorError4) {
-            throw _iteratorError4;
-          }
-        }
-      }
-
-      return {
-        choice_values: choiceValues,
-        other_values: otherValues
-      };
-    }
-  }, {
-    key: 'isEqual',
-    value: function isEqual(value) {
-      if (_lodash2.default.includes(this.selectedValues, value)) {
-        return true;
-      }
-
-      return this.otherValue === value;
-    }
-  }, {
-    key: 'contains',
-    value: function contains(value) {
-      return this.isEqual(value);
-    }
-  }, {
-    key: 'startsWith',
-    value: function startsWith(value) {
-      return this.contains(value);
-    }
-
-    // isLessThan(value) {
-    //   notImplemented();
-    // }
-
-    // isGreaterThan(value) {
-    //   notImplemented();
-    // }
-
-  }, {
     key: 'isEmpty',
     get: function get() {
       if (this._choiceValues.length) {
@@ -211,60 +175,44 @@ var ChoiceValue = function (_FormValue) {
     get: function get() {
       var labels = [];
 
-      var _iteratorNormalCompletion5 = true;
-      var _didIteratorError5 = false;
-      var _iteratorError5 = undefined;
+      for (var _iterator5 = this._choiceValues, _isArray5 = Array.isArray(_iterator5), _i5 = 0, _iterator5 = _isArray5 ? _iterator5 : _iterator5[Symbol.iterator]();;) {
+        var _ref5;
 
-      try {
-        for (var _iterator5 = this._choiceValues[Symbol.iterator](), _step5; !(_iteratorNormalCompletion5 = (_step5 = _iterator5.next()).done); _iteratorNormalCompletion5 = true) {
-          var rawValue = _step5.value;
-
-          var choice = this.element.choiceByValue(rawValue);
-
-          var label = choice != null ? choice.label : rawValue;
-
-          if (_textUtils2.default.isPresent(label)) {
-            labels.push(label);
-          }
+        if (_isArray5) {
+          if (_i5 >= _iterator5.length) break;
+          _ref5 = _iterator5[_i5++];
+        } else {
+          _i5 = _iterator5.next();
+          if (_i5.done) break;
+          _ref5 = _i5.value;
         }
-      } catch (err) {
-        _didIteratorError5 = true;
-        _iteratorError5 = err;
-      } finally {
-        try {
-          if (!_iteratorNormalCompletion5 && _iterator5.return) {
-            _iterator5.return();
-          }
-        } finally {
-          if (_didIteratorError5) {
-            throw _iteratorError5;
-          }
+
+        var rawValue = _ref5;
+
+        var choice = this.element.choiceByValue(rawValue);
+
+        var label = choice != null ? choice.label : rawValue;
+
+        if (_textUtils2.default.isPresent(label)) {
+          labels.push(label);
         }
       }
 
-      var _iteratorNormalCompletion6 = true;
-      var _didIteratorError6 = false;
-      var _iteratorError6 = undefined;
+      for (var _iterator6 = this._otherValues, _isArray6 = Array.isArray(_iterator6), _i6 = 0, _iterator6 = _isArray6 ? _iterator6 : _iterator6[Symbol.iterator]();;) {
+        var _ref6;
 
-      try {
-        for (var _iterator6 = this._otherValues[Symbol.iterator](), _step6; !(_iteratorNormalCompletion6 = (_step6 = _iterator6.next()).done); _iteratorNormalCompletion6 = true) {
-          var otherValue = _step6.value;
+        if (_isArray6) {
+          if (_i6 >= _iterator6.length) break;
+          _ref6 = _iterator6[_i6++];
+        } else {
+          _i6 = _iterator6.next();
+          if (_i6.done) break;
+          _ref6 = _i6.value;
+        }
 
-          labels.push(otherValue);
-        }
-      } catch (err) {
-        _didIteratorError6 = true;
-        _iteratorError6 = err;
-      } finally {
-        try {
-          if (!_iteratorNormalCompletion6 && _iterator6.return) {
-            _iterator6.return();
-          }
-        } finally {
-          if (_didIteratorError6) {
-            throw _iteratorError6;
-          }
-        }
+        var otherValue = _ref6;
+
+        labels.push(otherValue);
       }
 
       return labels.join(ChoiceDisplaySeparator);
@@ -274,61 +222,45 @@ var ChoiceValue = function (_FormValue) {
     get: function get() {
       var values = [];
 
-      var _iteratorNormalCompletion7 = true;
-      var _didIteratorError7 = false;
-      var _iteratorError7 = undefined;
+      for (var _iterator7 = this._choiceValues, _isArray7 = Array.isArray(_iterator7), _i7 = 0, _iterator7 = _isArray7 ? _iterator7 : _iterator7[Symbol.iterator]();;) {
+        var _ref7;
 
-      try {
-        for (var _iterator7 = this._choiceValues[Symbol.iterator](), _step7; !(_iteratorNormalCompletion7 = (_step7 = _iterator7.next()).done); _iteratorNormalCompletion7 = true) {
-          var rawValue = _step7.value;
-
-          var choice = this.element.choiceByValue(rawValue);
-
-          if (choice != null) {
-            values.push(choice.label);
-            values.push(choice.value);
-          } else {
-            values.push(rawValue);
-          }
+        if (_isArray7) {
+          if (_i7 >= _iterator7.length) break;
+          _ref7 = _iterator7[_i7++];
+        } else {
+          _i7 = _iterator7.next();
+          if (_i7.done) break;
+          _ref7 = _i7.value;
         }
-      } catch (err) {
-        _didIteratorError7 = true;
-        _iteratorError7 = err;
-      } finally {
-        try {
-          if (!_iteratorNormalCompletion7 && _iterator7.return) {
-            _iterator7.return();
-          }
-        } finally {
-          if (_didIteratorError7) {
-            throw _iteratorError7;
-          }
+
+        var rawValue = _ref7;
+
+        var choice = this.element.choiceByValue(rawValue);
+
+        if (choice != null) {
+          values.push(choice.label);
+          values.push(choice.value);
+        } else {
+          values.push(rawValue);
         }
       }
 
-      var _iteratorNormalCompletion8 = true;
-      var _didIteratorError8 = false;
-      var _iteratorError8 = undefined;
+      for (var _iterator8 = this._otherValues, _isArray8 = Array.isArray(_iterator8), _i8 = 0, _iterator8 = _isArray8 ? _iterator8 : _iterator8[Symbol.iterator]();;) {
+        var _ref8;
 
-      try {
-        for (var _iterator8 = this._otherValues[Symbol.iterator](), _step8; !(_iteratorNormalCompletion8 = (_step8 = _iterator8.next()).done); _iteratorNormalCompletion8 = true) {
-          var otherValue = _step8.value;
+        if (_isArray8) {
+          if (_i8 >= _iterator8.length) break;
+          _ref8 = _iterator8[_i8++];
+        } else {
+          _i8 = _iterator8.next();
+          if (_i8.done) break;
+          _ref8 = _i8.value;
+        }
 
-          values.push(otherValue);
-        }
-      } catch (err) {
-        _didIteratorError8 = true;
-        _iteratorError8 = err;
-      } finally {
-        try {
-          if (!_iteratorNormalCompletion8 && _iterator8.return) {
-            _iterator8.return();
-          }
-        } finally {
-          if (_didIteratorError8) {
-            throw _iteratorError8;
-          }
-        }
+        var otherValue = _ref8;
+
+        values.push(otherValue);
       }
 
       return values.join(ChoiceSearchSeparator);
@@ -343,54 +275,38 @@ var ChoiceValue = function (_FormValue) {
     get: function get() {
       var allValues = [];
 
-      var _iteratorNormalCompletion9 = true;
-      var _didIteratorError9 = false;
-      var _iteratorError9 = undefined;
+      for (var _iterator9 = this._choiceValues, _isArray9 = Array.isArray(_iterator9), _i9 = 0, _iterator9 = _isArray9 ? _iterator9 : _iterator9[Symbol.iterator]();;) {
+        var _ref9;
 
-      try {
-        for (var _iterator9 = this._choiceValues[Symbol.iterator](), _step9; !(_iteratorNormalCompletion9 = (_step9 = _iterator9.next()).done); _iteratorNormalCompletion9 = true) {
-          var rawValue = _step9.value;
+        if (_isArray9) {
+          if (_i9 >= _iterator9.length) break;
+          _ref9 = _iterator9[_i9++];
+        } else {
+          _i9 = _iterator9.next();
+          if (_i9.done) break;
+          _ref9 = _i9.value;
+        }
 
-          allValues.push(rawValue);
-        }
-      } catch (err) {
-        _didIteratorError9 = true;
-        _iteratorError9 = err;
-      } finally {
-        try {
-          if (!_iteratorNormalCompletion9 && _iterator9.return) {
-            _iterator9.return();
-          }
-        } finally {
-          if (_didIteratorError9) {
-            throw _iteratorError9;
-          }
-        }
+        var rawValue = _ref9;
+
+        allValues.push(rawValue);
       }
 
-      var _iteratorNormalCompletion10 = true;
-      var _didIteratorError10 = false;
-      var _iteratorError10 = undefined;
+      for (var _iterator10 = this._otherValues, _isArray10 = Array.isArray(_iterator10), _i10 = 0, _iterator10 = _isArray10 ? _iterator10 : _iterator10[Symbol.iterator]();;) {
+        var _ref10;
 
-      try {
-        for (var _iterator10 = this._otherValues[Symbol.iterator](), _step10; !(_iteratorNormalCompletion10 = (_step10 = _iterator10.next()).done); _iteratorNormalCompletion10 = true) {
-          var otherValue = _step10.value;
+        if (_isArray10) {
+          if (_i10 >= _iterator10.length) break;
+          _ref10 = _iterator10[_i10++];
+        } else {
+          _i10 = _iterator10.next();
+          if (_i10.done) break;
+          _ref10 = _i10.value;
+        }
 
-          allValues.push(otherValue);
-        }
-      } catch (err) {
-        _didIteratorError10 = true;
-        _iteratorError10 = err;
-      } finally {
-        try {
-          if (!_iteratorNormalCompletion10 && _iterator10.return) {
-            _iterator10.return();
-          }
-        } finally {
-          if (_didIteratorError10) {
-            throw _iteratorError10;
-          }
-        }
+        var otherValue = _ref10;
+
+        allValues.push(otherValue);
       }
 
       if (allValues.length === 0) {

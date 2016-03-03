@@ -1,8 +1,6 @@
 'use strict';
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+exports.__esModule = true;
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -17,17 +15,15 @@ var Feature = function () {
     _classCallCheck(this, Feature);
   }
 
+  Feature.prototype.toJSON = function toJSON() {
+    notImplemented();
+  };
+
+  Feature.prototype.updateTimetamps = function updateTimetamps() {
+    notImplemented();
+  };
+
   _createClass(Feature, [{
-    key: 'toJSON',
-    value: function toJSON() {
-      notImplemented();
-    }
-  }, {
-    key: 'updateTimetamps',
-    value: function updateTimetamps() {
-      notImplemented();
-    }
-  }, {
     key: 'id',
     get: function get() {
       notImplemented();

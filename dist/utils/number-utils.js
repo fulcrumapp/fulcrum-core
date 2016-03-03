@@ -1,10 +1,6 @@
 'use strict';
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+exports.__esModule = true;
 
 var _locale = require('./locale');
 
@@ -32,71 +28,63 @@ var NumberUtils = function () {
     _classCallCheck(this, NumberUtils);
   }
 
-  _createClass(NumberUtils, null, [{
-    key: 'parseDouble',
-    value: function parseDouble(input) {
-      return +input;
-    }
-  }, {
-    key: 'localizedStringFromMachineString',
-    value: function localizedStringFromMachineString(machineString, allowDecimals) {
-      return machineString;
-    }
-  }, {
-    key: 'formatMachine',
-    value: function formatMachine(number) {
-      if (intl) {
-        if (NumberUtils.machineFormatter == null) {
-          NumberUtils.machineFormatter = new intl.NumberFormat(['en-US'], MachineFormatterOptions);
-        }
-      }
+  NumberUtils.parseDouble = function parseDouble(input) {
+    return +input;
+  };
 
-      return NumberUtils.formatWithFormatter(NumberUtils.machineFormatter, number);
-    }
-  }, {
-    key: 'formatCurrency',
-    value: function formatCurrency(number, currency) {
-      if (number == null) {
-        return null;
-      }
+  NumberUtils.localizedStringFromMachineString = function localizedStringFromMachineString(machineString, allowDecimals) {
+    return machineString;
+  };
 
-      return NumberUtils.__formatCurrency(number, currency);
+  NumberUtils.formatMachine = function formatMachine(number) {
+    if (intl) {
+      if (NumberUtils.machineFormatter == null) {
+        NumberUtils.machineFormatter = new intl.NumberFormat(['en-US'], MachineFormatterOptions);
+      }
     }
-  }, {
-    key: '__formatCurrency',
-    value: function __formatCurrency(number, currency) {
-      if (!_locale2.default.supportsECMA402()) {
+
+    return NumberUtils.formatWithFormatter(NumberUtils.machineFormatter, number);
+  };
+
+  NumberUtils.formatCurrency = function formatCurrency(number, currency) {
+    if (number == null) {
+      return null;
+    }
+
+    return NumberUtils.__formatCurrency(number, currency);
+  };
+
+  NumberUtils.__formatCurrency = function __formatCurrency(number, currency) {
+    if (!_locale2.default.supportsECMA402()) {
+      return number;
+    }
+
+    var options = {
+      style: 'currency',
+      currency: currency,
+      currencyDisplay: 'symbol',
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2
+    };
+
+    var formatter = new global.Intl.NumberFormat(_locale2.default.currentLocale(), options);
+
+    return formatter.format(number);
+  };
+
+  NumberUtils.formatWithFormatter = function formatWithFormatter(formatter, number) {
+    if (formatter != null) {
+      var string = formatter.format(number);
+
+      if (string === 'NaN') {
         return number;
-      }
-
-      var options = {
-        style: 'currency',
-        currency: currency,
-        currencyDisplay: 'symbol',
-        minimumFractionDigits: 2,
-        maximumFractionDigits: 2
-      };
-
-      var formatter = new global.Intl.NumberFormat(_locale2.default.currentLocale(), options);
-
-      return formatter.format(number);
-    }
-  }, {
-    key: 'formatWithFormatter',
-    value: function formatWithFormatter(formatter, number) {
-      if (formatter != null) {
-        var string = formatter.format(number);
-
-        if (string === 'NaN') {
-          return number;
-        } else {
-          return string;
-        }
       } else {
-        return number.toString();
+        return string;
       }
+    } else {
+      return number.toString();
     }
-  }]);
+  };
 
   return NumberUtils;
 }();

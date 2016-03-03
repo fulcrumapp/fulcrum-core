@@ -1,10 +1,6 @@
 'use strict';
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+exports.__esModule = true;
 
 var _sectionElement = require('./section-element');
 
@@ -109,23 +105,19 @@ var ElementFactory = function () {
     _classCallCheck(this, ElementFactory);
   }
 
-  _createClass(ElementFactory, null, [{
-    key: 'create',
-    value: function create(parent, attributes) {
-      var constructor = Constructors[attributes.type];
+  ElementFactory.create = function create(parent, attributes) {
+    var constructor = Constructors[attributes.type];
 
-      if (constructor == null) {
-        throw new Error('Unsupported element ' + attributes.type);
-      }
+    if (constructor == null) {
+      throw new Error('Unsupported element ' + attributes.type);
+    }
 
-      return new constructor(parent, attributes);
-    }
-  }, {
-    key: 'classes',
-    value: function classes() {
-      return Constructors;
-    }
-  }]);
+    return new constructor(parent, attributes);
+  };
+
+  ElementFactory.classes = function classes() {
+    return Constructors;
+  };
 
   return ElementFactory;
 }();

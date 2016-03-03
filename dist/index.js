@@ -1,8 +1,6 @@
 'use strict';
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+exports.__esModule = true;
 exports.DefaultValues = exports.MemoryDataSource = exports.DataSource = exports.FeatureValidator = exports.RecordLinkItemValue = exports.RecordLinkValue = exports.RecordLinkElement = exports.SectionElement = exports.TextValue = exports.TextElement = exports.CalculatedValue = exports.CalculatedElement = exports.DateValue = exports.DateElement = exports.ClassificationValue = exports.ClassificationElement = exports.ChoiceValue = exports.ChoiceElement = exports.BarcodeValue = exports.BarcodeElement = exports.AddressValue = exports.AddressElement = exports.VideoValue = exports.VideoItemValue = exports.PhotoValue = exports.PhotoItemValue = exports.AudioValue = exports.AudioItemValue = exports.RepeatableElement = exports.Condition = exports.ChildElements = exports.NumberUtils = exports.DateUtils = exports.TextUtils = exports.FormValues = exports.Feature = exports.RepeatableValue = exports.RepeatableItemValue = exports.ElementFactory = exports.ClassificationSet = exports.Classification = exports.ChoiceList = exports.Choice = exports.FormValue = exports.Element = exports.Record = exports.Form = undefined;
 
 var _form = require('./form');

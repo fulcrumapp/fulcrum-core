@@ -1,8 +1,6 @@
 'use strict';
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+exports.__esModule = true;
 
 var _choice = require('./elements/choice');
 
@@ -23,29 +21,21 @@ var ChoiceList = function ChoiceList(attributes) {
   this.choices = [];
 
   if (attributes.choices) {
-    var _iteratorNormalCompletion = true;
-    var _didIteratorError = false;
-    var _iteratorError = undefined;
+    for (var _iterator = attributes.choices, _isArray = Array.isArray(_iterator), _i = 0, _iterator = _isArray ? _iterator : _iterator[Symbol.iterator]();;) {
+      var _ref;
 
-    try {
-      for (var _iterator = attributes.choices[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
-        var choice = _step.value;
+      if (_isArray) {
+        if (_i >= _iterator.length) break;
+        _ref = _iterator[_i++];
+      } else {
+        _i = _iterator.next();
+        if (_i.done) break;
+        _ref = _i.value;
+      }
 
-        this.choices.push(new _choice2.default(choice));
-      }
-    } catch (err) {
-      _didIteratorError = true;
-      _iteratorError = err;
-    } finally {
-      try {
-        if (!_iteratorNormalCompletion && _iterator.return) {
-          _iterator.return();
-        }
-      } finally {
-        if (_didIteratorError) {
-          throw _iteratorError;
-        }
-      }
+      var choice = _ref;
+
+      this.choices.push(new _choice2.default(choice));
     }
   }
 };

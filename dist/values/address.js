@@ -1,8 +1,6 @@
 'use strict';
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+exports.__esModule = true;
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -30,78 +28,66 @@ var Address = function () {
     }
   }
 
+  Address.prototype.toJSON = function toJSON() {
+    var json = {};
+
+    json.sub_thoroughfare = this.streetNumber || null;
+    json.thoroughfare = this.streetName || null;
+    json.suite = this.suite || null;
+    json.locality = this.city || null;
+    json.sub_admin_area = this.county || null;
+    json.admin_area = this.state || null;
+    json.postal_code = this.postalCode || null;
+    json.country = this.country || null;
+
+    return json;
+  };
+
+  Address.prototype.clear = function clear() {
+    this.streetNumber = null;
+    this.streetName = null;
+    this.suite = null;
+    this.city = null;
+    this.county = null;
+    this.state = null;
+    this.postalCode = null;
+    this.country = null;
+  };
+
+  Address.prototype.isEmpty = function isEmpty() {
+    return !(_textUtils2.default.isPresent(this.streetNumber) || _textUtils2.default.isPresent(this.streetName) || _textUtils2.default.isPresent(this.suite) || _textUtils2.default.isPresent(this.city) || _textUtils2.default.isPresent(this.county) || _textUtils2.default.isPresent(this.state) || _textUtils2.default.isPresent(this.postalCode) || _textUtils2.default.isPresent(this.country));
+  };
+
+  Address.prototype.line = function line() {
+    var result = [];
+
+    for (var _len = arguments.length, parts = Array(_len), _key = 0; _key < _len; _key++) {
+      parts[_key] = arguments[_key];
+    }
+
+    for (var _iterator = parts, _isArray = Array.isArray(_iterator), _i = 0, _iterator = _isArray ? _iterator : _iterator[Symbol.iterator]();;) {
+      var _ref;
+
+      if (_isArray) {
+        if (_i >= _iterator.length) break;
+        _ref = _iterator[_i++];
+      } else {
+        _i = _iterator.next();
+        if (_i.done) break;
+        _ref = _i.value;
+      }
+
+      var part = _ref;
+
+      if (_textUtils2.default.isPresent(part)) {
+        result.push(part);
+      }
+    }
+
+    return result.join(' ');
+  };
+
   _createClass(Address, [{
-    key: 'toJSON',
-    value: function toJSON() {
-      var json = {};
-
-      json.sub_thoroughfare = this.streetNumber || null;
-      json.thoroughfare = this.streetName || null;
-      json.suite = this.suite || null;
-      json.locality = this.city || null;
-      json.sub_admin_area = this.county || null;
-      json.admin_area = this.state || null;
-      json.postal_code = this.postalCode || null;
-      json.country = this.country || null;
-
-      return json;
-    }
-  }, {
-    key: 'clear',
-    value: function clear() {
-      this.streetNumber = null;
-      this.streetName = null;
-      this.suite = null;
-      this.city = null;
-      this.county = null;
-      this.state = null;
-      this.postalCode = null;
-      this.country = null;
-    }
-  }, {
-    key: 'isEmpty',
-    value: function isEmpty() {
-      return !(_textUtils2.default.isPresent(this.streetNumber) || _textUtils2.default.isPresent(this.streetName) || _textUtils2.default.isPresent(this.suite) || _textUtils2.default.isPresent(this.city) || _textUtils2.default.isPresent(this.county) || _textUtils2.default.isPresent(this.state) || _textUtils2.default.isPresent(this.postalCode) || _textUtils2.default.isPresent(this.country));
-    }
-  }, {
-    key: 'line',
-    value: function line() {
-      var result = [];
-
-      for (var _len = arguments.length, parts = Array(_len), _key = 0; _key < _len; _key++) {
-        parts[_key] = arguments[_key];
-      }
-
-      var _iteratorNormalCompletion = true;
-      var _didIteratorError = false;
-      var _iteratorError = undefined;
-
-      try {
-        for (var _iterator = parts[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
-          var part = _step.value;
-
-          if (_textUtils2.default.isPresent(part)) {
-            result.push(part);
-          }
-        }
-      } catch (err) {
-        _didIteratorError = true;
-        _iteratorError = err;
-      } finally {
-        try {
-          if (!_iteratorNormalCompletion && _iterator.return) {
-            _iterator.return();
-          }
-        } finally {
-          if (_didIteratorError) {
-            throw _iteratorError;
-          }
-        }
-      }
-
-      return result.join(' ');
-    }
-  }, {
     key: 'lines',
     get: function get() {
       var result = [];

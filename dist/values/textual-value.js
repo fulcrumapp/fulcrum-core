@@ -1,8 +1,6 @@
 'use strict';
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+exports.__esModule = true;
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -20,11 +18,13 @@ var _numberUtils2 = _interopRequireDefault(_numberUtils);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+function _defaults(obj, defaults) { var keys = Object.getOwnPropertyNames(defaults); for (var i = 0; i < keys.length; i++) { var key = keys[i]; var value = Object.getOwnPropertyDescriptor(defaults, key); if (value && value.configurable && obj[key] === undefined) { Object.defineProperty(obj, key, value); } } return obj; }
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : _defaults(subClass, superClass); }
 
 var TextualValue = function (_FormValue) {
   _inherits(TextualValue, _FormValue);
@@ -32,93 +32,87 @@ var TextualValue = function (_FormValue) {
   function TextualValue(element, textValue) {
     _classCallCheck(this, TextualValue);
 
-    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(TextualValue).call(this, element, textValue));
+    var _this = _possibleConstructorReturn(this, _FormValue.call(this, element, textValue));
 
     _this.textValue = textValue;
     return _this;
   }
 
+  TextualValue.prototype.toJSON = function toJSON() {
+    if (this.isEmpty) {
+      return null;
+    }
+
+    return this.textValue;
+  };
+
+  TextualValue.prototype.isEqual = function isEqual(stringValue) {
+    if (this.isEmpty) {
+      return _textUtils2.default.isEmpty(stringValue);
+    }
+
+    stringValue = stringValue == null ? '' : stringValue.toString();
+
+    return this.textValue.toLowerCase() === stringValue.toLowerCase();
+  };
+
+  TextualValue.prototype.contains = function contains(stringValue) {
+    if (this.isEmpty) {
+      return _textUtils2.default.isEmpty(stringValue);
+    }
+
+    if (stringValue == null) {
+      return false;
+    }
+
+    stringValue = stringValue.toString();
+
+    return _textUtils2.default.contains(this.textValue, stringValue);
+  };
+
+  TextualValue.prototype.startsWith = function startsWith(stringValue) {
+    if (this.isEmpty) {
+      return _textUtils2.default.isEmpty(stringValue);
+    }
+
+    if (stringValue == null) {
+      return false;
+    }
+
+    stringValue = stringValue.toString();
+
+    return _textUtils2.default.startsWith(this.textValue, stringValue);
+  };
+
+  TextualValue.prototype.isLessThan = function isLessThan(stringValue) {
+    if (this.textValue == null || stringValue == null) {
+      return false;
+    }
+
+    if (stringValue != null) {
+      stringValue = stringValue.toString();
+    }
+
+    var thisValue = _numberUtils2.default.parseDouble(this.textValue);
+    var thatValue = _numberUtils2.default.parseDouble(stringValue);
+
+    return thisValue < thatValue;
+  };
+
+  TextualValue.prototype.isGreaterThan = function isGreaterThan(stringValue) {
+    if (this.textValue == null || stringValue == null) {
+      return false;
+    }
+
+    stringValue = stringValue == null ? '' : stringValue.toString();
+
+    var thisValue = _numberUtils2.default.parseDouble(this.textValue);
+    var thatValue = _numberUtils2.default.parseDouble(stringValue);
+
+    return thisValue > thatValue;
+  };
+
   _createClass(TextualValue, [{
-    key: 'toJSON',
-    value: function toJSON() {
-      if (this.isEmpty) {
-        return null;
-      }
-
-      return this.textValue;
-    }
-  }, {
-    key: 'isEqual',
-    value: function isEqual(stringValue) {
-      if (this.isEmpty) {
-        return _textUtils2.default.isEmpty(stringValue);
-      }
-
-      stringValue = stringValue == null ? '' : stringValue.toString();
-
-      return this.textValue.toLowerCase() === stringValue.toLowerCase();
-    }
-  }, {
-    key: 'contains',
-    value: function contains(stringValue) {
-      if (this.isEmpty) {
-        return _textUtils2.default.isEmpty(stringValue);
-      }
-
-      if (stringValue == null) {
-        return false;
-      }
-
-      stringValue = stringValue.toString();
-
-      return _textUtils2.default.contains(this.textValue, stringValue);
-    }
-  }, {
-    key: 'startsWith',
-    value: function startsWith(stringValue) {
-      if (this.isEmpty) {
-        return _textUtils2.default.isEmpty(stringValue);
-      }
-
-      if (stringValue == null) {
-        return false;
-      }
-
-      stringValue = stringValue.toString();
-
-      return _textUtils2.default.startsWith(this.textValue, stringValue);
-    }
-  }, {
-    key: 'isLessThan',
-    value: function isLessThan(stringValue) {
-      if (this.textValue == null || stringValue == null) {
-        return false;
-      }
-
-      if (stringValue != null) {
-        stringValue = stringValue.toString();
-      }
-
-      var thisValue = _numberUtils2.default.parseDouble(this.textValue);
-      var thatValue = _numberUtils2.default.parseDouble(stringValue);
-
-      return thisValue < thatValue;
-    }
-  }, {
-    key: 'isGreaterThan',
-    value: function isGreaterThan(stringValue) {
-      if (this.textValue == null || stringValue == null) {
-        return false;
-      }
-
-      stringValue = stringValue == null ? '' : stringValue.toString();
-
-      var thisValue = _numberUtils2.default.parseDouble(this.textValue);
-      var thatValue = _numberUtils2.default.parseDouble(stringValue);
-
-      return thisValue > thatValue;
-    }
-  }, {
     key: 'isEmpty',
     get: function get() {
       return _textUtils2.default.isEmpty(this.textValue);

@@ -1,8 +1,6 @@
 'use strict';
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+exports.__esModule = true;
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -48,72 +46,59 @@ var Form = function () {
     this._geometryRequired = !!attributes.geometry_required;
   }
 
-  _createClass(Form, [{
-    key: 'load',
-    value: function load(dataSource, callback) {
-      var loadElements = [];
+  Form.prototype.load = function load(dataSource, callback) {
+    var loadElements = [];
 
-      var _iteratorNormalCompletion = true;
-      var _didIteratorError = false;
-      var _iteratorError = undefined;
+    for (var _iterator = this.allElements, _isArray = Array.isArray(_iterator), _i = 0, _iterator = _isArray ? _iterator : _iterator[Symbol.iterator]();;) {
+      var _ref;
 
-      try {
-        for (var _iterator = this.allElements[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
-          var element = _step.value;
-
-          if (element.load) {
-            loadElements.push(element);
-          }
-        }
-      } catch (err) {
-        _didIteratorError = true;
-        _iteratorError = err;
-      } finally {
-        try {
-          if (!_iteratorNormalCompletion && _iterator.return) {
-            _iterator.return();
-          }
-        } finally {
-          if (_didIteratorError) {
-            throw _iteratorError;
-          }
-        }
+      if (_isArray) {
+        if (_i >= _iterator.length) break;
+        _ref = _iterator[_i++];
+      } else {
+        _i = _iterator.next();
+        if (_i.done) break;
+        _ref = _i.value;
       }
 
-      _async2.default.each(loadElements, function (element, cb) {
-        element.load(dataSource, cb);
-      }, callback);
-    }
-  }, {
-    key: 'createRecord',
-    value: function createRecord(attributes) {
-      var record = new _record2.default(attributes);
+      var element = _ref;
 
-      // TODO(zhm) this might not be final
-      record._form = this;
-      record._formValuesJSON = {};
+      if (element.load) {
+        loadElements.push(element);
+      }
+    }
 
-      _defaultValues2.default.applyDefaultValuesForElements(this.elements, record.formValues, record);
+    _async2.default.each(loadElements, function (element, cb) {
+      element.load(dataSource, cb);
+    }, callback);
+  };
 
-      return record;
-    }
-  }, {
-    key: 'get',
-    value: function get(key) {
-      return this.elementsByKey[key];
-    }
-  }, {
-    key: 'find',
-    value: function find(dataName) {
-      return this.elementsByDataName[dataName];
-    }
-  }, {
-    key: 'toJSON',
-    value: function toJSON() {
-      // TODO(zhm) actually implement this so it returns a copy
-      return this._json;
-    }
-  }, {
+  Form.prototype.createRecord = function createRecord(attributes) {
+    var record = new _record2.default(attributes);
+
+    // TODO(zhm) this might not be final
+    record._form = this;
+    record._formValuesJSON = {};
+
+    _defaultValues2.default.applyDefaultValuesForElements(this.elements, record.formValues, record);
+
+    return record;
+  };
+
+  Form.prototype.get = function get(key) {
+    return this.elementsByKey[key];
+  };
+
+  Form.prototype.find = function find(dataName) {
+    return this.elementsByDataName[dataName];
+  };
+
+  Form.prototype.toJSON = function toJSON() {
+    // TODO(zhm) actually implement this so it returns a copy
+    return this._json;
+  };
+
+  _createClass(Form, [{
     key: 'statusField',
     get: function get() {
       if (!this._statusField) {
