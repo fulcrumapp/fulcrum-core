@@ -134,7 +134,7 @@ var FormValues = function () {
       throw new Error('Invalid values');
     }
 
-    for (var _iterator3 = Object.keys(this._values), _isArray3 = Array.isArray(_iterator3), _i3 = 0, _iterator3 = _isArray3 ? _iterator3 : _iterator3[Symbol.iterator]();;) {
+    for (var _iterator3 = Object.keys(formValues._values), _isArray3 = Array.isArray(_iterator3), _i3 = 0, _iterator3 = _isArray3 ? _iterator3 : _iterator3[Symbol.iterator]();;) {
       var _ref3;
 
       if (_isArray3) {
@@ -148,7 +148,7 @@ var FormValues = function () {
 
       var key = _ref3;
 
-      var formValue = this._values[key];
+      var formValue = formValues._values[key];
 
       this.set(key, formValue);
     }
