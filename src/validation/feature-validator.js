@@ -212,6 +212,6 @@ export default class FeatureValidator {
       messages.push(error.message);
     }
 
-    messages.join('\n\n');
+    return messages.join('\n\n');
   }
 }

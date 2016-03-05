@@ -1,3 +1,5 @@
+import Form from '../form';
+
 export default class ElementValidationError {
   constructor(element) {
     this.element = element;
@@ -9,7 +11,9 @@ export default class ElementValidationError {
     let iterator = this.element.parent;
 
     while (iterator) {
-      parents.push(iterator.label);
+      if (!(iterator instanceof Form)) {
+        parents.push(iterator.label);
+      }
 
       iterator = iterator.parent;
     }

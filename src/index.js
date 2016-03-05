@@ -45,6 +45,7 @@ import FeatureValidator from './validation/feature-validator';
 import DataSource from './data-source';
 import MemoryDataSource from './utils/memory-data-source';
 import DefaultValues from './values/default-values';
+import CustomValidationError from './validation/custom-validation-error';
 
 export {Form};
 export {Record};
@@ -93,3 +94,4 @@ export {FeatureValidator};
 export {DataSource};
 export {MemoryDataSource};
 export {DefaultValues};
+export {CustomValidationError};
