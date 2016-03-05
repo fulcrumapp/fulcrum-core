@@ -289,7 +289,7 @@ var FeatureValidator = function () {
       messages.push(error.message);
     }
 
-    messages.join('\n\n');
+    return messages.join('\n\n');
   };
 
   return FeatureValidator;
