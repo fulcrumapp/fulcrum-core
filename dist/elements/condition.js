@@ -157,11 +157,11 @@ var Condition = function () {
           _ref3 = _i3.value;
         }
 
-        var condition = _ref3;
+        var _condition = _ref3;
 
-        var isSatisfied = condition.isSatisfied(record, values, cache);
+        var _isSatisfied2 = _condition.isSatisfied(record, values, cache);
 
-        if (!isSatisfied) {
+        if (!_isSatisfied2) {
           shouldBeVisible = false;
         }
       }
@@ -242,11 +242,11 @@ var Condition = function () {
           _ref5 = _i5.value;
         }
 
-        var condition = _ref5;
+        var _condition2 = _ref5;
 
-        var isSatisfied = condition.isSatisfied(record, values, cache);
+        var _isSatisfied3 = _condition2.isSatisfied(record, values, cache);
 
-        if (!isSatisfied) {
+        if (!_isSatisfied3) {
           shouldBeRequired = false;
           break;
         }

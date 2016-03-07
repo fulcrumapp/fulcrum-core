@@ -2,11 +2,9 @@
 
 exports.__esModule = true;
 
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+var _textualValue = require('./textual-value');
 
-var _formValue = require('./form-value');
-
-var _formValue2 = _interopRequireDefault(_formValue);
+var _textualValue2 = _interopRequireDefault(_textualValue);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -27,15 +25,8 @@ var StatusValue = function (_TextualValue) {
     return _possibleConstructorReturn(this, _TextualValue.apply(this, arguments));
   }
 
-  _createClass(StatusValue, [{
-    key: 'displayValue',
-    get: function get() {
-      return this.textValue || '';
-    }
-  }]);
-
   return StatusValue;
-}(_formValue2.default);
+}(_textualValue2.default);
 
 exports.default = StatusValue;
 //# sourceMappingURL=status-value.js.map

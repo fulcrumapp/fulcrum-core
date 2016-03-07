@@ -8,9 +8,9 @@ var _elementTypes = require('./element-types');
 
 var _elementTypes2 = _interopRequireDefault(_elementTypes);
 
-var _condition = require('./condition');
+var _condition2 = require('./condition');
 
-var _condition2 = _interopRequireDefault(_condition);
+var _condition3 = _interopRequireDefault(_condition2);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -63,7 +63,7 @@ var Element = function () {
 
         var condition = _ref;
 
-        this.visibleConditions.push(new _condition2.default(this, condition));
+        this.visibleConditions.push(new _condition3.default(this, condition));
       }
     }
 
@@ -84,9 +84,9 @@ var Element = function () {
           _ref2 = _i2.value;
         }
 
-        var condition = _ref2;
+        var _condition = _ref2;
 
-        this.requiredConditions.push(new _condition2.default(this, condition));
+        this.requiredConditions.push(new _condition3.default(this, _condition));
       }
     }
 

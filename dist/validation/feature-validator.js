@@ -128,11 +128,11 @@ var FeatureValidator = function () {
         }
       } else {
         var required = _condition2.default.shouldElementBeRequired(element, record, formValues);
-        var visible = _condition2.default.shouldElementBeVisible(element, record, formValues, cache);
+        var _visible = _condition2.default.shouldElementBeVisible(element, record, formValues, cache);
 
         var disabled = element.isDisabled;
 
-        var validatable = visible && !disabled;
+        var validatable = _visible && !disabled;
 
         if (validatable) {
           if (required) {
@@ -153,22 +153,22 @@ var FeatureValidator = function () {
                 errors.push(error);
               }
             } else if (element.hasPattern) {
-              var textValue = formValues.get(element.key);
+              var _textValue = formValues.get(element.key);
 
-              var error = FeatureValidator.validatePatternOfElement(element, textValue);
+              var _error = FeatureValidator.validatePatternOfElement(element, _textValue);
 
-              if (error) {
-                errors.push(error);
+              if (_error) {
+                errors.push(_error);
               }
             }
           }
 
           if (element.isLengthValidationSupported) {
-            var fieldValue = formValues.get(element.key);
-            var error = FeatureValidator.validateLengthForElement(element, fieldValue);
+            var _fieldValue = formValues.get(element.key);
+            var _error2 = FeatureValidator.validateLengthForElement(element, _fieldValue);
 
-            if (error) {
-              errors.push(error);
+            if (_error2) {
+              errors.push(_error2);
             }
           }
         }
