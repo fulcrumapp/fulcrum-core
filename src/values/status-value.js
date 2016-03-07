@@ -1,7 +1,4 @@
-import TextualValue from './form-value';
+import TextualValue from './textual-value';
 
 export default class StatusValue extends TextualValue {
-  get displayValue() {
-    return this.textValue || '';
-  }
 }
