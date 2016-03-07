@@ -37,8 +37,8 @@ var DateUtils = function () {
   };
 
   DateUtils.formatTime = function formatTime(date) {
-    var hours = _lodash2.default.padLeft(date.getHours(), 2, '0');
-    var minutes = _lodash2.default.padLeft(date.getMinutes(), 2, '0');
+    var hours = _lodash2.default.padStart(date.getHours(), 2, '0');
+    var minutes = _lodash2.default.padStart(date.getMinutes(), 2, '0');
 
     return hours + ':' + minutes;
   };
@@ -56,8 +56,8 @@ var DateUtils = function () {
 
   DateUtils.formatDate = function formatDate(date) {
     var year = date.getFullYear();
-    var month = _lodash2.default.padLeft(date.getMonth() + 1, 2, '0');
-    var day = _lodash2.default.padLeft(date.getDate(), 2, '0');
+    var month = _lodash2.default.padStart(date.getMonth() + 1, 2, '0');
+    var day = _lodash2.default.padStart(date.getDate(), 2, '0');
 
     return year + '-' + month + '-' + day;
   };
@@ -72,8 +72,8 @@ var DateUtils = function () {
   DateUtils.__formatLocalizedDate = function __formatLocalizedDate(date) {
     if (!_locale2.default.supportsECMA402()) {
       var year = date.getFullYear();
-      var month = _lodash2.default.padLeft(date.getMonth() + 1, 2, '0');
-      var day = _lodash2.default.padLeft(date.getDate(), 2, '0');
+      var month = _lodash2.default.padStart(date.getMonth() + 1, 2, '0');
+      var day = _lodash2.default.padStart(date.getDate(), 2, '0');
       return year + '-' + month + '-' + day;
     }
 

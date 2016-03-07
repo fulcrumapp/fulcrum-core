@@ -20,8 +20,8 @@ export default class DateUtils {
   }
 
   static formatTime(date) {
-    const hours = _.padLeft(date.getHours(), 2, '0');
-    const minutes = _.padLeft(date.getMinutes(), 2, '0');
+    const hours = _.padStart(date.getHours(), 2, '0');
+    const minutes = _.padStart(date.getMinutes(), 2, '0');
 
     return hours + ':' + minutes;
   }
@@ -39,8 +39,8 @@ export default class DateUtils {
 
   static formatDate(date) {
     const year = date.getFullYear();
-    const month = _.padLeft(date.getMonth() + 1, 2, '0');
-    const day = _.padLeft(date.getDate(), 2, '0');
+    const month = _.padStart(date.getMonth() + 1, 2, '0');
+    const day = _.padStart(date.getDate(), 2, '0');
 
     return year + '-' + month + '-' + day;
   }
@@ -55,8 +55,8 @@ export default class DateUtils {
   static __formatLocalizedDate(date) {
     if (!Locale.supportsECMA402()) {
       const year = date.getFullYear();
-      const month = _.padLeft(date.getMonth() + 1, 2, '0');
-      const day = _.padLeft(date.getDate(), 2, '0');
+      const month = _.padStart(date.getMonth() + 1, 2, '0');
+      const day = _.padStart(date.getDate(), 2, '0');
       return year + '-' + month + '-' + day;
     }
 
