@@ -55,6 +55,14 @@ var FileDataSource = function () {
     return callback(null, new _form2.default(this.json(jsonPath).form));
   };
 
+  FileDataSource.prototype.getUsers = function getUsers(params, callback) {
+    return callback(null, []);
+  };
+
+  FileDataSource.prototype.getProjects = function getProjects(params, callback) {
+    return callback(null, []);
+  };
+
   return FileDataSource;
 }();
 

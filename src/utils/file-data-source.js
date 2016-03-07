@@ -31,4 +31,12 @@ export default class FileDataSource {
 
     return callback(null, new Form(this.json(jsonPath).form));
   }
+
+  getUsers(params, callback) {
+    return callback(null, []);
+  }
+
+  getProjects(params, callback) {
+    return callback(null, []);
+  }
 }

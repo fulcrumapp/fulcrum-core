@@ -1,6 +1,8 @@
 export default class MemoryDataSource {
   constructor(name) {
     this.cache = {};
+    this.projects = null;
+    this.users = null;
   }
 
   getChoiceList(id, callback) {
@@ -17,6 +19,14 @@ export default class MemoryDataSource {
 
   getRecord(id, callback) {
     return callback(null, this.cache[id]);
+  }
+
+  getUsers(params, callback) {
+    return callback(null, this.users);
+  }
+
+  getProjects(params, callback) {
+    return callback(null, this.projects);
   }
 
   getChoiceListComplete(id, object, callback) {
@@ -36,6 +46,16 @@ export default class MemoryDataSource {
 
   getRecordComplete(id, object, callback) {
     this.cache[id] = object;
+    callback();
+  }
+
+  getUsersComplete(params, object, callback) {
+    this.users = object;
+    callback();
+  }
+
+  getProjectsComplete(params, object, callback) {
+    this.projects = object;
     callback();
   }
 }

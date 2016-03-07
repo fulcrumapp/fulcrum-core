@@ -124,4 +124,12 @@ export default class DataSource {
   getRecords(form, params, callback) {
     this.invoke(this.root, 'getRecords', [form, params], callback);
   }
+
+  getUsers(params, callback) {
+    this.invoke(this.root, 'getUsers', [params], callback);
+  }
+
+  getProjects(params, callback) {
+    this.invoke(this.root, 'getProjects', [params], callback);
+  }
 }

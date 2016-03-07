@@ -9,6 +9,8 @@ var MemoryDataSource = function () {
     _classCallCheck(this, MemoryDataSource);
 
     this.cache = {};
+    this.projects = null;
+    this.users = null;
   }
 
   MemoryDataSource.prototype.getChoiceList = function getChoiceList(id, callback) {
@@ -25,6 +27,14 @@ var MemoryDataSource = function () {
 
   MemoryDataSource.prototype.getRecord = function getRecord(id, callback) {
     return callback(null, this.cache[id]);
+  };
+
+  MemoryDataSource.prototype.getUsers = function getUsers(params, callback) {
+    return callback(null, this.users);
+  };
+
+  MemoryDataSource.prototype.getProjects = function getProjects(params, callback) {
+    return callback(null, this.projects);
   };
 
   MemoryDataSource.prototype.getChoiceListComplete = function getChoiceListComplete(id, object, callback) {
@@ -44,6 +54,16 @@ var MemoryDataSource = function () {
 
   MemoryDataSource.prototype.getRecordComplete = function getRecordComplete(id, object, callback) {
     this.cache[id] = object;
+    callback();
+  };
+
+  MemoryDataSource.prototype.getUsersComplete = function getUsersComplete(params, object, callback) {
+    this.users = object;
+    callback();
+  };
+
+  MemoryDataSource.prototype.getProjectsComplete = function getProjectsComplete(params, object, callback) {
+    this.projects = object;
     callback();
   };
 

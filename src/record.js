@@ -66,6 +66,8 @@ export default class Record extends Feature {
     json.form_values = this.formValues.toJSON();
     json.latitude = this._latitude;
     json.longitude = this._longitude;
+    json.project_id = this._projectID;
+    json.assigned_to_id = this._assignedToID;
 
     return json;
   }
@@ -102,7 +104,7 @@ export default class Record extends Feature {
   }
 
   get statusValue() {
-    return new StatusValue(this.status, this.form.statusField);
+    return new StatusValue(this.form.statusField, this.status);
   }
 
   get displayValue() {
@@ -136,5 +138,29 @@ export default class Record extends Feature {
     }
 
     return this.form.statusField.isEnabled;
+  }
+
+  get projectID() {
+    return this._projectID;
+  }
+
+  set projectID(id) {
+    this._projectID = id;
+  }
+
+  get assignedToID() {
+    return this._assignedToID;
+  }
+
+  set assignedToID(id) {
+    this._assignedToID = id;
+  }
+
+  get status() {
+    return this._status;
+  }
+
+  set status(status) {
+    this._status = status;
   }
 }

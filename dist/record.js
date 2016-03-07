@@ -60,6 +60,8 @@ var Record = function (_Feature) {
     json.form_values = this.formValues.toJSON();
     json.latitude = this._latitude;
     json.longitude = this._longitude;
+    json.project_id = this._projectID;
+    json.assigned_to_id = this._assignedToID;
 
     return json;
   };
@@ -142,7 +144,7 @@ var Record = function (_Feature) {
   }, {
     key: 'statusValue',
     get: function get() {
-      return new _statusValue2.default(this.status, this.form.statusField);
+      return new _statusValue2.default(this.form.statusField, this.status);
     }
   }, {
     key: 'displayValue',
@@ -191,6 +193,30 @@ var Record = function (_Feature) {
       }
 
       return this.form.statusField.isEnabled;
+    }
+  }, {
+    key: 'projectID',
+    get: function get() {
+      return this._projectID;
+    },
+    set: function set(id) {
+      this._projectID = id;
+    }
+  }, {
+    key: 'assignedToID',
+    get: function get() {
+      return this._assignedToID;
+    },
+    set: function set(id) {
+      this._assignedToID = id;
+    }
+  }, {
+    key: 'status',
+    get: function get() {
+      return this._status;
+    },
+    set: function set(status) {
+      this._status = status;
     }
   }]);
 

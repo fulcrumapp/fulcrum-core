@@ -139,6 +139,14 @@ var DataSource = function () {
     this.invoke(this.root, 'getRecords', [form, params], callback);
   };
 
+  DataSource.prototype.getUsers = function getUsers(params, callback) {
+    this.invoke(this.root, 'getUsers', [params], callback);
+  };
+
+  DataSource.prototype.getProjects = function getProjects(params, callback) {
+    this.invoke(this.root, 'getProjects', [params], callback);
+  };
+
   _createClass(DataSource, [{
     key: 'root',
     get: function get() {

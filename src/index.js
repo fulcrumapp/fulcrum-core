@@ -46,6 +46,8 @@ import DataSource from './data-source';
 import MemoryDataSource from './utils/memory-data-source';
 import DefaultValues from './values/default-values';
 import CustomValidationError from './validation/custom-validation-error';
+import User from './user';
+import Project from './project';
 
 export {Form};
 export {Record};
@@ -95,3 +97,5 @@ export {DataSource};
 export {MemoryDataSource};
 export {DefaultValues};
 export {CustomValidationError};
+export {User};
+export {Project};
