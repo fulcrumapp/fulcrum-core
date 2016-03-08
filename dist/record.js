@@ -218,6 +218,38 @@ var Record = function (_Feature) {
     set: function set(status) {
       this._status = status;
     }
+  }, {
+    key: 'latitude',
+    get: function get() {
+      return this._latitude;
+    },
+    set: function set(latitude) {
+      this._latitude = latitude;
+    }
+  }, {
+    key: 'longitude',
+    get: function get() {
+      return this._longitude;
+    },
+    set: function set(longitude) {
+      this._longitude = longitude;
+    }
+  }, {
+    key: 'horizontalAccuracy',
+    get: function get() {
+      return this._horizontalAccuracy;
+    },
+    set: function set(accuracy) {
+      this._horizontalAccuracy = accuracy;
+    }
+  }, {
+    key: 'verticalAccuracy',
+    get: function get() {
+      return this._verticalAccuracy;
+    },
+    set: function set(accuracy) {
+      this._verticalAccuracy = accuracy;
+    }
   }]);
 
   return Record;

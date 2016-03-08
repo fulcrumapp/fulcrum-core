@@ -163,4 +163,36 @@ export default class Record extends Feature {
   set status(status) {
     this._status = status;
   }
+
+  get latitude() {
+    return this._latitude;
+  }
+
+  set latitude(latitude) {
+    this._latitude = latitude;
+  }
+
+  get longitude() {
+    return this._longitude;
+  }
+
+  set longitude(longitude) {
+    this._longitude = longitude;
+  }
+
+  get horizontalAccuracy() {
+    return this._horizontalAccuracy;
+  }
+
+  set horizontalAccuracy(accuracy) {
+    this._horizontalAccuracy = accuracy;
+  }
+
+  get verticalAccuracy() {
+    return this._verticalAccuracy;
+  }
+
+  set verticalAccuracy(accuracy) {
+    this._verticalAccuracy = accuracy;
+  }
 }

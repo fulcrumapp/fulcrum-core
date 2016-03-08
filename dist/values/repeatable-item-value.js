@@ -128,16 +128,6 @@ var RepeatableItemValue = function (_Feature) {
       return this._element.isGeometryEnabled;
     }
   }, {
-    key: 'latitude',
-    get: function get() {
-      return this._latitude;
-    }
-  }, {
-    key: 'longitude',
-    get: function get() {
-      return this._longitude;
-    }
-  }, {
     key: 'displayValue',
     get: function get() {
       var titleFieldKeys = this._element.titleFieldKeys;
@@ -169,6 +159,22 @@ var RepeatableItemValue = function (_Feature) {
       }
 
       return titles.join(', ');
+    }
+  }, {
+    key: 'latitude',
+    get: function get() {
+      return this._latitude;
+    },
+    set: function set(latitude) {
+      this._latitude = latitude;
+    }
+  }, {
+    key: 'longitude',
+    get: function get() {
+      return this._longitude;
+    },
+    set: function set(longitude) {
+      this._longitude = longitude;
     }
   }]);
 

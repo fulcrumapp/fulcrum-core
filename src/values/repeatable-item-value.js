@@ -77,14 +77,6 @@ export default class RepeatableItemValue extends Feature {
     return this._element.isGeometryEnabled;
   }
 
-  get latitude() {
-    return this._latitude;
-  }
-
-  get longitude() {
-    return this._longitude;
-  }
-
   get displayValue() {
     const titleFieldKeys = this._element.titleFieldKeys;
     const titles = [];
@@ -113,5 +105,21 @@ export default class RepeatableItemValue extends Feature {
       type: 'Point',
       coordinates: [this._longitude, this._latitude]
     };
+  }
+
+  get latitude() {
+    return this._latitude;
+  }
+
+  set latitude(latitude) {
+    this._latitude = latitude;
+  }
+
+  get longitude() {
+    return this._longitude;
+  }
+
+  set longitude(longitude) {
+    this._longitude = longitude;
   }
 }
