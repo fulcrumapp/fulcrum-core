@@ -102,16 +102,32 @@ export default class RepeatableValue extends FormValue {
     this.mapItems(callback);
   }
 
+  itemIndex(item) {
+    for (let index = 0; index < this._items.length; ++index) {
+      if (item.id === this._items[index].id) {
+        return index;
+      }
+    }
+
+    return -1;
+  }
+
+  insertItem(item) {
+    const index = this.itemIndex(item);
+
+    if (index > -1) {
+      this._items[index] = item;
+    } else {
+      this._items.push(item);
+    }
+  }
+
   createNewItem() {
     const attributes = {
       id: uuid.v4(),
       form_values: {}
     };
 
-    const item = new RepeatableItemValue(this.element, attributes, this._items.length);
-
-    this._items.push(item);
-
-    return item;
+    return new RepeatableItemValue(this.element, attributes, this._items.length);
   }
 }
