@@ -61,6 +61,10 @@ export default class MediaValue extends FormValue {
   }
 
   toJSON() {
+    if (this.isEmpty) {
+      return null;
+    }
+
     const items = [];
 
     for (let item of this._items) {
