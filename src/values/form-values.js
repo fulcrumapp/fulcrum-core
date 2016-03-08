@@ -2,6 +2,7 @@ import FormValueFactory from './form-value-factory';
 import FormValue from './form-value';
 import TextualElement from '../elements/textual-element';
 import TextUtils from '../utils/text-utils';
+import Condition from '../elements/condition';
 
 const SearchValueSeparator = ' ';
 
@@ -200,5 +201,35 @@ export default class FormValues {
     }
 
     return searchValues.join(SearchValueSeparator);
+  }
+
+  clearInvisibleValues(valuesForConditions, record) {
+    const elementsToRemove = [];
+
+    const cache = {};
+
+    for (const formValue of this.all) {
+      const element = formValue.element;
+
+      // don't clear out fields that are explicitly marked hidden, or have any parents explicitly marked as hidden
+      const skipElement = element.isHidden || element.hasHiddenParent;
+
+      if (!skipElement) {
+        const shouldBeVisible = Condition.shouldElementBeVisible(element,
+                                                                 record,
+                                                                 valuesForConditions,
+                                                                 cache);
+
+        if (!shouldBeVisible) {
+          elementsToRemove.push(element);
+        }
+      }
+    }
+
+    for (const element of elementsToRemove) {
+      const blankValue = this.createValue(element, null);
+
+      this.set(element.key, blankValue);
+    }
   }
 }
