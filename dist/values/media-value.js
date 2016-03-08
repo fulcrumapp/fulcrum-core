@@ -62,6 +62,10 @@ var MediaValue = function (_FormValue) {
   }
 
   MediaValue.prototype.toJSON = function toJSON() {
+    if (this.isEmpty) {
+      return null;
+    }
+
     var items = [];
 
     for (var _iterator2 = this._items, _isArray2 = Array.isArray(_iterator2), _i2 = 0, _iterator2 = _isArray2 ? _iterator2 : _iterator2[Symbol.iterator]();;) {
