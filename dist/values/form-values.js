@@ -20,6 +20,10 @@ var _textUtils = require('../utils/text-utils');
 
 var _textUtils2 = _interopRequireDefault(_textUtils);
 
+var _condition = require('../elements/condition');
+
+var _condition2 = _interopRequireDefault(_condition);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -235,24 +239,77 @@ var FormValues = function () {
     return null;
   };
 
+  FormValues.prototype.clearInvisibleValues = function clearInvisibleValues(valuesForConditions, record) {
+    var elementsToRemove = [];
+
+    var cache = {};
+
+    for (var _iterator4 = this.all, _isArray4 = Array.isArray(_iterator4), _i4 = 0, _iterator4 = _isArray4 ? _iterator4 : _iterator4[Symbol.iterator]();;) {
+      var _ref4;
+
+      if (_isArray4) {
+        if (_i4 >= _iterator4.length) break;
+        _ref4 = _iterator4[_i4++];
+      } else {
+        _i4 = _iterator4.next();
+        if (_i4.done) break;
+        _ref4 = _i4.value;
+      }
+
+      var formValue = _ref4;
+
+      var element = formValue.element;
+
+      // don't clear out fields that are explicitly marked hidden, or have any parents explicitly marked as hidden
+      var skipElement = element.isHidden || element.hasHiddenParent;
+
+      if (!skipElement) {
+        var shouldBeVisible = _condition2.default.shouldElementBeVisible(element, record, valuesForConditions, cache);
+
+        if (!shouldBeVisible) {
+          elementsToRemove.push(element);
+        }
+      }
+    }
+
+    for (var _iterator5 = elementsToRemove, _isArray5 = Array.isArray(_iterator5), _i5 = 0, _iterator5 = _isArray5 ? _iterator5 : _iterator5[Symbol.iterator]();;) {
+      var _ref5;
+
+      if (_isArray5) {
+        if (_i5 >= _iterator5.length) break;
+        _ref5 = _iterator5[_i5++];
+      } else {
+        _i5 = _iterator5.next();
+        if (_i5.done) break;
+        _ref5 = _i5.value;
+      }
+
+      var _element = _ref5;
+
+      var blankValue = this.createValue(_element, null);
+
+      this.set(_element.key, blankValue);
+    }
+  };
+
   _createClass(FormValues, [{
     key: 'all',
     get: function get() {
       var result = [];
 
-      for (var _iterator4 = Object.keys(this._values), _isArray4 = Array.isArray(_iterator4), _i4 = 0, _iterator4 = _isArray4 ? _iterator4 : _iterator4[Symbol.iterator]();;) {
-        var _ref4;
+      for (var _iterator6 = Object.keys(this._values), _isArray6 = Array.isArray(_iterator6), _i6 = 0, _iterator6 = _isArray6 ? _iterator6 : _iterator6[Symbol.iterator]();;) {
+        var _ref6;
 
-        if (_isArray4) {
-          if (_i4 >= _iterator4.length) break;
-          _ref4 = _iterator4[_i4++];
+        if (_isArray6) {
+          if (_i6 >= _iterator6.length) break;
+          _ref6 = _iterator6[_i6++];
         } else {
-          _i4 = _iterator4.next();
-          if (_i4.done) break;
-          _ref4 = _i4.value;
+          _i6 = _iterator6.next();
+          if (_i6.done) break;
+          _ref6 = _i6.value;
         }
 
-        var key = _ref4;
+        var key = _ref6;
 
         result.push(this._values[key]);
       }
@@ -264,19 +321,19 @@ var FormValues = function () {
     get: function get() {
       var searchValues = [];
 
-      for (var _iterator5 = Object.keys(this._values), _isArray5 = Array.isArray(_iterator5), _i5 = 0, _iterator5 = _isArray5 ? _iterator5 : _iterator5[Symbol.iterator]();;) {
-        var _ref5;
+      for (var _iterator7 = Object.keys(this._values), _isArray7 = Array.isArray(_iterator7), _i7 = 0, _iterator7 = _isArray7 ? _iterator7 : _iterator7[Symbol.iterator]();;) {
+        var _ref7;
 
-        if (_isArray5) {
-          if (_i5 >= _iterator5.length) break;
-          _ref5 = _iterator5[_i5++];
+        if (_isArray7) {
+          if (_i7 >= _iterator7.length) break;
+          _ref7 = _iterator7[_i7++];
         } else {
-          _i5 = _iterator5.next();
-          if (_i5.done) break;
-          _ref5 = _i5.value;
+          _i7 = _iterator7.next();
+          if (_i7.done) break;
+          _ref7 = _i7.value;
         }
 
-        var key = _ref5;
+        var key = _ref7;
 
         var formValue = this._values[key];
 

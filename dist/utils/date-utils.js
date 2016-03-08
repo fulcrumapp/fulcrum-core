@@ -44,6 +44,10 @@ var DateUtils = function () {
   };
 
   DateUtils.parseTimestamp = function parseTimestamp(timestampString) {
+    if (!timestampString) {
+      return null;
+    }
+
     return new Date(parseFloat(timestampString) * 1000);
   };
 

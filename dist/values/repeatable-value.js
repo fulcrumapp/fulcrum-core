@@ -118,17 +118,33 @@ var RepeatableValue = function (_FormValue) {
     this.mapItems(callback);
   };
 
+  RepeatableValue.prototype.itemIndex = function itemIndex(item) {
+    for (var index = 0; index < this._items.length; ++index) {
+      if (item.id === this._items[index].id) {
+        return index;
+      }
+    }
+
+    return -1;
+  };
+
+  RepeatableValue.prototype.insertItem = function insertItem(item) {
+    var index = this.itemIndex(item);
+
+    if (index > -1) {
+      this._items[index] = item;
+    } else {
+      this._items.push(item);
+    }
+  };
+
   RepeatableValue.prototype.createNewItem = function createNewItem() {
     var attributes = {
       id: _uuid2.default.v4(),
       form_values: {}
     };
 
-    var item = new _repeatableItemValue2.default(this.element, attributes, this._items.length);
-
-    this._items.push(item);
-
-    return item;
+    return new _repeatableItemValue2.default(this.element, attributes, this._items.length);
   };
 
   _createClass(RepeatableValue, [{
