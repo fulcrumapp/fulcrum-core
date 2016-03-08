@@ -27,6 +27,10 @@ export default class DateUtils {
   }
 
   static parseTimestamp(timestampString) {
+    if (!timestampString) {
+      return null;
+    }
+
     return new Date(parseFloat(timestampString) * 1000);
   }
 
