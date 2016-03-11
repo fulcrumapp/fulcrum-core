@@ -3,6 +3,9 @@ export default class MemoryDataSource {
     this.cache = {};
     this.projects = null;
     this.users = null;
+    this.photos = {};
+    this.audio = {};
+    this.videos = {};
   }
 
   getChoiceList(id, callback) {
@@ -27,6 +30,18 @@ export default class MemoryDataSource {
 
   getProjects(params, callback) {
     return callback(null, this.projects);
+  }
+
+  getPhoto(id, callback) {
+    return callback(null, this.photos[id]);
+  }
+
+  getAudio(id, callback) {
+    return callback(null, this.audio[id]);
+  }
+
+  getVideo(id, callback) {
+    return callback(null, this.videos[id]);
   }
 
   getChoiceListComplete(id, object, callback) {
@@ -56,6 +71,21 @@ export default class MemoryDataSource {
 
   getProjectsComplete(params, object, callback) {
     this.projects = object;
+    callback();
+  }
+
+  getPhotoComplete(id, object, callback) {
+    this.photos[id] = object;
+    callback();
+  }
+
+  getAudioComplete(id, object, callback) {
+    this.audio[id] = object;
+    callback();
+  }
+
+  getVideoComplete(id, object, callback) {
+    this.videos[id] = object;
     callback();
   }
 }

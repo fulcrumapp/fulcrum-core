@@ -1,7 +1,7 @@
 'use strict';
 
 exports.__esModule = true;
-exports.Project = exports.User = exports.CustomValidationError = exports.DefaultValues = exports.MemoryDataSource = exports.DataSource = exports.FeatureValidator = exports.RecordLinkItemValue = exports.RecordLinkValue = exports.RecordLinkElement = exports.SectionElement = exports.TextValue = exports.TextElement = exports.CalculatedValue = exports.CalculatedElement = exports.DateValue = exports.DateElement = exports.ClassificationValue = exports.ClassificationElement = exports.ChoiceValue = exports.ChoiceElement = exports.BarcodeValue = exports.BarcodeElement = exports.AddressValue = exports.AddressElement = exports.VideoValue = exports.VideoItemValue = exports.PhotoValue = exports.PhotoItemValue = exports.AudioValue = exports.AudioItemValue = exports.RepeatableElement = exports.Condition = exports.ChildElements = exports.NumberUtils = exports.DateUtils = exports.TextUtils = exports.FormValues = exports.Feature = exports.RepeatableValue = exports.RepeatableItemValue = exports.ElementFactory = exports.ClassificationSet = exports.Classification = exports.ChoiceList = exports.Choice = exports.FormValue = exports.Element = exports.Record = exports.Form = undefined;
+exports.Project = exports.User = exports.MediaItemValue = exports.MediaValue = exports.CustomValidationError = exports.DefaultValues = exports.MemoryDataSource = exports.DataSource = exports.FeatureValidator = exports.RecordLinkItemValue = exports.RecordLinkValue = exports.RecordLinkElement = exports.SectionElement = exports.TextValue = exports.TextElement = exports.CalculatedValue = exports.CalculatedElement = exports.DateValue = exports.DateElement = exports.ClassificationValue = exports.ClassificationElement = exports.ChoiceValue = exports.ChoiceElement = exports.BarcodeValue = exports.BarcodeElement = exports.AddressValue = exports.AddressElement = exports.VideoValue = exports.VideoItemValue = exports.PhotoValue = exports.PhotoItemValue = exports.AudioValue = exports.AudioItemValue = exports.RepeatableElement = exports.Condition = exports.ChildElements = exports.NumberUtils = exports.DateUtils = exports.TextUtils = exports.FormValues = exports.Feature = exports.RepeatableValue = exports.RepeatableItemValue = exports.ElementFactory = exports.ClassificationSet = exports.Classification = exports.ChoiceList = exports.Choice = exports.FormValue = exports.Element = exports.Record = exports.Form = undefined;
 
 var _form = require('./form');
 
@@ -191,6 +191,14 @@ var _customValidationError = require('./validation/custom-validation-error');
 
 var _customValidationError2 = _interopRequireDefault(_customValidationError);
 
+var _mediaValue = require('./values/media-value');
+
+var _mediaValue2 = _interopRequireDefault(_mediaValue);
+
+var _mediaItemValue = require('./values/media-item-value');
+
+var _mediaItemValue2 = _interopRequireDefault(_mediaItemValue);
+
 var _user = require('./user');
 
 var _user2 = _interopRequireDefault(_user);
@@ -249,6 +257,8 @@ exports.DataSource = _dataSource2.default;
 exports.MemoryDataSource = _memoryDataSource2.default;
 exports.DefaultValues = _defaultValues2.default;
 exports.CustomValidationError = _customValidationError2.default;
+exports.MediaValue = _mediaValue2.default;
+exports.MediaItemValue = _mediaItemValue2.default;
 exports.User = _user2.default;
 exports.Project = _project2.default;
 //# sourceMappingURL=index.js.map

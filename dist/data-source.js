@@ -147,7 +147,16 @@ var DataSource = function () {
     this.invoke(this.root, 'getProjects', [params], callback);
   };
 
+  DataSource.prototype.getPhoto = function getPhoto(id, callback) {
+    this.invoke(this.root, 'getPhoto', [id], callback);
+  };
+
   _createClass(DataSource, [{
+    key: 'source',
+    get: function get() {
+      return this.sources[this.sources.length - 1];
+    }
+  }, {
     key: 'root',
     get: function get() {
       return this.sources[0];

@@ -48,6 +48,10 @@ export default class DataSource {
     this.sources = [];
   }
 
+  get source() {
+    return this.sources[this.sources.length - 1];
+  }
+
   invoke(dataSource, method, params, callback) {
     const invokeCallback = (err, ...objects) => {
       if (err) {
@@ -131,5 +135,17 @@ export default class DataSource {
 
   getProjects(params, callback) {
     this.invoke(this.root, 'getProjects', [params], callback);
+  }
+
+  getPhoto(id, callback) {
+    this.invoke(this.root, 'getPhoto', [id], callback);
+  }
+
+  getAudio(id, callback) {
+    this.invoke(this.root, 'getAudio', [id], callback);
+  }
+
+  getVideo(id, callback) {
+    this.invoke(this.root, 'getVideo', [id], callback);
   }
 }

@@ -2,6 +2,8 @@
 
 exports.__esModule = true;
 
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
 var _containerElement = require('./container-element');
 
 var _containerElement2 = _interopRequireDefault(_containerElement);
@@ -26,11 +28,23 @@ var RepeatableElement = function (_ContainerElement) {
 
     _this.titleFieldKeys = attributes.title_field_keys;
 
-    _this.geometryTypes = attributes.geometry_types;
+    _this._geometryTypes = attributes.geometry_types;
 
-    _this.geometryRequired = !!attributes.geometry_required;
+    _this._geometryRequired = !!attributes.geometry_required;
     return _this;
   }
+
+  _createClass(RepeatableElement, [{
+    key: 'isGeometryEnabled',
+    get: function get() {
+      return this._geometryTypes && this._geometryTypes.length;
+    }
+  }, {
+    key: 'isGeometryRequired',
+    get: function get() {
+      return this.isGeometryEnabled && this._geometryRequired;
+    }
+  }]);
 
   return RepeatableElement;
 }(_containerElement2.default);

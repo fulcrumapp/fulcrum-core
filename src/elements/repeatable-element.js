@@ -6,8 +6,16 @@ export default class RepeatableElement extends ContainerElement {
 
     this.titleFieldKeys = attributes.title_field_keys;
 
-    this.geometryTypes = attributes.geometry_types;
+    this._geometryTypes = attributes.geometry_types;
 
-    this.geometryRequired = !!attributes.geometry_required;
+    this._geometryRequired = !!attributes.geometry_required;
+  }
+
+  get isGeometryEnabled() {
+    return this._geometryTypes && this._geometryTypes.length;
+  }
+
+  get isGeometryRequired() {
+    return this.isGeometryEnabled && this._geometryRequired;
   }
 }
