@@ -11,6 +11,9 @@ var MemoryDataSource = function () {
     this.cache = {};
     this.projects = null;
     this.users = null;
+    this.photos = {};
+    this.audio = {};
+    this.videos = {};
   }
 
   MemoryDataSource.prototype.getChoiceList = function getChoiceList(id, callback) {
@@ -35,6 +38,18 @@ var MemoryDataSource = function () {
 
   MemoryDataSource.prototype.getProjects = function getProjects(params, callback) {
     return callback(null, this.projects);
+  };
+
+  MemoryDataSource.prototype.getPhoto = function getPhoto(id, callback) {
+    return callback(null, this.photos[id]);
+  };
+
+  MemoryDataSource.prototype.getAudio = function getAudio(id, callback) {
+    return callback(null, this.audio[id]);
+  };
+
+  MemoryDataSource.prototype.getVideo = function getVideo(id, callback) {
+    return callback(null, this.videos[id]);
   };
 
   MemoryDataSource.prototype.getChoiceListComplete = function getChoiceListComplete(id, object, callback) {
@@ -64,6 +79,21 @@ var MemoryDataSource = function () {
 
   MemoryDataSource.prototype.getProjectsComplete = function getProjectsComplete(params, object, callback) {
     this.projects = object;
+    callback();
+  };
+
+  MemoryDataSource.prototype.getPhotoComplete = function getPhotoComplete(id, object, callback) {
+    this.photos[id] = object;
+    callback();
+  };
+
+  MemoryDataSource.prototype.getAudioComplete = function getAudioComplete(id, object, callback) {
+    this.audio[id] = object;
+    callback();
+  };
+
+  MemoryDataSource.prototype.getVideoComplete = function getVideoComplete(id, object, callback) {
+    this.videos[id] = object;
     callback();
   };
 
