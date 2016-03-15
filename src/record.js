@@ -5,15 +5,20 @@ import DateUtils from './utils/date-utils';
 import StatusValue from './values/status-value';
 
 export default class Record extends Feature {
-  constructor(attributes) {
+  constructor(attributes, form) {
+    if (!form) {
+      throw new ReferenceError('A form must be passed');
+    }
+
     super();
 
-    // this._id = attributes.id;
-    // this._createdAt = DateUtils.parseTimestamp(attributes.client_created_at);
-    // this._updatedAt = DateUtils.parseTimestamp(attributes.client_updated_at);
-    // this._formValuesJSON = attributes.form_values;
-    // this._latitude = attributes.latitude;
-    // this._longitude = attributes.longitude;
+    this._form = form;
+    this._id = attributes.id;
+    this._createdAt = DateUtils.parseTimestamp(attributes.client_created_at);
+    this._updatedAt = DateUtils.parseTimestamp(attributes.client_updated_at);
+    this._formValuesJSON = attributes.form_values;
+    this._latitude = attributes.latitude;
+    this._longitude = attributes.longitude;
   }
 
   get id() {
