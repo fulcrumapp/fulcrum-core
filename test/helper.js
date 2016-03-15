@@ -25,7 +25,7 @@ export default function setup(callback) {
   form = new Form(formJson);
 
   form.load(dataSource, () => {
-    record = new Record(recordJson);
+    record = new Record(recordJson, form);
 
     record._form = form;
     record._formValuesJSON = recordJson.form_values;
