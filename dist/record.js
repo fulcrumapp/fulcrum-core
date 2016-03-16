@@ -37,17 +37,23 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var Record = function (_Feature) {
   _inherits(Record, _Feature);
 
-  function Record(attributes) {
+  function Record(attributes, form) {
     _classCallCheck(this, Record);
 
-    return _possibleConstructorReturn(this, _Feature.call(this));
+    if (!form) {
+      throw new ReferenceError('A form must be passed');
+    }
 
-    // this._id = attributes.id;
-    // this._createdAt = DateUtils.parseTimestamp(attributes.client_created_at);
-    // this._updatedAt = DateUtils.parseTimestamp(attributes.client_updated_at);
-    // this._formValuesJSON = attributes.form_values;
-    // this._latitude = attributes.latitude;
-    // this._longitude = attributes.longitude;
+    var _this = _possibleConstructorReturn(this, _Feature.call(this));
+
+    _this._form = form;
+    _this._id = attributes.id;
+    _this._createdAt = _dateUtils2.default.parseTimestamp(attributes.client_created_at);
+    _this._updatedAt = _dateUtils2.default.parseTimestamp(attributes.client_updated_at);
+    _this._formValuesJSON = attributes.form_values;
+    _this._latitude = attributes.latitude;
+    _this._longitude = attributes.longitude;
+    return _this;
   }
 
   Record.prototype.toJSON = function toJSON() {

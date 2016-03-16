@@ -75,10 +75,10 @@ var ChoiceValue = function (_FormValue) {
             _ref2 = _i2.value;
           }
 
-          var _choice = _ref2;
+          var choice = _ref2;
 
-          if (_textUtils2.default.isPresent(_choice)) {
-            _this._otherValues.push(_choice);
+          if (_textUtils2.default.isPresent(choice)) {
+            _this._otherValues.push(choice);
           }
         }
       }

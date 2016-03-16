@@ -76,10 +76,10 @@ var FormValue = function () {
 
         var klass = _ref;
 
-        var _constructor = FormValue.factory().classes()[_elementTypes2.default[klass]];
+        var constructor = FormValue.factory().classes()[_elementTypes2.default[klass]];
 
-        if (_constructor) {
-          FormValue._classes[_constructor.name] = _constructor;
+        if (constructor) {
+          FormValue._classes[constructor.name] = constructor;
         }
       }
     }

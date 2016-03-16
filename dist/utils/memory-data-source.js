@@ -29,7 +29,7 @@ var MemoryDataSource = function () {
     return callback(null, this.cache[id]);
   };
 
-  MemoryDataSource.prototype.getRecord = function getRecord(id, callback) {
+  MemoryDataSource.prototype.getRecord = function getRecord(id, form, callback) {
     return callback(null, this.cache[id]);
   };
 
@@ -76,7 +76,7 @@ var MemoryDataSource = function () {
     callback();
   };
 
-  MemoryDataSource.prototype.getRecordComplete = function getRecordComplete(id, object, callback) {
+  MemoryDataSource.prototype.getRecordComplete = function getRecordComplete(id, form, object, callback) {
     this.cache[id] = object;
     callback();
   };

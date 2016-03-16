@@ -73,10 +73,10 @@ var ClassificationValue = function (_FormValue) {
           _ref2 = _i2.value;
         }
 
-        var _choice = _ref2;
+        var choice = _ref2;
 
-        if (_textUtils2.default.isPresent(_choice)) {
-          _this._otherValues.push(_choice);
+        if (_textUtils2.default.isPresent(choice)) {
+          _this._otherValues.push(choice);
         }
       }
     }
@@ -235,9 +235,9 @@ var ClassificationValue = function (_FormValue) {
           _ref6 = _i6.value;
         }
 
-        var _value = _ref6;
+        var value = _ref6;
 
-        allValues.push(_value);
+        allValues.push(value);
       }
 
       if (allValues.length === 0) {

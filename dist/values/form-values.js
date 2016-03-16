@@ -284,11 +284,11 @@ var FormValues = function () {
         _ref5 = _i5.value;
       }
 
-      var _element = _ref5;
+      var element = _ref5;
 
-      var blankValue = this.createValue(_element, null);
+      var blankValue = this.createValue(element, null);
 
-      this.set(_element.key, blankValue);
+      this.set(element.key, blankValue);
     }
   };
 
