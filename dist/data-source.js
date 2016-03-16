@@ -155,8 +155,16 @@ var DataSource = function () {
     this.invoke(this.root, 'getAudio', [id], callback);
   };
 
+  DataSource.prototype.getAudioTrack = function getAudioTrack(id, callback) {
+    this.invoke(this.root, 'getAudioTrack', [id], callback);
+  };
+
   DataSource.prototype.getVideo = function getVideo(id, callback) {
     this.invoke(this.root, 'getVideo', [id], callback);
+  };
+
+  DataSource.prototype.getVideoTrack = function getVideoTrack(id, callback) {
+    this.invoke(this.root, 'getVideoTrack', [id], callback);
   };
 
   _createClass(DataSource, [{

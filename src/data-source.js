@@ -145,7 +145,15 @@ export default class DataSource {
     this.invoke(this.root, 'getAudio', [id], callback);
   }
 
+  getAudioTrack(id, callback) {
+    this.invoke(this.root, 'getAudioTrack', [id], callback);
+  }
+
   getVideo(id, callback) {
     this.invoke(this.root, 'getVideo', [id], callback);
+  }
+
+  getVideoTrack(id, callback) {
+    this.invoke(this.root, 'getVideoTrack', [id], callback);
   }
 }
