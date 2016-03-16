@@ -121,8 +121,8 @@ export default class DataSource {
     this.invoke(this.root, 'getForm', [id], callback);
   }
 
-  getRecord(id, callback) {
-    this.invoke(this.root, 'getRecord', [id], callback);
+  getRecord(id, form, callback) {
+    this.invoke(this.root, 'getRecord', [id, form], callback);
   }
 
   getRecords(form, params, callback) {

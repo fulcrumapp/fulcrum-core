@@ -20,7 +20,7 @@ export default class MemoryDataSource {
     return callback(null, this.cache[id]);
   }
 
-  getRecord(id, callback) {
+  getRecord(id, form, callback) {
     return callback(null, this.cache[id]);
   }
 
@@ -59,7 +59,7 @@ export default class MemoryDataSource {
     callback();
   }
 
-  getRecordComplete(id, object, callback) {
+  getRecordComplete(id, form, object, callback) {
     this.cache[id] = object;
     callback();
   }
