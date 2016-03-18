@@ -107,4 +107,28 @@ export default class MediaValue extends FormValue {
 
     return item;
   }
+
+  removeItem(id) {
+    for (let index = 0; index < this._items.length; ++index) {
+      if (this._items[index].mediaID === id) {
+        const item = this._items[index];
+
+        this._items.splice(index, 1);
+
+        return item;
+      }
+    }
+
+    return null;
+  }
+
+  get hasCaptions() {
+    for (const item of this._items) {
+      if (TextUtils.isPresent(item.caption)) {
+        return true;
+      }
+    }
+
+    return false;
+  }
 }

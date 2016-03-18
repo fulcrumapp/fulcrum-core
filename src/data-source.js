@@ -121,8 +121,8 @@ export default class DataSource {
     this.invoke(this.root, 'getForm', [id], callback);
   }
 
-  getRecord(id, callback) {
-    this.invoke(this.root, 'getRecord', [id], callback);
+  getRecord(id, form, callback) {
+    this.invoke(this.root, 'getRecord', [id, form], callback);
   }
 
   getRecords(form, params, callback) {
@@ -155,5 +155,25 @@ export default class DataSource {
 
   getVideoTrack(id, callback) {
     this.invoke(this.root, 'getVideoTrack', [id], callback);
+  }
+
+  createPhoto(accessKey, file, progress, callback) {
+    this.invoke(this.root, 'createPhoto', [accessKey, file, progress], callback);
+  }
+
+  createVideo(accessKey, file, progress, callback) {
+    this.invoke(this.root, 'createVideo', [accessKey, file, progress], callback);
+  }
+
+  createAudio(accessKey, file, progress, callback) {
+    this.invoke(this.root, 'createAudio', [accessKey, file, progress], callback);
+  }
+
+  saveVideoTrack(accessKey, file, progress, callback) {
+    this.invoke(this.root, 'saveVideoTrack', [accessKey, file, progress], callback);
+  }
+
+  saveAudioTrack(accessKey, file, progress, callback) {
+    this.invoke(this.root, 'saveAudioTrack', [accessKey, file, progress], callback);
   }
 }
