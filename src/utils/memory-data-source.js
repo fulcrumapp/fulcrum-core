@@ -21,7 +21,7 @@ export default class MemoryDataSource {
     return callback(null, this.cache[id]);
   }
 
-  getRecord(id, callback) {
+  getRecord(id, form, callback) {
     return callback(null, this.cache[id]);
   }
 
@@ -68,7 +68,7 @@ export default class MemoryDataSource {
     callback();
   }
 
-  getRecordComplete(id, object, callback) {
+  getRecordComplete(id, form, object, callback) {
     this.cache[id] = object;
     callback();
   }
@@ -84,12 +84,16 @@ export default class MemoryDataSource {
   }
 
   getPhotoComplete(id, object, callback) {
-    this.photos[id] = object;
+    if (object.processed) {
+      this.photos[id] = object;
+    }
     callback();
   }
 
   getAudioComplete(id, object, callback) {
-    this.audio[id] = object;
+    if (object.processed) {
+      this.audio[id] = object;
+    }
     callback();
   }
 
@@ -99,7 +103,10 @@ export default class MemoryDataSource {
   }
 
   getVideoComplete(id, object, callback) {
-    this.videos[id] = object;
+    if (object.processed) {
+      this.videos[id] = object;
+    }
+
     callback();
   }
 
