@@ -26,6 +26,27 @@ export default class DateUtils {
     return hours + ':' + minutes;
   }
 
+  static formatTimeSeconds(seconds) {
+    const ss = +seconds % 60;
+    const div = (+seconds - ss) / 60;
+    const mm = div % 60;
+    const hh = (div - mm) / 60;
+
+    const h = _.padStart(Math.floor(hh), 2, '0');
+    const m = _.padStart(Math.floor(mm), 2, '0');
+    const s = _.padStart(Math.floor(ss), 2, '0');
+
+    return h + ':' + m + ':' + s;
+  }
+
+  static formatTimeParts(hours, minutes, seconds) {
+    const h = _.padStart(+hours, 2, '0');
+    const m = _.padStart(+minutes, 2, '0');
+    const s = _.padStart(+seconds, 2, '0');
+
+    return h + ':' + m + ':' + s;
+  }
+
   static parseTimestamp(timestampString) {
     if (!timestampString) {
       return null;
