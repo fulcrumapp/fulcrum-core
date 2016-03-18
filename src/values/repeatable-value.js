@@ -98,6 +98,11 @@ export default class RepeatableValue extends FormValue {
     return this._items.slice().map(callback);
   }
 
+  // return a copy until it's determined that a mutable API is necessary
+  get items() {
+    return this._items.slice();
+  }
+
   forEachItem(callback) {
     this.mapItems(callback);
   }
