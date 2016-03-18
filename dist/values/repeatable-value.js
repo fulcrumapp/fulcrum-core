@@ -114,6 +114,9 @@ var RepeatableValue = function (_FormValue) {
     return this._items.slice().map(callback);
   };
 
+  // return a copy until it's determined that a mutable API is necessary
+
+
   RepeatableValue.prototype.forEachItem = function forEachItem(callback) {
     this.mapItems(callback);
   };
@@ -207,6 +210,11 @@ var RepeatableValue = function (_FormValue) {
     key: 'multipleValues',
     get: function get() {
       return null;
+    }
+  }, {
+    key: 'items',
+    get: function get() {
+      return this._items.slice();
     }
   }]);
 

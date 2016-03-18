@@ -131,8 +131,8 @@ var DataSource = function () {
     this.invoke(this.root, 'getForm', [id], callback);
   };
 
-  DataSource.prototype.getRecord = function getRecord(id, callback) {
-    this.invoke(this.root, 'getRecord', [id], callback);
+  DataSource.prototype.getRecord = function getRecord(id, form, callback) {
+    this.invoke(this.root, 'getRecord', [id, form], callback);
   };
 
   DataSource.prototype.getRecords = function getRecords(form, params, callback) {
@@ -165,6 +165,26 @@ var DataSource = function () {
 
   DataSource.prototype.getVideoTrack = function getVideoTrack(id, callback) {
     this.invoke(this.root, 'getVideoTrack', [id], callback);
+  };
+
+  DataSource.prototype.createPhoto = function createPhoto(accessKey, file, progress, callback) {
+    this.invoke(this.root, 'createPhoto', [accessKey, file, progress], callback);
+  };
+
+  DataSource.prototype.createVideo = function createVideo(accessKey, file, progress, callback) {
+    this.invoke(this.root, 'createVideo', [accessKey, file, progress], callback);
+  };
+
+  DataSource.prototype.createAudio = function createAudio(accessKey, file, progress, callback) {
+    this.invoke(this.root, 'createAudio', [accessKey, file, progress], callback);
+  };
+
+  DataSource.prototype.saveVideoTrack = function saveVideoTrack(accessKey, file, progress, callback) {
+    this.invoke(this.root, 'saveVideoTrack', [accessKey, file, progress], callback);
+  };
+
+  DataSource.prototype.saveAudioTrack = function saveAudioTrack(accessKey, file, progress, callback) {
+    this.invoke(this.root, 'saveAudioTrack', [accessKey, file, progress], callback);
   };
 
   _createClass(DataSource, [{

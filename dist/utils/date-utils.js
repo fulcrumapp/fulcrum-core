@@ -43,6 +43,27 @@ var DateUtils = function () {
     return hours + ':' + minutes;
   };
 
+  DateUtils.formatTimeSeconds = function formatTimeSeconds(seconds) {
+    var ss = +seconds % 60;
+    var div = (+seconds - ss) / 60;
+    var mm = div % 60;
+    var hh = (div - mm) / 60;
+
+    var h = _lodash2.default.padStart(Math.floor(hh), 2, '0');
+    var m = _lodash2.default.padStart(Math.floor(mm), 2, '0');
+    var s = _lodash2.default.padStart(Math.floor(ss), 2, '0');
+
+    return h + ':' + m + ':' + s;
+  };
+
+  DateUtils.formatTimeParts = function formatTimeParts(hours, minutes, seconds) {
+    var h = _lodash2.default.padStart(+hours, 2, '0');
+    var m = _lodash2.default.padStart(+minutes, 2, '0');
+    var s = _lodash2.default.padStart(+seconds, 2, '0');
+
+    return h + ':' + m + ':' + s;
+  };
+
   DateUtils.parseTimestamp = function parseTimestamp(timestampString) {
     if (!timestampString) {
       return null;

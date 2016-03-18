@@ -29,7 +29,7 @@ var MemoryDataSource = function () {
     return callback(null, this.cache[id]);
   };
 
-  MemoryDataSource.prototype.getRecord = function getRecord(id, callback) {
+  MemoryDataSource.prototype.getRecord = function getRecord(id, form, callback) {
     return callback(null, this.cache[id]);
   };
 
@@ -76,7 +76,7 @@ var MemoryDataSource = function () {
     callback();
   };
 
-  MemoryDataSource.prototype.getRecordComplete = function getRecordComplete(id, object, callback) {
+  MemoryDataSource.prototype.getRecordComplete = function getRecordComplete(id, form, object, callback) {
     this.cache[id] = object;
     callback();
   };
@@ -92,12 +92,16 @@ var MemoryDataSource = function () {
   };
 
   MemoryDataSource.prototype.getPhotoComplete = function getPhotoComplete(id, object, callback) {
-    this.photos[id] = object;
+    if (object.processed) {
+      this.photos[id] = object;
+    }
     callback();
   };
 
   MemoryDataSource.prototype.getAudioComplete = function getAudioComplete(id, object, callback) {
-    this.audio[id] = object;
+    if (object.processed) {
+      this.audio[id] = object;
+    }
     callback();
   };
 
@@ -107,7 +111,10 @@ var MemoryDataSource = function () {
   };
 
   MemoryDataSource.prototype.getVideoComplete = function getVideoComplete(id, object, callback) {
-    this.videos[id] = object;
+    if (object.processed) {
+      this.videos[id] = object;
+    }
+
     callback();
   };
 

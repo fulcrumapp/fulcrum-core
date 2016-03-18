@@ -122,6 +122,20 @@ var MediaValue = function (_FormValue) {
     return item;
   };
 
+  MediaValue.prototype.removeItem = function removeItem(id) {
+    for (var index = 0; index < this._items.length; ++index) {
+      if (this._items[index].mediaID === id) {
+        var item = this._items[index];
+
+        this._items.splice(index, 1);
+
+        return item;
+      }
+    }
+
+    return null;
+  };
+
   _createClass(MediaValue, [{
     key: 'isEmpty',
     get: function get() {
@@ -209,6 +223,30 @@ var MediaValue = function (_FormValue) {
       }
 
       return items;
+    }
+  }, {
+    key: 'hasCaptions',
+    get: function get() {
+      for (var _iterator6 = this._items, _isArray6 = Array.isArray(_iterator6), _i6 = 0, _iterator6 = _isArray6 ? _iterator6 : _iterator6[Symbol.iterator]();;) {
+        var _ref6;
+
+        if (_isArray6) {
+          if (_i6 >= _iterator6.length) break;
+          _ref6 = _iterator6[_i6++];
+        } else {
+          _i6 = _iterator6.next();
+          if (_i6.done) break;
+          _ref6 = _i6.value;
+        }
+
+        var item = _ref6;
+
+        if (_textUtils2.default.isPresent(item.caption)) {
+          return true;
+        }
+      }
+
+      return false;
     }
   }]);
 
