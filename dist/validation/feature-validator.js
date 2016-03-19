@@ -65,7 +65,7 @@ var FeatureValidator = function () {
     var errors = [];
 
     if (record.isStatusFieldEnabled && record.status == null) {
-      errors.push(new _requiredFieldValidationError2.default(record.form.statusField.label));
+      errors.push(new _requiredFieldValidationError2.default(record.form.statusField));
     }
 
     if (record.form.isGeometryRequired) {

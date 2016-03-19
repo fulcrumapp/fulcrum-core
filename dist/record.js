@@ -50,6 +50,8 @@ var Record = function (_Feature) {
 
     var _this = _possibleConstructorReturn(this, _Feature.call(this));
 
+    _this._form = form;
+
     _this.updateFromAPIAttributes(attributes);
     return _this;
   }
@@ -59,6 +61,7 @@ var Record = function (_Feature) {
 
     // TODO(zhm) this is incomplete
     json.id = this.id || null;
+    json.version = this._version || null;
     json.client_created_at = _dateUtils2.default.formatTimestamp(this.createdAt);
     json.client_updated_at = _dateUtils2.default.formatTimestamp(this.updatedAt);
     json.form_values = this.formValues.toJSON();
@@ -68,18 +71,17 @@ var Record = function (_Feature) {
     json.assigned_to_id = this._assignedToID || null;
     json.form_id = this._form.id;
 
-    console.log('toJSON', json);
-
     return json;
   };
 
   Record.prototype.updateFromAPIAttributes = function updateFromAPIAttributes(attributes) {
     this._id = attributes.id || _uuid2.default.v4();
+    this._version = attributes.version || null;
     this._createdAt = _dateUtils2.default.parseTimestamp(attributes.client_created_at);
     this._updatedAt = _dateUtils2.default.parseTimestamp(attributes.client_updated_at);
-    this._formValuesJSON = attributes.form_values;
-    this._latitude = attributes.latitude;
-    this._longitude = attributes.longitude;
+    this._formValuesJSON = attributes.form_values || {};
+    this._latitude = attributes.latitude || null;
+    this._longitude = attributes.longitude || null;
   };
 
   Record.prototype.updateTimestamps = function updateTimestamps() {
@@ -121,6 +123,11 @@ var Record = function (_Feature) {
     key: 'form',
     get: function get() {
       return this._form;
+    }
+  }, {
+    key: 'version',
+    get: function get() {
+      return this._version;
     }
   }, {
     key: 'createdAt',
