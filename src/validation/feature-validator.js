@@ -27,7 +27,7 @@ export default class FeatureValidator {
     const errors = [];
 
     if (record.isStatusFieldEnabled && record.status == null) {
-      errors.push(new RequiredFieldValidationError(record.form.statusField.label));
+      errors.push(new RequiredFieldValidationError(record.form.statusField));
     }
 
     if (record.form.isGeometryRequired) {
