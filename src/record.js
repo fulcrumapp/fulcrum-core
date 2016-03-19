@@ -13,6 +13,8 @@ export default class Record extends Feature {
 
     super();
 
+    this._form = form;
+
     this.updateFromAPIAttributes(attributes);
   }
 
@@ -80,12 +82,12 @@ export default class Record extends Feature {
 
   updateFromAPIAttributes(attributes) {
     this._id = attributes.id || uuid.v4();
-    this._version = attributes.version;
+    this._version = attributes.version || null;
     this._createdAt = DateUtils.parseTimestamp(attributes.client_created_at);
     this._updatedAt = DateUtils.parseTimestamp(attributes.client_updated_at);
-    this._formValuesJSON = attributes.form_values;
-    this._latitude = attributes.latitude;
-    this._longitude = attributes.longitude;
+    this._formValuesJSON = attributes.form_values || {};
+    this._latitude = attributes.latitude || null;
+    this._longitude = attributes.longitude || null;
   }
 
   updateTimestamps() {
