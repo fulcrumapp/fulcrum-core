@@ -24,6 +24,10 @@ var _statusValue = require('./values/status-value');
 
 var _statusValue2 = _interopRequireDefault(_statusValue);
 
+var _uuid = require('uuid');
+
+var _uuid2 = _interopRequireDefault(_uuid);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _defaults(obj, defaults) { var keys = Object.getOwnPropertyNames(defaults); for (var i = 0; i < keys.length; i++) { var key = keys[i]; var value = Object.getOwnPropertyDescriptor(defaults, key); if (value && value.configurable && obj[key] === undefined) { Object.defineProperty(obj, key, value); } } return obj; }
@@ -46,13 +50,7 @@ var Record = function (_Feature) {
 
     var _this = _possibleConstructorReturn(this, _Feature.call(this));
 
-    _this._form = form;
-    _this._id = attributes.id;
-    _this._createdAt = _dateUtils2.default.parseTimestamp(attributes.client_created_at);
-    _this._updatedAt = _dateUtils2.default.parseTimestamp(attributes.client_updated_at);
-    _this._formValuesJSON = attributes.form_values;
-    _this._latitude = attributes.latitude;
-    _this._longitude = attributes.longitude;
+    _this.updateFromAPIAttributes(attributes);
     return _this;
   }
 
@@ -60,16 +58,28 @@ var Record = function (_Feature) {
     var json = {};
 
     // TODO(zhm) this is incomplete
-    json.id = this.id;
+    json.id = this.id || null;
     json.client_created_at = _dateUtils2.default.formatTimestamp(this.createdAt);
     json.client_updated_at = _dateUtils2.default.formatTimestamp(this.updatedAt);
     json.form_values = this.formValues.toJSON();
-    json.latitude = this._latitude;
-    json.longitude = this._longitude;
-    json.project_id = this._projectID;
-    json.assigned_to_id = this._assignedToID;
+    json.latitude = this._latitude || null;
+    json.longitude = this._longitude || null;
+    json.project_id = this._projectID || null;
+    json.assigned_to_id = this._assignedToID || null;
+    json.form_id = this._form.id;
+
+    console.log('toJSON', json);
 
     return json;
+  };
+
+  Record.prototype.updateFromAPIAttributes = function updateFromAPIAttributes(attributes) {
+    this._id = attributes.id || _uuid2.default.v4();
+    this._createdAt = _dateUtils2.default.parseTimestamp(attributes.client_created_at);
+    this._updatedAt = _dateUtils2.default.parseTimestamp(attributes.client_updated_at);
+    this._formValuesJSON = attributes.form_values;
+    this._latitude = attributes.latitude;
+    this._longitude = attributes.longitude;
   };
 
   Record.prototype.updateTimestamps = function updateTimestamps() {

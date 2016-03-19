@@ -38,6 +38,10 @@ var AddressValue = function (_FormValue) {
   // throw new Error('Not implemented');
 
   AddressValue.prototype.toJSON = function toJSON() {
+    if (this.isEmpty) {
+      return null;
+    }
+
     return this.address.toJSON();
   };
 

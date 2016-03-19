@@ -76,7 +76,7 @@ var DateUtils = function () {
     if (date == null) {
       return null;
     }
-    return date.getTime().toFixed(3);
+    return (date.getTime() / 1000).toFixed(3);
   };
 
   DateUtils.formatDate = function formatDate(date) {

@@ -32,6 +32,8 @@ var Form = function () {
   function Form(attributes) {
     _classCallCheck(this, Form);
 
+    this._id = attributes.id;
+
     // TODO(zhm) remove json attr
     this._json = attributes;
     // TODO(zhm) this might need to go away
@@ -99,6 +101,11 @@ var Form = function () {
   };
 
   _createClass(Form, [{
+    key: 'id',
+    get: function get() {
+      return this._id;
+    }
+  }, {
     key: 'statusField',
     get: function get() {
       if (!this._statusField) {

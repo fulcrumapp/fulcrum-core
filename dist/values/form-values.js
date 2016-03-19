@@ -159,6 +159,10 @@ var FormValues = function () {
   };
 
   FormValues.prototype.createValue = function createValue(element, rawValue) {
+    if (element == null) {
+      throw new Error('element cannot be null');
+    }
+
     return _formValueFactory2.default.create(element, rawValue != null ? rawValue : null);
   };
 

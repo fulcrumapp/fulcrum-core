@@ -187,6 +187,10 @@ var DataSource = function () {
     this.invoke(this.root, 'saveAudioTrack', [accessKey, file, progress], callback);
   };
 
+  DataSource.prototype.saveRecord = function saveRecord(record, callback) {
+    this.invoke(this.root, 'saveRecord', [record], callback);
+  };
+
   _createClass(DataSource, [{
     key: 'source',
     get: function get() {
