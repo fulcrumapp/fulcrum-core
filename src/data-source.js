@@ -176,4 +176,8 @@ export default class DataSource {
   saveAudioTrack(accessKey, file, progress, callback) {
     this.invoke(this.root, 'saveAudioTrack', [accessKey, file, progress], callback);
   }
+
+  saveRecord(record, callback) {
+    this.invoke(this.root, 'saveRecord', [record], callback);
+  }
 }

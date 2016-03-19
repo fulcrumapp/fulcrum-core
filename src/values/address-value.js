@@ -37,6 +37,10 @@ export default class AddressValue extends FormValue {
   }
 
   toJSON() {
+    if (this.isEmpty) {
+      return null;
+    }
+
     return this.address.toJSON();
   }
 

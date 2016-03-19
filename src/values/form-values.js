@@ -104,6 +104,10 @@ export default class FormValues {
   }
 
   createValue(element, rawValue) {
+    if (element == null) {
+      throw new Error('element cannot be null');
+    }
+
     return FormValueFactory.create(element, rawValue != null ? rawValue : null);
   }
 

@@ -3,6 +3,7 @@ import FormValues from './values/form-values';
 import TextUtils from './utils/text-utils';
 import DateUtils from './utils/date-utils';
 import StatusValue from './values/status-value';
+import uuid from 'uuid';
 
 export default class Record extends Feature {
   constructor(attributes, form) {
@@ -12,13 +13,7 @@ export default class Record extends Feature {
 
     super();
 
-    this._form = form;
-    this._id = attributes.id;
-    this._createdAt = DateUtils.parseTimestamp(attributes.client_created_at);
-    this._updatedAt = DateUtils.parseTimestamp(attributes.client_updated_at);
-    this._formValuesJSON = attributes.form_values;
-    this._latitude = attributes.latitude;
-    this._longitude = attributes.longitude;
+    this.updateFromAPIAttributes(attributes);
   }
 
   get id() {
@@ -31,6 +26,10 @@ export default class Record extends Feature {
 
   get form() {
     return this._form;
+  }
+
+  get version() {
+    return this._version;
   }
 
   get createdAt() {
@@ -65,16 +64,28 @@ export default class Record extends Feature {
     const json = {};
 
     // TODO(zhm) this is incomplete
-    json.id = this.id;
+    json.id = this.id || null;
+    json.version = this._version || null;
     json.client_created_at = DateUtils.formatTimestamp(this.createdAt);
     json.client_updated_at = DateUtils.formatTimestamp(this.updatedAt);
     json.form_values = this.formValues.toJSON();
-    json.latitude = this._latitude;
-    json.longitude = this._longitude;
-    json.project_id = this._projectID;
-    json.assigned_to_id = this._assignedToID;
+    json.latitude = this._latitude || null;
+    json.longitude = this._longitude || null;
+    json.project_id = this._projectID || null;
+    json.assigned_to_id = this._assignedToID || null;
+    json.form_id = this._form.id;
 
     return json;
+  }
+
+  updateFromAPIAttributes(attributes) {
+    this._id = attributes.id || uuid.v4();
+    this._version = attributes.version;
+    this._createdAt = DateUtils.parseTimestamp(attributes.client_created_at);
+    this._updatedAt = DateUtils.parseTimestamp(attributes.client_updated_at);
+    this._formValuesJSON = attributes.form_values;
+    this._latitude = attributes.latitude;
+    this._longitude = attributes.longitude;
   }
 
   updateTimestamps() {

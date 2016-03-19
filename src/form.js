@@ -6,6 +6,8 @@ import async from 'async';
 
 export default class Form {
   constructor(attributes) {
+    this._id = attributes.id;
+
     // TODO(zhm) remove json attr
     this._json = attributes;
     // TODO(zhm) this might need to go away
@@ -18,6 +20,10 @@ export default class Form {
 
     this._name = attributes.name;
     this._geometryRequired = !!attributes.geometry_required;
+  }
+
+  get id() {
+    return this._id;
   }
 
   load(dataSource, callback) {
