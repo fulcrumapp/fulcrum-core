@@ -39,6 +39,8 @@
 
 */
 
+import async from 'async';
+
 function noop(...params) {
   params[params.length - 1]();
 }
@@ -103,6 +105,50 @@ export default class DataSource {
     this.sources.push(source);
 
     return this;
+  }
+
+  prepare(formID, callback) {
+    const result = {};
+
+    const tasks = {
+      form: (callback) => {
+        this.getForm(formID, (err, form) => {
+          if (err) {
+            callback(err);
+            return;
+          }
+
+          result.form = form;
+          result.form.load(this, callback);
+        });
+      },
+
+      users: (callback) => {
+        this.getUsers(null, (err, users) => {
+          if (err) {
+            callback(err);
+            return;
+          }
+
+          result.users = users;
+          callback(err);
+        });
+      },
+
+      projects: (callback) => {
+        this.getProjects(null, (err, projects) => {
+          if (err) {
+            callback(err);
+            return;
+          }
+
+          result.projects = projects;
+          callback(err);
+        });
+      }
+    };
+
+    async.parallel(tasks, (err) => callback(err, result));
   }
 
   get root() {

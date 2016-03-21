@@ -2,50 +2,54 @@
 
 exports.__esModule = true;
 
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }(); /*
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       The DataSource class is a composable series of layers that can be used to
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       chain data providers together to form more complex schemes.
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       For example, we can setup several layers of caching and data providers:
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         * A - First look in an in-memory hash (e.g. lives until a page refresh)
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         * B - Then look in indexedDB (lives beyond a page refresh, but requires pulling from somewhere else)
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         * C - Then finally actually hit the API to get it
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       Given this configuration, when requesting data when it's not present at all, the request will travel
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       all the way to the end and then each layer is given a chance to process it back on the way up. Passing
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       the object back up is critical to being able to store the result at each level.
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       A.then(B).then(C);
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        get(callback)    -> A -> B -> C -
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        callback(object) <- A <- B <- C -
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       So in this configuration, when asking for a form object, the memory data source would miss and delegate
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       to the indexedDB data source, which would also miss and the API data source would end up providing the
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       record from the live API. At that point the object is passed back to the indexedDB where it can be stored
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       for the next time. After indexedDB stores it, it's passed to the memory cache so it can also store it. And
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       finally the actual original callback is invoked with the object. The next time the object is fetched, it will
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       be returned from the memory store. Unless a full page refresh happens, and indexedDB will return it first.
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       After the first fetch:
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        get(callback)    -> A    B    C
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        callback(object) <- A    B    C
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       After a full page refresh
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        get(callback)    -> A -> B    C
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        callback(object) <- A <- B    C
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     */
+
+var _async = require('async');
+
+var _async2 = _interopRequireDefault(_async);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-/*
-
-  The DataSource class is a composable series of layers that can be used to
-  chain data providers together to form more complex schemes.
-
-  For example, we can setup several layers of caching and data providers:
-    * A - First look in an in-memory hash (e.g. lives until a page refresh)
-    * B - Then look in indexedDB (lives beyond a page refresh, but requires pulling from somewhere else)
-    * C - Then finally actually hit the API to get it
-
-  Given this configuration, when requesting data when it's not present at all, the request will travel
-  all the way to the end and then each layer is given a chance to process it back on the way up. Passing
-  the object back up is critical to being able to store the result at each level.
-
-  A.then(B).then(C);
-
-   get(callback)    -> A -> B -> C -
-                                   |
-   callback(object) <- A <- B <- C -
-
-  So in this configuration, when asking for a form object, the memory data source would miss and delegate
-  to the indexedDB data source, which would also miss and the API data source would end up providing the
-  record from the live API. At that point the object is passed back to the indexedDB where it can be stored
-  for the next time. After indexedDB stores it, it's passed to the memory cache so it can also store it. And
-  finally the actual original callback is invoked with the object. The next time the object is fetched, it will
-  be returned from the memory store. Unless a full page refresh happens, and indexedDB will return it first.
-
-  After the first fetch:
-
-   get(callback)    -> A    B    C
-                       |
-   callback(object) <- A    B    C
-
-  After a full page refresh
-
-   get(callback)    -> A -> B    C
-                            |
-   callback(object) <- A <- B    C
-
-*/
 
 function noop() {
   (arguments.length <= arguments.length - 1 + 0 ? undefined : arguments[arguments.length - 1 + 0])();
@@ -117,6 +121,54 @@ var DataSource = function () {
     this.sources.push(source);
 
     return this;
+  };
+
+  DataSource.prototype.prepare = function prepare(formID, callback) {
+    var _this3 = this;
+
+    var result = {};
+
+    var tasks = {
+      form: function form(callback) {
+        _this3.getForm(formID, function (err, form) {
+          if (err) {
+            callback(err);
+            return;
+          }
+
+          result.form = form;
+          result.form.load(_this3, callback);
+        });
+      },
+
+      users: function users(callback) {
+        _this3.getUsers(null, function (err, users) {
+          if (err) {
+            callback(err);
+            return;
+          }
+
+          result.users = users;
+          callback(err);
+        });
+      },
+
+      projects: function projects(callback) {
+        _this3.getProjects(null, function (err, projects) {
+          if (err) {
+            callback(err);
+            return;
+          }
+
+          result.projects = projects;
+          callback(err);
+        });
+      }
+    };
+
+    _async2.default.parallel(tasks, function (err) {
+      return callback(err, result);
+    });
   };
 
   DataSource.prototype.getChoiceList = function getChoiceList(id, callback) {
