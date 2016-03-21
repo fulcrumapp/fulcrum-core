@@ -64,7 +64,15 @@ var DateUtils = function () {
     return h + ':' + m + ':' + s;
   };
 
-  DateUtils.parseTimestamp = function parseTimestamp(timestampString) {
+  DateUtils.parseISOTimestamp = function parseISOTimestamp(timestampString) {
+    if (!timestampString) {
+      return null;
+    }
+
+    return new Date(timestampString);
+  };
+
+  DateUtils.parseEpochTimestamp = function parseEpochTimestamp(timestampString) {
     if (!timestampString) {
       return null;
     }
@@ -72,8 +80,15 @@ var DateUtils = function () {
     return new Date(parseFloat(timestampString) * 1000);
   };
 
-  DateUtils.formatTimestamp = function formatTimestamp(date) {
-    if (date == null) {
+  DateUtils.formatISOTimestamp = function formatISOTimestamp(date) {
+    if (date == null || isNaN(date.getTime())) {
+      return null;
+    }
+    return date.toISOString();
+  };
+
+  DateUtils.formatEpochTimestamp = function formatEpochTimestamp(date) {
+    if (date == null || isNaN(date.getTime())) {
       return null;
     }
     return (date.getTime() / 1000).toFixed(3);

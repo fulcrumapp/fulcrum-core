@@ -62,8 +62,8 @@ var Record = function (_Feature) {
     // TODO(zhm) this is incomplete
     json.id = this.id || null;
     json.version = this._version || null;
-    json.client_created_at = _dateUtils2.default.formatTimestamp(this.createdAt);
-    json.client_updated_at = _dateUtils2.default.formatTimestamp(this.updatedAt);
+    json.client_created_at = _dateUtils2.default.formatISOTimestamp(this.clientCreatedAt);
+    json.client_updated_at = _dateUtils2.default.formatISOTimestamp(this.clientUpdatedAt);
     json.form_values = this.formValues.toJSON();
     json.latitude = this._latitude || null;
     json.longitude = this._longitude || null;
@@ -77,8 +77,10 @@ var Record = function (_Feature) {
   Record.prototype.updateFromAPIAttributes = function updateFromAPIAttributes(attributes) {
     this._id = attributes.id || _uuid2.default.v4();
     this._version = attributes.version || null;
-    this._createdAt = _dateUtils2.default.parseTimestamp(attributes.client_created_at);
-    this._updatedAt = _dateUtils2.default.parseTimestamp(attributes.client_updated_at);
+    this._createdAt = _dateUtils2.default.parseISOTimestamp(attributes.created_at);
+    this._updatedAt = _dateUtils2.default.parseISOTimestamp(attributes.updated_at);
+    this._clientCreatedAt = _dateUtils2.default.parseISOTimestamp(attributes.client_created_at);
+    this._clientUpdatedAt = _dateUtils2.default.parseISOTimestamp(attributes.client_updated_at);
     this._formValuesJSON = attributes.form_values || {};
     this._latitude = attributes.latitude || null;
     this._longitude = attributes.longitude || null;
@@ -144,6 +146,22 @@ var Record = function (_Feature) {
     },
     set: function set(updatedAt) {
       this._updatedAt = updatedAt;
+    }
+  }, {
+    key: 'clientCreatedAt',
+    get: function get() {
+      return this._clientCreatedAt;
+    },
+    set: function set(createdAt) {
+      this._clientCreatedAt = createdAt;
+    }
+  }, {
+    key: 'clientUpdatedAt',
+    get: function get() {
+      return this._clientUpdatedAt;
+    },
+    set: function set(updatedAt) {
+      this._clientUpdatedAt = updatedAt;
     }
   }, {
     key: 'formValues',

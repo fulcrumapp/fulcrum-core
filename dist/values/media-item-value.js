@@ -5,9 +5,10 @@ exports.__esModule = true;
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 var MediaItemValue = function () {
-  function MediaItemValue(attributes) {
+  function MediaItemValue(mediaValue, attributes) {
     _classCallCheck(this, MediaItemValue);
 
+    this.mediaValue = mediaValue;
     this.caption = attributes.caption;
     this.mediaID = attributes[this.mediaKey];
   }

@@ -24,6 +24,18 @@ var _condition = require('../elements/condition');
 
 var _condition2 = _interopRequireDefault(_condition);
 
+var _mediaValue = require('./media-value');
+
+var _mediaValue2 = _interopRequireDefault(_mediaValue);
+
+var _signatureValue = require('./signature-value');
+
+var _signatureValue2 = _interopRequireDefault(_signatureValue);
+
+var _repeatableValue = require('./repeatable-value');
+
+var _repeatableValue2 = _interopRequireDefault(_repeatableValue);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -351,6 +363,51 @@ var FormValues = function () {
       }
 
       return searchValues.join(SearchValueSeparator);
+    }
+  }, {
+    key: 'mediaValues',
+    get: function get() {
+      var values = [];
+
+      for (var _iterator8 = this.all, _isArray8 = Array.isArray(_iterator8), _i8 = 0, _iterator8 = _isArray8 ? _iterator8 : _iterator8[Symbol.iterator]();;) {
+        var _ref8;
+
+        if (_isArray8) {
+          if (_i8 >= _iterator8.length) break;
+          _ref8 = _iterator8[_i8++];
+        } else {
+          _i8 = _iterator8.next();
+          if (_i8.done) break;
+          _ref8 = _i8.value;
+        }
+
+        var formValue = _ref8;
+
+        if (formValue instanceof _mediaValue2.default) {
+          values.push.apply(values, formValue.items);
+        } else if (formValue instanceof _signatureValue2.default) {
+          values.push(formValue);
+        } else if (formValue instanceof _repeatableValue2.default) {
+          for (var _iterator9 = formValue.items, _isArray9 = Array.isArray(_iterator9), _i9 = 0, _iterator9 = _isArray9 ? _iterator9 : _iterator9[Symbol.iterator]();;) {
+            var _ref9;
+
+            if (_isArray9) {
+              if (_i9 >= _iterator9.length) break;
+              _ref9 = _iterator9[_i9++];
+            } else {
+              _i9 = _iterator9.next();
+              if (_i9.done) break;
+              _ref9 = _i9.value;
+            }
+
+            var item = _ref9;
+
+            values.push.apply(values, item.formValues.mediaValues);
+          }
+        }
+      }
+
+      return values;
     }
   }]);
 

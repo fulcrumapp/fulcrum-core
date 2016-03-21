@@ -42,8 +42,8 @@ var RepeatableItemValue = function (_Feature) {
 
     _this._element = element;
     _this._id = item.id;
-    _this._createdAt = _dateUtils2.default.parseTimestamp(item.created_at);
-    _this._updatedAt = _dateUtils2.default.parseTimestamp(item.updated_at);
+    _this._createdAt = _dateUtils2.default.parseEpochTimestamp(item.created_at);
+    _this._updatedAt = _dateUtils2.default.parseEpochTimestamp(item.updated_at);
     _this._formValuesJSON = item.form_values;
 
     var geometry = item.geometry;
@@ -59,8 +59,8 @@ var RepeatableItemValue = function (_Feature) {
     var json = {};
 
     json.id = this.identifier;
-    json.created_at = _dateUtils2.default.formatTimestamp(this.createdAt);
-    json.updated_at = _dateUtils2.default.formatTimestamp(this.updatedAt);
+    json.created_at = _dateUtils2.default.formatEpochTimestamp(this.createdAt);
+    json.updated_at = _dateUtils2.default.formatEpochTimestamp(this.updatedAt);
     json.form_values = this.formValues.toJSON();
     json.geometry = this.geometryAsGeoJSON();
 

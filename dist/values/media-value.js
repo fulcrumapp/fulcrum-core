@@ -55,7 +55,7 @@ var MediaValue = function (_FormValue) {
 
         var item = _ref;
 
-        _this._items.push(new _this.ItemClass(item));
+        _this._items.push(new _this.ItemClass(_this, item));
       }
     }
     return _this;
@@ -113,7 +113,7 @@ var MediaValue = function (_FormValue) {
   };
 
   MediaValue.prototype.addItem = function addItem(id, caption) {
-    var item = new this.ItemClass({ caption: caption });
+    var item = new this.ItemClass(this, { caption: caption });
 
     item.mediaID = id;
 
@@ -247,6 +247,14 @@ var MediaValue = function (_FormValue) {
       }
 
       return false;
+    }
+
+    // return a copy until it's determined that a mutable API is necessary
+
+  }, {
+    key: 'items',
+    get: function get() {
+      return this._items.slice();
     }
   }]);
 
