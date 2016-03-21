@@ -25,9 +25,17 @@ export default class AddressValue extends FormValue {
   }
 
   get columnValue() {
-    return null;
-    // TODO(zhm) implement
-    // throw new Error('Not implemented');
+    const value = {};
+
+    const address = this.address.toJSON();
+
+    for (const key of Object.keys(address)) {
+      value['f' + this.element.key + '_' + key] = address[key];
+    }
+
+    value['f' + this.element.key] = this.searchableValue;
+
+    return value;
   }
 
   get multipleValues() {
