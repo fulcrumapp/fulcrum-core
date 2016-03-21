@@ -50,6 +50,22 @@ export default class Record extends Feature {
     this._updatedAt = updatedAt;
   }
 
+  get clientCreatedAt() {
+    return this._clientCreatedAt;
+  }
+
+  set clientCreatedAt(createdAt) {
+    this._clientCreatedAt = createdAt;
+  }
+
+  get clientUpdatedAt() {
+    return this._clientUpdatedAt;
+  }
+
+  set clientUpdatedAt(updatedAt) {
+    this._clientUpdatedAt = updatedAt;
+  }
+
   get formValues() {
     if (this._formValues == null) {
       this._formValues = new FormValues(this._form, this._formValuesJSON);
@@ -68,8 +84,8 @@ export default class Record extends Feature {
     // TODO(zhm) this is incomplete
     json.id = this.id || null;
     json.version = this._version || null;
-    json.client_created_at = DateUtils.formatTimestamp(this.createdAt);
-    json.client_updated_at = DateUtils.formatTimestamp(this.updatedAt);
+    json.client_created_at = DateUtils.formatISOTimestamp(this.clientCreatedAt);
+    json.client_updated_at = DateUtils.formatISOTimestamp(this.clientUpdatedAt);
     json.form_values = this.formValues.toJSON();
     json.latitude = this._latitude || null;
     json.longitude = this._longitude || null;
@@ -83,8 +99,10 @@ export default class Record extends Feature {
   updateFromAPIAttributes(attributes) {
     this._id = attributes.id || uuid.v4();
     this._version = attributes.version || null;
-    this._createdAt = DateUtils.parseTimestamp(attributes.client_created_at);
-    this._updatedAt = DateUtils.parseTimestamp(attributes.client_updated_at);
+    this._createdAt = DateUtils.parseISOTimestamp(attributes.created_at);
+    this._updatedAt = DateUtils.parseISOTimestamp(attributes.updated_at);
+    this._clientCreatedAt = DateUtils.parseISOTimestamp(attributes.client_created_at);
+    this._clientUpdatedAt = DateUtils.parseISOTimestamp(attributes.client_updated_at);
     this._formValuesJSON = attributes.form_values || {};
     this._latitude = attributes.latitude || null;
     this._longitude = attributes.longitude || null;

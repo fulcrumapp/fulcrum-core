@@ -47,7 +47,15 @@ export default class DateUtils {
     return h + ':' + m + ':' + s;
   }
 
-  static parseTimestamp(timestampString) {
+  static parseISOTimestamp(timestampString) {
+    if (!timestampString) {
+      return null;
+    }
+
+    return new Date(timestampString);
+  }
+
+  static parseEpochTimestamp(timestampString) {
     if (!timestampString) {
       return null;
     }
@@ -55,8 +63,15 @@ export default class DateUtils {
     return new Date(parseFloat(timestampString) * 1000);
   }
 
-  static formatTimestamp(date) {
-    if (date == null) {
+  static formatISOTimestamp(date) {
+    if (date == null || isNaN(date.getTime())) {
+      return null;
+    }
+    return date.toISOString();
+  }
+
+  static formatEpochTimestamp(date) {
+    if (date == null || isNaN(date.getTime())) {
       return null;
     }
     return (date.getTime() / 1000).toFixed(3);
