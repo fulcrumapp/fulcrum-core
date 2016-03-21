@@ -88,9 +88,30 @@ var AddressValue = function (_FormValue) {
   }, {
     key: 'columnValue',
     get: function get() {
-      return null;
-      // TODO(zhm) implement
-      // throw new Error('Not implemented');
+      var value = {};
+
+      var address = this.address.toJSON();
+
+      for (var _iterator = Object.keys(address), _isArray = Array.isArray(_iterator), _i = 0, _iterator = _isArray ? _iterator : _iterator[Symbol.iterator]();;) {
+        var _ref;
+
+        if (_isArray) {
+          if (_i >= _iterator.length) break;
+          _ref = _iterator[_i++];
+        } else {
+          _i = _iterator.next();
+          if (_i.done) break;
+          _ref = _i.value;
+        }
+
+        var key = _ref;
+
+        value['f' + this.element.key + '_' + key] = address[key];
+      }
+
+      value['f' + this.element.key] = this.searchableValue;
+
+      return value;
     }
   }, {
     key: 'multipleValues',
