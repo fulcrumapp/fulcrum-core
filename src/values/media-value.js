@@ -11,7 +11,7 @@ export default class MediaValue extends FormValue {
 
     if (items != null) {
       for (let item of items) {
-        this._items.push(new this.ItemClass(item));
+        this._items.push(new this.ItemClass(this, item));
       }
     }
   }
@@ -99,7 +99,7 @@ export default class MediaValue extends FormValue {
   }
 
   addItem(id, caption) {
-    const item = new this.ItemClass({ caption: caption });
+    const item = new this.ItemClass(this, { caption: caption });
 
     item.mediaID = id;
 
@@ -130,5 +130,10 @@ export default class MediaValue extends FormValue {
     }
 
     return false;
+  }
+
+  // return a copy until it's determined that a mutable API is necessary
+  get items() {
+    return this._items.slice();
   }
 }

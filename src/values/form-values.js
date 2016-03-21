@@ -3,6 +3,9 @@ import FormValue from './form-value';
 import TextualElement from '../elements/textual-element';
 import TextUtils from '../utils/text-utils';
 import Condition from '../elements/condition';
+import MediaValue from './media-value';
+import SignatureValue from './signature-value';
+import RepeatableValue from './repeatable-value';
 
 const SearchValueSeparator = ' ';
 
@@ -235,5 +238,23 @@ export default class FormValues {
 
       this.set(element.key, blankValue);
     }
+  }
+
+  get mediaValues() {
+    const values = [];
+
+    for (const formValue of this.all) {
+      if (formValue instanceof MediaValue) {
+        values.push.apply(values, formValue.items);
+      } else if (formValue instanceof SignatureValue) {
+        values.push(formValue);
+      } else if (formValue instanceof RepeatableValue) {
+        for (const item of formValue.items) {
+          values.push.apply(values, item.formValues.mediaValues);
+        }
+      }
+    }
+
+    return values;
   }
 }

@@ -1,5 +1,6 @@
 export default class MediaItemValue {
-  constructor(attributes) {
+  constructor(mediaValue, attributes) {
+    this.mediaValue = mediaValue;
     this.caption = attributes.caption;
     this.mediaID = attributes[this.mediaKey];
   }
