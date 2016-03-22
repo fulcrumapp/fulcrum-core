@@ -107,9 +107,9 @@ export default class RepeatableValue extends FormValue {
     this.mapItems(callback);
   }
 
-  itemIndex(item) {
+  itemIndex(id) {
     for (let index = 0; index < this._items.length; ++index) {
-      if (item.id === this._items[index].id) {
+      if (id === this._items[index].id) {
         return index;
       }
     }
@@ -118,13 +118,27 @@ export default class RepeatableValue extends FormValue {
   }
 
   insertItem(item) {
-    const index = this.itemIndex(item);
+    const index = this.itemIndex(item.id);
 
     if (index > -1) {
       this._items[index] = item;
     } else {
       this._items.push(item);
     }
+  }
+
+  removeItem(id) {
+    const index = this.itemIndex(id);
+
+    if (index > -1) {
+      const item = this._items[index];
+
+      this._items.splice(index, 1);
+
+      return item;
+    }
+
+    return null;
   }
 
   createNewItem() {
