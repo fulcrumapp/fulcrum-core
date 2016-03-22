@@ -121,9 +121,9 @@ var RepeatableValue = function (_FormValue) {
     this.mapItems(callback);
   };
 
-  RepeatableValue.prototype.itemIndex = function itemIndex(item) {
+  RepeatableValue.prototype.itemIndex = function itemIndex(id) {
     for (var index = 0; index < this._items.length; ++index) {
-      if (item.id === this._items[index].id) {
+      if (id === this._items[index].id) {
         return index;
       }
     }
@@ -132,13 +132,27 @@ var RepeatableValue = function (_FormValue) {
   };
 
   RepeatableValue.prototype.insertItem = function insertItem(item) {
-    var index = this.itemIndex(item);
+    var index = this.itemIndex(item.id);
 
     if (index > -1) {
       this._items[index] = item;
     } else {
       this._items.push(item);
     }
+  };
+
+  RepeatableValue.prototype.removeItem = function removeItem(id) {
+    var index = this.itemIndex(id);
+
+    if (index > -1) {
+      var item = this._items[index];
+
+      this._items.splice(index, 1);
+
+      return item;
+    }
+
+    return null;
   };
 
   RepeatableValue.prototype.createNewItem = function createNewItem() {
