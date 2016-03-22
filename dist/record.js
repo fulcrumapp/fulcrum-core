@@ -59,9 +59,12 @@ var Record = function (_Feature) {
   Record.prototype.toJSON = function toJSON() {
     var json = {};
 
-    // TODO(zhm) this is incomplete
+    json.form_id = this._form.id;
+
     json.id = this.id || null;
     json.version = this._version || null;
+    json.created_at = _dateUtils2.default.formatISOTimestamp(this.createdAt);
+    json.updated_at = _dateUtils2.default.formatISOTimestamp(this.updatedAt);
     json.client_created_at = _dateUtils2.default.formatISOTimestamp(this.clientCreatedAt);
     json.client_updated_at = _dateUtils2.default.formatISOTimestamp(this.clientUpdatedAt);
     json.form_values = this.formValues.toJSON();
@@ -69,7 +72,12 @@ var Record = function (_Feature) {
     json.longitude = this._longitude || null;
     json.project_id = this._projectID || null;
     json.assigned_to_id = this._assignedToID || null;
-    json.form_id = this._form.id;
+    json.status = this._status || null;
+
+    json.created_by_id = this._createdByID || null;
+    json.created_by = this._createdBy || null;
+    json.updated_by_id = this._updatedByID || null;
+    json.updated_by = this._updatedBy || null;
 
     return json;
   };
@@ -84,6 +92,14 @@ var Record = function (_Feature) {
     this._formValuesJSON = attributes.form_values || {};
     this._latitude = attributes.latitude || null;
     this._longitude = attributes.longitude || null;
+    this._projectID = attributes.project_id || null;
+    this._assignedToID = attributes.assigned_to_id || null;
+    this._status = attributes.status || null;
+
+    this._createdByID = attributes.created_by_id || null;
+    this._createdBy = attributes.created_by || null;
+    this._updatedByID = attributes.updated_by_id || null;
+    this._updatedBy = attributes.updated_by || null;
   };
 
   Record.prototype.updateTimestamps = function updateTimestamps() {
