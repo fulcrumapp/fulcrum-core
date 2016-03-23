@@ -26,7 +26,7 @@ var RepeatableElement = function (_ContainerElement) {
 
     var _this = _possibleConstructorReturn(this, _ContainerElement.call(this, parent, attributes));
 
-    _this.titleFieldKeys = attributes.title_field_keys;
+    _this.titleFieldKeys = attributes.title_field_keys || [attributes.title_field_key];
 
     _this._geometryTypes = attributes.geometry_types;
 
