@@ -3,13 +3,17 @@ export default class Classification {
     this.parent = parent;
     this.label = attributes.label;
     this.value = attributes.value || attributes.label;
-    this.children = [];
+    this._items = [];
 
     if (attributes.child_classifications) {
       for (let child of attributes.child_classifications) {
-        this.children.push(new Classification(this, child));
+        this._items.push(new Classification(this, child));
       }
     }
+  }
+
+  get items() {
+    return this._items.slice();
   }
 
   get exploded() {

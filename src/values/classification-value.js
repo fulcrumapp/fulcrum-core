@@ -136,6 +136,14 @@ export default class ClassificationValue extends FormValue {
     return this._otherValues[0];
   }
 
+  set otherValue(value) {
+    if (value && value.length) {
+      this._otherValues = [ value ];
+    } else {
+      this._otherValues = [];
+    }
+  }
+
   get selectedClassification() {
     let result = null;
 
@@ -149,7 +157,7 @@ export default class ClassificationValue extends FormValue {
       for (let classification of currentClassifications) {
         if (classification.value === classificationValue) {
           result = classification;
-          currentClassifications = classification.children;
+          currentClassifications = classification.items;
           break;
         }
       }
@@ -160,7 +168,15 @@ export default class ClassificationValue extends FormValue {
 
   setSelectedClassification(classification, otherValue) {
     if (classification instanceof Classification) {
-      this._choiceValues = classification.toJSON();
+      this.setSelectedClassificationJSON(classification.toJSON(), otherValue);
+    } else {
+      this.setSelectedClassificationJSON(null, otherValue);
+    }
+  }
+
+  setSelectedClassificationJSON(classificationAsJSON, otherValue) {
+    if (classificationAsJSON && classificationAsJSON.length) {
+      this._choiceValues = classificationAsJSON;
     } else {
       this._choiceValues = [];
     }

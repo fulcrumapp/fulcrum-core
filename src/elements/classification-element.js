@@ -5,7 +5,7 @@ export default class ClassificationElement extends Element {
   constructor(parent, attributes) {
     super(parent, attributes);
 
-    this.allowOther = !!attributes.allowOther;
+    this.allowOther = !!attributes.allow_other;
     this.choiceFilter = null;
 
     this._overrideClassificationItems = null;
