@@ -54,10 +54,6 @@ var Address = function () {
     this.country = null;
   };
 
-  Address.prototype.isEmpty = function isEmpty() {
-    return !(_textUtils2.default.isPresent(this.streetNumber) || _textUtils2.default.isPresent(this.streetName) || _textUtils2.default.isPresent(this.suite) || _textUtils2.default.isPresent(this.city) || _textUtils2.default.isPresent(this.county) || _textUtils2.default.isPresent(this.state) || _textUtils2.default.isPresent(this.postalCode) || _textUtils2.default.isPresent(this.country));
-  };
-
   Address.prototype.line = function line() {
     var result = [];
 
@@ -88,6 +84,11 @@ var Address = function () {
   };
 
   _createClass(Address, [{
+    key: 'isEmpty',
+    get: function get() {
+      return !(_textUtils2.default.isPresent(this.streetNumber) || _textUtils2.default.isPresent(this.streetName) || _textUtils2.default.isPresent(this.suite) || _textUtils2.default.isPresent(this.city) || _textUtils2.default.isPresent(this.county) || _textUtils2.default.isPresent(this.state) || _textUtils2.default.isPresent(this.postalCode) || _textUtils2.default.isPresent(this.country));
+    }
+  }, {
     key: 'lines',
     get: function get() {
       var result = [];

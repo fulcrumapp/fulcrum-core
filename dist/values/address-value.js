@@ -68,7 +68,7 @@ var AddressValue = function (_FormValue) {
   _createClass(AddressValue, [{
     key: 'isEmpty',
     get: function get() {
-      return this.address.isEmpty();
+      return this.address.isEmpty;
     }
   }, {
     key: 'displayValue',
