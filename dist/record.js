@@ -79,6 +79,26 @@ var Record = function (_Feature) {
     json.updated_by_id = this._updatedByID || null;
     json.updated_by = this._updatedBy || null;
 
+    if (this._horizontalAccuracy != null) {
+      json.horizontal_accuracy = this._horizontalAccuracy;
+    }
+
+    if (this._verticalAccuracy != null) {
+      json.vertical_accuracy = this._verticalAccuracy;
+    }
+
+    if (this._altitude != null) {
+      json.altitude = this._altitude;
+    }
+
+    if (this._speed != null) {
+      json.speed = this._speed;
+    }
+
+    if (this._course != null) {
+      json.course = this._course;
+    }
+
     return json;
   };
 
@@ -100,6 +120,12 @@ var Record = function (_Feature) {
     this._createdBy = attributes.created_by || null;
     this._updatedByID = attributes.updated_by_id || null;
     this._updatedBy = attributes.updated_by || null;
+
+    this._horizontalAccuracy = attributes.horizontal_accuracy || null;
+    this._verticalAccuracy = attributes.vertical_accuracy || null;
+    this._altitude = attributes.altitude || null;
+    this._speed = attributes.speed || null;
+    this._course = attributes.course || null;
   };
 
   Record.prototype.updateTimestamps = function updateTimestamps() {
@@ -306,6 +332,18 @@ var Record = function (_Feature) {
     },
     set: function set(accuracy) {
       this._verticalAccuracy = accuracy;
+    }
+  }, {
+    key: 'geometryAsGeoJSON',
+    get: function get() {
+      if (!this.hasCoordinate) {
+        return null;
+      }
+
+      return {
+        type: 'Point',
+        coordinates: [this.longitude, this.latitude]
+      };
     }
   }]);
 

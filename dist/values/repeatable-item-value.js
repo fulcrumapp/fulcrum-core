@@ -62,7 +62,7 @@ var RepeatableItemValue = function (_Feature) {
     json.created_at = _dateUtils2.default.formatEpochTimestamp(this.createdAt);
     json.updated_at = _dateUtils2.default.formatEpochTimestamp(this.updatedAt);
     json.form_values = this.formValues.toJSON();
-    json.geometry = this.geometryAsGeoJSON();
+    json.geometry = this.geometryAsGeoJSON;
 
     return json;
   };
@@ -75,17 +75,6 @@ var RepeatableItemValue = function (_Feature) {
     }
 
     this._updatedAt = now;
-  };
-
-  RepeatableItemValue.prototype.geometryAsGeoJSON = function geometryAsGeoJSON() {
-    if (!this.hasCoordinate) {
-      return null;
-    }
-
-    return {
-      type: 'Point',
-      coordinates: [this._longitude, this._latitude]
-    };
   };
 
   _createClass(RepeatableItemValue, [{
@@ -159,6 +148,18 @@ var RepeatableItemValue = function (_Feature) {
       }
 
       return titles.join(', ');
+    }
+  }, {
+    key: 'geometryAsGeoJSON',
+    get: function get() {
+      if (!this.hasCoordinate) {
+        return null;
+      }
+
+      return {
+        type: 'Point',
+        coordinates: [this._longitude, this._latitude]
+      };
     }
   }, {
     key: 'latitude',
