@@ -58,7 +58,7 @@ export default class RepeatableItemValue extends Feature {
     json.created_at = DateUtils.formatEpochTimestamp(this.createdAt);
     json.updated_at = DateUtils.formatEpochTimestamp(this.updatedAt);
     json.form_values = this.formValues.toJSON();
-    json.geometry = this.geometryAsGeoJSON();
+    json.geometry = this.geometryAsGeoJSON;
 
     return json;
   }
@@ -96,7 +96,7 @@ export default class RepeatableItemValue extends Feature {
     return titles.join(', ');
   }
 
-  geometryAsGeoJSON() {
+  get geometryAsGeoJSON() {
     if (!this.hasCoordinate) {
       return null;
     }
