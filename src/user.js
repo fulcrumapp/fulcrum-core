@@ -6,6 +6,7 @@ export default class User {
     this._firstName = attributes.first_name;
     this._lastName = attributes.last_name;
     this._email = attributes.email;
+    this._fullName = attributes.name;
   }
 
   get id() {
@@ -21,7 +22,7 @@ export default class User {
   }
 
   get fullName() {
-    return this.firstName + ' ' + this.lastName;
+    return this._fullName || (this.firstName + ' ' + this.lastName);
   }
 
   get email() {

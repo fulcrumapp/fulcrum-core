@@ -16,6 +16,7 @@ var User = function () {
     this._firstName = attributes.first_name;
     this._lastName = attributes.last_name;
     this._email = attributes.email;
+    this._fullName = attributes.name;
   }
 
   _createClass(User, [{
@@ -36,7 +37,7 @@ var User = function () {
   }, {
     key: 'fullName',
     get: function get() {
-      return this.firstName + ' ' + this.lastName;
+      return this._fullName || this.firstName + ' ' + this.lastName;
     }
   }, {
     key: 'email',
