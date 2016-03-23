@@ -9,7 +9,7 @@ export default class AddressValue extends FormValue {
   }
 
   get isEmpty() {
-    return this.address.isEmpty();
+    return this.address.isEmpty;
   }
 
   get displayValue() {

@@ -16,7 +16,7 @@ export default class Condition {
   }
 
   static isEmpty(formValue) {
-    return formValue === null || formValue.isEmpty();
+    return formValue === null || formValue.isEmpty;
   }
 
   static contains(formValue, stringValue) {

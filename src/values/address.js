@@ -40,7 +40,7 @@ export default class Address {
     this.country = null;
   }
 
-  isEmpty() {
+  get isEmpty() {
     return !(TextUtils.isPresent(this.streetNumber) ||
              TextUtils.isPresent(this.streetName) ||
              TextUtils.isPresent(this.suite) ||
