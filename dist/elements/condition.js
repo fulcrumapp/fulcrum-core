@@ -322,10 +322,10 @@ var Condition = function () {
         return Condition.startsWith(formValue, this.value);
 
       case 'greater_than':
-        return Condition.greaterThan(formValue, this.value);
+        return Condition.isGreaterThan(formValue, this.value);
 
       case 'less_than':
-        return Condition.lessThan(formValue, this.value);
+        return Condition.isLessThan(formValue, this.value);
 
       default:
         break;
