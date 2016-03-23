@@ -18,7 +18,7 @@ export default class TextUtils {
   }
 
   static contains(haystack, needle) {
-    if (needle === null) {
+    if (needle == null) {
       return false;
     }
 
@@ -26,7 +26,7 @@ export default class TextUtils {
   }
 
   static startsWith(haystack, needle) {
-    if (needle === null) {
+    if (needle == null) {
       return false;
     }
 
