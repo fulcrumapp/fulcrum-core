@@ -49,6 +49,7 @@ import CustomValidationError from './validation/custom-validation-error';
 import MediaValue from './values/media-value';
 import MediaItemValue from './values/media-item-value';
 import User from './user';
+import Role from './role';
 import Project from './project';
 
 export {Form};
@@ -102,4 +103,5 @@ export {CustomValidationError};
 export {MediaValue};
 export {MediaItemValue};
 export {User};
+export {Role};
 export {Project};
