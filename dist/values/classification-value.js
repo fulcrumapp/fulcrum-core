@@ -99,7 +99,15 @@ var ClassificationValue = function (_FormValue) {
 
   ClassificationValue.prototype.setSelectedClassification = function setSelectedClassification(classification, otherValue) {
     if (classification instanceof _classification2.default) {
-      this._choiceValues = classification.toJSON();
+      this.setSelectedClassificationJSON(classification.toJSON(), otherValue);
+    } else {
+      this.setSelectedClassificationJSON(null, otherValue);
+    }
+  };
+
+  ClassificationValue.prototype.setSelectedClassificationJSON = function setSelectedClassificationJSON(classificationAsJSON, otherValue) {
+    if (classificationAsJSON && classificationAsJSON.length) {
+      this._choiceValues = classificationAsJSON;
     } else {
       this._choiceValues = [];
     }
@@ -264,6 +272,13 @@ var ClassificationValue = function (_FormValue) {
       }
 
       return this._otherValues[0];
+    },
+    set: function set(value) {
+      if (value && value.length) {
+        this._otherValues = [value];
+      } else {
+        this._otherValues = [];
+      }
     }
   }, {
     key: 'selectedClassification',
@@ -306,7 +321,7 @@ var ClassificationValue = function (_FormValue) {
 
           if (classification.value === classificationValue) {
             result = classification;
-            currentClassifications = classification.children;
+            currentClassifications = classification.items;
             break;
           }
         }

@@ -30,7 +30,7 @@ var ClassificationElement = function (_Element) {
 
     var _this = _possibleConstructorReturn(this, _Element.call(this, parent, attributes));
 
-    _this.allowOther = !!attributes.allowOther;
+    _this.allowOther = !!attributes.allow_other;
     _this.choiceFilter = null;
 
     _this._overrideClassificationItems = null;

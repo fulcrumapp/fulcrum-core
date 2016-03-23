@@ -13,7 +13,7 @@ var Classification = function () {
     this.parent = parent;
     this.label = attributes.label;
     this.value = attributes.value || attributes.label;
-    this.children = [];
+    this._items = [];
 
     if (attributes.child_classifications) {
       for (var _iterator = attributes.child_classifications, _isArray = Array.isArray(_iterator), _i = 0, _iterator = _isArray ? _iterator : _iterator[Symbol.iterator]();;) {
@@ -30,7 +30,7 @@ var Classification = function () {
 
         var child = _ref;
 
-        this.children.push(new Classification(this, child));
+        this._items.push(new Classification(this, child));
       }
     }
   }
@@ -61,6 +61,11 @@ var Classification = function () {
   };
 
   _createClass(Classification, [{
+    key: "items",
+    get: function get() {
+      return this._items.slice();
+    }
+  }, {
     key: "exploded",
     get: function get() {
       // return an array of all classifications including all parent items
