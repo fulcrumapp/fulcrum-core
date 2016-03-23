@@ -11,7 +11,7 @@ export default class Form {
     // TODO(zhm) remove json attr
     this._json = attributes;
     // TODO(zhm) this might need to go away
-    this.titleFieldKeys = attributes.title_field_keys;
+    this.titleFieldKeys = attributes.title_field_keys || [attributes.record_title_key];
     this.script = attributes.script;
     this.createChildElements(attributes.elements);
 
