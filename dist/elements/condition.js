@@ -28,7 +28,7 @@ var Condition = function () {
   };
 
   Condition.isEmpty = function isEmpty(formValue) {
-    return formValue === null || formValue.isEmpty;
+    return formValue == null || formValue.isEmpty;
   };
 
   Condition.contains = function contains(formValue, stringValue) {

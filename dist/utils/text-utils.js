@@ -32,7 +32,7 @@ var TextUtils = function () {
   };
 
   TextUtils.contains = function contains(haystack, needle) {
-    if (needle === null) {
+    if (needle == null) {
       return false;
     }
 
@@ -40,7 +40,7 @@ var TextUtils = function () {
   };
 
   TextUtils.startsWith = function startsWith(haystack, needle) {
-    if (needle === null) {
+    if (needle == null) {
       return false;
     }
 
