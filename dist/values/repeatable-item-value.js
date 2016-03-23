@@ -91,11 +91,25 @@ var RepeatableItemValue = function (_Feature) {
     key: 'createdAt',
     get: function get() {
       return this._createdAt;
+    },
+    set: function set(createdAt) {
+      if (!(createdAt instanceof Date)) {
+        throw new TypeError('createdAt must be a Date');
+      }
+
+      this._createdAt = createdAt;
     }
   }, {
     key: 'updatedAt',
     get: function get() {
       return this._updatedAt;
+    },
+    set: function set(updatedAt) {
+      if (!(updatedAt instanceof Date)) {
+        throw new TypeError('updatedAt must be a Date');
+      }
+
+      this._updatedAt = updatedAt;
     }
   }, {
     key: 'formValues',

@@ -35,8 +35,24 @@ export default class RepeatableItemValue extends Feature {
     return this._createdAt;
   }
 
+  set createdAt(createdAt) {
+    if (!(createdAt instanceof Date)) {
+      throw new TypeError('createdAt must be a Date');
+    }
+
+    this._createdAt = createdAt;
+  }
+
   get updatedAt() {
     return this._updatedAt;
+  }
+
+  set updatedAt(updatedAt) {
+    if (!(updatedAt instanceof Date)) {
+      throw new TypeError('updatedAt must be a Date');
+    }
+
+    this._updatedAt = updatedAt;
   }
 
   get formValues() {
