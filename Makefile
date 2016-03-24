@@ -9,6 +9,9 @@ clean:
 test:
 	npm test
 
+svg:
+	./node_modules/.bin/svgo --pretty -f icons
+
 simpletest:
 	npm run simpletest
 
