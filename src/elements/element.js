@@ -59,7 +59,7 @@ export default class Element {
     }
 
     this._overrideLabel = null;
-    this._overrideInformation = null;
+    this._overrideDescription = null;
     this._overrideIsRequired = null;
     this._overrideIsHidden = null;
     this._overrideIsDisabled = null;
