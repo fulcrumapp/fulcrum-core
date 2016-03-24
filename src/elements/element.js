@@ -172,7 +172,7 @@ export default class Element {
   }
 
   set overrideIsRequired(value) {
-    this._overrideIsRequired = !!value;
+    this._overrideIsRequired = value != null ? !!value : null;
   }
 
   get overrideIsHidden() {
@@ -180,7 +180,7 @@ export default class Element {
   }
 
   set overrideIsHidden(value) {
-    this._overrideIsHidden = !!value;
+    this._overrideIsHidden = value != null ? !!value : null;
   }
 
   get overrideIsDisabled() {
@@ -188,7 +188,7 @@ export default class Element {
   }
 
   set overrideIsDisabled(value) {
-    this._overrideIsDisabled = !!value;
+    this._overrideIsDisabled = value != null ? !!value : null;
   }
 
   get overrideMinLength() {
@@ -196,7 +196,7 @@ export default class Element {
   }
 
   set overrideMinLength(value) {
-    this._overrideMinLength = !!value;
+    this._overrideMinLength = value != null ? +value : null;
   }
 
   get overrideMaxLength() {
@@ -204,7 +204,7 @@ export default class Element {
   }
 
   set overrideMaxLength(value) {
-    this._overrideMaxLength = !!value;
+    this._overrideMaxLength = value != null ? +value : null;
   }
 
   get isLengthValidationSupported() {
