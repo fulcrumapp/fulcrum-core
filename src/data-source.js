@@ -215,6 +215,10 @@ export default class DataSource {
     this.invoke(this.root, 'createAudio', [accessKey, file, progress], callback);
   }
 
+  createSignature(accessKey, file, progress, callback) {
+    this.invoke(this.root, 'createSignature', [accessKey, file, progress], callback);
+  }
+
   saveVideoTrack(accessKey, file, progress, callback) {
     this.invoke(this.root, 'saveVideoTrack', [accessKey, file, progress], callback);
   }

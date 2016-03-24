@@ -1,4 +1,5 @@
 import FormValue from './form-value';
+import DateUtils from '../utils/date-utils';
 
 export default class SignatureValue extends FormValue {
   constructor(element, attributes) {
@@ -6,16 +7,41 @@ export default class SignatureValue extends FormValue {
 
     if (attributes) {
       this._identifier = attributes.signature_id;
-      this._timestamp = attributes.timestamp;
+      this._timestamp = DateUtils.parseISOTimestamp(attributes.timestamp);
     }
   }
 
+  get id() {
+    return this._identifier;
+  }
+
+  set id(id) {
+    this._identifier = id;
+  }
+
+  get timestamp() {
+    return this._timestamp;
+  }
+
+  set timestamp(timestamp) {
+    if (!(timestamp instanceof Date)) {
+      throw new TypeError('timestamp must be a Date');
+    }
+
+    this._timestamp = timestamp;
+  }
+
+  clear() {
+    this._identifier = null;
+    this._timestamp = null;
+  }
+
   get isEmpty() {
-    return false;
+    return this._identifier == null;
   }
 
   get displayValue() {
-    return '1 Signature';
+    return this.isEmpty ? null : '1 Signature';
   }
 
   get searchableValue() {
@@ -23,7 +49,7 @@ export default class SignatureValue extends FormValue {
   }
 
   get length() {
-    return 1;
+    return this.isEmpty ? 0 : 1;
   }
 
   get columnValue() {
@@ -35,9 +61,13 @@ export default class SignatureValue extends FormValue {
   }
 
   toJSON() {
+    if (this.isEmpty) {
+      return null;
+    }
+
     return {
       signature_id: this._identifier,
-      timestamp: this._timestamp
+      timestamp: DateUtils.formatISOTimestamp(this._timestamp)
     };
   }
 
