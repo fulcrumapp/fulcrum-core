@@ -231,6 +231,10 @@ var DataSource = function () {
     this.invoke(this.root, 'createAudio', [accessKey, file, progress], callback);
   };
 
+  DataSource.prototype.createSignature = function createSignature(accessKey, file, progress, callback) {
+    this.invoke(this.root, 'createSignature', [accessKey, file, progress], callback);
+  };
+
   DataSource.prototype.saveVideoTrack = function saveVideoTrack(accessKey, file, progress, callback) {
     this.invoke(this.root, 'saveVideoTrack', [accessKey, file, progress], callback);
   };

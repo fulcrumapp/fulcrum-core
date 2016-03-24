@@ -8,6 +8,10 @@ var _formValue = require('./form-value');
 
 var _formValue2 = _interopRequireDefault(_formValue);
 
+var _dateUtils = require('../utils/date-utils');
+
+var _dateUtils2 = _interopRequireDefault(_dateUtils);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _defaults(obj, defaults) { var keys = Object.getOwnPropertyNames(defaults); for (var i = 0; i < keys.length; i++) { var key = keys[i]; var value = Object.getOwnPropertyDescriptor(defaults, key); if (value && value.configurable && obj[key] === undefined) { Object.defineProperty(obj, key, value); } } return obj; }
@@ -28,15 +32,24 @@ var SignatureValue = function (_FormValue) {
 
     if (attributes) {
       _this._identifier = attributes.signature_id;
-      _this._timestamp = attributes.timestamp;
+      _this._timestamp = _dateUtils2.default.parseISOTimestamp(attributes.timestamp);
     }
     return _this;
   }
 
+  SignatureValue.prototype.clear = function clear() {
+    this._identifier = null;
+    this._timestamp = null;
+  };
+
   SignatureValue.prototype.toJSON = function toJSON() {
+    if (this.isEmpty) {
+      return null;
+    }
+
     return {
       signature_id: this._identifier,
-      timestamp: this._timestamp
+      timestamp: _dateUtils2.default.formatISOTimestamp(this._timestamp)
     };
   };
 
@@ -61,14 +74,34 @@ var SignatureValue = function (_FormValue) {
   };
 
   _createClass(SignatureValue, [{
+    key: 'id',
+    get: function get() {
+      return this._identifier;
+    },
+    set: function set(id) {
+      this._identifier = id;
+    }
+  }, {
+    key: 'timestamp',
+    get: function get() {
+      return this._timestamp;
+    },
+    set: function set(timestamp) {
+      if (!(timestamp instanceof Date)) {
+        throw new TypeError('timestamp must be a Date');
+      }
+
+      this._timestamp = timestamp;
+    }
+  }, {
     key: 'isEmpty',
     get: function get() {
-      return false;
+      return this._identifier == null;
     }
   }, {
     key: 'displayValue',
     get: function get() {
-      return '1 Signature';
+      return this.isEmpty ? null : '1 Signature';
     }
   }, {
     key: 'searchableValue',
@@ -78,7 +111,7 @@ var SignatureValue = function (_FormValue) {
   }, {
     key: 'length',
     get: function get() {
-      return 1;
+      return this.isEmpty ? 0 : 1;
     }
   }, {
     key: 'columnValue',
