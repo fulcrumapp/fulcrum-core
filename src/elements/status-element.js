@@ -3,6 +3,8 @@ import StatusChoice from './status-choice';
 
 export default class StatusElement extends TextualElement {
   constructor(parent, attributes) {
+    attributes.type = 'StatusField';
+
     super(parent, attributes);
 
     this.choices = [];

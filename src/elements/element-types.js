@@ -33,5 +33,7 @@ export default {
 
   CalculatedElement: 'CalculatedField',
 
-  RecordLinkElement: 'RecordLinkField'
+  RecordLinkElement: 'RecordLinkField',
+
+  StatusElement: 'StatusField'
 };

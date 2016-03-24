@@ -5,58 +5,66 @@ let ElementFactory = null;
 
 export default class Element {
   constructor(parent, attributes) {
-    this.parent = parent;
+    this._parent = parent;
 
-    this.attributes = attributes;
+    this._attributes = attributes;
 
-    this.key = attributes.key;
+    this._key = attributes.key;
 
-    this.type = attributes.type;
+    this._type = attributes.type;
 
-    this.label = attributes.label;
+    this._label = attributes.label;
 
-    this.description = attributes.description;
+    this._description = attributes.description;
 
-    this.dataName = attributes.data_name;
+    this._dataName = attributes.data_name;
 
-    this.defaultValue = attributes.default_value;
+    this._defaultValue = attributes.default_value;
 
-    this.required = !!attributes.required;
+    this._isRequired = !!attributes.required;
 
-    this.hidden = !!attributes.hidden;
+    this._isHidden = !!attributes.hidden;
 
-    this.disabled = !!attributes.disabled;
+    this._isDisabled = !!attributes.disabled;
 
-    this.visibleConditionsType = this.attributes.visible_conditions_type;
+    this._visibleConditionsType = attributes.visible_conditions_type;
 
-    this.visibleConditions = [];
+    this._visibleConditions = [];
 
     if (attributes.visible_conditions) {
       for (let condition of attributes.visible_conditions) {
-        this.visibleConditions.push(new Condition(this, condition));
+        this._visibleConditions.push(new Condition(this, condition));
       }
     }
 
-    this.requiredConditionsType = this.attributes.required_conditions_type;
+    this._requiredConditionsType = attributes.required_conditions_type;
 
-    this.requiredConditions = [];
+    this._requiredConditions = [];
 
     if (attributes.required_conditions) {
       for (let condition of attributes.required_conditions) {
-        this.requiredConditions.push(new Condition(this, condition));
+        this._requiredConditions.push(new Condition(this, condition));
       }
     }
 
-    this.minLength = -1;
-    this.maxLength = -1;
+    this._minLength = -1;
+    this._maxLength = -1;
 
     if (attributes.min_length != null) {
-      this.minLength = +attributes.min_length;
+      this._minLength = +attributes.min_length;
     }
 
     if (attributes.max_length != null) {
-      this.maxLength = +attributes.max_length;
+      this._maxLength = +attributes.max_length;
     }
+
+    this._overrideLabel = null;
+    this._overrideInformation = null;
+    this._overrideIsRequired = null;
+    this._overrideIsHidden = null;
+    this._overrideIsDisabled = null;
+    this._overrideMinLength = null;
+    this._overrideMaxLength = null;
   }
 
   static factory() {
@@ -77,6 +85,126 @@ export default class Element {
     }
 
     return Element._classes;
+  }
+
+  get parent() {
+    return this._parent;
+  }
+
+  get type() {
+    return this._type;
+  }
+
+  get key() {
+    return this._key;
+  }
+
+  get label() {
+    return this._overrideLabel ? this._overrideLabel : this._label;
+  }
+
+  get description() {
+    return this._overrideDescription ? this._overrideDescription : this._description;
+  }
+
+  get dataName() {
+    return this._dataName;
+  }
+
+  get defaultValue() {
+    return this._defaultValue;
+  }
+
+  get isRequired() {
+    return this._overrideIsRequired ? this._overrideIsRequired : this._isRequired;
+  }
+
+  get isHidden() {
+    return this._overrideIsHidden ? this._overrideIsHidden : this._isHidden;
+  }
+
+  get isDisabled() {
+    return this._overrideIsDisabled ? this._overrideIsDisabled : this._isDisabled;
+  }
+
+  get visibleConditionsType() {
+    return this._visibleConditionsType;
+  }
+
+  get visibleConditions() {
+    return this._visibleConditions;
+  }
+
+  get requiredConditionsType() {
+    return this._requiredConditionsType;
+  }
+
+  get requiredConditions() {
+    return this._requiredConditions;
+  }
+
+  get minLength() {
+    return this._overrideMinLength ? this._overrideMinLength : this._minLength;
+  }
+
+  get maxLength() {
+    return this._overrideMaxLength ? this._overrideMinLength : this._maxLength;
+  }
+
+  get overrideLabel() {
+    return this._overrideLabel;
+  }
+
+  set overrideLabel(value) {
+    this._overrideLabel = value;
+  }
+
+  get overrideDescription() {
+    return this._overrideDescription;
+  }
+
+  set overrideDescription(value) {
+    this._overrideDescription = value;
+  }
+
+  get overrideIsRequired() {
+    return this._overrideIsRequired;
+  }
+
+  set overrideIsRequired(value) {
+    this._overrideIsRequired = !!value;
+  }
+
+  get overrideIsHidden() {
+    return this._overrideIsHidden;
+  }
+
+  set overrideIsHidden(value) {
+    this._overrideIsHidden = !!value;
+  }
+
+  get overrideIsDisabled() {
+    return this._overrideIsDisabled;
+  }
+
+  set overrideIsDisabled(value) {
+    this._overrideIsDisabled = !!value;
+  }
+
+  get overrideMinLength() {
+    return this._overrideMinLength;
+  }
+
+  set overrideMinLength(value) {
+    this._overrideMinLength = !!value;
+  }
+
+  get overrideMaxLength() {
+    return this._overrideMaxLength;
+  }
+
+  set overrideMaxLength(value) {
+    this._overrideMaxLength = !!value;
   }
 
   get isLengthValidationSupported() {
@@ -100,8 +228,8 @@ export default class Element {
   }
 
   get hasHiddenParent() {
-    if (this.parent == null || this.hidden) {
-      return this.hidden;
+    if (this.parent == null || this.isHidden) {
+      return this.isHidden;
     }
     return this.parent.hasHiddenParent;
   }
@@ -180,5 +308,9 @@ export default class Element {
 
   get isRecordLinkElement() {
     return this.isType(Types.RecordLinkElement);
+  }
+
+  get isStatusElement() {
+    return this.isType(Types.StatusElement);
   }
 }

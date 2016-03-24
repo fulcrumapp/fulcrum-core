@@ -15,7 +15,7 @@ export default class ChoiceElement extends Element {
 
     // TODO(zhm) the loading needs to be re-worked to support choice lists
     if (attributes.choices) {
-      for (let choice of this.attributes.choices) {
+      for (let choice of attributes.choices) {
         this._choices.push(new Choice(choice));
       }
     }

@@ -84,7 +84,7 @@ export default class Condition {
     // ends, it early exits instead of blowing the stack
     cache[element.key] = true;
 
-    if (element.hidden || element.hasHiddenParent) {
+    if (element.isHidden || element.hasHiddenParent) {
       cache[element.key] = false;
       return false;
     }
@@ -147,7 +147,7 @@ export default class Condition {
 
   static shouldElementBeRequired(element, record, values) {
     if (!element.hasRequiredConditions) {
-      return element.required;
+      return element.isRequired;
     }
 
     const cache = {};
@@ -203,7 +203,7 @@ export default class Condition {
       // case and the referenced element should always be considered satisfied so that it's possible
       // to put conditions on explicitly hidden values.
 
-      const skipElement = referencedElement.hidden || referencedElement.hasHiddenParent;
+      const skipElement = referencedElement.isHidden || referencedElement.hasHiddenParent;
 
       if (!skipElement) {
         isReferencedFieldSatisfied = Condition.shouldElementBeVisibleRecursive(referencedElement, record, values, cache);
