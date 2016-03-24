@@ -28,6 +28,8 @@ var StatusElement = function (_TextualElement) {
   function StatusElement(parent, attributes) {
     _classCallCheck(this, StatusElement);
 
+    attributes.type = 'StatusField';
+
     var _this = _possibleConstructorReturn(this, _TextualElement.call(this, parent, attributes));
 
     _this.choices = [];

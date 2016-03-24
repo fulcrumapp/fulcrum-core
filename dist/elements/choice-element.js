@@ -40,7 +40,7 @@ var ChoiceElement = function (_Element) {
 
     // TODO(zhm) the loading needs to be re-worked to support choice lists
     if (attributes.choices) {
-      for (var _iterator = _this.attributes.choices, _isArray = Array.isArray(_iterator), _i = 0, _iterator = _isArray ? _iterator : _iterator[Symbol.iterator]();;) {
+      for (var _iterator = attributes.choices, _isArray = Array.isArray(_iterator), _i = 0, _iterator = _isArray ? _iterator : _iterator[Symbol.iterator]();;) {
         var _ref;
 
         if (_isArray) {

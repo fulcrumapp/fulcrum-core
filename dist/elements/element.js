@@ -22,31 +22,31 @@ var Element = function () {
   function Element(parent, attributes) {
     _classCallCheck(this, Element);
 
-    this.parent = parent;
+    this._parent = parent;
 
-    this.attributes = attributes;
+    this._attributes = attributes;
 
-    this.key = attributes.key;
+    this._key = attributes.key;
 
-    this.type = attributes.type;
+    this._type = attributes.type;
 
-    this.label = attributes.label;
+    this._label = attributes.label;
 
-    this.description = attributes.description;
+    this._description = attributes.description;
 
-    this.dataName = attributes.data_name;
+    this._dataName = attributes.data_name;
 
-    this.defaultValue = attributes.default_value;
+    this._defaultValue = attributes.default_value;
 
-    this.required = !!attributes.required;
+    this._isRequired = !!attributes.required;
 
-    this.hidden = !!attributes.hidden;
+    this._isHidden = !!attributes.hidden;
 
-    this.disabled = !!attributes.disabled;
+    this._isDisabled = !!attributes.disabled;
 
-    this.visibleConditionsType = this.attributes.visible_conditions_type;
+    this._visibleConditionsType = attributes.visible_conditions_type;
 
-    this.visibleConditions = [];
+    this._visibleConditions = [];
 
     if (attributes.visible_conditions) {
       for (var _iterator = attributes.visible_conditions, _isArray = Array.isArray(_iterator), _i = 0, _iterator = _isArray ? _iterator : _iterator[Symbol.iterator]();;) {
@@ -63,13 +63,13 @@ var Element = function () {
 
         var condition = _ref;
 
-        this.visibleConditions.push(new _condition3.default(this, condition));
+        this._visibleConditions.push(new _condition3.default(this, condition));
       }
     }
 
-    this.requiredConditionsType = this.attributes.required_conditions_type;
+    this._requiredConditionsType = attributes.required_conditions_type;
 
-    this.requiredConditions = [];
+    this._requiredConditions = [];
 
     if (attributes.required_conditions) {
       for (var _iterator2 = attributes.required_conditions, _isArray2 = Array.isArray(_iterator2), _i2 = 0, _iterator2 = _isArray2 ? _iterator2 : _iterator2[Symbol.iterator]();;) {
@@ -86,20 +86,28 @@ var Element = function () {
 
         var _condition = _ref2;
 
-        this.requiredConditions.push(new _condition3.default(this, _condition));
+        this._requiredConditions.push(new _condition3.default(this, _condition));
       }
     }
 
-    this.minLength = -1;
-    this.maxLength = -1;
+    this._minLength = -1;
+    this._maxLength = -1;
 
     if (attributes.min_length != null) {
-      this.minLength = +attributes.min_length;
+      this._minLength = +attributes.min_length;
     }
 
     if (attributes.max_length != null) {
-      this.maxLength = +attributes.max_length;
+      this._maxLength = +attributes.max_length;
     }
+
+    this._overrideLabel = null;
+    this._overrideDescription = null;
+    this._overrideIsRequired = null;
+    this._overrideIsHidden = null;
+    this._overrideIsDisabled = null;
+    this._overrideMinLength = null;
+    this._overrideMaxLength = null;
   }
 
   Element.factory = function factory() {
@@ -140,6 +148,142 @@ var Element = function () {
   };
 
   _createClass(Element, [{
+    key: 'parent',
+    get: function get() {
+      return this._parent;
+    }
+  }, {
+    key: 'type',
+    get: function get() {
+      return this._type;
+    }
+  }, {
+    key: 'key',
+    get: function get() {
+      return this._key;
+    }
+  }, {
+    key: 'label',
+    get: function get() {
+      return this._overrideLabel ? this._overrideLabel : this._label;
+    }
+  }, {
+    key: 'description',
+    get: function get() {
+      return this._overrideDescription ? this._overrideDescription : this._description;
+    }
+  }, {
+    key: 'dataName',
+    get: function get() {
+      return this._dataName;
+    }
+  }, {
+    key: 'defaultValue',
+    get: function get() {
+      return this._defaultValue;
+    }
+  }, {
+    key: 'isRequired',
+    get: function get() {
+      return this._overrideIsRequired ? this._overrideIsRequired : this._isRequired;
+    }
+  }, {
+    key: 'isHidden',
+    get: function get() {
+      return this._overrideIsHidden ? this._overrideIsHidden : this._isHidden;
+    }
+  }, {
+    key: 'isDisabled',
+    get: function get() {
+      return this._overrideIsDisabled ? this._overrideIsDisabled : this._isDisabled;
+    }
+  }, {
+    key: 'visibleConditionsType',
+    get: function get() {
+      return this._visibleConditionsType;
+    }
+  }, {
+    key: 'visibleConditions',
+    get: function get() {
+      return this._visibleConditions;
+    }
+  }, {
+    key: 'requiredConditionsType',
+    get: function get() {
+      return this._requiredConditionsType;
+    }
+  }, {
+    key: 'requiredConditions',
+    get: function get() {
+      return this._requiredConditions;
+    }
+  }, {
+    key: 'minLength',
+    get: function get() {
+      return this._overrideMinLength ? this._overrideMinLength : this._minLength;
+    }
+  }, {
+    key: 'maxLength',
+    get: function get() {
+      return this._overrideMaxLength ? this._overrideMinLength : this._maxLength;
+    }
+  }, {
+    key: 'overrideLabel',
+    get: function get() {
+      return this._overrideLabel;
+    },
+    set: function set(value) {
+      this._overrideLabel = value;
+    }
+  }, {
+    key: 'overrideDescription',
+    get: function get() {
+      return this._overrideDescription;
+    },
+    set: function set(value) {
+      this._overrideDescription = value;
+    }
+  }, {
+    key: 'overrideIsRequired',
+    get: function get() {
+      return this._overrideIsRequired;
+    },
+    set: function set(value) {
+      this._overrideIsRequired = value != null ? !!value : null;
+    }
+  }, {
+    key: 'overrideIsHidden',
+    get: function get() {
+      return this._overrideIsHidden;
+    },
+    set: function set(value) {
+      this._overrideIsHidden = value != null ? !!value : null;
+    }
+  }, {
+    key: 'overrideIsDisabled',
+    get: function get() {
+      return this._overrideIsDisabled;
+    },
+    set: function set(value) {
+      this._overrideIsDisabled = value != null ? !!value : null;
+    }
+  }, {
+    key: 'overrideMinLength',
+    get: function get() {
+      return this._overrideMinLength;
+    },
+    set: function set(value) {
+      this._overrideMinLength = value != null ? +value : null;
+    }
+  }, {
+    key: 'overrideMaxLength',
+    get: function get() {
+      return this._overrideMaxLength;
+    },
+    set: function set(value) {
+      this._overrideMaxLength = value != null ? +value : null;
+    }
+  }, {
     key: 'isLengthValidationSupported',
     get: function get() {
       return false;
@@ -167,8 +311,8 @@ var Element = function () {
   }, {
     key: 'hasHiddenParent',
     get: function get() {
-      if (this.parent == null || this.hidden) {
-        return this.hidden;
+      if (this.parent == null || this.isHidden) {
+        return this.isHidden;
       }
       return this.parent.hasHiddenParent;
     }
@@ -261,6 +405,11 @@ var Element = function () {
     key: 'isRecordLinkElement',
     get: function get() {
       return this.isType(_elementTypes2.default.RecordLinkElement);
+    }
+  }, {
+    key: 'isStatusElement',
+    get: function get() {
+      return this.isType(_elementTypes2.default.StatusElement);
     }
   }]);
 

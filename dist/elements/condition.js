@@ -109,7 +109,7 @@ var Condition = function () {
     // ends, it early exits instead of blowing the stack
     cache[element.key] = true;
 
-    if (element.hidden || element.hasHiddenParent) {
+    if (element.isHidden || element.hasHiddenParent) {
       cache[element.key] = false;
       return false;
     }
@@ -198,7 +198,7 @@ var Condition = function () {
 
   Condition.shouldElementBeRequired = function shouldElementBeRequired(element, record, values) {
     if (!element.hasRequiredConditions) {
-      return element.required;
+      return element.isRequired;
     }
 
     var cache = {};
@@ -280,7 +280,7 @@ var Condition = function () {
       // case and the referenced element should always be considered satisfied so that it's possible
       // to put conditions on explicitly hidden values.
 
-      var skipElement = referencedElement.hidden || referencedElement.hasHiddenParent;
+      var skipElement = referencedElement.isHidden || referencedElement.hasHiddenParent;
 
       if (!skipElement) {
         isReferencedFieldSatisfied = Condition.shouldElementBeVisibleRecursive(referencedElement, record, values, cache);

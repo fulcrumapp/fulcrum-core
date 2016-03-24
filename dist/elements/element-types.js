@@ -36,6 +36,8 @@ exports.default = {
 
   CalculatedElement: 'CalculatedField',
 
-  RecordLinkElement: 'RecordLinkField'
+  RecordLinkElement: 'RecordLinkField',
+
+  StatusElement: 'StatusField'
 };
 //# sourceMappingURL=element-types.js.map
