@@ -36,12 +36,13 @@ export default class RecordLinkElement extends Element {
   load(dataSource, callback) {
     dataSource.getForm(this._formID, (err, form) => {
       if (err) {
-        return callback(err);
+        callback(err);
+        return;
       }
 
+      // recursively load the linked forms
       this.form = form;
-
-      return callback();
+      this.form.load(dataSource, callback);
     });
   }
 }
