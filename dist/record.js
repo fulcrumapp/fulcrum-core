@@ -103,6 +103,8 @@ var Record = function (_Feature) {
   };
 
   Record.prototype.updateFromAPIAttributes = function updateFromAPIAttributes(attributes) {
+    attributes = attributes || {};
+
     this._id = attributes.id || _uuid2.default.v4();
     this._version = attributes.version || null;
     this._createdAt = _dateUtils2.default.parseISOTimestamp(attributes.created_at);

@@ -78,10 +78,6 @@ var Form = function () {
   Form.prototype.createRecord = function createRecord(attributes) {
     var record = new _record2.default(attributes, this);
 
-    // TODO(zhm) this might not be final
-    record._form = this;
-    record._formValuesJSON = {};
-
     _defaultValues2.default.applyDefaultValuesForElements(this.elements, record.formValues, record);
 
     return record;
