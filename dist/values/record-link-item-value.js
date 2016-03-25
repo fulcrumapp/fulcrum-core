@@ -1,21 +1,24 @@
-"use strict";
+'use strict';
 
 exports.__esModule = true;
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
+var _assert = require('assert');
+
+var _assert2 = _interopRequireDefault(_assert);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 var RecordLinkItemValue = function () {
-  function RecordLinkItemValue(attributes) {
+  function RecordLinkItemValue(parent, attributes) {
     _classCallCheck(this, RecordLinkItemValue);
 
+    this._parent = parent;
     this._recordID = attributes.record_id;
   }
-
-  RecordLinkItemValue.prototype.id = function id() {
-    return this._recordID;
-  };
 
   RecordLinkItemValue.prototype.toJSON = function toJSON() {
     return {
@@ -23,10 +26,49 @@ var RecordLinkItemValue = function () {
     };
   };
 
+  RecordLinkItemValue.prototype.load = function load(dataSource, callback) {
+    var _this = this;
+
+    (0, _assert2.default)(this.parent.element.form, 'form must be present before loading the record');
+
+    dataSource.getRecord(this._recordID, this.parent.element.form, function (err, record) {
+      if (err) {
+        return callback(err);
+      }
+
+      _this._record = record;
+
+      return callback();
+    });
+  };
+
   _createClass(RecordLinkItemValue, [{
-    key: "record",
+    key: 'parent',
+    get: function get() {
+      return this._parent;
+    }
+  }, {
+    key: 'id',
+    get: function get() {
+      return this._recordID;
+    }
+  }, {
+    key: 'displayValue',
+    get: function get() {
+      if (this._record) {
+        return this._record.displayValue;
+      }
+
+      return null;
+    }
+  }, {
+    key: 'record',
     get: function get() {
       return this._record;
+    },
+    set: function set(record) {
+      this._recordID = record;
+      this._record = record;
     }
   }]);
 

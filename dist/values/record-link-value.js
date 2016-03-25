@@ -55,7 +55,7 @@ var RecordLinkValue = function (_FormValue) {
 
         var item = _ref;
 
-        _this._items.push(new _recordLinkItemValue2.default(item));
+        _this._items.push(new _recordLinkItemValue2.default(_this, item));
       }
     }
     return _this;
@@ -105,11 +105,45 @@ var RecordLinkValue = function (_FormValue) {
   };
 
   RecordLinkValue.prototype.addRecord = function addRecord(record) {
-    var item = new _recordLinkItemValue2.default({ record_id: record.id });
+    var item = new _recordLinkItemValue2.default(this, { record_id: record.id });
 
     item._record = record;
 
-    this._items.push(item);
+    this.insertItem(item);
+  };
+
+  RecordLinkValue.prototype.itemIndex = function itemIndex(id) {
+    for (var index = 0; index < this._items.length; ++index) {
+      if (id === this._items[index].id) {
+        return index;
+      }
+    }
+
+    return -1;
+  };
+
+  RecordLinkValue.prototype.insertItem = function insertItem(item) {
+    var index = this.itemIndex(item.id);
+
+    if (index > -1) {
+      this._items[index] = item;
+    } else {
+      this._items.push(item);
+    }
+  };
+
+  RecordLinkValue.prototype.removeItem = function removeItem(id) {
+    var index = this.itemIndex(id);
+
+    if (index > -1) {
+      var item = this._items[index];
+
+      this._items.splice(index, 1);
+
+      return item;
+    }
+
+    return null;
   };
 
   _createClass(RecordLinkValue, [{
@@ -172,7 +206,7 @@ var RecordLinkValue = function (_FormValue) {
   }, {
     key: 'items',
     get: function get() {
-      return this._items;
+      return this._items.slice();
     }
   }]);
 
