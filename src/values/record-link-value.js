@@ -11,7 +11,7 @@ export default class RecordLinkValue extends FormValue {
 
     if (items) {
       for (let item of items) {
-        this._items.push(new RecordLinkItemValue(item));
+        this._items.push(new RecordLinkItemValue(this, item));
       }
     }
   }
@@ -85,14 +85,48 @@ export default class RecordLinkValue extends FormValue {
   }
 
   get items() {
-    return this._items;
+    return this._items.slice();
   }
 
   addRecord(record) {
-    const item = new RecordLinkItemValue({record_id: record.id});
+    const item = new RecordLinkItemValue(this, {record_id: record.id});
 
     item._record = record;
 
-    this._items.push(item);
+    this.insertItem(item);
+  }
+
+  itemIndex(id) {
+    for (let index = 0; index < this._items.length; ++index) {
+      if (id === this._items[index].id) {
+        return index;
+      }
+    }
+
+    return -1;
+  }
+
+  insertItem(item) {
+    const index = this.itemIndex(item.id);
+
+    if (index > -1) {
+      this._items[index] = item;
+    } else {
+      this._items.push(item);
+    }
+  }
+
+  removeItem(id) {
+    const index = this.itemIndex(id);
+
+    if (index > -1) {
+      const item = this._items[index];
+
+      this._items.splice(index, 1);
+
+      return item;
+    }
+
+    return null;
   }
 }
