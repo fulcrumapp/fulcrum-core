@@ -43,10 +43,6 @@ export default class Form {
   createRecord(attributes) {
     const record = new Record(attributes, this);
 
-    // TODO(zhm) this might not be final
-    record._form = this;
-    record._formValuesJSON = {};
-
     DefaultValues.applyDefaultValuesForElements(this.elements,
                                                 record.formValues,
                                                 record);

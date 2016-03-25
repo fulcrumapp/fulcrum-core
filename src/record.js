@@ -125,6 +125,8 @@ export default class Record extends Feature {
   }
 
   updateFromAPIAttributes(attributes) {
+    attributes = attributes || {};
+
     this._id = attributes.id || uuid.v4();
     this._version = attributes.version || null;
     this._createdAt = DateUtils.parseISOTimestamp(attributes.created_at);
