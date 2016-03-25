@@ -91,12 +91,13 @@ var RecordLinkElement = function (_Element) {
 
     dataSource.getForm(this._formID, function (err, form) {
       if (err) {
-        return callback(err);
+        callback(err);
+        return;
       }
 
+      // recursively load the linked forms
       _this2.form = form;
-
-      return callback();
+      _this2.form.load(dataSource, callback);
     });
   };
 
