@@ -44,16 +44,20 @@ var DateUtils = function () {
   };
 
   DateUtils.formatTimeSeconds = function formatTimeSeconds(seconds) {
+    var milliseconds = arguments.length <= 1 || arguments[1] === undefined ? false : arguments[1];
+
     var ss = +seconds % 60;
     var div = (+seconds - ss) / 60;
     var mm = div % 60;
     var hh = (div - mm) / 60;
+    var ms = ss * 1000 % 1000;
 
     var h = _lodash2.default.padStart(Math.floor(hh), 2, '0');
     var m = _lodash2.default.padStart(Math.floor(mm), 2, '0');
     var s = _lodash2.default.padStart(Math.floor(ss), 2, '0');
+    var u = _lodash2.default.padStart(Math.floor(ms), 3, '0');
 
-    return h + ':' + m + ':' + s;
+    return h + ':' + m + ':' + s + (milliseconds ? '.' + u : '');
   };
 
   DateUtils.formatTimeParts = function formatTimeParts(hours, minutes, seconds) {

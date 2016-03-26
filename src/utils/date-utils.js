@@ -26,17 +26,19 @@ export default class DateUtils {
     return hours + ':' + minutes;
   }
 
-  static formatTimeSeconds(seconds) {
+  static formatTimeSeconds(seconds, milliseconds = false) {
     const ss = +seconds % 60;
     const div = (+seconds - ss) / 60;
     const mm = div % 60;
     const hh = (div - mm) / 60;
+    const ms = (ss * 1000 % 1000);
 
     const h = _.padStart(Math.floor(hh), 2, '0');
     const m = _.padStart(Math.floor(mm), 2, '0');
     const s = _.padStart(Math.floor(ss), 2, '0');
+    const u = _.padStart(Math.floor(ms), 3, '0');
 
-    return h + ':' + m + ':' + s;
+    return h + ':' + m + ':' + s + (milliseconds ? '.' + u : '');
   }
 
   static formatTimeParts(hours, minutes, seconds) {
