@@ -3,13 +3,21 @@ import Mixin from 'mixmatch';
 let ElementFactory = null;
 
 export default class ChildElements extends Mixin {
+  get elements() {
+    if (!this._elements) {
+      this.createChildElements(this._elementsJSON);
+    }
+
+    return this._elements;
+  }
+
   createChildElements(elements) {
-    this.elements = [];
+    this._elements = [];
 
     for (let element of elements) {
       // hack for circular dependency, not ideal
       ElementFactory = ElementFactory || require('./element-factory').default;
-      this.elements.push(ElementFactory.create(this, element));
+      this._elements.push(ElementFactory.create(this, element));
     }
   }
 

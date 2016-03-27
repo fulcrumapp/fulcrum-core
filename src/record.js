@@ -7,13 +7,9 @@ import uuid from 'uuid';
 
 export default class Record extends Feature {
   constructor(attributes, form) {
-    if (!form) {
-      throw new ReferenceError('A form must be passed');
-    }
-
     super();
 
-    this._form = form;
+    this._form = form || null;
 
     this.updateFromAPIAttributes(attributes);
   }

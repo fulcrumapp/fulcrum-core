@@ -6,22 +6,30 @@ import async from 'async';
 
 export default class Form {
   constructor(attributes) {
+    this.updateFromAPIAttributes(attributes);
+  }
+
+  updateFromAPIAttributes(attributes) {
     attributes = attributes || {};
 
     this._id = attributes.id;
-
-    // TODO(zhm) remove json attr
-    this._json = attributes;
-    // TODO(zhm) this might need to go away
-    this.titleFieldKeys = attributes.title_field_keys || [attributes.record_title_key];
-    this.script = attributes.script;
-    this.createChildElements(attributes.elements);
-
+    this._name = attributes.name;
+    this._description = attributes.description;
+    this._elementsJSON = attributes.elements;
+    this._elements = null;
+    this._titleFieldKeysJSON = attributes.title_field_keys;
     this._statusFieldJSON = attributes.status_field;
     this._statusField = null;
-
-    this._name = attributes.name;
+    this._script = attributes.script;
     this._geometryRequired = !!attributes.geometry_required;
+
+    if (attributes.title_field_keys || attributes.record_title_key) {
+      this._titleFieldKeysJSON = attributes.title_field_keys || [attributes.record_title_key];
+      this._titleFieldKeys = [];
+    } else {
+      this._titleFieldKeysJSON = [];
+      this._titleFieldKeys = [];
+    }
   }
 
   get id() {
@@ -72,8 +80,15 @@ export default class Form {
   }
 
   toJSON() {
-    // TODO(zhm) actually implement this so it returns a copy
-    return this._json;
+    const json = {};
+
+    json.id = this.id || null;
+    json.name = this.name || null;
+    json.description = this.description || null;
+    json.script = this.script || null;
+    json.elements = JSON.parse(JSON.stringify(this.elementsJSON));
+
+    return json;
   }
 
   get isGeometryRequired() {
@@ -82,6 +97,14 @@ export default class Form {
 
   get name() {
     return this._name;
+  }
+
+  get description() {
+    return this._description;
+  }
+
+  get script() {
+    return this._script;
   }
 }
 
