@@ -33,7 +33,25 @@ var DateUtils = function () {
     if (!(timeString != null && timeString.length === 5)) {
       return null;
     }
-    return timeString;
+
+    var _timeString$split = timeString.split(':');
+
+    var hours = _timeString$split[0];
+    var minutes = _timeString$split[1];
+
+
+    if (hours == null || minutes == null) {
+      return null;
+    }
+
+    hours = +hours;
+    minutes = +minutes;
+
+    if (isNaN(hours) || isNaN(minutes)) {
+      return null;
+    }
+
+    return hours * 60 + minutes;
   };
 
   DateUtils.formatTime = function formatTime(date) {

@@ -40,14 +40,14 @@ var TimeValue = function (_TextualValue) {
       return _textUtils2.default.isEmpty(stringValue);
     }
 
-    var thisTime = this.timeValue();
+    var thisTime = this.timeValue;
     var thatTime = _dateUtils2.default.parseTime(stringValue);
 
     if (thisTime == null || thatTime == null) {
       return false;
     }
 
-    return thisTime.getTime() < thatTime.getTime();
+    return thisTime < thatTime;
   };
 
   TimeValue.prototype.isGreaterThan = function isGreaterThan(stringValue) {
@@ -55,39 +55,39 @@ var TimeValue = function (_TextualValue) {
       return _textUtils2.default.isEmpty(stringValue);
     }
 
-    var thisTime = this.timeValue();
+    var thisTime = this.timeValue;
     var thatTime = _dateUtils2.default.parseTime(stringValue);
 
     if (thisTime == null || thatTime == null) {
       return false;
     }
 
-    return thisTime.getTime() > thatTime.getTime();
-  };
-
-  TimeValue.prototype.timeValue = function timeValue() {
-    return _dateUtils2.default.parseTime(this.textValue);
+    return thisTime > thatTime;
   };
 
   _createClass(TimeValue, [{
     key: 'displayValue',
     get: function get() {
-      if (this.isEmpty) {
-        return null;
-      }
-
-      var time = this.timeValue();
-
-      if (time == null) {
-        return null;
-      }
-
-      return time;
+      return this.textValue;
     }
   }, {
     key: 'searchableValue',
     get: function get() {
       return this.textValue;
+    }
+  }, {
+    key: 'timeValue',
+    get: function get() {
+      if (this.isEmpty) {
+        return null;
+      }
+
+      return _dateUtils2.default.parseTime(this.textValue);
+    }
+  }, {
+    key: 'columnValue',
+    get: function get() {
+      return this.timeValue;
     }
   }]);
 

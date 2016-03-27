@@ -198,7 +198,7 @@ var MediaValue = function (_FormValue) {
         ids.push(item.mediaID);
       }
 
-      return ids.join(',');
+      return ids;
     }
   }, {
     key: 'multipleValues',

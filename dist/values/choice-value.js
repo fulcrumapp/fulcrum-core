@@ -317,7 +317,7 @@ var ChoiceValue = function (_FormValue) {
         return allValues[0];
       }
 
-      return '\t' + allValues.join('\t') + '\t';
+      return allValues;
     }
   }, {
     key: 'multipleValues',

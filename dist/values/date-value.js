@@ -90,6 +90,19 @@ var DateValue = function (_TextualValue) {
     get: function get() {
       return _dateUtils2.default.parseDate(this.textValue);
     }
+  }, {
+    key: 'columnValue',
+    get: function get() {
+      if (this.isEmpty) {
+        return null;
+      }
+
+      var timestamp = this.textValue + 'T00:00:00Z';
+
+      var date = _dateUtils2.default.parseISOTimestamp(timestamp);
+
+      return date ? date.getTime() / 1000 : null;
+    }
   }]);
 
   return DateValue;
