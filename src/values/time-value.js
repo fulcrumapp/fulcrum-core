@@ -4,17 +4,7 @@ import TextUtils from '../utils/text-utils';
 
 export default class TimeValue extends TextualValue {
   get displayValue() {
-    if (this.isEmpty) {
-      return null;
-    }
-
-    const time = this.timeValue();
-
-    if (time == null) {
-      return null;
-    }
-
-    return time;
+    return this.textValue;
   }
 
   get searchableValue() {
@@ -26,14 +16,14 @@ export default class TimeValue extends TextualValue {
       return TextUtils.isEmpty(stringValue);
     }
 
-    const thisTime = this.timeValue();
+    const thisTime = this.timeValue;
     const thatTime = DateUtils.parseTime(stringValue);
 
     if (thisTime == null || thatTime == null) {
       return false;
     }
 
-    return thisTime.getTime() < thatTime.getTime();
+    return thisTime < thatTime;
   }
 
   isGreaterThan(stringValue) {
@@ -41,17 +31,25 @@ export default class TimeValue extends TextualValue {
       return TextUtils.isEmpty(stringValue);
     }
 
-    const thisTime = this.timeValue();
+    const thisTime = this.timeValue;
     const thatTime = DateUtils.parseTime(stringValue);
 
     if (thisTime == null || thatTime == null) {
       return false;
     }
 
-    return thisTime.getTime() > thatTime.getTime();
+    return thisTime > thatTime;
   }
 
-  timeValue() {
+  get timeValue() {
+    if (this.isEmpty) {
+      return null;
+    }
+
     return DateUtils.parseTime(this.textValue);
+  }
+
+  get columnValue() {
+    return this.timeValue;
   }
 }

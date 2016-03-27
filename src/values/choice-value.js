@@ -127,7 +127,7 @@ export default class ChoiceValue extends FormValue {
       return allValues[0];
     }
 
-    return '\t' + allValues.join('\t') + '\t';
+    return allValues;
   }
 
   get multipleValues() {

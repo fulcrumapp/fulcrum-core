@@ -58,4 +58,16 @@ export default class DateValue extends TextualValue {
   get dateValue() {
     return DateUtils.parseDate(this.textValue);
   }
+
+  get columnValue() {
+    if (this.isEmpty) {
+      return null;
+    }
+
+    const timestamp = this.textValue + 'T00:00:00Z';
+
+    const date = DateUtils.parseISOTimestamp(timestamp);
+
+    return date ? date.getTime() / 1000 : null;
+  }
 }

@@ -47,7 +47,7 @@ export default class MediaValue extends FormValue {
       ids.push(item.mediaID);
     }
 
-    return ids.join(',');
+    return ids;
   }
 
   get multipleValues() {
