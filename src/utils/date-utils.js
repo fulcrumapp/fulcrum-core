@@ -16,7 +16,21 @@ export default class DateUtils {
     if (!((timeString != null) && timeString.length === 5)) {
       return null;
     }
-    return timeString;
+
+    let [hours, minutes] = timeString.split(':');
+
+    if (hours == null || minutes == null) {
+      return null;
+    }
+
+    hours = +hours;
+    minutes = +minutes;
+
+    if (isNaN(hours) || isNaN(minutes)) {
+      return null;
+    }
+
+    return (hours * 60) + minutes;
   }
 
   static formatTime(date) {
