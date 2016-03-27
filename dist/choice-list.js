@@ -2,6 +2,8 @@
 
 exports.__esModule = true;
 
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
 var _choice = require('./elements/choice');
 
 var _choice2 = _interopRequireDefault(_choice);
@@ -10,35 +12,67 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-var ChoiceList = function ChoiceList(attributes) {
-  _classCallCheck(this, ChoiceList);
+var ChoiceList = function () {
+  function ChoiceList(attributes) {
+    _classCallCheck(this, ChoiceList);
 
-  attributes = attributes || {};
+    this.updateFromAPIAttributes(attributes);
+  }
 
-  this.id = attributes.id;
-  this.name = attributes.name;
-  this.description = attributes.description;
-  this.choices = [];
+  ChoiceList.prototype.updateFromAPIAttributes = function updateFromAPIAttributes(attributes) {
+    attributes = attributes || {};
 
-  if (attributes.choices) {
-    for (var _iterator = attributes.choices, _isArray = Array.isArray(_iterator), _i = 0, _iterator = _isArray ? _iterator : _iterator[Symbol.iterator]();;) {
-      var _ref;
+    this._id = attributes.id;
+    this._name = attributes.name;
+    this._description = attributes.description;
+    this._choicesJSON = attributes.choices || [];
+  };
 
-      if (_isArray) {
-        if (_i >= _iterator.length) break;
-        _ref = _iterator[_i++];
-      } else {
-        _i = _iterator.next();
-        if (_i.done) break;
-        _ref = _i.value;
+  _createClass(ChoiceList, [{
+    key: 'id',
+    get: function get() {
+      return this._id;
+    }
+  }, {
+    key: 'name',
+    get: function get() {
+      return this._name;
+    }
+  }, {
+    key: 'description',
+    get: function get() {
+      return this._description;
+    }
+  }, {
+    key: 'choices',
+    get: function get() {
+      if (!this._choices) {
+        this._choices = [];
+
+        for (var _iterator = this._choicesJSON, _isArray = Array.isArray(_iterator), _i = 0, _iterator = _isArray ? _iterator : _iterator[Symbol.iterator]();;) {
+          var _ref;
+
+          if (_isArray) {
+            if (_i >= _iterator.length) break;
+            _ref = _iterator[_i++];
+          } else {
+            _i = _iterator.next();
+            if (_i.done) break;
+            _ref = _i.value;
+          }
+
+          var choice = _ref;
+
+          this._choices.push(new _choice2.default(choice));
+        }
       }
 
-      var choice = _ref;
-
-      this.choices.push(new _choice2.default(choice));
+      return this._choices;
     }
-  }
-};
+  }]);
+
+  return ChoiceList;
+}();
 
 exports.default = ChoiceList;
 //# sourceMappingURL=choice-list.js.map

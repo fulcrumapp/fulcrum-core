@@ -30,7 +30,7 @@ var ChildElements = function (_Mixin) {
   }
 
   ChildElements.prototype.createChildElements = function createChildElements(elements) {
-    this.elements = [];
+    this._elements = [];
 
     for (var _iterator = elements, _isArray = Array.isArray(_iterator), _i = 0, _iterator = _isArray ? _iterator : _iterator[Symbol.iterator]();;) {
       var _ref;
@@ -48,7 +48,7 @@ var ChildElements = function (_Mixin) {
 
       // hack for circular dependency, not ideal
       ElementFactory = ElementFactory || require('./element-factory').default;
-      this.elements.push(ElementFactory.create(this, element));
+      this._elements.push(ElementFactory.create(this, element));
     }
   };
 
@@ -149,6 +149,15 @@ var ChildElements = function (_Mixin) {
   };
 
   _createClass(ChildElements, [{
+    key: 'elements',
+    get: function get() {
+      if (!this._elements) {
+        this.createChildElements(this._elementsJSON);
+      }
+
+      return this._elements;
+    }
+  }, {
     key: 'allElements',
     get: function get() {
       return this._flattenElements(this.elements);

@@ -32,23 +32,31 @@ var Form = function () {
   function Form(attributes) {
     _classCallCheck(this, Form);
 
+    this.updateFromAPIAttributes(attributes);
+  }
+
+  Form.prototype.updateFromAPIAttributes = function updateFromAPIAttributes(attributes) {
     attributes = attributes || {};
 
     this._id = attributes.id;
-
-    // TODO(zhm) remove json attr
-    this._json = attributes;
-    // TODO(zhm) this might need to go away
-    this.titleFieldKeys = attributes.title_field_keys || [attributes.record_title_key];
-    this.script = attributes.script;
-    this.createChildElements(attributes.elements);
-
+    this._name = attributes.name;
+    this._description = attributes.description;
+    this._elementsJSON = attributes.elements;
+    this._elements = null;
+    this._titleFieldKeysJSON = attributes.title_field_keys;
     this._statusFieldJSON = attributes.status_field;
     this._statusField = null;
-
-    this._name = attributes.name;
+    this._script = attributes.script;
     this._geometryRequired = !!attributes.geometry_required;
-  }
+
+    if (attributes.title_field_keys || attributes.record_title_key) {
+      this._titleFieldKeysJSON = attributes.title_field_keys || [attributes.record_title_key];
+      this._titleFieldKeys = [];
+    } else {
+      this._titleFieldKeysJSON = [];
+      this._titleFieldKeys = [];
+    }
+  };
 
   Form.prototype.load = function load(dataSource, callback) {
     var loadElements = [];
@@ -94,8 +102,15 @@ var Form = function () {
   };
 
   Form.prototype.toJSON = function toJSON() {
-    // TODO(zhm) actually implement this so it returns a copy
-    return this._json;
+    var json = {};
+
+    json.id = this.id || null;
+    json.name = this.name || null;
+    json.description = this.description || null;
+    json.script = this.script || null;
+    json.elements = JSON.parse(JSON.stringify(this.elementsJSON));
+
+    return json;
   };
 
   _createClass(Form, [{
@@ -125,6 +140,16 @@ var Form = function () {
     key: 'name',
     get: function get() {
       return this._name;
+    }
+  }, {
+    key: 'description',
+    get: function get() {
+      return this._description;
+    }
+  }, {
+    key: 'script',
+    get: function get() {
+      return this._script;
     }
   }]);
 

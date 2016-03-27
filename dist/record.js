@@ -44,13 +44,9 @@ var Record = function (_Feature) {
   function Record(attributes, form) {
     _classCallCheck(this, Record);
 
-    if (!form) {
-      throw new ReferenceError('A form must be passed');
-    }
-
     var _this = _possibleConstructorReturn(this, _Feature.call(this));
 
-    _this._form = form;
+    _this._form = form || null;
 
     _this.updateFromAPIAttributes(attributes);
     return _this;
