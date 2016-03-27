@@ -6,6 +6,8 @@ import async from 'async';
 
 export default class Form {
   constructor(attributes) {
+    attributes = attributes || {};
+
     this._id = attributes.id;
 
     // TODO(zhm) remove json attr

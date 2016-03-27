@@ -32,6 +32,8 @@ var Form = function () {
   function Form(attributes) {
     _classCallCheck(this, Form);
 
+    attributes = attributes || {};
+
     this._id = attributes.id;
 
     // TODO(zhm) remove json attr
