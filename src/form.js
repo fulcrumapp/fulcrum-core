@@ -86,7 +86,7 @@ export default class Form {
     json.name = this.name || null;
     json.description = this.description || null;
     json.script = this.script || null;
-    json.elements = JSON.parse(JSON.stringify(this.elementsJSON));
+    json.elements = JSON.parse(JSON.stringify(this._elementsJSON));
 
     return json;
   }
@@ -105,6 +105,10 @@ export default class Form {
 
   get script() {
     return this._script;
+  }
+
+  get titleFieldKeys() {
+    return this._titleFieldKeys;
   }
 }
 

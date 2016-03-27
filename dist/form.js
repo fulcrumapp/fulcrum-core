@@ -108,7 +108,7 @@ var Form = function () {
     json.name = this.name || null;
     json.description = this.description || null;
     json.script = this.script || null;
-    json.elements = JSON.parse(JSON.stringify(this.elementsJSON));
+    json.elements = JSON.parse(JSON.stringify(this._elementsJSON));
 
     return json;
   };
@@ -150,6 +150,11 @@ var Form = function () {
     key: 'script',
     get: function get() {
       return this._script;
+    }
+  }, {
+    key: 'titleFieldKeys',
+    get: function get() {
+      return this._titleFieldKeys;
     }
   }]);
 
