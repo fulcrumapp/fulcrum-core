@@ -17,18 +17,16 @@ export default class Form {
     this._description = attributes.description;
     this._elementsJSON = attributes.elements;
     this._elements = null;
-    this._titleFieldKeysJSON = attributes.title_field_keys;
     this._statusFieldJSON = attributes.status_field;
     this._statusField = null;
     this._script = attributes.script;
     this._geometryRequired = !!attributes.geometry_required;
+    this._reportTemplatesJSON = attributes.report_templates;
 
     if (attributes.title_field_keys || attributes.record_title_key) {
       this._titleFieldKeysJSON = attributes.title_field_keys || [attributes.record_title_key];
-      this._titleFieldKeys = [];
     } else {
       this._titleFieldKeysJSON = [];
-      this._titleFieldKeys = [];
     }
   }
 
@@ -108,7 +106,15 @@ export default class Form {
   }
 
   get titleFieldKeys() {
-    return this._titleFieldKeys;
+    return this._titleFieldKeysJSON || [];
+  }
+
+  get reportTemplates() {
+    return this._reportTemplatesJSON || [];
+  }
+
+  get reportTemplate() {
+    return this.reportTemplates.length ? this.reportTemplates[0] : null;
   }
 }
 

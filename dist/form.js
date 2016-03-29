@@ -43,18 +43,16 @@ var Form = function () {
     this._description = attributes.description;
     this._elementsJSON = attributes.elements;
     this._elements = null;
-    this._titleFieldKeysJSON = attributes.title_field_keys;
     this._statusFieldJSON = attributes.status_field;
     this._statusField = null;
     this._script = attributes.script;
     this._geometryRequired = !!attributes.geometry_required;
+    this._reportTemplatesJSON = attributes.report_templates;
 
     if (attributes.title_field_keys || attributes.record_title_key) {
       this._titleFieldKeysJSON = attributes.title_field_keys || [attributes.record_title_key];
-      this._titleFieldKeys = [];
     } else {
       this._titleFieldKeysJSON = [];
-      this._titleFieldKeys = [];
     }
   };
 
@@ -154,7 +152,17 @@ var Form = function () {
   }, {
     key: 'titleFieldKeys',
     get: function get() {
-      return this._titleFieldKeys;
+      return this._titleFieldKeysJSON || [];
+    }
+  }, {
+    key: 'reportTemplates',
+    get: function get() {
+      return this._reportTemplatesJSON || [];
+    }
+  }, {
+    key: 'reportTemplate',
+    get: function get() {
+      return this.reportTemplates.length ? this.reportTemplates[0] : null;
     }
   }]);
 

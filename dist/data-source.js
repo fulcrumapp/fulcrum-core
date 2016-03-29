@@ -247,6 +247,10 @@ var DataSource = function () {
     this.invoke(this.root, 'saveRecord', [record], callback);
   };
 
+  DataSource.prototype.deleteRecord = function deleteRecord(record, callback) {
+    this.invoke(this.root, 'deleteRecord', [record], callback);
+  };
+
   _createClass(DataSource, [{
     key: 'source',
     get: function get() {

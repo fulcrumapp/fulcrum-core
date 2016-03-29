@@ -230,4 +230,8 @@ export default class DataSource {
   saveRecord(record, callback) {
     this.invoke(this.root, 'saveRecord', [record], callback);
   }
+
+  deleteRecord(record, callback) {
+    this.invoke(this.root, 'deleteRecord', [record], callback);
+  }
 }
