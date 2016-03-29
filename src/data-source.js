@@ -175,6 +175,10 @@ export default class DataSource {
     this.invoke(this.root, 'getRecords', [form, params], callback);
   }
 
+  queryRecords(form, params, callback) {
+    this.invoke(this.root, 'queryRecords', [form, params], callback);
+  }
+
   getUsers(params, callback) {
     this.invoke(this.root, 'getUsers', [params], callback);
   }
