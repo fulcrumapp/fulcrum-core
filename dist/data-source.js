@@ -191,6 +191,10 @@ var DataSource = function () {
     this.invoke(this.root, 'getRecords', [form, params], callback);
   };
 
+  DataSource.prototype.queryRecords = function queryRecords(form, params, callback) {
+    this.invoke(this.root, 'queryRecords', [form, params], callback);
+  };
+
   DataSource.prototype.getUsers = function getUsers(params, callback) {
     this.invoke(this.root, 'getUsers', [params], callback);
   };
