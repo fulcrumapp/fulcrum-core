@@ -117,7 +117,7 @@ export default class ClassificationValue extends FormValue {
       return null;
     }
 
-    return allValues.join('\t');
+    return allValues;
   }
 
   get multipleValues() {
