@@ -22,6 +22,15 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : _defaults(subClass, superClass); }
 
+var DEFAULT_STATUS_ELEMENT = {
+  label: 'Status',
+  key: '@status',
+  data_name: 'status',
+  enabled: false,
+  read_only: false,
+  choices: []
+};
+
 var StatusElement = function (_TextualElement) {
   _inherits(StatusElement, _TextualElement);
 
@@ -30,11 +39,13 @@ var StatusElement = function (_TextualElement) {
 
     attributes.type = 'StatusField';
 
-    var _this = _possibleConstructorReturn(this, _TextualElement.call(this, parent, attributes));
+    var attrs = Object.assign({}, DEFAULT_STATUS_ELEMENT, attributes);
+
+    var _this = _possibleConstructorReturn(this, _TextualElement.call(this, parent, attrs));
 
     _this.choices = [];
 
-    for (var _iterator = attributes.choices, _isArray = Array.isArray(_iterator), _i = 0, _iterator = _isArray ? _iterator : _iterator[Symbol.iterator]();;) {
+    for (var _iterator = attrs.choices, _isArray = Array.isArray(_iterator), _i = 0, _iterator = _isArray ? _iterator : _iterator[Symbol.iterator]();;) {
       var _ref;
 
       if (_isArray) {
@@ -51,8 +62,8 @@ var StatusElement = function (_TextualElement) {
       _this.choices.push(new _statusChoice2.default(choice));
     }
 
-    _this._enabled = !!attributes.enabled;
-    _this._readOnly = !!attributes.read_only;
+    _this._enabled = !!attrs.enabled;
+    _this._readOnly = !!attrs.read_only;
     return _this;
   }
 

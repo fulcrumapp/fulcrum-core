@@ -45,6 +45,7 @@ var RepeatableItemValue = function (_Feature) {
     _this._createdAt = _dateUtils2.default.parseEpochTimestamp(item.created_at);
     _this._updatedAt = _dateUtils2.default.parseEpochTimestamp(item.updated_at);
     _this._formValuesJSON = item.form_values;
+    _this._version = item.version || 1;
 
     var geometry = item.geometry;
 
@@ -93,11 +94,16 @@ var RepeatableItemValue = function (_Feature) {
       return this._createdAt;
     },
     set: function set(createdAt) {
-      if (!(createdAt instanceof Date)) {
+      if (createdAt != null && !(createdAt instanceof Date)) {
         throw new TypeError('createdAt must be a Date');
       }
 
       this._createdAt = createdAt;
+    }
+  }, {
+    key: 'version',
+    get: function get() {
+      return this._version;
     }
   }, {
     key: 'updatedAt',
@@ -105,7 +111,7 @@ var RepeatableItemValue = function (_Feature) {
       return this._updatedAt;
     },
     set: function set(updatedAt) {
-      if (!(updatedAt instanceof Date)) {
+      if (updatedAt != null && !(updatedAt instanceof Date)) {
         throw new TypeError('updatedAt must be a Date');
       }
 

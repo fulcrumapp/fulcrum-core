@@ -52,7 +52,11 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function noop() {
-  (arguments.length <= arguments.length - 1 + 0 ? undefined : arguments[arguments.length - 1 + 0])();
+  for (var _len = arguments.length, params = Array(_len), _key = 0; _key < _len; _key++) {
+    params[_key] = arguments[_key];
+  }
+
+  params[params.length - 1]();
 }
 
 var DataSource = function () {
@@ -66,8 +70,8 @@ var DataSource = function () {
     var _this = this;
 
     var invokeCallback = function invokeCallback(err) {
-      for (var _len = arguments.length, objects = Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
-        objects[_key - 1] = arguments[_key];
+      for (var _len2 = arguments.length, objects = Array(_len2 > 1 ? _len2 - 1 : 0), _key2 = 1; _key2 < _len2; _key2++) {
+        objects[_key2 - 1] = arguments[_key2];
       }
 
       if (err) {

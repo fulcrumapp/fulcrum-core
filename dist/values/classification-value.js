@@ -252,7 +252,7 @@ var ClassificationValue = function (_FormValue) {
         return null;
       }
 
-      return allValues.join('\t');
+      return allValues;
     }
   }, {
     key: 'multipleValues',
