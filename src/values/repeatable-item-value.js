@@ -14,6 +14,7 @@ export default class RepeatableItemValue extends Feature {
     this._createdAt = DateUtils.parseEpochTimestamp(item.created_at);
     this._updatedAt = DateUtils.parseEpochTimestamp(item.updated_at);
     this._formValuesJSON = item.form_values;
+    this._version = item.version || 1;
 
     const geometry = item.geometry;
 
@@ -33,6 +34,10 @@ export default class RepeatableItemValue extends Feature {
 
   get createdAt() {
     return this._createdAt;
+  }
+
+  get version() {
+    return this._version;
   }
 
   set createdAt(createdAt) {
