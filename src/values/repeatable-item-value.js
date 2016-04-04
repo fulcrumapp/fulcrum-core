@@ -41,7 +41,7 @@ export default class RepeatableItemValue extends Feature {
   }
 
   set createdAt(createdAt) {
-    if (!(createdAt instanceof Date)) {
+    if (createdAt != null && !(createdAt instanceof Date)) {
       throw new TypeError('createdAt must be a Date');
     }
 
@@ -53,7 +53,7 @@ export default class RepeatableItemValue extends Feature {
   }
 
   set updatedAt(updatedAt) {
-    if (!(updatedAt instanceof Date)) {
+    if (updatedAt != null && !(updatedAt instanceof Date)) {
       throw new TypeError('updatedAt must be a Date');
     }
 
