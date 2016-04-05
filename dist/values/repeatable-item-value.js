@@ -59,7 +59,7 @@ var RepeatableItemValue = function (_Feature) {
   RepeatableItemValue.prototype.toJSON = function toJSON() {
     var json = {};
 
-    json.id = this.identifier;
+    json.id = this.id;
     json.created_at = _dateUtils2.default.formatEpochTimestamp(this.createdAt);
     json.updated_at = _dateUtils2.default.formatEpochTimestamp(this.updatedAt);
     json.form_values = this.formValues.toJSON();
