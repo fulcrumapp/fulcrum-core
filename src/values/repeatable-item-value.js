@@ -75,7 +75,7 @@ export default class RepeatableItemValue extends Feature {
   toJSON() {
     const json = {};
 
-    json.id = this.identifier;
+    json.id = this.id;
     json.created_at = DateUtils.formatEpochTimestamp(this.createdAt);
     json.updated_at = DateUtils.formatEpochTimestamp(this.updatedAt);
     json.form_values = this.formValues.toJSON();
