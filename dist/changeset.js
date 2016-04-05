@@ -93,7 +93,7 @@ var Changeset = function () {
   }, {
     key: 'metadataDescription',
     get: function get() {
-      var parts = [this._metadata.application, this._metadata.application_version, this._metadata.browser, this._metadata.browser_version, this._metadata.platform, this._metadata.platform_version, this._metadata.device_manufacturer, this._metadata.device_model];
+      var parts = [_lodash2.default.compact([this._metadata.application, this._metadata.application_version]).join(' '), _lodash2.default.compact([this._metadata.browser, this._metadata.browser_version]).join(' '), _lodash2.default.compact([this._metadata.platform, this._metadata.platform_version]).join(' '), _lodash2.default.compact([this._metadata.device_manufacturer, this._metadata.device_model]).join(' ')];
 
       return _lodash2.default.compact(parts).join(' / ');
     }
