@@ -48,9 +48,30 @@ var Record = function (_Feature) {
 
     _this._form = form || null;
 
+    console.log('making', attributes);
     _this.updateFromAPIAttributes(attributes);
     return _this;
   }
+
+  Record.prototype.loadChangeset = function loadChangeset(dataSource, callback) {
+    var _this2 = this;
+
+    if (this._changesetID == null) {
+      console.log('done');
+      callback();
+      return;
+    }
+
+    dataSource.getChangeset(this._changesetID, function (err, changeset) {
+      if (err) {
+        return callback(err);
+      }
+
+      _this2._changeset = changeset;
+
+      return callback();
+    });
+  };
 
   Record.prototype.toJSON = function toJSON() {
     var json = {};
@@ -95,6 +116,10 @@ var Record = function (_Feature) {
       json.course = this._course;
     }
 
+    if (this._changesetID) {
+      json.changeset_id = this._changesetID;
+    }
+
     return json;
   };
 
@@ -124,6 +149,8 @@ var Record = function (_Feature) {
     this._altitude = attributes.altitude || null;
     this._speed = attributes.speed || null;
     this._course = attributes.course || null;
+
+    this._changesetID = attributes.changeset_id || null;
   };
 
   Record.prototype.updateTimestamps = function updateTimestamps() {
@@ -216,6 +243,15 @@ var Record = function (_Feature) {
     key: 'hasCoordinate',
     get: function get() {
       return this._latitude != null && this._longitude != null;
+    }
+  }, {
+    key: 'changeset',
+    get: function get() {
+      return this._changeset;
+    },
+    set: function set(changeset) {
+      this._changesetID = changeset.id;
+      this._changeset = changeset;
     }
   }, {
     key: 'isGeometryEnabled',

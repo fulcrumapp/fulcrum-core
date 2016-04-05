@@ -207,6 +207,10 @@ var DataSource = function () {
     this.invoke(this.root, 'getProjects', [params], callback);
   };
 
+  DataSource.prototype.getChangeset = function getChangeset(id, callback) {
+    this.invoke(this.root, 'getChangeset', [id], callback);
+  };
+
   DataSource.prototype.getPhoto = function getPhoto(id, callback) {
     this.invoke(this.root, 'getPhoto', [id], callback);
   };
