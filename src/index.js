@@ -51,6 +51,7 @@ import MediaItemValue from './values/media-item-value';
 import User from './user';
 import Role from './role';
 import Project from './project';
+import Changeset from './changeset';
 
 export {Form};
 export {Record};
@@ -105,3 +106,4 @@ export {MediaItemValue};
 export {User};
 export {Role};
 export {Project};
+export {Changeset};

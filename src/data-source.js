@@ -187,6 +187,10 @@ export default class DataSource {
     this.invoke(this.root, 'getProjects', [params], callback);
   }
 
+  getChangeset(id, callback) {
+    this.invoke(this.root, 'getChangeset', [id], callback);
+  }
+
   getPhoto(id, callback) {
     this.invoke(this.root, 'getPhoto', [id], callback);
   }

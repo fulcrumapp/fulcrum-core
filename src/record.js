@@ -74,6 +74,32 @@ export default class Record extends Feature {
     return this._latitude != null && this._longitude != null;
   }
 
+  get changeset() {
+    return this._changeset;
+  }
+
+  set changeset(changeset) {
+    this._changesetID = changeset.id;
+    this._changeset = changeset;
+  }
+
+  loadChangeset(dataSource, callback) {
+    if (this._changesetID == null) {
+      callback();
+      return;
+    }
+
+    dataSource.getChangeset(this._changesetID, (err, changeset) => {
+      if (err) {
+        return callback(err);
+      }
+
+      this._changeset = changeset;
+
+      return callback();
+    });
+  }
+
   toJSON() {
     const json = {};
 
@@ -117,6 +143,10 @@ export default class Record extends Feature {
       json.course = this._course;
     }
 
+    if (this._changesetID) {
+      json.changeset_id = this._changesetID;
+    }
+
     return json;
   }
 
@@ -146,6 +176,8 @@ export default class Record extends Feature {
     this._altitude = attributes.altitude || null;
     this._speed = attributes.speed || null;
     this._course = attributes.course || null;
+
+    this._changesetID = attributes.changeset_id || null;
   }
 
   updateTimestamps() {
