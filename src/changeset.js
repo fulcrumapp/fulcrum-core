@@ -74,14 +74,17 @@ export default class Changeset {
 
   get metadataDescription() {
     const parts = [
-      this._metadata.application,
-      this._metadata.application_version,
-      this._metadata.browser,
-      this._metadata.browser_version,
-      this._metadata.platform,
-      this._metadata.platform_version,
-      this._metadata.device_manufacturer,
-      this._metadata.device_model
+      _.compact([ this._metadata.application,
+                  this._metadata.application_version ]).join(' '),
+
+      _.compact([ this._metadata.browser,
+                  this._metadata.browser_version ]).join(' '),
+
+      _.compact([ this._metadata.platform,
+                  this._metadata.platform_version ]).join(' '),
+
+      _.compact([ this._metadata.device_manufacturer,
+                  this._metadata.device_model ]).join(' ')
     ];
 
     return _.compact(parts).join(' / ');
