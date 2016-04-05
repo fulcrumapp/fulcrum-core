@@ -48,7 +48,6 @@ var Record = function (_Feature) {
 
     _this._form = form || null;
 
-    console.log('making', attributes);
     _this.updateFromAPIAttributes(attributes);
     return _this;
   }
@@ -57,7 +56,6 @@ var Record = function (_Feature) {
     var _this2 = this;
 
     if (this._changesetID == null) {
-      console.log('done');
       callback();
       return;
     }
