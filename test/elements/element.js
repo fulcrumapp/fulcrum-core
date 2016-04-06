@@ -22,9 +22,9 @@ describe('elements', () => {
     element.dataName.should.eql('name');
     element.description.should.eql('Enter your name');
     element.defaultValue.should.eql('no name');
-    element.required.should.eql(true);
-    element.hidden.should.eql(false);
-    element.disabled.should.eql(false);
+    element.isRequired.should.eql(true);
+    element.isHidden.should.eql(false);
+    element.isDisabled.should.eql(false);
     element.minLength.should.eql(1);
     element.maxLength.should.eql(30);
     element.hasMinLength.should.eql(true);

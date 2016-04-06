@@ -20,7 +20,7 @@ describe('classification fields', () => {
     const field = record.form.find('os');
 
     field.classificationItems[0].should.be.instanceof(Classification);
-    field.classificationItems[1].children[0].should.be.instanceof(Classification);
+    field.classificationItems[1].items[0].should.be.instanceof(Classification);
   });
 
   it('supports overriding the choices', () => {
@@ -34,16 +34,16 @@ describe('classification fields', () => {
                                           { label: 'Test' } ];
 
     // override the options on the fly
-    field.classificationItems[1].children[0].should.be.instanceof(Classification);
-    field.classificationItems[1].children[0].value.should.eql('Red');
-    field.classificationItems[1].children[1].value.should.eql('Green');
-    field.classificationItems[1].children[2].value.should.eql('Blue');
+    field.classificationItems[1].items[0].should.be.instanceof(Classification);
+    field.classificationItems[1].items[0].value.should.eql('Red');
+    field.classificationItems[1].items[1].value.should.eql('Green');
+    field.classificationItems[1].items[2].value.should.eql('Blue');
 
     // now bring the original items back
     field.overrideClassificationItems = null;
 
-    field.classificationItems[1].children[0].value.should.eql('Server');
-    field.classificationItems[2].children[0].value.should.eql('Ubuntu');
+    field.classificationItems[1].items[0].value.should.eql('Server');
+    field.classificationItems[2].items[0].value.should.eql('Ubuntu');
   });
 
   it('supports filtering the choices', () => {
@@ -87,7 +87,7 @@ describe('classification fields', () => {
 
     value.length.should.eql(3);
 
-    value.columnValue.should.eql('Linux\tUbuntu\t11.1');
+    value.columnValue.should.eql(['Linux', 'Ubuntu', '11.1']);
 
     value.hasOtherValue.should.eql(false);
 
@@ -101,7 +101,7 @@ describe('classification fields', () => {
 
     value.displayValue.should.eql('Linux ▸ Ubuntu ▸ 11.1');
 
-    const newItem = value.element.classificationItems[1].children[0].children[0];
+    const newItem = value.element.classificationItems[1].items[0].items[0];
 
     value.setSelectedClassification(newItem);
 
@@ -117,7 +117,7 @@ describe('classification fields', () => {
 
     value.length.should.eql(3);
 
-    value.columnValue.should.eql('Windows\tServer\t2000');
+    value.columnValue.should.eql(['Windows', 'Server', '2000']);
 
     value.hasOtherValue.should.eql(false);
 
@@ -145,7 +145,7 @@ describe('classification fields', () => {
     shouldBeNull(value.otherValue);
 
     // set an other value
-    const anotherItem = value.element.classificationItems[1].children[0];
+    const anotherItem = value.element.classificationItems[1].items[0];
 
     value.setSelectedClassification(anotherItem, '2015');
 
@@ -161,7 +161,7 @@ describe('classification fields', () => {
 
     value.length.should.eql(3);
 
-    value.columnValue.should.eql('Windows\tServer\t2015');
+    value.columnValue.should.eql(['Windows', 'Server', '2015']);
 
     value.hasOtherValue.should.eql(true);
 

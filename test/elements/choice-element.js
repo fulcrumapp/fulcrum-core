@@ -151,7 +151,7 @@ describe('choice fields', () => {
 
     value.length.should.eql(3);
 
-    value.columnValue.should.eql('\t24\t38\tAnother\t');
+    value.columnValue.should.eql(['24', '38', 'Another']);
 
     value.hasOtherValue.should.eql(true);
 
