@@ -39,6 +39,13 @@ export default class Form {
   }
 
   load(dataSource, callback) {
+    if (this._schemaLoaded) {
+      callback();
+      return;
+    }
+
+    this._schemaLoaded = true;
+
     const loadElements = [];
 
     for (const element of this.allElements) {
