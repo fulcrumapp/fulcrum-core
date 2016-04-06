@@ -2,6 +2,8 @@
 
 exports.__esModule = true;
 
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
 var _textualValue = require('./textual-value');
 
 var _textualValue2 = _interopRequireDefault(_textualValue);
@@ -24,6 +26,20 @@ var StatusValue = function (_TextualValue) {
 
     return _possibleConstructorReturn(this, _TextualValue.apply(this, arguments));
   }
+
+  _createClass(StatusValue, [{
+    key: 'displayValue',
+    get: function get() {
+      var choice = this.element.statusForValue(this.textValue);
+
+      return choice ? choice.label : this.textValue || '';
+    }
+  }, {
+    key: 'searchableValue',
+    get: function get() {
+      return this.displayValue;
+    }
+  }]);
 
   return StatusValue;
 }(_textualValue2.default);
