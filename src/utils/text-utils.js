@@ -22,7 +22,7 @@ export default class TextUtils {
       return false;
     }
 
-    return _.contains(haystack.toLowerCase(), needle.toLowerCase());
+    return _.includes(haystack.toLowerCase(), needle.toLowerCase());
   }
 
   static startsWith(haystack, needle) {
