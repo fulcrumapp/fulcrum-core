@@ -47,7 +47,11 @@ var Form = function () {
     this._statusField = null;
     this._script = attributes.script;
     this._geometryRequired = !!attributes.geometry_required;
+    this._geometryTypes = attributes.geometry_types;
     this._reportTemplatesJSON = attributes.report_templates;
+
+    this._projectEnabled = attributes.project_enabled != null ? !!attributes.project_enabled : true;
+    this._assignmentEnabled = attributes.assignment_enabled != null ? !!attributes.assignment_enabled : true;
 
     if (attributes.title_field_keys || attributes.record_title_key) {
       this._titleFieldKeysJSON = attributes.title_field_keys || [attributes.record_title_key];
@@ -57,6 +61,13 @@ var Form = function () {
   };
 
   Form.prototype.load = function load(dataSource, callback) {
+    if (this._schemaLoaded) {
+      callback();
+      return;
+    }
+
+    this._schemaLoaded = true;
+
     var loadElements = [];
 
     for (var _iterator = this.allElements, _isArray = Array.isArray(_iterator), _i = 0, _iterator = _isArray ? _iterator : _iterator[Symbol.iterator]();;) {
@@ -107,6 +118,12 @@ var Form = function () {
     json.description = this.description || null;
     json.script = this.script || null;
     json.elements = JSON.parse(JSON.stringify(this._elementsJSON));
+    json.assignment_enabled = this.isAssignmentEnabled;
+    json.project_enabled = this.isProjectEnabled;
+    json.geometry_required = this.isGeometryRequired;
+    json.geometry_types = this._geometryTypes;
+    json.title_field_keys = this.titleFieldKeys;
+    json.report_templates = this.reportTemplates;
 
     return json;
   };
@@ -128,6 +145,21 @@ var Form = function () {
     key: 'hasHiddenParent',
     get: function get() {
       return false;
+    }
+  }, {
+    key: 'isProjectEnabled',
+    get: function get() {
+      return this._projectEnabled;
+    }
+  }, {
+    key: 'isAssignmentEnabled',
+    get: function get() {
+      return this._assignmentEnabled;
+    }
+  }, {
+    key: 'isGeometryEnabled',
+    get: function get() {
+      return this._geometryTypes && this._geometryTypes.length;
     }
   }, {
     key: 'isGeometryRequired',

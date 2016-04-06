@@ -36,7 +36,7 @@ var TextUtils = function () {
       return false;
     }
 
-    return _lodash2.default.contains(haystack.toLowerCase(), needle.toLowerCase());
+    return _lodash2.default.includes(haystack.toLowerCase(), needle.toLowerCase());
   };
 
   TextUtils.startsWith = function startsWith(haystack, needle) {
