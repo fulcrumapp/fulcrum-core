@@ -252,6 +252,16 @@ var Record = function (_Feature) {
       this._changeset = changeset;
     }
   }, {
+    key: 'createdBy',
+    get: function get() {
+      return this._createdBy;
+    }
+  }, {
+    key: 'updatedBy',
+    get: function get() {
+      return this._updatedBy;
+    }
+  }, {
     key: 'isGeometryEnabled',
     get: function get() {
       return this.form.isGeometryEnabled;

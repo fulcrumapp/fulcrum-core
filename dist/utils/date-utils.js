@@ -10,6 +10,10 @@ var _lodash = require('lodash');
 
 var _lodash2 = _interopRequireDefault(_lodash);
 
+var _relativeDate = require('relative-date');
+
+var _relativeDate2 = _interopRequireDefault(_relativeDate);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -128,7 +132,20 @@ var DateUtils = function () {
     if (date == null) {
       return null;
     }
+
     return DateUtils.__formatLocalizedDate(date);
+  };
+
+  DateUtils.formatLocalizedTimestamp = function formatLocalizedTimestamp(date) {
+    if (date == null) {
+      return null;
+    }
+
+    return date.toLocaleString();
+  };
+
+  DateUtils.formatRelativeTimestamp = function formatRelativeTimestamp(date) {
+    return (0, _relativeDate2.default)(date);
   };
 
   DateUtils.__formatLocalizedDate = function __formatLocalizedDate(date) {
