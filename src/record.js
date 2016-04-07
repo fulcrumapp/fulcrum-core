@@ -83,6 +83,14 @@ export default class Record extends Feature {
     this._changeset = changeset;
   }
 
+  get createdBy() {
+    return this._createdBy;
+  }
+
+  get updatedBy() {
+    return this._updatedBy;
+  }
+
   loadChangeset(dataSource, callback) {
     if (this._changesetID == null) {
       callback();
