@@ -159,7 +159,7 @@ var Form = function () {
   }, {
     key: 'isGeometryEnabled',
     get: function get() {
-      return this._geometryTypes && this._geometryTypes.length;
+      return this._geometryTypes && this._geometryTypes.length > 0;
     }
   }, {
     key: 'isGeometryRequired',

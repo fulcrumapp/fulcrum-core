@@ -37,7 +37,7 @@ var RepeatableElement = function (_ContainerElement) {
   _createClass(RepeatableElement, [{
     key: 'isGeometryEnabled',
     get: function get() {
-      return this._geometryTypes && this._geometryTypes.length;
+      return this._geometryTypes && this._geometryTypes.length > 0;
     }
   }, {
     key: 'isGeometryRequired',
