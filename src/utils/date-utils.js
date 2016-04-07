@@ -1,5 +1,6 @@
 import Locale from './locale';
 import _ from 'lodash';
+import relativeDate from 'relative-date';
 
 let intl = null;
 
@@ -105,7 +106,20 @@ export default class DateUtils {
     if (date == null) {
       return null;
     }
+
     return DateUtils.__formatLocalizedDate(date);
+  }
+
+  static formatLocalizedTimestamp(date) {
+    if (date == null) {
+      return null;
+    }
+
+    return date.toLocaleString();
+  }
+
+  static formatRelativeTimestamp(date) {
+    return relativeDate(date);
   }
 
   static __formatLocalizedDate(date) {
