@@ -19,6 +19,8 @@ var Role = function () {
     this._canChangeStatus = !!attributes.can_change_status;
     this._canChangeProject = !!attributes.can_change_project;
     this._canChangeAssignment = !!attributes.can_assign_records;
+    this._canRunReports = !!attributes.can_run_reports;
+    this._canDeleteRecords = !!attributes.can_delete_records;
   }
 
   _createClass(Role, [{
@@ -35,6 +37,16 @@ var Role = function () {
     key: "canChangeAssignment",
     get: function get() {
       return this._canChangeAssignment;
+    }
+  }, {
+    key: "canDeleteRecords",
+    get: function get() {
+      return this._canDeleteRecords;
+    }
+  }, {
+    key: "canRunReports",
+    get: function get() {
+      return this._canRunReports;
     }
   }]);
 
