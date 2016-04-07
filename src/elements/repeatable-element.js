@@ -12,7 +12,7 @@ export default class RepeatableElement extends ContainerElement {
   }
 
   get isGeometryEnabled() {
-    return this._geometryTypes && this._geometryTypes.length;
+    return this._geometryTypes && this._geometryTypes.length > 0;
   }
 
   get isGeometryRequired() {
