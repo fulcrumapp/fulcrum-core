@@ -154,11 +154,11 @@ var Record = function (_Feature) {
   Record.prototype.updateTimestamps = function updateTimestamps() {
     var now = new Date();
 
-    if (this._createdAt == null) {
-      this.createdAt = now;
+    if (this.clientCreatedAt == null) {
+      this.clientCreatedAt = now;
     }
 
-    this.updatedAt = now;
+    this.clientUpdatedAt = now;
   };
 
   Record.prototype.get = function get(key, formValues) {

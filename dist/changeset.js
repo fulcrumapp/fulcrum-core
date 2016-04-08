@@ -91,9 +91,18 @@ var Changeset = function () {
       return (0, _util.format)('Submitted %s by %s from %s', this._createdAt, this._createdBy, this.metadataDescription);
     }
   }, {
+    key: 'application',
+    get: function get() {
+      if (this._metadata.import_id) {
+        return 'Fulcrum Importer';
+      } else {
+        return this._metadata.application;
+      }
+    }
+  }, {
     key: 'metadataDescription',
     get: function get() {
-      var parts = [_lodash2.default.compact([this._metadata.application, this._metadata.application_version]).join(' '), _lodash2.default.compact([this._metadata.browser, this._metadata.browser_version]).join(' '), _lodash2.default.compact([this._metadata.platform, this._metadata.platform_version]).join(' '), _lodash2.default.compact([this._metadata.device_manufacturer, this._metadata.device_model]).join(' ')];
+      var parts = [_lodash2.default.compact([this.application, this._metadata.application_version]).join(' '), _lodash2.default.compact([this._metadata.browser, this._metadata.browser_version]).join(' '), _lodash2.default.compact([this._metadata.platform, this._metadata.platform_version]).join(' '), _lodash2.default.compact([this._metadata.device_manufacturer, this._metadata.device_model]).join(' ')];
 
       return _lodash2.default.compact(parts).join(' / ');
     }
