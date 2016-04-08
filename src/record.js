@@ -191,11 +191,11 @@ export default class Record extends Feature {
   updateTimestamps() {
     const now = new Date();
 
-    if (this._createdAt == null) {
-      this.createdAt = now;
+    if (this.clientCreatedAt == null) {
+      this.clientCreatedAt = now;
     }
 
-    this.updatedAt = now;
+    this.clientUpdatedAt = now;
   }
 
   get isGeometryEnabled() {

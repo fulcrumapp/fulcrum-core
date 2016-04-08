@@ -72,9 +72,17 @@ export default class Changeset {
                   this.metadataDescription);
   }
 
+  get application() {
+    if (this._metadata.import_id) {
+      return 'Fulcrum Importer';
+    } else {
+      return this._metadata.application;
+    }
+  }
+
   get metadataDescription() {
     const parts = [
-      _.compact([ this._metadata.application,
+      _.compact([ this.application,
                   this._metadata.application_version ]).join(' '),
 
       _.compact([ this._metadata.browser,
