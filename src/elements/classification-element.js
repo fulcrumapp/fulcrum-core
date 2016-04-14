@@ -46,6 +46,12 @@ export default class ClassificationElement extends Element {
     this._overrideClassificationItems = classificationItems;
   }
 
+  get overrideValues() {
+    return Object.assign(super.overrideValues, {
+      overrideClassificationItems: this._overrideClassificationItems
+    });
+  }
+
   get filteredClassifications() {
     const items = this.classificationSet.items;
 

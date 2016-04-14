@@ -91,6 +91,12 @@ export default class ChoiceElement extends Element {
     this._overrideChoices = choices;
   }
 
+  get overrideValues() {
+    return Object.assign(super.overrideValues, {
+      overrideChoices: this._overrideChoices
+    });
+  }
+
   choiceByValue(value) {
     if (!this._choicesByValue) {
       this._choicesByValue = {};
