@@ -7,6 +7,14 @@ export default class ContainerElement extends Element {
 
     this.createChildElements(attributes.elements);
   }
+
+  resetOverrides() {
+    super.resetOverrides();
+
+    for (const element of this.elements) {
+      element.resetOverrides();
+    }
+  }
 }
 
 ChildElements.includeInto(ContainerElement);

@@ -219,6 +219,16 @@ export default class Element {
     };
   }
 
+  resetOverrides() {
+    this._overrideLabel = null;
+    this._overrideDescription = null;
+    this._overrideIsRequired = null;
+    this._overrideIsHidden = null;
+    this._overrideIsDisabled = null;
+    this._overrideMinLength = null;
+    this._overrideMaxLength = null;
+  }
+
   get isLengthValidationSupported() {
     return false;
   }

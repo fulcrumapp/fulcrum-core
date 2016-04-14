@@ -52,6 +52,12 @@ export default class ClassificationElement extends Element {
     });
   }
 
+  resetOverrides() {
+    super.resetOverrides();
+
+    this._overrideClassificationItems = null;
+  }
+
   get filteredClassifications() {
     const items = this.classificationSet.items;
 

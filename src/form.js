@@ -145,6 +145,14 @@ export default class Form {
   get reportTemplate() {
     return this.reportTemplates.length ? this.reportTemplates[0] : null;
   }
+
+  resetOverrides() {
+    for (const element of this.elements) {
+      element.resetOverrides();
+    }
+
+    this.statusField.resetOverrides();
+  }
 }
 
 ChildElements.includeInto(Form);

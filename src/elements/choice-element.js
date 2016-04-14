@@ -97,6 +97,12 @@ export default class ChoiceElement extends Element {
     });
   }
 
+  resetOverrides() {
+    super.resetOverrides();
+
+    this._overrideChoices = null;
+  }
+
   choiceByValue(value) {
     if (!this._choicesByValue) {
       this._choicesByValue = {};
