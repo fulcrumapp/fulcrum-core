@@ -40,6 +40,41 @@ export default class ClassificationValue extends FormValue {
     return true;
   }
 
+  isEqual(value) {
+    const classification = this.selectedClassification;
+
+    const choiceValues = classification ? classification.toJSON() : null;
+
+    const ESCAPED = /\\,/g;
+
+    const parts = value.replace(ESCAPED, '\t\t').split(',').map(part => part.replace(/\t\t/g, ','));
+
+    let allMatchSoFar = false;
+
+    let partIndex = 0;
+
+    for (const part of parts) {
+      if (part != null && choiceValues && partIndex < choiceValues.length &&
+          choiceValues[partIndex].toLowerCase() === part.replace(ESCAPED, ',').toLowerCase()) {
+        allMatchSoFar = true;
+      } else {
+        allMatchSoFar = false;
+      }
+
+      ++partIndex;
+    }
+
+    return allMatchSoFar;
+  }
+
+  contains(value) {
+    return this.isEqual(value);
+  }
+
+  startsWith(value) {
+    return this.contains(value);
+  }
+
   get displayValue() {
     const values = [];
 
