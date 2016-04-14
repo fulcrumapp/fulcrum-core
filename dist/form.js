@@ -128,6 +128,27 @@ var Form = function () {
     return json;
   };
 
+  Form.prototype.resetOverrides = function resetOverrides() {
+    for (var _iterator2 = this.elements, _isArray2 = Array.isArray(_iterator2), _i2 = 0, _iterator2 = _isArray2 ? _iterator2 : _iterator2[Symbol.iterator]();;) {
+      var _ref2;
+
+      if (_isArray2) {
+        if (_i2 >= _iterator2.length) break;
+        _ref2 = _iterator2[_i2++];
+      } else {
+        _i2 = _iterator2.next();
+        if (_i2.done) break;
+        _ref2 = _i2.value;
+      }
+
+      var element = _ref2;
+
+      element.resetOverrides();
+    }
+
+    this.statusField.resetOverrides();
+  };
+
   _createClass(Form, [{
     key: 'id',
     get: function get() {

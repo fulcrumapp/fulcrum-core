@@ -81,6 +81,12 @@ var ChoiceElement = function (_Element) {
     }
   };
 
+  ChoiceElement.prototype.resetOverrides = function resetOverrides() {
+    _Element.prototype.resetOverrides.call(this);
+
+    this._overrideChoices = null;
+  };
+
   ChoiceElement.prototype.choiceByValue = function choiceByValue(value) {
     if (!this._choicesByValue) {
       this._choicesByValue = {};

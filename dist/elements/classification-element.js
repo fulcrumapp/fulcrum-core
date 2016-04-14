@@ -53,6 +53,12 @@ var ClassificationElement = function (_Element) {
     });
   };
 
+  ClassificationElement.prototype.resetOverrides = function resetOverrides() {
+    _Element.prototype.resetOverrides.call(this);
+
+    this._overrideClassificationItems = null;
+  };
+
   _createClass(ClassificationElement, [{
     key: 'classificationItems',
     get: function get() {
