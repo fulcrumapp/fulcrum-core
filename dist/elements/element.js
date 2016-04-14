@@ -284,6 +284,19 @@ var Element = function () {
       this._overrideMaxLength = value != null ? +value : null;
     }
   }, {
+    key: 'overrideValues',
+    get: function get() {
+      return {
+        overrideLabel: this._overrideLabel,
+        overrideDescription: this._overrideDescription,
+        overrideIsRequired: this._overrideIsRequired,
+        overrideIsHidden: this._overrideIsHidden,
+        overrideIsDisabled: this._overrideIsDisabled,
+        overrideMinLength: this._overrideMinLength,
+        overrideMaxLength: this._overrideMaxLength
+      };
+    }
+  }, {
     key: 'isLengthValidationSupported',
     get: function get() {
       return false;

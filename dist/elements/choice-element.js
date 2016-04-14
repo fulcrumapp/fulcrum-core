@@ -199,6 +199,13 @@ var ChoiceElement = function (_Element) {
 
       this._overrideChoices = choices;
     }
+  }, {
+    key: 'overrideValues',
+    get: function get() {
+      return Object.assign(_Element.prototype.overrideValues, {
+        overrideChoices: this._overrideChoices
+      });
+    }
   }]);
 
   return ChoiceElement;

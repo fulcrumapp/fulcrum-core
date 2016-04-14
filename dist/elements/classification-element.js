@@ -90,6 +90,13 @@ var ClassificationElement = function (_Element) {
       this._overrideClassificationItems = classificationItems;
     }
   }, {
+    key: 'overrideValues',
+    get: function get() {
+      return Object.assign(_Element.prototype.overrideValues, {
+        overrideClassificationItems: this._overrideClassificationItems
+      });
+    }
+  }, {
     key: 'filteredClassifications',
     get: function get() {
       var items = this.classificationSet.items;
