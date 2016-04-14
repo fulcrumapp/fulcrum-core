@@ -83,6 +83,55 @@ var ClassificationValue = function (_FormValue) {
     return _this;
   }
 
+  ClassificationValue.prototype.isEqual = function isEqual(value) {
+    var classification = this.selectedClassification;
+
+    var choiceValues = classification ? classification.toJSON() : null;
+
+    var ESCAPED = /\\,/g;
+
+    var parts = value.replace(ESCAPED, '\t\t').split(',').map(function (part) {
+      return part.replace(/\t\t/g, ',');
+    });
+
+    var allMatchSoFar = false;
+
+    var partIndex = 0;
+
+    for (var _iterator3 = parts, _isArray3 = Array.isArray(_iterator3), _i3 = 0, _iterator3 = _isArray3 ? _iterator3 : _iterator3[Symbol.iterator]();;) {
+      var _ref3;
+
+      if (_isArray3) {
+        if (_i3 >= _iterator3.length) break;
+        _ref3 = _iterator3[_i3++];
+      } else {
+        _i3 = _iterator3.next();
+        if (_i3.done) break;
+        _ref3 = _i3.value;
+      }
+
+      var part = _ref3;
+
+      if (part != null && choiceValues && partIndex < choiceValues.length && choiceValues[partIndex].toLowerCase() === part.replace(ESCAPED, ',').toLowerCase()) {
+        allMatchSoFar = true;
+      } else {
+        allMatchSoFar = false;
+      }
+
+      ++partIndex;
+    }
+
+    return allMatchSoFar;
+  };
+
+  ClassificationValue.prototype.contains = function contains(value) {
+    return this.isEqual(value);
+  };
+
+  ClassificationValue.prototype.startsWith = function startsWith(value) {
+    return this.contains(value);
+  };
+
   ClassificationValue.prototype.toJSON = function toJSON() {
     if (this.isEmpty) {
       return null;
@@ -140,19 +189,19 @@ var ClassificationValue = function (_FormValue) {
       var classification = this.selectedClassification;
 
       if (classification) {
-        for (var _iterator3 = classification.exploded, _isArray3 = Array.isArray(_iterator3), _i3 = 0, _iterator3 = _isArray3 ? _iterator3 : _iterator3[Symbol.iterator]();;) {
-          var _ref3;
+        for (var _iterator4 = classification.exploded, _isArray4 = Array.isArray(_iterator4), _i4 = 0, _iterator4 = _isArray4 ? _iterator4 : _iterator4[Symbol.iterator]();;) {
+          var _ref4;
 
-          if (_isArray3) {
-            if (_i3 >= _iterator3.length) break;
-            _ref3 = _iterator3[_i3++];
+          if (_isArray4) {
+            if (_i4 >= _iterator4.length) break;
+            _ref4 = _iterator4[_i4++];
           } else {
-            _i3 = _iterator3.next();
-            if (_i3.done) break;
-            _ref3 = _i3.value;
+            _i4 = _iterator4.next();
+            if (_i4.done) break;
+            _ref4 = _i4.value;
           }
 
-          var item = _ref3;
+          var item = _ref4;
 
           if (item.label) {
             values.push(item.label);
@@ -174,19 +223,19 @@ var ClassificationValue = function (_FormValue) {
       var classification = this.selectedClassification;
 
       if (classification) {
-        for (var _iterator4 = classification.exploded, _isArray4 = Array.isArray(_iterator4), _i4 = 0, _iterator4 = _isArray4 ? _iterator4 : _iterator4[Symbol.iterator]();;) {
-          var _ref4;
+        for (var _iterator5 = classification.exploded, _isArray5 = Array.isArray(_iterator5), _i5 = 0, _iterator5 = _isArray5 ? _iterator5 : _iterator5[Symbol.iterator]();;) {
+          var _ref5;
 
-          if (_isArray4) {
-            if (_i4 >= _iterator4.length) break;
-            _ref4 = _iterator4[_i4++];
+          if (_isArray5) {
+            if (_i5 >= _iterator5.length) break;
+            _ref5 = _iterator5[_i5++];
           } else {
-            _i4 = _iterator4.next();
-            if (_i4.done) break;
-            _ref4 = _i4.value;
+            _i5 = _iterator5.next();
+            if (_i5.done) break;
+            _ref5 = _i5.value;
           }
 
-          var item = _ref4;
+          var item = _ref5;
 
           if (item.label) {
             values.push(item.label);
@@ -214,24 +263,7 @@ var ClassificationValue = function (_FormValue) {
     get: function get() {
       var allValues = [];
 
-      for (var _iterator5 = this._choiceValues, _isArray5 = Array.isArray(_iterator5), _i5 = 0, _iterator5 = _isArray5 ? _iterator5 : _iterator5[Symbol.iterator]();;) {
-        var _ref5;
-
-        if (_isArray5) {
-          if (_i5 >= _iterator5.length) break;
-          _ref5 = _iterator5[_i5++];
-        } else {
-          _i5 = _iterator5.next();
-          if (_i5.done) break;
-          _ref5 = _i5.value;
-        }
-
-        var value = _ref5;
-
-        allValues.push(value);
-      }
-
-      for (var _iterator6 = this._otherValues, _isArray6 = Array.isArray(_iterator6), _i6 = 0, _iterator6 = _isArray6 ? _iterator6 : _iterator6[Symbol.iterator]();;) {
+      for (var _iterator6 = this._choiceValues, _isArray6 = Array.isArray(_iterator6), _i6 = 0, _iterator6 = _isArray6 ? _iterator6 : _iterator6[Symbol.iterator]();;) {
         var _ref6;
 
         if (_isArray6) {
@@ -243,7 +275,24 @@ var ClassificationValue = function (_FormValue) {
           _ref6 = _i6.value;
         }
 
-        var _value = _ref6;
+        var value = _ref6;
+
+        allValues.push(value);
+      }
+
+      for (var _iterator7 = this._otherValues, _isArray7 = Array.isArray(_iterator7), _i7 = 0, _iterator7 = _isArray7 ? _iterator7 : _iterator7[Symbol.iterator]();;) {
+        var _ref7;
+
+        if (_isArray7) {
+          if (_i7 >= _iterator7.length) break;
+          _ref7 = _iterator7[_i7++];
+        } else {
+          _i7 = _iterator7.next();
+          if (_i7.done) break;
+          _ref7 = _i7.value;
+        }
+
+        var _value = _ref7;
 
         allValues.push(_value);
       }
@@ -291,33 +340,33 @@ var ClassificationValue = function (_FormValue) {
 
       var currentClassifications = this.element.classificationItems;
 
-      for (var _iterator7 = this._choiceValues, _isArray7 = Array.isArray(_iterator7), _i7 = 0, _iterator7 = _isArray7 ? _iterator7 : _iterator7[Symbol.iterator]();;) {
-        var _ref7;
+      for (var _iterator8 = this._choiceValues, _isArray8 = Array.isArray(_iterator8), _i8 = 0, _iterator8 = _isArray8 ? _iterator8 : _iterator8[Symbol.iterator]();;) {
+        var _ref8;
 
-        if (_isArray7) {
-          if (_i7 >= _iterator7.length) break;
-          _ref7 = _iterator7[_i7++];
+        if (_isArray8) {
+          if (_i8 >= _iterator8.length) break;
+          _ref8 = _iterator8[_i8++];
         } else {
-          _i7 = _iterator7.next();
-          if (_i7.done) break;
-          _ref7 = _i7.value;
+          _i8 = _iterator8.next();
+          if (_i8.done) break;
+          _ref8 = _i8.value;
         }
 
-        var classificationValue = _ref7;
+        var classificationValue = _ref8;
 
-        for (var _iterator8 = currentClassifications, _isArray8 = Array.isArray(_iterator8), _i8 = 0, _iterator8 = _isArray8 ? _iterator8 : _iterator8[Symbol.iterator]();;) {
-          var _ref8;
+        for (var _iterator9 = currentClassifications, _isArray9 = Array.isArray(_iterator9), _i9 = 0, _iterator9 = _isArray9 ? _iterator9 : _iterator9[Symbol.iterator]();;) {
+          var _ref9;
 
-          if (_isArray8) {
-            if (_i8 >= _iterator8.length) break;
-            _ref8 = _iterator8[_i8++];
+          if (_isArray9) {
+            if (_i9 >= _iterator9.length) break;
+            _ref9 = _iterator9[_i9++];
           } else {
-            _i8 = _iterator8.next();
-            if (_i8.done) break;
-            _ref8 = _i8.value;
+            _i9 = _iterator9.next();
+            if (_i9.done) break;
+            _ref9 = _i9.value;
           }
 
-          var classification = _ref8;
+          var classification = _ref9;
 
           if (classification.value === classificationValue) {
             result = classification;
