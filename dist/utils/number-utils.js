@@ -2,6 +2,8 @@
 
 exports.__esModule = true;
 
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
 var _locale = require('./locale');
 
 var _locale2 = _interopRequireDefault(_locale);
@@ -20,7 +22,9 @@ var MachineFormatterOptions = {
 var intl = null;
 
 if (typeof Intl !== 'undefined') {
-  intl = global.Intl;
+  /* eslint-disable no-undef */
+  intl = Intl;
+  /* eslint-enable no-undef */
 }
 
 var NumberUtils = function () {
@@ -32,17 +36,19 @@ var NumberUtils = function () {
     return +input;
   };
 
-  NumberUtils.localizedStringFromMachineString = function localizedStringFromMachineString(machineString, allowDecimals) {
+  NumberUtils.localizedStringFromMachineString = function localizedStringFromMachineString(machineString) {
+    var allowDecimals = arguments.length <= 1 || arguments[1] === undefined ? true : arguments[1];
+
+    if (allowDecimals && NumberUtils.localeDecimalFormatter) {
+      return NumberUtils.localeDecimalFormatter.format(machineString);
+    } else if (NumberUtils.localeIntegerFormatter) {
+      return NumberUtils.localeIntegerFormatter.format(machineString);
+    }
+
     return machineString;
   };
 
   NumberUtils.formatMachine = function formatMachine(number) {
-    if (intl) {
-      if (NumberUtils.machineFormatter == null) {
-        NumberUtils.machineFormatter = new intl.NumberFormat(['en-US'], MachineFormatterOptions);
-      }
-    }
-
     return NumberUtils.formatWithFormatter(NumberUtils.machineFormatter, number);
   };
 
@@ -85,6 +91,35 @@ var NumberUtils = function () {
       return number.toString();
     }
   };
+
+  _createClass(NumberUtils, null, [{
+    key: 'localeDecimalFormatter',
+    get: function get() {
+      if (!this._localeDecimalFormatter && intl) {
+        this._localeDecimalFormatter = new intl.NumberFormat();
+      }
+
+      return this._localeDecimalFormatter;
+    }
+  }, {
+    key: 'localeIntegerFormatter',
+    get: function get() {
+      if (!this._localeIntegerFormatter && intl) {
+        this._localeIntegerFormatter = new intl.NumberFormat([], { maximumFractionDigits: 0 });
+      }
+
+      return this._localeIntegerFormatter;
+    }
+  }, {
+    key: 'machineFormatter',
+    get: function get() {
+      if (!this._machineFormatter && intl) {
+        this._machineFormatter = new intl.NumberFormat(['en-US'], MachineFormatterOptions);
+      }
+
+      return this._machineFormatter;
+    }
+  }]);
 
   return NumberUtils;
 }();
