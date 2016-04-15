@@ -258,14 +258,14 @@ var Condition = function () {
 
   Condition.valueForCondition = function valueForCondition(condition, values, record) {
     if (condition.fieldKey === '@status') {
-      return record.statusValue();
+      return record.statusValue;
     }
     return values.get(condition.fieldKey);
   };
 
   Condition.elementForCondition = function elementForCondition(condition, record) {
     if (condition.fieldKey === '@status') {
-      return record.statusValue().statusElement;
+      return record.statusValue.element;
     }
     return record.form.elementsByKey[condition.fieldKey];
   };
