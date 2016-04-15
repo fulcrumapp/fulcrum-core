@@ -181,14 +181,14 @@ export default class Condition {
 
   static valueForCondition(condition, values, record) {
     if (condition.fieldKey === '@status') {
-      return record.statusValue();
+      return record.statusValue;
     }
     return values.get(condition.fieldKey);
   }
 
   static elementForCondition(condition, record) {
     if (condition.fieldKey === '@status') {
-      return record.statusValue().statusElement;
+      return record.statusValue.element;
     }
     return record.form.elementsByKey[condition.fieldKey];
   }
