@@ -125,6 +125,10 @@ var Form = function () {
     json.title_field_keys = this.titleFieldKeys;
     json.report_templates = this.reportTemplates;
 
+    if (this._statusFieldJSON) {
+      json.status_field = JSON.parse(JSON.stringify(this._statusFieldJSON));
+    }
+
     return json;
   };
 
