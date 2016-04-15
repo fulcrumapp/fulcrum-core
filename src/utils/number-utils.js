@@ -10,7 +10,9 @@ const MachineFormatterOptions = {
 let intl = null;
 
 if (typeof Intl !== 'undefined') {
-  intl = global.Intl;
+  /* eslint-disable no-undef */
+  intl = Intl;
+  /* eslint-enable no-undef */
 }
 
 export default class NumberUtils {
@@ -18,17 +20,41 @@ export default class NumberUtils {
     return +input;
   }
 
-  static localizedStringFromMachineString(machineString, allowDecimals) {
+  static get localeDecimalFormatter() {
+    if (!this._localeDecimalFormatter && intl) {
+      this._localeDecimalFormatter = new intl.NumberFormat();
+    }
+
+    return this._localeDecimalFormatter;
+  }
+
+  static get localeIntegerFormatter() {
+    if (!this._localeIntegerFormatter && intl) {
+      this._localeIntegerFormatter = new intl.NumberFormat([], {maximumFractionDigits: 0});
+    }
+
+    return this._localeIntegerFormatter;
+  }
+
+  static get machineFormatter() {
+    if (!this._machineFormatter && intl) {
+      this._machineFormatter = new intl.NumberFormat(['en-US'], MachineFormatterOptions);
+    }
+
+    return this._machineFormatter;
+  }
+
+  static localizedStringFromMachineString(machineString, allowDecimals = true) {
+    if (allowDecimals && NumberUtils.localeDecimalFormatter) {
+      return NumberUtils.localeDecimalFormatter.format(machineString);
+    } else if (NumberUtils.localeIntegerFormatter) {
+      return NumberUtils.localeIntegerFormatter.format(machineString);
+    }
+
     return machineString;
   }
 
   static formatMachine(number) {
-    if (intl) {
-      if (NumberUtils.machineFormatter == null) {
-        NumberUtils.machineFormatter = new intl.NumberFormat(['en-US'], MachineFormatterOptions);
-      }
-    }
-
     return NumberUtils.formatWithFormatter(NumberUtils.machineFormatter, number);
   }
 
