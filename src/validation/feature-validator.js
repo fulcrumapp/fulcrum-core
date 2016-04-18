@@ -190,7 +190,7 @@ export default class FeatureValidator {
     // since the number is now normalized to en_US, check for the . separator
     const decimalSeparator = '.';
 
-    if (element.isInteger) {
+    if (element.isIntegerFormat) {
       if (value.indexOf(decimalSeparator) > -1) {
         return new NumericFormatValidationError(element);
       }

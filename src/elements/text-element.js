@@ -4,7 +4,7 @@ export default class TextElement extends TextualElement {
   constructor(parent, attributes) {
     super(parent, attributes);
 
-    this.numeric = !!attributes.numeric;
+    this._isNumeric = !!attributes.numeric;
 
     this.format = attributes.format;
 
@@ -37,11 +37,15 @@ export default class TextElement extends TextualElement {
   }
 
   get isDecimalFormat() {
-    return this.numeric && this.format === 'decimal';
+    return this._isNumeric && this.format === 'decimal';
   }
 
   get isIntegerFormat() {
-    return this.numeric && this.format === 'integer';
+    return this._isNumeric && this.format === 'integer';
+  }
+
+  get isNumeric() {
+    return this._isNumeric;
   }
 
   get hasMin() {

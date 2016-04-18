@@ -2,7 +2,7 @@ import TextualValue from './textual-value';
 
 export default class TextValue extends TextualValue {
   get columnValue() {
-    if (this.element.numeric) {
+    if (this.element.isNumeric) {
       return this.numericValue;
     }
     // this does NOT work in loose mode
