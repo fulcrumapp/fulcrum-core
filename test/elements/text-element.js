@@ -17,7 +17,7 @@ describe('text fields', () => {
     const field = record.form.find('name');
 
     field.should.be.instanceof(TextElement);
-    field.numeric.should.eql(false);
+    field.isNumeric.should.eql(false);
     field.pattern.should.eql('[a-zA-Z0-9]+');
     field.patternDescription.should.eql('Alphanumeric Only');
     field.minLength.should.eql(1);

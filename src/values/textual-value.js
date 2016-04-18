@@ -95,6 +95,10 @@ export default class TextualValue extends FormValue {
     const thisValue = NumberUtils.parseDouble(this.textValue);
     const thatValue = NumberUtils.parseDouble(stringValue);
 
+    if (thisValue == null || thatValue == null) {
+      return false;
+    }
+
     return thisValue < thatValue;
   }
 
@@ -107,6 +111,10 @@ export default class TextualValue extends FormValue {
 
     const thisValue = NumberUtils.parseDouble(this.textValue);
     const thatValue = NumberUtils.parseDouble(stringValue);
+
+    if (thisValue == null || thatValue == null) {
+      return false;
+    }
 
     return thisValue > thatValue;
   }
