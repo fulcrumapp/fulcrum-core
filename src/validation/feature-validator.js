@@ -191,14 +191,14 @@ export default class FeatureValidator {
     const decimalSeparator = '.';
 
     if (element.isIntegerFormat) {
-      if (value.indexOf(decimalSeparator) > -1) {
+      if (value.textValue.indexOf(decimalSeparator) > -1) {
         return new NumericFormatValidationError(element);
       }
     }
 
     const numberValue = +value.textValue;
 
-    if (numberValue < element.min || numberValue > element.max) {
+    if ((element.hasMin && numberValue < element.min) || (element.hasMax && numberValue > element.max)) {
       return new NumericRangeValidationError(element);
     }
 

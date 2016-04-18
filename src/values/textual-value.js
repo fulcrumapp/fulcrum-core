@@ -114,4 +114,14 @@ export default class TextualValue extends FormValue {
   get numericValue() {
     return NumberUtils.parseDouble(this.textValue);
   }
+
+  get isNumeric() {
+    if (!this.isEmpty) {
+      const number = NumberUtils.parseDouble(this.textValue);
+
+      return number != null;
+    }
+
+    return true;
+  }
 }

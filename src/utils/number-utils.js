@@ -17,7 +17,13 @@ if (typeof Intl !== 'undefined') {
 
 export default class NumberUtils {
   static parseDouble(input) {
-    return +input;
+    const number = +input;
+
+    if (number == null || isNaN(number)) {
+      return null;
+    }
+
+    return number;
   }
 
   static get localeDecimalFormatter() {
