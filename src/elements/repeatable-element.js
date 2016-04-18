@@ -18,4 +18,8 @@ export default class RepeatableElement extends ContainerElement {
   get isGeometryRequired() {
     return this.isGeometryEnabled && this._geometryRequired;
   }
+
+  get isLengthValidationSupported() {
+    return true;
+  }
 }
