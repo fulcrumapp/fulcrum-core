@@ -7,8 +7,9 @@ export default class ChoiceElement extends Element {
 
     this.multiple = !!attributes.multiple;
     this.allowOther = !!attributes.allow_other;
-    this.choiceFilter = null;
-    this.overrideChoices = null;
+
+    this._choiceFilter = null;
+    this._overrideChoices = null;
 
     this._choiceListID = attributes.choice_list_id;
     this._choices = [];
@@ -46,6 +47,14 @@ export default class ChoiceElement extends Element {
 
   get choices() {
     return this._overrideChoices ? this._overrideChoices : this.filteredChoices;
+  }
+
+  get choiceFilter() {
+    return this._choiceFilter;
+  }
+
+  set choiceFilter(choiceFilter) {
+    this._choiceFilter = choiceFilter;
   }
 
   get filteredChoices() {
@@ -93,6 +102,7 @@ export default class ChoiceElement extends Element {
 
   get overrideValues() {
     return Object.assign(super.overrideValues, {
+      choiceFilter: this._choiceFilter,
       overrideChoices: this._overrideChoices
     });
   }
@@ -100,6 +110,7 @@ export default class ChoiceElement extends Element {
   resetOverrides() {
     super.resetOverrides();
 
+    this._choiceFilter = null;
     this._overrideChoices = null;
   }
 

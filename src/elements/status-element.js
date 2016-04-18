@@ -18,14 +18,20 @@ export default class StatusElement extends TextualElement {
 
     super(parent, attrs);
 
-    this.choices = [];
+    this._statusFilter = null;
+
+    this._choices = [];
 
     for (const choice of attrs.choices) {
-      this.choices.push(new StatusChoice(choice));
+      this._choices.push(new StatusChoice(choice));
     }
 
     this._enabled = !!attrs.enabled;
     this._readOnly = !!attrs.read_only;
+  }
+
+  get choices() {
+    return this.filteredChoices;
   }
 
   get isEnabled() {
@@ -36,6 +42,14 @@ export default class StatusElement extends TextualElement {
     return this._readOnly;
   }
 
+  get statusFilter() {
+    return this._statusFilter;
+  }
+
+  set statusFilter(statusFilter) {
+    this._statusFilter = statusFilter;
+  }
+
   statusForValue(value) {
     for (const choice of this.choices) {
       if (choice.value === value) {
@@ -44,5 +58,37 @@ export default class StatusElement extends TextualElement {
     }
 
     return null;
+  }
+
+  get filteredChoices() {
+    const items = this._choices;
+
+    if (!this.statusFilter) {
+      return items;
+    }
+
+    const filteredItems = [];
+
+    for (let item of items) {
+      for (let filter of this.statusFilter) {
+        if (item.value.toLowerCase().indexOf(filter.toLowerCase()) !== -1) {
+          filteredItems.push(item);
+        }
+      }
+    }
+
+    return filteredItems;
+  }
+
+  get overrideValues() {
+    return Object.assign(super.overrideValues, {
+      statusFilter: this._statusFilter
+    });
+  }
+
+  resetOverrides() {
+    super.resetOverrides();
+
+    this._statusFilter = null;
   }
 }
