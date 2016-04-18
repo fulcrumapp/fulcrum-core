@@ -32,8 +32,9 @@ var ChoiceElement = function (_Element) {
 
     _this.multiple = !!attributes.multiple;
     _this.allowOther = !!attributes.allow_other;
-    _this.choiceFilter = null;
-    _this.overrideChoices = null;
+
+    _this._choiceFilter = null;
+    _this._overrideChoices = null;
 
     _this._choiceListID = attributes.choice_list_id;
     _this._choices = [];
@@ -84,6 +85,7 @@ var ChoiceElement = function (_Element) {
   ChoiceElement.prototype.resetOverrides = function resetOverrides() {
     _Element.prototype.resetOverrides.call(this);
 
+    this._choiceFilter = null;
     this._overrideChoices = null;
   };
 
@@ -121,6 +123,14 @@ var ChoiceElement = function (_Element) {
     key: 'choices',
     get: function get() {
       return this._overrideChoices ? this._overrideChoices : this.filteredChoices;
+    }
+  }, {
+    key: 'choiceFilter',
+    get: function get() {
+      return this._choiceFilter;
+    },
+    set: function set(choiceFilter) {
+      this._choiceFilter = choiceFilter;
     }
   }, {
     key: 'filteredChoices',
@@ -209,6 +219,7 @@ var ChoiceElement = function (_Element) {
     key: 'overrideValues',
     get: function get() {
       return Object.assign(_Element.prototype.overrideValues, {
+        choiceFilter: this._choiceFilter,
         overrideChoices: this._overrideChoices
       });
     }

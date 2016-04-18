@@ -43,7 +43,9 @@ var StatusElement = function (_TextualElement) {
 
     var _this = _possibleConstructorReturn(this, _TextualElement.call(this, parent, attrs));
 
-    _this.choices = [];
+    _this._statusFilter = null;
+
+    _this._choices = [];
 
     for (var _iterator = attrs.choices, _isArray = Array.isArray(_iterator), _i = 0, _iterator = _isArray ? _iterator : _iterator[Symbol.iterator]();;) {
       var _ref;
@@ -59,7 +61,7 @@ var StatusElement = function (_TextualElement) {
 
       var choice = _ref;
 
-      _this.choices.push(new _statusChoice2.default(choice));
+      _this._choices.push(new _statusChoice2.default(choice));
     }
 
     _this._enabled = !!attrs.enabled;
@@ -90,7 +92,18 @@ var StatusElement = function (_TextualElement) {
     return null;
   };
 
+  StatusElement.prototype.resetOverrides = function resetOverrides() {
+    _TextualElement.prototype.resetOverrides.call(this);
+
+    this._statusFilter = null;
+  };
+
   _createClass(StatusElement, [{
+    key: 'choices',
+    get: function get() {
+      return this.filteredChoices;
+    }
+  }, {
     key: 'isEnabled',
     get: function get() {
       return this._enabled;
@@ -99,6 +112,68 @@ var StatusElement = function (_TextualElement) {
     key: 'isReadOnly',
     get: function get() {
       return this._readOnly;
+    }
+  }, {
+    key: 'statusFilter',
+    get: function get() {
+      return this._statusFilter;
+    },
+    set: function set(statusFilter) {
+      this._statusFilter = statusFilter;
+    }
+  }, {
+    key: 'filteredChoices',
+    get: function get() {
+      var items = this._choices;
+
+      if (!this.statusFilter) {
+        return items;
+      }
+
+      var filteredItems = [];
+
+      for (var _iterator3 = items, _isArray3 = Array.isArray(_iterator3), _i3 = 0, _iterator3 = _isArray3 ? _iterator3 : _iterator3[Symbol.iterator]();;) {
+        var _ref3;
+
+        if (_isArray3) {
+          if (_i3 >= _iterator3.length) break;
+          _ref3 = _iterator3[_i3++];
+        } else {
+          _i3 = _iterator3.next();
+          if (_i3.done) break;
+          _ref3 = _i3.value;
+        }
+
+        var item = _ref3;
+
+        for (var _iterator4 = this.statusFilter, _isArray4 = Array.isArray(_iterator4), _i4 = 0, _iterator4 = _isArray4 ? _iterator4 : _iterator4[Symbol.iterator]();;) {
+          var _ref4;
+
+          if (_isArray4) {
+            if (_i4 >= _iterator4.length) break;
+            _ref4 = _iterator4[_i4++];
+          } else {
+            _i4 = _iterator4.next();
+            if (_i4.done) break;
+            _ref4 = _i4.value;
+          }
+
+          var filter = _ref4;
+
+          if (item.value.toLowerCase().indexOf(filter.toLowerCase()) !== -1) {
+            filteredItems.push(item);
+          }
+        }
+      }
+
+      return filteredItems;
+    }
+  }, {
+    key: 'overrideValues',
+    get: function get() {
+      return Object.assign(_TextualElement.prototype.overrideValues, {
+        statusFilter: this._statusFilter
+      });
     }
   }]);
 

@@ -31,7 +31,8 @@ var ClassificationElement = function (_Element) {
     var _this = _possibleConstructorReturn(this, _Element.call(this, parent, attributes));
 
     _this.allowOther = !!attributes.allow_other;
-    _this.choiceFilter = null;
+
+    _this._choiceFilter = null;
 
     _this._overrideClassificationItems = null;
 
@@ -56,6 +57,7 @@ var ClassificationElement = function (_Element) {
   ClassificationElement.prototype.resetOverrides = function resetOverrides() {
     _Element.prototype.resetOverrides.call(this);
 
+    this._choiceFilter = null;
     this._overrideClassificationItems = null;
   };
 
@@ -63,6 +65,14 @@ var ClassificationElement = function (_Element) {
     key: 'classificationItems',
     get: function get() {
       return this._overrideClassificationItems ? this._overrideClassificationItems : this.filteredClassifications;
+    }
+  }, {
+    key: 'choiceFilter',
+    get: function get() {
+      return this._choiceFilter;
+    },
+    set: function set(choiceFilter) {
+      this._choiceFilter = choiceFilter;
     }
   }, {
     key: 'overrideClassificationItems',
@@ -99,6 +109,7 @@ var ClassificationElement = function (_Element) {
     key: 'overrideValues',
     get: function get() {
       return Object.assign(_Element.prototype.overrideValues, {
+        choiceFilter: this._choiceFilter,
         overrideClassificationItems: this._overrideClassificationItems
       });
     }
