@@ -33,7 +33,13 @@ var NumberUtils = function () {
   }
 
   NumberUtils.parseDouble = function parseDouble(input) {
-    return +input;
+    var number = +input;
+
+    if (number == null || isNaN(number)) {
+      return null;
+    }
+
+    return number;
   };
 
   NumberUtils.localizedStringFromMachineString = function localizedStringFromMachineString(machineString) {

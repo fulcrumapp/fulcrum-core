@@ -151,6 +151,17 @@ var TextualValue = function (_FormValue) {
     get: function get() {
       return _numberUtils2.default.parseDouble(this.textValue);
     }
+  }, {
+    key: 'isNumeric',
+    get: function get() {
+      if (!this.isEmpty) {
+        var number = _numberUtils2.default.parseDouble(this.textValue);
+
+        return number != null;
+      }
+
+      return true;
+    }
   }]);
 
   return TextualValue;

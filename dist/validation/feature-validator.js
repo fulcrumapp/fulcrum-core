@@ -255,14 +255,14 @@ var FeatureValidator = function () {
     var decimalSeparator = '.';
 
     if (element.isIntegerFormat) {
-      if (value.indexOf(decimalSeparator) > -1) {
+      if (value.textValue.indexOf(decimalSeparator) > -1) {
         return new _numericFormatValidationError2.default(element);
       }
     }
 
     var numberValue = +value.textValue;
 
-    if (numberValue < element.min || numberValue > element.max) {
+    if (element.hasMin && numberValue < element.min || element.hasMax && numberValue > element.max) {
       return new _numericRangeValidationError2.default(element);
     }
 
