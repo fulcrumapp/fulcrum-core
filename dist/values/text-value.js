@@ -30,7 +30,7 @@ var TextValue = function (_TextualValue) {
   _createClass(TextValue, [{
     key: 'columnValue',
     get: function get() {
-      if (this.element.numeric) {
+      if (this.element.isNumeric) {
         return this.numericValue;
       }
       // this does NOT work in loose mode

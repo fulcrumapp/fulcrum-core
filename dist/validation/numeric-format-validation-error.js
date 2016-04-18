@@ -32,7 +32,7 @@ var NumericFormatValidationError = function (_ElementValidationErr) {
   _createClass(NumericFormatValidationError, [{
     key: 'message',
     get: function get() {
-      var messageFormat = this.element.isInteger ? "The value of field '%s' must be an integer number." : "The value of field '%s' must be an decimal number.";
+      var messageFormat = this.element.isIntegerFormat ? "The value of field '%s' must be an integer number." : "The value of field '%s' must be an decimal number.";
 
       return (0, _util.format)(messageFormat, this.label);
     }

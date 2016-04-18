@@ -26,7 +26,7 @@ var TextElement = function (_TextualElement) {
 
     var _this = _possibleConstructorReturn(this, _TextualElement.call(this, parent, attributes));
 
-    _this.numeric = !!attributes.numeric;
+    _this._isNumeric = !!attributes.numeric;
 
     _this.format = attributes.format;
 
@@ -63,12 +63,17 @@ var TextElement = function (_TextualElement) {
   }, {
     key: 'isDecimalFormat',
     get: function get() {
-      return this.numeric && this.format === 'decimal';
+      return this._isNumeric && this.format === 'decimal';
     }
   }, {
     key: 'isIntegerFormat',
     get: function get() {
-      return this.numeric && this.format === 'integer';
+      return this._isNumeric && this.format === 'integer';
+    }
+  }, {
+    key: 'isNumeric',
+    get: function get() {
+      return this._isNumeric;
     }
   }, {
     key: 'hasMin',

@@ -254,7 +254,7 @@ var FeatureValidator = function () {
     // since the number is now normalized to en_US, check for the . separator
     var decimalSeparator = '.';
 
-    if (element.isInteger) {
+    if (element.isIntegerFormat) {
       if (value.indexOf(decimalSeparator) > -1) {
         return new _numericFormatValidationError2.default(element);
       }
