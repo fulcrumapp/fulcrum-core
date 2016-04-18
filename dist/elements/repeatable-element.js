@@ -44,6 +44,11 @@ var RepeatableElement = function (_ContainerElement) {
     get: function get() {
       return this.isGeometryEnabled && this._geometryRequired;
     }
+  }, {
+    key: 'isLengthValidationSupported',
+    get: function get() {
+      return true;
+    }
   }]);
 
   return RepeatableElement;

@@ -224,6 +224,8 @@ var FeatureValidator = function () {
       return null;
     }
 
+    console.log('length', element.label);
+
     var hasMinLengthError = false;
     var hasMaxLengthError = false;
 
