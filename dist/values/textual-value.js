@@ -96,6 +96,10 @@ var TextualValue = function (_FormValue) {
     var thisValue = _numberUtils2.default.parseDouble(this.textValue);
     var thatValue = _numberUtils2.default.parseDouble(stringValue);
 
+    if (thisValue == null || thatValue == null) {
+      return false;
+    }
+
     return thisValue < thatValue;
   };
 
@@ -108,6 +112,10 @@ var TextualValue = function (_FormValue) {
 
     var thisValue = _numberUtils2.default.parseDouble(this.textValue);
     var thatValue = _numberUtils2.default.parseDouble(stringValue);
+
+    if (thisValue == null || thatValue == null) {
+      return false;
+    }
 
     return thisValue > thatValue;
   };
