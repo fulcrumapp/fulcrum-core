@@ -55,6 +55,14 @@ export default class DateValue extends TextualValue {
     return thisDate.getTime() > thatDate.getTime();
   }
 
+  get isValid() {
+    if (this.isEmpty) {
+      return true;
+    }
+
+    return DateUtils.isValidDate(this.textValue);
+  }
+
   get dateValue() {
     return DateUtils.parseDate(this.textValue);
   }

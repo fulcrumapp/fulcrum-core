@@ -41,6 +41,14 @@ export default class TimeValue extends TextualValue {
     return thisTime > thatTime;
   }
 
+  get isValid() {
+    if (this.isEmpty) {
+      return true;
+    }
+
+    return DateUtils.isValidTime(this.textValue);
+  }
+
   get timeValue() {
     if (this.isEmpty) {
       return null;

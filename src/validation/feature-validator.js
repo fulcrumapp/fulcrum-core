@@ -7,6 +7,8 @@ import PatternValidationError from './pattern-validation-error';
 import LengthValidationError from './length-validation-error';
 import NumericFormatValidationError from './numeric-format-validation-error';
 import NumericRangeValidationError from './numeric-range-validation-error';
+import DateFormatValidationError from './date-format-validation-error';
+import TimeFormatValidationError from './time-format-validation-error';
 
 export default class FeatureValidator {
   static validateFeature(feature, record, formValues) {
@@ -112,6 +114,22 @@ export default class FeatureValidator {
             }
           }
 
+          if (element.isDateElement) {
+            const error = FeatureValidator.validateDateField(element, formValues.get(element.key));
+
+            if (error) {
+              errors.push(error);
+            }
+          }
+
+          if (element.isTimeElement) {
+            const error = FeatureValidator.validateTimeField(element, formValues.get(element.key));
+
+            if (error) {
+              errors.push(error);
+            }
+          }
+
           if (element.isLengthValidationSupported) {
             const fieldValue = formValues.get(element.key);
             const error = FeatureValidator.validateLengthForElement(element, fieldValue);
@@ -200,6 +218,30 @@ export default class FeatureValidator {
 
     if ((element.hasMin && numberValue < element.min) || (element.hasMax && numberValue > element.max)) {
       return new NumericRangeValidationError(element);
+    }
+
+    return null;
+  }
+
+  static validateDateField(element, value) {
+    if (value == null || value.isEmpty) {
+      return null;
+    }
+
+    if (!value.isValid) {
+      return new DateFormatValidationError(element);
+    }
+
+    return null;
+  }
+
+  static validateTimeField(element, value) {
+    if (value == null || value.isEmpty) {
+      return null;
+    }
+
+    if (!value.isValid) {
+      return new TimeFormatValidationError(element);
     }
 
     return null;

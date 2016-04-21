@@ -94,6 +94,81 @@ export default class DateUtils {
     return (date.getTime() / 1000).toFixed(3);
   }
 
+  static isValidTime(timeString) {
+    if (timeString == null) {
+      return true;
+    }
+
+    if (timeString.length !== 5) {
+      return false;
+    }
+
+    const parts = timeString.split(':');
+
+    if (parts.length !== 2) {
+      return false;
+    }
+
+    const [hourPart, minutePart] = parts;
+
+    if (hourPart.length !== 2 || minutePart.length !== 2) {
+      return false;
+    }
+
+    const hour = +hourPart;
+    const minute = +minutePart;
+
+    if (isNaN(hour) || isNaN(minute)) {
+      return false;
+    }
+
+    if (hour < 0 || hour >= 24) {
+      return false;
+    }
+
+    if (minute < 0 || minute >= 60) {
+      return false;
+    }
+
+    return true;
+  }
+
+  static isValidDate(dateString) {
+    if (dateString == null) {
+      return true;
+    }
+
+    if (dateString.length !== 10) {
+      return false;
+    }
+
+    const parts = dateString.split('-');
+
+    if (parts.length !== 3) {
+      return false;
+    }
+
+    const [yearPart, monthPart, dayPart] = parts;
+
+    if (yearPart.length !== 4 ||
+        monthPart.length !== 2 ||
+        dayPart.length !== 2) {
+      return false;
+    }
+
+    const year = +yearPart;
+    const month = +monthPart;
+    const day = +dayPart;
+
+    if (isNaN(year) || isNaN(month) || isNaN(day)) {
+      return false;
+    }
+
+    const parsed = DateUtils.parseDate(dateString);
+
+    return parsed && !isNaN(parsed);
+  }
+
   static formatDate(date) {
     const year = date.getFullYear();
     const month = _.padStart(date.getMonth() + 1, 2, '0');
