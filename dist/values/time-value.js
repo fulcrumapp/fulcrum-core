@@ -76,6 +76,15 @@ var TimeValue = function (_TextualValue) {
       return this.textValue;
     }
   }, {
+    key: 'isValid',
+    get: function get() {
+      if (this.isEmpty) {
+        return true;
+      }
+
+      return _dateUtils2.default.isValidTime(this.textValue);
+    }
+  }, {
     key: 'timeValue',
     get: function get() {
       if (this.isEmpty) {

@@ -86,6 +86,15 @@ var DateValue = function (_TextualValue) {
       return this.textValue;
     }
   }, {
+    key: 'isValid',
+    get: function get() {
+      if (this.isEmpty) {
+        return true;
+      }
+
+      return _dateUtils2.default.isValidDate(this.textValue);
+    }
+  }, {
     key: 'dateValue',
     get: function get() {
       return _dateUtils2.default.parseDate(this.textValue);

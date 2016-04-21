@@ -120,6 +120,84 @@ var DateUtils = function () {
     return (date.getTime() / 1000).toFixed(3);
   };
 
+  DateUtils.isValidTime = function isValidTime(timeString) {
+    if (timeString == null) {
+      return true;
+    }
+
+    if (timeString.length !== 5) {
+      return false;
+    }
+
+    var parts = timeString.split(':');
+
+    if (parts.length !== 2) {
+      return false;
+    }
+
+    var hourPart = parts[0];
+    var minutePart = parts[1];
+
+
+    if (hourPart.length !== 2 || minutePart.length !== 2) {
+      return false;
+    }
+
+    var hour = +hourPart;
+    var minute = +minutePart;
+
+    if (isNaN(hour) || isNaN(minute)) {
+      return false;
+    }
+
+    if (hour < 0 || hour >= 24) {
+      return false;
+    }
+
+    if (minute < 0 || minute >= 60) {
+      return false;
+    }
+
+    return true;
+  };
+
+  DateUtils.isValidDate = function isValidDate(dateString) {
+    if (dateString == null) {
+      return true;
+    }
+
+    if (dateString.length !== 10) {
+      return false;
+    }
+
+    var parts = dateString.split('-');
+
+    if (parts.length !== 3) {
+      return false;
+    }
+
+    var yearPart = parts[0];
+    var monthPart = parts[1];
+    var dayPart = parts[2];
+
+
+    if (yearPart.length !== 4 || monthPart.length !== 2 || dayPart.length !== 2) {
+      return false;
+    }
+
+    var year = +yearPart;
+    var month = +monthPart;
+    var day = +dayPart;
+
+    if (isNaN(year) || isNaN(month) || isNaN(day)) {
+      return false;
+    }
+
+    var parsed = DateUtils.parseDate(dateString);
+
+    return parsed && !isNaN(parsed);
+  };
+
   DateUtils.formatDate = function formatDate(date) {
     var year = date.getFullYear();
     var month = _lodash2.default.padStart(date.getMonth() + 1, 2, '0');

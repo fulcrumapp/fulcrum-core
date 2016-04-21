@@ -38,6 +38,14 @@ var _numericRangeValidationError = require('./numeric-range-validation-error');
 
 var _numericRangeValidationError2 = _interopRequireDefault(_numericRangeValidationError);
 
+var _dateFormatValidationError = require('./date-format-validation-error');
+
+var _dateFormatValidationError2 = _interopRequireDefault(_dateFormatValidationError);
+
+var _timeFormatValidationError = require('./time-format-validation-error');
+
+var _timeFormatValidationError2 = _interopRequireDefault(_timeFormatValidationError);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -163,12 +171,28 @@ var FeatureValidator = function () {
             }
           }
 
-          if (element.isLengthValidationSupported) {
-            var _fieldValue = formValues.get(element.key);
-            var _error2 = FeatureValidator.validateLengthForElement(element, _fieldValue);
+          if (element.isDateElement) {
+            var _error2 = FeatureValidator.validateDateField(element, formValues.get(element.key));
 
             if (_error2) {
               errors.push(_error2);
+            }
+          }
+
+          if (element.isTimeElement) {
+            var _error3 = FeatureValidator.validateTimeField(element, formValues.get(element.key));
+
+            if (_error3) {
+              errors.push(_error3);
+            }
+          }
+
+          if (element.isLengthValidationSupported) {
+            var _fieldValue = formValues.get(element.key);
+            var _error4 = FeatureValidator.validateLengthForElement(element, _fieldValue);
+
+            if (_error4) {
+              errors.push(_error4);
             }
           }
         }
@@ -264,6 +288,30 @@ var FeatureValidator = function () {
 
     if (element.hasMin && numberValue < element.min || element.hasMax && numberValue > element.max) {
       return new _numericRangeValidationError2.default(element);
+    }
+
+    return null;
+  };
+
+  FeatureValidator.validateDateField = function validateDateField(element, value) {
+    if (value == null || value.isEmpty) {
+      return null;
+    }
+
+    if (!value.isValid) {
+      return new _dateFormatValidationError2.default(element);
+    }
+
+    return null;
+  };
+
+  FeatureValidator.validateTimeField = function validateTimeField(element, value) {
+    if (value == null || value.isEmpty) {
+      return null;
+    }
+
+    if (!value.isValid) {
+      return new _timeFormatValidationError2.default(element);
     }
 
     return null;
