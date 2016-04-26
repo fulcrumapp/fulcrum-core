@@ -232,7 +232,7 @@ var FeatureValidator = function () {
       return null;
     }
 
-    var regex = new RegExp(element.pattern);
+    var regex = new RegExp('^(?:' + element.pattern + ')$');
 
     if (regex) {
       if (!regex.test(value.textValue)) {
