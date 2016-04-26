@@ -162,7 +162,7 @@ export default class FeatureValidator {
       return null;
     }
 
-    const regex = new RegExp(element.pattern);
+    const regex = new RegExp('^(?:' + element.pattern + ')$');
 
     if (regex) {
       if (!regex.test(value.textValue)) {
