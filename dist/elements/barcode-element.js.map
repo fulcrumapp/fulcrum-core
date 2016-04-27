@@ -1,1 +1,1 @@
-{"version":3,"sources":["../../src/elements/barcode-element.js"],"names":[],"mappings":";;;;AAAA;;;;;;;;;;;;;;IAEqB","file":"barcode-element.js","sourcesContent":["import TextualElement from './element';\n\nexport default class BarcodeElement extends TextualElement {\n}\n"]}
+{"version":3,"sources":["../../src/elements/barcode-element.js"],"names":[],"mappings":";;;;AAAA;;;;;;;;;;;;;;IAEqB,c;;;;;;;;;;;;kBAAA,c","file":"barcode-element.js","sourcesContent":["import TextualElement from './element';\n\nexport default class BarcodeElement extends TextualElement {\n}\n"]}

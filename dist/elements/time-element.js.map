@@ -1,1 +1,1 @@
-{"version":3,"sources":["../../src/elements/time-element.js"],"names":[],"mappings":";;;;AAAA;;;;;;;;;;;;;;IAEqB","file":"time-element.js","sourcesContent":["import TextualElement from './textual-element';\n\nexport default class TimeElement extends TextualElement {\n}\n"]}
+{"version":3,"sources":["../../src/elements/time-element.js"],"names":[],"mappings":";;;;AAAA;;;;;;;;;;;;;;IAEqB,W;;;;;;;;;;;;kBAAA,W","file":"time-element.js","sourcesContent":["import TextualElement from './textual-element';\n\nexport default class TimeElement extends TextualElement {\n}\n"]}
