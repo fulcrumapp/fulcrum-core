@@ -26,7 +26,7 @@ var DefaultValues = function () {
 
     var hasValue = value && !value.isEmpty;
 
-    if (hasValue || defaultValue == null) {
+    if (hasValue || defaultValue == null || defaultValue.length === 0) {
       return;
     }
 

@@ -42,41 +42,45 @@ var ClassificationValue = function (_FormValue) {
     _this._otherValues = [];
 
     if (attributes) {
-      for (var _iterator = attributes.choice_values, _isArray = Array.isArray(_iterator), _i = 0, _iterator = _isArray ? _iterator : _iterator[Symbol.iterator]();;) {
-        var _ref;
+      if (attributes.choice_values) {
+        for (var _iterator = attributes.choice_values, _isArray = Array.isArray(_iterator), _i = 0, _iterator = _isArray ? _iterator : _iterator[Symbol.iterator]();;) {
+          var _ref;
 
-        if (_isArray) {
-          if (_i >= _iterator.length) break;
-          _ref = _iterator[_i++];
-        } else {
-          _i = _iterator.next();
-          if (_i.done) break;
-          _ref = _i.value;
-        }
+          if (_isArray) {
+            if (_i >= _iterator.length) break;
+            _ref = _iterator[_i++];
+          } else {
+            _i = _iterator.next();
+            if (_i.done) break;
+            _ref = _i.value;
+          }
 
-        var choice = _ref;
+          var choice = _ref;
 
-        if (_textUtils2.default.isPresent(choice)) {
-          _this._choiceValues.push(choice);
+          if (_textUtils2.default.isPresent(choice)) {
+            _this._choiceValues.push(choice);
+          }
         }
       }
 
-      for (var _iterator2 = attributes.other_values, _isArray2 = Array.isArray(_iterator2), _i2 = 0, _iterator2 = _isArray2 ? _iterator2 : _iterator2[Symbol.iterator]();;) {
-        var _ref2;
+      if (attributes.other_values) {
+        for (var _iterator2 = attributes.other_values, _isArray2 = Array.isArray(_iterator2), _i2 = 0, _iterator2 = _isArray2 ? _iterator2 : _iterator2[Symbol.iterator]();;) {
+          var _ref2;
 
-        if (_isArray2) {
-          if (_i2 >= _iterator2.length) break;
-          _ref2 = _iterator2[_i2++];
-        } else {
-          _i2 = _iterator2.next();
-          if (_i2.done) break;
-          _ref2 = _i2.value;
-        }
+          if (_isArray2) {
+            if (_i2 >= _iterator2.length) break;
+            _ref2 = _iterator2[_i2++];
+          } else {
+            _i2 = _iterator2.next();
+            if (_i2.done) break;
+            _ref2 = _i2.value;
+          }
 
-        var _choice = _ref2;
+          var _choice = _ref2;
 
-        if (_textUtils2.default.isPresent(_choice)) {
-          _this._otherValues.push(_choice);
+          if (_textUtils2.default.isPresent(_choice)) {
+            _this._otherValues.push(_choice);
+          }
         }
       }
     }
