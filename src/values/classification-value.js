@@ -223,7 +223,7 @@ export default class ClassificationValue extends FormValue {
     if (otherValue) {
       this._otherValues = [ otherValue.toString() ];
     } else {
-      this._otherVaues = [];
+      this._otherValues = [];
     }
   }
 }
