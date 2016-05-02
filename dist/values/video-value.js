@@ -41,9 +41,9 @@ var VideoValue = function (_MediaValue) {
     get: function get() {
       if (this.length === 1) {
         return '1 Video';
-      } else {
-        return this.length + ' Videos';
       }
+
+      return this.length + ' Videos';
     }
   }]);
 

@@ -59,12 +59,12 @@ var Condition = function () {
     return formValue.isGreaterThan(stringValue);
   };
 
-  Condition.shouldElementBeVisible = function shouldElementBeVisible(element, record, values, cache) {
-    if (cache != null && cache[element.key] != null) {
-      return cache[element.key];
+  Condition.shouldElementBeVisible = function shouldElementBeVisible(element, record, values, visibilityCache) {
+    if (visibilityCache != null && visibilityCache[element.key] != null) {
+      return visibilityCache[element.key];
     }
 
-    cache = cache || {};
+    var cache = visibilityCache || {};
 
     var shouldBeVisible = Condition.shouldElementBeVisibleRecursive(element, record, values, cache);
 

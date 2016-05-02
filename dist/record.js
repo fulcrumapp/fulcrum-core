@@ -121,8 +121,8 @@ var Record = function (_Feature) {
     return json;
   };
 
-  Record.prototype.updateFromAPIAttributes = function updateFromAPIAttributes(attributes) {
-    attributes = attributes || {};
+  Record.prototype.updateFromAPIAttributes = function updateFromAPIAttributes(attrs) {
+    var attributes = attrs || {};
 
     this._id = attributes.id || _uuid2.default.v4();
     this._version = attributes.version || null;

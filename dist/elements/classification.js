@@ -71,7 +71,9 @@ var Classification = function () {
       // return an array of all classifications including all parent items
       var classifications = [];
 
+      /* eslint-disable consistent-this */
       var iterator = this;
+      /* eslint-enable consistent-this */
 
       while (iterator && iterator.parent) {
         classifications.push(iterator);

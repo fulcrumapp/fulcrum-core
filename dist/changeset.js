@@ -25,8 +25,8 @@ var Changeset = function () {
     this.updateFromAPIAttributes(attributes);
   }
 
-  Changeset.prototype.updateFromAPIAttributes = function updateFromAPIAttributes(attributes) {
-    attributes = attributes || {};
+  Changeset.prototype.updateFromAPIAttributes = function updateFromAPIAttributes(attrs) {
+    var attributes = attrs || {};
 
     this._id = attributes.id;
     this._metadata = attributes.metadata || {};
@@ -95,9 +95,9 @@ var Changeset = function () {
     get: function get() {
       if (this._metadata.import_id) {
         return 'Fulcrum Importer';
-      } else {
-        return this._metadata.application;
       }
+
+      return this._metadata.application;
     }
   }, {
     key: 'metadataDescription',

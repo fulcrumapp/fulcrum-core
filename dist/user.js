@@ -7,10 +7,10 @@ var _createClass = function () { function defineProperties(target, props) { for 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 var User = function () {
-  function User(attributes) {
+  function User(attrs) {
     _classCallCheck(this, User);
 
-    attributes = attributes || {};
+    var attributes = attrs || {};
 
     this._id = attributes.id;
     this._firstName = attributes.first_name;

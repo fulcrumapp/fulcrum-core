@@ -19,8 +19,8 @@ var ClassificationSet = function () {
     this.updateFromAPIAttributes(attributes);
   }
 
-  ClassificationSet.prototype.updateFromAPIAttributes = function updateFromAPIAttributes(attributes) {
-    attributes = attributes || {};
+  ClassificationSet.prototype.updateFromAPIAttributes = function updateFromAPIAttributes(attrs) {
+    var attributes = attrs || {};
 
     this._id = attributes.id;
     this._name = attributes.name;

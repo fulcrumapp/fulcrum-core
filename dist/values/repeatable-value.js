@@ -174,9 +174,9 @@ var RepeatableValue = function (_FormValue) {
     get: function get() {
       if (this.length === 1) {
         return '1 Item';
-      } else {
-        return this.length + ' Items';
       }
+
+      return this.length + ' Items';
     }
   }, {
     key: 'searchableValue',

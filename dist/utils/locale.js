@@ -20,9 +20,9 @@ var Locale = function () {
   Locale.supportsECMA402 = function supportsECMA402() {
     if (typeof Intl !== 'undefined') {
       return true;
-    } else {
-      return false;
     }
+
+    return false;
   };
 
   return Locale;

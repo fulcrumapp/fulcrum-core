@@ -35,8 +35,8 @@ var Form = function () {
     this.updateFromAPIAttributes(attributes);
   }
 
-  Form.prototype.updateFromAPIAttributes = function updateFromAPIAttributes(attributes) {
-    attributes = attributes || {};
+  Form.prototype.updateFromAPIAttributes = function updateFromAPIAttributes(attrs) {
+    var attributes = attrs || {};
 
     this._id = attributes.id;
     this._name = attributes.name;

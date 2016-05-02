@@ -90,12 +90,12 @@ var NumberUtils = function () {
 
       if (string === 'NaN') {
         return number;
-      } else {
-        return string;
       }
-    } else {
-      return number.toString();
+
+      return string;
     }
+
+    return number.toString();
   };
 
   _createClass(NumberUtils, null, [{

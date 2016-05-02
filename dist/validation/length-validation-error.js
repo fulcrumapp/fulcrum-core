@@ -48,9 +48,9 @@ var LengthValidationError = function (_ElementValidationErr) {
   LengthValidationError.prototype.messageWithFormats = function messageWithFormats(singularFormat, pluralFormat, length) {
     if (length === 1) {
       return (0, _util.format)(singularFormat, this.label, length);
-    } else {
-      return (0, _util.format)(pluralFormat, this.label, length);
     }
+
+    return (0, _util.format)(pluralFormat, this.label, length);
   };
 
   _createClass(LengthValidationError, [{

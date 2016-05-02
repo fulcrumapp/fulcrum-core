@@ -16,6 +16,8 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
+// import ElementFactory from './element-factory';
+
 var ElementFactory = null;
 
 var Element = function () {
@@ -111,7 +113,10 @@ var Element = function () {
   }
 
   Element.factory = function factory() {
+    // return ElementFactory;
+    /* eslint-disable global-require */
     return ElementFactory = ElementFactory || require('./element-factory').default;
+    /* eslint-enable global-require */
   };
 
   Element.create = function create(parent, attributes) {

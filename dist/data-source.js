@@ -104,9 +104,9 @@ var DataSource = function () {
         return callback(err);
       } else if (dataSource.previous) {
         return _this2.process(dataSource.previous, method, params, objects, callback);
-      } else {
-        return callback.apply(null, [null].concat(objects));
       }
+
+      return callback.apply(null, [null].concat(objects));
     };
 
     var processArguments = params.concat(objects.concat([processCallback]));

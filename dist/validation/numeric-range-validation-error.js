@@ -32,7 +32,7 @@ var NumericRangeValidationError = function (_ElementValidationErr) {
   _createClass(NumericRangeValidationError, [{
     key: 'message',
     get: function get() {
-      var message = void 0;
+      var message = null;
 
       var fieldLabel = this.label;
 

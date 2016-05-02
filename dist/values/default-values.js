@@ -21,7 +21,9 @@ var DefaultValues = function () {
     _classCallCheck(this, DefaultValues);
   }
 
-  DefaultValues.applyDefaultValue = function applyDefaultValue(defaultValue, element, formValues) {
+  DefaultValues.applyDefaultValue = function applyDefaultValue(elementDefaultValue, element, formValues) {
+    var defaultValue = elementDefaultValue;
+
     var value = formValues.get(element.key);
 
     var hasValue = value && !value.isEmpty;

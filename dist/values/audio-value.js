@@ -41,9 +41,9 @@ var AudioValue = function (_MediaValue) {
     get: function get() {
       if (this.length === 1) {
         return '1 Audio File';
-      } else {
-        return this.length + ' Audio Files';
       }
+
+      return this.length + ' Audio Files';
     }
   }]);
 

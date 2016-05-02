@@ -19,8 +19,8 @@ var ChoiceList = function () {
     this.updateFromAPIAttributes(attributes);
   }
 
-  ChoiceList.prototype.updateFromAPIAttributes = function updateFromAPIAttributes(attributes) {
-    attributes = attributes || {};
+  ChoiceList.prototype.updateFromAPIAttributes = function updateFromAPIAttributes(attrs) {
+    var attributes = attrs || {};
 
     this._id = attributes.id;
     this._name = attributes.name;

@@ -163,6 +163,10 @@ var _sectionElement = require('./elements/section-element');
 
 var _sectionElement2 = _interopRequireDefault(_sectionElement);
 
+var _recordLinkElement = require('./elements/record-link-element');
+
+var _recordLinkElement2 = _interopRequireDefault(_recordLinkElement);
+
 var _recordLinkValue = require('./values/record-link-value');
 
 var _recordLinkValue2 = _interopRequireDefault(_recordLinkValue);
@@ -257,7 +261,7 @@ exports.CalculatedValue = _calculatedValue2.default;
 exports.TextElement = _textElement2.default;
 exports.TextValue = _textValue2.default;
 exports.SectionElement = _sectionElement2.default;
-exports.RecordLinkElement = _sectionElement2.default;
+exports.RecordLinkElement = _recordLinkElement2.default;
 exports.RecordLinkValue = _recordLinkValue2.default;
 exports.RecordLinkItemValue = _recordLinkItemValue2.default;
 exports.FeatureValidator = _featureValidator2.default;

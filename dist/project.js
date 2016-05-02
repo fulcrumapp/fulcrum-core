@@ -13,8 +13,8 @@ var Project = function () {
     this.updateFromAPIAttributes(attributes);
   }
 
-  Project.prototype.updateFromAPIAttributes = function updateFromAPIAttributes(attributes) {
-    attributes = attributes || {};
+  Project.prototype.updateFromAPIAttributes = function updateFromAPIAttributes(attrs) {
+    var attributes = attrs || {};
 
     this._id = attributes.id;
     this._name = attributes.name;

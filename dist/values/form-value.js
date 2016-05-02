@@ -12,11 +12,13 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
+// import FormValueFactory from './form-value-factory';
+
+var FormValueFactory = null;
+
 function notImplemented() {
   throw new Error('Not implemented');
 }
-
-var FormValueFactory = null;
 
 var FormValue = function () {
   function FormValue(element, value) {
@@ -51,7 +53,10 @@ var FormValue = function () {
   };
 
   FormValue.factory = function factory() {
+    // return FormValueFactory;
+    /* eslint-disable global-require */
     return FormValueFactory = FormValueFactory || require('./form-value-factory').default;
+    /* eslint-enable global-require */
   };
 
   FormValue.create = function create(element, attributes) {

@@ -29,10 +29,10 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var DateValue = function (_TextualValue) {
   _inherits(DateValue, _TextualValue);
 
-  function DateValue(element, value) {
+  function DateValue() {
     _classCallCheck(this, DateValue);
 
-    return _possibleConstructorReturn(this, _TextualValue.call(this, element, value));
+    return _possibleConstructorReturn(this, _TextualValue.apply(this, arguments));
   }
 
   DateValue.prototype.isLessThan = function isLessThan(stringValue) {

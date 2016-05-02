@@ -51,9 +51,9 @@ var TextualValue = function (_FormValue) {
       return _textUtils2.default.isEmpty(stringValue);
     }
 
-    stringValue = stringValue == null ? '' : stringValue.toString();
+    var lowerValue = stringValue == null ? '' : stringValue.toString();
 
-    return this.textValue.toLowerCase() === stringValue.toLowerCase();
+    return this.textValue.toLowerCase() === lowerValue.toLowerCase();
   };
 
   TextualValue.prototype.contains = function contains(stringValue) {
@@ -65,9 +65,9 @@ var TextualValue = function (_FormValue) {
       return false;
     }
 
-    stringValue = stringValue.toString();
+    var lowerValue = stringValue.toString();
 
-    return _textUtils2.default.contains(this.textValue, stringValue);
+    return _textUtils2.default.contains(this.textValue, lowerValue);
   };
 
   TextualValue.prototype.startsWith = function startsWith(stringValue) {
@@ -79,9 +79,7 @@ var TextualValue = function (_FormValue) {
       return false;
     }
 
-    stringValue = stringValue.toString();
-
-    return _textUtils2.default.startsWith(this.textValue, stringValue);
+    return _textUtils2.default.startsWith(this.textValue, stringValue.toString());
   };
 
   TextualValue.prototype.isLessThan = function isLessThan(stringValue) {
@@ -89,12 +87,14 @@ var TextualValue = function (_FormValue) {
       return false;
     }
 
+    var string = null;
+
     if (stringValue != null) {
-      stringValue = stringValue.toString();
+      string = stringValue.toString();
     }
 
     var thisValue = _numberUtils2.default.parseDouble(this.textValue);
-    var thatValue = _numberUtils2.default.parseDouble(stringValue);
+    var thatValue = _numberUtils2.default.parseDouble(string);
 
     if (thisValue == null || thatValue == null) {
       return false;
@@ -108,10 +108,10 @@ var TextualValue = function (_FormValue) {
       return false;
     }
 
-    stringValue = stringValue == null ? '' : stringValue.toString();
+    var string = stringValue == null ? '' : stringValue.toString();
 
     var thisValue = _numberUtils2.default.parseDouble(this.textValue);
-    var thatValue = _numberUtils2.default.parseDouble(stringValue);
+    var thatValue = _numberUtils2.default.parseDouble(string);
 
     if (thisValue == null || thatValue == null) {
       return false;

@@ -109,10 +109,8 @@ var FeatureValidator = function () {
     return errors;
   };
 
-  FeatureValidator.validateFieldsInElements = function validateFieldsInElements(elements, record, formValues, errors, cache) {
-    if (!cache) {
-      cache = {};
-    }
+  FeatureValidator.validateFieldsInElements = function validateFieldsInElements(elements, record, formValues, errors, visibilityCache) {
+    var cache = visibilityCache || {};
 
     for (var _iterator = elements, _isArray = Array.isArray(_iterator), _i = 0, _iterator = _isArray ? _iterator : _iterator[Symbol.iterator]();;) {
       var _ref;

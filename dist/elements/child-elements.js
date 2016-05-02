@@ -18,6 +18,8 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : _defaults(subClass, superClass); }
 
+// import ElementFactory from './element-factory';
+
 var ElementFactory = null;
 
 var ChildElements = function (_Mixin) {
@@ -46,9 +48,11 @@ var ChildElements = function (_Mixin) {
 
       var element = _ref;
 
+      /* eslint-disable global-require */
       // hack for circular dependency, not ideal
       ElementFactory = ElementFactory || require('./element-factory').default;
       this._elements.push(ElementFactory.create(this, element));
+      /* eslint-enable global-require */
     }
   };
 
