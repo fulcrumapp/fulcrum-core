@@ -4,17 +4,13 @@ exports.__esModule = true;
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _elementTypes = require('../elements/element-types');
+var _formValueFactory = require('./form-value-factory');
 
-var _elementTypes2 = _interopRequireDefault(_elementTypes);
+var _formValueFactory2 = _interopRequireDefault(_formValueFactory);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-// import FormValueFactory from './form-value-factory';
-
-var FormValueFactory = null;
 
 function notImplemented() {
   throw new Error('Not implemented');
@@ -52,44 +48,8 @@ var FormValue = function () {
     notImplemented();
   };
 
-  FormValue.factory = function factory() {
-    // return FormValueFactory;
-    /* eslint-disable global-require */
-    return FormValueFactory = FormValueFactory || require('./form-value-factory').default;
-    /* eslint-enable global-require */
-  };
-
   FormValue.create = function create(element, attributes) {
-    return FormValue.factory().create(element, attributes);
-  };
-
-  FormValue.classes = function classes() {
-    if (FormValue._classes == null) {
-      FormValue._classes = {};
-
-      for (var _iterator = Object.keys(_elementTypes2.default), _isArray = Array.isArray(_iterator), _i = 0, _iterator = _isArray ? _iterator : _iterator[Symbol.iterator]();;) {
-        var _ref;
-
-        if (_isArray) {
-          if (_i >= _iterator.length) break;
-          _ref = _iterator[_i++];
-        } else {
-          _i = _iterator.next();
-          if (_i.done) break;
-          _ref = _i.value;
-        }
-
-        var klass = _ref;
-
-        var _constructor = FormValue.factory().classes()[_elementTypes2.default[klass]];
-
-        if (_constructor) {
-          FormValue._classes[_constructor.name] = _constructor;
-        }
-      }
-    }
-
-    return FormValue._classes;
+    return _formValueFactory2.default.create(element, attributes);
   };
 
   _createClass(FormValue, [{

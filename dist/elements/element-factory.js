@@ -74,6 +74,10 @@ var _recordLinkElement = require('./record-link-element');
 
 var _recordLinkElement2 = _interopRequireDefault(_recordLinkElement);
 
+var _containerElement = require('./container-element');
+
+var _containerElement2 = _interopRequireDefault(_containerElement);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -100,6 +104,8 @@ var Constructors = {
   RecordLinkField: _recordLinkElement2.default
 };
 
+var initialized = false;
+
 var ElementFactory = function () {
   function ElementFactory() {
     _classCallCheck(this, ElementFactory);
@@ -107,6 +113,11 @@ var ElementFactory = function () {
 
   ElementFactory.create = function create(parent, attributes) {
     var constructor = Constructors[attributes.type];
+
+    if (!initialized) {
+      initialized = true;
+      _containerElement2.default.initialize();
+    }
 
     if (constructor == null) {
       throw new Error('Unsupported element ' + attributes.type);

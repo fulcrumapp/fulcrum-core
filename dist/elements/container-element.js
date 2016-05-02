@@ -53,11 +53,16 @@ var ContainerElement = function (_Element) {
     }
   };
 
+  ContainerElement.initialize = function initialize() {
+    // this is a bit of a hack to get around circular dependencies. This gets
+    // called once from within the factory to setup the class. Putting this
+    // at global scope introduces circular dependency errors because ChildElements
+    // ends up loading the factory.
+    _childElements2.default.includeInto(ContainerElement);
+  };
+
   return ContainerElement;
 }(_element2.default);
 
 exports.default = ContainerElement;
-
-
-_childElements2.default.includeInto(ContainerElement);
 //# sourceMappingURL=container-element.js.map

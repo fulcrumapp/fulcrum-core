@@ -16,10 +16,6 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-// import ElementFactory from './element-factory';
-
-var ElementFactory = null;
-
 var Element = function () {
   function Element(parent, attributes) {
     _classCallCheck(this, Element);
@@ -111,42 +107,6 @@ var Element = function () {
     this._overrideMinLength = null;
     this._overrideMaxLength = null;
   }
-
-  Element.factory = function factory() {
-    // return ElementFactory;
-    /* eslint-disable global-require */
-    return ElementFactory = ElementFactory || require('./element-factory').default;
-    /* eslint-enable global-require */
-  };
-
-  Element.create = function create(parent, attributes) {
-    return Element.factory().create(parent, attributes);
-  };
-
-  Element.classes = function classes() {
-    if (Element._classes == null) {
-      Element._classes = {};
-
-      for (var _iterator3 = Object.keys(_elementTypes2.default), _isArray3 = Array.isArray(_iterator3), _i3 = 0, _iterator3 = _isArray3 ? _iterator3 : _iterator3[Symbol.iterator]();;) {
-        var _ref3;
-
-        if (_isArray3) {
-          if (_i3 >= _iterator3.length) break;
-          _ref3 = _iterator3[_i3++];
-        } else {
-          _i3 = _iterator3.next();
-          if (_i3.done) break;
-          _ref3 = _i3.value;
-        }
-
-        var klass = _ref3;
-
-        Element._classes[klass] = Element.factory().classes()[_elementTypes2.default[klass]];
-      }
-    }
-
-    return Element._classes;
-  };
 
   Element.prototype.resetOverrides = function resetOverrides() {
     this._overrideLabel = null;
