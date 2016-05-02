@@ -51,9 +51,9 @@ var TextualValue = function (_FormValue) {
       return _textUtils2.default.isEmpty(stringValue);
     }
 
-    var lowerValue = stringValue == null ? '' : stringValue.toString();
+    var string = stringValue == null ? '' : stringValue.toString();
 
-    return this.textValue.toLowerCase() === lowerValue.toLowerCase();
+    return this.textValue.toLowerCase() === string.toLowerCase();
   };
 
   TextualValue.prototype.contains = function contains(stringValue) {
@@ -65,9 +65,9 @@ var TextualValue = function (_FormValue) {
       return false;
     }
 
-    var lowerValue = stringValue.toString();
+    var string = stringValue.toString();
 
-    return _textUtils2.default.contains(this.textValue, lowerValue);
+    return _textUtils2.default.contains(this.textValue, string);
   };
 
   TextualValue.prototype.startsWith = function startsWith(stringValue) {

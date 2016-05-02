@@ -50,9 +50,9 @@ export default class TextualValue extends FormValue {
       return TextUtils.isEmpty(stringValue);
     }
 
-    const lowerValue = (stringValue == null ? '' : stringValue.toString());
+    const string = (stringValue == null ? '' : stringValue.toString());
 
-    return this.textValue.toLowerCase() === lowerValue.toLowerCase();
+    return this.textValue.toLowerCase() === string.toLowerCase();
   }
 
   contains(stringValue) {
@@ -64,9 +64,9 @@ export default class TextualValue extends FormValue {
       return false;
     }
 
-    const lowerValue = stringValue.toString();
+    const string = stringValue.toString();
 
-    return TextUtils.contains(this.textValue, lowerValue);
+    return TextUtils.contains(this.textValue, string);
   }
 
   startsWith(stringValue) {
