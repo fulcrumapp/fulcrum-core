@@ -46,7 +46,7 @@ export default class ClassificationElement extends Element {
 
     const classificationItems = [];
 
-    for (let classificationAttributes of overrideClassificationSetItems) {
+    for (const classificationAttributes of overrideClassificationSetItems) {
       const classification = new Classification(null, classificationAttributes);
 
       classificationItems.push(classification);
@@ -78,8 +78,8 @@ export default class ClassificationElement extends Element {
 
     const filteredItems = [];
 
-    for (let item of items) {
-      for (let filter of this.classificationFilter) {
+    for (const item of items) {
+      for (const filter of this.classificationFilter) {
         if (item.value.toLowerCase().indexOf(filter.toLowerCase()) !== -1) {
           filteredItems.push(item);
         }

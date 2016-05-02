@@ -8,7 +8,7 @@
     "test": "npm run lint && node_modules/.bin/mocha ./test/setup.js ./test/test.js ./test/elements/*.js",
     "simpletest": "node_modules/.bin/mocha ./test/setup.js ./test/test.js ./test/elements/*.js",
     "prepublish": "npm run lint && npm run clean && npm run build",
-    "lint": "node_modules/.bin/eslint src",
+    "lint": "node_modules/.bin/eslint src/* src/**/*",
     "build": "node_modules/.bin/babel src --out-dir dist --source-maps",
     "watch": "node_modules/.bin/babel src --out-dir dist --source-maps --watch",
     "clean": "rm -rf dist",
@@ -21,6 +21,9 @@
     "type": "git",
     "url": "git://github.com/fulcrumapp/fulcrum-core.git"
   },
+  "eslintConfig": {
+    "extends": "fulcrum"
+  },
   "devDependencies": {
     "babel-cli": "^6.7.7",
     "babel-core": "^6.7.7",
@@ -31,7 +34,9 @@
     "babel-preset-es2015-node5": "^1.2.0",
     "babel-preset-stage-3": "^6.5.0",
     "chai": "^3.5.0",
-    "eslint": "^2.8.0",
+    "eslint": "^2.9.0",
+    "eslint-config-fulcrum": "^1.0.0",
+    "eslint-plugin-react": "^5.0.1",
     "mocha": "^2.4.5",
     "npm-check-updates": "^2.6.3",
     "should": "^8.3.1",
@@ -39,7 +44,7 @@
   },
   "dependencies": {
     "async": "^2.0.0-rc.3",
-    "lodash": "^4.11.1",
+    "lodash": "^4.11.2",
     "mixmatch": "0.0.2",
     "relative-date": "^1.1.3",
     "uuid": "^2.0.2"

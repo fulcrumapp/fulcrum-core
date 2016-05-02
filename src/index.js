@@ -38,7 +38,7 @@ import CalculatedValue from './values/calculated-value';
 import TextElement from './elements/text-element';
 import TextValue from './values/text-value';
 import SectionElement from './elements/section-element';
-import RecordLinkElement from './elements/section-element';
+import RecordLinkElement from './elements/record-link-element';
 import RecordLinkValue from './values/record-link-value';
 import RecordLinkItemValue from './values/record-link-item-value';
 import FeatureValidator from './validation/feature-validator';

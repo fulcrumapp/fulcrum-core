@@ -47,19 +47,19 @@ export default class Condition {
     return formValue.isGreaterThan(stringValue);
   }
 
-  static shouldElementBeVisible(element, record, values, cache) {
-    if (cache != null && cache[element.key] != null) {
-      return cache[element.key];
+  static shouldElementBeVisible(element, record, values, visibilityCache) {
+    if (visibilityCache != null && visibilityCache[element.key] != null) {
+      return visibilityCache[element.key];
     }
 
-    cache = cache || {};
+    const cache = visibilityCache || {};
 
     let shouldBeVisible = Condition.shouldElementBeVisibleRecursive(element, record, values, cache);
 
     if (element.isSectionElement) {
       let hasVisibleChildren = false;
 
-      for (let childElement of element.elements) {
+      for (const childElement of element.elements) {
         const visible = Condition.shouldElementBeVisibleRecursive(childElement, record, values, cache);
 
         if (visible) {
@@ -96,7 +96,7 @@ export default class Condition {
     }
 
     if (element.visibleConditionsType === 'any') {
-      for (let condition of element.visibleConditions) {
+      for (const condition of element.visibleConditions) {
         const isSatisfied = condition.isSatisfied(record, values, cache);
 
         if (isSatisfied) {
@@ -107,7 +107,7 @@ export default class Condition {
     } else if (element.visibleConditionsType === 'all') {
       shouldBeVisible = true;
 
-      for (let condition of element.visibleConditions) {
+      for (const condition of element.visibleConditions) {
         const isSatisfied = condition.isSatisfied(record, values, cache);
 
         if (!isSatisfied) {
@@ -155,7 +155,7 @@ export default class Condition {
     let shouldBeRequired = false;
 
     if (element.requiredConditionsType === 'any') {
-      for (let condition of element.requiredConditions) {
+      for (const condition of element.requiredConditions) {
         const isSatisfied = condition.isSatisfied(record, values, cache);
 
         if (isSatisfied) {
@@ -166,7 +166,7 @@ export default class Condition {
     } else if (element.requiredConditionsType === 'all') {
       shouldBeRequired = true;
 
-      for (let condition of element.requiredConditions) {
+      for (const condition of element.requiredConditions) {
         const isSatisfied = condition.isSatisfied(record, values, cache);
 
         if (!isSatisfied) {

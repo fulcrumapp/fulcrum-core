@@ -9,8 +9,8 @@ export default class VideoValue extends MediaValue {
   get displayValue() {
     if (this.length === 1) {
       return '1 Video';
-    } else {
-      return `${this.length} Videos`;
     }
+
+    return `${this.length} Videos`;
   }
 }

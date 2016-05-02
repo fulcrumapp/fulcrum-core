@@ -6,7 +6,7 @@ export default class Classification {
     this._items = [];
 
     if (attributes.child_classifications) {
-      for (let child of attributes.child_classifications) {
+      for (const child of attributes.child_classifications) {
         this._items.push(new Classification(this, child));
       }
     }
@@ -20,7 +20,9 @@ export default class Classification {
     // return an array of all classifications including all parent items
     const classifications = [];
 
+    /* eslint-disable consistent-this */
     let iterator = this;
+    /* eslint-enable consistent-this */
 
     while (iterator && iterator.parent) {
       classifications.push(iterator);
@@ -37,7 +39,7 @@ export default class Classification {
   toJSON() {
     const values = [];
 
-    for (let item of this.exploded) {
+    for (const item of this.exploded) {
       if (item.value) {
         values.push(item.value);
       }

@@ -1,4 +1,5 @@
 import Mixin from 'mixmatch';
+// import ElementFactory from './element-factory';
 
 let ElementFactory = null;
 
@@ -14,10 +15,12 @@ export default class ChildElements extends Mixin {
   createChildElements(elements) {
     this._elements = [];
 
-    for (let element of elements) {
+    for (const element of elements) {
+      /* eslint-disable global-require */
       // hack for circular dependency, not ideal
       ElementFactory = ElementFactory || require('./element-factory').default;
       this._elements.push(ElementFactory.create(this, element));
+      /* eslint-enable global-require */
     }
   }
 
@@ -56,7 +59,7 @@ export default class ChildElements extends Mixin {
   _flattenElements(elements) {
     let flat = [];
 
-    for (let element of elements) {
+    for (const element of elements) {
       flat.push(element);
 
       if (element.elements) {
@@ -70,13 +73,13 @@ export default class ChildElements extends Mixin {
   _flattenElementsByAttribute(elements, attr) {
     const flat = {};
 
-    for (let element of elements) {
+    for (const element of elements) {
       flat[element[attr]] = element;
 
       if (element.elements) {
         const children = this._flattenElementsByAttribute(element.elements, attr);
 
-        for (let key of Object.keys(children)) {
+        for (const key of Object.keys(children)) {
           flat[key] = children[key];
         }
       }

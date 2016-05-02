@@ -3,10 +3,6 @@ import DateUtils from '../utils/date-utils';
 import TextUtils from '../utils/text-utils';
 
 export default class DateValue extends TextualValue {
-  constructor(element, value) {
-    super(element, value);
-  }
-
   get displayValue() {
     if (this.isEmpty) {
       return null;

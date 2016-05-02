@@ -3,7 +3,7 @@ import {format} from 'util';
 
 export default class NumericRangeValidationError extends ElementValidationError {
   get message() {
-    let message;
+    let message = null;
 
     const fieldLabel = this.label;
 

@@ -3,8 +3,8 @@ export default class Project {
     this.updateFromAPIAttributes(attributes);
   }
 
-  updateFromAPIAttributes(attributes) {
-    attributes = attributes || {};
+  updateFromAPIAttributes(attrs) {
+    const attributes = attrs || {};
 
     this._id = attributes.id;
     this._name = attributes.name;

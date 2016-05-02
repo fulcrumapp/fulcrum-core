@@ -65,10 +65,8 @@ export default class FeatureValidator {
     return errors;
   }
 
-  static validateFieldsInElements(elements, record, formValues, errors, cache) {
-    if (!cache) {
-      cache = {};
-    }
+  static validateFieldsInElements(elements, record, formValues, errors, visibilityCache) {
+    const cache = visibilityCache || {};
 
     for (const element of elements) {
       if (element.isSectionElement) {

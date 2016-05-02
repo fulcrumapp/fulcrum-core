@@ -69,8 +69,8 @@ export default class StatusElement extends TextualElement {
 
     const filteredItems = [];
 
-    for (let item of items) {
-      for (let filter of this.statusFilter) {
+    for (const item of items) {
+      for (const filter of this.statusFilter) {
         if (item.value.toLowerCase().indexOf(filter.toLowerCase()) !== -1) {
           filteredItems.push(item);
         }

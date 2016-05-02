@@ -18,7 +18,7 @@ export default class DateUtils {
       return null;
     }
 
-    let [hours, minutes] = timeString.split(':');
+    let [ hours, minutes ] = timeString.split(':');
 
     if (hours == null || minutes == null) {
       return null;
@@ -109,7 +109,7 @@ export default class DateUtils {
       return false;
     }
 
-    const [hourPart, minutePart] = parts;
+    const [ hourPart, minutePart ] = parts;
 
     if (hourPart.length !== 2 || minutePart.length !== 2) {
       return false;
@@ -148,7 +148,7 @@ export default class DateUtils {
       return false;
     }
 
-    const [yearPart, monthPart, dayPart] = parts;
+    const [ yearPart, monthPart, dayPart ] = parts;
 
     if (yearPart.length !== 4 ||
         monthPart.length !== 2 ||

@@ -4,7 +4,7 @@ export default class RepeatableElement extends ContainerElement {
   constructor(parent, attributes) {
     super(parent, attributes);
 
-    this.titleFieldKeys = attributes.title_field_keys || [attributes.title_field_key];
+    this.titleFieldKeys = attributes.title_field_keys || [ attributes.title_field_key ];
 
     this._geometryTypes = attributes.geometry_types;
 

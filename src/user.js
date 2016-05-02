@@ -1,6 +1,6 @@
 export default class User {
-  constructor(attributes) {
-    attributes = attributes || {};
+  constructor(attrs) {
+    const attributes = attrs || {};
 
     this._id = attributes.id;
     this._firstName = attributes.first_name;

@@ -1,5 +1,6 @@
 import Types from './element-types';
 import Condition from './condition';
+// import ElementFactory from './element-factory';
 
 let ElementFactory = null;
 
@@ -32,7 +33,7 @@ export default class Element {
     this._visibleConditions = [];
 
     if (attributes.visible_conditions) {
-      for (let condition of attributes.visible_conditions) {
+      for (const condition of attributes.visible_conditions) {
         this._visibleConditions.push(new Condition(this, condition));
       }
     }
@@ -42,7 +43,7 @@ export default class Element {
     this._requiredConditions = [];
 
     if (attributes.required_conditions) {
-      for (let condition of attributes.required_conditions) {
+      for (const condition of attributes.required_conditions) {
         this._requiredConditions.push(new Condition(this, condition));
       }
     }
@@ -68,7 +69,10 @@ export default class Element {
   }
 
   static factory() {
+    // return ElementFactory;
+    /* eslint-disable global-require */
     return (ElementFactory = ElementFactory || require('./element-factory').default);
+    /* eslint-enable global-require */
   }
 
   static create(parent, attributes) {
@@ -79,7 +83,7 @@ export default class Element {
     if (Element._classes == null) {
       Element._classes = {};
 
-      for (let klass of Object.keys(Types)) {
+      for (const klass of Object.keys(Types)) {
         Element._classes[klass] = Element.factory().classes()[Types[klass]];
       }
     }

@@ -23,7 +23,7 @@ export default class CalculatedElement extends TextualElement {
   static findCalculatedElementsForContainer(container) {
     let elements = [];
 
-    for (let element of container.elements) {
+    for (const element of container.elements) {
       if (element.isCalculatedElement) {
         elements.push(element);
       } else if (element.isSectionElement) {

@@ -12,7 +12,7 @@ export default class RepeatableValue extends FormValue {
     this._items = [];
 
     if (items != null) {
-      for (let item of items) {
+      for (const item of items) {
         this._items.push(new RepeatableItemValue(this.element, item, this._items.length));
       }
     }
@@ -25,9 +25,9 @@ export default class RepeatableValue extends FormValue {
   get displayValue() {
     if (this.length === 1) {
       return '1 Item';
-    } else {
-      return this.length + ' Items';
     }
+
+    return this.length + ' Items';
   }
 
   get searchableValue() {
@@ -37,7 +37,7 @@ export default class RepeatableValue extends FormValue {
 
     const values = [];
 
-    for (let item of this._items) {
+    for (const item of this._items) {
       const searchValue = item.searchableValue;
 
       if (TextUtils.isPresent(searchValue)) {
@@ -59,7 +59,7 @@ export default class RepeatableValue extends FormValue {
 
     const items = [];
 
-    for (let item of this._items) {
+    for (const item of this._items) {
       items.push(item.toJSON());
     }
 

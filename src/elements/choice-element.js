@@ -16,7 +16,7 @@ export default class ChoiceElement extends Element {
 
     // TODO(zhm) the loading needs to be re-worked to support choice lists
     if (attributes.choices) {
-      for (let choice of attributes.choices) {
+      for (const choice of attributes.choices) {
         this._choices.push(new Choice(choice));
       }
     }
@@ -66,8 +66,8 @@ export default class ChoiceElement extends Element {
 
     const filteredItems = [];
 
-    for (let item of items) {
-      for (let filter of this.choiceFilter) {
+    for (const item of items) {
+      for (const filter of this.choiceFilter) {
         if (item.value.toLowerCase().indexOf(filter.toLowerCase()) !== -1) {
           filteredItems.push(item);
         }
@@ -91,7 +91,7 @@ export default class ChoiceElement extends Element {
 
     const choices = [];
 
-    for (let choiceAttributes of overrideChoices) {
+    for (const choiceAttributes of overrideChoices) {
       const choice = new Choice(choiceAttributes);
 
       choices.push(choice);
@@ -118,7 +118,7 @@ export default class ChoiceElement extends Element {
     if (!this._choicesByValue) {
       this._choicesByValue = {};
 
-      for (let choice of this.choices) {
+      for (const choice of this.choices) {
         this._choicesByValue[choice.value] = choice;
       }
     }

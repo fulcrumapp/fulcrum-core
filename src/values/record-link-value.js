@@ -10,7 +10,7 @@ export default class RecordLinkValue extends FormValue {
     this._items = [];
 
     if (items) {
-      for (let item of items) {
+      for (const item of items) {
         this._items.push(new RecordLinkItemValue(this, item));
       }
     }
@@ -43,7 +43,7 @@ export default class RecordLinkValue extends FormValue {
   toJSON() {
     const items = [];
 
-    for (let item of this._items) {
+    for (const item of this._items) {
       items.push(item.toJSON());
     }
 
@@ -57,7 +57,7 @@ export default class RecordLinkValue extends FormValue {
   get multipleValues() {
     const ids = [];
 
-    for (let item of this._items) {
+    for (const item of this._items) {
       ids.push(new MultipleValueItem(this.element, item.recordID));
     }
 

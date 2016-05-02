@@ -9,8 +9,8 @@ export default class PhotoValue extends MediaValue {
   get displayValue() {
     if (this.length === 1) {
       return '1 Photo';
-    } else {
-      return `${this.length} Photos`;
     }
+
+    return `${this.length} Photos`;
   }
 }

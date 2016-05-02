@@ -1,10 +1,11 @@
 import Types from '../elements/element-types';
+// import FormValueFactory from './form-value-factory';
+
+let FormValueFactory = null;
 
 function notImplemented() {
   throw new Error('Not implemented');
 }
-
-let FormValueFactory = null;
 
 export default class FormValue {
   constructor(element, value) {
@@ -69,7 +70,10 @@ export default class FormValue {
   }
 
   static factory() {
+    // return FormValueFactory;
+    /* eslint-disable global-require */
     return (FormValueFactory = FormValueFactory || require('./form-value-factory').default);
+    /* eslint-enable global-require */
   }
 
   static create(element, attributes) {
@@ -80,7 +84,7 @@ export default class FormValue {
     if (FormValue._classes == null) {
       FormValue._classes = {};
 
-      for (let klass of Object.keys(Types)) {
+      for (const klass of Object.keys(Types)) {
         const constructor = FormValue.factory().classes()[Types[klass]];
 
         if (constructor) {

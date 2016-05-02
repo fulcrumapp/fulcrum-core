@@ -15,7 +15,7 @@ export default class ClassificationValue extends FormValue {
 
     if (attributes) {
       if (attributes.choice_values) {
-        for (let choice of attributes.choice_values) {
+        for (const choice of attributes.choice_values) {
           if (TextUtils.isPresent(choice)) {
             this._choiceValues.push(choice);
           }
@@ -23,7 +23,7 @@ export default class ClassificationValue extends FormValue {
       }
 
       if (attributes.other_values) {
-        for (let choice of attributes.other_values) {
+        for (const choice of attributes.other_values) {
           if (TextUtils.isPresent(choice)) {
             this._otherValues.push(choice);
           }
@@ -85,7 +85,7 @@ export default class ClassificationValue extends FormValue {
     const classification = this.selectedClassification;
 
     if (classification) {
-      for (let item of classification.exploded) {
+      for (const item of classification.exploded) {
         if (item.label) {
           values.push(item.label);
         }
@@ -105,7 +105,7 @@ export default class ClassificationValue extends FormValue {
     const classification = this.selectedClassification;
 
     if (classification) {
-      for (let item of classification.exploded) {
+      for (const item of classification.exploded) {
         if (item.label) {
           values.push(item.label);
         }
@@ -144,11 +144,11 @@ export default class ClassificationValue extends FormValue {
   get columnValue() {
     const allValues = [];
 
-    for (let value of this._choiceValues) {
+    for (const value of this._choiceValues) {
       allValues.push(value);
     }
 
-    for (let value of this._otherValues) {
+    for (const value of this._otherValues) {
       allValues.push(value);
     }
 
@@ -192,8 +192,8 @@ export default class ClassificationValue extends FormValue {
 
     let currentClassifications = this.element.classificationItems;
 
-    for (let classificationValue of this._choiceValues) {
-      for (let classification of currentClassifications) {
+    for (const classificationValue of this._choiceValues) {
+      for (const classification of currentClassifications) {
         if (classification.value === classificationValue) {
           result = classification;
           currentClassifications = classification.items;

@@ -10,7 +10,7 @@ export default class MediaValue extends FormValue {
     this._items = [];
 
     if (items != null) {
-      for (let item of items) {
+      for (const item of items) {
         this._items.push(new this.ItemClass(this, item));
       }
     }
@@ -43,7 +43,7 @@ export default class MediaValue extends FormValue {
   get columnValue() {
     const ids = [];
 
-    for (let item of this._items) {
+    for (const item of this._items) {
       ids.push(item.mediaID);
     }
 
@@ -53,7 +53,7 @@ export default class MediaValue extends FormValue {
   get multipleValues() {
     const items = [];
 
-    for (let item of this._items) {
+    for (const item of this._items) {
       items.push(new MultipleValueItem(this.element, item.mediaID));
     }
 
@@ -67,7 +67,7 @@ export default class MediaValue extends FormValue {
 
     const items = [];
 
-    for (let item of this._items) {
+    for (const item of this._items) {
       items.push(item.toJSON());
     }
 

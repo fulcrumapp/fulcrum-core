@@ -14,7 +14,7 @@ export default class ChoiceValue extends FormValue {
 
     if (attributes) {
       if (attributes.choice_values) {
-        for (let choice of attributes.choice_values) {
+        for (const choice of attributes.choice_values) {
           if (TextUtils.isPresent(choice)) {
             this._choiceValues.push(choice);
           }
@@ -22,7 +22,7 @@ export default class ChoiceValue extends FormValue {
       }
 
       if (attributes.other_values) {
-        for (let choice of attributes.other_values) {
+        for (const choice of attributes.other_values) {
           if (TextUtils.isPresent(choice)) {
             this._otherValues.push(choice);
           }
@@ -44,7 +44,7 @@ export default class ChoiceValue extends FormValue {
   get displayValue() {
     const labels = [];
 
-    for (let rawValue of this._choiceValues) {
+    for (const rawValue of this._choiceValues) {
       const choice = this.element.choiceByValue(rawValue);
 
       const label = (choice != null ? choice.label : rawValue);
@@ -54,7 +54,7 @@ export default class ChoiceValue extends FormValue {
       }
     }
 
-    for (let otherValue of this._otherValues) {
+    for (const otherValue of this._otherValues) {
       labels.push(otherValue);
     }
 
@@ -64,7 +64,7 @@ export default class ChoiceValue extends FormValue {
   get searchableValue() {
     const values = [];
 
-    for (let rawValue of this._choiceValues) {
+    for (const rawValue of this._choiceValues) {
       const choice = this.element.choiceByValue(rawValue);
 
       if (choice != null) {
@@ -75,7 +75,7 @@ export default class ChoiceValue extends FormValue {
       }
     }
 
-    for (let otherValue of this._otherValues) {
+    for (const otherValue of this._otherValues) {
       values.push(otherValue);
     }
 
@@ -94,11 +94,11 @@ export default class ChoiceValue extends FormValue {
     const choiceValues = [];
     const otherValues = [];
 
-    for (let rawValue of this._choiceValues) {
+    for (const rawValue of this._choiceValues) {
       choiceValues.push(rawValue);
     }
 
-    for (let otherValue of this._otherValues) {
+    for (const otherValue of this._otherValues) {
       otherValues.push(otherValue);
     }
 
@@ -111,11 +111,11 @@ export default class ChoiceValue extends FormValue {
   get columnValue() {
     const allValues = [];
 
-    for (let rawValue of this._choiceValues) {
+    for (const rawValue of this._choiceValues) {
       allValues.push(rawValue);
     }
 
-    for (let otherValue of this._otherValues) {
+    for (const otherValue of this._otherValues) {
       allValues.push(otherValue);
     }
 

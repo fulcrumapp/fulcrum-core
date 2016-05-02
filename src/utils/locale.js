@@ -10,8 +10,8 @@ export default class Locale {
   static supportsECMA402() {
     if (typeof Intl !== 'undefined') {
       return true;
-    } else {
-      return false;
     }
+
+    return false;
   }
 }

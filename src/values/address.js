@@ -88,7 +88,7 @@ export default class Address {
   line(...parts) {
     const result = [];
 
-    for (let part of parts) {
+    for (const part of parts) {
       if (TextUtils.isPresent(part)) {
         result.push(part);
       }

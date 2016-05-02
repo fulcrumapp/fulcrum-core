@@ -1,6 +1,6 @@
 export default class Role {
-  constructor(attributes) {
-    attributes = attributes || {};
+  constructor(attrs) {
+    const attributes = attrs || {};
 
     this.id = attributes.id;
     this.name = attributes.name;

@@ -7,8 +7,8 @@ export default class Changeset {
     this.updateFromAPIAttributes(attributes);
   }
 
-  updateFromAPIAttributes(attributes) {
-    attributes = attributes || {};
+  updateFromAPIAttributes(attrs) {
+    const attributes = attrs || {};
 
     this._id = attributes.id;
     this._metadata = attributes.metadata || {};
@@ -75,9 +75,9 @@ export default class Changeset {
   get application() {
     if (this._metadata.import_id) {
       return 'Fulcrum Importer';
-    } else {
-      return this._metadata.application;
     }
+
+    return this._metadata.application;
   }
 
   get metadataDescription() {

@@ -158,8 +158,8 @@ export default class Record extends Feature {
     return json;
   }
 
-  updateFromAPIAttributes(attributes) {
-    attributes = attributes || {};
+  updateFromAPIAttributes(attrs) {
+    const attributes = attrs || {};
 
     this._id = attributes.id || uuid.v4();
     this._version = attributes.version || null;
@@ -227,7 +227,7 @@ export default class Record extends Feature {
     const titleFieldKeys = this.form.titleFieldKeys;
     const titles = [];
 
-    for (let fieldKey of titleFieldKeys) {
+    for (const fieldKey of titleFieldKeys) {
       const value = this.formValues.get(fieldKey);
 
       if (value) {

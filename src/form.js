@@ -9,8 +9,8 @@ export default class Form {
     this.updateFromAPIAttributes(attributes);
   }
 
-  updateFromAPIAttributes(attributes) {
-    attributes = attributes || {};
+  updateFromAPIAttributes(attrs) {
+    const attributes = attrs || {};
 
     this._id = attributes.id;
     this._name = attributes.name;
@@ -28,7 +28,7 @@ export default class Form {
     this._assignmentEnabled = attributes.assignment_enabled != null ? !!attributes.assignment_enabled : true;
 
     if (attributes.title_field_keys || attributes.record_title_key) {
-      this._titleFieldKeysJSON = attributes.title_field_keys || [attributes.record_title_key];
+      this._titleFieldKeysJSON = attributes.title_field_keys || [ attributes.record_title_key ];
     } else {
       this._titleFieldKeysJSON = [];
     }

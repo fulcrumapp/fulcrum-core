@@ -50,9 +50,9 @@ export default class TextualValue extends FormValue {
       return TextUtils.isEmpty(stringValue);
     }
 
-    stringValue = (stringValue == null ? '' : stringValue.toString());
+    const lowerValue = (stringValue == null ? '' : stringValue.toString());
 
-    return this.textValue.toLowerCase() === stringValue.toLowerCase();
+    return this.textValue.toLowerCase() === lowerValue.toLowerCase();
   }
 
   contains(stringValue) {
@@ -64,9 +64,9 @@ export default class TextualValue extends FormValue {
       return false;
     }
 
-    stringValue = stringValue.toString();
+    const lowerValue = stringValue.toString();
 
-    return TextUtils.contains(this.textValue, stringValue);
+    return TextUtils.contains(this.textValue, lowerValue);
   }
 
   startsWith(stringValue) {
@@ -78,9 +78,7 @@ export default class TextualValue extends FormValue {
       return false;
     }
 
-    stringValue = stringValue.toString();
-
-    return TextUtils.startsWith(this.textValue, stringValue);
+    return TextUtils.startsWith(this.textValue, stringValue.toString());
   }
 
   isLessThan(stringValue) {
@@ -88,12 +86,14 @@ export default class TextualValue extends FormValue {
       return false;
     }
 
+    let string = null;
+
     if (stringValue != null) {
-      stringValue = stringValue.toString();
+      string = stringValue.toString();
     }
 
     const thisValue = NumberUtils.parseDouble(this.textValue);
-    const thatValue = NumberUtils.parseDouble(stringValue);
+    const thatValue = NumberUtils.parseDouble(string);
 
     if (thisValue == null || thatValue == null) {
       return false;
@@ -107,10 +107,10 @@ export default class TextualValue extends FormValue {
       return false;
     }
 
-    stringValue = (stringValue == null ? '' : stringValue.toString());
+    const string = (stringValue == null ? '' : stringValue.toString());
 
     const thisValue = NumberUtils.parseDouble(this.textValue);
-    const thatValue = NumberUtils.parseDouble(stringValue);
+    const thatValue = NumberUtils.parseDouble(string);
 
     if (thisValue == null || thatValue == null) {
       return false;

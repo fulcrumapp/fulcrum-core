@@ -53,7 +53,7 @@ export default class FormValues {
   }
 
   loadValues(elements, attributes) {
-    for (let element of elements) {
+    for (const element of elements) {
       this.loadValue(element, attributes);
     }
   }
@@ -75,7 +75,7 @@ export default class FormValues {
   toJSON() {
     const json = {};
 
-    for (let key of Object.keys(this._values)) {
+    for (const key of Object.keys(this._values)) {
       const formValue = this._values[key];
 
       if (formValue) {
@@ -99,7 +99,7 @@ export default class FormValues {
       throw new Error('Invalid values');
     }
 
-    for (let key of Object.keys(formValues._values)) {
+    for (const key of Object.keys(formValues._values)) {
       const formValue = formValues._values[key];
 
       this.set(key, formValue);
@@ -195,7 +195,7 @@ export default class FormValues {
   get searchableValue() {
     const searchValues = [];
 
-    for (let key of Object.keys(this._values)) {
+    for (const key of Object.keys(this._values)) {
       const formValue = this._values[key];
 
       if (formValue) {

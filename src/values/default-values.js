@@ -4,7 +4,9 @@ import TextUtils from '../utils/text-utils';
 const NOW = 'now';
 
 export default class DefaultValues {
-  static applyDefaultValue(defaultValue, element, formValues) {
+  static applyDefaultValue(elementDefaultValue, element, formValues) {
+    let defaultValue = elementDefaultValue;
+
     const value = formValues.get(element.key);
 
     const hasValue = value && !value.isEmpty;

@@ -18,7 +18,7 @@ export default class ElementValidationError {
       iterator = iterator.parent;
     }
 
-    const parentLabels = parents.reverse().concat([this.element.label]);
+    const parentLabels = parents.reverse().concat([ this.element.label ]);
 
     return parentLabels.join(' / ');
   }

@@ -44,7 +44,7 @@ export default class NumberUtils {
 
   static get machineFormatter() {
     if (!this._machineFormatter && intl) {
-      this._machineFormatter = new intl.NumberFormat(['en-US'], MachineFormatterOptions);
+      this._machineFormatter = new intl.NumberFormat([ 'en-US' ], MachineFormatterOptions);
     }
 
     return this._machineFormatter;
@@ -92,15 +92,15 @@ export default class NumberUtils {
 
   static formatWithFormatter(formatter, number) {
     if (formatter != null) {
-      let string = formatter.format(number);
+      const string = formatter.format(number);
 
       if (string === 'NaN') {
         return number;
-      } else {
-        return string;
       }
-    } else {
-      return number.toString();
+
+      return string;
     }
+
+    return number.toString();
   }
 }

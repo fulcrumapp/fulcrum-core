@@ -102,7 +102,7 @@ export default class RepeatableItemValue extends Feature {
     const titleFieldKeys = this._element.titleFieldKeys;
     const titles = [];
 
-    for (let fieldKey of titleFieldKeys) {
+    for (const fieldKey of titleFieldKeys) {
       const formValue = this.formValues.get(fieldKey);
 
       if (formValue) {
@@ -124,7 +124,7 @@ export default class RepeatableItemValue extends Feature {
 
     return {
       type: 'Point',
-      coordinates: [this._longitude, this._latitude]
+      coordinates: [ this._longitude, this._latitude ]
     };
   }
 

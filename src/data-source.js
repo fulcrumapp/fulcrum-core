@@ -67,14 +67,14 @@ export default class DataSource {
       return callback(new Error('Unhandled request: ' + method));
     };
 
-    const invokeArguments = params.concat([invokeCallback]);
+    const invokeArguments = params.concat([ invokeCallback ]);
 
     (dataSource[method] || noop).apply(dataSource, invokeArguments);
   }
 
   process(dataSource, method, params, objects, callback) {
     if (dataSource == null) {
-      return callback.apply(null, [null].concat(objects));
+      return callback.apply(null, [ null ].concat(objects));
     }
 
     const processMethod = method + 'Complete';
@@ -84,12 +84,12 @@ export default class DataSource {
         return callback(err);
       } else if (dataSource.previous) {
         return this.process(dataSource.previous, method, params, objects, callback);
-      } else {
-        return callback.apply(null, [null].concat(objects));
       }
+
+      return callback.apply(null, [ null ].concat(objects));
     };
 
-    const processArguments = params.concat(objects.concat([processCallback]));
+    const processArguments = params.concat(objects.concat([ processCallback ]));
 
     (dataSource[processMethod] || noop).apply(dataSource, processArguments);
 
@@ -156,90 +156,90 @@ export default class DataSource {
   }
 
   getChoiceList(id, callback) {
-    this.invoke(this.root, 'getChoiceList', [id], callback);
+    this.invoke(this.root, 'getChoiceList', [ id ], callback);
   }
 
   getClassificationSet(id, callback) {
-    this.invoke(this.root, 'getClassificationSet', [id], callback);
+    this.invoke(this.root, 'getClassificationSet', [ id ], callback);
   }
 
   getForm(id, callback) {
-    this.invoke(this.root, 'getForm', [id], callback);
+    this.invoke(this.root, 'getForm', [ id ], callback);
   }
 
   getRecord(id, form, callback) {
-    this.invoke(this.root, 'getRecord', [id, form], callback);
+    this.invoke(this.root, 'getRecord', [ id, form ], callback);
   }
 
   getRecords(form, params, callback) {
-    this.invoke(this.root, 'getRecords', [form, params], callback);
+    this.invoke(this.root, 'getRecords', [ form, params ], callback);
   }
 
   queryRecords(form, params, callback) {
-    this.invoke(this.root, 'queryRecords', [form, params], callback);
+    this.invoke(this.root, 'queryRecords', [ form, params ], callback);
   }
 
   getUsers(params, callback) {
-    this.invoke(this.root, 'getUsers', [params], callback);
+    this.invoke(this.root, 'getUsers', [ params ], callback);
   }
 
   getProjects(params, callback) {
-    this.invoke(this.root, 'getProjects', [params], callback);
+    this.invoke(this.root, 'getProjects', [ params ], callback);
   }
 
   getChangeset(id, callback) {
-    this.invoke(this.root, 'getChangeset', [id], callback);
+    this.invoke(this.root, 'getChangeset', [ id ], callback);
   }
 
   getPhoto(id, callback) {
-    this.invoke(this.root, 'getPhoto', [id], callback);
+    this.invoke(this.root, 'getPhoto', [ id ], callback);
   }
 
   getAudio(id, callback) {
-    this.invoke(this.root, 'getAudio', [id], callback);
+    this.invoke(this.root, 'getAudio', [ id ], callback);
   }
 
   getAudioTrack(id, callback) {
-    this.invoke(this.root, 'getAudioTrack', [id], callback);
+    this.invoke(this.root, 'getAudioTrack', [ id ], callback);
   }
 
   getVideo(id, callback) {
-    this.invoke(this.root, 'getVideo', [id], callback);
+    this.invoke(this.root, 'getVideo', [ id ], callback);
   }
 
   getVideoTrack(id, callback) {
-    this.invoke(this.root, 'getVideoTrack', [id], callback);
+    this.invoke(this.root, 'getVideoTrack', [ id ], callback);
   }
 
   createPhoto(accessKey, file, progress, callback) {
-    this.invoke(this.root, 'createPhoto', [accessKey, file, progress], callback);
+    this.invoke(this.root, 'createPhoto', [ accessKey, file, progress ], callback);
   }
 
   createVideo(accessKey, file, progress, callback) {
-    this.invoke(this.root, 'createVideo', [accessKey, file, progress], callback);
+    this.invoke(this.root, 'createVideo', [ accessKey, file, progress ], callback);
   }
 
   createAudio(accessKey, file, progress, callback) {
-    this.invoke(this.root, 'createAudio', [accessKey, file, progress], callback);
+    this.invoke(this.root, 'createAudio', [ accessKey, file, progress ], callback);
   }
 
   createSignature(accessKey, file, progress, callback) {
-    this.invoke(this.root, 'createSignature', [accessKey, file, progress], callback);
+    this.invoke(this.root, 'createSignature', [ accessKey, file, progress ], callback);
   }
 
   saveVideoTrack(accessKey, file, progress, callback) {
-    this.invoke(this.root, 'saveVideoTrack', [accessKey, file, progress], callback);
+    this.invoke(this.root, 'saveVideoTrack', [ accessKey, file, progress ], callback);
   }
 
   saveAudioTrack(accessKey, file, progress, callback) {
-    this.invoke(this.root, 'saveAudioTrack', [accessKey, file, progress], callback);
+    this.invoke(this.root, 'saveAudioTrack', [ accessKey, file, progress ], callback);
   }
 
   saveRecord(record, callback) {
-    this.invoke(this.root, 'saveRecord', [record], callback);
+    this.invoke(this.root, 'saveRecord', [ record ], callback);
   }
 
   deleteRecord(record, callback) {
-    this.invoke(this.root, 'deleteRecord', [record], callback);
+    this.invoke(this.root, 'deleteRecord', [ record ], callback);
   }
 }
