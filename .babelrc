@@ -1,4 +1,4 @@
 {
-  "presets": ["es2015-loose", "stage-3"],
+  "presets": ["es2015-loose", "stage-1"],
   "plugins": ["transform-proto-to-assign"]
 }
