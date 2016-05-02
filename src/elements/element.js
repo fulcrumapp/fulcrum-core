@@ -1,8 +1,5 @@
 import Types from './element-types';
 import Condition from './condition';
-// import ElementFactory from './element-factory';
-
-let ElementFactory = null;
 
 export default class Element {
   constructor(parent, attributes) {
@@ -66,29 +63,6 @@ export default class Element {
     this._overrideIsDisabled = null;
     this._overrideMinLength = null;
     this._overrideMaxLength = null;
-  }
-
-  static factory() {
-    // return ElementFactory;
-    /* eslint-disable global-require */
-    return (ElementFactory = ElementFactory || require('./element-factory').default);
-    /* eslint-enable global-require */
-  }
-
-  static create(parent, attributes) {
-    return Element.factory().create(parent, attributes);
-  }
-
-  static classes() {
-    if (Element._classes == null) {
-      Element._classes = {};
-
-      for (const klass of Object.keys(Types)) {
-        Element._classes[klass] = Element.factory().classes()[Types[klass]];
-      }
-    }
-
-    return Element._classes;
   }
 
   get parent() {

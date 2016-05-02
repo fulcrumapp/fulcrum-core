@@ -1,4 +1,4 @@
-import Section from './section-element';
+import SectionElement from './section-element';
 import ChoiceElement from './choice-element';
 import TextElement from './text-element';
 import DateElement from './date-element';
@@ -16,9 +16,10 @@ import HyperlinkElement from './hyperlink-element';
 import BarcodeElement from './barcode-element';
 import CalculatedElement from './calculated-element';
 import RecordLinkElement from './record-link-element';
+import ContainerElement from './container-element';
 
 const Constructors = {
-  Section: Section,
+  Section: SectionElement,
   ChoiceField: ChoiceElement,
   TextField: TextElement,
   DateTimeField: DateElement,
@@ -39,9 +40,16 @@ const Constructors = {
   RecordLinkField: RecordLinkElement
 };
 
+let initialized = false;
+
 export default class ElementFactory {
   static create(parent, attributes) {
     const constructor = Constructors[attributes.type];
+
+    if (!initialized) {
+      initialized = true;
+      ContainerElement.initialize();
+    }
 
     if (constructor == null) {
       throw new Error('Unsupported element ' + attributes.type);
@@ -54,3 +62,4 @@ export default class ElementFactory {
     return Constructors;
   }
 }
+

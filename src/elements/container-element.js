@@ -15,6 +15,12 @@ export default class ContainerElement extends Element {
       element.resetOverrides();
     }
   }
-}
 
-ChildElements.includeInto(ContainerElement);
+  static initialize() {
+    // this is a bit of a hack to get around circular dependencies. This gets
+    // called once from within the factory to setup the class. Putting this
+    // at global scope introduces circular dependency errors because ChildElements
+    // ends up loading the factory.
+    ChildElements.includeInto(ContainerElement);
+  }
+}

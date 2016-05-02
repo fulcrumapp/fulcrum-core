@@ -1,7 +1,5 @@
 import Mixin from 'mixmatch';
-// import ElementFactory from './element-factory';
-
-let ElementFactory = null;
+import ElementFactory from './element-factory';
 
 export default class ChildElements extends Mixin {
   get elements() {
@@ -16,11 +14,7 @@ export default class ChildElements extends Mixin {
     this._elements = [];
 
     for (const element of elements) {
-      /* eslint-disable global-require */
-      // hack for circular dependency, not ideal
-      ElementFactory = ElementFactory || require('./element-factory').default;
       this._elements.push(ElementFactory.create(this, element));
-      /* eslint-enable global-require */
     }
   }
 
