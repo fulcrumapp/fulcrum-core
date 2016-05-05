@@ -22,8 +22,10 @@ export default class StatusElement extends TextualElement {
 
     this._choices = [];
 
-    for (const choice of attrs.choices) {
-      this._choices.push(new StatusChoice(choice));
+    if (attrs.choices) {
+      for (const choice of attrs.choices) {
+        this._choices.push(new StatusChoice(choice));
+      }
     }
 
     this._enabled = !!attrs.enabled;
