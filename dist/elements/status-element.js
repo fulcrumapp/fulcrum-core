@@ -47,21 +47,23 @@ var StatusElement = function (_TextualElement) {
 
     _this._choices = [];
 
-    for (var _iterator = attrs.choices, _isArray = Array.isArray(_iterator), _i = 0, _iterator = _isArray ? _iterator : _iterator[Symbol.iterator]();;) {
-      var _ref;
+    if (attrs.choices) {
+      for (var _iterator = attrs.choices, _isArray = Array.isArray(_iterator), _i = 0, _iterator = _isArray ? _iterator : _iterator[Symbol.iterator]();;) {
+        var _ref;
 
-      if (_isArray) {
-        if (_i >= _iterator.length) break;
-        _ref = _iterator[_i++];
-      } else {
-        _i = _iterator.next();
-        if (_i.done) break;
-        _ref = _i.value;
+        if (_isArray) {
+          if (_i >= _iterator.length) break;
+          _ref = _iterator[_i++];
+        } else {
+          _i = _iterator.next();
+          if (_i.done) break;
+          _ref = _i.value;
+        }
+
+        var choice = _ref;
+
+        _this._choices.push(new _statusChoice2.default(choice));
       }
-
-      var choice = _ref;
-
-      _this._choices.push(new _statusChoice2.default(choice));
     }
 
     _this._enabled = !!attrs.enabled;
