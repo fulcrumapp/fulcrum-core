@@ -78,11 +78,11 @@ export default class Element {
   }
 
   get label() {
-    return this._overrideLabel ? this._overrideLabel : this._label;
+    return this._overrideLabel != null ? this._overrideLabel : this._label;
   }
 
   get description() {
-    return this._overrideDescription ? this._overrideDescription : this._description;
+    return this._overrideDescription != null ? this._overrideDescription : this._description;
   }
 
   get dataName() {
@@ -94,15 +94,15 @@ export default class Element {
   }
 
   get isRequired() {
-    return this._overrideIsRequired ? this._overrideIsRequired : this._isRequired;
+    return this._overrideIsRequired != null ? this._overrideIsRequired : this._isRequired;
   }
 
   get isHidden() {
-    return this._overrideIsHidden ? this._overrideIsHidden : this._isHidden;
+    return this._overrideIsHidden != null ? this._overrideIsHidden : this._isHidden;
   }
 
   get isDisabled() {
-    return this._overrideIsDisabled ? this._overrideIsDisabled : this._isDisabled;
+    return this._overrideIsDisabled != null ? this._overrideIsDisabled : this._isDisabled;
   }
 
   get visibleConditionsType() {
@@ -122,11 +122,11 @@ export default class Element {
   }
 
   get minLength() {
-    return this._overrideMinLength ? this._overrideMinLength : this._minLength;
+    return this._overrideMinLength != null ? this._overrideMinLength : this._minLength;
   }
 
   get maxLength() {
-    return this._overrideMaxLength ? this._overrideMinLength : this._maxLength;
+    return this._overrideMaxLength != null ? this._overrideMinLength : this._maxLength;
   }
 
   get overrideLabel() {
