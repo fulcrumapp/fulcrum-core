@@ -113,7 +113,7 @@ var StatusElement = function (_TextualElement) {
   }, {
     key: 'isReadOnly',
     get: function get() {
-      return this._readOnly;
+      return this._overrideIsDisabled != null ? this._overrideIsDisabled : this._readOnly;
     }
   }, {
     key: 'statusFilter',
