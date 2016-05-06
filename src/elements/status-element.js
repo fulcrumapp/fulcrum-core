@@ -41,7 +41,7 @@ export default class StatusElement extends TextualElement {
   }
 
   get isReadOnly() {
-    return this._readOnly;
+    return this._overrideIsDisabled != null ? this._overrideIsDisabled : this._readOnly;
   }
 
   get statusFilter() {
