@@ -140,12 +140,12 @@ var Element = function () {
   }, {
     key: 'label',
     get: function get() {
-      return this._overrideLabel ? this._overrideLabel : this._label;
+      return this._overrideLabel != null ? this._overrideLabel : this._label;
     }
   }, {
     key: 'description',
     get: function get() {
-      return this._overrideDescription ? this._overrideDescription : this._description;
+      return this._overrideDescription != null ? this._overrideDescription : this._description;
     }
   }, {
     key: 'dataName',
@@ -160,17 +160,17 @@ var Element = function () {
   }, {
     key: 'isRequired',
     get: function get() {
-      return this._overrideIsRequired ? this._overrideIsRequired : this._isRequired;
+      return this._overrideIsRequired != null ? this._overrideIsRequired : this._isRequired;
     }
   }, {
     key: 'isHidden',
     get: function get() {
-      return this._overrideIsHidden ? this._overrideIsHidden : this._isHidden;
+      return this._overrideIsHidden != null ? this._overrideIsHidden : this._isHidden;
     }
   }, {
     key: 'isDisabled',
     get: function get() {
-      return this._overrideIsDisabled ? this._overrideIsDisabled : this._isDisabled;
+      return this._overrideIsDisabled != null ? this._overrideIsDisabled : this._isDisabled;
     }
   }, {
     key: 'visibleConditionsType',
@@ -195,12 +195,12 @@ var Element = function () {
   }, {
     key: 'minLength',
     get: function get() {
-      return this._overrideMinLength ? this._overrideMinLength : this._minLength;
+      return this._overrideMinLength != null ? this._overrideMinLength : this._minLength;
     }
   }, {
     key: 'maxLength',
     get: function get() {
-      return this._overrideMaxLength ? this._overrideMinLength : this._maxLength;
+      return this._overrideMaxLength != null ? this._overrideMinLength : this._maxLength;
     }
   }, {
     key: 'overrideLabel',
