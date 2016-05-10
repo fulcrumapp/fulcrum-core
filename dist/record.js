@@ -178,6 +178,86 @@ var Record = function (_Feature) {
     formValues.set(key, value);
   };
 
+  Record.prototype.updateFromActionAttributes = function updateFromActionAttributes(attributes, role) {
+    for (var _iterator = Object.keys(attributes), _isArray = Array.isArray(_iterator), _i = 0, _iterator = _isArray ? _iterator : _iterator[Symbol.iterator]();;) {
+      var _ref;
+
+      if (_isArray) {
+        if (_i >= _iterator.length) break;
+        _ref = _iterator[_i++];
+      } else {
+        _i = _iterator.next();
+        if (_i.done) break;
+        _ref = _i.value;
+      }
+
+      var dataName = _ref;
+
+      switch (dataName) {
+        case 'project_id':
+          {
+            if (attributes.project_id && role.canChangeProject) {
+              this.projectID = attributes.project_id;
+            }
+
+            break;
+          }
+
+        case 'assigned_to_id':
+          {
+            if (attributes.assigned_to_id && role.canChangeAssignment) {
+              this.assignedToID = attributes.assigned_to_id;
+            }
+
+            break;
+          }
+
+        case 'status':
+          {
+            if (attributes.status && role.canChangeStatus) {
+              this.status = attributes.status;
+            }
+
+            break;
+          }
+
+        case 'latitude':
+          {
+            if (attributes.latitude != null && attributes.latitude >= -90 && attributes.latitude <= 90) {
+              this.latitude = +attributes.latitude;
+            }
+
+            break;
+          }
+
+        case 'longitude':
+          {
+            if (attributes.longitude != null && attributes.longitude >= -180 && attributes.longitude <= 180) {
+              this.longitude = +attributes.longitude;
+            }
+
+            break;
+          }
+
+        default:
+          {
+            var element = this.form.elementsByDataName[dataName];
+            var value = attributes[dataName];
+
+            if (element && value != null) {
+              var formValue = this.formValues.createValueFromString(element, value);
+
+              if (formValue) {
+                this.formValues.set(element.key, formValue);
+              }
+            }
+
+            break;
+          }
+      }
+    }
+  };
+
   _createClass(Record, [{
     key: 'id',
     get: function get() {
@@ -277,19 +357,19 @@ var Record = function (_Feature) {
       var titleFieldKeys = this.form.titleFieldKeys;
       var titles = [];
 
-      for (var _iterator = titleFieldKeys, _isArray = Array.isArray(_iterator), _i = 0, _iterator = _isArray ? _iterator : _iterator[Symbol.iterator]();;) {
-        var _ref;
+      for (var _iterator2 = titleFieldKeys, _isArray2 = Array.isArray(_iterator2), _i2 = 0, _iterator2 = _isArray2 ? _iterator2 : _iterator2[Symbol.iterator]();;) {
+        var _ref2;
 
-        if (_isArray) {
-          if (_i >= _iterator.length) break;
-          _ref = _iterator[_i++];
+        if (_isArray2) {
+          if (_i2 >= _iterator2.length) break;
+          _ref2 = _iterator2[_i2++];
         } else {
-          _i = _iterator.next();
-          if (_i.done) break;
-          _ref = _i.value;
+          _i2 = _iterator2.next();
+          if (_i2.done) break;
+          _ref2 = _i2.value;
         }
 
-        var fieldKey = _ref;
+        var fieldKey = _ref2;
 
         var value = this.formValues.get(fieldKey);
 
