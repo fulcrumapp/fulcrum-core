@@ -325,4 +325,65 @@ export default class Record extends Feature {
       ]
     };
   }
+
+  updateFromActionAttributes(attributes, role) {
+    for (const dataName of Object.keys(attributes)) {
+      switch (dataName) {
+        case 'project_id': {
+          if (attributes.project_id && role.canChangeProject) {
+            this.projectID = attributes.project_id;
+          }
+
+          break;
+        }
+
+        case 'assigned_to_id': {
+          if (attributes.assigned_to_id && role.canChangeAssignment) {
+            this.assignedToID = attributes.assigned_to_id;
+          }
+
+          break;
+        }
+
+        case 'status': {
+          if (attributes.status && role.canChangeStatus) {
+            this.status = attributes.status;
+          }
+
+          break;
+        }
+
+        case 'latitude': {
+          if (attributes.latitude != null && attributes.latitude >= -90 && attributes.latitude <= 90) {
+            this.latitude = +attributes.latitude;
+          }
+
+          break;
+        }
+
+        case 'longitude': {
+          if (attributes.longitude != null && attributes.longitude >= -180 && attributes.longitude <= 180) {
+            this.longitude = +attributes.longitude;
+          }
+
+          break;
+        }
+
+        default: {
+          const element = this.form.elementsByDataName[dataName];
+          const value = attributes[dataName];
+
+          if (element && value != null) {
+            const formValue = this.formValues.createValueFromString(element, value);
+
+            if (formValue) {
+              this.formValues.set(element.key, formValue);
+            }
+          }
+
+          break;
+        }
+      }
+    }
+  }
 }
