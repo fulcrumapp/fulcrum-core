@@ -10,6 +10,8 @@ export default class Role {
     this._canChangeProject = !!attributes.can_change_project;
     this._canChangeAssignment = !!attributes.can_assign_records;
     this._canRunReports = !!attributes.can_run_reports;
+    this._canCreateRecords = !!attributes.can_create_records;
+    this._canUpdateRecords = !!attributes.can_update_records;
     this._canDeleteRecords = !!attributes.can_delete_records;
   }
 
@@ -23,6 +25,14 @@ export default class Role {
 
   get canChangeAssignment() {
     return this._canChangeAssignment;
+  }
+
+  get canCreateRecords() {
+    return this._canCreateRecords;
+  }
+
+  get canUpdateRecords() {
+    return this._canUpdateRecords;
   }
 
   get canDeleteRecords() {
