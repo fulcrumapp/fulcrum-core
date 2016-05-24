@@ -1,6 +1,6 @@
 import DateUtils from './utils/date-utils';
 import { format } from 'util';
-import _ from 'lodash';
+import compact from 'lodash.compact';
 
 export default class Changeset {
   constructor(attributes) {
@@ -82,19 +82,19 @@ export default class Changeset {
 
   get metadataDescription() {
     const parts = [
-      _.compact([ this.application,
-                  this._metadata.application_version ]).join(' '),
+      compact([ this.application,
+                this._metadata.application_version ]).join(' '),
 
-      _.compact([ this._metadata.browser,
-                  this._metadata.browser_version ]).join(' '),
+      compact([ this._metadata.browser,
+                this._metadata.browser_version ]).join(' '),
 
-      _.compact([ this._metadata.platform,
-                  this._metadata.platform_version ]).join(' '),
+      compact([ this._metadata.platform,
+                this._metadata.platform_version ]).join(' '),
 
-      _.compact([ this._metadata.device_manufacturer,
-                  this._metadata.device_model ]).join(' ')
+      compact([ this._metadata.device_manufacturer,
+                this._metadata.device_model ]).join(' ')
     ];
 
-    return _.compact(parts).join(' / ');
+    return compact(parts).join(' / ');
   }
 }

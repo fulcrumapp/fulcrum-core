@@ -10,7 +10,7 @@ var _dateUtils2 = _interopRequireDefault(_dateUtils);
 
 var _util = require('util');
 
-var _lodash = require('lodash');
+var _lodash = require('lodash.compact');
 
 var _lodash2 = _interopRequireDefault(_lodash);
 
@@ -102,9 +102,9 @@ var Changeset = function () {
   }, {
     key: 'metadataDescription',
     get: function get() {
-      var parts = [_lodash2.default.compact([this.application, this._metadata.application_version]).join(' '), _lodash2.default.compact([this._metadata.browser, this._metadata.browser_version]).join(' '), _lodash2.default.compact([this._metadata.platform, this._metadata.platform_version]).join(' '), _lodash2.default.compact([this._metadata.device_manufacturer, this._metadata.device_model]).join(' ')];
+      var parts = [(0, _lodash2.default)([this.application, this._metadata.application_version]).join(' '), (0, _lodash2.default)([this._metadata.browser, this._metadata.browser_version]).join(' '), (0, _lodash2.default)([this._metadata.platform, this._metadata.platform_version]).join(' '), (0, _lodash2.default)([this._metadata.device_manufacturer, this._metadata.device_model]).join(' ')];
 
-      return _lodash2.default.compact(parts).join(' / ');
+      return (0, _lodash2.default)(parts).join(' / ');
     }
   }]);
 

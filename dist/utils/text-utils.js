@@ -2,9 +2,17 @@
 
 exports.__esModule = true;
 
-var _lodash = require('lodash');
+var _lodash = require('lodash.includes');
 
 var _lodash2 = _interopRequireDefault(_lodash);
+
+var _lodash3 = require('lodash.startswith');
+
+var _lodash4 = _interopRequireDefault(_lodash3);
+
+var _lodash5 = require('lodash.trim');
+
+var _lodash6 = _interopRequireDefault(_lodash5);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -36,7 +44,7 @@ var TextUtils = function () {
       return false;
     }
 
-    return _lodash2.default.includes(haystack.toLowerCase(), needle.toLowerCase());
+    return (0, _lodash2.default)(haystack.toLowerCase(), needle.toLowerCase());
   };
 
   TextUtils.startsWith = function startsWith(haystack, needle) {
@@ -44,11 +52,11 @@ var TextUtils = function () {
       return false;
     }
 
-    return _lodash2.default.startsWith(haystack, needle);
+    return (0, _lodash4.default)(haystack, needle);
   };
 
   TextUtils.trim = function trim(value) {
-    return _lodash2.default.trim(value);
+    return (0, _lodash6.default)(value);
   };
 
   return TextUtils;

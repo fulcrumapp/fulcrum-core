@@ -6,7 +6,7 @@ var _locale = require('./locale');
 
 var _locale2 = _interopRequireDefault(_locale);
 
-var _lodash = require('lodash');
+var _lodash = require('lodash.padstart');
 
 var _lodash2 = _interopRequireDefault(_lodash);
 
@@ -59,8 +59,8 @@ var DateUtils = function () {
   };
 
   DateUtils.formatTime = function formatTime(date) {
-    var hours = _lodash2.default.padStart(date.getHours(), 2, '0');
-    var minutes = _lodash2.default.padStart(date.getMinutes(), 2, '0');
+    var hours = (0, _lodash2.default)(date.getHours(), 2, '0');
+    var minutes = (0, _lodash2.default)(date.getMinutes(), 2, '0');
 
     return hours + ':' + minutes;
   };
@@ -74,18 +74,18 @@ var DateUtils = function () {
     var hh = (div - mm) / 60;
     var ms = ss * 1000 % 1000;
 
-    var h = _lodash2.default.padStart(Math.floor(hh), 2, '0');
-    var m = _lodash2.default.padStart(Math.floor(mm), 2, '0');
-    var s = _lodash2.default.padStart(Math.floor(ss), 2, '0');
-    var u = _lodash2.default.padStart(Math.floor(ms), 3, '0');
+    var h = (0, _lodash2.default)(Math.floor(hh), 2, '0');
+    var m = (0, _lodash2.default)(Math.floor(mm), 2, '0');
+    var s = (0, _lodash2.default)(Math.floor(ss), 2, '0');
+    var u = (0, _lodash2.default)(Math.floor(ms), 3, '0');
 
     return h + ':' + m + ':' + s + (milliseconds ? '.' + u : '');
   };
 
   DateUtils.formatTimeParts = function formatTimeParts(hours, minutes, seconds) {
-    var h = _lodash2.default.padStart(+hours, 2, '0');
-    var m = _lodash2.default.padStart(+minutes, 2, '0');
-    var s = _lodash2.default.padStart(+seconds, 2, '0');
+    var h = (0, _lodash2.default)(+hours, 2, '0');
+    var m = (0, _lodash2.default)(+minutes, 2, '0');
+    var s = (0, _lodash2.default)(+seconds, 2, '0');
 
     return h + ':' + m + ':' + s;
   };
@@ -200,8 +200,8 @@ var DateUtils = function () {
 
   DateUtils.formatDate = function formatDate(date) {
     var year = date.getFullYear();
-    var month = _lodash2.default.padStart(date.getMonth() + 1, 2, '0');
-    var day = _lodash2.default.padStart(date.getDate(), 2, '0');
+    var month = (0, _lodash2.default)(date.getMonth() + 1, 2, '0');
+    var day = (0, _lodash2.default)(date.getDate(), 2, '0');
 
     return year + '-' + month + '-' + day;
   };
@@ -229,8 +229,8 @@ var DateUtils = function () {
   DateUtils.__formatLocalizedDate = function __formatLocalizedDate(date) {
     if (!_locale2.default.supportsECMA402()) {
       var year = date.getFullYear();
-      var month = _lodash2.default.padStart(date.getMonth() + 1, 2, '0');
-      var day = _lodash2.default.padStart(date.getDate(), 2, '0');
+      var month = (0, _lodash2.default)(date.getMonth() + 1, 2, '0');
+      var day = (0, _lodash2.default)(date.getDate(), 2, '0');
       return year + '-' + month + '-' + day;
     }
 

@@ -12,7 +12,7 @@ var _textUtils = require('../utils/text-utils');
 
 var _textUtils2 = _interopRequireDefault(_textUtils);
 
-var _lodash = require('lodash');
+var _lodash = require('lodash.includes');
 
 var _lodash2 = _interopRequireDefault(_lodash);
 
@@ -135,7 +135,7 @@ var ChoiceValue = function (_FormValue) {
   };
 
   ChoiceValue.prototype.isEqual = function isEqual(value) {
-    if (_lodash2.default.includes(this.selectedValues, value)) {
+    if ((0, _lodash2.default)(this.selectedValues, value)) {
       return true;
     }
 

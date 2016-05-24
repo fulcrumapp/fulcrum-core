@@ -1,6 +1,6 @@
 import FormValue from './form-value';
 import TextUtils from '../utils/text-utils';
-import _ from 'lodash';
+import includes from 'lodash.includes';
 
 const ChoiceDisplaySeparator = ', ';
 const ChoiceSearchSeparator = ' ';
@@ -163,7 +163,7 @@ export default class ChoiceValue extends FormValue {
   }
 
   isEqual(value) {
-    if (_.includes(this.selectedValues, value)) {
+    if (includes(this.selectedValues, value)) {
       return true;
     }
 

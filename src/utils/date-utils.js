@@ -1,5 +1,5 @@
 import Locale from './locale';
-import _ from 'lodash';
+import padStart from 'lodash.padstart';
 import relativeDate from 'relative-date';
 
 let intl = null;
@@ -35,8 +35,8 @@ export default class DateUtils {
   }
 
   static formatTime(date) {
-    const hours = _.padStart(date.getHours(), 2, '0');
-    const minutes = _.padStart(date.getMinutes(), 2, '0');
+    const hours = padStart(date.getHours(), 2, '0');
+    const minutes = padStart(date.getMinutes(), 2, '0');
 
     return hours + ':' + minutes;
   }
@@ -48,18 +48,18 @@ export default class DateUtils {
     const hh = (div - mm) / 60;
     const ms = (ss * 1000 % 1000);
 
-    const h = _.padStart(Math.floor(hh), 2, '0');
-    const m = _.padStart(Math.floor(mm), 2, '0');
-    const s = _.padStart(Math.floor(ss), 2, '0');
-    const u = _.padStart(Math.floor(ms), 3, '0');
+    const h = padStart(Math.floor(hh), 2, '0');
+    const m = padStart(Math.floor(mm), 2, '0');
+    const s = padStart(Math.floor(ss), 2, '0');
+    const u = padStart(Math.floor(ms), 3, '0');
 
     return h + ':' + m + ':' + s + (milliseconds ? '.' + u : '');
   }
 
   static formatTimeParts(hours, minutes, seconds) {
-    const h = _.padStart(+hours, 2, '0');
-    const m = _.padStart(+minutes, 2, '0');
-    const s = _.padStart(+seconds, 2, '0');
+    const h = padStart(+hours, 2, '0');
+    const m = padStart(+minutes, 2, '0');
+    const s = padStart(+seconds, 2, '0');
 
     return h + ':' + m + ':' + s;
   }
@@ -171,8 +171,8 @@ export default class DateUtils {
 
   static formatDate(date) {
     const year = date.getFullYear();
-    const month = _.padStart(date.getMonth() + 1, 2, '0');
-    const day = _.padStart(date.getDate(), 2, '0');
+    const month = padStart(date.getMonth() + 1, 2, '0');
+    const day = padStart(date.getDate(), 2, '0');
 
     return year + '-' + month + '-' + day;
   }
@@ -200,8 +200,8 @@ export default class DateUtils {
   static __formatLocalizedDate(date) {
     if (!Locale.supportsECMA402()) {
       const year = date.getFullYear();
-      const month = _.padStart(date.getMonth() + 1, 2, '0');
-      const day = _.padStart(date.getDate(), 2, '0');
+      const month = padStart(date.getMonth() + 1, 2, '0');
+      const day = padStart(date.getDate(), 2, '0');
       return year + '-' + month + '-' + day;
     }
 

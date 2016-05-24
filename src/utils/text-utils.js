@@ -1,4 +1,6 @@
-import _ from 'lodash';
+import includes from 'lodash.includes';
+import startsWith from 'lodash.startswith';
+import trim from 'lodash.trim';
 
 export default class TextUtils {
   static isEmpty(value) {
@@ -22,7 +24,7 @@ export default class TextUtils {
       return false;
     }
 
-    return _.includes(haystack.toLowerCase(), needle.toLowerCase());
+    return includes(haystack.toLowerCase(), needle.toLowerCase());
   }
 
   static startsWith(haystack, needle) {
@@ -30,10 +32,10 @@ export default class TextUtils {
       return false;
     }
 
-    return _.startsWith(haystack, needle);
+    return startsWith(haystack, needle);
   }
 
   static trim(value) {
-    return _.trim(value);
+    return trim(value);
   }
 }
