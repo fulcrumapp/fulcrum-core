@@ -170,6 +170,11 @@ var RepeatableItemValue = function (_Feature) {
       return titles.join(', ');
     }
   }, {
+    key: 'searchableValue',
+    get: function get() {
+      return this.formValues.searchableValue;
+    }
+  }, {
     key: 'geometryAsGeoJSON',
     get: function get() {
       if (!this.hasCoordinate) {
