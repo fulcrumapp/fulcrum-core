@@ -46,3 +46,13 @@ describe('Record', () => {
     record.formValues.get('8fd4').textValue.should.eql('2015-12-02');
   });
 });
+
+describe('Form', () => {
+  it('parses project_enabled', () => {
+    form.isProjectEnabled.should.eql(false);
+  });
+
+  it('parses assignment_enabled', () => {
+    form.isAssignmentEnabled.should.eql(false);
+  });
+});

@@ -50,7 +50,7 @@ var Form = function () {
     this._geometryTypes = attributes.geometry_types;
     this._reportTemplatesJSON = attributes.report_templates;
 
-    this._projectEnabled = attributes.project_enabled != null ? !!attributes.project_enabled : true;
+    this._projectEnabled = attributes.projects_enabled != null ? !!attributes.projects_enabled : true;
     this._assignmentEnabled = attributes.assignment_enabled != null ? !!attributes.assignment_enabled : true;
 
     if (attributes.title_field_keys || attributes.record_title_key) {
@@ -119,7 +119,7 @@ var Form = function () {
     json.script = this.script || null;
     json.elements = JSON.parse(JSON.stringify(this._elementsJSON));
     json.assignment_enabled = this.isAssignmentEnabled;
-    json.project_enabled = this.isProjectEnabled;
+    json.projects_enabled = this.isProjectEnabled;
     json.geometry_required = this.isGeometryRequired;
     json.geometry_types = this._geometryTypes;
     json.title_field_keys = this.titleFieldKeys;
