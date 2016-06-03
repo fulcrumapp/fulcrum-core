@@ -117,6 +117,10 @@ export default class RepeatableItemValue extends Feature {
     return titles.join(', ');
   }
 
+  get searchableValue() {
+    return this.formValues.searchableValue;
+  }
+
   get geometryAsGeoJSON() {
     if (!this.hasCoordinate) {
       return null;
