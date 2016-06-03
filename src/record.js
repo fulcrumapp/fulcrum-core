@@ -223,6 +223,10 @@ export default class Record extends Feature {
     return new StatusValue(this.form.statusField, this.status);
   }
 
+  get searchableValue() {
+    return this.formValues.searchableValue();
+  }
+
   get displayValue() {
     const titleFieldKeys = this.form.titleFieldKeys;
     const titles = [];

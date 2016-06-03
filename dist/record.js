@@ -352,6 +352,11 @@ var Record = function (_Feature) {
       return new _statusValue2.default(this.form.statusField, this.status);
     }
   }, {
+    key: 'searchableValue',
+    get: function get() {
+      return this.formValues.searchableValue();
+    }
+  }, {
     key: 'displayValue',
     get: function get() {
       var titleFieldKeys = this.form.titleFieldKeys;

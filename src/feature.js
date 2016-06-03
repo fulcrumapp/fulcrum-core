@@ -31,6 +31,10 @@ export default class Feature {
     notImplemented();
   }
 
+  get searchableValue() {
+    notImplemented();
+  }
+
   toJSON() {
     notImplemented();
   }

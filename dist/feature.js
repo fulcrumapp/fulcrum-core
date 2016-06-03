@@ -58,6 +58,11 @@ var Feature = function () {
     get: function get() {
       notImplemented();
     }
+  }, {
+    key: 'searchableValue',
+    get: function get() {
+      notImplemented();
+    }
   }]);
 
   return Feature;
