@@ -224,7 +224,7 @@ export default class Record extends Feature {
   }
 
   get searchableValue() {
-    return this.formValues.searchableValue();
+    return this.formValues.searchableValue;
   }
 
   get displayValue() {

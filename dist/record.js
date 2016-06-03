@@ -354,7 +354,7 @@ var Record = function (_Feature) {
   }, {
     key: 'searchableValue',
     get: function get() {
-      return this.formValues.searchableValue();
+      return this.formValues.searchableValue;
     }
   }, {
     key: 'displayValue',
