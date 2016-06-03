@@ -276,6 +276,14 @@ export default class Record extends Feature {
     this._assignedToID = id;
   }
 
+  get createdByID() {
+    return this._createdByID;
+  }
+
+  get updatedByID() {
+    return this._updatedByID;
+  }
+
   get status() {
     return this._status;
   }

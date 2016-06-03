@@ -421,6 +421,16 @@ var Record = function (_Feature) {
       this._assignedToID = id;
     }
   }, {
+    key: 'createdByID',
+    get: function get() {
+      return this._createdByID;
+    }
+  }, {
+    key: 'updatedByID',
+    get: function get() {
+      return this._updatedByID;
+    }
+  }, {
     key: 'status',
     get: function get() {
       return this._status;
