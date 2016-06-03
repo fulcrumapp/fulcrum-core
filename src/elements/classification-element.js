@@ -78,10 +78,12 @@ export default class ClassificationElement extends Element {
 
     const filteredItems = [];
 
-    for (const item of items) {
-      for (const filter of this.classificationFilter) {
-        if (item.value.toLowerCase().indexOf(filter.toLowerCase()) !== -1) {
-          filteredItems.push(item);
+    if (items) {
+      for (const item of items) {
+        for (const filter of this.classificationFilter) {
+          if (item.value.toLowerCase().indexOf(filter.toLowerCase()) !== -1) {
+            filteredItems.push(item);
+          }
         }
       }
     }
