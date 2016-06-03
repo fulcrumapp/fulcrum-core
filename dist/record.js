@@ -400,6 +400,11 @@ var Record = function (_Feature) {
       return this.form.statusField.isEnabled;
     }
   }, {
+    key: 'formID',
+    get: function get() {
+      return this.form ? this.form.id : null;
+    }
+  }, {
     key: 'projectID',
     get: function get() {
       return this._projectID;

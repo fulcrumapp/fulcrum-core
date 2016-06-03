@@ -256,6 +256,10 @@ export default class Record extends Feature {
     return this.form.statusField.isEnabled;
   }
 
+  get formID() {
+    return this.form ? this.form.id : null;
+  }
+
   get projectID() {
     return this._projectID;
   }
