@@ -2,6 +2,7 @@ import Feature from '../feature';
 import FormValues from './form-values';
 import DateUtils from '../utils/date-utils';
 import TextUtils from '../utils/text-utils';
+import loadObject from '../load-object';
 
 export default class RepeatableItemValue extends Feature {
   constructor(element, item, index) {
@@ -15,9 +16,9 @@ export default class RepeatableItemValue extends Feature {
     this._updatedAt = DateUtils.parseEpochTimestamp(item.updated_at);
     this._formValuesJSON = item.form_values;
     this._version = item.version || 1;
+    this._changesetID = item.changeset_id;
     this._createdByID = item.created_by_id;
     this._updatedByID = item.updated_by_id;
-    this._changesetID = item.changeset_id;
 
     const geometry = item.geometry;
 
@@ -155,11 +156,23 @@ export default class RepeatableItemValue extends Feature {
     return this._changesetID;
   }
 
+  get createdByID() {
+    return this._createdByID;
+  }
+
   get updatedByID() {
     return this._updatedByID;
   }
 
-  get createdByID() {
-    return this._createdByID;
+  loadChangeset(dataSource, callback) {
+    return loadObject(dataSource, 'changeset', 'getChangeset', callback);
+  }
+
+  loadCreatedBy(dataSource, callback) {
+    return loadObject(dataSource, 'updatedBy', 'getUser', callback);
+  }
+
+  loadUpdatedBy(dataSource, callback) {
+    return loadObject(dataSource, 'createdBy', 'getUser', callback);
   }
 }

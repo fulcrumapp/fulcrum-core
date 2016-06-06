@@ -4,6 +4,7 @@ import TextUtils from './utils/text-utils';
 import DateUtils from './utils/date-utils';
 import StatusValue from './values/status-value';
 import uuid from 'uuid';
+import loadObject from './load-object';
 
 export default class Record extends Feature {
   constructor(attributes, form) {
@@ -96,20 +97,7 @@ export default class Record extends Feature {
   }
 
   loadChangeset(dataSource, callback) {
-    if (this._changesetID == null) {
-      callback();
-      return;
-    }
-
-    dataSource.getChangeset(this._changesetID, (err, changeset) => {
-      if (err) {
-        return callback(err);
-      }
-
-      this._changeset = changeset;
-
-      return callback();
-    });
+    return loadObject(dataSource, 'changeset', 'getChangeset', callback);
   }
 
   toJSON() {
