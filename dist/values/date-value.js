@@ -106,11 +106,13 @@ var DateValue = function (_TextualValue) {
         return null;
       }
 
-      var timestamp = this.textValue + 'T00:00:00Z';
+      return this.dateValue;
 
-      var date = _dateUtils2.default.parseISOTimestamp(timestamp);
-
-      return date ? date.getTime() / 1000 : null;
+      // The following code can be used to convert a date to a unix timestamp integer
+      //
+      // const timestamp = this.textValue + 'T00:00:00Z';
+      // const date = DateUtils.parseISOTimestamp(timestamp);
+      // return date ? date.getTime() / 1000 : null;
     }
   }]);
 
