@@ -263,6 +263,8 @@ export default class FormValues {
 
     for (const formValue of this.all) {
       if (formValue instanceof RepeatableValue) {
+        items.push.apply(items, formValue.items);
+
         for (const item of formValue.items) {
           items.push.apply(items, item.formValues.repeatableItems);
         }

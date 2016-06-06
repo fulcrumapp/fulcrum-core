@@ -429,6 +429,8 @@ var FormValues = function () {
         var formValue = _ref10;
 
         if (formValue instanceof _repeatableValue2.default) {
+          items.push.apply(items, formValue.items);
+
           for (var _iterator11 = formValue.items, _isArray11 = Array.isArray(_iterator11), _i11 = 0, _iterator11 = _isArray11 ? _iterator11 : _iterator11[Symbol.iterator]();;) {
             var _ref11;
 
