@@ -332,6 +332,30 @@ export default class Record extends Feature {
     this._verticalAccuracy = accuracy;
   }
 
+  get altitude() {
+    return this._altitude;
+  }
+
+  set altitude(altitude) {
+    this._altitude = altitude;
+  }
+
+  get speed() {
+    return this._speed;
+  }
+
+  set speed(speed) {
+    this._speed = speed;
+  }
+
+  get course() {
+    return this._course;
+  }
+
+  set course(course) {
+    this._course = course;
+  }
+
   get geometryAsGeoJSON() {
     if (!this.hasCoordinate) {
       return null;

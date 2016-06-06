@@ -481,6 +481,30 @@ var Record = function (_Feature) {
       this._verticalAccuracy = accuracy;
     }
   }, {
+    key: 'altitude',
+    get: function get() {
+      return this._altitude;
+    },
+    set: function set(altitude) {
+      this._altitude = altitude;
+    }
+  }, {
+    key: 'speed',
+    get: function get() {
+      return this._speed;
+    },
+    set: function set(speed) {
+      this._speed = speed;
+    }
+  }, {
+    key: 'course',
+    get: function get() {
+      return this._course;
+    },
+    set: function set(course) {
+      this._course = course;
+    }
+  }, {
     key: 'geometryAsGeoJSON',
     get: function get() {
       if (!this.hasCoordinate) {
