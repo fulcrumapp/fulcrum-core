@@ -53,7 +53,16 @@ export default class SignatureValue extends FormValue {
   }
 
   get columnValue() {
-    return this._identifier;
+    if (this.isEmpty) {
+      return null;
+    }
+
+    const value = {};
+
+    value['f' + this.element.key + '_timestamp'] = this.timestamp;
+    value['f' + this.element.key] = this._identifier;
+
+    return value;
   }
 
   get multipleValues() {

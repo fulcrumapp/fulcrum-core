@@ -116,7 +116,16 @@ var SignatureValue = function (_FormValue) {
   }, {
     key: 'columnValue',
     get: function get() {
-      return this._identifier;
+      if (this.isEmpty) {
+        return null;
+      }
+
+      var value = {};
+
+      value['f' + this.element.key + '_timestamp'] = this.timestamp;
+      value['f' + this.element.key] = this._identifier;
+
+      return value;
     }
   }, {
     key: 'multipleValues',
