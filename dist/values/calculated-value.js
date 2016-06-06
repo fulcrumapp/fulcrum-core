@@ -63,7 +63,7 @@ var CalculatedValue = function (_TextualValue) {
         var date = new Date(this.textValue + ' 00:00:00Z');
 
         if (date) {
-          return date.getTime();
+          return date.getTime() / 1000;
         }
       }
 

@@ -33,7 +33,7 @@ export default class CalculatedValue extends TextualValue {
       const date = new Date(`${this.textValue} 00:00:00Z`);
 
       if (date) {
-        return date.getTime();
+        return date.getTime() / 1000;
       }
     }
 
