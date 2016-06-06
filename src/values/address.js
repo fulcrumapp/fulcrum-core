@@ -78,7 +78,7 @@ export default class Address {
   }
 
   get line2() {
-    return this.line(this.city, this.state, this.postalCode);
+    return this.line(this.city, this.county, this.state, this.postalCode);
   }
 
   get line3() {
