@@ -409,6 +409,47 @@ var FormValues = function () {
 
       return values;
     }
+  }, {
+    key: 'repeatableItems',
+    get: function get() {
+      var items = [];
+
+      for (var _iterator10 = this.all, _isArray10 = Array.isArray(_iterator10), _i10 = 0, _iterator10 = _isArray10 ? _iterator10 : _iterator10[Symbol.iterator]();;) {
+        var _ref10;
+
+        if (_isArray10) {
+          if (_i10 >= _iterator10.length) break;
+          _ref10 = _iterator10[_i10++];
+        } else {
+          _i10 = _iterator10.next();
+          if (_i10.done) break;
+          _ref10 = _i10.value;
+        }
+
+        var formValue = _ref10;
+
+        if (formValue instanceof _repeatableValue2.default) {
+          for (var _iterator11 = formValue.items, _isArray11 = Array.isArray(_iterator11), _i11 = 0, _iterator11 = _isArray11 ? _iterator11 : _iterator11[Symbol.iterator]();;) {
+            var _ref11;
+
+            if (_isArray11) {
+              if (_i11 >= _iterator11.length) break;
+              _ref11 = _iterator11[_i11++];
+            } else {
+              _i11 = _iterator11.next();
+              if (_i11.done) break;
+              _ref11 = _i11.value;
+            }
+
+            var item = _ref11;
+
+            items.push.apply(items, item.formValues.repeatableItems);
+          }
+        }
+      }
+
+      return items;
+    }
   }]);
 
   return FormValues;
