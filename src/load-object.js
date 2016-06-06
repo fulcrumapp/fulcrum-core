@@ -1,17 +1,17 @@
-export default function loadObject(dataSource, attribute, loader, callback) {
+export default function loadObject(object, dataSource, attribute, loader, callback) {
   const ivar = '_' + attribute + 'ID';
 
-  if (this[ivar] == null) {
+  if (object[ivar] == null) {
     callback();
     return;
   }
 
-  dataSource[loader](this[ivar], (err, object) => {
+  dataSource[loader](object[ivar], (err, result) => {
     if (err) {
       return callback(err);
     }
 
-    this['_' + attribute] = object;
+    object['_' + attribute] = result;
 
     return callback();
   });

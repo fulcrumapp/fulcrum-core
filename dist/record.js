@@ -57,7 +57,7 @@ var Record = function (_Feature) {
   }
 
   Record.prototype.loadChangeset = function loadChangeset(dataSource, callback) {
-    return (0, _loadObject2.default)(dataSource, 'changeset', 'getChangeset', callback);
+    return (0, _loadObject2.default)(this, dataSource, 'changeset', 'getChangeset', callback);
   };
 
   Record.prototype.toJSON = function toJSON() {

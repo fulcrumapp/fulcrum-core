@@ -86,15 +86,15 @@ var RepeatableItemValue = function (_Feature) {
   };
 
   RepeatableItemValue.prototype.loadChangeset = function loadChangeset(dataSource, callback) {
-    return (0, _loadObject2.default)(dataSource, 'changeset', 'getChangeset', callback);
+    return (0, _loadObject2.default)(this, dataSource, 'changeset', 'getChangeset', callback);
   };
 
   RepeatableItemValue.prototype.loadCreatedBy = function loadCreatedBy(dataSource, callback) {
-    return (0, _loadObject2.default)(dataSource, 'updatedBy', 'getUser', callback);
+    return (0, _loadObject2.default)(this, dataSource, 'updatedBy', 'getUser', callback);
   };
 
   RepeatableItemValue.prototype.loadUpdatedBy = function loadUpdatedBy(dataSource, callback) {
-    return (0, _loadObject2.default)(dataSource, 'createdBy', 'getUser', callback);
+    return (0, _loadObject2.default)(this, dataSource, 'createdBy', 'getUser', callback);
   };
 
   _createClass(RepeatableItemValue, [{

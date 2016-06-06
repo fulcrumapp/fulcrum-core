@@ -165,14 +165,14 @@ export default class RepeatableItemValue extends Feature {
   }
 
   loadChangeset(dataSource, callback) {
-    return loadObject(dataSource, 'changeset', 'getChangeset', callback);
+    return loadObject(this, dataSource, 'changeset', 'getChangeset', callback);
   }
 
   loadCreatedBy(dataSource, callback) {
-    return loadObject(dataSource, 'updatedBy', 'getUser', callback);
+    return loadObject(this, dataSource, 'updatedBy', 'getUser', callback);
   }
 
   loadUpdatedBy(dataSource, callback) {
-    return loadObject(dataSource, 'createdBy', 'getUser', callback);
+    return loadObject(this, dataSource, 'createdBy', 'getUser', callback);
   }
 }

@@ -2,22 +2,20 @@
 
 exports.__esModule = true;
 exports.default = loadObject;
-function loadObject(dataSource, attribute, loader, callback) {
-  var _this = this;
-
+function loadObject(object, dataSource, attribute, loader, callback) {
   var ivar = '_' + attribute + 'ID';
 
-  if (this[ivar] == null) {
+  if (object[ivar] == null) {
     callback();
     return;
   }
 
-  dataSource[loader](this[ivar], function (err, object) {
+  dataSource[loader](object[ivar], function (err, result) {
     if (err) {
       return callback(err);
     }
 
-    _this['_' + attribute] = object;
+    object['_' + attribute] = result;
 
     return callback();
   });

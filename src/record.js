@@ -97,7 +97,7 @@ export default class Record extends Feature {
   }
 
   loadChangeset(dataSource, callback) {
-    return loadObject(dataSource, 'changeset', 'getChangeset', callback);
+    return loadObject(this, dataSource, 'changeset', 'getChangeset', callback);
   }
 
   toJSON() {
