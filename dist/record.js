@@ -332,6 +332,11 @@ var Record = function (_Feature) {
       this._changeset = changeset;
     }
   }, {
+    key: 'changesetID',
+    get: function get() {
+      return this._changesetID;
+    }
+  }, {
     key: 'createdBy',
     get: function get() {
       return this._createdBy;
