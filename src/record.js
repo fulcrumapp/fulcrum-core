@@ -83,6 +83,10 @@ export default class Record extends Feature {
     this._changeset = changeset;
   }
 
+  get changesetID() {
+    return this._changesetID;
+  }
+
   get createdBy() {
     return this._createdBy;
   }
