@@ -58,7 +58,7 @@ export default class RecordLinkValue extends FormValue {
     const ids = [];
 
     for (const item of this._items) {
-      ids.push(item.mediaID);
+      ids.push(item.id);
     }
 
     return ids;
@@ -68,7 +68,7 @@ export default class RecordLinkValue extends FormValue {
     const ids = [];
 
     for (const item of this._items) {
-      ids.push(new MultipleValueItem(this.element, item.recordID));
+      ids.push(new MultipleValueItem(this.element, item.id));
     }
 
     return ids;

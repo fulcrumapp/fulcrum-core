@@ -197,7 +197,7 @@ var RecordLinkValue = function (_FormValue) {
 
         var item = _ref3;
 
-        ids.push(item.mediaID);
+        ids.push(item.id);
       }
 
       return ids;
@@ -221,7 +221,7 @@ var RecordLinkValue = function (_FormValue) {
 
         var item = _ref4;
 
-        ids.push(new _multipleValueItem2.default(this.element, item.recordID));
+        ids.push(new _multipleValueItem2.default(this.element, item.id));
       }
 
       return ids;
