@@ -257,4 +257,18 @@ export default class FormValues {
 
     return values;
   }
+
+  get repeatableItems() {
+    const items = [];
+
+    for (const formValue of this.all) {
+      if (formValue instanceof RepeatableValue) {
+        for (const item of formValue.items) {
+          items.push.apply(items, item.formValues.repeatableItems);
+        }
+      }
+    }
+
+    return items;
+  }
 }
