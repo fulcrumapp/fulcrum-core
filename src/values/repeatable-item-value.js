@@ -15,6 +15,9 @@ export default class RepeatableItemValue extends Feature {
     this._updatedAt = DateUtils.parseEpochTimestamp(item.updated_at);
     this._formValuesJSON = item.form_values;
     this._version = item.version || 1;
+    this._createdByID = item.created_by_id;
+    this._updatedByID = item.updated_by_id;
+    this._changesetID = item.changeset_id;
 
     const geometry = item.geometry;
 
@@ -146,5 +149,17 @@ export default class RepeatableItemValue extends Feature {
 
   set longitude(longitude) {
     this._longitude = longitude;
+  }
+
+  get changesetID() {
+    return this._changesetID;
+  }
+
+  get updatedByID() {
+    return this._updatedByID;
+  }
+
+  get createdByID() {
+    return this._createdByID;
   }
 }
