@@ -179,7 +179,12 @@ var MediaValue = function (_FormValue) {
   }, {
     key: 'columnValue',
     get: function get() {
+      if (this.isEmpty) {
+        return null;
+      }
+
       var ids = [];
+      var captions = [];
 
       for (var _iterator4 = this._items, _isArray4 = Array.isArray(_iterator4), _i4 = 0, _iterator4 = _isArray4 ? _iterator4 : _iterator4[Symbol.iterator]();;) {
         var _ref4;
@@ -196,9 +201,15 @@ var MediaValue = function (_FormValue) {
         var item = _ref4;
 
         ids.push(item.mediaID);
+        captions.push(item.caption);
       }
 
-      return ids;
+      var value = {};
+
+      value['f' + this.element.key + '_captions'] = captions;
+      value['f' + this.element.key] = ids;
+
+      return value;
     }
   }, {
     key: 'multipleValues',

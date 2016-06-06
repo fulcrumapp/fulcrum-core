@@ -177,11 +177,10 @@ var RecordLinkValue = function (_FormValue) {
   }, {
     key: 'columnValue',
     get: function get() {
-      return null;
-    }
-  }, {
-    key: 'multipleValues',
-    get: function get() {
+      if (this.isEmpty) {
+        return null;
+      }
+
       var ids = [];
 
       for (var _iterator3 = this._items, _isArray3 = Array.isArray(_iterator3), _i3 = 0, _iterator3 = _isArray3 ? _iterator3 : _iterator3[Symbol.iterator]();;) {
@@ -197,6 +196,30 @@ var RecordLinkValue = function (_FormValue) {
         }
 
         var item = _ref3;
+
+        ids.push(item.mediaID);
+      }
+
+      return ids;
+    }
+  }, {
+    key: 'multipleValues',
+    get: function get() {
+      var ids = [];
+
+      for (var _iterator4 = this._items, _isArray4 = Array.isArray(_iterator4), _i4 = 0, _iterator4 = _isArray4 ? _iterator4 : _iterator4[Symbol.iterator]();;) {
+        var _ref4;
+
+        if (_isArray4) {
+          if (_i4 >= _iterator4.length) break;
+          _ref4 = _iterator4[_i4++];
+        } else {
+          _i4 = _iterator4.next();
+          if (_i4.done) break;
+          _ref4 = _i4.value;
+        }
+
+        var item = _ref4;
 
         ids.push(new _multipleValueItem2.default(this.element, item.recordID));
       }
