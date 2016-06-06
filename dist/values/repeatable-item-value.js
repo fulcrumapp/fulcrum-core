@@ -236,6 +236,21 @@ var RepeatableItemValue = function (_Feature) {
     get: function get() {
       return this._updatedByID;
     }
+  }, {
+    key: 'changeset',
+    get: function get() {
+      return this._changeset;
+    }
+  }, {
+    key: 'updatedBy',
+    get: function get() {
+      return this._updatedBy;
+    }
+  }, {
+    key: 'createdBy',
+    get: function get() {
+      return this._createdBy;
+    }
   }]);
 
   return RepeatableItemValue;

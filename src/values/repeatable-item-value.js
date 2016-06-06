@@ -175,4 +175,16 @@ export default class RepeatableItemValue extends Feature {
   loadUpdatedBy(dataSource, callback) {
     return loadObject(this, dataSource, 'createdBy', 'getUser', callback);
   }
+
+  get changeset() {
+    return this._changeset;
+  }
+
+  get updatedBy() {
+    return this._updatedBy;
+  }
+
+  get createdBy() {
+    return this._createdBy;
+  }
 }
