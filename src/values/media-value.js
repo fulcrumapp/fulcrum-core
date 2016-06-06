@@ -41,13 +41,24 @@ export default class MediaValue extends FormValue {
   }
 
   get columnValue() {
+    if (this.isEmpty) {
+      return null;
+    }
+
     const ids = [];
+    const captions = [];
 
     for (const item of this._items) {
       ids.push(item.mediaID);
+      captions.push(item.caption);
     }
 
-    return ids;
+    const value = {};
+
+    value['f' + this.element.key + '_captions'] = captions;
+    value['f' + this.element.key] = ids;
+
+    return value;
   }
 
   get multipleValues() {

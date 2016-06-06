@@ -51,7 +51,17 @@ export default class RecordLinkValue extends FormValue {
   }
 
   get columnValue() {
-    return null;
+    if (this.isEmpty) {
+      return null;
+    }
+
+    const ids = [];
+
+    for (const item of this._items) {
+      ids.push(item.mediaID);
+    }
+
+    return ids;
   }
 
   get multipleValues() {
