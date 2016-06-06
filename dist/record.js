@@ -28,6 +28,10 @@ var _uuid = require('uuid');
 
 var _uuid2 = _interopRequireDefault(_uuid);
 
+var _loadObject = require('./load-object');
+
+var _loadObject2 = _interopRequireDefault(_loadObject);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _defaults(obj, defaults) { var keys = Object.getOwnPropertyNames(defaults); for (var i = 0; i < keys.length; i++) { var key = keys[i]; var value = Object.getOwnPropertyDescriptor(defaults, key); if (value && value.configurable && obj[key] === undefined) { Object.defineProperty(obj, key, value); } } return obj; }
@@ -53,22 +57,7 @@ var Record = function (_Feature) {
   }
 
   Record.prototype.loadChangeset = function loadChangeset(dataSource, callback) {
-    var _this2 = this;
-
-    if (this._changesetID == null) {
-      callback();
-      return;
-    }
-
-    dataSource.getChangeset(this._changesetID, function (err, changeset) {
-      if (err) {
-        return callback(err);
-      }
-
-      _this2._changeset = changeset;
-
-      return callback();
-    });
+    return (0, _loadObject2.default)(dataSource, 'changeset', 'getChangeset', callback);
   };
 
   Record.prototype.toJSON = function toJSON() {

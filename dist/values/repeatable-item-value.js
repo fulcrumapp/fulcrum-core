@@ -20,6 +20,10 @@ var _textUtils = require('../utils/text-utils');
 
 var _textUtils2 = _interopRequireDefault(_textUtils);
 
+var _loadObject = require('../load-object');
+
+var _loadObject2 = _interopRequireDefault(_loadObject);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _defaults(obj, defaults) { var keys = Object.getOwnPropertyNames(defaults); for (var i = 0; i < keys.length; i++) { var key = keys[i]; var value = Object.getOwnPropertyDescriptor(defaults, key); if (value && value.configurable && obj[key] === undefined) { Object.defineProperty(obj, key, value); } } return obj; }
@@ -46,6 +50,9 @@ var RepeatableItemValue = function (_Feature) {
     _this._updatedAt = _dateUtils2.default.parseEpochTimestamp(item.updated_at);
     _this._formValuesJSON = item.form_values;
     _this._version = item.version || 1;
+    _this._changesetID = item.changeset_id;
+    _this._createdByID = item.created_by_id;
+    _this._updatedByID = item.updated_by_id;
 
     var geometry = item.geometry;
 
@@ -76,6 +83,18 @@ var RepeatableItemValue = function (_Feature) {
     }
 
     this._updatedAt = now;
+  };
+
+  RepeatableItemValue.prototype.loadChangeset = function loadChangeset(dataSource, callback) {
+    return (0, _loadObject2.default)(dataSource, 'changeset', 'getChangeset', callback);
+  };
+
+  RepeatableItemValue.prototype.loadCreatedBy = function loadCreatedBy(dataSource, callback) {
+    return (0, _loadObject2.default)(dataSource, 'updatedBy', 'getUser', callback);
+  };
+
+  RepeatableItemValue.prototype.loadUpdatedBy = function loadUpdatedBy(dataSource, callback) {
+    return (0, _loadObject2.default)(dataSource, 'createdBy', 'getUser', callback);
   };
 
   _createClass(RepeatableItemValue, [{
@@ -201,6 +220,21 @@ var RepeatableItemValue = function (_Feature) {
     },
     set: function set(longitude) {
       this._longitude = longitude;
+    }
+  }, {
+    key: 'changesetID',
+    get: function get() {
+      return this._changesetID;
+    }
+  }, {
+    key: 'createdByID',
+    get: function get() {
+      return this._createdByID;
+    }
+  }, {
+    key: 'updatedByID',
+    get: function get() {
+      return this._updatedByID;
     }
   }]);
 
