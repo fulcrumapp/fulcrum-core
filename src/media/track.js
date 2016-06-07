@@ -65,7 +65,13 @@ export default class Track {
       properties: {},
       geometry: {
         type: 'LineString',
-        coordinates: lines[0]
+        coordinates: lines[0],
+        crs: {
+          type: 'name',
+          properties: {
+            name: 'EPSG:4326'
+          }
+        }
       }
     };
 
@@ -84,7 +90,13 @@ export default class Track {
       properties: {},
       geometry: {
         type: 'MultiLineString',
-        coordinates: lines
+        coordinates: lines,
+        crs: {
+          type: 'name',
+          properties: {
+            name: 'EPSG:4326'
+          }
+        }
       }
     };
 
