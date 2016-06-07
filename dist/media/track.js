@@ -42,11 +42,7 @@ var Track = function () {
     }
   }
 
-  Track.prototype.toGeoJSONLines = function toGeoJSONLines() {
-    if (this._geoJSONLines) {
-      return this._geoJSONLines;
-    }
-
+  Track.prototype._toLineSegments = function _toLineSegments() {
     var lines = [];
 
     for (var _iterator2 = this.segments, _isArray2 = Array.isArray(_iterator2), _i2 = 0, _iterator2 = _isArray2 ? _iterator2 : _iterator2[Symbol.iterator]();;) {
@@ -87,6 +83,16 @@ var Track = function () {
       lines.push(line);
     }
 
+    return lines;
+  };
+
+  Track.prototype.toGeoJSONLines = function toGeoJSONLines() {
+    if (this._geoJSONLines) {
+      return this._geoJSONLines;
+    }
+
+    var lines = this._toLineSegments();
+
     this._geoJSONLines = {
       type: 'Feature',
       properties: {},
@@ -97,6 +103,25 @@ var Track = function () {
     };
 
     return this._geoJSONLines;
+  };
+
+  Track.prototype.toGeoJSONMultiLineString = function toGeoJSONMultiLineString() {
+    if (this._geoJSONMultiLineString) {
+      return this._geoJSONMultiLineString;
+    }
+
+    var lines = this._toLineSegments();
+
+    this._geoJSONMultiLineString = {
+      type: 'Feature',
+      properties: {},
+      geometry: {
+        type: 'MultiLineString',
+        coordinates: lines
+      }
+    };
+
+    return this._geoJSONMultiLineString;
   };
 
   Track.prototype.toGeoJSONSegments = function toGeoJSONSegments() {
