@@ -35,11 +35,7 @@ export default class Track {
     return null;
   }
 
-  toGeoJSONLines() {
-    if (this._geoJSONLines) {
-      return this._geoJSONLines;
-    }
-
+  _toLineSegments() {
     const lines = [];
 
     for (const segment of this.segments) {
@@ -54,6 +50,16 @@ export default class Track {
       lines.push(line);
     }
 
+    return lines;
+  }
+
+  toGeoJSONLines() {
+    if (this._geoJSONLines) {
+      return this._geoJSONLines;
+    }
+
+    const lines = this._toLineSegments();
+
     this._geoJSONLines = {
       type: 'Feature',
       properties: {},
@@ -64,6 +70,25 @@ export default class Track {
     };
 
     return this._geoJSONLines;
+  }
+
+  toGeoJSONMultiLineString() {
+    if (this._geoJSONMultiLineString) {
+      return this._geoJSONMultiLineString;
+    }
+
+    const lines = this._toLineSegments();
+
+    this._geoJSONMultiLineString = {
+      type: 'Feature',
+      properties: {},
+      geometry: {
+        type: 'MultiLineString',
+        coordinates: lines
+      }
+    };
+
+    return this._geoJSONMultiLineString;
   }
 
   toGeoJSONSegments() {
