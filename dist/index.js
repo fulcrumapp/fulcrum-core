@@ -1,7 +1,7 @@
 'use strict';
 
 exports.__esModule = true;
-exports.Changeset = exports.Project = exports.Role = exports.User = exports.MediaItemValue = exports.MediaValue = exports.CustomValidationError = exports.DefaultValues = exports.MemoryDataSource = exports.DataSource = exports.FeatureValidator = exports.RecordLinkItemValue = exports.RecordLinkValue = exports.RecordLinkElement = exports.SectionElement = exports.TextValue = exports.TextElement = exports.CalculatedValue = exports.CalculatedElement = exports.DateValue = exports.DateElement = exports.ClassificationValue = exports.ClassificationElement = exports.ChoiceValue = exports.ChoiceElement = exports.BarcodeValue = exports.BarcodeElement = exports.AddressValue = exports.AddressElement = exports.VideoValue = exports.VideoItemValue = exports.PhotoValue = exports.PhotoItemValue = exports.AudioValue = exports.AudioItemValue = exports.RepeatableElement = exports.Condition = exports.ChildElements = exports.NumberUtils = exports.DateUtils = exports.TextUtils = exports.FormValues = exports.Feature = exports.RepeatableValue = exports.RepeatableItemValue = exports.ElementFactory = exports.ClassificationSet = exports.Classification = exports.ChoiceList = exports.Choice = exports.FormValue = exports.Element = exports.Record = exports.Form = undefined;
+exports.TrackPlayer = exports.TrackSegment = exports.TrackPoint = exports.Track = exports.Changeset = exports.Project = exports.Role = exports.User = exports.MediaItemValue = exports.MediaValue = exports.CustomValidationError = exports.DefaultValues = exports.MemoryDataSource = exports.DataSource = exports.FeatureValidator = exports.RecordLinkItemValue = exports.RecordLinkValue = exports.RecordLinkElement = exports.SectionElement = exports.TextValue = exports.TextElement = exports.CalculatedValue = exports.CalculatedElement = exports.DateValue = exports.DateElement = exports.ClassificationValue = exports.ClassificationElement = exports.ChoiceValue = exports.ChoiceElement = exports.BarcodeValue = exports.BarcodeElement = exports.AddressValue = exports.AddressElement = exports.VideoValue = exports.VideoItemValue = exports.PhotoValue = exports.PhotoItemValue = exports.AudioValue = exports.AudioItemValue = exports.RepeatableElement = exports.Condition = exports.ChildElements = exports.NumberUtils = exports.DateUtils = exports.TextUtils = exports.FormValues = exports.Feature = exports.RepeatableValue = exports.RepeatableItemValue = exports.ElementFactory = exports.ClassificationSet = exports.Classification = exports.ChoiceList = exports.Choice = exports.FormValue = exports.Element = exports.Record = exports.Form = undefined;
 
 var _form = require('./form');
 
@@ -219,6 +219,22 @@ var _changeset = require('./changeset');
 
 var _changeset2 = _interopRequireDefault(_changeset);
 
+var _track = require('./media/track');
+
+var _track2 = _interopRequireDefault(_track);
+
+var _trackPoint = require('./media/track-point');
+
+var _trackPoint2 = _interopRequireDefault(_trackPoint);
+
+var _trackSegment = require('./media/track-segment');
+
+var _trackSegment2 = _interopRequireDefault(_trackSegment);
+
+var _trackPlayer = require('./media/track-player');
+
+var _trackPlayer2 = _interopRequireDefault(_trackPlayer);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 exports.Form = _form2.default;
@@ -275,4 +291,8 @@ exports.User = _user2.default;
 exports.Role = _role2.default;
 exports.Project = _project2.default;
 exports.Changeset = _changeset2.default;
+exports.Track = _track2.default;
+exports.TrackPoint = _trackPoint2.default;
+exports.TrackSegment = _trackSegment2.default;
+exports.TrackPlayer = _trackPlayer2.default;
 //# sourceMappingURL=index.js.map
