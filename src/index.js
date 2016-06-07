@@ -52,4 +52,7 @@ export User from './user';
 export Role from './role';
 export Project from './project';
 export Changeset from './changeset';
-
+export Track from './media/track';
+export TrackPoint from './media/track-point';
+export TrackSegment from './media/track-segment';
+export TrackPlayer from './media/track-player';
