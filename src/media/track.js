@@ -47,7 +47,9 @@ export default class Track {
         }
       }
 
-      lines.push(line);
+      if (line.length > 1) {
+        lines.push(line);
+      }
     }
 
     return lines;

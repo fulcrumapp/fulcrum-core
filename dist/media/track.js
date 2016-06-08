@@ -80,7 +80,9 @@ var Track = function () {
         }
       }
 
-      lines.push(line);
+      if (line.length > 1) {
+        lines.push(line);
+      }
     }
 
     return lines;
