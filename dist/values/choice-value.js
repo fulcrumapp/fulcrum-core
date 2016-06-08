@@ -240,7 +240,10 @@ var ChoiceValue = function (_FormValue) {
 
         if (choice != null) {
           values.push(choice.label);
-          values.push(choice.value);
+
+          if (choice.label !== choice.value) {
+            values.push(choice.value);
+          }
         } else {
           values.push(rawValue);
         }

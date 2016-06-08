@@ -110,7 +110,7 @@ export default class ClassificationValue extends FormValue {
           values.push(item.label);
         }
 
-        if (item.value) {
+        if (item.value && item.value !== item.label) {
           values.push(item.value);
         }
       }
