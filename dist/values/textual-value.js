@@ -133,7 +133,7 @@ var TextualValue = function (_FormValue) {
   }, {
     key: 'searchableValue',
     get: function get() {
-      return this.textValue || '';
+      return this.displayValue || '';
     }
   }, {
     key: 'length',

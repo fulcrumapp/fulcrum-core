@@ -18,7 +18,7 @@ export default class TextualValue extends FormValue {
   }
 
   get searchableValue() {
-    return this.textValue || '';
+    return this.displayValue || '';
   }
 
   get length() {
