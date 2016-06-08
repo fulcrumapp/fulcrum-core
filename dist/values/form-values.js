@@ -357,7 +357,7 @@ var FormValues = function () {
           var searchValue = formValue.searchableValue;
 
           if (searchValue != null) {
-            searchValues.push(searchValue);
+            searchValues.push(searchValue.trim());
           }
         }
       }

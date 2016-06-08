@@ -202,7 +202,7 @@ export default class FormValues {
         const searchValue = formValue.searchableValue;
 
         if (searchValue != null) {
-          searchValues.push(searchValue);
+          searchValues.push(searchValue.trim());
         }
       }
     }
