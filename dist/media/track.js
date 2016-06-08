@@ -114,6 +114,10 @@ var Track = function () {
 
     var lines = this._toLineSegments();
 
+    if (lines.length === 0) {
+      return null;
+    }
+
     this._geoJSONMultiLineString = {
       type: 'Feature',
       properties: {},
