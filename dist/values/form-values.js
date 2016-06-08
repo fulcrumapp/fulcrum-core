@@ -362,7 +362,7 @@ var FormValues = function () {
         }
       }
 
-      return searchValues.join(SearchValueSeparator);
+      return searchValues.join(SearchValueSeparator).trim();
     }
   }, {
     key: 'mediaValues',
