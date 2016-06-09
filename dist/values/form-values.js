@@ -48,7 +48,7 @@ var FormValues = function () {
 
     this._values = {};
     this.container = container;
-    this.loadValues(container.elements, attributes);
+    this.loadValues(container.elements, attributes || {});
   }
 
   FormValues.prototype.get = function get(key) {

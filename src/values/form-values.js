@@ -13,7 +13,7 @@ export default class FormValues {
   constructor(container, attributes) {
     this._values = {};
     this.container = container;
-    this.loadValues(container.elements, attributes);
+    this.loadValues(container.elements, attributes || {});
   }
 
   get all() {
