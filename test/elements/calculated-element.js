@@ -52,7 +52,7 @@ describe('calculated fields', () => {
 
     value.displayValue.should.eql('December 31, 1969');
 
-    value.searchableValue.should.eql('1969-12-31');
+    value.searchableValue.should.eql('December 31, 1969');
 
     value.toJSON().should.eql('1969-12-31');
 
@@ -68,7 +68,7 @@ describe('calculated fields', () => {
 
     value.displayValue.should.eql('1,337');
 
-    value.searchableValue.should.eql('1337');
+    value.searchableValue.should.eql('1,337');
 
     value.toJSON().should.eql('1337');
 
@@ -84,7 +84,7 @@ describe('calculated fields', () => {
 
     value.displayValue.should.eql('$1,337.37');
 
-    value.searchableValue.should.eql('1337.37');
+    value.searchableValue.should.eql('$1,337.37');
 
     value.toJSON().should.eql('1337.37');
 

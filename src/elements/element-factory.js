@@ -52,7 +52,7 @@ export default class ElementFactory {
     }
 
     if (constructor == null) {
-      throw new Error('Unsupported element ' + attributes.type);
+      return null;
     }
 
     return new constructor(parent, attributes);

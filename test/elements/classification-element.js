@@ -81,7 +81,7 @@ describe('classification fields', () => {
 
     value.displayValue.should.eql('Linux ▸ Ubuntu ▸ 11.1');
 
-    value.searchableValue.should.eql('Linux Linux Ubuntu Ubuntu 11.1 11.1');
+    value.searchableValue.should.eql('Linux Ubuntu 11.1');
 
     value.toJSON().should.eql({ choice_values: [ 'Linux', 'Ubuntu', '11.1' ], other_values: [] });
 
@@ -111,7 +111,7 @@ describe('classification fields', () => {
 
     value.isEmpty.should.eql(false);
 
-    value.searchableValue.should.eql('Windows Windows Server Server 2000 2000');
+    value.searchableValue.should.eql('Windows Server 2000');
 
     value.toJSON().should.eql({ choice_values: [ 'Windows', 'Server', '2000' ], other_values: [] });
 
@@ -155,7 +155,7 @@ describe('classification fields', () => {
 
     value.isEmpty.should.eql(false);
 
-    value.searchableValue.should.eql('Windows Windows Server Server 2015');
+    value.searchableValue.should.eql('Windows Server 2015');
 
     value.toJSON().should.eql({ choice_values: [ 'Windows', 'Server' ], other_values: [ '2015' ] });
 
