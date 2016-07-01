@@ -48,7 +48,11 @@ var ChildElements = function (_Mixin) {
 
       var element = _ref;
 
-      this._elements.push(_elementFactory2.default.create(this, element));
+      var el = _elementFactory2.default.create(this, element);
+
+      if (el) {
+        this._elements.push(el);
+      }
     }
   };
 

@@ -99,7 +99,7 @@ var FormValueFactory = function () {
     var constructor = Constructors[element.type];
 
     if (constructor == null) {
-      throw new Error('Unsupported element ' + element.type);
+      return null;
     }
 
     return new constructor(element, attributes);
