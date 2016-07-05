@@ -211,6 +211,14 @@ export default class DateUtils {
       day: 'numeric'
     };
 
-    return new intl.DateTimeFormat(Locale.currentLocale(), options).format(date);
+    let result = null;
+
+    try {
+      result = new intl.DateTimeFormat(Locale.currentLocale(), options).format(date);
+    } catch (ex) {
+      // RangeError: Provided date is not in valid range.
+    }
+
+    return result;
   }
 }

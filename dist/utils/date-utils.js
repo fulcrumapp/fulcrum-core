@@ -240,7 +240,15 @@ var DateUtils = function () {
       day: 'numeric'
     };
 
-    return new intl.DateTimeFormat(_locale2.default.currentLocale(), options).format(date);
+    var result = null;
+
+    try {
+      result = new intl.DateTimeFormat(_locale2.default.currentLocale(), options).format(date);
+    } catch (ex) {
+      // RangeError: Provided date is not in valid range.
+    }
+
+    return result;
   };
 
   return DateUtils;
