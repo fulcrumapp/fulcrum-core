@@ -18,6 +18,10 @@ var Track = function () {
 
     this._segments = [];
 
+    if (Array.isArray(attributes)) {
+      attributes = { tracks: [{ track: attributes }] };
+    }
+
     if (attributes.tracks) {
       for (var _iterator = attributes.tracks, _isArray = Array.isArray(_iterator), _i = 0, _iterator = _isArray ? _iterator : _iterator[Symbol.iterator]();;) {
         var _ref;

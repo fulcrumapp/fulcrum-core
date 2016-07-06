@@ -4,6 +4,10 @@ export default class Track {
   constructor(attributes) {
     this._segments = [];
 
+    if (Array.isArray(attributes)) {
+      attributes = {tracks: [ {track: attributes} ]};
+    }
+
     if (attributes.tracks) {
       for (const trackSegment of attributes.tracks) {
         const segment = new TrackSegment(trackSegment);
