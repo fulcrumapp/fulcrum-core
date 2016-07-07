@@ -36,6 +36,7 @@
     "chai": "^3.5.0",
     "eslint": "^2.9.0",
     "eslint-config-fulcrum": "^1.0.0",
+    "eslint-plugin-babel": "^3.3.0",
     "eslint-plugin-react": "^5.0.1",
     "mocha": "^2.4.5",
     "npm-check-updates": "^2.6.3",
