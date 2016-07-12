@@ -30,7 +30,13 @@ var DateUtils = function () {
   }
 
   DateUtils.parseDate = function parseDate(dateString) {
-    return new Date(dateString.replace(/-/g, '/'));
+    var date = new Date(dateString.replace(/-/g, '/'));
+
+    if (date == null || isNaN(date.getTime())) {
+      return null;
+    }
+
+    return date;
   };
 
   DateUtils.parseTime = function parseTime(timeString) {
