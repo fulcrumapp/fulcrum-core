@@ -16,6 +16,9 @@ export default class ClassificationElement extends Element {
 
   load(dataSource, callback) {
     dataSource.getClassificationSet(this._classificationSetID, (err, classificationSet) => {
+      // TODO(zhm) Some forms have orphaned classification sets (life sucks)
+      // Maybe we should add a parameter to the load() method to throw
+      // errors.
       if (err) {
         return callback(err);
       }

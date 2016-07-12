@@ -68,6 +68,9 @@ var ChoiceElement = function (_Element) {
 
     if (this._choiceListID) {
       dataSource.getChoiceList(this._choiceListID, function (err, choiceList) {
+        // TODO(zhm) Some forms have orphaned choice lists (life sucks)
+        // Maybe we should add a parameter to the load() method to throw
+        // errors.
         if (err) {
           return callback(err);
         }

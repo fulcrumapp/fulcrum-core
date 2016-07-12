@@ -90,7 +90,17 @@ var Form = function () {
     }
 
     _async2.default.each(loadElements, function (element, cb) {
-      element.load(dataSource, cb);
+      element.load(dataSource, function (err) {
+        if (err) {
+          // TODO(zhm) We need a parameter to control what happens when there's an error. We don't
+          // want to throw right here because some actual forms have orphaned objects. We can't have this
+          // blow up here because in a migration we need to keep going even when a form is 'slightly bogus'.
+          // In some cases it might be desirable to have more strict verification of the choice lists and
+          // classification sets.
+        }
+
+        cb();
+      });
     }, callback);
   };
 

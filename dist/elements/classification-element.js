@@ -44,6 +44,9 @@ var ClassificationElement = function (_Element) {
     var _this2 = this;
 
     dataSource.getClassificationSet(this._classificationSetID, function (err, classificationSet) {
+      // TODO(zhm) Some forms have orphaned classification sets (life sucks)
+      // Maybe we should add a parameter to the load() method to throw
+      // errors.
       if (err) {
         return callback(err);
       }
