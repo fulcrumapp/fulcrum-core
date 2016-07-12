@@ -13,11 +13,13 @@ export default class ChildElements extends Mixin {
   createChildElements(elements) {
     this._elements = [];
 
-    for (const element of elements) {
-      const el = ElementFactory.create(this, element);
+    if (elements) {
+      for (const element of elements) {
+        const el = ElementFactory.create(this, element);
 
-      if (el) {
-        this._elements.push(el);
+        if (el) {
+          this._elements.push(el);
+        }
       }
     }
   }

@@ -34,24 +34,26 @@ var ChildElements = function (_Mixin) {
   ChildElements.prototype.createChildElements = function createChildElements(elements) {
     this._elements = [];
 
-    for (var _iterator = elements, _isArray = Array.isArray(_iterator), _i = 0, _iterator = _isArray ? _iterator : _iterator[Symbol.iterator]();;) {
-      var _ref;
+    if (elements) {
+      for (var _iterator = elements, _isArray = Array.isArray(_iterator), _i = 0, _iterator = _isArray ? _iterator : _iterator[Symbol.iterator]();;) {
+        var _ref;
 
-      if (_isArray) {
-        if (_i >= _iterator.length) break;
-        _ref = _iterator[_i++];
-      } else {
-        _i = _iterator.next();
-        if (_i.done) break;
-        _ref = _i.value;
-      }
+        if (_isArray) {
+          if (_i >= _iterator.length) break;
+          _ref = _iterator[_i++];
+        } else {
+          _i = _iterator.next();
+          if (_i.done) break;
+          _ref = _i.value;
+        }
 
-      var element = _ref;
+        var element = _ref;
 
-      var el = _elementFactory2.default.create(this, element);
+        var el = _elementFactory2.default.create(this, element);
 
-      if (el) {
-        this._elements.push(el);
+        if (el) {
+          this._elements.push(el);
+        }
       }
     }
   };
