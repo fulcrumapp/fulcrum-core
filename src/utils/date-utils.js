@@ -10,7 +10,13 @@ if (typeof Intl !== 'undefined') {
 
 export default class DateUtils {
   static parseDate(dateString) {
-    return new Date(dateString.replace(/-/g, '/'));
+    const date = new Date(dateString.replace(/-/g, '/'));
+
+    if (date == null || isNaN(date.getTime())) {
+      return null;
+    }
+
+    return date;
   }
 
   static parseTime(timeString) {
