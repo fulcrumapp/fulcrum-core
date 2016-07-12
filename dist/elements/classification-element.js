@@ -119,6 +119,10 @@ var ClassificationElement = function (_Element) {
   }, {
     key: 'filteredClassifications',
     get: function get() {
+      if (!this.classificationSet) {
+        return [];
+      }
+
       var items = this.classificationSet.items;
 
       if (!this.classificationFilter) {

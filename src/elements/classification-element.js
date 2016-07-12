@@ -73,6 +73,10 @@ export default class ClassificationElement extends Element {
   }
 
   get filteredClassifications() {
+    if (!this.classificationSet) {
+      return [];
+    }
+
     const items = this.classificationSet.items;
 
     if (!this.classificationFilter) {
