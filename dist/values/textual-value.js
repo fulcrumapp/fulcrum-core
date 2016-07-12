@@ -34,7 +34,7 @@ var TextualValue = function (_FormValue) {
 
     var _this = _possibleConstructorReturn(this, _FormValue.call(this, element, textValue));
 
-    _this.textValue = textValue;
+    _this.textValue = textValue != null ? textValue.toString() : null;
     return _this;
   }
 

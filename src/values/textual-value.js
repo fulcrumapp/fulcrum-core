@@ -6,7 +6,7 @@ export default class TextualValue extends FormValue {
   constructor(element, textValue) {
     super(element, textValue);
 
-    this.textValue = textValue;
+    this.textValue = textValue != null ? textValue.toString() : null;
   }
 
   get isEmpty() {
