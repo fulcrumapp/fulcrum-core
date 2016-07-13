@@ -22,7 +22,10 @@ export default class RepeatableItemValue extends Feature {
 
     const geometry = item.geometry;
 
-    if (geometry != null && geometry.type === 'Point') {
+    if (geometry != null &&
+        geometry.type === 'Point' &&
+        geometry.coordinates &&
+        geometry.coordinates.length > 1) {
       this._latitude = geometry.coordinates[1];
       this._longitude = geometry.coordinates[0];
     }

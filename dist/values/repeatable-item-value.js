@@ -56,7 +56,7 @@ var RepeatableItemValue = function (_Feature) {
 
     var geometry = item.geometry;
 
-    if (geometry != null && geometry.type === 'Point') {
+    if (geometry != null && geometry.type === 'Point' && geometry.coordinates && geometry.coordinates.length > 1) {
       _this._latitude = geometry.coordinates[1];
       _this._longitude = geometry.coordinates[0];
     }
