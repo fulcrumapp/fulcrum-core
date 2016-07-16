@@ -9,7 +9,7 @@ export default class MediaValue extends FormValue {
 
     this._items = [];
 
-    if (items != null) {
+    if (Array.isArray(items)) {
       for (const item of items) {
         this._items.push(new this.ItemClass(this, item));
       }

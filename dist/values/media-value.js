@@ -40,7 +40,7 @@ var MediaValue = function (_FormValue) {
 
     _this._items = [];
 
-    if (items != null) {
+    if (Array.isArray(items)) {
       for (var _iterator = items, _isArray = Array.isArray(_iterator), _i = 0, _iterator = _isArray ? _iterator : _iterator[Symbol.iterator]();;) {
         var _ref;
 
