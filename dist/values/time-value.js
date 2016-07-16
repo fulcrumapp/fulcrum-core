@@ -93,6 +93,15 @@ var TimeValue = function (_TextualValue) {
 
       return _dateUtils2.default.parseTime(this.textValue);
     }
+  }, {
+    key: 'columnValue',
+    get: function get() {
+      if (!this.isValid) {
+        return null;
+      }
+
+      return this.textValue || null;
+    }
   }]);
 
   return TimeValue;
