@@ -33,6 +33,8 @@ export ClassificationElement from './elements/classification-element';
 export ClassificationValue from './values/classification-value';
 export DateElement from './elements/date-element';
 export DateValue from './values/date-value';
+export TimeElement from './elements/time-element';
+export TimeValue from './values/time-value';
 export CalculatedElement from './elements/calculated-element';
 export CalculatedValue from './values/calculated-value';
 export TextElement from './elements/text-element';
