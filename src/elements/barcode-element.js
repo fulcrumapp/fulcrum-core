@@ -1,4 +1,4 @@
-import TextualElement from './element';
+import TextualElement from './textual-element';
 
 export default class BarcodeElement extends TextualElement {
 }

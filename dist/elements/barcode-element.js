@@ -2,9 +2,9 @@
 
 exports.__esModule = true;
 
-var _element = require('./element');
+var _textualElement = require('./textual-element');
 
-var _element2 = _interopRequireDefault(_element);
+var _textualElement2 = _interopRequireDefault(_textualElement);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -26,7 +26,7 @@ var BarcodeElement = function (_TextualElement) {
   }
 
   return BarcodeElement;
-}(_element2.default);
+}(_textualElement2.default);
 
 exports.default = BarcodeElement;
 //# sourceMappingURL=barcode-element.js.map
