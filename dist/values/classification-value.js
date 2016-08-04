@@ -120,6 +120,7 @@ var ClassificationValue = function (_FormValue) {
         allMatchSoFar = true;
       } else {
         allMatchSoFar = false;
+        break;
       }
 
       ++partIndex;
