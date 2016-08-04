@@ -63,6 +63,7 @@ export default class ClassificationValue extends FormValue {
         allMatchSoFar = true;
       } else {
         allMatchSoFar = false;
+        break;
       }
 
       ++partIndex;
