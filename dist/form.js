@@ -254,6 +254,14 @@ var Form = function () {
     get: function get() {
       return this._overrideMediaGalleryEnabled != null ? !!this._overrideMediaGalleryEnabled : true;
     }
+  }, {
+    key: 'overrideValues',
+    get: function get() {
+      return {
+        overrideManualLocationEnabled: this.overrideManualLocationEnabled,
+        overrideMediaGalleryEnabled: this.overrideMediaGalleryEnabled
+      };
+    }
   }]);
 
   return Form;

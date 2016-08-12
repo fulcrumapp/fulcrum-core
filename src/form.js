@@ -176,6 +176,13 @@ export default class Form {
     return this._overrideMediaGalleryEnabled != null ? !!this._overrideMediaGalleryEnabled : true;
   }
 
+  get overrideValues() {
+    return {
+      overrideManualLocationEnabled: this.overrideManualLocationEnabled,
+      overrideMediaGalleryEnabled: this.overrideMediaGalleryEnabled
+    };
+  }
+
   resetOverrides() {
     for (const element of this.elements) {
       element.resetOverrides();
