@@ -177,7 +177,7 @@ var StatusElement = function (_TextualElement) {
   }, {
     key: 'overrideValues',
     get: function get() {
-      return Object.assign(Object.getOwnPropertyDescriptor(_element2.default.prototype, 'overrideValues'), {
+      return Object.assign(Object.getOwnPropertyDescriptor(_element2.default.prototype, 'overrideValues').get.call(this), {
         statusFilter: this._statusFilter
       });
     }

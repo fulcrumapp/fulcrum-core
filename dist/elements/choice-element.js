@@ -221,7 +221,7 @@ var ChoiceElement = function (_Element) {
   }, {
     key: 'overrideValues',
     get: function get() {
-      return Object.assign(Object.getOwnPropertyDescriptor(_element2.default.prototype, 'overrideValues'), {
+      return Object.assign(Object.getOwnPropertyDescriptor(_element2.default.prototype, 'overrideValues').get.call(this), {
         choiceFilter: this._choiceFilter,
         overrideChoices: this._overrideChoices
       });

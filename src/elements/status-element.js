@@ -84,7 +84,7 @@ export default class StatusElement extends TextualElement {
   }
 
   get overrideValues() {
-    return Object.assign(Object.getOwnPropertyDescriptor(Element.prototype, 'overrideValues'), {
+    return Object.assign(Object.getOwnPropertyDescriptor(Element.prototype, 'overrideValues').get.call(this), {
       statusFilter: this._statusFilter
     });
   }

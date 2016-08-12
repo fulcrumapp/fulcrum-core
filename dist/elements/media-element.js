@@ -49,7 +49,7 @@ var MediaElement = function (_Element) {
   }, {
     key: 'overrideValues',
     get: function get() {
-      return Object.assign(Object.getOwnPropertyDescriptor(_element2.default.prototype, 'overrideValues'), {
+      return Object.assign(Object.getOwnPropertyDescriptor(_element2.default.prototype, 'overrideValues').get.call(this), {
         overrideMediaGalleryEnabled: this._overrideMediaGalleryEnabled
       });
     }
