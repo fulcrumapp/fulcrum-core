@@ -48,6 +48,7 @@ export DataSource from './data-source';
 export MemoryDataSource from './utils/memory-data-source';
 export DefaultValues from './values/default-values';
 export CustomValidationError from './validation/custom-validation-error';
+export MediaElement from './elements/media-element';
 export MediaValue from './values/media-value';
 export MediaItemValue from './values/media-item-value';
 export User from './user';
