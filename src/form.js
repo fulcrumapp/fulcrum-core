@@ -178,8 +178,8 @@ export default class Form {
 
   get overrideValues() {
     return {
-      overrideManualLocationEnabled: this.overrideManualLocationEnabled,
-      overrideMediaGalleryEnabled: this.overrideMediaGalleryEnabled
+      overrideManualLocationEnabled: this._overrideManualLocationEnabled,
+      overrideMediaGalleryEnabled: this._overrideMediaGalleryEnabled
     };
   }
 
@@ -190,8 +190,8 @@ export default class Form {
 
     this.statusField.resetOverrides();
 
-    this.overrideManualLocationEnabled = null;
-    this.overrideMediaGalleryEnabled = null;
+    this._overrideManualLocationEnabled = null;
+    this._overrideMediaGalleryEnabled = null;
   }
 }
 

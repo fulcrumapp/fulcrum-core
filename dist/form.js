@@ -162,8 +162,8 @@ var Form = function () {
 
     this.statusField.resetOverrides();
 
-    this.overrideManualLocationEnabled = null;
-    this.overrideMediaGalleryEnabled = null;
+    this._overrideManualLocationEnabled = null;
+    this._overrideMediaGalleryEnabled = null;
   };
 
   _createClass(Form, [{
@@ -258,8 +258,8 @@ var Form = function () {
     key: 'overrideValues',
     get: function get() {
       return {
-        overrideManualLocationEnabled: this.overrideManualLocationEnabled,
-        overrideMediaGalleryEnabled: this.overrideMediaGalleryEnabled
+        overrideManualLocationEnabled: this._overrideManualLocationEnabled,
+        overrideMediaGalleryEnabled: this._overrideMediaGalleryEnabled
       };
     }
   }]);
