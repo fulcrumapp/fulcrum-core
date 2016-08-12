@@ -107,6 +107,13 @@ var Record = function (_Feature) {
       json.changeset_id = this._changesetID;
     }
 
+    json.created_location = this.createdLocation;
+    json.updated_location = this.updatedLocation;
+
+    json.created_duration = this.createdDuration;
+    json.updated_duration = this.updatedDuration;
+    json.edited_duration = this.editedDuration;
+
     return json;
   };
 
@@ -138,6 +145,38 @@ var Record = function (_Feature) {
     this._course = attributes.course || null;
 
     this._changesetID = attributes.changeset_id || null;
+
+    this._createdDuration = attributes.created_duration || null;
+    this._updatedDuration = attributes.updated_duration || null;
+    this._editedDuration = attributes.edited_duration || null;
+
+    var createdLocation = attributes.created_location;
+
+    if (createdLocation) {
+      this._createdLatitude = createdLocation.latitude || null;
+      this._createdLongitude = createdLocation.longitude || null;
+      this._createdAltitude = createdLocation.altitude || null;
+      this._createdAccuracy = createdLocation.horizontal_accuracy || null;
+    } else {
+      this._createdLatitude = null;
+      this._createdLongitude = null;
+      this._createdAltitude = null;
+      this._createdAccuracy = null;
+    }
+
+    var updatedLocation = attributes.updated_location;
+
+    if (updatedLocation) {
+      this._updatedLatitude = updatedLocation.latitude || null;
+      this._updatedLongitude = updatedLocation.longitude || null;
+      this._updatedAltitude = updatedLocation.altitude || null;
+      this._updatedAccuracy = updatedLocation.horizontal_accuracy || null;
+    } else {
+      this._updatedLatitude = null;
+      this._updatedLongitude = null;
+      this._updatedAltitude = null;
+      this._updatedAccuracy = null;
+    }
   };
 
   Record.prototype.updateTimestamps = function updateTimestamps() {
@@ -504,6 +543,132 @@ var Record = function (_Feature) {
         type: 'Point',
         coordinates: [this.longitude, this.latitude]
       };
+    }
+  }, {
+    key: 'createdDuration',
+    get: function get() {
+      return this._createdDuration;
+    },
+    set: function set(value) {
+      this._createdDuration = value != null ? +value : null;
+    }
+  }, {
+    key: 'updatedDuration',
+    get: function get() {
+      return this._updatedDuration;
+    },
+    set: function set(value) {
+      this._updatedDuration = value != null ? +value : null;
+    }
+  }, {
+    key: 'editedDuration',
+    get: function get() {
+      return this._editedDuration;
+    },
+    set: function set(value) {
+      this._editedDuration = value != null ? +value : null;
+    }
+  }, {
+    key: 'createdLatitude',
+    get: function get() {
+      return this._createdLatitude;
+    },
+    set: function set(value) {
+      this._createdLatitude = value != null ? +value : null;
+    }
+  }, {
+    key: 'createdLongitude',
+    get: function get() {
+      return this._createdLongitude;
+    },
+    set: function set(value) {
+      this._createdLongitude = value != null ? +value : null;
+    }
+  }, {
+    key: 'createdAltitude',
+    get: function get() {
+      return this._createdAltitude;
+    },
+    set: function set(value) {
+      this._createdAltitude = value != null ? +value : null;
+    }
+  }, {
+    key: 'createdAccuracy',
+    get: function get() {
+      return this._createdAccuracy;
+    },
+    set: function set(value) {
+      this._createdAccuracy = value != null ? +value : null;
+    }
+  }, {
+    key: 'updatedLatitude',
+    get: function get() {
+      return this._updatedLatitude;
+    },
+    set: function set(value) {
+      this._updatedLatitude = value != null ? +value : null;
+    }
+  }, {
+    key: 'updatedLongitude',
+    get: function get() {
+      return this._updatedLongitude;
+    },
+    set: function set(value) {
+      this._updatedLongitude = value != null ? +value : null;
+    }
+  }, {
+    key: 'updatedAltitude',
+    get: function get() {
+      return this._updatedAltitude;
+    },
+    set: function set(value) {
+      this._updatedAltitude = value != null ? +value : null;
+    }
+  }, {
+    key: 'updatedAccuracy',
+    get: function get() {
+      return this._updatedAccuracy;
+    },
+    set: function set(value) {
+      this._updatedAccuracy = value != null ? +value : null;
+    }
+  }, {
+    key: 'hasCreatedCoordinate',
+    get: function get() {
+      return this.createdLatitude != null && this.createdLongitude != null;
+    }
+  }, {
+    key: 'hasUpdatedCoordinate',
+    get: function get() {
+      return this.updatedLatitude != null && this.updatedLongitude != null;
+    }
+  }, {
+    key: 'createdLocation',
+    get: function get() {
+      if (this.hasCreatedCoordinate) {
+        return {
+          latitude: this.createdLatitude,
+          longitude: this.createdLongitude,
+          altitude: this.createdAltitude,
+          horizontal_accuracy: this.createdAccuracy
+        };
+      }
+
+      return null;
+    }
+  }, {
+    key: 'updatedLocation',
+    get: function get() {
+      if (this.hasUpdatedCoordinate) {
+        return {
+          latitude: this.updatedLatitude,
+          longitude: this.updatedLongitude,
+          altitude: this.updatedAltitude,
+          horizontal_accuracy: this.updatedAccuracy
+        };
+      }
+
+      return null;
     }
   }]);
 
