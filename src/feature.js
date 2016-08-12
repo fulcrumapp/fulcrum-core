@@ -42,4 +42,24 @@ export default class Feature {
   updateTimetamps() {
     notImplemented();
   }
+
+  get createdDuration() {
+    notImplemented();
+  }
+
+  get updatedDuration() {
+    notImplemented();
+  }
+
+  get editedDuration() {
+    notImplemented();
+  }
+
+  get hasCreatedCoordinate() {
+    notImplemented();
+  }
+
+  get hasUpdatedCoordinate() {
+    notImplemented();
+  }
 }
