@@ -160,12 +160,31 @@ export default class Form {
     return this.reportTemplates.length ? this.reportTemplates[0] : null;
   }
 
+  set overrideManualLocationEnabled(override) {
+    this._overrideManualLocationEnabled = override;
+  }
+
+  get isManualLocationEnabled() {
+    return this._overrideManualLocationEnabled != null ? !!this._overrideManualLocationEnabled : true;
+  }
+
+  set overrideMediaGalleryEnabled(override) {
+    this._overrideMediaGalleryEnabled = override;
+  }
+
+  get isMediaGalleryEnabled() {
+    return this._overrideMediaGalleryEnabled != null ? !!this._overrideMediaGalleryEnabled : true;
+  }
+
   resetOverrides() {
     for (const element of this.elements) {
       element.resetOverrides();
     }
 
     this.statusField.resetOverrides();
+
+    this.overrideManualLocationEnabled = null;
+    this.overrideMediaGalleryEnabled = null;
   }
 }
 

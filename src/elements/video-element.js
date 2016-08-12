@@ -8,4 +8,3 @@ export default class VideoElement extends MediaElement {
     this.audioEnabled = !!attributes.audio_enabled;
   }
 }
-
