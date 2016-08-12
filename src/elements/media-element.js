@@ -13,6 +13,12 @@ export default class MediaElement extends Element {
     return this._overrideMediaGalleryEnabled;
   }
 
+  get overrideValues() {
+    return Object.assign(super.overrideValues, {
+      overrideMediaGalleryEnabled: this._overrideMediaGalleryEnabled
+    });
+  }
+
   resetOverrides() {
     super.resetOverrides();
 

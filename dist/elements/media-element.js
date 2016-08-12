@@ -46,6 +46,13 @@ var MediaElement = function (_Element) {
     get: function get() {
       return this._overrideMediaGalleryEnabled;
     }
+  }, {
+    key: 'overrideValues',
+    get: function get() {
+      return Object.assign(_Element.prototype.overrideValues, {
+        overrideMediaGalleryEnabled: this._overrideMediaGalleryEnabled
+      });
+    }
   }]);
 
   return MediaElement;
