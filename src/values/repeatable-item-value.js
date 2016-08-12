@@ -36,30 +36,30 @@ export default class RepeatableItemValue extends Feature {
 
     const createdLocation = item.created_location;
 
+    this._createdLatitude = null;
+    this._createdLongitude = null;
+    this._createdAltitude = null;
+    this._createdAccuracy = null;
+
     if (createdLocation) {
-      this._createdLatitude = createdLocation.latitude || null;
-      this._createdLongitude = createdLocation.longitude || null;
-      this._createdAltitude = createdLocation.altitude || null;
-      this._createdAccuracy = createdLocation.horizontal_accuracy || null;
-    } else {
-      this._createdLatitude = null;
-      this._createdLongitude = null;
-      this._createdAltitude = null;
-      this._createdAccuracy = null;
+      this._createdLatitude = createdLocation.latitude;
+      this._createdLongitude = createdLocation.longitude;
+      this._createdAltitude = createdLocation.altitude;
+      this._createdAccuracy = createdLocation.horizontal_accuracy;
     }
 
     const updatedLocation = item.updated_location;
 
+    this._updatedLatitude = null;
+    this._updatedLongitude = null;
+    this._updatedAltitude = null;
+    this._updatedAccuracy = null;
+
     if (updatedLocation) {
-      this._updatedLatitude = updatedLocation.latitude || null;
-      this._updatedLongitude = updatedLocation.longitude || null;
-      this._updatedAltitude = updatedLocation.altitude || null;
-      this._updatedAccuracy = updatedLocation.horizontal_accuracy || null;
-    } else {
-      this._updatedLatitude = null;
-      this._updatedLongitude = null;
-      this._updatedAltitude = null;
-      this._updatedAccuracy = null;
+      this._updatedLatitude = updatedLocation.latitude;
+      this._updatedLongitude = updatedLocation.longitude;
+      this._updatedAltitude = updatedLocation.altitude;
+      this._updatedAccuracy = updatedLocation.horizontal_accuracy;
     }
   }
 
