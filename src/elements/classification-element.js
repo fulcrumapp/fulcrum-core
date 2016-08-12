@@ -59,7 +59,7 @@ export default class ClassificationElement extends Element {
   }
 
   get overrideValues() {
-    return Object.assign(super.overrideValues, {
+    return Object.assign(Object.getOwnPropertyDescriptor(Element.prototype, 'overrideValues'), {
       choiceFilter: this._choiceFilter,
       overrideClassificationItems: this._overrideClassificationItems
     });

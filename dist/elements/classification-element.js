@@ -111,7 +111,7 @@ var ClassificationElement = function (_Element) {
   }, {
     key: 'overrideValues',
     get: function get() {
-      return Object.assign(_Element.prototype.overrideValues, {
+      return Object.assign(Object.getOwnPropertyDescriptor(_element2.default.prototype, 'overrideValues'), {
         choiceFilter: this._choiceFilter,
         overrideClassificationItems: this._overrideClassificationItems
       });

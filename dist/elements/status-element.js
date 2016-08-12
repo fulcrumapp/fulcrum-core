@@ -12,6 +12,10 @@ var _statusChoice = require('./status-choice');
 
 var _statusChoice2 = _interopRequireDefault(_statusChoice);
 
+var _element = require('./element');
+
+var _element2 = _interopRequireDefault(_element);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _defaults(obj, defaults) { var keys = Object.getOwnPropertyNames(defaults); for (var i = 0; i < keys.length; i++) { var key = keys[i]; var value = Object.getOwnPropertyDescriptor(defaults, key); if (value && value.configurable && obj[key] === undefined) { Object.defineProperty(obj, key, value); } } return obj; }
@@ -173,7 +177,7 @@ var StatusElement = function (_TextualElement) {
   }, {
     key: 'overrideValues',
     get: function get() {
-      return Object.assign(_TextualElement.prototype.overrideValues, {
+      return Object.assign(Object.getOwnPropertyDescriptor(_element2.default.prototype, 'overrideValues'), {
         statusFilter: this._statusFilter
       });
     }

@@ -104,7 +104,7 @@ export default class ChoiceElement extends Element {
   }
 
   get overrideValues() {
-    return Object.assign(super.overrideValues, {
+    return Object.assign(Object.getOwnPropertyDescriptor(Element.prototype, 'overrideValues'), {
       choiceFilter: this._choiceFilter,
       overrideChoices: this._overrideChoices
     });

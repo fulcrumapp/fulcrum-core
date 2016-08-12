@@ -14,7 +14,7 @@ export default class MediaElement extends Element {
   }
 
   get overrideValues() {
-    return Object.assign(super.overrideValues, {
+    return Object.assign(Object.getOwnPropertyDescriptor(Element.prototype, 'overrideValues'), {
       overrideMediaGalleryEnabled: this._overrideMediaGalleryEnabled
     });
   }
