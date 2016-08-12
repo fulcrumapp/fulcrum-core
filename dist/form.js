@@ -161,6 +161,9 @@ var Form = function () {
     }
 
     this.statusField.resetOverrides();
+
+    this.overrideManualLocationEnabled = null;
+    this.overrideMediaGalleryEnabled = null;
   };
 
   _createClass(Form, [{
@@ -230,6 +233,26 @@ var Form = function () {
     key: 'reportTemplate',
     get: function get() {
       return this.reportTemplates.length ? this.reportTemplates[0] : null;
+    }
+  }, {
+    key: 'overrideManualLocationEnabled',
+    set: function set(override) {
+      this._overrideManualLocationEnabled = override;
+    }
+  }, {
+    key: 'isManualLocationEnabled',
+    get: function get() {
+      return this._overrideManualLocationEnabled != null ? !!this._overrideManualLocationEnabled : true;
+    }
+  }, {
+    key: 'overrideMediaGalleryEnabled',
+    set: function set(override) {
+      this._overrideMediaGalleryEnabled = override;
+    }
+  }, {
+    key: 'isMediaGalleryEnabled',
+    get: function get() {
+      return this._overrideMediaGalleryEnabled != null ? !!this._overrideMediaGalleryEnabled : true;
     }
   }]);
 

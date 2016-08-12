@@ -27,10 +27,24 @@ var MediaElement = function (_Element) {
     return _possibleConstructorReturn(this, _Element.apply(this, arguments));
   }
 
+  MediaElement.prototype.resetOverrides = function resetOverrides() {
+    _Element.prototype.resetOverrides.call(this);
+
+    this._overrideMediaGalleryEnabled = null;
+  };
+
   _createClass(MediaElement, [{
     key: 'isLengthValidationSupported',
     get: function get() {
       return true;
+    }
+  }, {
+    key: 'overrideMediaGalleryEnabled',
+    set: function set(override) {
+      this._overrideMediaGalleryEnabled = override;
+    },
+    get: function get() {
+      return this._overrideMediaGalleryEnabled;
     }
   }]);
 
