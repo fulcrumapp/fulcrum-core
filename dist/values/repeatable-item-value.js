@@ -67,30 +67,30 @@ var RepeatableItemValue = function (_Feature) {
 
     var createdLocation = item.created_location;
 
+    _this._createdLatitude = null;
+    _this._createdLongitude = null;
+    _this._createdAltitude = null;
+    _this._createdAccuracy = null;
+
     if (createdLocation) {
-      _this._createdLatitude = createdLocation.latitude || null;
-      _this._createdLongitude = createdLocation.longitude || null;
-      _this._createdAltitude = createdLocation.altitude || null;
-      _this._createdAccuracy = createdLocation.horizontal_accuracy || null;
-    } else {
-      _this._createdLatitude = null;
-      _this._createdLongitude = null;
-      _this._createdAltitude = null;
-      _this._createdAccuracy = null;
+      _this._createdLatitude = createdLocation.latitude;
+      _this._createdLongitude = createdLocation.longitude;
+      _this._createdAltitude = createdLocation.altitude;
+      _this._createdAccuracy = createdLocation.horizontal_accuracy;
     }
 
     var updatedLocation = item.updated_location;
 
+    _this._updatedLatitude = null;
+    _this._updatedLongitude = null;
+    _this._updatedAltitude = null;
+    _this._updatedAccuracy = null;
+
     if (updatedLocation) {
-      _this._updatedLatitude = updatedLocation.latitude || null;
-      _this._updatedLongitude = updatedLocation.longitude || null;
-      _this._updatedAltitude = updatedLocation.altitude || null;
-      _this._updatedAccuracy = updatedLocation.horizontal_accuracy || null;
-    } else {
-      _this._updatedLatitude = null;
-      _this._updatedLongitude = null;
-      _this._updatedAltitude = null;
-      _this._updatedAccuracy = null;
+      _this._updatedLatitude = updatedLocation.latitude;
+      _this._updatedLongitude = updatedLocation.longitude;
+      _this._updatedAltitude = updatedLocation.altitude;
+      _this._updatedAccuracy = updatedLocation.horizontal_accuracy;
     }
     return _this;
   }
