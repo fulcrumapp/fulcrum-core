@@ -63,6 +63,31 @@ var Feature = function () {
     get: function get() {
       notImplemented();
     }
+  }, {
+    key: 'createdDuration',
+    get: function get() {
+      notImplemented();
+    }
+  }, {
+    key: 'updatedDuration',
+    get: function get() {
+      notImplemented();
+    }
+  }, {
+    key: 'editedDuration',
+    get: function get() {
+      notImplemented();
+    }
+  }, {
+    key: 'hasCreatedCoordinate',
+    get: function get() {
+      notImplemented();
+    }
+  }, {
+    key: 'hasUpdatedCoordinate',
+    get: function get() {
+      notImplemented();
+    }
   }]);
 
   return Feature;

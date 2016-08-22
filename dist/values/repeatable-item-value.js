@@ -60,6 +60,38 @@ var RepeatableItemValue = function (_Feature) {
       _this._latitude = geometry.coordinates[1];
       _this._longitude = geometry.coordinates[0];
     }
+
+    _this._createdDuration = item.created_duration || null;
+    _this._updatedDuration = item.updated_duration || null;
+    _this._editedDuration = item.edited_duration || null;
+
+    var createdLocation = item.created_location;
+
+    _this._createdLatitude = null;
+    _this._createdLongitude = null;
+    _this._createdAltitude = null;
+    _this._createdAccuracy = null;
+
+    if (createdLocation) {
+      _this._createdLatitude = createdLocation.latitude;
+      _this._createdLongitude = createdLocation.longitude;
+      _this._createdAltitude = createdLocation.altitude;
+      _this._createdAccuracy = createdLocation.horizontal_accuracy;
+    }
+
+    var updatedLocation = item.updated_location;
+
+    _this._updatedLatitude = null;
+    _this._updatedLongitude = null;
+    _this._updatedAltitude = null;
+    _this._updatedAccuracy = null;
+
+    if (updatedLocation) {
+      _this._updatedLatitude = updatedLocation.latitude;
+      _this._updatedLongitude = updatedLocation.longitude;
+      _this._updatedAltitude = updatedLocation.altitude;
+      _this._updatedAccuracy = updatedLocation.horizontal_accuracy;
+    }
     return _this;
   }
 
@@ -71,6 +103,11 @@ var RepeatableItemValue = function (_Feature) {
     json.updated_at = _dateUtils2.default.formatEpochTimestamp(this.updatedAt);
     json.form_values = this.formValues.toJSON();
     json.geometry = this.geometryAsGeoJSON;
+    json.created_location = this.createdLocation;
+    json.updated_location = this.updatedLocation;
+    json.created_duration = this.createdDuration;
+    json.updated_duration = this.updatedDuration;
+    json.edited_duration = this.editedDuration;
 
     return json;
   };
@@ -250,6 +287,132 @@ var RepeatableItemValue = function (_Feature) {
     key: 'createdBy',
     get: function get() {
       return this._createdBy;
+    }
+  }, {
+    key: 'createdDuration',
+    get: function get() {
+      return this._createdDuration;
+    },
+    set: function set(value) {
+      this._createdDuration = value != null ? +value : null;
+    }
+  }, {
+    key: 'updatedDuration',
+    get: function get() {
+      return this._updatedDuration;
+    },
+    set: function set(value) {
+      this._updatedDuration = value != null ? +value : null;
+    }
+  }, {
+    key: 'editedDuration',
+    get: function get() {
+      return this._editedDuration;
+    },
+    set: function set(value) {
+      this._editedDuration = value != null ? +value : null;
+    }
+  }, {
+    key: 'createdLatitude',
+    get: function get() {
+      return this._createdLatitude;
+    },
+    set: function set(value) {
+      this._createdLatitude = value != null ? +value : null;
+    }
+  }, {
+    key: 'createdLongitude',
+    get: function get() {
+      return this._createdLongitude;
+    },
+    set: function set(value) {
+      this._createdLongitude = value != null ? +value : null;
+    }
+  }, {
+    key: 'createdAltitude',
+    get: function get() {
+      return this._createdAltitude;
+    },
+    set: function set(value) {
+      this._createdAltitude = value != null ? +value : null;
+    }
+  }, {
+    key: 'createdAccuracy',
+    get: function get() {
+      return this._createdAccuracy;
+    },
+    set: function set(value) {
+      this._createdAccuracy = value != null ? +value : null;
+    }
+  }, {
+    key: 'updatedLatitude',
+    get: function get() {
+      return this._updatedLatitude;
+    },
+    set: function set(value) {
+      this._updatedLatitude = value != null ? +value : null;
+    }
+  }, {
+    key: 'updatedLongitude',
+    get: function get() {
+      return this._updatedLongitude;
+    },
+    set: function set(value) {
+      this._updatedLongitude = value != null ? +value : null;
+    }
+  }, {
+    key: 'updatedAltitude',
+    get: function get() {
+      return this._updatedAltitude;
+    },
+    set: function set(value) {
+      this._updatedAltitude = value != null ? +value : null;
+    }
+  }, {
+    key: 'updatedAccuracy',
+    get: function get() {
+      return this._updatedAccuracy;
+    },
+    set: function set(value) {
+      this._updatedAccuracy = value != null ? +value : null;
+    }
+  }, {
+    key: 'hasCreatedCoordinate',
+    get: function get() {
+      return this.createdLatitude != null && this.createdLongitude != null;
+    }
+  }, {
+    key: 'hasUpdatedCoordinate',
+    get: function get() {
+      return this.updatedLatitude != null && this.updatedLongitude != null;
+    }
+  }, {
+    key: 'createdLocation',
+    get: function get() {
+      if (this.hasCreatedCoordinate) {
+        return {
+          latitude: this.createdLatitude,
+          longitude: this.createdLongitude,
+          altitude: this.createdAltitude,
+          horizontal_accuracy: this.createdAccuracy
+        };
+      }
+
+      return null;
+    }
+  }, {
+    key: 'updatedLocation',
+    get: function get() {
+      if (this.hasUpdatedCoordinate) {
+        return {
+          latitude: this.updatedLatitude,
+          longitude: this.updatedLongitude,
+          altitude: this.updatedAltitude,
+          horizontal_accuracy: this.updatedAccuracy
+        };
+      }
+
+      return null;
     }
   }]);
 

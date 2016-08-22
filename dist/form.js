@@ -255,11 +255,22 @@ var Form = function () {
       return this._overrideMediaGalleryEnabled != null ? !!this._overrideMediaGalleryEnabled : true;
     }
   }, {
+    key: 'overrideEditDurationsEnabled',
+    set: function set(override) {
+      this._overrideEditDurationsEnabled = override;
+    }
+  }, {
+    key: 'isEditDurationsEnabled',
+    get: function get() {
+      return this._overrideEditDurationsEnabled != null ? !!this._overrideEditDurationsEnabled : true;
+    }
+  }, {
     key: 'overrideValues',
     get: function get() {
       return {
         overrideManualLocationEnabled: this._overrideManualLocationEnabled,
-        overrideMediaGalleryEnabled: this._overrideMediaGalleryEnabled
+        overrideMediaGalleryEnabled: this._overrideMediaGalleryEnabled,
+        overrideEditDurationsEnabled: this._overrideEditDurationsEnabled
       };
     }
   }]);

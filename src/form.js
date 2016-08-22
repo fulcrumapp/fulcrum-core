@@ -176,10 +176,19 @@ export default class Form {
     return this._overrideMediaGalleryEnabled != null ? !!this._overrideMediaGalleryEnabled : true;
   }
 
+  set overrideEditDurationsEnabled(override) {
+    this._overrideEditDurationsEnabled = override;
+  }
+
+  get isEditDurationsEnabled() {
+    return this._overrideEditDurationsEnabled != null ? !!this._overrideEditDurationsEnabled : true;
+  }
+
   get overrideValues() {
     return {
       overrideManualLocationEnabled: this._overrideManualLocationEnabled,
-      overrideMediaGalleryEnabled: this._overrideMediaGalleryEnabled
+      overrideMediaGalleryEnabled: this._overrideMediaGalleryEnabled,
+      overrideEditDurationsEnabled: this._overrideEditDurationsEnabled
     };
   }
 
