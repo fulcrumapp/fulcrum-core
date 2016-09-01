@@ -123,7 +123,7 @@ var TextualValue = function (_FormValue) {
   _createClass(TextualValue, [{
     key: 'isEmpty',
     get: function get() {
-      return _textUtils2.default.isEmpty(this.textValue);
+      return this.textValue == null || this.textValue.length === 0;
     }
   }, {
     key: 'displayValue',
