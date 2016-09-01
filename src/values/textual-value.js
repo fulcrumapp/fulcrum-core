@@ -10,7 +10,7 @@ export default class TextualValue extends FormValue {
   }
 
   get isEmpty() {
-    return TextUtils.isEmpty(this.textValue);
+    return this.textValue == null || this.textValue.length === 0;
   }
 
   get displayValue() {
