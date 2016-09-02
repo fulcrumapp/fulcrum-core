@@ -125,9 +125,9 @@ describe('text fields', () => {
 
     value.searchableValue.should.eql('13.2');
 
-    value.toJSON().should.eql('13.2');
+    value.toJSON().should.eql('13.2000');
 
-    value.length.should.eql(4);
+    value.length.should.eql(7);
 
     value.columnValue.should.eql(13.2);
 
@@ -186,23 +186,23 @@ describe('text fields', () => {
   it('implements comparisons for decimal numeric fields', () => {
     const value = record.formValues.find('decimal_number');
 
-    value.textValue.should.eql('13.2');
+    value.textValue.should.eql('13.2000');
 
     // conditions
-    value.isEqual('13.2').should.eql(true);
+    value.isEqual('13.2000').should.eql(true);
     value.isEqual('13.20').should.eql(false); // TODO(zhm) seems wrong
     value.isEqual('12').should.eql(false);
     value.isEqual(null).should.eql(false);
 
     value.contains('13').should.eql(true);
     value.contains('13.2').should.eql(true);
-    value.contains('13.20').should.eql(false);
+    value.contains('13.200000').should.eql(false);
     value.contains('a').should.eql(false);
     value.contains(null).should.eql(false);
 
     value.startsWith('13').should.eql(true);
     value.startsWith('13.2').should.eql(true);
-    value.startsWith('13.20').should.eql(false);
+    value.startsWith('13.200000').should.eql(false);
     value.startsWith('a').should.eql(false);
     value.startsWith(null).should.eql(false);
 

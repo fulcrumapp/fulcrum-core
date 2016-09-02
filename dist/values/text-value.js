@@ -8,6 +8,10 @@ var _textualValue = require('./textual-value');
 
 var _textualValue2 = _interopRequireDefault(_textualValue);
 
+var _numberUtils = require('../utils/number-utils');
+
+var _numberUtils2 = _interopRequireDefault(_numberUtils);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _defaults(obj, defaults) { var keys = Object.getOwnPropertyNames(defaults); for (var i = 0; i < keys.length; i++) { var key = keys[i]; var value = Object.getOwnPropertyDescriptor(defaults, key); if (value && value.configurable && obj[key] === undefined) { Object.defineProperty(obj, key, value); } } return obj; }
@@ -36,6 +40,15 @@ var TextValue = function (_TextualValue) {
       // this does NOT work in loose mode
       // return super.columnValue;
       return this.textValue || null;
+    }
+  }, {
+    key: 'displayValue',
+    get: function get() {
+      if (this.element.isNumeric && this.textValue != null) {
+        return _numberUtils2.default.localizedStringFromMachineString(this.textValue, this.element.isDecimalFormat);
+      }
+
+      return this.textValue || '';
     }
   }]);
 
