@@ -121,17 +121,17 @@ describe('text fields', () => {
 
     value.isEmpty.should.eql(false);
 
-    value.displayValue.should.eql('13.2');
+    value.displayValue.should.eql('1337.2');
 
-    value.searchableValue.should.eql('13.2');
+    value.searchableValue.should.eql('1337.2');
 
-    value.toJSON().should.eql('13.2000');
+    value.toJSON().should.eql('1337.2000');
 
-    value.length.should.eql(7);
+    value.length.should.eql(9);
 
-    value.columnValue.should.eql(13.2);
+    value.columnValue.should.eql(1337.2);
 
-    value.numericValue.should.eql(13.2);
+    value.numericValue.should.eql(1337.2);
   });
 
   it('implements comparisons for integer numeric fields', () => {
@@ -186,35 +186,35 @@ describe('text fields', () => {
   it('implements comparisons for decimal numeric fields', () => {
     const value = record.formValues.find('decimal_number');
 
-    value.textValue.should.eql('13.2000');
+    value.textValue.should.eql('1337.2000');
 
     // conditions
-    value.isEqual('13.2000').should.eql(true);
-    value.isEqual('13.20').should.eql(false); // TODO(zhm) seems wrong
+    value.isEqual('1337.2000').should.eql(true);
+    value.isEqual('1337.20').should.eql(false); // TODO(zhm) seems wrong
     value.isEqual('12').should.eql(false);
     value.isEqual(null).should.eql(false);
 
-    value.contains('13').should.eql(true);
-    value.contains('13.2').should.eql(true);
-    value.contains('13.200000').should.eql(false);
+    value.contains('1337').should.eql(true);
+    value.contains('1337.2').should.eql(true);
+    value.contains('1337.200000').should.eql(false);
     value.contains('a').should.eql(false);
     value.contains(null).should.eql(false);
 
-    value.startsWith('13').should.eql(true);
-    value.startsWith('13.2').should.eql(true);
-    value.startsWith('13.200000').should.eql(false);
+    value.startsWith('1337').should.eql(true);
+    value.startsWith('1337.2').should.eql(true);
+    value.startsWith('1337.200000').should.eql(false);
     value.startsWith('a').should.eql(false);
     value.startsWith(null).should.eql(false);
 
-    value.isLessThan('14').should.eql(true);
-    value.isLessThan('13.2').should.eql(false);
-    value.isLessThan('12').should.eql(false);
+    value.isLessThan('1400').should.eql(true);
+    value.isLessThan('1337.2').should.eql(false);
+    value.isLessThan('1200').should.eql(false);
     value.isLessThan('a').should.eql(false);
     value.isLessThan(null).should.eql(false);
 
-    value.isGreaterThan('12').should.eql(true);
-    value.isGreaterThan('13.2').should.eql(false);
-    value.isGreaterThan('14').should.eql(false);
+    value.isGreaterThan('1200').should.eql(true);
+    value.isGreaterThan('1337.2').should.eql(false);
+    value.isGreaterThan('1400').should.eql(false);
     value.isGreaterThan('a').should.eql(false);
     value.isGreaterThan(null).should.eql(false);
   });

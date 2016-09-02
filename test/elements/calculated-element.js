@@ -66,9 +66,9 @@ describe('calculated fields', () => {
 
     value.isEmpty.should.eql(false);
 
-    value.displayValue.should.eql('1,337');
+    value.displayValue.should.eql('1337');
 
-    value.searchableValue.should.eql('1,337');
+    value.searchableValue.should.eql('1337');
 
     value.toJSON().should.eql('1337');
 

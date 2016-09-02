@@ -102,7 +102,7 @@ var NumberUtils = function () {
     key: 'localeDecimalFormatter',
     get: function get() {
       if (!this._localeDecimalFormatter && intl) {
-        this._localeDecimalFormatter = new intl.NumberFormat();
+        this._localeDecimalFormatter = new intl.NumberFormat([], MachineFormatterOptions);
       }
 
       return this._localeDecimalFormatter;
@@ -111,7 +111,7 @@ var NumberUtils = function () {
     key: 'localeIntegerFormatter',
     get: function get() {
       if (!this._localeIntegerFormatter && intl) {
-        this._localeIntegerFormatter = new intl.NumberFormat([], { maximumFractionDigits: 0 });
+        this._localeIntegerFormatter = new intl.NumberFormat([], { useGrouping: false, maximumFractionDigits: 0 });
       }
 
       return this._localeIntegerFormatter;
