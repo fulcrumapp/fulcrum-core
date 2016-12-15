@@ -56,14 +56,24 @@ export default class ChildElements extends Mixin {
     return result;
   }
 
-  _flattenElements(elements) {
+  flattenElements(recurseRepeatables = true) {
+    return this._flattenElements(this.elements, recurseRepeatables);
+  }
+
+  _flattenElements(elements, recurseRepeatables = true) {
     let flat = [];
 
     for (const element of elements) {
       flat.push(element);
 
-      if (element.elements) {
-        flat = flat.concat(this._flattenElements(element.elements));
+      let recurse = true;
+
+      if (!recurseRepeatables && element.isRepeatable) {
+        recurse = false;
+      }
+
+      if (recurse && element.elements) {
+        flat = flat.concat(this._flattenElements(element.elements, recurseRepeatables));
       }
     }
 
