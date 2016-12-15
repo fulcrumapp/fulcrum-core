@@ -34,9 +34,6 @@ var AddressValue = function (_FormValue) {
     return _this;
   }
 
-  // TODO(zhm) implement
-  // throw new Error('Not implemented');
-
   AddressValue.prototype.toJSON = function toJSON() {
     if (this.isEmpty) {
       return null;
@@ -117,6 +114,8 @@ var AddressValue = function (_FormValue) {
     key: 'multipleValues',
     get: function get() {
       return null;
+      // TODO(zhm) implement
+      // throw new Error('Not implemented');
     }
   }]);
 

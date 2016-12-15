@@ -83,7 +83,15 @@ var ChildElements = function (_Mixin) {
     return result;
   };
 
+  ChildElements.prototype.flattenElements = function flattenElements() {
+    var recurseRepeatables = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : true;
+
+    return this._flattenElements(this.elements, recurseRepeatables);
+  };
+
   ChildElements.prototype._flattenElements = function _flattenElements(elements) {
+    var recurseRepeatables = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : true;
+
     var flat = [];
 
     for (var _iterator3 = elements, _isArray3 = Array.isArray(_iterator3), _i3 = 0, _iterator3 = _isArray3 ? _iterator3 : _iterator3[Symbol.iterator]();;) {
@@ -102,8 +110,14 @@ var ChildElements = function (_Mixin) {
 
       flat.push(element);
 
-      if (element.elements) {
-        flat = flat.concat(this._flattenElements(element.elements));
+      var recurse = true;
+
+      if (!recurseRepeatables && element.isRepeatable) {
+        recurse = false;
+      }
+
+      if (recurse && element.elements) {
+        flat = flat.concat(this._flattenElements(element.elements, recurseRepeatables));
       }
     }
 

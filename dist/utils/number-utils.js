@@ -43,7 +43,7 @@ var NumberUtils = function () {
   };
 
   NumberUtils.localizedStringFromMachineString = function localizedStringFromMachineString(machineString) {
-    var allowDecimals = arguments.length <= 1 || arguments[1] === undefined ? true : arguments[1];
+    var allowDecimals = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : true;
 
     if (allowDecimals && NumberUtils.localeDecimalFormatter) {
       return NumberUtils.localeDecimalFormatter.format(machineString);

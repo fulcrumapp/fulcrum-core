@@ -44,11 +44,9 @@ var DateUtils = function () {
       return null;
     }
 
-    var _timeString$split = timeString.split(':');
-
-    var hours = _timeString$split[0];
-    var minutes = _timeString$split[1];
-
+    var _timeString$split = timeString.split(':'),
+        hours = _timeString$split[0],
+        minutes = _timeString$split[1];
 
     if (hours == null || minutes == null) {
       return null;
@@ -72,7 +70,7 @@ var DateUtils = function () {
   };
 
   DateUtils.formatTimeSeconds = function formatTimeSeconds(seconds) {
-    var milliseconds = arguments.length <= 1 || arguments[1] === undefined ? false : arguments[1];
+    var milliseconds = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
 
     var ss = +seconds % 60;
     var div = (+seconds - ss) / 60;
@@ -141,8 +139,8 @@ var DateUtils = function () {
       return false;
     }
 
-    var hourPart = parts[0];
-    var minutePart = parts[1];
+    var hourPart = parts[0],
+        minutePart = parts[1];
 
 
     if (hourPart.length !== 2 || minutePart.length !== 2) {
@@ -182,9 +180,9 @@ var DateUtils = function () {
       return false;
     }
 
-    var yearPart = parts[0];
-    var monthPart = parts[1];
-    var dayPart = parts[2];
+    var yearPart = parts[0],
+        monthPart = parts[1],
+        dayPart = parts[2];
 
 
     if (yearPart.length !== 4 || monthPart.length !== 2 || dayPart.length !== 2) {

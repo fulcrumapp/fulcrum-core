@@ -74,20 +74,17 @@ var TrackPlayer = function () {
   };
 
   TrackPlayer.prototype.findPreviousTrackPoint = function findPreviousTrackPoint(time) {
-    var _findPreviousTrackPoi = this.findPreviousTrackPointIndexes(time);
-
-    var segmentIndex = _findPreviousTrackPoi[0];
-    var pointIndex = _findPreviousTrackPoi[1];
+    var _findPreviousTrackPoi = this.findPreviousTrackPointIndexes(time),
+        segmentIndex = _findPreviousTrackPoi[0],
+        pointIndex = _findPreviousTrackPoi[1];
 
     return this.track.segments[segmentIndex].points[pointIndex];
   };
 
   TrackPlayer.prototype.findNextTrackPoint = function findNextTrackPoint(time) {
-    var _findPreviousTrackPoi2 = this.findPreviousTrackPointIndexes(time);
-
-    var segmentIndex = _findPreviousTrackPoi2[0];
-    var pointIndex = _findPreviousTrackPoi2[1];
-
+    var _findPreviousTrackPoi2 = this.findPreviousTrackPointIndexes(time),
+        segmentIndex = _findPreviousTrackPoi2[0],
+        pointIndex = _findPreviousTrackPoi2[1];
 
     if (pointIndex + 1 < this.track.segments[segmentIndex].points.length) {
       return this.track.segments[segmentIndex].points[pointIndex + 1];
