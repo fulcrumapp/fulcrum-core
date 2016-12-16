@@ -68,7 +68,7 @@ export default class ChildElements extends Mixin {
 
       let recurse = true;
 
-      if (!recurseRepeatables && element.isRepeatable) {
+      if (!recurseRepeatables && element.isRepeatableElement) {
         recurse = false;
       }
 

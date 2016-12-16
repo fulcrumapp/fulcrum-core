@@ -112,7 +112,7 @@ var ChildElements = function (_Mixin) {
 
       var recurse = true;
 
-      if (!recurseRepeatables && element.isRepeatable) {
+      if (!recurseRepeatables && element.isRepeatableElement) {
         recurse = false;
       }
 
