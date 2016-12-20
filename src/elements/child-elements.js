@@ -44,10 +44,10 @@ export default class ChildElements extends Mixin {
     return this._elementsByDataName;
   }
 
-  elementsOfType(type) {
+  elementsOfType(type, recurseRepeatables = true) {
     const result = [];
 
-    for (const element of this.allElements) {
+    for (const element of this.flattenElements(recurseRepeatables)) {
       if (element.type === type) {
         result.push(element);
       }

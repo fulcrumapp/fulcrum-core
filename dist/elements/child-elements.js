@@ -59,9 +59,11 @@ var ChildElements = function (_Mixin) {
   };
 
   ChildElements.prototype.elementsOfType = function elementsOfType(type) {
+    var recurseRepeatables = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : true;
+
     var result = [];
 
-    for (var _iterator2 = this.allElements, _isArray2 = Array.isArray(_iterator2), _i2 = 0, _iterator2 = _isArray2 ? _iterator2 : _iterator2[Symbol.iterator]();;) {
+    for (var _iterator2 = this.flattenElements(recurseRepeatables), _isArray2 = Array.isArray(_iterator2), _i2 = 0, _iterator2 = _isArray2 ? _iterator2 : _iterator2[Symbol.iterator]();;) {
       var _ref2;
 
       if (_isArray2) {
