@@ -42,6 +42,21 @@ var SignatureValue = function (_FormValue) {
     this._timestamp = null;
   };
 
+  SignatureValue.prototype.format = function format(_ref) {
+    var _ref$part = _ref.part,
+        part = _ref$part === undefined ? null : _ref$part;
+
+    if (this.isEmpty) {
+      return null;
+    }
+
+    if (part === 'timestamp') {
+      return this.timestamp;
+    }
+
+    return this.id;
+  };
+
   SignatureValue.prototype.toJSON = function toJSON() {
     if (this.isEmpty) {
       return null;

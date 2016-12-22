@@ -86,6 +86,17 @@ var ChoiceValue = function (_FormValue) {
     return _this;
   }
 
+  ChoiceValue.prototype.format = function format(_ref3) {
+    var _ref3$useDisplayValue = _ref3.useDisplayValue,
+        useDisplayValue = _ref3$useDisplayValue === undefined ? false : _ref3$useDisplayValue;
+
+    if (this.isEmpty) {
+      return null;
+    }
+
+    return useDisplayValue ? this.labelStrings.sort() : this.valueStrings.sort();
+  };
+
   ChoiceValue.prototype.toJSON = function toJSON() {
     if (this.isEmpty) {
       return null;
@@ -95,35 +106,35 @@ var ChoiceValue = function (_FormValue) {
     var otherValues = [];
 
     for (var _iterator3 = this._choiceValues, _isArray3 = Array.isArray(_iterator3), _i3 = 0, _iterator3 = _isArray3 ? _iterator3 : _iterator3[Symbol.iterator]();;) {
-      var _ref3;
+      var _ref4;
 
       if (_isArray3) {
         if (_i3 >= _iterator3.length) break;
-        _ref3 = _iterator3[_i3++];
+        _ref4 = _iterator3[_i3++];
       } else {
         _i3 = _iterator3.next();
         if (_i3.done) break;
-        _ref3 = _i3.value;
+        _ref4 = _i3.value;
       }
 
-      var rawValue = _ref3;
+      var rawValue = _ref4;
 
       choiceValues.push(rawValue);
     }
 
     for (var _iterator4 = this._otherValues, _isArray4 = Array.isArray(_iterator4), _i4 = 0, _iterator4 = _isArray4 ? _iterator4 : _iterator4[Symbol.iterator]();;) {
-      var _ref4;
+      var _ref5;
 
       if (_isArray4) {
         if (_i4 >= _iterator4.length) break;
-        _ref4 = _iterator4[_i4++];
+        _ref5 = _iterator4[_i4++];
       } else {
         _i4 = _iterator4.next();
         if (_i4.done) break;
-        _ref4 = _i4.value;
+        _ref5 = _i4.value;
       }
 
-      var otherValue = _ref4;
+      var otherValue = _ref5;
 
       otherValues.push(otherValue);
     }
@@ -171,23 +182,23 @@ var ChoiceValue = function (_FormValue) {
       return true;
     }
   }, {
-    key: 'displayValue',
+    key: 'labelStrings',
     get: function get() {
       var labels = [];
 
       for (var _iterator5 = this._choiceValues, _isArray5 = Array.isArray(_iterator5), _i5 = 0, _iterator5 = _isArray5 ? _iterator5 : _iterator5[Symbol.iterator]();;) {
-        var _ref5;
+        var _ref6;
 
         if (_isArray5) {
           if (_i5 >= _iterator5.length) break;
-          _ref5 = _iterator5[_i5++];
+          _ref6 = _iterator5[_i5++];
         } else {
           _i5 = _iterator5.next();
           if (_i5.done) break;
-          _ref5 = _i5.value;
+          _ref6 = _i5.value;
         }
 
-        var rawValue = _ref5;
+        var rawValue = _ref6;
 
         var choice = this.element.choiceByValue(rawValue);
 
@@ -199,42 +210,88 @@ var ChoiceValue = function (_FormValue) {
       }
 
       for (var _iterator6 = this._otherValues, _isArray6 = Array.isArray(_iterator6), _i6 = 0, _iterator6 = _isArray6 ? _iterator6 : _iterator6[Symbol.iterator]();;) {
-        var _ref6;
+        var _ref7;
 
         if (_isArray6) {
           if (_i6 >= _iterator6.length) break;
-          _ref6 = _iterator6[_i6++];
+          _ref7 = _iterator6[_i6++];
         } else {
           _i6 = _iterator6.next();
           if (_i6.done) break;
-          _ref6 = _i6.value;
+          _ref7 = _i6.value;
         }
 
-        var otherValue = _ref6;
+        var otherValue = _ref7;
 
         labels.push(otherValue);
       }
 
-      return labels.join(ChoiceDisplaySeparator);
+      return labels;
+    }
+  }, {
+    key: 'valueStrings',
+    get: function get() {
+      var values = [];
+
+      for (var _iterator7 = this._choiceValues, _isArray7 = Array.isArray(_iterator7), _i7 = 0, _iterator7 = _isArray7 ? _iterator7 : _iterator7[Symbol.iterator]();;) {
+        var _ref8;
+
+        if (_isArray7) {
+          if (_i7 >= _iterator7.length) break;
+          _ref8 = _iterator7[_i7++];
+        } else {
+          _i7 = _iterator7.next();
+          if (_i7.done) break;
+          _ref8 = _i7.value;
+        }
+
+        var rawValue = _ref8;
+
+        values.push(rawValue);
+      }
+
+      for (var _iterator8 = this._otherValues, _isArray8 = Array.isArray(_iterator8), _i8 = 0, _iterator8 = _isArray8 ? _iterator8 : _iterator8[Symbol.iterator]();;) {
+        var _ref9;
+
+        if (_isArray8) {
+          if (_i8 >= _iterator8.length) break;
+          _ref9 = _iterator8[_i8++];
+        } else {
+          _i8 = _iterator8.next();
+          if (_i8.done) break;
+          _ref9 = _i8.value;
+        }
+
+        var otherValue = _ref9;
+
+        values.push(otherValue);
+      }
+
+      return values;
+    }
+  }, {
+    key: 'displayValue',
+    get: function get() {
+      return this.labelStrings.join(ChoiceDisplaySeparator);
     }
   }, {
     key: 'searchableValue',
     get: function get() {
       var values = [];
 
-      for (var _iterator7 = this._choiceValues, _isArray7 = Array.isArray(_iterator7), _i7 = 0, _iterator7 = _isArray7 ? _iterator7 : _iterator7[Symbol.iterator]();;) {
-        var _ref7;
+      for (var _iterator9 = this._choiceValues, _isArray9 = Array.isArray(_iterator9), _i9 = 0, _iterator9 = _isArray9 ? _iterator9 : _iterator9[Symbol.iterator]();;) {
+        var _ref10;
 
-        if (_isArray7) {
-          if (_i7 >= _iterator7.length) break;
-          _ref7 = _iterator7[_i7++];
+        if (_isArray9) {
+          if (_i9 >= _iterator9.length) break;
+          _ref10 = _iterator9[_i9++];
         } else {
-          _i7 = _iterator7.next();
-          if (_i7.done) break;
-          _ref7 = _i7.value;
+          _i9 = _iterator9.next();
+          if (_i9.done) break;
+          _ref10 = _i9.value;
         }
 
-        var rawValue = _ref7;
+        var rawValue = _ref10;
 
         var choice = this.element.choiceByValue(rawValue);
 
@@ -249,19 +306,19 @@ var ChoiceValue = function (_FormValue) {
         }
       }
 
-      for (var _iterator8 = this._otherValues, _isArray8 = Array.isArray(_iterator8), _i8 = 0, _iterator8 = _isArray8 ? _iterator8 : _iterator8[Symbol.iterator]();;) {
-        var _ref8;
+      for (var _iterator10 = this._otherValues, _isArray10 = Array.isArray(_iterator10), _i10 = 0, _iterator10 = _isArray10 ? _iterator10 : _iterator10[Symbol.iterator]();;) {
+        var _ref11;
 
-        if (_isArray8) {
-          if (_i8 >= _iterator8.length) break;
-          _ref8 = _iterator8[_i8++];
+        if (_isArray10) {
+          if (_i10 >= _iterator10.length) break;
+          _ref11 = _iterator10[_i10++];
         } else {
-          _i8 = _iterator8.next();
-          if (_i8.done) break;
-          _ref8 = _i8.value;
+          _i10 = _iterator10.next();
+          if (_i10.done) break;
+          _ref11 = _i10.value;
         }
 
-        var otherValue = _ref8;
+        var otherValue = _ref11;
 
         values.push(otherValue);
       }
@@ -276,41 +333,7 @@ var ChoiceValue = function (_FormValue) {
   }, {
     key: 'columnValue',
     get: function get() {
-      var allValues = [];
-
-      for (var _iterator9 = this._choiceValues, _isArray9 = Array.isArray(_iterator9), _i9 = 0, _iterator9 = _isArray9 ? _iterator9 : _iterator9[Symbol.iterator]();;) {
-        var _ref9;
-
-        if (_isArray9) {
-          if (_i9 >= _iterator9.length) break;
-          _ref9 = _iterator9[_i9++];
-        } else {
-          _i9 = _iterator9.next();
-          if (_i9.done) break;
-          _ref9 = _i9.value;
-        }
-
-        var rawValue = _ref9;
-
-        allValues.push(rawValue);
-      }
-
-      for (var _iterator10 = this._otherValues, _isArray10 = Array.isArray(_iterator10), _i10 = 0, _iterator10 = _isArray10 ? _iterator10 : _iterator10[Symbol.iterator]();;) {
-        var _ref10;
-
-        if (_isArray10) {
-          if (_i10 >= _iterator10.length) break;
-          _ref10 = _iterator10[_i10++];
-        } else {
-          _i10 = _iterator10.next();
-          if (_i10.done) break;
-          _ref10 = _i10.value;
-        }
-
-        var otherValue = _ref10;
-
-        allValues.push(otherValue);
-      }
+      var allValues = this.valueStrings.sort();
 
       if (allValues.length === 0) {
         return null;

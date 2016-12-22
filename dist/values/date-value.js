@@ -65,6 +65,13 @@ var DateValue = function (_TextualValue) {
     return thisDate.getTime() > thatDate.getTime();
   };
 
+  DateValue.prototype.format = function format(_ref) {
+    var _ref$useDisplayValue = _ref.useDisplayValue,
+        useDisplayValue = _ref$useDisplayValue === undefined ? false : _ref$useDisplayValue;
+
+    return this.columnValue;
+  };
+
   _createClass(DateValue, [{
     key: 'displayValue',
     get: function get() {

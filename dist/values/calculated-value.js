@@ -34,6 +34,26 @@ var CalculatedValue = function (_TextualValue) {
     return _this;
   }
 
+  CalculatedValue.prototype.format = function format() {
+    if (this.isEmpty) {
+      return null;
+    }
+
+    var display = this.element.display;
+
+    // - for currency or number display, return the numeric value
+    // - for date calculations return the date
+    // - for text (and anything else) just return the string value
+
+    if (display.isCurrency || display.isNumber) {
+      return _numberUtils2.default.parseDouble(this.textValue);
+    } else if (display.isDate) {
+      return new Date(this.textValue + ' 00:00:00Z');
+    }
+
+    return this.textValue;
+  };
+
   _createClass(CalculatedValue, [{
     key: 'displayValue',
     get: function get() {

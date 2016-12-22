@@ -34,6 +34,21 @@ var AddressValue = function (_FormValue) {
     return _this;
   }
 
+  AddressValue.prototype.format = function format(_ref) {
+    var _ref$part = _ref.part,
+        part = _ref$part === undefined ? null : _ref$part;
+
+    if (this.isEmpty) {
+      return null;
+    }
+
+    if (part) {
+      return this.address.toJSON()[part];
+    }
+
+    return this.address.searchableValue;
+  };
+
   AddressValue.prototype.toJSON = function toJSON() {
     if (this.isEmpty) {
       return null;
@@ -90,18 +105,18 @@ var AddressValue = function (_FormValue) {
       var address = this.address.toJSON();
 
       for (var _iterator = Object.keys(address), _isArray = Array.isArray(_iterator), _i = 0, _iterator = _isArray ? _iterator : _iterator[Symbol.iterator]();;) {
-        var _ref;
+        var _ref2;
 
         if (_isArray) {
           if (_i >= _iterator.length) break;
-          _ref = _iterator[_i++];
+          _ref2 = _iterator[_i++];
         } else {
           _i = _iterator.next();
           if (_i.done) break;
-          _ref = _i.value;
+          _ref2 = _i.value;
         }
 
-        var key = _ref;
+        var key = _ref2;
 
         value['f' + this.element.key + '_' + key] = address[key];
       }

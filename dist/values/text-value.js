@@ -31,6 +31,21 @@ var TextValue = function (_TextualValue) {
     return _possibleConstructorReturn(this, _TextualValue.apply(this, arguments));
   }
 
+  TextValue.prototype.format = function format(_ref) {
+    var _ref$useDisplayValue = _ref.useDisplayValue,
+        useDisplayValue = _ref$useDisplayValue === undefined ? false : _ref$useDisplayValue;
+
+    if (this.isEmpty) {
+      return null;
+    }
+
+    if (this.element.isNumeric && this.textValue != null) {
+      return this.numericValue;
+    }
+
+    return this.displayValue;
+  };
+
   _createClass(TextValue, [{
     key: 'columnValue',
     get: function get() {

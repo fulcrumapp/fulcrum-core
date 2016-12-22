@@ -63,6 +63,14 @@ var RepeatableValue = function (_FormValue) {
     return _this;
   }
 
+  RepeatableValue.prototype.format = function format(options) {
+    if (this.isEmpty) {
+      return null;
+    }
+
+    return this.displayValue;
+  };
+
   RepeatableValue.prototype.toJSON = function toJSON() {
     if (this.isEmpty) {
       return null;

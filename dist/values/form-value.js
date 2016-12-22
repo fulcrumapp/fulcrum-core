@@ -24,6 +24,10 @@ var FormValue = function () {
     this._rawValue = value;
   }
 
+  FormValue.prototype.format = function format(options) {
+    notImplemented();
+  };
+
   FormValue.prototype.toJSON = function toJSON() {
     notImplemented();
   };

@@ -38,6 +38,17 @@ var TextualValue = function (_FormValue) {
     return _this;
   }
 
+  TextualValue.prototype.format = function format(_ref) {
+    var _ref$useDisplayValue = _ref.useDisplayValue,
+        useDisplayValue = _ref$useDisplayValue === undefined ? false : _ref$useDisplayValue;
+
+    if (this.isEmpty) {
+      return null;
+    }
+
+    return useDisplayValue ? this.displayValue : this.textValue;
+  };
+
   TextualValue.prototype.toJSON = function toJSON() {
     if (this.isEmpty) {
       return null;

@@ -61,22 +61,41 @@ var RecordLinkValue = function (_FormValue) {
     return _this;
   }
 
+  RecordLinkValue.prototype.format = function format(_ref2) {
+    var _ref2$part = _ref2.part,
+        part = _ref2$part === undefined ? null : _ref2$part;
+
+    if (this.isEmpty) {
+      return null;
+    }
+
+    if (part === 'title') {
+      return this.items.map(function (item) {
+        return item.displayValue;
+      });
+    }
+
+    return this.items.map(function (item) {
+      return item.id;
+    });
+  };
+
   RecordLinkValue.prototype.toJSON = function toJSON() {
     var items = [];
 
     for (var _iterator2 = this._items, _isArray2 = Array.isArray(_iterator2), _i2 = 0, _iterator2 = _isArray2 ? _iterator2 : _iterator2[Symbol.iterator]();;) {
-      var _ref2;
+      var _ref3;
 
       if (_isArray2) {
         if (_i2 >= _iterator2.length) break;
-        _ref2 = _iterator2[_i2++];
+        _ref3 = _iterator2[_i2++];
       } else {
         _i2 = _iterator2.next();
         if (_i2.done) break;
-        _ref2 = _i2.value;
+        _ref3 = _i2.value;
       }
 
-      var item = _ref2;
+      var item = _ref3;
 
       items.push(item.toJSON());
     }
@@ -184,18 +203,18 @@ var RecordLinkValue = function (_FormValue) {
       var ids = [];
 
       for (var _iterator3 = this._items, _isArray3 = Array.isArray(_iterator3), _i3 = 0, _iterator3 = _isArray3 ? _iterator3 : _iterator3[Symbol.iterator]();;) {
-        var _ref3;
+        var _ref4;
 
         if (_isArray3) {
           if (_i3 >= _iterator3.length) break;
-          _ref3 = _iterator3[_i3++];
+          _ref4 = _iterator3[_i3++];
         } else {
           _i3 = _iterator3.next();
           if (_i3.done) break;
-          _ref3 = _i3.value;
+          _ref4 = _i3.value;
         }
 
-        var item = _ref3;
+        var item = _ref4;
 
         ids.push(item.id);
       }
@@ -208,18 +227,18 @@ var RecordLinkValue = function (_FormValue) {
       var ids = [];
 
       for (var _iterator4 = this._items, _isArray4 = Array.isArray(_iterator4), _i4 = 0, _iterator4 = _isArray4 ? _iterator4 : _iterator4[Symbol.iterator]();;) {
-        var _ref4;
+        var _ref5;
 
         if (_isArray4) {
           if (_i4 >= _iterator4.length) break;
-          _ref4 = _iterator4[_i4++];
+          _ref5 = _iterator4[_i4++];
         } else {
           _i4 = _iterator4.next();
           if (_i4.done) break;
-          _ref4 = _i4.value;
+          _ref5 = _i4.value;
         }
 
-        var item = _ref4;
+        var item = _ref5;
 
         ids.push(new _multipleValueItem2.default(this.element, item.id));
       }
