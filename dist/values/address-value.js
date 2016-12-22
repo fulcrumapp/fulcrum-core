@@ -46,7 +46,7 @@ var AddressValue = function (_FormValue) {
       return this.address.toJSON()[part];
     }
 
-    return this.address.searchableValue;
+    return this.searchableValue;
   };
 
   AddressValue.prototype.toJSON = function toJSON() {
