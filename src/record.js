@@ -88,12 +88,16 @@ export default class Record extends Feature {
     return this._changesetID;
   }
 
-  get createdBy() {
-    return this._createdBy;
+  get createdByName() {
+    return this._createdByName;
   }
 
   get updatedBy() {
     return this._updatedBy;
+  }
+
+  get updatedByName() {
+    return this._updatedByName;
   }
 
   loadChangeset(dataSource, callback) {
@@ -119,7 +123,7 @@ export default class Record extends Feature {
     json.status = this._status || null;
 
     json.created_by_id = this._createdByID || null;
-    json.created_by = this._createdBy || null;
+    json.created_by = this._createdByName || null;
     json.updated_by_id = this._updatedByID || null;
     json.updated_by = this._updatedBy || null;
 
@@ -174,9 +178,9 @@ export default class Record extends Feature {
     this._status = attributes.status || null;
 
     this._createdByID = attributes.created_by_id || null;
-    this._createdBy = attributes.created_by || null;
+    this._createdByName = attributes.created_by || null;
     this._updatedByID = attributes.updated_by_id || null;
-    this._updatedBy = attributes.updated_by || null;
+    this._updatedByName = attributes.updated_by || null;
 
     this._horizontalAccuracy = attributes.horizontal_accuracy || null;
     this._verticalAccuracy = attributes.vertical_accuracy || null;
