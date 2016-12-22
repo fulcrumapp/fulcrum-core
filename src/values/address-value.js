@@ -53,7 +53,7 @@ export default class AddressValue extends FormValue {
       return this.address.toJSON()[part];
     }
 
-    return this.address.searchableValue;
+    return this.searchableValue;
   }
 
   toJSON() {
