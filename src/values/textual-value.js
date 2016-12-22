@@ -9,6 +9,14 @@ export default class TextualValue extends FormValue {
     this.textValue = textValue != null ? textValue.toString() : null;
   }
 
+  format({useDisplayValue = false}) {
+    if (this.isEmpty) {
+      return null;
+    }
+
+    return useDisplayValue ? this.displayValue : this.textValue;
+  }
+
   get isEmpty() {
     return this.textValue == null || this.textValue.length === 0;
   }

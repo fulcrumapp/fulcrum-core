@@ -18,4 +18,16 @@ export default class TextValue extends TextualValue {
 
     return this.textValue || '';
   }
+
+  format({useDisplayValue = false}) {
+    if (this.isEmpty) {
+      return null;
+    }
+
+    if (this.element.isNumeric && this.textValue != null) {
+      return this.numericValue;
+    }
+
+    return this.displayValue;
+  }
 }

@@ -44,6 +44,18 @@ export default class AddressValue extends FormValue {
     // throw new Error('Not implemented');
   }
 
+  format({part = null}) {
+    if (this.isEmpty) {
+      return null;
+    }
+
+    if (part) {
+      return this.address.toJSON()[part];
+    }
+
+    return this.address.searchableValue;
+  }
+
   toJSON() {
     if (this.isEmpty) {
       return null;

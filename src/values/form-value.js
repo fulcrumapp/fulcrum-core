@@ -42,6 +42,10 @@ export default class FormValue {
     notImplemented();
   }
 
+  format(options) {
+    notImplemented();
+  }
+
   toJSON() {
     notImplemented();
   }

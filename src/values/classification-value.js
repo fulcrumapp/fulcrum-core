@@ -80,24 +80,42 @@ export default class ClassificationValue extends FormValue {
     return this.contains(value);
   }
 
-  get displayValue() {
-    const values = [];
+  get labelStrings() {
+    const labels = [];
 
     const classification = this.selectedClassification;
 
     if (classification) {
       for (const item of classification.exploded) {
         if (item.label) {
-          values.push(item.label);
+          labels.push(item.label);
         }
       }
     }
 
     if (this.hasOtherValue) {
-      values.push(this.otherValue);
+      labels.push(this.otherValue);
     }
 
-    return values.join(DisplaySeparator);
+    return labels;
+  }
+
+  get valueStrings() {
+    const values = [];
+
+    for (const value of this._choiceValues) {
+      values.push(value);
+    }
+
+    for (const value of this._otherValues) {
+      values.push(value);
+    }
+
+    return values;
+  }
+
+  get displayValue() {
+    return this.labelStrings.join(DisplaySeparator);
   }
 
   get searchableValue() {
@@ -124,6 +142,14 @@ export default class ClassificationValue extends FormValue {
     return values.join(SearchSeparator);
   }
 
+  format({useDisplayValue = false}) {
+    if (this.isEmpty) {
+      return null;
+    }
+
+    return useDisplayValue ? this.labelStrings : this.valueStrings;
+  }
+
   get length() {
     return this._choiceValues.length + this._otherValues.length;
   }
@@ -143,15 +169,7 @@ export default class ClassificationValue extends FormValue {
   }
 
   get columnValue() {
-    const allValues = [];
-
-    for (const value of this._choiceValues) {
-      allValues.push(value);
-    }
-
-    for (const value of this._otherValues) {
-      allValues.push(value);
-    }
+    const allValues = this.valueStrings;
 
     if (allValues.length === 0) {
       return null;

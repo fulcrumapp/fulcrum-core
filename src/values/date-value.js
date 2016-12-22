@@ -63,6 +63,10 @@ export default class DateValue extends TextualValue {
     return DateUtils.parseDate(this.textValue);
   }
 
+  format({useDisplayValue = false}) {
+    return this.columnValue;
+  }
+
   get columnValue() {
     if (this.isEmpty) {
       return null;

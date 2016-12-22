@@ -48,6 +48,14 @@ export default class RepeatableValue extends FormValue {
     return values.join(SearchSeparator);
   }
 
+  format(options) {
+    if (this.isEmpty) {
+      return null;
+    }
+
+    return this.displayValue;
+  }
+
   get length() {
     return this._items.length;
   }

@@ -48,6 +48,18 @@ export default class SignatureValue extends FormValue {
     return null;
   }
 
+  format({part = null}) {
+    if (this.isEmpty) {
+      return null;
+    }
+
+    if (part === 'timestamp') {
+      return this.timestamp;
+    }
+
+    return this.id;
+  }
+
   get length() {
     return this.isEmpty ? 0 : 1;
   }

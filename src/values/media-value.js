@@ -40,6 +40,18 @@ export default class MediaValue extends FormValue {
     return this._items.length;
   }
 
+  format({part = null}) {
+    if (this.isEmpty) {
+      return null;
+    }
+
+    if (part === 'caption') {
+      return this.items.map(item => item.caption);
+    }
+
+    return this.items.map(item => item.mediaID);
+  }
+
   get columnValue() {
     if (this.isEmpty) {
       return null;

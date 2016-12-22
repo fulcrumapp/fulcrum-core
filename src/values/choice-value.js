@@ -41,7 +41,15 @@ export default class ChoiceValue extends FormValue {
     return true;
   }
 
-  get displayValue() {
+  format({useDisplayValue = false}) {
+    if (this.isEmpty) {
+      return null;
+    }
+
+    return useDisplayValue ? this.labelStrings.sort() : this.valueStrings.sort();
+  }
+
+  get labelStrings() {
     const labels = [];
 
     for (const rawValue of this._choiceValues) {
@@ -58,7 +66,25 @@ export default class ChoiceValue extends FormValue {
       labels.push(otherValue);
     }
 
-    return labels.join(ChoiceDisplaySeparator);
+    return labels;
+  }
+
+  get valueStrings() {
+    const values = [];
+
+    for (const rawValue of this._choiceValues) {
+      values.push(rawValue);
+    }
+
+    for (const otherValue of this._otherValues) {
+      values.push(otherValue);
+    }
+
+    return values;
+  }
+
+  get displayValue() {
+    return this.labelStrings.join(ChoiceDisplaySeparator);
   }
 
   get searchableValue() {
@@ -112,15 +138,7 @@ export default class ChoiceValue extends FormValue {
   }
 
   get columnValue() {
-    const allValues = [];
-
-    for (const rawValue of this._choiceValues) {
-      allValues.push(rawValue);
-    }
-
-    for (const otherValue of this._otherValues) {
-      allValues.push(otherValue);
-    }
+    const allValues = this.valueStrings.sort();
 
     if (allValues.length === 0) {
       return null;

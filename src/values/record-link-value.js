@@ -40,6 +40,18 @@ export default class RecordLinkValue extends FormValue {
     return this._items.length;
   }
 
+  format({part = null}) {
+    if (this.isEmpty) {
+      return null;
+    }
+
+    if (part === 'title') {
+      return this.items.map(item => item.displayValue);
+    }
+
+    return this.items.map(item => item.id);
+  }
+
   toJSON() {
     const items = [];
 

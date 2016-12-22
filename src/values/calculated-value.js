@@ -8,6 +8,26 @@ export default class CalculatedValue extends TextualValue {
     this.error = null;
   }
 
+  format() {
+    if (this.isEmpty) {
+      return null;
+    }
+
+    const display = this.element.display;
+
+    // - for currency or number display, return the numeric value
+    // - for date calculations return the date
+    // - for text (and anything else) just return the string value
+
+    if (display.isCurrency || display.isNumber) {
+      return NumberUtils.parseDouble(this.textValue);
+    } else if (display.isDate) {
+      return new Date(`${this.textValue} 00:00:00Z`);
+    }
+
+    return this.textValue;
+  }
+
   get displayValue() {
     if (this.hasError) {
       return this.error;
