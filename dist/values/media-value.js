@@ -63,16 +63,19 @@ var MediaValue = function (_FormValue) {
 
   MediaValue.prototype.format = function format(_ref2) {
     var _ref2$part = _ref2.part,
-        part = _ref2$part === undefined ? null : _ref2$part;
+        part = _ref2$part === undefined ? null : _ref2$part,
+        formatURL = _ref2.formatURL;
 
     if (this.isEmpty) {
       return null;
     }
 
-    if (part === 'caption') {
+    if (part === 'captions') {
       return this.items.map(function (item) {
         return item.caption;
       });
+    } else if (part === 'urls') {
+      return this.items.map(formatURL);
     }
 
     return this.items.map(function (item) {
