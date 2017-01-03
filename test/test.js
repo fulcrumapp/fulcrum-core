@@ -53,6 +53,10 @@ describe('Form', () => {
   });
 
   it('parses assignment_enabled', () => {
-    form.isAssignmentEnabled.should.eql(false);
+    form.isAssignmentEnabled.should.eql(true);
+  });
+
+  it('parses auto_assign', () => {
+    form.isAutoAssign.should.eql(true);
   });
 });
