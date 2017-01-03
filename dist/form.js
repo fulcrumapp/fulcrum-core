@@ -52,6 +52,7 @@ var Form = function () {
 
     this._projectEnabled = attributes.projects_enabled != null ? !!attributes.projects_enabled : true;
     this._assignmentEnabled = attributes.assignment_enabled != null ? !!attributes.assignment_enabled : true;
+    this._autoAssign = attributes.auto_assign != null ? !!attributes.auto_assign : false;
 
     if (attributes.title_field_keys || attributes.record_title_key) {
       this._titleFieldKeysJSON = attributes.title_field_keys || [attributes.record_title_key];
@@ -129,6 +130,7 @@ var Form = function () {
     json.script = this.script || null;
     json.elements = JSON.parse(JSON.stringify(this._elementsJSON));
     json.assignment_enabled = this.isAssignmentEnabled;
+    json.auto_assign = this.isAutoAssign;
     json.projects_enabled = this.isProjectEnabled;
     json.geometry_required = this.isGeometryRequired;
     json.geometry_types = this._geometryTypes;
@@ -193,6 +195,11 @@ var Form = function () {
     key: 'isAssignmentEnabled',
     get: function get() {
       return this._assignmentEnabled;
+    }
+  }, {
+    key: 'isAutoAssign',
+    get: function get() {
+      return this._autoAssign;
     }
   }, {
     key: 'isGeometryEnabled',
