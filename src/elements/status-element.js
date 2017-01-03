@@ -11,6 +11,11 @@ const DEFAULT_STATUS_ELEMENT = {
   choices: []
 };
 
+/**
+ * The StatusElement class
+ *
+ * @class StatusElement
+ */
 export default class StatusElement extends TextualElement {
   constructor(parent, attributes) {
     attributes.type = 'StatusField';
@@ -37,6 +42,9 @@ export default class StatusElement extends TextualElement {
     return this.filteredChoices;
   }
 
+  /**
+   * @returns {boolean} Whether or not the status field is enabled
+   */
   get isEnabled() {
     return this._enabled;
   }

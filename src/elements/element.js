@@ -1,6 +1,13 @@
 import Types from './element-types';
 import Condition from './condition';
 
+/**
+ * The Element class
+ *
+ * This is a super class that all elements inherit from. You should never instantiate an instance of this class.
+ *
+ * @class Element
+ */
 export default class Element {
   constructor(parent, attributes) {
     this._parent = parent;
@@ -65,30 +72,51 @@ export default class Element {
     this._overrideMaxLength = null;
   }
 
+  /**
+   * @returns {Element|null} The parent element of this element
+   */
   get parent() {
     return this._parent;
   }
 
+  /**
+   * @returns {string} The element type
+   */
   get type() {
     return this._type;
   }
 
+  /**
+   * @returns {string} The unique element key
+   */
   get key() {
     return this._key;
   }
 
+  /**
+   * @returns {string} The element label
+   */
   get label() {
     return this._overrideLabel != null ? this._overrideLabel : this._label;
   }
 
+  /**
+   * @returns {string} The element description
+   */
   get description() {
     return this._overrideDescription != null ? this._overrideDescription : this._description;
   }
 
+  /**
+   * @returns {string} The unique element data name
+   */
   get dataName() {
     return this._dataName;
   }
 
+  /**
+   * @returns {string|null} The element's default value
+   */
   get defaultValue() {
     return this._defaultValue;
   }

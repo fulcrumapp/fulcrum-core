@@ -1,0 +1,18 @@
+name: 'Fulcrum Core'
+toc:
+  -
+    name: Fulcrum Core
+    description: |
+      Fulcrum Core provies a data model to interact with objects from
+      Fulcrum's API http:\/\/developer.fulcrumapp.com.
+  - Form
+  - Record
+  - StatusElement
+  -
+    name: Base Classes
+    description: |
+      These are base classes and should not be instantiated directly.
+  - Element
+  - TextualElement
+autolink:
+  - Element

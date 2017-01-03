@@ -4,6 +4,20 @@ import DefaultValues from './values/default-values';
 import Record from './record';
 import async from 'async';
 
+/**
+ * The Form class
+ *
+ * @example
+ * const fulcrumCore = require('fulcrum-core');
+ *
+ * // returns a new Form object
+ * var form = new fulcrumCore.Form(attributes);
+ *
+ * @class Form
+ * @param {Object} attributes - A form object returned by the [Fulcrum API](http://developer.fulcrumapp.com/endpoints/forms/#examples)
+ * @param {string} attributes.name - The form name
+ * @param {string} attributes.description - The form description
+ */
 export default class Form {
   constructor(attributes) {
     this.updateFromAPIAttributes(attributes);
@@ -34,6 +48,9 @@ export default class Form {
     }
   }
 
+  /**
+   * @returns {string} unique id
+   */
   get id() {
     return this._id;
   }
@@ -69,6 +86,11 @@ export default class Form {
     }, callback);
   }
 
+  /**
+   * @param {Object} attributes - A record object returned by the [Fulcrum API](http://developer.fulcrumapp.com/endpoints/records/#examples)
+   *
+   * @returns {Record} record - A new record object
+   */
   createRecord(attributes) {
     const record = new Record(attributes, this);
 
@@ -79,6 +101,9 @@ export default class Form {
     return record;
   }
 
+  /**
+   * @returns {StatusElement} The status element
+   */
   get statusField() {
     if (!this._statusField) {
       this._statusField = new StatusElement(this, this._statusFieldJSON);

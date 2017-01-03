@@ -6,6 +6,13 @@ import StatusValue from './values/status-value';
 import uuid from 'uuid';
 import loadObject from './load-object';
 
+/**
+ * The Record class
+ *
+ * @class Record
+ * @param {Object} attributes - A record object returned by the [Fulcrum API](http://developer.fulcrumapp.com/endpoints/records/#examples)
+ * @param {Form} form - The form the record is associated with
+ */
 export default class Record extends Feature {
   constructor(attributes, form) {
     super();
@@ -15,6 +22,9 @@ export default class Record extends Feature {
     this.updateFromAPIAttributes(attributes);
   }
 
+  /**
+   * @returns {string} unique id
+   */
   get id() {
     return this._id;
   }
@@ -23,6 +33,9 @@ export default class Record extends Feature {
     this._id = id;
   }
 
+  /**
+   * @returns {Form} The form the record is associated with
+   */
   get form() {
     return this._form;
   }
