@@ -7,7 +7,7 @@ export default class ClassificationElement extends Element {
 
     this.allowOther = !!attributes.allow_other;
 
-    this._choiceFilter = null;
+    this._classificationFilter = null;
 
     this._overrideClassificationItems = null;
 
@@ -33,12 +33,12 @@ export default class ClassificationElement extends Element {
     return this._overrideClassificationItems ? this._overrideClassificationItems : this.filteredClassifications;
   }
 
-  get choiceFilter() {
-    return this._choiceFilter;
+  get classificationFilter() {
+    return this._classificationFilter;
   }
 
-  set choiceFilter(choiceFilter) {
-    this._choiceFilter = choiceFilter;
+  set classificationFilter(classificationFilter) {
+    this._classificationFilter = classificationFilter;
   }
 
   set overrideClassificationItems(overrideClassificationSetItems) {
@@ -60,7 +60,7 @@ export default class ClassificationElement extends Element {
 
   get overrideValues() {
     return Object.assign(Object.getOwnPropertyDescriptor(Element.prototype, 'overrideValues').get.call(this), {
-      choiceFilter: this._choiceFilter,
+      classificationFilter: this._classificationFilter,
       overrideClassificationItems: this._overrideClassificationItems
     });
   }
@@ -68,7 +68,7 @@ export default class ClassificationElement extends Element {
   resetOverrides() {
     super.resetOverrides();
 
-    this._choiceFilter = null;
+    this._classificationFilter = null;
     this._overrideClassificationItems = null;
   }
 

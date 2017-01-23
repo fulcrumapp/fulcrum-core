@@ -61,7 +61,7 @@ describe('classification fields', () => {
     field.classificationItems[0].value.should.eql('Linux');
 
     // back to unfiltered
-    field.classificationFilter = null;
+    field.resetOverrides();
     field.classificationItems[0].value.should.eql('Unknown');
   });
 
