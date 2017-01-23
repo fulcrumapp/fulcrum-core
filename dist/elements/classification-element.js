@@ -32,7 +32,7 @@ var ClassificationElement = function (_Element) {
 
     _this.allowOther = !!attributes.allow_other;
 
-    _this._choiceFilter = null;
+    _this._classificationFilter = null;
 
     _this._overrideClassificationItems = null;
 
@@ -60,7 +60,7 @@ var ClassificationElement = function (_Element) {
   ClassificationElement.prototype.resetOverrides = function resetOverrides() {
     _Element.prototype.resetOverrides.call(this);
 
-    this._choiceFilter = null;
+    this._classificationFilter = null;
     this._overrideClassificationItems = null;
   };
 
@@ -70,12 +70,12 @@ var ClassificationElement = function (_Element) {
       return this._overrideClassificationItems ? this._overrideClassificationItems : this.filteredClassifications;
     }
   }, {
-    key: 'choiceFilter',
+    key: 'classificationFilter',
     get: function get() {
-      return this._choiceFilter;
+      return this._classificationFilter;
     },
-    set: function set(choiceFilter) {
-      this._choiceFilter = choiceFilter;
+    set: function set(classificationFilter) {
+      this._classificationFilter = classificationFilter;
     }
   }, {
     key: 'overrideClassificationItems',
@@ -112,7 +112,7 @@ var ClassificationElement = function (_Element) {
     key: 'overrideValues',
     get: function get() {
       return Object.assign(Object.getOwnPropertyDescriptor(_element2.default.prototype, 'overrideValues').get.call(this), {
-        choiceFilter: this._choiceFilter,
+        classificationFilter: this._classificationFilter,
         overrideClassificationItems: this._overrideClassificationItems
       });
     }
