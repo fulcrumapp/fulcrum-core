@@ -218,8 +218,15 @@ export default class FormValues {
     for (const formValue of this.all) {
       const element = formValue.element;
 
-      // don't clear out fields that are explicitly marked hidden, or have any parents explicitly marked as hidden
-      const skipElement = element.isHidden || element.hasHiddenParent;
+      // don't clear out fields that are:
+      //   * are explicitly marked hidden
+      //   * or have any parents explicitly marked as hidden
+      //   * or explicitly want to keep the values
+      //   * or have any parents explicitly marked to preserve vaues
+      const skipElement = element.isHidden ||
+                          element.hasHiddenParent ||
+                          element.preserveValueWhenConditionallyHidden ||
+                          element.hasPreservedParent;
 
       if (!skipElement) {
         const shouldBeVisible = Condition.shouldElementBeVisible(element,

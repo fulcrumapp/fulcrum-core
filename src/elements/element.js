@@ -27,6 +27,8 @@ export default class Element {
 
     this._visibleConditionsType = attributes.visible_conditions_type;
 
+    this._visibleConditionsBehavior = attributes.visible_conditions_behavior || 'clear';
+
     this._visibleConditions = [];
 
     if (attributes.visible_conditions) {
@@ -232,6 +234,17 @@ export default class Element {
       return this.isHidden;
     }
     return this.parent.hasHiddenParent;
+  }
+
+  get preserveValueWhenConditionallyHidden() {
+    return this._visibleConditionsBehavior === 'preserve';
+  }
+
+  get hasPreservedParent() {
+    if (this.parent == null || this.preserveValueWhenConditionallyHidden) {
+      return this.preserveValueWhenConditionallyHidden;
+    }
+    return this.parent.hasPreservedParent;
   }
 
   isType(type) {
