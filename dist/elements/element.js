@@ -44,6 +44,8 @@ var Element = function () {
 
     this._visibleConditionsType = attributes.visible_conditions_type;
 
+    this._visibleConditionsBehavior = attributes.visible_conditions_behavior || 'clear';
+
     this._visibleConditions = [];
 
     if (attributes.visible_conditions) {
@@ -303,6 +305,19 @@ var Element = function () {
         return this.isHidden;
       }
       return this.parent.hasHiddenParent;
+    }
+  }, {
+    key: 'preserveValueWhenConditionallyHidden',
+    get: function get() {
+      return this._visibleConditionsBehavior === 'preserve';
+    }
+  }, {
+    key: 'isPreserved',
+    get: function get() {
+      if (this.parent == null || this.preserveValueWhenConditionallyHidden) {
+        return this.preserveValueWhenConditionallyHidden;
+      }
+      return this.parent.isPreserved;
     }
   }, {
     key: 'isSectionElement',

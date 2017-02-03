@@ -276,8 +276,11 @@ var FormValues = function () {
 
       var element = formValue.element;
 
-      // don't clear out fields that are explicitly marked hidden, or have any parents explicitly marked as hidden
-      var skipElement = element.isHidden || element.hasHiddenParent;
+      // don't clear out fields that are:
+      //   * are explicitly marked hidden
+      //   * or have any parents explicitly marked as hidden
+      //   * or have any parents explicitly marked to preserve values
+      var skipElement = element.isHidden || element.hasHiddenParent || element.isPreserved;
 
       if (!skipElement) {
         var shouldBeVisible = _condition2.default.shouldElementBeVisible(element, record, valuesForConditions, cache);
