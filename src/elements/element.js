@@ -240,11 +240,11 @@ export default class Element {
     return this._visibleConditionsBehavior === 'preserve';
   }
 
-  get hasPreservedParent() {
+  get isPreserved() {
     if (this.parent == null || this.preserveValueWhenConditionallyHidden) {
       return this.preserveValueWhenConditionallyHidden;
     }
-    return this.parent.hasPreservedParent;
+    return this.parent.isPreserved;
   }
 
   isType(type) {
