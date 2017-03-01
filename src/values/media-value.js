@@ -47,7 +47,7 @@ export default class MediaValue extends FormValue {
 
     if (part === 'captions') {
       return this.items.map(item => item.caption);
-    } else if (part === 'urls') {
+    } else if (part === 'urls' && formatURL) {
       return this.items.map(formatURL);
     }
 

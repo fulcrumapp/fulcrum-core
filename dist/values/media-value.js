@@ -74,7 +74,7 @@ var MediaValue = function (_FormValue) {
       return this.items.map(function (item) {
         return item.caption;
       });
-    } else if (part === 'urls') {
+    } else if (part === 'urls' && formatURL) {
       return this.items.map(formatURL);
     }
 

@@ -109,6 +109,12 @@ var Condition = function () {
     // ends, it early exits instead of blowing the stack
     cache[element.key] = true;
 
+    // if the override value is set, always return it (SETHIDDEN() always wins)
+    if (element.overrideIsHidden != null) {
+      cache[element.key] = !element.isHidden;
+      return !element.isHidden;
+    }
+
     if (element.isHidden || element.hasHiddenParent) {
       cache[element.key] = false;
       return false;
@@ -197,7 +203,9 @@ var Condition = function () {
   };
 
   Condition.shouldElementBeRequired = function shouldElementBeRequired(element, record, values) {
-    if (!element.hasRequiredConditions) {
+    // If there are no conditions, or if the override value is set, always return
+    // the current required flag. (SETREQUIRED() always wins)
+    if (!element.hasRequiredConditions || element.overrideIsRequired != null) {
       return element.isRequired;
     }
 
