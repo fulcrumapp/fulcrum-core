@@ -130,7 +130,9 @@ var Record = function (_Feature) {
     this._latitude = attributes.latitude || null;
     this._longitude = attributes.longitude || null;
     this._projectID = attributes.project_id || null;
+    this._projectName = attributes.project || null;
     this._assignedToID = attributes.assigned_to_id || null;
+    this._assignedToName = attributes.assigned_to || null;
     this._status = attributes.status || null;
 
     this._createdByID = attributes.created_by_id || null;
@@ -448,12 +450,23 @@ var Record = function (_Feature) {
       return this.form ? this.form.id : null;
     }
   }, {
+    key: 'projectName',
+    get: function get() {
+      return this._projectName;
+    }
+  }, {
     key: 'projectID',
     get: function get() {
       return this._projectID;
     },
     set: function set(id) {
       this._projectID = id;
+      this._projectName = null;
+    }
+  }, {
+    key: 'assignedToName',
+    get: function get() {
+      return this._assignedToName;
     }
   }, {
     key: 'assignedToID',
@@ -462,6 +475,7 @@ var Record = function (_Feature) {
     },
     set: function set(id) {
       this._assignedToID = id;
+      this._assignedToName = null;
     }
   }, {
     key: 'createdByID',

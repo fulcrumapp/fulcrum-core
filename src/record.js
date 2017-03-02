@@ -174,7 +174,9 @@ export default class Record extends Feature {
     this._latitude = attributes.latitude || null;
     this._longitude = attributes.longitude || null;
     this._projectID = attributes.project_id || null;
+    this._projectName = attributes.project || null;
     this._assignedToID = attributes.assigned_to_id || null;
+    this._assignedToName = attributes.assigned_to || null;
     this._status = attributes.status || null;
 
     this._createdByID = attributes.created_by_id || null;
@@ -299,12 +301,21 @@ export default class Record extends Feature {
     return this.form ? this.form.id : null;
   }
 
+  get projectName() {
+    return this._projectName;
+  }
+
   get projectID() {
     return this._projectID;
   }
 
   set projectID(id) {
     this._projectID = id;
+    this._projectName = null;
+  }
+
+  get assignedToName() {
+    return this._assignedToName;
   }
 
   get assignedToID() {
@@ -313,6 +324,7 @@ export default class Record extends Feature {
 
   set assignedToID(id) {
     this._assignedToID = id;
+    this._assignedToName = null;
   }
 
   get createdByID() {
