@@ -51,8 +51,17 @@ var RepeatableItemValue = function (_Feature) {
     _this._formValuesJSON = item.form_values;
     _this._version = item.version || 1;
     _this._changesetID = item.changeset_id;
-    _this._createdByID = item.created_by_id;
-    _this._updatedByID = item.updated_by_id;
+
+    _this._recordProjectID = item.record_project_id || null;
+    _this._recordProjectName = item.record_project || null;
+    _this._recordAssignedToID = item.record_assigned_to_id || null;
+    _this._recordAssignedToName = item.record_assigned_to || null;
+    _this._recordStatus = item.record_status || null;
+
+    _this._createdByID = item.created_by_id || null;
+    _this._createdByName = item.created_by || null;
+    _this._updatedByID = item.updated_by_id || null;
+    _this._updatedByName = item.updated_by || null;
 
     var geometry = item.geometry;
 
@@ -413,6 +422,41 @@ var RepeatableItemValue = function (_Feature) {
       }
 
       return null;
+    }
+  }, {
+    key: 'createdByName',
+    get: function get() {
+      return this._createdByName;
+    }
+  }, {
+    key: 'updatedByName',
+    get: function get() {
+      return this._updatedByName;
+    }
+  }, {
+    key: 'recordProjectName',
+    get: function get() {
+      return this._recordProjectName;
+    }
+  }, {
+    key: 'recordProjectID',
+    get: function get() {
+      return this._recordProjectID;
+    }
+  }, {
+    key: 'recordAssignedToName',
+    get: function get() {
+      return this._recordAssignedToName;
+    }
+  }, {
+    key: 'recordAssignedToID',
+    get: function get() {
+      return this._recordAssignedToID;
+    }
+  }, {
+    key: 'recordStatus',
+    get: function get() {
+      return this._recordAssignedToID;
     }
   }]);
 

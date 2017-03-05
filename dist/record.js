@@ -367,21 +367,6 @@ var Record = function (_Feature) {
       return this._changesetID;
     }
   }, {
-    key: 'createdByName',
-    get: function get() {
-      return this._createdByName;
-    }
-  }, {
-    key: 'updatedBy',
-    get: function get() {
-      return this._updatedBy;
-    }
-  }, {
-    key: 'updatedByName',
-    get: function get() {
-      return this._updatedByName;
-    }
-  }, {
     key: 'isGeometryEnabled',
     get: function get() {
       return this.form.isGeometryEnabled;
@@ -478,14 +463,34 @@ var Record = function (_Feature) {
       this._assignedToName = null;
     }
   }, {
+    key: 'createdBy',
+    get: function get() {
+      return this._createdBy;
+    }
+  }, {
     key: 'createdByID',
     get: function get() {
       return this._createdByID;
     }
   }, {
+    key: 'createdByName',
+    get: function get() {
+      return this._createdByName;
+    }
+  }, {
+    key: 'updatedBy',
+    get: function get() {
+      return this._updatedBy;
+    }
+  }, {
     key: 'updatedByID',
     get: function get() {
       return this._updatedByID;
+    }
+  }, {
+    key: 'updatedByName',
+    get: function get() {
+      return this._updatedByName;
     }
   }, {
     key: 'status',
