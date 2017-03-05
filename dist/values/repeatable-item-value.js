@@ -456,7 +456,7 @@ var RepeatableItemValue = function (_Feature) {
   }, {
     key: 'recordStatus',
     get: function get() {
-      return this._recordAssignedToID;
+      return this._recordStatus;
     }
   }]);
 

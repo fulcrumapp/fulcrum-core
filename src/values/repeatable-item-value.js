@@ -384,6 +384,6 @@ export default class RepeatableItemValue extends Feature {
   }
 
   get recordStatus() {
-    return this._recordAssignedToID;
+    return this._recordStatus;
   }
 }
