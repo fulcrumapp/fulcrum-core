@@ -88,18 +88,6 @@ export default class Record extends Feature {
     return this._changesetID;
   }
 
-  get createdByName() {
-    return this._createdByName;
-  }
-
-  get updatedBy() {
-    return this._updatedBy;
-  }
-
-  get updatedByName() {
-    return this._updatedByName;
-  }
-
   loadChangeset(dataSource, callback) {
     return loadObject(this, dataSource, 'changeset', 'getChangeset', callback);
   }
@@ -327,12 +315,28 @@ export default class Record extends Feature {
     this._assignedToName = null;
   }
 
+  get createdBy() {
+    return this._createdBy;
+  }
+
   get createdByID() {
     return this._createdByID;
   }
 
+  get createdByName() {
+    return this._createdByName;
+  }
+
+  get updatedBy() {
+    return this._updatedBy;
+  }
+
   get updatedByID() {
     return this._updatedByID;
+  }
+
+  get updatedByName() {
+    return this._updatedByName;
   }
 
   get status() {

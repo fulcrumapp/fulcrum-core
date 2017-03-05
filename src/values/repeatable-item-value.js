@@ -17,8 +17,17 @@ export default class RepeatableItemValue extends Feature {
     this._formValuesJSON = item.form_values;
     this._version = item.version || 1;
     this._changesetID = item.changeset_id;
-    this._createdByID = item.created_by_id;
-    this._updatedByID = item.updated_by_id;
+
+    this._recordProjectID = item.record_project_id || null;
+    this._recordProjectName = item.record_project || null;
+    this._recordAssignedToID = item.record_assigned_to_id || null;
+    this._recordAssignedToName = item.record_assigned_to || null;
+    this._recordStatus = item.record_status || null;
+
+    this._createdByID = item.created_by_id || null;
+    this._createdByName = item.created_by || null;
+    this._updatedByID = item.updated_by_id || null;
+    this._updatedByName = item.updated_by || null;
 
     const geometry = item.geometry;
 
@@ -348,5 +357,33 @@ export default class RepeatableItemValue extends Feature {
     }
 
     return null;
+  }
+
+  get createdByName() {
+    return this._createdByName;
+  }
+
+  get updatedByName() {
+    return this._updatedByName;
+  }
+
+  get recordProjectName() {
+    return this._recordProjectName;
+  }
+
+  get recordProjectID() {
+    return this._recordProjectID;
+  }
+
+  get recordAssignedToName() {
+    return this._recordAssignedToName;
+  }
+
+  get recordAssignedToID() {
+    return this._recordAssignedToID;
+  }
+
+  get recordStatus() {
+    return this._recordAssignedToID;
   }
 }
