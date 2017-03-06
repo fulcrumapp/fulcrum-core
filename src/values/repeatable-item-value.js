@@ -5,71 +5,13 @@ import TextUtils from '../utils/text-utils';
 import loadObject from '../load-object';
 
 export default class RepeatableItemValue extends Feature {
-  constructor(element, item, index) {
+  constructor(element, attrs, index) {
     super();
 
-    this.index = index;
-
+    this._index = index;
     this._element = element;
-    this._id = item.id;
-    this._createdAt = DateUtils.parseEpochTimestamp(item.created_at);
-    this._updatedAt = DateUtils.parseEpochTimestamp(item.updated_at);
-    this._formValuesJSON = item.form_values;
-    this._version = item.version || 1;
-    this._changesetID = item.changeset_id;
 
-    this._recordProjectID = item.record_project_id || null;
-    this._recordProjectName = item.record_project || null;
-    this._recordAssignedToID = item.record_assigned_to_id || null;
-    this._recordAssignedToName = item.record_assigned_to || null;
-    this._recordStatus = item.record_status || null;
-
-    this._createdByID = item.created_by_id || null;
-    this._createdByName = item.created_by || null;
-    this._updatedByID = item.updated_by_id || null;
-    this._updatedByName = item.updated_by || null;
-
-    const geometry = item.geometry;
-
-    if (geometry != null &&
-        geometry.type === 'Point' &&
-        geometry.coordinates &&
-        geometry.coordinates.length > 1) {
-      this._latitude = geometry.coordinates[1];
-      this._longitude = geometry.coordinates[0];
-    }
-
-    this._createdDuration = item.created_duration || null;
-    this._updatedDuration = item.updated_duration || null;
-    this._editedDuration = item.edited_duration || null;
-
-    const createdLocation = item.created_location;
-
-    this._createdLatitude = null;
-    this._createdLongitude = null;
-    this._createdAltitude = null;
-    this._createdAccuracy = null;
-
-    if (createdLocation) {
-      this._createdLatitude = createdLocation.latitude;
-      this._createdLongitude = createdLocation.longitude;
-      this._createdAltitude = createdLocation.altitude;
-      this._createdAccuracy = createdLocation.horizontal_accuracy;
-    }
-
-    const updatedLocation = item.updated_location;
-
-    this._updatedLatitude = null;
-    this._updatedLongitude = null;
-    this._updatedAltitude = null;
-    this._updatedAccuracy = null;
-
-    if (updatedLocation) {
-      this._updatedLatitude = updatedLocation.latitude;
-      this._updatedLongitude = updatedLocation.longitude;
-      this._updatedAltitude = updatedLocation.altitude;
-      this._updatedAccuracy = updatedLocation.horizontal_accuracy;
-    }
+    this.updateFromAPIAttributes(attrs);
   }
 
   get element() {
@@ -78,6 +20,10 @@ export default class RepeatableItemValue extends Feature {
 
   get id() {
     return this._id;
+  }
+
+  get index() {
+    return this._index;
   }
 
   get createdAt() {
@@ -118,6 +64,71 @@ export default class RepeatableItemValue extends Feature {
 
   get hasCoordinate() {
     return this._latitude != null && this._longitude != null;
+  }
+
+  updateFromAPIAttributes(attrs) {
+    this._id = attrs.id;
+    this._createdAt = DateUtils.parseEpochTimestamp(attrs.created_at);
+    this._updatedAt = DateUtils.parseEpochTimestamp(attrs.updated_at);
+    this._formValuesJSON = attrs.form_values;
+    this._version = attrs.version || 1;
+    this._changesetID = attrs.changeset_id;
+
+    this._recordID = attrs.record_id || null;
+    this._parentID = attrs.parent_id || null;
+
+    this._recordProjectID = attrs.record_project_id || null;
+    this._recordProjectName = attrs.record_project || null;
+    this._recordAssignedToID = attrs.record_assigned_to_id || null;
+    this._recordAssignedToName = attrs.record_assigned_to || null;
+    this._recordStatus = attrs.record_status || null;
+
+    this._createdByID = attrs.created_by_id || null;
+    this._createdByName = attrs.created_by || null;
+    this._updatedByID = attrs.updated_by_id || null;
+    this._updatedByName = attrs.updated_by || null;
+
+    const geometry = attrs.geometry;
+
+    if (geometry != null &&
+        geometry.type === 'Point' &&
+        geometry.coordinates &&
+        geometry.coordinates.length > 1) {
+      this._latitude = geometry.coordinates[1];
+      this._longitude = geometry.coordinates[0];
+    }
+
+    this._createdDuration = attrs.created_duration || null;
+    this._updatedDuration = attrs.updated_duration || null;
+    this._editedDuration = attrs.edited_duration || null;
+
+    const createdLocation = attrs.created_location;
+
+    this._createdLatitude = null;
+    this._createdLongitude = null;
+    this._createdAltitude = null;
+    this._createdAccuracy = null;
+
+    if (createdLocation) {
+      this._createdLatitude = createdLocation.latitude;
+      this._createdLongitude = createdLocation.longitude;
+      this._createdAltitude = createdLocation.altitude;
+      this._createdAccuracy = createdLocation.horizontal_accuracy;
+    }
+
+    const updatedLocation = attrs.updated_location;
+
+    this._updatedLatitude = null;
+    this._updatedLongitude = null;
+    this._updatedAltitude = null;
+    this._updatedAccuracy = null;
+
+    if (updatedLocation) {
+      this._updatedLatitude = updatedLocation.latitude;
+      this._updatedLongitude = updatedLocation.longitude;
+      this._updatedAltitude = updatedLocation.altitude;
+      this._updatedAccuracy = updatedLocation.horizontal_accuracy;
+    }
   }
 
   toJSON() {
@@ -357,6 +368,14 @@ export default class RepeatableItemValue extends Feature {
     }
 
     return null;
+  }
+
+  get recordID() {
+    return this._recordID;
+  }
+
+  get parentID() {
+    return this._parentID;
   }
 
   get createdByName() {
