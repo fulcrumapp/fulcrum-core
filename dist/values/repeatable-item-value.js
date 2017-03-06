@@ -37,72 +37,79 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var RepeatableItemValue = function (_Feature) {
   _inherits(RepeatableItemValue, _Feature);
 
-  function RepeatableItemValue(element, item, index) {
+  function RepeatableItemValue(element, attrs, index) {
     _classCallCheck(this, RepeatableItemValue);
 
     var _this = _possibleConstructorReturn(this, _Feature.call(this));
 
-    _this.index = index;
-
+    _this._index = index;
     _this._element = element;
-    _this._id = item.id;
-    _this._createdAt = _dateUtils2.default.parseEpochTimestamp(item.created_at);
-    _this._updatedAt = _dateUtils2.default.parseEpochTimestamp(item.updated_at);
-    _this._formValuesJSON = item.form_values;
-    _this._version = item.version || 1;
-    _this._changesetID = item.changeset_id;
 
-    _this._recordProjectID = item.record_project_id || null;
-    _this._recordProjectName = item.record_project || null;
-    _this._recordAssignedToID = item.record_assigned_to_id || null;
-    _this._recordAssignedToName = item.record_assigned_to || null;
-    _this._recordStatus = item.record_status || null;
-
-    _this._createdByID = item.created_by_id || null;
-    _this._createdByName = item.created_by || null;
-    _this._updatedByID = item.updated_by_id || null;
-    _this._updatedByName = item.updated_by || null;
-
-    var geometry = item.geometry;
-
-    if (geometry != null && geometry.type === 'Point' && geometry.coordinates && geometry.coordinates.length > 1) {
-      _this._latitude = geometry.coordinates[1];
-      _this._longitude = geometry.coordinates[0];
-    }
-
-    _this._createdDuration = item.created_duration || null;
-    _this._updatedDuration = item.updated_duration || null;
-    _this._editedDuration = item.edited_duration || null;
-
-    var createdLocation = item.created_location;
-
-    _this._createdLatitude = null;
-    _this._createdLongitude = null;
-    _this._createdAltitude = null;
-    _this._createdAccuracy = null;
-
-    if (createdLocation) {
-      _this._createdLatitude = createdLocation.latitude;
-      _this._createdLongitude = createdLocation.longitude;
-      _this._createdAltitude = createdLocation.altitude;
-      _this._createdAccuracy = createdLocation.horizontal_accuracy;
-    }
-
-    var updatedLocation = item.updated_location;
-
-    _this._updatedLatitude = null;
-    _this._updatedLongitude = null;
-    _this._updatedAltitude = null;
-    _this._updatedAccuracy = null;
-
-    if (updatedLocation) {
-      _this._updatedLatitude = updatedLocation.latitude;
-      _this._updatedLongitude = updatedLocation.longitude;
-      _this._updatedAltitude = updatedLocation.altitude;
-      _this._updatedAccuracy = updatedLocation.horizontal_accuracy;
-    }
+    _this.updateFromAPIAttributes(attrs);
     return _this;
   }
+
+  RepeatableItemValue.prototype.updateFromAPIAttributes = function updateFromAPIAttributes(attrs) {
+    this._id = attrs.id;
+    this._createdAt = _dateUtils2.default.parseEpochTimestamp(attrs.created_at);
+    this._updatedAt = _dateUtils2.default.parseEpochTimestamp(attrs.updated_at);
+    this._formValuesJSON = attrs.form_values;
+    this._version = attrs.version || 1;
+    this._changesetID = attrs.changeset_id;
+
+    this._recordID = attrs.record_id || null;
+    this._parentID = attrs.parent_id || null;
+
+    this._recordProjectID = attrs.record_project_id || null;
+    this._recordProjectName = attrs.record_project || null;
+    this._recordAssignedToID = attrs.record_assigned_to_id || null;
+    this._recordAssignedToName = attrs.record_assigned_to || null;
+    this._recordStatus = attrs.record_status || null;
+
+    this._createdByID = attrs.created_by_id || null;
+    this._createdByName = attrs.created_by || null;
+    this._updatedByID = attrs.updated_by_id || null;
+    this._updatedByName = attrs.updated_by || null;
+
+    var geometry = attrs.geometry;
+
+    if (geometry != null && geometry.type === 'Point' && geometry.coordinates && geometry.coordinates.length > 1) {
+      this._latitude = geometry.coordinates[1];
+      this._longitude = geometry.coordinates[0];
+    }
+
+    this._createdDuration = attrs.created_duration || null;
+    this._updatedDuration = attrs.updated_duration || null;
+    this._editedDuration = attrs.edited_duration || null;
+
+    var createdLocation = attrs.created_location;
+
+    this._createdLatitude = null;
+    this._createdLongitude = null;
+    this._createdAltitude = null;
+    this._createdAccuracy = null;
+
+    if (createdLocation) {
+      this._createdLatitude = createdLocation.latitude;
+      this._createdLongitude = createdLocation.longitude;
+      this._createdAltitude = createdLocation.altitude;
+      this._createdAccuracy = createdLocation.horizontal_accuracy;
+    }
+
+    var updatedLocation = attrs.updated_location;
+
+    this._updatedLatitude = null;
+    this._updatedLongitude = null;
+    this._updatedAltitude = null;
+    this._updatedAccuracy = null;
+
+    if (updatedLocation) {
+      this._updatedLatitude = updatedLocation.latitude;
+      this._updatedLongitude = updatedLocation.longitude;
+      this._updatedAltitude = updatedLocation.altitude;
+      this._updatedAccuracy = updatedLocation.horizontal_accuracy;
+    }
+  };
 
   RepeatableItemValue.prototype.toJSON = function toJSON() {
     var json = {};
@@ -152,6 +159,11 @@ var RepeatableItemValue = function (_Feature) {
     key: 'id',
     get: function get() {
       return this._id;
+    }
+  }, {
+    key: 'index',
+    get: function get() {
+      return this._index;
     }
   }, {
     key: 'createdAt',
@@ -422,6 +434,16 @@ var RepeatableItemValue = function (_Feature) {
       }
 
       return null;
+    }
+  }, {
+    key: 'recordID',
+    get: function get() {
+      return this._recordID;
+    }
+  }, {
+    key: 'parentID',
+    get: function get() {
+      return this._parentID;
     }
   }, {
     key: 'createdByName',
