@@ -23,6 +23,7 @@ export default class Form {
     this._geometryRequired = !!attributes.geometry_required;
     this._geometryTypes = attributes.geometry_types;
     this._reportTemplatesJSON = attributes.report_templates;
+    this._boundingBox = attributes.bounding_box;
 
     this._projectEnabled = attributes.projects_enabled != null ? !!attributes.projects_enabled : true;
     this._assignmentEnabled = attributes.assignment_enabled != null ? !!attributes.assignment_enabled : true;
@@ -111,6 +112,10 @@ export default class Form {
     return this._autoAssign;
   }
 
+  get boundingBox() {
+    return this._boundingBox;
+  }
+
   toJSON() {
     const json = {};
 
@@ -126,6 +131,7 @@ export default class Form {
     json.geometry_types = this._geometryTypes;
     json.title_field_keys = this.titleFieldKeys;
     json.report_templates = this.reportTemplates;
+    json.bounding_box = this.boundingBox;
 
     if (this._statusFieldJSON) {
       json.status_field = JSON.parse(JSON.stringify(this._statusFieldJSON));
