@@ -40,7 +40,7 @@ export default class MediaValue extends FormValue {
     return this._items.length;
   }
 
-  format({part = null, formatMediaURL, formatMediaViewerURL}) {
+  format({part = null, formatMediaURL, formatMediaViewerURL, ...args}) {
     if (this.isEmpty) {
       return null;
     }
@@ -48,9 +48,9 @@ export default class MediaValue extends FormValue {
     if (part === 'captions') {
       return this.items.map(item => item.caption);
     } else if (part === 'view' && formatMediaViewerURL) {
-      return formatMediaViewerURL(this);
+      return formatMediaViewerURL(this, args);
     } else if (part === 'urls' && formatMediaURL) {
-      return this.items.map(formatMediaURL);
+      return this.items.map(item => formatMediaURL(item, args));
     }
 
     return this.items.map(item => item.mediaID);

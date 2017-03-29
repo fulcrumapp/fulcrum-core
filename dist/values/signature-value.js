@@ -16,6 +16,8 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 function _defaults(obj, defaults) { var keys = Object.getOwnPropertyNames(defaults); for (var i = 0; i < keys.length; i++) { var key = keys[i]; var value = Object.getOwnPropertyDescriptor(defaults, key); if (value && value.configurable && obj[key] === undefined) { Object.defineProperty(obj, key, value); } } return obj; }
 
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
@@ -46,7 +48,8 @@ var SignatureValue = function (_FormValue) {
     var _ref$part = _ref.part,
         part = _ref$part === undefined ? null : _ref$part,
         formatSignatureURL = _ref.formatSignatureURL,
-        formatSignatureViewerURL = _ref.formatSignatureViewerURL;
+        formatSignatureViewerURL = _ref.formatSignatureViewerURL,
+        args = _objectWithoutProperties(_ref, ['part', 'formatSignatureURL', 'formatSignatureViewerURL']);
 
     if (this.isEmpty) {
       return null;
@@ -55,9 +58,9 @@ var SignatureValue = function (_FormValue) {
     if (part === 'timestamp') {
       return this.timestamp;
     } else if (part === 'view' && formatSignatureViewerURL) {
-      return formatSignatureViewerURL(this);
+      return formatSignatureViewerURL(this, args);
     } else if (part === 'url' && formatSignatureURL) {
-      return formatSignatureURL(this);
+      return formatSignatureURL(this, args);
     }
 
     return this.id;

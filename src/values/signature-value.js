@@ -48,7 +48,7 @@ export default class SignatureValue extends FormValue {
     return null;
   }
 
-  format({part = null, formatSignatureURL, formatSignatureViewerURL}) {
+  format({part = null, formatSignatureURL, formatSignatureViewerURL, ...args}) {
     if (this.isEmpty) {
       return null;
     }
@@ -56,9 +56,9 @@ export default class SignatureValue extends FormValue {
     if (part === 'timestamp') {
       return this.timestamp;
     } else if (part === 'view' && formatSignatureViewerURL) {
-      return formatSignatureViewerURL(this);
+      return formatSignatureViewerURL(this, args);
     } else if (part === 'url' && formatSignatureURL) {
-      return formatSignatureURL(this);
+      return formatSignatureURL(this, args);
     }
 
     return this.id;
