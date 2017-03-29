@@ -48,17 +48,17 @@ export default class SignatureValue extends FormValue {
     return null;
   }
 
-  format({part = null, formatURL, formatViewerURL}) {
+  format({part = null, formatSignatureURL, formatSignatureViewerURL}) {
     if (this.isEmpty) {
       return null;
     }
 
     if (part === 'timestamp') {
       return this.timestamp;
-    } else if (part === 'view' && formatViewerURL) {
-      return formatViewerURL(this);
-    } else if (part === 'url' && formatURL) {
-      return formatURL(this);
+    } else if (part === 'view' && formatSignatureViewerURL) {
+      return formatSignatureViewerURL(this);
+    } else if (part === 'url' && formatSignatureURL) {
+      return formatSignatureURL(this);
     }
 
     return this.id;
