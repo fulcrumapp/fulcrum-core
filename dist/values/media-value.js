@@ -64,8 +64,8 @@ var MediaValue = function (_FormValue) {
   MediaValue.prototype.format = function format(_ref2) {
     var _ref2$part = _ref2.part,
         part = _ref2$part === undefined ? null : _ref2$part,
-        formatURL = _ref2.formatURL,
-        formatViewerURL = _ref2.formatViewerURL;
+        formatMediaURL = _ref2.formatMediaURL,
+        formatMediaViewerURL = _ref2.formatMediaViewerURL;
 
     if (this.isEmpty) {
       return null;
@@ -75,10 +75,10 @@ var MediaValue = function (_FormValue) {
       return this.items.map(function (item) {
         return item.caption;
       });
-    } else if (part === 'view' && formatViewerURL) {
-      return formatViewerURL(this);
-    } else if (part === 'urls' && formatURL) {
-      return this.items.map(formatURL);
+    } else if (part === 'view' && formatMediaViewerURL) {
+      return formatMediaViewerURL(this);
+    } else if (part === 'urls' && formatMediaURL) {
+      return this.items.map(formatMediaURL);
     }
 
     return this.items.map(function (item) {

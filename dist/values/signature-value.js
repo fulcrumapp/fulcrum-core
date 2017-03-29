@@ -45,8 +45,8 @@ var SignatureValue = function (_FormValue) {
   SignatureValue.prototype.format = function format(_ref) {
     var _ref$part = _ref.part,
         part = _ref$part === undefined ? null : _ref$part,
-        formatURL = _ref.formatURL,
-        formatViewerURL = _ref.formatViewerURL;
+        formatSignatureURL = _ref.formatSignatureURL,
+        formatSignatureViewerURL = _ref.formatSignatureViewerURL;
 
     if (this.isEmpty) {
       return null;
@@ -54,10 +54,10 @@ var SignatureValue = function (_FormValue) {
 
     if (part === 'timestamp') {
       return this.timestamp;
-    } else if (part === 'view' && formatViewerURL) {
-      return formatViewerURL(this);
-    } else if (part === 'url' && formatURL) {
-      return formatURL(this);
+    } else if (part === 'view' && formatSignatureViewerURL) {
+      return formatSignatureViewerURL(this);
+    } else if (part === 'url' && formatSignatureURL) {
+      return formatSignatureURL(this);
     }
 
     return this.id;
