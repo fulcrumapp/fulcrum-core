@@ -98,14 +98,14 @@ export default class Record extends Feature {
     json.form_id = this._form.id;
 
     json.id = this.id || null;
-    json.version = this._version || null;
+    json.version = this._version != null ? this._version : null;
     json.created_at = DateUtils.formatISOTimestamp(this.createdAt);
     json.updated_at = DateUtils.formatISOTimestamp(this.updatedAt);
     json.client_created_at = DateUtils.formatISOTimestamp(this.clientCreatedAt);
     json.client_updated_at = DateUtils.formatISOTimestamp(this.clientUpdatedAt);
     json.form_values = this.formValues.toJSON();
-    json.latitude = this._latitude || null;
-    json.longitude = this._longitude || null;
+    json.latitude = this._latitude != null ? this._latitude : null;
+    json.longitude = this._longitude != null ? this._longitude : null;
     json.project_id = this._projectID || null;
     json.assigned_to_id = this._assignedToID || null;
     json.status = this._status || null;
@@ -153,14 +153,14 @@ export default class Record extends Feature {
     const attributes = attrs || {};
 
     this._id = attributes.id || uuid.v4();
-    this._version = attributes.version || null;
+    this._version = attributes.version != null ? attributes.version : null;
     this._createdAt = DateUtils.parseISOTimestamp(attributes.created_at);
     this._updatedAt = DateUtils.parseISOTimestamp(attributes.updated_at);
     this._clientCreatedAt = DateUtils.parseISOTimestamp(attributes.client_created_at);
     this._clientUpdatedAt = DateUtils.parseISOTimestamp(attributes.client_updated_at);
     this._formValuesJSON = attributes.form_values || {};
-    this._latitude = attributes.latitude || null;
-    this._longitude = attributes.longitude || null;
+    this._latitude = attributes.latitude != null ? attributes.latitude : null;
+    this._longitude = attributes.longitude != null ? attributes.longitude : null;
     this._projectID = attributes.project_id || null;
     this._projectName = attributes.project || null;
     this._assignedToID = attributes.assigned_to_id || null;
@@ -172,17 +172,17 @@ export default class Record extends Feature {
     this._updatedByID = attributes.updated_by_id || null;
     this._updatedByName = attributes.updated_by || null;
 
-    this._horizontalAccuracy = attributes.horizontal_accuracy || null;
-    this._verticalAccuracy = attributes.vertical_accuracy || null;
-    this._altitude = attributes.altitude || null;
-    this._speed = attributes.speed || null;
-    this._course = attributes.course || null;
+    this._horizontalAccuracy = attributes.horizontal_accuracy != null ? attributes.horizontal_accuracy : null;
+    this._verticalAccuracy = attributes.vertical_accuracy != null ? attributes.vertical_accuracy : null;
+    this._altitude = attributes.altitude != null ? attributes.altitude : null;
+    this._speed = attributes.speed != null ? attributes.speed : null;
+    this._course = attributes.course != null ? attributes.course : null;
 
     this._changesetID = attributes.changeset_id || null;
 
-    this._createdDuration = attributes.created_duration || null;
-    this._updatedDuration = attributes.updated_duration || null;
-    this._editedDuration = attributes.edited_duration || null;
+    this._createdDuration = attributes.created_duration != null ? attributes.created_duration : null;
+    this._updatedDuration = attributes.updated_duration != null ? attributes.updated_duration : null;
+    this._editedDuration = attributes.edited_duration != null ? attributes.edited_duration : null;
 
     const createdLocation = attributes.created_location;
 

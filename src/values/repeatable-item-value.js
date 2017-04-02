@@ -71,7 +71,7 @@ export default class RepeatableItemValue extends Feature {
     this._createdAt = DateUtils.parseEpochTimestamp(attrs.created_at);
     this._updatedAt = DateUtils.parseEpochTimestamp(attrs.updated_at);
     this._formValuesJSON = attrs.form_values;
-    this._version = attrs.version || 1;
+    this._version = attrs.version != null ? attrs.version : 1;
     this._changesetID = attrs.changeset_id;
 
     this._recordID = attrs.record_id || null;
@@ -98,9 +98,9 @@ export default class RepeatableItemValue extends Feature {
       this._longitude = geometry.coordinates[0];
     }
 
-    this._createdDuration = attrs.created_duration || null;
-    this._updatedDuration = attrs.updated_duration || null;
-    this._editedDuration = attrs.edited_duration || null;
+    this._createdDuration = attrs.created_duration != null ? attrs.created_duration : null;
+    this._updatedDuration = attrs.updated_duration != null ? attrs.updated_duration : null;
+    this._editedDuration = attrs.edited_duration != null ? attrs.edited_duration : null;
 
     const createdLocation = attrs.created_location;
 

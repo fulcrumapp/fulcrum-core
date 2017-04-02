@@ -54,7 +54,7 @@ var RepeatableItemValue = function (_Feature) {
     this._createdAt = _dateUtils2.default.parseEpochTimestamp(attrs.created_at);
     this._updatedAt = _dateUtils2.default.parseEpochTimestamp(attrs.updated_at);
     this._formValuesJSON = attrs.form_values;
-    this._version = attrs.version || 1;
+    this._version = attrs.version != null ? attrs.version : 1;
     this._changesetID = attrs.changeset_id;
 
     this._recordID = attrs.record_id || null;
@@ -78,9 +78,9 @@ var RepeatableItemValue = function (_Feature) {
       this._longitude = geometry.coordinates[0];
     }
 
-    this._createdDuration = attrs.created_duration || null;
-    this._updatedDuration = attrs.updated_duration || null;
-    this._editedDuration = attrs.edited_duration || null;
+    this._createdDuration = attrs.created_duration != null ? attrs.created_duration : null;
+    this._updatedDuration = attrs.updated_duration != null ? attrs.updated_duration : null;
+    this._editedDuration = attrs.edited_duration != null ? attrs.edited_duration : null;
 
     var createdLocation = attrs.created_location;
 
