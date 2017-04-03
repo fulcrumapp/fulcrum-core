@@ -1,7 +1,7 @@
 'use strict';
 
 exports.__esModule = true;
-exports.TrackPlayer = exports.TrackSegment = exports.TrackPoint = exports.Track = exports.Changeset = exports.Project = exports.Role = exports.User = exports.StatusValue = exports.StatusChoice = exports.StatusElement = exports.MediaItemValue = exports.MediaValue = exports.MediaElement = exports.CustomValidationError = exports.DefaultValues = exports.MemoryDataSource = exports.DataSource = exports.FeatureValidator = exports.RecordLinkItemValue = exports.RecordLinkValue = exports.RecordLinkElement = exports.SectionElement = exports.TextValue = exports.TextElement = exports.CalculatedValue = exports.CalculatedElement = exports.TimeValue = exports.TimeElement = exports.DateValue = exports.DateElement = exports.ClassificationValue = exports.ClassificationElement = exports.ChoiceValue = exports.ChoiceElement = exports.BarcodeValue = exports.BarcodeElement = exports.AddressValue = exports.AddressElement = exports.VideoValue = exports.VideoItemValue = exports.PhotoValue = exports.PhotoItemValue = exports.AudioValue = exports.AudioItemValue = exports.RepeatableElement = exports.Condition = exports.ChildElements = exports.NumberUtils = exports.DateUtils = exports.TextUtils = exports.FormValues = exports.Feature = exports.RepeatableValue = exports.RepeatableItemValue = exports.ElementFactory = exports.ClassificationSet = exports.Classification = exports.ChoiceList = exports.Choice = exports.FormValue = exports.Element = exports.Record = exports.Form = undefined;
+exports.TrackPlayer = exports.TrackSegment = exports.TrackPoint = exports.Track = exports.Changeset = exports.Project = exports.Role = exports.User = exports.StatusValue = exports.StatusChoice = exports.StatusElement = exports.MediaItemValue = exports.MediaValue = exports.MediaElement = exports.CustomValidationError = exports.DefaultValues = exports.LevelDBDataSource = exports.MemoryDataSource = exports.DataSource = exports.FeatureValidator = exports.RecordLinkItemValue = exports.RecordLinkValue = exports.RecordLinkElement = exports.SectionElement = exports.TextValue = exports.TextElement = exports.CalculatedValue = exports.CalculatedElement = exports.TimeValue = exports.TimeElement = exports.DateValue = exports.DateElement = exports.ClassificationValue = exports.ClassificationElement = exports.ChoiceValue = exports.ChoiceElement = exports.BarcodeValue = exports.BarcodeElement = exports.AddressValue = exports.AddressElement = exports.VideoValue = exports.VideoItemValue = exports.PhotoValue = exports.PhotoItemValue = exports.AudioValue = exports.AudioItemValue = exports.RepeatableElement = exports.Condition = exports.ChildElements = exports.NumberUtils = exports.DateUtils = exports.TextUtils = exports.FormValues = exports.Feature = exports.RepeatableValue = exports.RepeatableItemValue = exports.ElementFactory = exports.ClassificationSet = exports.Classification = exports.ChoiceList = exports.Choice = exports.FormValue = exports.Element = exports.Record = exports.Form = undefined;
 
 var _form = require('./form');
 
@@ -195,6 +195,10 @@ var _memoryDataSource = require('./utils/memory-data-source');
 
 var _memoryDataSource2 = _interopRequireDefault(_memoryDataSource);
 
+var _leveldbDataSource = require('./utils/leveldb-data-source');
+
+var _leveldbDataSource2 = _interopRequireDefault(_leveldbDataSource);
+
 var _defaultValues = require('./values/default-values');
 
 var _defaultValues2 = _interopRequireDefault(_defaultValues);
@@ -309,6 +313,7 @@ exports.RecordLinkItemValue = _recordLinkItemValue2.default;
 exports.FeatureValidator = _featureValidator2.default;
 exports.DataSource = _dataSource2.default;
 exports.MemoryDataSource = _memoryDataSource2.default;
+exports.LevelDBDataSource = _leveldbDataSource2.default;
 exports.DefaultValues = _defaultValues2.default;
 exports.CustomValidationError = _customValidationError2.default;
 exports.MediaElement = _mediaElement2.default;

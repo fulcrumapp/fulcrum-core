@@ -50,6 +50,7 @@ var Form = function () {
     this._geometryTypes = attributes.geometry_types;
     this._reportTemplatesJSON = attributes.report_templates;
     this._boundingBox = attributes.bounding_box;
+    this._version = attributes.version;
 
     this._projectEnabled = attributes.projects_enabled != null ? !!attributes.projects_enabled : true;
     this._assignmentEnabled = attributes.assignment_enabled != null ? !!attributes.assignment_enabled : true;
@@ -138,6 +139,7 @@ var Form = function () {
     json.title_field_keys = this.titleFieldKeys;
     json.report_templates = this.reportTemplates;
     json.bounding_box = this.boundingBox;
+    json.version = this.version;
 
     if (this._statusFieldJSON) {
       json.status_field = JSON.parse(JSON.stringify(this._statusFieldJSON));
@@ -174,6 +176,11 @@ var Form = function () {
     key: 'id',
     get: function get() {
       return this._id;
+    }
+  }, {
+    key: 'version',
+    get: function get() {
+      return this._version;
     }
   }, {
     key: 'statusField',

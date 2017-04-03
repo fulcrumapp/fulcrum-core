@@ -26,6 +26,19 @@ var ChoiceList = function () {
     this._name = attributes.name;
     this._description = attributes.description;
     this._choicesJSON = attributes.choices || [];
+    this._version = attrs.version;
+  };
+
+  ChoiceList.prototype.toJSON = function toJSON() {
+    var json = {};
+
+    json.id = this.id || null;
+    json.name = this.name || null;
+    json.description = this.description || null;
+    json.choices = this._choicesJSON || null;
+    json.version = this.version;
+
+    return json;
   };
 
   _createClass(ChoiceList, [{
@@ -42,6 +55,11 @@ var ChoiceList = function () {
     key: 'description',
     get: function get() {
       return this._description;
+    }
+  }, {
+    key: 'version',
+    get: function get() {
+      return this._version;
     }
   }, {
     key: 'choices',

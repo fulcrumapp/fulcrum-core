@@ -26,6 +26,19 @@ var ClassificationSet = function () {
     this._name = attributes.name;
     this._description = attributes.description;
     this._itemsJSON = attributes.items || [];
+    this._version = attributes.version;
+  };
+
+  ClassificationSet.prototype.toJSON = function toJSON() {
+    var json = {};
+
+    json.id = this.id || null;
+    json.name = this.name || null;
+    json.description = this.description || null;
+    json.items = this._itemsJSON || null;
+    json.version = this.version;
+
+    return json;
   };
 
   _createClass(ClassificationSet, [{
@@ -42,6 +55,11 @@ var ClassificationSet = function () {
     key: 'description',
     get: function get() {
       return this._description;
+    }
+  }, {
+    key: 'version',
+    get: function get() {
+      return this._version;
     }
   }, {
     key: 'items',
