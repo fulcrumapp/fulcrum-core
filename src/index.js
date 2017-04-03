@@ -46,6 +46,7 @@ export RecordLinkItemValue from './values/record-link-item-value';
 export FeatureValidator from './validation/feature-validator';
 export DataSource from './data-source';
 export MemoryDataSource from './utils/memory-data-source';
+export LevelDBDataSource from './utils/leveldb-data-source';
 export DefaultValues from './values/default-values';
 export CustomValidationError from './validation/custom-validation-error';
 export MediaElement from './elements/media-element';

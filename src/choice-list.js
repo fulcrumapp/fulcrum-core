@@ -12,6 +12,7 @@ export default class ChoiceList {
     this._name = attributes.name;
     this._description = attributes.description;
     this._choicesJSON = attributes.choices || [];
+    this._version = attrs.version;
   }
 
   get id() {
@@ -26,6 +27,10 @@ export default class ChoiceList {
     return this._description;
   }
 
+  get version() {
+    return this._version;
+  }
+
   get choices() {
     if (!this._choices) {
       this._choices = [];
@@ -36,5 +41,17 @@ export default class ChoiceList {
     }
 
     return this._choices;
+  }
+
+  toJSON() {
+    const json = {};
+
+    json.id = this.id || null;
+    json.name = this.name || null;
+    json.description = this.description || null;
+    json.choices = this._choicesJSON || null;
+    json.version = this.version;
+
+    return json;
   }
 }

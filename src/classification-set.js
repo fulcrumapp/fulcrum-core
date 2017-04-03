@@ -12,6 +12,7 @@ export default class ClassificationSet {
     this._name = attributes.name;
     this._description = attributes.description;
     this._itemsJSON = attributes.items || [];
+    this._version = attributes.version;
   }
 
   get id() {
@@ -26,6 +27,10 @@ export default class ClassificationSet {
     return this._description;
   }
 
+  get version() {
+    return this._version;
+  }
+
   get items() {
     if (!this._items) {
       this._items = [];
@@ -36,5 +41,17 @@ export default class ClassificationSet {
     }
 
     return this._items;
+  }
+
+  toJSON() {
+    const json = {};
+
+    json.id = this.id || null;
+    json.name = this.name || null;
+    json.description = this.description || null;
+    json.items = this._itemsJSON || null;
+    json.version = this.version;
+
+    return json;
   }
 }
