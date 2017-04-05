@@ -124,6 +124,10 @@ var RepeatableItemValue = function (_Feature) {
     json.created_duration = this.createdDuration;
     json.updated_duration = this.updatedDuration;
     json.edited_duration = this.editedDuration;
+    json.created_by_id = this.createdByID;
+    json.updated_by_id = this.updatedByID;
+    json.version = this.version;
+    json.changeset_id = this.changesetID;
 
     return json;
   };
