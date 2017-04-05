@@ -36,6 +36,10 @@ var _repeatableValue = require('./repeatable-value');
 
 var _repeatableValue2 = _interopRequireDefault(_repeatableValue);
 
+var _recordLinkValue = require('./record-link-value');
+
+var _recordLinkValue2 = _interopRequireDefault(_recordLinkValue);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -449,6 +453,49 @@ var FormValues = function () {
             var item = _ref11;
 
             items.push.apply(items, item.formValues.repeatableItems);
+          }
+        }
+      }
+
+      return items;
+    }
+  }, {
+    key: 'recordLinkItems',
+    get: function get() {
+      var items = [];
+
+      for (var _iterator12 = this.all, _isArray12 = Array.isArray(_iterator12), _i12 = 0, _iterator12 = _isArray12 ? _iterator12 : _iterator12[Symbol.iterator]();;) {
+        var _ref12;
+
+        if (_isArray12) {
+          if (_i12 >= _iterator12.length) break;
+          _ref12 = _iterator12[_i12++];
+        } else {
+          _i12 = _iterator12.next();
+          if (_i12.done) break;
+          _ref12 = _i12.value;
+        }
+
+        var formValue = _ref12;
+
+        if (formValue instanceof _recordLinkValue2.default) {
+          items.push.apply(items, formValue.items);
+        } else if (formValue instanceof _repeatableValue2.default) {
+          for (var _iterator13 = formValue.items, _isArray13 = Array.isArray(_iterator13), _i13 = 0, _iterator13 = _isArray13 ? _iterator13 : _iterator13[Symbol.iterator]();;) {
+            var _ref13;
+
+            if (_isArray13) {
+              if (_i13 >= _iterator13.length) break;
+              _ref13 = _iterator13[_i13++];
+            } else {
+              _i13 = _iterator13.next();
+              if (_i13.done) break;
+              _ref13 = _i13.value;
+            }
+
+            var item = _ref13;
+
+            items.push.apply(items, item.formValues.recordLinkItems);
           }
         }
       }

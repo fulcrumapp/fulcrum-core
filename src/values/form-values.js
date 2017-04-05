@@ -6,6 +6,7 @@ import Condition from '../elements/condition';
 import MediaValue from './media-value';
 import SignatureValue from './signature-value';
 import RepeatableValue from './repeatable-value';
+import RecordLinkValue from './record-link-value';
 
 const SearchValueSeparator = ' ';
 
@@ -270,6 +271,22 @@ export default class FormValues {
 
         for (const item of formValue.items) {
           items.push.apply(items, item.formValues.repeatableItems);
+        }
+      }
+    }
+
+    return items;
+  }
+
+  get recordLinkItems() {
+    const items = [];
+
+    for (const formValue of this.all) {
+      if (formValue instanceof RecordLinkValue) {
+        items.push.apply(items, formValue.items);
+      } else if (formValue instanceof RepeatableValue) {
+        for (const item of formValue.items) {
+          items.push.apply(items, item.formValues.recordLinkItems);
         }
       }
     }
