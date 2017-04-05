@@ -69,7 +69,7 @@ var RecordLinkValue = function (_FormValue) {
       return null;
     }
 
-    if (part === 'title') {
+    if (part === 'titles') {
       return this.items.map(function (item) {
         return item.displayValue;
       });

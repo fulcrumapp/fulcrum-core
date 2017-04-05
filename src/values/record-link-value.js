@@ -45,7 +45,7 @@ export default class RecordLinkValue extends FormValue {
       return null;
     }
 
-    if (part === 'title') {
+    if (part === 'titles') {
       return this.items.map(item => item.displayValue);
     }
 
