@@ -449,11 +449,17 @@ var RepeatableItemValue = function (_Feature) {
     key: 'createdByName',
     get: function get() {
       return this._createdByName;
+    },
+    set: function set(name) {
+      this._createdByName = name;
     }
   }, {
     key: 'updatedByName',
     get: function get() {
       return this._updatedByName;
+    },
+    set: function set(name) {
+      this._updatedByName = name;
     }
   }, {
     key: 'recordProjectName',

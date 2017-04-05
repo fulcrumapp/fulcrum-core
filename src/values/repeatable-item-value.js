@@ -382,8 +382,16 @@ export default class RepeatableItemValue extends Feature {
     return this._createdByName;
   }
 
+  set createdByName(name) {
+    this._createdByName = name;
+  }
+
   get updatedByName() {
     return this._updatedByName;
+  }
+
+  set updatedByName(name) {
+    this._updatedByName = name;
   }
 
   get recordProjectName() {
