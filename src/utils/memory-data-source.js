@@ -29,6 +29,10 @@ export default class MemoryDataSource {
     return callback(null, this.users);
   }
 
+  getUser(id, callback) {
+    return callback(null, this.cache[id]);
+  }
+
   getProjects(params, callback) {
     return callback(null, this.projects);
   }
@@ -69,6 +73,11 @@ export default class MemoryDataSource {
   }
 
   getRecordComplete(id, form, object, callback) {
+    this.cache[id] = object;
+    callback();
+  }
+
+  getUserComplete(id, object, callback) {
     this.cache[id] = object;
     callback();
   }

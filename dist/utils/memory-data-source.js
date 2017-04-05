@@ -37,6 +37,10 @@ var MemoryDataSource = function () {
     return callback(null, this.users);
   };
 
+  MemoryDataSource.prototype.getUser = function getUser(id, callback) {
+    return callback(null, this.cache[id]);
+  };
+
   MemoryDataSource.prototype.getProjects = function getProjects(params, callback) {
     return callback(null, this.projects);
   };
@@ -77,6 +81,11 @@ var MemoryDataSource = function () {
   };
 
   MemoryDataSource.prototype.getRecordComplete = function getRecordComplete(id, form, object, callback) {
+    this.cache[id] = object;
+    callback();
+  };
+
+  MemoryDataSource.prototype.getUserComplete = function getUserComplete(id, object, callback) {
     this.cache[id] = object;
     callback();
   };
