@@ -390,16 +390,32 @@ export default class RepeatableItemValue extends Feature {
     return this._recordProjectName;
   }
 
+  set recordProjectName(name) {
+    this._recordProjectName = name;
+  }
+
   get recordProjectID() {
     return this._recordProjectID;
+  }
+
+  set recordProjectID(id) {
+    this._recordProjectID = id;
   }
 
   get recordAssignedToName() {
     return this._recordAssignedToName;
   }
 
+  set recordAssignedToName(name) {
+    this._recordAssignedToName = name;
+  }
+
   get recordAssignedToID() {
     return this._recordAssignedToID;
+  }
+
+  set recordAssignedToID(id) {
+    this._recordAssignedToID = id;
   }
 
   get recordStatus() {

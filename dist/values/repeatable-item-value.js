@@ -459,21 +459,33 @@ var RepeatableItemValue = function (_Feature) {
     key: 'recordProjectName',
     get: function get() {
       return this._recordProjectName;
+    },
+    set: function set(name) {
+      this._recordProjectName = name;
     }
   }, {
     key: 'recordProjectID',
     get: function get() {
       return this._recordProjectID;
+    },
+    set: function set(id) {
+      this._recordProjectID = id;
     }
   }, {
     key: 'recordAssignedToName',
     get: function get() {
       return this._recordAssignedToName;
+    },
+    set: function set(name) {
+      this._recordAssignedToName = name;
     }
   }, {
     key: 'recordAssignedToID',
     get: function get() {
       return this._recordAssignedToID;
+    },
+    set: function set(id) {
+      this._recordAssignedToID = id;
     }
   }, {
     key: 'recordStatus',
