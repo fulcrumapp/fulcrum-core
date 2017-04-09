@@ -12,7 +12,7 @@ export default class ChoiceList {
     this._name = attributes.name;
     this._description = attributes.description;
     this._choicesJSON = attributes.choices || [];
-    this._version = attrs.version;
+    this._version = attributes.version;
   }
 
   get id() {
