@@ -298,8 +298,20 @@ export default class Record extends Feature {
   }
 
   set projectID(id) {
-    this._projectID = id;
-    this._projectName = null;
+    if (id !== this._projectID) {
+      this._projectID = id;
+      this._projectName = null;
+    }
+  }
+
+  set project(project) {
+    if (project) {
+      this._projectID = project.id;
+      this._projectName = project.name;
+    } else {
+      this._projectID = null;
+      this._projectName = null;
+    }
   }
 
   get assignedToName() {
@@ -310,9 +322,21 @@ export default class Record extends Feature {
     return this._assignedToID;
   }
 
+  set assignedTo(user) {
+    if (user) {
+      this._assignedToID = user.id;
+      this._assignedToName = user.fullName;
+    } else {
+      this._assignedToID = null;
+      this._assignedToName = null;
+    }
+  }
+
   set assignedToID(id) {
-    this._assignedToID = id;
-    this._assignedToName = null;
+    if (id !== this._assignedToID) {
+      this._assignedToID = id;
+      this._assignedToName = null;
+    }
   }
 
   get createdBy() {

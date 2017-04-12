@@ -445,8 +445,21 @@ var Record = function (_Feature) {
       return this._projectID;
     },
     set: function set(id) {
-      this._projectID = id;
-      this._projectName = null;
+      if (id !== this._projectID) {
+        this._projectID = id;
+        this._projectName = null;
+      }
+    }
+  }, {
+    key: 'project',
+    set: function set(project) {
+      if (project) {
+        this._projectID = project.id;
+        this._projectName = project.name;
+      } else {
+        this._projectID = null;
+        this._projectName = null;
+      }
     }
   }, {
     key: 'assignedToName',
@@ -459,8 +472,21 @@ var Record = function (_Feature) {
       return this._assignedToID;
     },
     set: function set(id) {
-      this._assignedToID = id;
-      this._assignedToName = null;
+      if (id !== this._assignedToID) {
+        this._assignedToID = id;
+        this._assignedToName = null;
+      }
+    }
+  }, {
+    key: 'assignedTo',
+    set: function set(user) {
+      if (user) {
+        this._assignedToID = user.id;
+        this._assignedToName = user.fullName;
+      } else {
+        this._assignedToID = null;
+        this._assignedToName = null;
+      }
     }
   }, {
     key: 'createdBy',
