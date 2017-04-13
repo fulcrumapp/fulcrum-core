@@ -28,7 +28,7 @@ var Role = function () {
     this._canChangeStatus = !!attributes.can_change_status;
     this._canChangeProject = !!attributes.can_change_project;
     this._canChangeLocation = !!attributes.can_change_location;
-    this._canChangeAssignment = !!attributes.can_assign_records;
+    this._canAssignRecords = !!attributes.can_assign_records;
     this._canRunReports = !!attributes.can_run_reports;
     this._canCreateRecords = !!attributes.can_create_records;
     this._canUpdateRecords = !!attributes.can_update_records;
@@ -104,9 +104,9 @@ var Role = function () {
       return this._canChangeProject;
     }
   }, {
-    key: "canChangeAssignment",
+    key: "canAssignRecords",
     get: function get() {
-      return this._canChangeAssignment;
+      return this._canAssignRecords;
     }
   }, {
     key: "canCreateRecords",
