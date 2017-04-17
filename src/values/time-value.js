@@ -57,6 +57,14 @@ export default class TimeValue extends TextualValue {
     return DateUtils.parseTime(this.textValue);
   }
 
+  format({useDisplayValue = false}) {
+    if (useDisplayValue) {
+      return this.displayValue;
+    }
+
+    return this.columnValue;
+  }
+
   get columnValue() {
     if (!this.isValid) {
       return null;
