@@ -65,6 +65,17 @@ var TimeValue = function (_TextualValue) {
     return thisTime > thatTime;
   };
 
+  TimeValue.prototype.format = function format(_ref) {
+    var _ref$useDisplayValue = _ref.useDisplayValue,
+        useDisplayValue = _ref$useDisplayValue === undefined ? false : _ref$useDisplayValue;
+
+    if (useDisplayValue) {
+      return this.displayValue;
+    }
+
+    return this.columnValue;
+  };
+
   _createClass(TimeValue, [{
     key: 'displayValue',
     get: function get() {

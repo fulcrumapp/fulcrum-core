@@ -235,7 +235,7 @@ var Record = function (_Feature) {
 
         case 'assigned_to_id':
           {
-            if (attributes.assigned_to_id && role.canChangeAssignment) {
+            if (attributes.assigned_to_id && role.canAssignRecords) {
               this.assignedToID = attributes.assigned_to_id;
             }
 
