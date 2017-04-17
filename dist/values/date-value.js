@@ -69,6 +69,10 @@ var DateValue = function (_TextualValue) {
     var _ref$useDisplayValue = _ref.useDisplayValue,
         useDisplayValue = _ref$useDisplayValue === undefined ? false : _ref$useDisplayValue;
 
+    if (useDisplayValue) {
+      return this.displayValue;
+    }
+
     return this.columnValue;
   };
 

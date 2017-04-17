@@ -34,9 +34,16 @@ var CalculatedValue = function (_TextualValue) {
     return _this;
   }
 
-  CalculatedValue.prototype.format = function format() {
+  CalculatedValue.prototype.format = function format(_ref) {
+    var _ref$useDisplayValue = _ref.useDisplayValue,
+        useDisplayValue = _ref$useDisplayValue === undefined ? false : _ref$useDisplayValue;
+
     if (this.isEmpty) {
       return null;
+    }
+
+    if (useDisplayValue) {
+      return this.displayValue;
     }
 
     var display = this.element.display;

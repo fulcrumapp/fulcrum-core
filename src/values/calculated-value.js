@@ -8,9 +8,13 @@ export default class CalculatedValue extends TextualValue {
     this.error = null;
   }
 
-  format() {
+  format({useDisplayValue = false}) {
     if (this.isEmpty) {
       return null;
+    }
+
+    if (useDisplayValue) {
+      return this.displayValue;
     }
 
     const display = this.element.display;

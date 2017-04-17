@@ -64,6 +64,10 @@ export default class DateValue extends TextualValue {
   }
 
   format({useDisplayValue = false}) {
+    if (useDisplayValue) {
+      return this.displayValue;
+    }
+
     return this.columnValue;
   }
 
