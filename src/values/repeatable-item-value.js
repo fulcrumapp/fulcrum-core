@@ -233,11 +233,11 @@ export default class RepeatableItemValue extends Feature {
   }
 
   loadCreatedBy(dataSource, callback) {
-    return loadObject(this, dataSource, 'updatedBy', 'getUser', callback);
+    return loadObject(this, dataSource, 'createdBy', 'getUser', callback);
   }
 
   loadUpdatedBy(dataSource, callback) {
-    return loadObject(this, dataSource, 'createdBy', 'getUser', callback);
+    return loadObject(this, dataSource, 'updatedBy', 'getUser', callback);
   }
 
   get changeset() {
