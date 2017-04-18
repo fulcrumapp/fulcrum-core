@@ -147,11 +147,11 @@ var RepeatableItemValue = function (_Feature) {
   };
 
   RepeatableItemValue.prototype.loadCreatedBy = function loadCreatedBy(dataSource, callback) {
-    return (0, _loadObject2.default)(this, dataSource, 'updatedBy', 'getUser', callback);
+    return (0, _loadObject2.default)(this, dataSource, 'createdBy', 'getUser', callback);
   };
 
   RepeatableItemValue.prototype.loadUpdatedBy = function loadUpdatedBy(dataSource, callback) {
-    return (0, _loadObject2.default)(this, dataSource, 'createdBy', 'getUser', callback);
+    return (0, _loadObject2.default)(this, dataSource, 'updatedBy', 'getUser', callback);
   };
 
   _createClass(RepeatableItemValue, [{
