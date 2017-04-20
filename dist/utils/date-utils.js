@@ -203,6 +203,10 @@ var DateUtils = function () {
   };
 
   DateUtils.formatDate = function formatDate(date) {
+    if (date == null) {
+      return null;
+    }
+
     var year = date.getFullYear();
     var month = (0, _lodash2.default)(date.getMonth() + 1, 2, '0');
     var day = (0, _lodash2.default)(date.getDate(), 2, '0');

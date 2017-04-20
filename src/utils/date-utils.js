@@ -176,6 +176,10 @@ export default class DateUtils {
   }
 
   static formatDate(date) {
+    if (date == null) {
+      return null;
+    }
+
     const year = date.getFullYear();
     const month = padStart(date.getMonth() + 1, 2, '0');
     const day = padStart(date.getDate(), 2, '0');
