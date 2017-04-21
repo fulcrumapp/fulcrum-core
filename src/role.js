@@ -8,6 +8,8 @@ export default class Role {
 
     this._id = attributes.id;
     this._name = attributes.name;
+    this._isSystem = !!attributes.is_system;
+    this._isDefault = !!attributes.is_default;
     this._canManageSubscription = !!attributes.can_manage_subscription;
     this._canUpdateOrganization = !!attributes.can_update_organization;
     this._canManageMembers = !!attributes.can_manage_members;
@@ -36,6 +38,14 @@ export default class Role {
 
   get name() {
     return this._name;
+  }
+
+  get isSystem() {
+    return this._isSystem;
+  }
+
+  get isDefault() {
+    return this._isDefault;
   }
 
   get canManageSubscription() {

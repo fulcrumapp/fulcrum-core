@@ -18,6 +18,8 @@ var Role = function () {
 
     this._id = attributes.id;
     this._name = attributes.name;
+    this._isSystem = !!attributes.is_system;
+    this._isDefault = !!attributes.is_default;
     this._canManageSubscription = !!attributes.can_manage_subscription;
     this._canUpdateOrganization = !!attributes.can_update_organization;
     this._canManageMembers = !!attributes.can_manage_members;
@@ -49,6 +51,16 @@ var Role = function () {
     key: "name",
     get: function get() {
       return this._name;
+    }
+  }, {
+    key: "isSystem",
+    get: function get() {
+      return this._isSystem;
+    }
+  }, {
+    key: "isDefault",
+    get: function get() {
+      return this._isDefault;
     }
   }, {
     key: "canManageSubscription",
