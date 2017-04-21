@@ -10,12 +10,14 @@ var Role = function () {
   function Role(attrs) {
     _classCallCheck(this, Role);
 
+    this.updateFromAPIAttributes(attrs);
+  }
+
+  Role.prototype.updateFromAPIAttributes = function updateFromAPIAttributes(attrs) {
     var attributes = attrs || {};
 
-    this.id = attributes.id;
-    this.name = attributes.name;
-    this._attributes = attributes;
-
+    this._id = attributes.id;
+    this._name = attributes.name;
     this._canManageSubscription = !!attributes.can_manage_subscription;
     this._canUpdateOrganization = !!attributes.can_update_organization;
     this._canManageMembers = !!attributes.can_manage_members;
@@ -36,9 +38,19 @@ var Role = function () {
     this._canExportRecords = !!attributes.can_export_records;
     this._canImportRecords = !!attributes.can_import_records;
     this._canManageAuthorizations = !!attributes.can_manage_authorizations;
-  }
+  };
 
   _createClass(Role, [{
+    key: "id",
+    get: function get() {
+      return this._id;
+    }
+  }, {
+    key: "name",
+    get: function get() {
+      return this._name;
+    }
+  }, {
     key: "canManageSubscription",
     get: function get() {
       return this._canManageSubscription;

@@ -1,11 +1,13 @@
 export default class Role {
   constructor(attrs) {
+    this.updateFromAPIAttributes(attrs);
+  }
+
+  updateFromAPIAttributes(attrs) {
     const attributes = attrs || {};
 
-    this.id = attributes.id;
-    this.name = attributes.name;
-    this._attributes = attributes;
-
+    this._id = attributes.id;
+    this._name = attributes.name;
     this._canManageSubscription = !!attributes.can_manage_subscription;
     this._canUpdateOrganization = !!attributes.can_update_organization;
     this._canManageMembers = !!attributes.can_manage_members;
@@ -26,6 +28,14 @@ export default class Role {
     this._canExportRecords = !!attributes.can_export_records;
     this._canImportRecords = !!attributes.can_import_records;
     this._canManageAuthorizations = !!attributes.can_manage_authorizations;
+  }
+
+  get id() {
+    return this._id;
+  }
+
+  get name() {
+    return this._name;
   }
 
   get canManageSubscription() {
