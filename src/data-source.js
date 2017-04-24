@@ -191,6 +191,10 @@ export default class DataSource {
     this.invoke(this.root, 'getProjects', [ params ], callback);
   }
 
+  getProject(id, callback) {
+    this.invoke(this.root, 'getProject', [ id ], callback);
+  }
+
   getChangeset(id, callback) {
     this.invoke(this.root, 'getChangeset', [ id ], callback);
   }

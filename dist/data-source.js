@@ -211,6 +211,10 @@ var DataSource = function () {
     this.invoke(this.root, 'getProjects', [params], callback);
   };
 
+  DataSource.prototype.getProject = function getProject(id, callback) {
+    this.invoke(this.root, 'getProject', [id], callback);
+  };
+
   DataSource.prototype.getChangeset = function getChangeset(id, callback) {
     this.invoke(this.root, 'getChangeset', [id], callback);
   };
