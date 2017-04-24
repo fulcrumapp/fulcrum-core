@@ -80,6 +80,28 @@ export default class Changeset {
     return this._metadata.application;
   }
 
+  get metadataIndexText() {
+    if (!this._metadata) {
+      return null;
+    }
+
+    const parts = [];
+
+    for (const key of Object.keys(this._metadata)) {
+      const value = this._metadata[key];
+
+      if (typeof value === 'string') {
+        parts.push(value);
+      } else if (typeof value === 'number') {
+        parts.push(value.toString());
+      } else if (value != null) {
+        parts.push(JSON.stringify(value));
+      }
+    }
+
+    return parts.length ? parts.join(' ') : null;
+  }
+
   get metadataDescription() {
     const parts = [
       compact([ this.application,
