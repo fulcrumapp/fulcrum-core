@@ -100,6 +100,42 @@ var Changeset = function () {
       return this._metadata.application;
     }
   }, {
+    key: 'metadataIndexText',
+    get: function get() {
+      if (!this._metadata) {
+        return null;
+      }
+
+      var parts = [];
+
+      for (var _iterator = Object.keys(this._metadata), _isArray = Array.isArray(_iterator), _i = 0, _iterator = _isArray ? _iterator : _iterator[Symbol.iterator]();;) {
+        var _ref;
+
+        if (_isArray) {
+          if (_i >= _iterator.length) break;
+          _ref = _iterator[_i++];
+        } else {
+          _i = _iterator.next();
+          if (_i.done) break;
+          _ref = _i.value;
+        }
+
+        var key = _ref;
+
+        var value = this._metadata[key];
+
+        if (typeof value === 'string') {
+          parts.push(value);
+        } else if (typeof value === 'number') {
+          parts.push(value.toString());
+        } else if (value != null) {
+          parts.push(JSON.stringify(value));
+        }
+      }
+
+      return parts.length ? parts.join(' ') : null;
+    }
+  }, {
     key: 'metadataDescription',
     get: function get() {
       var parts = [(0, _lodash2.default)([this.application, this._metadata.application_version]).join(' '), (0, _lodash2.default)([this._metadata.browser, this._metadata.browser_version]).join(' '), (0, _lodash2.default)([this._metadata.platform, this._metadata.platform_version]).join(' '), (0, _lodash2.default)([this._metadata.device_manufacturer, this._metadata.device_model]).join(' ')];
