@@ -40,6 +40,8 @@ export CalculatedValue from './values/calculated-value';
 export TextElement from './elements/text-element';
 export TextValue from './values/text-value';
 export SectionElement from './elements/section-element';
+export SignatureElement from './elements/signature-element';
+export SignatureValue from './values/signature-value';
 export RecordLinkElement from './elements/record-link-element';
 export RecordLinkValue from './values/record-link-value';
 export RecordLinkItemValue from './values/record-link-item-value';

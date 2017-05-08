@@ -1,7 +1,7 @@
 'use strict';
 
 exports.__esModule = true;
-exports.TrackPlayer = exports.TrackSegment = exports.TrackPoint = exports.Track = exports.Changeset = exports.Project = exports.Role = exports.User = exports.StatusValue = exports.StatusChoice = exports.StatusElement = exports.MediaItemValue = exports.MediaValue = exports.MediaElement = exports.CustomValidationError = exports.DefaultValues = exports.LevelDBDataSource = exports.MemoryDataSource = exports.DataSource = exports.FeatureValidator = exports.RecordLinkItemValue = exports.RecordLinkValue = exports.RecordLinkElement = exports.SectionElement = exports.TextValue = exports.TextElement = exports.CalculatedValue = exports.CalculatedElement = exports.TimeValue = exports.TimeElement = exports.DateValue = exports.DateElement = exports.ClassificationValue = exports.ClassificationElement = exports.ChoiceValue = exports.ChoiceElement = exports.BarcodeValue = exports.BarcodeElement = exports.AddressValue = exports.AddressElement = exports.VideoValue = exports.VideoItemValue = exports.PhotoValue = exports.PhotoItemValue = exports.AudioValue = exports.AudioItemValue = exports.RepeatableElement = exports.Condition = exports.ChildElements = exports.NumberUtils = exports.DateUtils = exports.TextUtils = exports.FormValues = exports.Feature = exports.RepeatableValue = exports.RepeatableItemValue = exports.ElementFactory = exports.ClassificationSet = exports.Classification = exports.ChoiceList = exports.Choice = exports.FormValue = exports.Element = exports.Record = exports.Form = undefined;
+exports.TrackPlayer = exports.TrackSegment = exports.TrackPoint = exports.Track = exports.Changeset = exports.Project = exports.Role = exports.User = exports.StatusValue = exports.StatusChoice = exports.StatusElement = exports.MediaItemValue = exports.MediaValue = exports.MediaElement = exports.CustomValidationError = exports.DefaultValues = exports.LevelDBDataSource = exports.MemoryDataSource = exports.DataSource = exports.FeatureValidator = exports.RecordLinkItemValue = exports.RecordLinkValue = exports.RecordLinkElement = exports.SignatureValue = exports.SignatureElement = exports.SectionElement = exports.TextValue = exports.TextElement = exports.CalculatedValue = exports.CalculatedElement = exports.TimeValue = exports.TimeElement = exports.DateValue = exports.DateElement = exports.ClassificationValue = exports.ClassificationElement = exports.ChoiceValue = exports.ChoiceElement = exports.BarcodeValue = exports.BarcodeElement = exports.AddressValue = exports.AddressElement = exports.VideoValue = exports.VideoItemValue = exports.PhotoValue = exports.PhotoItemValue = exports.AudioValue = exports.AudioItemValue = exports.RepeatableElement = exports.Condition = exports.ChildElements = exports.NumberUtils = exports.DateUtils = exports.TextUtils = exports.FormValues = exports.Feature = exports.RepeatableValue = exports.RepeatableItemValue = exports.ElementFactory = exports.ClassificationSet = exports.Classification = exports.ChoiceList = exports.Choice = exports.FormValue = exports.Element = exports.Record = exports.Form = undefined;
 
 var _form = require('./form');
 
@@ -171,6 +171,14 @@ var _sectionElement = require('./elements/section-element');
 
 var _sectionElement2 = _interopRequireDefault(_sectionElement);
 
+var _signatureElement = require('./elements/signature-element');
+
+var _signatureElement2 = _interopRequireDefault(_signatureElement);
+
+var _signatureValue = require('./values/signature-value');
+
+var _signatureValue2 = _interopRequireDefault(_signatureValue);
+
 var _recordLinkElement = require('./elements/record-link-element');
 
 var _recordLinkElement2 = _interopRequireDefault(_recordLinkElement);
@@ -307,6 +315,8 @@ exports.CalculatedValue = _calculatedValue2.default;
 exports.TextElement = _textElement2.default;
 exports.TextValue = _textValue2.default;
 exports.SectionElement = _sectionElement2.default;
+exports.SignatureElement = _signatureElement2.default;
+exports.SignatureValue = _signatureValue2.default;
 exports.RecordLinkElement = _recordLinkElement2.default;
 exports.RecordLinkValue = _recordLinkValue2.default;
 exports.RecordLinkItemValue = _recordLinkItemValue2.default;
