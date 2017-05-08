@@ -15,6 +15,10 @@ export default class SignatureValue extends FormValue {
     return this._identifier;
   }
 
+  get mediaID() {
+    return this._identifier;
+  }
+
   set id(id) {
     this._identifier = id;
   }
