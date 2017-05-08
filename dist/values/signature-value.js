@@ -106,11 +106,6 @@ var SignatureValue = function (_FormValue) {
       this._identifier = id;
     }
   }, {
-    key: 'mediaID',
-    get: function get() {
-      return this._identifier;
-    }
-  }, {
     key: 'timestamp',
     get: function get() {
       return this._timestamp;
