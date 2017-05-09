@@ -121,13 +121,13 @@ var RepeatableItemValue = function (_Feature) {
     json.geometry = this.geometryAsGeoJSON;
     json.created_location = this.createdLocation;
     json.updated_location = this.updatedLocation;
-    json.created_duration = this.createdDuration;
-    json.updated_duration = this.updatedDuration;
-    json.edited_duration = this.editedDuration;
-    json.created_by_id = this.createdByID;
-    json.updated_by_id = this.updatedByID;
-    json.version = this.version;
-    json.changeset_id = this.changesetID;
+    json.created_duration = this._createdDuration != null ? this._createdDuration : null;
+    json.updated_duration = this._updatedDuration != null ? this._updatedDuration : null;
+    json.edited_duration = this._editedDuration != null ? this._editedDuration : null;
+    json.created_by_id = this._createdByID != null ? this._createdByID : null;
+    json.updated_by_id = this._updatedByID != null ? this._updatedByID : null;
+    json.version = this._version != null ? this._version : null;
+    json.changeset_id = this._changesetID != null ? this._changesetID : null;
 
     return json;
   };
