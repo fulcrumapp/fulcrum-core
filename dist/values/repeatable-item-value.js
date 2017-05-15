@@ -155,6 +155,16 @@ var RepeatableItemValue = function (_Feature) {
   };
 
   _createClass(RepeatableItemValue, [{
+    key: 'isRecord',
+    get: function get() {
+      return false;
+    }
+  }, {
+    key: 'isRepeatable',
+    get: function get() {
+      return true;
+    }
+  }, {
     key: 'element',
     get: function get() {
       return this._element;

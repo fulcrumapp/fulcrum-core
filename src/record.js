@@ -15,6 +15,14 @@ export default class Record extends Feature {
     this.updateFromAPIAttributes(attributes);
   }
 
+  get isRecord() {
+    return true;
+  }
+
+  get isRepeatable() {
+    return false;
+  }
+
   get id() {
     return this._id;
   }

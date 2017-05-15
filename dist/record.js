@@ -289,6 +289,16 @@ var Record = function (_Feature) {
   };
 
   _createClass(Record, [{
+    key: 'isRecord',
+    get: function get() {
+      return true;
+    }
+  }, {
+    key: 'isRepeatable',
+    get: function get() {
+      return false;
+    }
+  }, {
     key: 'id',
     get: function get() {
       return this._id;

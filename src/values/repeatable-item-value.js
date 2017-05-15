@@ -14,6 +14,14 @@ export default class RepeatableItemValue extends Feature {
     this.updateFromAPIAttributes(attrs);
   }
 
+  get isRecord() {
+    return false;
+  }
+
+  get isRepeatable() {
+    return true;
+  }
+
   get element() {
     return this._element;
   }
