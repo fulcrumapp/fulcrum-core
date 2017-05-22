@@ -17,6 +17,9 @@ export default class Changeset {
     this._minLon = attributes.min_lon;
     this._maxLon = attributes.max_lon;
     this._numberOfChanges = attributes.number_of_changes;
+    this._numberOfCreates = attributes.number_created;
+    this._numberOfUpdates = attributes.number_updated;
+    this._numberOfDeletes = attributes.number_deleted;
     this._closedAt = DateUtils.parseISOTimestamp(attributes.closed_at);
     this._closedBy = attributes.closed_by;
     this._closedByID = attributes.closed_by_id;
@@ -41,6 +44,9 @@ export default class Changeset {
     json.max_lon = this._maxLon;
 
     json.number_of_changes = this._numberOfChanges;
+    json.number_created = this._numberOfCreates;
+    json.number_updated = this._numberOfUpdates;
+    json.number_deleted = this._numberOfDeletes;
 
     json.closed_at = DateUtils.formatISOTimestamp(this._closedAt);
     json.closed_by = this._closedBy;

@@ -35,6 +35,9 @@ var Changeset = function () {
     this._minLon = attributes.min_lon;
     this._maxLon = attributes.max_lon;
     this._numberOfChanges = attributes.number_of_changes;
+    this._numberOfCreates = attributes.number_created;
+    this._numberOfUpdates = attributes.number_updated;
+    this._numberOfDeletes = attributes.number_deleted;
     this._closedAt = _dateUtils2.default.parseISOTimestamp(attributes.closed_at);
     this._closedBy = attributes.closed_by;
     this._closedByID = attributes.closed_by_id;
@@ -59,6 +62,9 @@ var Changeset = function () {
     json.max_lon = this._maxLon;
 
     json.number_of_changes = this._numberOfChanges;
+    json.number_created = this._numberOfCreates;
+    json.number_updated = this._numberOfUpdates;
+    json.number_deleted = this._numberOfDeletes;
 
     json.closed_at = _dateUtils2.default.formatISOTimestamp(this._closedAt);
     json.closed_by = this._closedBy;
