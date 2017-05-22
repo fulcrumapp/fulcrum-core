@@ -102,6 +102,21 @@ var Changeset = function () {
       return this._updatedAt;
     }
   }, {
+    key: 'numberOfCreates',
+    get: function get() {
+      return this._numberOfCreates;
+    }
+  }, {
+    key: 'numberOfUpdates',
+    get: function get() {
+      return this._numberOfUpdates;
+    }
+  }, {
+    key: 'numberOfDeletes',
+    get: function get() {
+      return this._numberOfDeletes;
+    }
+  }, {
     key: 'displayValue',
     get: function get() {
       return (0, _util.format)('Submitted %s by %s from %s', this._createdAt, this._createdBy, this.metadataDescription);

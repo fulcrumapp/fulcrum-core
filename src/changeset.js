@@ -79,6 +79,18 @@ export default class Changeset {
     return this._updatedAt;
   }
 
+  get numberOfCreates() {
+    return this._numberOfCreates;
+  }
+
+  get numberOfUpdates() {
+    return this._numberOfUpdates;
+  }
+
+  get numberOfDeletes() {
+    return this._numberOfDeletes;
+  }
+
   get displayValue() {
     return format('Submitted %s by %s from %s',
                   this._createdAt,
