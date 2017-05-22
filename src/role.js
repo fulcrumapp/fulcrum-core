@@ -1,4 +1,4 @@
-import DateUtils from './date-utils';
+import DateUtils from './utils/date-utils';
 
 export default class Role {
   constructor(attrs) {
