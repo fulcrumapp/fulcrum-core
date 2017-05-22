@@ -1,4 +1,5 @@
 import Choice from './elements/choice';
+import DateUtils from './utils/date-utils';
 
 export default class ChoiceList {
   constructor(attributes) {
@@ -13,6 +14,8 @@ export default class ChoiceList {
     this._description = attributes.description;
     this._choicesJSON = attributes.choices || [];
     this._version = attributes.version;
+    this._createdAt = DateUtils.parseISOTimestamp(attributes.created_at);
+    this._updatedAt = DateUtils.parseISOTimestamp(attributes.updated_at);
   }
 
   get id() {
@@ -29,6 +32,14 @@ export default class ChoiceList {
 
   get version() {
     return this._version;
+  }
+
+  get createdAt() {
+    return this._createdAt;
+  }
+
+  get updatedAt() {
+    return this._updatedAt;
   }
 
   get choices() {
@@ -51,6 +62,8 @@ export default class ChoiceList {
     json.description = this.description || null;
     json.choices = this._choicesJSON || null;
     json.version = this.version;
+    json.created_at = DateUtils.formatISOTimestamp(this.createdAt);
+    json.updated_at = DateUtils.formatISOTimestamp(this.updatedAt);
 
     return json;
   }

@@ -8,6 +8,10 @@ var _classification = require('./elements/classification');
 
 var _classification2 = _interopRequireDefault(_classification);
 
+var _dateUtils = require('./utils/date-utils');
+
+var _dateUtils2 = _interopRequireDefault(_dateUtils);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -27,6 +31,8 @@ var ClassificationSet = function () {
     this._description = attributes.description;
     this._itemsJSON = attributes.items || [];
     this._version = attributes.version;
+    this._createdAt = _dateUtils2.default.parseISOTimestamp(attributes.created_at);
+    this._updatedAt = _dateUtils2.default.parseISOTimestamp(attributes.updated_at);
   };
 
   ClassificationSet.prototype.toJSON = function toJSON() {
@@ -37,6 +43,8 @@ var ClassificationSet = function () {
     json.description = this.description || null;
     json.items = this._itemsJSON || null;
     json.version = this.version;
+    json.created_at = _dateUtils2.default.formatISOTimestamp(this.createdAt);
+    json.updated_at = _dateUtils2.default.formatISOTimestamp(this.updatedAt);
 
     return json;
   };
@@ -60,6 +68,16 @@ var ClassificationSet = function () {
     key: 'version',
     get: function get() {
       return this._version;
+    }
+  }, {
+    key: 'createdAt',
+    get: function get() {
+      return this._createdAt;
+    }
+  }, {
+    key: 'updatedAt',
+    get: function get() {
+      return this._updatedAt;
     }
   }, {
     key: 'items',

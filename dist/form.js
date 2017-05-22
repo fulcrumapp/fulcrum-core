@@ -24,6 +24,10 @@ var _async = require('async');
 
 var _async2 = _interopRequireDefault(_async);
 
+var _dateUtils = require('./utils/date-utils');
+
+var _dateUtils2 = _interopRequireDefault(_dateUtils);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -51,6 +55,8 @@ var Form = function () {
     this._reportTemplatesJSON = attributes.report_templates;
     this._boundingBox = attributes.bounding_box;
     this._version = attributes.version;
+    this._createdAt = _dateUtils2.default.parseISOTimestamp(attributes.created_at);
+    this._updatedAt = _dateUtils2.default.parseISOTimestamp(attributes.updated_at);
 
     this._projectEnabled = attributes.projects_enabled != null ? !!attributes.projects_enabled : true;
     this._assignmentEnabled = attributes.assignment_enabled != null ? !!attributes.assignment_enabled : true;
@@ -140,6 +146,8 @@ var Form = function () {
     json.report_templates = this.reportTemplates;
     json.bounding_box = this.boundingBox;
     json.version = this.version;
+    json.created_at = _dateUtils2.default.formatISOTimestamp(this.createdAt);
+    json.updated_at = _dateUtils2.default.formatISOTimestamp(this.updatedAt);
 
     if (this._statusFieldJSON) {
       json.status_field = JSON.parse(JSON.stringify(this._statusFieldJSON));
@@ -181,6 +189,16 @@ var Form = function () {
     key: 'version',
     get: function get() {
       return this._version;
+    }
+  }, {
+    key: 'createdAt',
+    get: function get() {
+      return this._createdAt;
+    }
+  }, {
+    key: 'updatedAt',
+    get: function get() {
+      return this._updatedAt;
     }
   }, {
     key: 'statusField',

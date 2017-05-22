@@ -1,3 +1,5 @@
+import DateUtils from './utils/date-utils';
+
 export default class Project {
   constructor(attributes) {
     this.updateFromAPIAttributes(attributes);
@@ -9,6 +11,8 @@ export default class Project {
     this._id = attributes.id;
     this._name = attributes.name;
     this._description = attributes.description;
+    this._createdAt = DateUtils.parseISOTimestamp(attributes.created_at);
+    this._updatedAt = DateUtils.parseISOTimestamp(attributes.updated_at);
   }
 
   get id() {
@@ -21,5 +25,13 @@ export default class Project {
 
   get description() {
     return this._description;
+  }
+
+  get createdAt() {
+    return this._createdAt;
+  }
+
+  get updatedAt() {
+    return this._updatedAt;
   }
 }

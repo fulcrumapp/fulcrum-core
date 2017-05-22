@@ -3,6 +3,7 @@ import StatusElement from './elements/status-element';
 import DefaultValues from './values/default-values';
 import Record from './record';
 import async from 'async';
+import DateUtils from './utils/date-utils';
 
 export default class Form {
   constructor(attributes) {
@@ -25,6 +26,8 @@ export default class Form {
     this._reportTemplatesJSON = attributes.report_templates;
     this._boundingBox = attributes.bounding_box;
     this._version = attributes.version;
+    this._createdAt = DateUtils.parseISOTimestamp(attributes.created_at);
+    this._updatedAt = DateUtils.parseISOTimestamp(attributes.updated_at);
 
     this._projectEnabled = attributes.projects_enabled != null ? !!attributes.projects_enabled : true;
     this._assignmentEnabled = attributes.assignment_enabled != null ? !!attributes.assignment_enabled : true;
@@ -43,6 +46,14 @@ export default class Form {
 
   get version() {
     return this._version;
+  }
+
+  get createdAt() {
+    return this._createdAt;
+  }
+
+  get updatedAt() {
+    return this._updatedAt;
   }
 
   load(dataSource, callback) {
@@ -138,6 +149,8 @@ export default class Form {
     json.report_templates = this.reportTemplates;
     json.bounding_box = this.boundingBox;
     json.version = this.version;
+    json.created_at = DateUtils.formatISOTimestamp(this.createdAt);
+    json.updated_at = DateUtils.formatISOTimestamp(this.updatedAt);
 
     if (this._statusFieldJSON) {
       json.status_field = JSON.parse(JSON.stringify(this._statusFieldJSON));

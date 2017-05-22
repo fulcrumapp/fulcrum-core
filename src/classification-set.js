@@ -1,4 +1,5 @@
 import Classification from './elements/classification';
+import DateUtils from './utils/date-utils';
 
 export default class ClassificationSet {
   constructor(attributes) {
@@ -13,6 +14,8 @@ export default class ClassificationSet {
     this._description = attributes.description;
     this._itemsJSON = attributes.items || [];
     this._version = attributes.version;
+    this._createdAt = DateUtils.parseISOTimestamp(attributes.created_at);
+    this._updatedAt = DateUtils.parseISOTimestamp(attributes.updated_at);
   }
 
   get id() {
@@ -29,6 +32,14 @@ export default class ClassificationSet {
 
   get version() {
     return this._version;
+  }
+
+  get createdAt() {
+    return this._createdAt;
+  }
+
+  get updatedAt() {
+    return this._updatedAt;
   }
 
   get items() {
@@ -51,6 +62,8 @@ export default class ClassificationSet {
     json.description = this.description || null;
     json.items = this._itemsJSON || null;
     json.version = this.version;
+    json.created_at = DateUtils.formatISOTimestamp(this.createdAt);
+    json.updated_at = DateUtils.formatISOTimestamp(this.updatedAt);
 
     return json;
   }

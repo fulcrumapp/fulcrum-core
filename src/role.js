@@ -1,3 +1,5 @@
+import DateUtils from './date-utils';
+
 export default class Role {
   constructor(attrs) {
     this.updateFromAPIAttributes(attrs);
@@ -30,6 +32,8 @@ export default class Role {
     this._canExportRecords = !!attributes.can_export_records;
     this._canImportRecords = !!attributes.can_import_records;
     this._canManageAuthorizations = !!attributes.can_manage_authorizations;
+    this._createdAt = DateUtils.parseISOTimestamp(attributes.created_at);
+    this._updatedAt = DateUtils.parseISOTimestamp(attributes.updated_at);
   }
 
   get id() {
@@ -38,6 +42,14 @@ export default class Role {
 
   get name() {
     return this._name;
+  }
+
+  get createdAt() {
+    return this._createdAt;
+  }
+
+  get updatedAt() {
+    return this._updatedAt;
   }
 
   get isSystem() {
