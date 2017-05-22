@@ -86,6 +86,16 @@ var Changeset = function () {
       return this._closedAt != null;
     }
   }, {
+    key: 'createdAt',
+    get: function get() {
+      return this._createdAt;
+    }
+  }, {
+    key: 'updatedAt',
+    get: function get() {
+      return this._updatedAt;
+    }
+  }, {
     key: 'displayValue',
     get: function get() {
       return (0, _util.format)('Submitted %s by %s from %s', this._createdAt, this._createdBy, this.metadataDescription);

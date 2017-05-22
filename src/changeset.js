@@ -65,6 +65,14 @@ export default class Changeset {
     return this._closedAt != null;
   }
 
+  get createdAt() {
+    return this._createdAt;
+  }
+
+  get updatedAt() {
+    return this._updatedAt;
+  }
+
   get displayValue() {
     return format('Submitted %s by %s from %s',
                   this._createdAt,
