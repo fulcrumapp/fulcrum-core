@@ -28,10 +28,15 @@ export default class Form {
     this._version = attributes.version;
     this._createdAt = DateUtils.parseISOTimestamp(attributes.created_at);
     this._updatedAt = DateUtils.parseISOTimestamp(attributes.updated_at);
+    this._image = attributes.image;
+    this._imageLarge = attributes.image_large;
+    this._imageSmall = attributes.image_small;
+    this._imageThumbnail = attributes.image_thumbnail;
 
     this._projectEnabled = attributes.projects_enabled != null ? !!attributes.projects_enabled : true;
     this._assignmentEnabled = attributes.assignment_enabled != null ? !!attributes.assignment_enabled : true;
     this._autoAssign = attributes.auto_assign != null ? !!attributes.auto_assign : false;
+    this._hiddenOnDashboard = attributes.hidden_on_dashboard != null ? !!attributes.hidden_on_dashboard : false;
 
     if (attributes.title_field_keys || attributes.record_title_key) {
       this._titleFieldKeysJSON = attributes.title_field_keys || [ attributes.record_title_key ];
@@ -128,8 +133,28 @@ export default class Form {
     return this._autoAssign;
   }
 
+  get isHiddenOnDashboard() {
+    return this._hiddenOnDashboard;
+  }
+
   get boundingBox() {
     return this._boundingBox;
+  }
+
+  get image() {
+    return this._image;
+  }
+
+  get imageLarge() {
+    return this._imageLarge;
+  }
+
+  get imageSmall() {
+    return this._imageSmall;
+  }
+
+  get imageThumbnail() {
+    return this._imageThumbnail;
   }
 
   toJSON() {
@@ -141,6 +166,7 @@ export default class Form {
     json.script = this.script || null;
     json.elements = JSON.parse(JSON.stringify(this._elementsJSON));
     json.assignment_enabled = this.isAssignmentEnabled;
+    json.hidden_on_dashboard = this.isHiddenOnDashboard;
     json.auto_assign = this.isAutoAssign;
     json.projects_enabled = this.isProjectEnabled;
     json.geometry_required = this.isGeometryRequired;

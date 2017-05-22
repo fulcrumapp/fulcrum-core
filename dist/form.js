@@ -57,10 +57,15 @@ var Form = function () {
     this._version = attributes.version;
     this._createdAt = _dateUtils2.default.parseISOTimestamp(attributes.created_at);
     this._updatedAt = _dateUtils2.default.parseISOTimestamp(attributes.updated_at);
+    this._image = attributes.image;
+    this._imageLarge = attributes.image_large;
+    this._imageSmall = attributes.image_small;
+    this._imageThumbnail = attributes.image_thumbnail;
 
     this._projectEnabled = attributes.projects_enabled != null ? !!attributes.projects_enabled : true;
     this._assignmentEnabled = attributes.assignment_enabled != null ? !!attributes.assignment_enabled : true;
     this._autoAssign = attributes.auto_assign != null ? !!attributes.auto_assign : false;
+    this._hiddenOnDashboard = attributes.hidden_on_dashboard != null ? !!attributes.hidden_on_dashboard : false;
 
     if (attributes.title_field_keys || attributes.record_title_key) {
       this._titleFieldKeysJSON = attributes.title_field_keys || [attributes.record_title_key];
@@ -138,6 +143,7 @@ var Form = function () {
     json.script = this.script || null;
     json.elements = JSON.parse(JSON.stringify(this._elementsJSON));
     json.assignment_enabled = this.isAssignmentEnabled;
+    json.hidden_on_dashboard = this.isHiddenOnDashboard;
     json.auto_assign = this.isAutoAssign;
     json.projects_enabled = this.isProjectEnabled;
     json.geometry_required = this.isGeometryRequired;
@@ -229,9 +235,34 @@ var Form = function () {
       return this._autoAssign;
     }
   }, {
+    key: 'isHiddenOnDashboard',
+    get: function get() {
+      return this._hiddenOnDashboard;
+    }
+  }, {
     key: 'boundingBox',
     get: function get() {
       return this._boundingBox;
+    }
+  }, {
+    key: 'image',
+    get: function get() {
+      return this._image;
+    }
+  }, {
+    key: 'imageLarge',
+    get: function get() {
+      return this._imageLarge;
+    }
+  }, {
+    key: 'imageSmall',
+    get: function get() {
+      return this._imageSmall;
+    }
+  }, {
+    key: 'imageThumbnail',
+    get: function get() {
+      return this._imageThumbnail;
     }
   }, {
     key: 'isGeometryEnabled',
