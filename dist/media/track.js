@@ -35,6 +35,8 @@ var Track = function () {
       attributes = { tracks: [{ track: attributes }] };
     }
 
+    this._attributes = attributes;
+
     if (attributes.tracks) {
       for (var _iterator = attributes.tracks, _isArray = Array.isArray(_iterator), _i = 0, _iterator = _isArray ? _iterator : _iterator[Symbol.iterator]();;) {
         var _ref;
@@ -115,6 +117,14 @@ var Track = function () {
 
   Track.prototype.toSRT = function toSRT() {
     return _srt2.default.render([this]);
+  };
+
+  Track.prototype.toJSON = function toJSON() {
+    return this._attributes;
+  };
+
+  Track.prototype.toGeoJSON = function toGeoJSON() {
+    return this.toGeoJSONMultiLineString();
   };
 
   Track.prototype.toGeoJSONLines = function toGeoJSONLines() {

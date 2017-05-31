@@ -12,6 +12,8 @@ export default class Track {
       attributes = {tracks: [ {track: attributes} ]};
     }
 
+    this._attributes = attributes;
+
     if (attributes.tracks) {
       for (const trackSegment of attributes.tracks) {
         const segment = new TrackSegment(trackSegment);
@@ -77,6 +79,14 @@ export default class Track {
 
   toSRT() {
     return SRT.render([ this ]);
+  }
+
+  toJSON() {
+    return this._attributes;
+  }
+
+  toGeoJSON() {
+    return this.toGeoJSONMultiLineString();
   }
 
   toGeoJSONLines() {
