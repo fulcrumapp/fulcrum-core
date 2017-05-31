@@ -14,15 +14,11 @@ describe('track', () => {
 
   it('supports KML output', () => {
     const kml = track.toKML();
-    // console.log(kml);
-    fs.writeFileSync('track.kml', kml);
-    kml.length.should.eql(883219);
+    kml.length.should.eql(359055);
   });
 
   it('supports SRT output', () => {
     const srt = track.toSRT();
-    // console.log(srt);
-    fs.writeFileSync('track.srt', srt);
-    srt.length.should.eql(883219);
+    srt.length.should.eql(604830);
   });
 });
