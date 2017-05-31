@@ -124,7 +124,10 @@ var Track = function () {
   };
 
   Track.prototype.toGeoJSON = function toGeoJSON() {
-    return JSON.stringify(this.toGeoJSONMultiLineString());
+    return JSON.stringify({
+      type: 'FeatureCollection',
+      features: [this.toGeoJSONMultiLineString()]
+    });
   };
 
   Track.prototype.toGeoJSONLines = function toGeoJSONLines() {

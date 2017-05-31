@@ -86,7 +86,12 @@ export default class Track {
   }
 
   toGeoJSON() {
-    return JSON.stringify(this.toGeoJSONMultiLineString());
+    return JSON.stringify({
+      type: 'FeatureCollection',
+      features: [
+        this.toGeoJSONMultiLineString()
+      ]
+    });
   }
 
   toGeoJSONLines() {
