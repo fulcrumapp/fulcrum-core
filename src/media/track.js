@@ -81,11 +81,11 @@ export default class Track {
     return SRT.render([ this ]);
   }
 
-  toJSON() {
-    return this._attributes;
+  toJSONString() {
+    return JSON.stringify(this._attributes);
   }
 
-  toGeoJSON() {
+  toGeoJSONString() {
     return JSON.stringify({
       type: 'FeatureCollection',
       features: [

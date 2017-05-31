@@ -119,11 +119,11 @@ var Track = function () {
     return _srt2.default.render([this]);
   };
 
-  Track.prototype.toJSON = function toJSON() {
-    return this._attributes;
+  Track.prototype.toJSONString = function toJSONString() {
+    return JSON.stringify(this._attributes);
   };
 
-  Track.prototype.toGeoJSON = function toGeoJSON() {
+  Track.prototype.toGeoJSONString = function toGeoJSONString() {
     return JSON.stringify({
       type: 'FeatureCollection',
       features: [this.toGeoJSONMultiLineString()]
