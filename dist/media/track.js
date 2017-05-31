@@ -8,14 +8,27 @@ var _trackSegment = require('./track-segment');
 
 var _trackSegment2 = _interopRequireDefault(_trackSegment);
 
+var _gpx = require('./gpx');
+
+var _gpx2 = _interopRequireDefault(_gpx);
+
+var _kml = require('./kml');
+
+var _kml2 = _interopRequireDefault(_kml);
+
+var _srt = require('./srt');
+
+var _srt2 = _interopRequireDefault(_srt);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 var Track = function () {
-  function Track(attributes) {
+  function Track(id, attributes) {
     _classCallCheck(this, Track);
 
+    this._id = id;
     this._segments = [];
 
     if (Array.isArray(attributes)) {
@@ -80,7 +93,7 @@ var Track = function () {
         var point = _ref3;
 
         if (point.hasCoordinate) {
-          line.push([point.longitude, point.latitude]);
+          line.push([point.longitude, point.latitude, point.time]);
         }
       }
 
@@ -90,6 +103,18 @@ var Track = function () {
     }
 
     return lines;
+  };
+
+  Track.prototype.toGPX = function toGPX() {
+    return _gpx2.default.render([this]);
+  };
+
+  Track.prototype.toKML = function toKML() {
+    return _kml2.default.render([this]);
+  };
+
+  Track.prototype.toSRT = function toSRT() {
+    return _srt2.default.render([this]);
   };
 
   Track.prototype.toGeoJSONLines = function toGeoJSONLines() {
@@ -199,6 +224,11 @@ var Track = function () {
   };
 
   _createClass(Track, [{
+    key: 'id',
+    get: function get() {
+      return this._id;
+    }
+  }, {
     key: 'segments',
     get: function get() {
       return this._segments;

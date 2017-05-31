@@ -55,6 +55,13 @@ var TrackSegment = function () {
     get: function get() {
       return this._points[this._points.length - 1];
     }
+  }, {
+    key: 'locations',
+    get: function get() {
+      return this.points.filter(function (o) {
+        return o.hasCoordinate;
+      });
+    }
   }]);
 
   return TrackSegment;

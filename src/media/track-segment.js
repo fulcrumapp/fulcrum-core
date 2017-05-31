@@ -24,4 +24,8 @@ export default class TrackSegment {
   get lastPoint() {
     return this._points[this._points.length - 1];
   }
+
+  get locations() {
+    return this.points.filter(o => o.hasCoordinate);
+  }
 }

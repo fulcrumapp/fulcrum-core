@@ -1,7 +1,11 @@
 import TrackSegment from './track-segment';
+import GPX from './gpx';
+import KML from './kml';
+import SRT from './srt';
 
 export default class Track {
-  constructor(attributes) {
+  constructor(id, attributes) {
+    this._id = id;
     this._segments = [];
 
     if (Array.isArray(attributes)) {
@@ -17,6 +21,10 @@ export default class Track {
         }
       }
     }
+  }
+
+  get id() {
+    return this._id;
   }
 
   get segments() {
@@ -47,7 +55,7 @@ export default class Track {
 
       for (const point of segment.points) {
         if (point.hasCoordinate) {
-          line.push([ point.longitude, point.latitude ]);
+          line.push([ point.longitude, point.latitude, point.time ]);
         }
       }
 
@@ -57,6 +65,18 @@ export default class Track {
     }
 
     return lines;
+  }
+
+  toGPX() {
+    return GPX.render([ this ]);
+  }
+
+  toKML() {
+    return KML.render([ this ]);
+  }
+
+  toSRT() {
+    return SRT.render([ this ]);
   }
 
   toGeoJSONLines() {
