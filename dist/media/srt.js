@@ -20,7 +20,6 @@ var SRT = function () {
   };
 
   SRT.prototype.timestamp = function timestamp(t) {
-    console.log('T', t, this._firstTimestamp);
     var x = t - this._firstTimestamp;
 
     var ms = (0, _lodash2.default)(Math.floor(x % 1000), 2, '0');

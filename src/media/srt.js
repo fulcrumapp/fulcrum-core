@@ -6,7 +6,6 @@ export default class SRT {
   }
 
   timestamp(t) {
-    console.log('T', t, this._firstTimestamp);
     let x = t - this._firstTimestamp;
 
     const ms = padStart(Math.floor(x % 1000), 2, '0');
