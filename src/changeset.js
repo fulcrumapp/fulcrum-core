@@ -152,7 +152,7 @@ export default class Changeset {
       return null;
     }
 
-    if (this._minLat === this._maxLat && this._minLon === this._maxLon && this._minLat === this._minLon) {
+    if (this._minLat === this._maxLat && this._minLon === this._maxLon) {
       return {
         type: 'Point',
         coordinates: [ this._minLon, this._minLat ]
