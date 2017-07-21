@@ -173,6 +173,32 @@ var Changeset = function () {
 
       return (0, _lodash2.default)(parts).join(' / ');
     }
+  }, {
+    key: 'boundingBoxAsGeoJSON',
+    get: function get() {
+      if (this._minLat == null || this._maxLat == null || this._minLon == null || this._maxLon == null) {
+        return null;
+      }
+
+      if (this._minLat === this._maxLat && this._minLon === this._maxLon && this._minLat === this._minLon) {
+        return {
+          type: 'Point',
+          coordinates: [this._minLon, this._minLat]
+        };
+      }
+
+      if (this._minLat === this._maxLat || this._minLon === this._maxLon) {
+        return {
+          type: 'LineString',
+          coordinates: [[this._minLon, this._minLat], [this._maxLon, this._maxLat]]
+        };
+      }
+
+      return {
+        type: 'Polygon',
+        coordinates: [[[this._minLon, this._minLat], [this._minLon, this._maxLat], [this._maxLon, this._maxLat], [this._maxLon, this._minLat], [this._minLon, this._minLat]]]
+      };
+    }
   }]);
 
   return Changeset;

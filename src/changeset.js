@@ -145,4 +145,38 @@ export default class Changeset {
 
     return compact(parts).join(' / ');
   }
+
+  get boundingBoxAsGeoJSON() {
+    if (this._minLat == null || this._maxLat == null ||
+        this._minLon == null || this._maxLon == null) {
+      return null;
+    }
+
+    if (this._minLat === this._maxLat && this._minLon === this._maxLon && this._minLat === this._minLon) {
+      return {
+        type: 'Point',
+        coordinates: [ this._minLon, this._minLat ]
+      };
+    }
+
+    if (this._minLat === this._maxLat || this._minLon === this._maxLon) {
+      return {
+        type: 'LineString',
+        coordinates: [ [ this._minLon, this._minLat ], [ this._maxLon, this._maxLat ] ]
+      };
+    }
+
+    return {
+      type: 'Polygon',
+      coordinates: [
+        [
+          [ this._minLon, this._minLat ],
+          [ this._minLon, this._maxLat ],
+          [ this._maxLon, this._maxLat ],
+          [ this._maxLon, this._minLat ],
+          [ this._minLon, this._minLat ]
+        ]
+      ]
+    };
+  }
 }
