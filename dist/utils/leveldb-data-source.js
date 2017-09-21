@@ -104,7 +104,7 @@ var LevelDBDataSource = function () {
           var version = object.version;
 
           // delete the object from the cache if the versions don't match
-          if (versions[key] == null || versions[key] != null && versions[key] !== version) {
+          if (versions[key] == null || versions[key] !== version) {
             return _this.del(key, cb);
           }
 
