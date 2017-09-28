@@ -53,7 +53,7 @@ export default class RepeatableValue extends FormValue {
       return null;
     }
 
-    return this.displayValue;
+    return options.useDisplayValue ? this.displayValue : this.length;
   }
 
   get length() {
