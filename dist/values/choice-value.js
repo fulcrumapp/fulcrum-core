@@ -94,7 +94,13 @@ var ChoiceValue = function (_FormValue) {
       return null;
     }
 
-    return useDisplayValue ? this.labelStrings.sort() : this.valueStrings.sort();
+    var values = useDisplayValue ? this.labelStrings.sort() : this.valueStrings.sort();
+
+    if (!this.element.multiple) {
+      return values[0];
+    }
+
+    return values;
   };
 
   ChoiceValue.prototype.toJSON = function toJSON() {

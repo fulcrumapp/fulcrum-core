@@ -46,7 +46,13 @@ export default class ChoiceValue extends FormValue {
       return null;
     }
 
-    return useDisplayValue ? this.labelStrings.sort() : this.valueStrings.sort();
+    const values = useDisplayValue ? this.labelStrings.sort() : this.valueStrings.sort();
+
+    if (!this.element.multiple) {
+      return values[0];
+    }
+
+    return values;
   }
 
   get labelStrings() {
