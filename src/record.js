@@ -194,10 +194,10 @@ export default class Record extends Feature {
 
     const createdLocation = attributes.created_location;
 
-    this._createdLatitude = null;
-    this._createdLongitude = null;
-    this._createdAltitude = null;
-    this._createdAccuracy = null;
+    this._createdLatitude = attributes.created_latitude ? attributes.created_latitude : null;
+    this._createdLongitude = attributes.created_longitude ? attributes.created_longitude : null;
+    this._createdAltitude = attributes.created_altitude ? attributes.created_altitude : null;
+    this._createdAccuracy = attributes.created_horizontal_accuracy ? attributes.created_horizontal_accuracy : null;
 
     if (createdLocation) {
       this._createdLatitude = createdLocation.latitude;
@@ -208,10 +208,10 @@ export default class Record extends Feature {
 
     const updatedLocation = attributes.updated_location;
 
-    this._updatedLatitude = null;
-    this._updatedLongitude = null;
-    this._updatedAltitude = null;
-    this._updatedAccuracy = null;
+    this._updatedLatitude = attributes.updated_latitude ? attributes.updated_latitude : null;
+    this._updatedLongitude = attributes.updated_longitude ? attributes.updated_longitude : null;
+    this._updatedAltitude = attributes.updated_altitude ? attributes.updated_altitude : null;
+    this._updatedAccuracy = attributes.updated_horizontal_accuracy ? attributes.updated_horizontal_accuracy : null;
 
     if (updatedLocation) {
       this._updatedLatitude = updatedLocation.latitude;
