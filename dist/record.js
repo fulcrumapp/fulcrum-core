@@ -154,10 +154,10 @@ var Record = function (_Feature) {
 
     var createdLocation = attributes.created_location;
 
-    this._createdLatitude = null;
-    this._createdLongitude = null;
-    this._createdAltitude = null;
-    this._createdAccuracy = null;
+    this._createdLatitude = attributes.created_latitude != null ? attributes.created_latitude : null;
+    this._createdLongitude = attributes.created_longitude != null ? attributes.created_longitude : null;
+    this._createdAltitude = attributes.created_altitude != null ? attributes.created_altitude : null;
+    this._createdAccuracy = attributes.created_horizontal_accuracy != null ? attributes.created_horizontal_accuracy : null;
 
     if (createdLocation) {
       this._createdLatitude = createdLocation.latitude;
@@ -168,10 +168,10 @@ var Record = function (_Feature) {
 
     var updatedLocation = attributes.updated_location;
 
-    this._updatedLatitude = null;
-    this._updatedLongitude = null;
-    this._updatedAltitude = null;
-    this._updatedAccuracy = null;
+    this._updatedLatitude = attributes.updated_latitude != null ? attributes.updated_latitude : null;
+    this._updatedLongitude = attributes.updated_longitude != null ? attributes.updated_longitude : null;
+    this._updatedAltitude = attributes.updated_altitude != null ? attributes.updated_altitude : null;
+    this._updatedAccuracy = attributes.updated_horizontal_accuracy != null ? attributes.updated_horizontal_accuracy : null;
 
     if (updatedLocation) {
       this._updatedLatitude = updatedLocation.latitude;
