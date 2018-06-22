@@ -14,6 +14,10 @@ var KML = function () {
   };
 
   KML.prototype.timestamp = function timestamp(t) {
+    if (t == null) {
+      return null;
+    }
+
     return new Date(+t).toISOString();
   };
 
@@ -78,7 +82,7 @@ var KML = function () {
   };
 
   KML.prototype.kmlPlacemarkName = function kmlPlacemarkName(track) {
-    return '<name>' + this.timestamp(track.segments[0].locations[0].time) + '</name>';
+    return '<name>' + (track.isValid ? this.timestamp(track.firstLocation.time) : '') + '</name>';
   };
 
   KML.prototype.kmlPlacemarkStyle = function kmlPlacemarkStyle(track) {
@@ -122,7 +126,7 @@ var KML = function () {
   };
 
   KML.prototype.kmlExtendedDataDate = function kmlExtendedDataDate(track) {
-    return '<Data name="Date"><value>' + this.timestamp(track.segments[0].locations[0].time) + '</value></Data>';
+    return '<Data name="Date"><value>' + (track.isValid ? this.timestamp(track.firstLocation.time) : '') + '</value></Data>';
   };
 
   KML.prototype.kmlExtendedDataEnd = function kmlExtendedDataEnd() {

@@ -24,6 +24,10 @@ var GPX = function () {
   };
 
   GPX.prototype.timestamp = function timestamp(t) {
+    if (t == null) {
+      return null;
+    }
+
     return new Date(+t).toISOString();
   };
 

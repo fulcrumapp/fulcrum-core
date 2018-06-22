@@ -95,11 +95,11 @@ var SRT = function () {
   };
 
   SRT.prototype.srtEntry = function srtEntry(point, nextPoint, number) {
-    return ('\n' + number + '\n' + this.timestamp(point.time) + ' ' + (nextPoint && '--> ' + this.timestamp(nextPoint.time)) + '\n' + this.formatText(point) + '\n').trim();
+    return ('\n' + number + '\n' + this.timestamp(point.time) + ' ' + (nextPoint != null ? '--> ' + this.timestamp(nextPoint.time) : '') + '\n' + this.formatText(point) + '\n').trim();
   };
 
   SRT.prototype.formatText = function formatText(point) {
-    return [new Date(point.time).toISOString().replace('T', ' ').replace('Z', '').replace(/\.[\d]{3}/, ''), point.latitude && point.latitude.toFixed(6), point.longitude && point.longitude.toFixed(6), this.formatAltitude(point), this.formatSpeed(point)].join(', ');
+    return [new Date(point.time).toISOString().replace('T', ' ').replace('Z', '').replace(/\.[\d]{3}/, ''), point.latitude != null ? point.latitude.toFixed(6) : '', point.longitude != null ? point.longitude.toFixed(6) : '', this.formatAltitude(point), this.formatSpeed(point)].join(', ');
   };
 
   SRT.prototype.formatAltitude = function formatAltitude(point) {

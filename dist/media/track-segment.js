@@ -62,6 +62,18 @@ var TrackSegment = function () {
         return o.hasCoordinate;
       });
     }
+  }, {
+    key: 'firstLocation',
+    get: function get() {
+      return this.locations[0];
+    }
+  }, {
+    key: 'lastLocation',
+    get: function get() {
+      var locations = this.locations;
+
+      return locations[locations.length - 1];
+    }
   }]);
 
   return TrackSegment;

@@ -124,9 +124,13 @@ var Track = function () {
   };
 
   Track.prototype.toGeoJSONString = function toGeoJSONString() {
+    var lineString = this.toGeoJSONMultiLineString();
+
+    var features = lineString ? [lineString] : [];
+
     return JSON.stringify({
       type: 'FeatureCollection',
-      features: [this.toGeoJSONMultiLineString()]
+      features: features
     });
   };
 
@@ -242,6 +246,11 @@ var Track = function () {
       return this._id;
     }
   }, {
+    key: 'isValid',
+    get: function get() {
+      return this.firstLocation != null;
+    }
+  }, {
     key: 'segments',
     get: function get() {
       return this._segments;
@@ -255,6 +264,26 @@ var Track = function () {
     key: 'lastSegment',
     get: function get() {
       return this._segments[this._segments.length - 1];
+    }
+  }, {
+    key: 'firstLocation',
+    get: function get() {
+      return this.firstSegment && this.firstSegment.firstLocation;
+    }
+  }, {
+    key: 'lastLocation',
+    get: function get() {
+      return this.lastSegment && this.lastSegment.lastLocation;
+    }
+  }, {
+    key: 'firstPoint',
+    get: function get() {
+      return this.firstSegment && this.firstSegment.firstPoint;
+    }
+  }, {
+    key: 'lastPoint',
+    get: function get() {
+      return this.lastSegment && this.lastSegment.lastPoint;
     }
   }, {
     key: 'representativePoint',
