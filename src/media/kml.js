@@ -4,6 +4,10 @@ export default class KML {
   }
 
   timestamp(t) {
+    if (t == null) {
+      return null;
+    }
+
     return new Date(+t).toISOString();
   }
 
@@ -75,7 +79,7 @@ export default class KML {
   }
 
   kmlPlacemarkName(track) {
-    return `<name>${this.timestamp(track.segments[0].locations[0].time)}</name>`;
+    return `<name>${track.isValid ? this.timestamp(track.firstLocation.time) : ''}</name>`;
   }
 
   kmlPlacemarkStyle(track) {
@@ -117,7 +121,7 @@ export default class KML {
   }
 
   kmlExtendedDataDate(track) {
-    return `<Data name="Date"><value>${this.timestamp(track.segments[0].locations[0].time)}</value></Data>`;
+    return `<Data name="Date"><value>${track.isValid ? this.timestamp(track.firstLocation.time) : ''}</value></Data>`;
   }
 
   kmlExtendedDataEnd() {

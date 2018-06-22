@@ -28,4 +28,14 @@ export default class TrackSegment {
   get locations() {
     return this.points.filter(o => o.hasCoordinate);
   }
+
+  get firstLocation() {
+    return this.locations[0];
+  }
+
+  get lastLocation() {
+    const locations = this.locations;
+
+    return locations[locations.length - 1];
+  }
 }

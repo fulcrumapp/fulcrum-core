@@ -29,6 +29,10 @@ export default class Track {
     return this._id;
   }
 
+  get isValid() {
+    return this.firstLocation != null;
+  }
+
   get segments() {
     return this._segments;
   }
@@ -39,6 +43,22 @@ export default class Track {
 
   get lastSegment() {
     return this._segments[this._segments.length - 1];
+  }
+
+  get firstLocation() {
+    return this.firstSegment && this.firstSegment.firstLocation;
+  }
+
+  get lastLocation() {
+    return this.lastSegment && this.lastSegment.lastLocation;
+  }
+
+  get firstPoint() {
+    return this.firstSegment && this.firstSegment.firstPoint;
+  }
+
+  get lastPoint() {
+    return this.lastSegment && this.lastSegment.lastPoint;
   }
 
   get representativePoint() {
@@ -86,11 +106,13 @@ export default class Track {
   }
 
   toGeoJSONString() {
+    const lineString = this.toGeoJSONMultiLineString();
+
+    const features = lineString ? [ lineString ] : [];
+
     return JSON.stringify({
       type: 'FeatureCollection',
-      features: [
-        this.toGeoJSONMultiLineString()
-      ]
+      features: features
     });
   }
 

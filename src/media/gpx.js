@@ -14,6 +14,10 @@ export default class GPX {
   }
 
   timestamp(t) {
+    if (t == null) {
+      return null;
+    }
+
     return new Date(+t).toISOString();
   }
 
