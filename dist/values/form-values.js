@@ -145,16 +145,10 @@ var FormValues = function () {
     return json;
   };
 
-  FormValues.prototype.copy = function copy() {
-    return new FormValues(this.container, this.toJSON());
-  };
+  FormValues.prototype.toSimpleJSON = function toSimpleJSON() {
+    var json = {};
 
-  FormValues.prototype.merge = function merge(formValues) {
-    if (!(formValues instanceof FormValues)) {
-      throw new Error('Invalid values');
-    }
-
-    for (var _iterator3 = Object.keys(formValues._values), _isArray3 = Array.isArray(_iterator3), _i3 = 0, _iterator3 = _isArray3 ? _iterator3 : _iterator3[Symbol.iterator]();;) {
+    for (var _iterator3 = Object.keys(this._values), _isArray3 = Array.isArray(_iterator3), _i3 = 0, _iterator3 = _isArray3 ? _iterator3 : _iterator3[Symbol.iterator]();;) {
       var _ref3;
 
       if (_isArray3) {
@@ -167,6 +161,43 @@ var FormValues = function () {
       }
 
       var key = _ref3;
+
+      var formValue = this._values[key];
+
+      if (formValue) {
+        var jsonValue = formValue.toSimpleJSON();
+
+        if (jsonValue) {
+          json[formValue.element.dataName] = jsonValue;
+        }
+      }
+    }
+
+    return json;
+  };
+
+  FormValues.prototype.copy = function copy() {
+    return new FormValues(this.container, this.toJSON());
+  };
+
+  FormValues.prototype.merge = function merge(formValues) {
+    if (!(formValues instanceof FormValues)) {
+      throw new Error('Invalid values');
+    }
+
+    for (var _iterator4 = Object.keys(formValues._values), _isArray4 = Array.isArray(_iterator4), _i4 = 0, _iterator4 = _isArray4 ? _iterator4 : _iterator4[Symbol.iterator]();;) {
+      var _ref4;
+
+      if (_isArray4) {
+        if (_i4 >= _iterator4.length) break;
+        _ref4 = _iterator4[_i4++];
+      } else {
+        _i4 = _iterator4.next();
+        if (_i4.done) break;
+        _ref4 = _i4.value;
+      }
+
+      var key = _ref4;
 
       var formValue = formValues._values[key];
 
@@ -264,19 +295,19 @@ var FormValues = function () {
 
     var cache = {};
 
-    for (var _iterator4 = this.all, _isArray4 = Array.isArray(_iterator4), _i4 = 0, _iterator4 = _isArray4 ? _iterator4 : _iterator4[Symbol.iterator]();;) {
-      var _ref4;
+    for (var _iterator5 = this.all, _isArray5 = Array.isArray(_iterator5), _i5 = 0, _iterator5 = _isArray5 ? _iterator5 : _iterator5[Symbol.iterator]();;) {
+      var _ref5;
 
-      if (_isArray4) {
-        if (_i4 >= _iterator4.length) break;
-        _ref4 = _iterator4[_i4++];
+      if (_isArray5) {
+        if (_i5 >= _iterator5.length) break;
+        _ref5 = _iterator5[_i5++];
       } else {
-        _i4 = _iterator4.next();
-        if (_i4.done) break;
-        _ref4 = _i4.value;
+        _i5 = _iterator5.next();
+        if (_i5.done) break;
+        _ref5 = _i5.value;
       }
 
-      var formValue = _ref4;
+      var formValue = _ref5;
 
       var element = formValue.element;
 
@@ -295,19 +326,19 @@ var FormValues = function () {
       }
     }
 
-    for (var _iterator5 = elementsToRemove, _isArray5 = Array.isArray(_iterator5), _i5 = 0, _iterator5 = _isArray5 ? _iterator5 : _iterator5[Symbol.iterator]();;) {
-      var _ref5;
+    for (var _iterator6 = elementsToRemove, _isArray6 = Array.isArray(_iterator6), _i6 = 0, _iterator6 = _isArray6 ? _iterator6 : _iterator6[Symbol.iterator]();;) {
+      var _ref6;
 
-      if (_isArray5) {
-        if (_i5 >= _iterator5.length) break;
-        _ref5 = _iterator5[_i5++];
+      if (_isArray6) {
+        if (_i6 >= _iterator6.length) break;
+        _ref6 = _iterator6[_i6++];
       } else {
-        _i5 = _iterator5.next();
-        if (_i5.done) break;
-        _ref5 = _i5.value;
+        _i6 = _iterator6.next();
+        if (_i6.done) break;
+        _ref6 = _i6.value;
       }
 
-      var _element = _ref5;
+      var _element = _ref6;
 
       var blankValue = this.createValue(_element, null);
 
@@ -319,30 +350,6 @@ var FormValues = function () {
     key: 'all',
     get: function get() {
       var result = [];
-
-      for (var _iterator6 = Object.keys(this._values), _isArray6 = Array.isArray(_iterator6), _i6 = 0, _iterator6 = _isArray6 ? _iterator6 : _iterator6[Symbol.iterator]();;) {
-        var _ref6;
-
-        if (_isArray6) {
-          if (_i6 >= _iterator6.length) break;
-          _ref6 = _iterator6[_i6++];
-        } else {
-          _i6 = _iterator6.next();
-          if (_i6.done) break;
-          _ref6 = _i6.value;
-        }
-
-        var key = _ref6;
-
-        result.push(this._values[key]);
-      }
-
-      return result;
-    }
-  }, {
-    key: 'searchableValue',
-    get: function get() {
-      var searchValues = [];
 
       for (var _iterator7 = Object.keys(this._values), _isArray7 = Array.isArray(_iterator7), _i7 = 0, _iterator7 = _isArray7 ? _iterator7 : _iterator7[Symbol.iterator]();;) {
         var _ref7;
@@ -357,6 +364,30 @@ var FormValues = function () {
         }
 
         var key = _ref7;
+
+        result.push(this._values[key]);
+      }
+
+      return result;
+    }
+  }, {
+    key: 'searchableValue',
+    get: function get() {
+      var searchValues = [];
+
+      for (var _iterator8 = Object.keys(this._values), _isArray8 = Array.isArray(_iterator8), _i8 = 0, _iterator8 = _isArray8 ? _iterator8 : _iterator8[Symbol.iterator]();;) {
+        var _ref8;
+
+        if (_isArray8) {
+          if (_i8 >= _iterator8.length) break;
+          _ref8 = _iterator8[_i8++];
+        } else {
+          _i8 = _iterator8.next();
+          if (_i8.done) break;
+          _ref8 = _i8.value;
+        }
+
+        var key = _ref8;
 
         var formValue = this._values[key];
 
@@ -376,38 +407,38 @@ var FormValues = function () {
     get: function get() {
       var values = [];
 
-      for (var _iterator8 = this.all, _isArray8 = Array.isArray(_iterator8), _i8 = 0, _iterator8 = _isArray8 ? _iterator8 : _iterator8[Symbol.iterator]();;) {
-        var _ref8;
+      for (var _iterator9 = this.all, _isArray9 = Array.isArray(_iterator9), _i9 = 0, _iterator9 = _isArray9 ? _iterator9 : _iterator9[Symbol.iterator]();;) {
+        var _ref9;
 
-        if (_isArray8) {
-          if (_i8 >= _iterator8.length) break;
-          _ref8 = _iterator8[_i8++];
+        if (_isArray9) {
+          if (_i9 >= _iterator9.length) break;
+          _ref9 = _iterator9[_i9++];
         } else {
-          _i8 = _iterator8.next();
-          if (_i8.done) break;
-          _ref8 = _i8.value;
+          _i9 = _iterator9.next();
+          if (_i9.done) break;
+          _ref9 = _i9.value;
         }
 
-        var formValue = _ref8;
+        var formValue = _ref9;
 
         if (formValue instanceof _mediaValue2.default) {
           values.push.apply(values, formValue.items);
         } else if (formValue instanceof _signatureValue2.default) {
           values.push(formValue);
         } else if (formValue instanceof _repeatableValue2.default) {
-          for (var _iterator9 = formValue.items, _isArray9 = Array.isArray(_iterator9), _i9 = 0, _iterator9 = _isArray9 ? _iterator9 : _iterator9[Symbol.iterator]();;) {
-            var _ref9;
+          for (var _iterator10 = formValue.items, _isArray10 = Array.isArray(_iterator10), _i10 = 0, _iterator10 = _isArray10 ? _iterator10 : _iterator10[Symbol.iterator]();;) {
+            var _ref10;
 
-            if (_isArray9) {
-              if (_i9 >= _iterator9.length) break;
-              _ref9 = _iterator9[_i9++];
+            if (_isArray10) {
+              if (_i10 >= _iterator10.length) break;
+              _ref10 = _iterator10[_i10++];
             } else {
-              _i9 = _iterator9.next();
-              if (_i9.done) break;
-              _ref9 = _i9.value;
+              _i10 = _iterator10.next();
+              if (_i10.done) break;
+              _ref10 = _i10.value;
             }
 
-            var item = _ref9;
+            var item = _ref10;
 
             values.push.apply(values, item.formValues.mediaValues);
           }
@@ -421,36 +452,36 @@ var FormValues = function () {
     get: function get() {
       var items = [];
 
-      for (var _iterator10 = this.all, _isArray10 = Array.isArray(_iterator10), _i10 = 0, _iterator10 = _isArray10 ? _iterator10 : _iterator10[Symbol.iterator]();;) {
-        var _ref10;
+      for (var _iterator11 = this.all, _isArray11 = Array.isArray(_iterator11), _i11 = 0, _iterator11 = _isArray11 ? _iterator11 : _iterator11[Symbol.iterator]();;) {
+        var _ref11;
 
-        if (_isArray10) {
-          if (_i10 >= _iterator10.length) break;
-          _ref10 = _iterator10[_i10++];
+        if (_isArray11) {
+          if (_i11 >= _iterator11.length) break;
+          _ref11 = _iterator11[_i11++];
         } else {
-          _i10 = _iterator10.next();
-          if (_i10.done) break;
-          _ref10 = _i10.value;
+          _i11 = _iterator11.next();
+          if (_i11.done) break;
+          _ref11 = _i11.value;
         }
 
-        var formValue = _ref10;
+        var formValue = _ref11;
 
         if (formValue instanceof _repeatableValue2.default) {
           items.push.apply(items, formValue.items);
 
-          for (var _iterator11 = formValue.items, _isArray11 = Array.isArray(_iterator11), _i11 = 0, _iterator11 = _isArray11 ? _iterator11 : _iterator11[Symbol.iterator]();;) {
-            var _ref11;
+          for (var _iterator12 = formValue.items, _isArray12 = Array.isArray(_iterator12), _i12 = 0, _iterator12 = _isArray12 ? _iterator12 : _iterator12[Symbol.iterator]();;) {
+            var _ref12;
 
-            if (_isArray11) {
-              if (_i11 >= _iterator11.length) break;
-              _ref11 = _iterator11[_i11++];
+            if (_isArray12) {
+              if (_i12 >= _iterator12.length) break;
+              _ref12 = _iterator12[_i12++];
             } else {
-              _i11 = _iterator11.next();
-              if (_i11.done) break;
-              _ref11 = _i11.value;
+              _i12 = _iterator12.next();
+              if (_i12.done) break;
+              _ref12 = _i12.value;
             }
 
-            var item = _ref11;
+            var item = _ref12;
 
             items.push.apply(items, item.formValues.repeatableItems);
           }
@@ -464,36 +495,36 @@ var FormValues = function () {
     get: function get() {
       var items = [];
 
-      for (var _iterator12 = this.all, _isArray12 = Array.isArray(_iterator12), _i12 = 0, _iterator12 = _isArray12 ? _iterator12 : _iterator12[Symbol.iterator]();;) {
-        var _ref12;
+      for (var _iterator13 = this.all, _isArray13 = Array.isArray(_iterator13), _i13 = 0, _iterator13 = _isArray13 ? _iterator13 : _iterator13[Symbol.iterator]();;) {
+        var _ref13;
 
-        if (_isArray12) {
-          if (_i12 >= _iterator12.length) break;
-          _ref12 = _iterator12[_i12++];
+        if (_isArray13) {
+          if (_i13 >= _iterator13.length) break;
+          _ref13 = _iterator13[_i13++];
         } else {
-          _i12 = _iterator12.next();
-          if (_i12.done) break;
-          _ref12 = _i12.value;
+          _i13 = _iterator13.next();
+          if (_i13.done) break;
+          _ref13 = _i13.value;
         }
 
-        var formValue = _ref12;
+        var formValue = _ref13;
 
         if (formValue instanceof _recordLinkValue2.default) {
           items.push.apply(items, formValue.items);
         } else if (formValue instanceof _repeatableValue2.default) {
-          for (var _iterator13 = formValue.items, _isArray13 = Array.isArray(_iterator13), _i13 = 0, _iterator13 = _isArray13 ? _iterator13 : _iterator13[Symbol.iterator]();;) {
-            var _ref13;
+          for (var _iterator14 = formValue.items, _isArray14 = Array.isArray(_iterator14), _i14 = 0, _iterator14 = _isArray14 ? _iterator14 : _iterator14[Symbol.iterator]();;) {
+            var _ref14;
 
-            if (_isArray13) {
-              if (_i13 >= _iterator13.length) break;
-              _ref13 = _iterator13[_i13++];
+            if (_isArray14) {
+              if (_i14 >= _iterator14.length) break;
+              _ref14 = _iterator14[_i14++];
             } else {
-              _i13 = _iterator13.next();
-              if (_i13.done) break;
-              _ref13 = _i13.value;
+              _i14 = _iterator14.next();
+              if (_i14.done) break;
+              _ref14 = _i14.value;
             }
 
-            var item = _ref13;
+            var item = _ref14;
 
             items.push.apply(items, item.formValues.recordLinkItems);
           }

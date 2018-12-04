@@ -98,6 +98,33 @@ var RepeatableValue = function (_FormValue) {
     return items;
   };
 
+  RepeatableValue.prototype.toSimpleJSON = function toSimpleJSON() {
+    if (this.isEmpty) {
+      return null;
+    }
+
+    var items = [];
+
+    for (var _iterator3 = this._items, _isArray3 = Array.isArray(_iterator3), _i3 = 0, _iterator3 = _isArray3 ? _iterator3 : _iterator3[Symbol.iterator]();;) {
+      var _ref3;
+
+      if (_isArray3) {
+        if (_i3 >= _iterator3.length) break;
+        _ref3 = _iterator3[_i3++];
+      } else {
+        _i3 = _iterator3.next();
+        if (_i3.done) break;
+        _ref3 = _i3.value;
+      }
+
+      var item = _ref3;
+
+      items.push(item.toJSON({ simple: true }));
+    }
+
+    return items;
+  };
+
   RepeatableValue.prototype.isEqual = function isEqual(value) {
     return false;
   };
@@ -195,19 +222,19 @@ var RepeatableValue = function (_FormValue) {
 
       var values = [];
 
-      for (var _iterator3 = this._items, _isArray3 = Array.isArray(_iterator3), _i3 = 0, _iterator3 = _isArray3 ? _iterator3 : _iterator3[Symbol.iterator]();;) {
-        var _ref3;
+      for (var _iterator4 = this._items, _isArray4 = Array.isArray(_iterator4), _i4 = 0, _iterator4 = _isArray4 ? _iterator4 : _iterator4[Symbol.iterator]();;) {
+        var _ref4;
 
-        if (_isArray3) {
-          if (_i3 >= _iterator3.length) break;
-          _ref3 = _iterator3[_i3++];
+        if (_isArray4) {
+          if (_i4 >= _iterator4.length) break;
+          _ref4 = _iterator4[_i4++];
         } else {
-          _i3 = _iterator3.next();
-          if (_i3.done) break;
-          _ref3 = _i3.value;
+          _i4 = _iterator4.next();
+          if (_i4.done) break;
+          _ref4 = _i4.value;
         }
 
-        var item = _ref3;
+        var item = _ref4;
 
         var searchValue = item.searchableValue;
 

@@ -145,6 +145,7 @@ var ChoiceElement = function (_Element) {
       }
 
       var filteredItems = [];
+      var matchedValues = {};
 
       for (var _iterator3 = items, _isArray3 = Array.isArray(_iterator3), _i3 = 0, _iterator3 = _isArray3 ? _iterator3 : _iterator3[Symbol.iterator]();;) {
         var _ref3;
@@ -174,8 +175,11 @@ var ChoiceElement = function (_Element) {
 
           var filter = _ref4;
 
-          if (item.value.toLowerCase().indexOf(filter.toLowerCase()) !== -1) {
+          var isMatch = item.value.toLowerCase().indexOf(filter.toLowerCase()) !== -1;
+
+          if (isMatch && !matchedValues[item.value]) {
             filteredItems.push(item);
+            matchedValues[item.value] = item;
           }
         }
       }
