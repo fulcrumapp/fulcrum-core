@@ -45,6 +45,10 @@ export default class CalculatedValue extends TextualValue {
   }
 
   get columnValue() {
+    if (this.isEmpty) {
+      return null;
+    }
+
     const display = this.element.display;
 
     // - for currency or number display, return the numeric value
@@ -56,9 +60,11 @@ export default class CalculatedValue extends TextualValue {
     } else if (display.isDate) {
       const date = new Date(`${this.textValue} 00:00:00Z`);
 
-      if (date) {
+      if (date && !isNaN(date)) {
         return date.getTime() / 1000;
       }
+
+      return null;
     }
 
     return this.textValue;

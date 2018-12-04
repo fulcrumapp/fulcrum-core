@@ -57,6 +57,17 @@ describe('calculated fields', () => {
     value.toJSON().should.eql('1969-12-31');
 
     value.columnValue.should.eql(-86400);
+
+    value.textValue = null;
+
+    shouldBeNull(value.columnValue);
+    // (value.columnValue == null == null).should.be.true;
+    // (value.columnValue == null).should.eql(true);
+    // (value.columnValue == null).should.eql(true);
+
+    // throw new Error('yoyoyooo ' + value.columnValue + ' : ' + (value.columnValue == null));
+
+    // shouldBeNull(value.columnValue);
   });
 
   it('finds a numeric calculation value in the record', () => {
