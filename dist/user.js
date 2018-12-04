@@ -17,6 +17,8 @@ var User = function () {
     this._lastName = attributes.last_name;
     this._email = attributes.email;
     this._fullName = attributes.name;
+    this._imageLarge = attributes.image_large;
+    this._imageSmall = attributes.image_small;
   }
 
   _createClass(User, [{
@@ -43,6 +45,16 @@ var User = function () {
     key: 'email',
     get: function get() {
       return this._email;
+    }
+  }, {
+    key: 'imageLarge',
+    get: function get() {
+      return this._imageLarge;
+    }
+  }, {
+    key: 'imageSmall',
+    get: function get() {
+      return this._imageSmall;
     }
   }]);
 

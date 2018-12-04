@@ -61,6 +61,7 @@ var Form = function () {
     this._imageLarge = attributes.image_large;
     this._imageSmall = attributes.image_small;
     this._imageThumbnail = attributes.image_thumbnail;
+    this._recordCount = attributes.record_count;
 
     this._projectEnabled = attributes.projects_enabled != null ? !!attributes.projects_enabled : true;
     this._assignmentEnabled = attributes.assignment_enabled != null ? !!attributes.assignment_enabled : true;
@@ -283,6 +284,11 @@ var Form = function () {
     key: 'description',
     get: function get() {
       return this._description;
+    }
+  }, {
+    key: 'recordCount',
+    get: function get() {
+      return this._recordCount;
     }
   }, {
     key: 'script',
