@@ -32,6 +32,7 @@ export default class Form {
     this._imageLarge = attributes.image_large;
     this._imageSmall = attributes.image_small;
     this._imageThumbnail = attributes.image_thumbnail;
+    this._recordCount = attributes.record_count;
 
     this._projectEnabled = attributes.projects_enabled != null ? !!attributes.projects_enabled : true;
     this._assignmentEnabled = attributes.assignment_enabled != null ? !!attributes.assignment_enabled : true;
@@ -199,6 +200,10 @@ export default class Form {
 
   get description() {
     return this._description;
+  }
+
+  get recordCount() {
+    return this._recordCount;
   }
 
   get script() {

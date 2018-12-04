@@ -7,6 +7,8 @@ export default class User {
     this._lastName = attributes.last_name;
     this._email = attributes.email;
     this._fullName = attributes.name;
+    this._imageLarge = attributes.image_large;
+    this._imageSmall = attributes.image_small;
   }
 
   get id() {
@@ -27,5 +29,13 @@ export default class User {
 
   get email() {
     return this._email;
+  }
+
+  get imageLarge() {
+    return this._imageLarge;
+  }
+
+  get imageSmall() {
+    return this._imageSmall;
   }
 }
