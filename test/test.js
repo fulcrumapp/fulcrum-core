@@ -17,10 +17,12 @@ let formJson = null;
 
 let record = null;
 let recordJson = null;
+let simpleJson = null;
 
 beforeEach((done) => {
   formJson = JSON.parse(fs.readFileSync('./test/fixtures/forms/18300cfb-20e3-4e8b-9aef-878636b09ac4.json')).form;
   recordJson = JSON.parse(fs.readFileSync('./test/record.json')).record;
+  simpleJson = JSON.parse(fs.readFileSync('./test/fixtures/records/simple-format.json'));
 
   form = new Form(formJson);
 
@@ -44,6 +46,10 @@ describe('Record', () => {
 
   it('parses a date value', () => {
     record.formValues.get('8fd4').textValue.should.eql('2015-12-02');
+  });
+
+  it('produces simple JSON', () => {
+    record.toJSON({simple: true}).should.eql(simpleJson);
   });
 });
 

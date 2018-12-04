@@ -50,6 +50,10 @@ export default class FormValue {
     notImplemented();
   }
 
+  toSimpleJSON() {
+    return this.toJSON();
+  }
+
   isEqual(value) {
     notImplemented();
   }
