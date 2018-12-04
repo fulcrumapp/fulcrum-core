@@ -168,6 +168,16 @@ export default class ClassificationValue extends FormValue {
     };
   }
 
+  toSimpleJSON({labels} = {}) {
+    if (this.isEmpty) {
+      return null;
+    }
+
+    const strings = labels ? this.labelStrings : this.valueStrings;
+
+    return strings;
+  }
+
   get columnValue() {
     const allValues = this.valueStrings;
 

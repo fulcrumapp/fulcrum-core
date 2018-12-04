@@ -68,11 +68,15 @@ export default class ChoiceElement extends Element {
     }
 
     const filteredItems = [];
+    const matchedValues = {};
 
     for (const item of items) {
       for (const filter of this.choiceFilter) {
-        if (item.value.toLowerCase().indexOf(filter.toLowerCase()) !== -1) {
+        const isMatch = item.value.toLowerCase().indexOf(filter.toLowerCase()) !== -1;
+
+        if (isMatch && !matchedValues[item.value]) {
           filteredItems.push(item);
+          matchedValues[item.value] = item;
         }
       }
     }

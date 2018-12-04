@@ -100,7 +100,7 @@ export default class Record extends Feature {
     return loadObject(this, dataSource, 'changeset', 'getChangeset', callback);
   }
 
-  toJSON() {
+  toJSON({simple} = {}) {
     const json = {};
 
     json.form_id = this._form.id;
@@ -111,7 +111,7 @@ export default class Record extends Feature {
     json.updated_at = DateUtils.formatISOTimestamp(this.updatedAt);
     json.client_created_at = DateUtils.formatISOTimestamp(this.clientCreatedAt);
     json.client_updated_at = DateUtils.formatISOTimestamp(this.clientUpdatedAt);
-    json.form_values = this.formValues.toJSON();
+    json.form_values = simple ? this.formValues.toSimpleJSON() : this.formValues.toJSON();
     json.latitude = this._latitude != null ? this._latitude : null;
     json.longitude = this._longitude != null ? this._longitude : null;
     json.project_id = this._projectID || null;

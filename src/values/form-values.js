@@ -91,6 +91,24 @@ export default class FormValues {
     return json;
   }
 
+  toSimpleJSON() {
+    const json = {};
+
+    for (const key of Object.keys(this._values)) {
+      const formValue = this._values[key];
+
+      if (formValue) {
+        const jsonValue = formValue.toSimpleJSON();
+
+        if (jsonValue) {
+          json[formValue.element.dataName] = jsonValue;
+        }
+      }
+    }
+
+    return json;
+  }
+
   copy() {
     return new FormValues(this.container, this.toJSON());
   }

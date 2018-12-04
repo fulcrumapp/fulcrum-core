@@ -143,6 +143,16 @@ export default class ChoiceValue extends FormValue {
     };
   }
 
+  toSimpleJSON({labels} = {}) {
+    if (this.isEmpty) {
+      return null;
+    }
+
+    const strings = labels ? this.labelStrings : this.valueStrings;
+
+    return this.element.multiple ? strings : strings[0];
+  }
+
   get columnValue() {
     const allValues = this.valueStrings.sort();
 

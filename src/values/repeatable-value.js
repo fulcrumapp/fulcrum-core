@@ -74,6 +74,20 @@ export default class RepeatableValue extends FormValue {
     return items;
   }
 
+  toSimpleJSON() {
+    if (this.isEmpty) {
+      return null;
+    }
+
+    const items = [];
+
+    for (const item of this._items) {
+      items.push(item.toJSON({simple: true}));
+    }
+
+    return items;
+  }
+
   get columnValue() {
     return null;
   }
