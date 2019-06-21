@@ -25,6 +25,8 @@ export default class Element {
 
     this._isDisabled = !!attributes.disabled;
 
+    this._defaultPreviousValue = !!attributes.default_previous_value;
+
     this._visibleConditionsType = attributes.visible_conditions_type;
 
     this._visibleConditionsBehavior = attributes.visible_conditions_behavior || 'clear';
@@ -93,6 +95,10 @@ export default class Element {
 
   get defaultValue() {
     return this._defaultValue;
+  }
+
+  get isDefaultPreviousValueEnabled() {
+    return this._defaultPreviousValue;
   }
 
   get isRequired() {
