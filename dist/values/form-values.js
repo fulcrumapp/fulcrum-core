@@ -371,6 +371,11 @@ var FormValues = function () {
       return result;
     }
   }, {
+    key: 'elements',
+    get: function get() {
+      return this.container.elements;
+    }
+  }, {
     key: 'searchableValue',
     get: function get() {
       var searchValues = [];
