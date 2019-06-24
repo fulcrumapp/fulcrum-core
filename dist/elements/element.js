@@ -42,6 +42,8 @@ var Element = function () {
 
     this._isDisabled = !!attributes.disabled;
 
+    this._defaultPreviousValue = !!attributes.default_previous_value;
+
     this._visibleConditionsType = attributes.visible_conditions_type;
 
     this._visibleConditionsBehavior = attributes.visible_conditions_behavior || 'clear';
@@ -158,6 +160,11 @@ var Element = function () {
     key: 'defaultValue',
     get: function get() {
       return this._defaultValue;
+    }
+  }, {
+    key: 'isDefaultPreviousValueEnabled',
+    get: function get() {
+      return this._defaultPreviousValue;
     }
   }, {
     key: 'isRequired',

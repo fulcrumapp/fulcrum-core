@@ -211,6 +211,10 @@ export default class FormValues {
     return null;
   }
 
+  get elements() {
+    return this.container.elements;
+  }
+
   get searchableValue() {
     const searchValues = [];
 

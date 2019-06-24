@@ -49,7 +49,6 @@ var DefaultValues = function () {
     if (defaultValues == null) {
       return;
     }
-
     var elements = DefaultValues.elementsWithPreviousDefaultsEnabledWithinElements(formValues.elements, record.form);
 
     for (var _iterator = elements, _isArray = Array.isArray(_iterator), _i = 0, _iterator = _isArray ? _iterator : _iterator[Symbol.iterator]();;) {

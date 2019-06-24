@@ -32,7 +32,6 @@ export default class DefaultValues {
     if (defaultValues == null) {
       return;
     }
-
     const elements = DefaultValues.elementsWithPreviousDefaultsEnabledWithinElements(formValues.elements, record.form);
 
     for (const element of elements) {
