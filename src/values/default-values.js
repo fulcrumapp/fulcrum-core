@@ -28,12 +28,13 @@ export default class DefaultValues {
     }
   }
 
-  static applyPreviousDefaults(defaultValues, formValues, record) {
+  static applyPreviousDefaults(defaultValues, feature, record) {
     if (defaultValues == null) {
       return;
     }
-
-    const elements = DefaultValues.elementsWithPreviousDefaultsEnabledWithinElements(formValues.elements, record.form);
+    const form = feature.form;
+    const formValues = feature.formValues;
+    const elements = DefaultValues.elementsWithPreviousDefaultsEnabledWithinElements(form.elements, record.form);
 
     for (const element of elements) {
       const previousDefaultAsJSON = defaultValues[element.key];
