@@ -45,12 +45,13 @@ var DefaultValues = function () {
     }
   };
 
-  DefaultValues.applyPreviousDefaults = function applyPreviousDefaults(defaultValues, formValues, record) {
+  DefaultValues.applyPreviousDefaults = function applyPreviousDefaults(defaultValues, feature, record) {
     if (defaultValues == null) {
       return;
     }
-
-    var elements = DefaultValues.elementsWithPreviousDefaultsEnabledWithinElements(formValues.elements, record.form);
+    var form = feature.form;
+    var formValues = feature.formValues;
+    var elements = DefaultValues.elementsWithPreviousDefaultsEnabledWithinElements(form.elements, record.form);
 
     for (var _iterator = elements, _isArray = Array.isArray(_iterator), _i = 0, _iterator = _isArray ? _iterator : _iterator[Symbol.iterator]();;) {
       var _ref;
