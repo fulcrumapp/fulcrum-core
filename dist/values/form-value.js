@@ -32,6 +32,10 @@ var FormValue = function () {
     notImplemented();
   };
 
+  FormValue.prototype.toSimpleJSON = function toSimpleJSON() {
+    return this.toJSON();
+  };
+
   FormValue.prototype.isEqual = function isEqual(value) {
     notImplemented();
   };

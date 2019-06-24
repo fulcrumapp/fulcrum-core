@@ -112,12 +112,15 @@ var RepeatableItemValue = function (_Feature) {
   };
 
   RepeatableItemValue.prototype.toJSON = function toJSON() {
+    var _ref = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
+        simple = _ref.simple;
+
     var json = {};
 
     json.id = this.id;
     json.created_at = _dateUtils2.default.formatEpochTimestamp(this.createdAt);
     json.updated_at = _dateUtils2.default.formatEpochTimestamp(this.updatedAt);
-    json.form_values = this.formValues.toJSON();
+    json.form_values = simple ? this.formValues.toSimpleJSON() : this.formValues.toJSON();
     json.geometry = this.geometryAsGeoJSON;
     json.created_location = this.createdLocation;
     json.updated_location = this.updatedLocation;
@@ -234,18 +237,18 @@ var RepeatableItemValue = function (_Feature) {
       var titles = [];
 
       for (var _iterator = titleFieldKeys, _isArray = Array.isArray(_iterator), _i = 0, _iterator = _isArray ? _iterator : _iterator[Symbol.iterator]();;) {
-        var _ref;
+        var _ref2;
 
         if (_isArray) {
           if (_i >= _iterator.length) break;
-          _ref = _iterator[_i++];
+          _ref2 = _iterator[_i++];
         } else {
           _i = _iterator.next();
           if (_i.done) break;
-          _ref = _i.value;
+          _ref2 = _i.value;
         }
 
-        var fieldKey = _ref;
+        var fieldKey = _ref2;
 
         var formValue = this.formValues.get(fieldKey);
 

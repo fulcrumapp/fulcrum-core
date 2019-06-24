@@ -78,6 +78,10 @@ var CalculatedValue = function (_TextualValue) {
   }, {
     key: 'columnValue',
     get: function get() {
+      if (this.isEmpty) {
+        return null;
+      }
+
       var display = this.element.display;
 
       // - for currency or number display, return the numeric value
@@ -89,9 +93,11 @@ var CalculatedValue = function (_TextualValue) {
       } else if (display.isDate) {
         var date = new Date(this.textValue + ' 00:00:00Z');
 
-        if (date) {
+        if (date && !isNaN(date)) {
           return date.getTime() / 1000;
         }
+
+        return null;
       }
 
       return this.textValue;

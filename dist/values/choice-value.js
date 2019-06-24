@@ -151,6 +151,19 @@ var ChoiceValue = function (_FormValue) {
     };
   };
 
+  ChoiceValue.prototype.toSimpleJSON = function toSimpleJSON() {
+    var _ref6 = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
+        labels = _ref6.labels;
+
+    if (this.isEmpty) {
+      return null;
+    }
+
+    var strings = labels ? this.labelStrings : this.valueStrings;
+
+    return this.element.multiple ? strings : strings[0];
+  };
+
   ChoiceValue.prototype.isEqual = function isEqual(value) {
     if ((0, _lodash2.default)(this.selectedValues, value)) {
       return true;
@@ -193,18 +206,18 @@ var ChoiceValue = function (_FormValue) {
       var labels = [];
 
       for (var _iterator5 = this._choiceValues, _isArray5 = Array.isArray(_iterator5), _i5 = 0, _iterator5 = _isArray5 ? _iterator5 : _iterator5[Symbol.iterator]();;) {
-        var _ref6;
+        var _ref7;
 
         if (_isArray5) {
           if (_i5 >= _iterator5.length) break;
-          _ref6 = _iterator5[_i5++];
+          _ref7 = _iterator5[_i5++];
         } else {
           _i5 = _iterator5.next();
           if (_i5.done) break;
-          _ref6 = _i5.value;
+          _ref7 = _i5.value;
         }
 
-        var rawValue = _ref6;
+        var rawValue = _ref7;
 
         var choice = this.element.choiceByValue(rawValue);
 
@@ -216,18 +229,18 @@ var ChoiceValue = function (_FormValue) {
       }
 
       for (var _iterator6 = this._otherValues, _isArray6 = Array.isArray(_iterator6), _i6 = 0, _iterator6 = _isArray6 ? _iterator6 : _iterator6[Symbol.iterator]();;) {
-        var _ref7;
+        var _ref8;
 
         if (_isArray6) {
           if (_i6 >= _iterator6.length) break;
-          _ref7 = _iterator6[_i6++];
+          _ref8 = _iterator6[_i6++];
         } else {
           _i6 = _iterator6.next();
           if (_i6.done) break;
-          _ref7 = _i6.value;
+          _ref8 = _i6.value;
         }
 
-        var otherValue = _ref7;
+        var otherValue = _ref8;
 
         labels.push(otherValue);
       }
@@ -240,35 +253,35 @@ var ChoiceValue = function (_FormValue) {
       var values = [];
 
       for (var _iterator7 = this._choiceValues, _isArray7 = Array.isArray(_iterator7), _i7 = 0, _iterator7 = _isArray7 ? _iterator7 : _iterator7[Symbol.iterator]();;) {
-        var _ref8;
+        var _ref9;
 
         if (_isArray7) {
           if (_i7 >= _iterator7.length) break;
-          _ref8 = _iterator7[_i7++];
+          _ref9 = _iterator7[_i7++];
         } else {
           _i7 = _iterator7.next();
           if (_i7.done) break;
-          _ref8 = _i7.value;
+          _ref9 = _i7.value;
         }
 
-        var rawValue = _ref8;
+        var rawValue = _ref9;
 
         values.push(rawValue);
       }
 
       for (var _iterator8 = this._otherValues, _isArray8 = Array.isArray(_iterator8), _i8 = 0, _iterator8 = _isArray8 ? _iterator8 : _iterator8[Symbol.iterator]();;) {
-        var _ref9;
+        var _ref10;
 
         if (_isArray8) {
           if (_i8 >= _iterator8.length) break;
-          _ref9 = _iterator8[_i8++];
+          _ref10 = _iterator8[_i8++];
         } else {
           _i8 = _iterator8.next();
           if (_i8.done) break;
-          _ref9 = _i8.value;
+          _ref10 = _i8.value;
         }
 
-        var otherValue = _ref9;
+        var otherValue = _ref10;
 
         values.push(otherValue);
       }
@@ -286,18 +299,18 @@ var ChoiceValue = function (_FormValue) {
       var values = [];
 
       for (var _iterator9 = this._choiceValues, _isArray9 = Array.isArray(_iterator9), _i9 = 0, _iterator9 = _isArray9 ? _iterator9 : _iterator9[Symbol.iterator]();;) {
-        var _ref10;
+        var _ref11;
 
         if (_isArray9) {
           if (_i9 >= _iterator9.length) break;
-          _ref10 = _iterator9[_i9++];
+          _ref11 = _iterator9[_i9++];
         } else {
           _i9 = _iterator9.next();
           if (_i9.done) break;
-          _ref10 = _i9.value;
+          _ref11 = _i9.value;
         }
 
-        var rawValue = _ref10;
+        var rawValue = _ref11;
 
         var choice = this.element.choiceByValue(rawValue);
 
@@ -313,18 +326,18 @@ var ChoiceValue = function (_FormValue) {
       }
 
       for (var _iterator10 = this._otherValues, _isArray10 = Array.isArray(_iterator10), _i10 = 0, _iterator10 = _isArray10 ? _iterator10 : _iterator10[Symbol.iterator]();;) {
-        var _ref11;
+        var _ref12;
 
         if (_isArray10) {
           if (_i10 >= _iterator10.length) break;
-          _ref11 = _iterator10[_i10++];
+          _ref12 = _iterator10[_i10++];
         } else {
           _i10 = _iterator10.next();
           if (_i10.done) break;
-          _ref11 = _i10.value;
+          _ref12 = _i10.value;
         }
 
-        var otherValue = _ref11;
+        var otherValue = _ref12;
 
         values.push(otherValue);
       }

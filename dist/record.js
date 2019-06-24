@@ -61,6 +61,9 @@ var Record = function (_Feature) {
   };
 
   Record.prototype.toJSON = function toJSON() {
+    var _ref = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
+        simple = _ref.simple;
+
     var json = {};
 
     json.form_id = this._form.id;
@@ -71,7 +74,7 @@ var Record = function (_Feature) {
     json.updated_at = _dateUtils2.default.formatISOTimestamp(this.updatedAt);
     json.client_created_at = _dateUtils2.default.formatISOTimestamp(this.clientCreatedAt);
     json.client_updated_at = _dateUtils2.default.formatISOTimestamp(this.clientUpdatedAt);
-    json.form_values = this.formValues.toJSON();
+    json.form_values = simple ? this.formValues.toSimpleJSON() : this.formValues.toJSON();
     json.latitude = this._latitude != null ? this._latitude : null;
     json.longitude = this._longitude != null ? this._longitude : null;
     json.project_id = this._projectID || null;
@@ -210,18 +213,18 @@ var Record = function (_Feature) {
 
   Record.prototype.updateFromActionAttributes = function updateFromActionAttributes(attributes, role) {
     for (var _iterator = Object.keys(attributes), _isArray = Array.isArray(_iterator), _i = 0, _iterator = _isArray ? _iterator : _iterator[Symbol.iterator]();;) {
-      var _ref;
+      var _ref2;
 
       if (_isArray) {
         if (_i >= _iterator.length) break;
-        _ref = _iterator[_i++];
+        _ref2 = _iterator[_i++];
       } else {
         _i = _iterator.next();
         if (_i.done) break;
-        _ref = _i.value;
+        _ref2 = _i.value;
       }
 
-      var dataName = _ref;
+      var dataName = _ref2;
 
       switch (dataName) {
         case 'project_id':
@@ -398,18 +401,18 @@ var Record = function (_Feature) {
       var titles = [];
 
       for (var _iterator2 = titleFieldKeys, _isArray2 = Array.isArray(_iterator2), _i2 = 0, _iterator2 = _isArray2 ? _iterator2 : _iterator2[Symbol.iterator]();;) {
-        var _ref2;
+        var _ref3;
 
         if (_isArray2) {
           if (_i2 >= _iterator2.length) break;
-          _ref2 = _iterator2[_i2++];
+          _ref3 = _iterator2[_i2++];
         } else {
           _i2 = _iterator2.next();
           if (_i2.done) break;
-          _ref2 = _i2.value;
+          _ref3 = _i2.value;
         }
 
-        var fieldKey = _ref2;
+        var fieldKey = _ref3;
 
         var value = this.formValues.get(fieldKey);
 
