@@ -1,39 +1,33 @@
-'use strict';
+"use strict";
 
 exports.__esModule = true;
+exports["default"] = void 0;
 
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+var _elementValidationError = _interopRequireDefault(require("./element-validation-error"));
 
-var _elementValidationError = require('./element-validation-error');
+var _util = require("util");
 
-var _elementValidationError2 = _interopRequireDefault(_elementValidationError);
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
-var _util = require('util');
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
-function _defaults(obj, defaults) { var keys = Object.getOwnPropertyNames(defaults); for (var i = 0; i < keys.length; i++) { var key = keys[i]; var value = Object.getOwnPropertyDescriptor(defaults, key); if (value && value.configurable && obj[key] === undefined) { Object.defineProperty(obj, key, value); } } return obj; }
+function _inheritsLoose(subClass, superClass) { subClass.prototype = Object.create(superClass.prototype); subClass.prototype.constructor = subClass; subClass.__proto__ = superClass; }
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : _defaults(subClass, superClass); }
-
-var NumericRangeValidationError = function (_ElementValidationErr) {
-  _inherits(NumericRangeValidationError, _ElementValidationErr);
+var NumericRangeValidationError =
+/*#__PURE__*/
+function (_ElementValidationErr) {
+  _inheritsLoose(NumericRangeValidationError, _ElementValidationErr);
 
   function NumericRangeValidationError() {
-    _classCallCheck(this, NumericRangeValidationError);
-
-    return _possibleConstructorReturn(this, _ElementValidationErr.apply(this, arguments));
+    return _ElementValidationErr.apply(this, arguments) || this;
   }
 
   _createClass(NumericRangeValidationError, [{
-    key: 'message',
+    key: "message",
     get: function get() {
       var message = null;
-
       var fieldLabel = this.label;
 
       if (this.element.hasMin && this.element.hasMax) {
@@ -49,7 +43,7 @@ var NumericRangeValidationError = function (_ElementValidationErr) {
   }]);
 
   return NumericRangeValidationError;
-}(_elementValidationError2.default);
+}(_elementValidationError["default"]);
 
-exports.default = NumericRangeValidationError;
+exports["default"] = NumericRangeValidationError;
 //# sourceMappingURL=numeric-range-validation-error.js.map

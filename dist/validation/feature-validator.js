@@ -1,64 +1,41 @@
-'use strict';
+"use strict";
 
 exports.__esModule = true;
+exports["default"] = void 0;
 
-var _repeatableItemValue = require('../values/repeatable-item-value');
+var _repeatableItemValue = _interopRequireDefault(require("../values/repeatable-item-value"));
 
-var _repeatableItemValue2 = _interopRequireDefault(_repeatableItemValue);
+var _record = _interopRequireDefault(require("../record"));
 
-var _record = require('../record');
+var _condition = _interopRequireDefault(require("../elements/condition"));
 
-var _record2 = _interopRequireDefault(_record);
+var _requiredFieldValidationError = _interopRequireDefault(require("./required-field-validation-error"));
 
-var _condition = require('../elements/condition');
+var _geometryRequiredValidationError = _interopRequireDefault(require("./geometry-required-validation-error"));
 
-var _condition2 = _interopRequireDefault(_condition);
+var _patternValidationError = _interopRequireDefault(require("./pattern-validation-error"));
 
-var _requiredFieldValidationError = require('./required-field-validation-error');
+var _lengthValidationError = _interopRequireDefault(require("./length-validation-error"));
 
-var _requiredFieldValidationError2 = _interopRequireDefault(_requiredFieldValidationError);
+var _numericFormatValidationError = _interopRequireDefault(require("./numeric-format-validation-error"));
 
-var _geometryRequiredValidationError = require('./geometry-required-validation-error');
+var _numericRangeValidationError = _interopRequireDefault(require("./numeric-range-validation-error"));
 
-var _geometryRequiredValidationError2 = _interopRequireDefault(_geometryRequiredValidationError);
+var _dateFormatValidationError = _interopRequireDefault(require("./date-format-validation-error"));
 
-var _patternValidationError = require('./pattern-validation-error');
+var _timeFormatValidationError = _interopRequireDefault(require("./time-format-validation-error"));
 
-var _patternValidationError2 = _interopRequireDefault(_patternValidationError);
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
-var _lengthValidationError = require('./length-validation-error');
-
-var _lengthValidationError2 = _interopRequireDefault(_lengthValidationError);
-
-var _numericFormatValidationError = require('./numeric-format-validation-error');
-
-var _numericFormatValidationError2 = _interopRequireDefault(_numericFormatValidationError);
-
-var _numericRangeValidationError = require('./numeric-range-validation-error');
-
-var _numericRangeValidationError2 = _interopRequireDefault(_numericRangeValidationError);
-
-var _dateFormatValidationError = require('./date-format-validation-error');
-
-var _dateFormatValidationError2 = _interopRequireDefault(_dateFormatValidationError);
-
-var _timeFormatValidationError = require('./time-format-validation-error');
-
-var _timeFormatValidationError2 = _interopRequireDefault(_timeFormatValidationError);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-var FeatureValidator = function () {
-  function FeatureValidator() {
-    _classCallCheck(this, FeatureValidator);
-  }
+var FeatureValidator =
+/*#__PURE__*/
+function () {
+  function FeatureValidator() {}
 
   FeatureValidator.validateFeature = function validateFeature(feature, record, formValues) {
-    if (feature instanceof _record2.default) {
+    if (feature instanceof _record["default"]) {
       return FeatureValidator.validateRecord(record, formValues);
-    } else if (feature instanceof _repeatableItemValue2.default) {
+    } else if (feature instanceof _repeatableItemValue["default"]) {
       return FeatureValidator.validateRepeatableItem(feature, record, formValues);
     }
 
@@ -73,19 +50,17 @@ var FeatureValidator = function () {
     var errors = [];
 
     if (record.isStatusFieldEnabled && record.status == null) {
-      errors.push(new _requiredFieldValidationError2.default(record.form.statusField));
+      errors.push(new _requiredFieldValidationError["default"](record.form.statusField));
     }
 
     if (record.form.isGeometryRequired) {
       if (!record.hasCoordinate) {
-        errors.push(new _geometryRequiredValidationError2.default());
+        errors.push(new _geometryRequiredValidationError["default"]());
       }
     }
 
     var cache = {};
-
     this.validateFieldsInElements(record.form.elements, record, formValues, errors, cache);
-
     return errors;
   };
 
@@ -98,14 +73,12 @@ var FeatureValidator = function () {
 
     if (repeatableItem.element.isGeometryRequired) {
       if (!repeatableItem.hasCoordinate) {
-        errors.push(new _geometryRequiredValidationError2.default());
+        errors.push(new _geometryRequiredValidationError["default"]());
       }
     }
 
     var cache = {};
-
     FeatureValidator.validateFieldsInElements(repeatableItem.element.elements, record, formValues, errors, cache);
-
     return errors;
   };
 
@@ -127,17 +100,17 @@ var FeatureValidator = function () {
       var element = _ref;
 
       if (element.isSectionElement) {
-        var visible = _condition2.default.shouldElementBeVisible(element, record, formValues, cache);
+        var visible = _condition["default"].shouldElementBeVisible(element, record, formValues, cache);
 
         if (visible) {
           FeatureValidator.validateFieldsInElements(element.elements, record, formValues, errors, cache);
         }
       } else {
-        var required = _condition2.default.shouldElementBeRequired(element, record, formValues);
-        var _visible = _condition2.default.shouldElementBeVisible(element, record, formValues, cache);
+        var required = _condition["default"].shouldElementBeRequired(element, record, formValues);
+
+        var _visible = _condition["default"].shouldElementBeVisible(element, record, formValues, cache);
 
         var disabled = element.isDisabled;
-
         var validatable = _visible && !disabled;
 
         if (validatable) {
@@ -145,14 +118,13 @@ var FeatureValidator = function () {
             var fieldValue = formValues.get(element.key);
 
             if (fieldValue == null || fieldValue.isEmpty) {
-              errors.push(new _requiredFieldValidationError2.default(element));
+              errors.push(new _requiredFieldValidationError["default"](element));
             }
           }
 
           if (element.isTextElement) {
             if (element.isNumeric) {
               var textValue = formValues.get(element.key);
-
               var error = FeatureValidator.validateNumericField(element, textValue);
 
               if (error) {
@@ -187,6 +159,7 @@ var FeatureValidator = function () {
 
           if (element.isLengthValidationSupported) {
             var _fieldValue = formValues.get(element.key);
+
             var _error4 = FeatureValidator.validateLengthForElement(element, _fieldValue);
 
             if (_error4) {
@@ -212,11 +185,8 @@ var FeatureValidator = function () {
               }
 
               var item = _ref2;
-
               var itemValues = item.formValues.copy();
-
               itemValues.merge(formValues);
-
               FeatureValidator.validateFieldsInElements(item.element.elements, record, itemValues, errors, null);
             }
           }
@@ -234,7 +204,7 @@ var FeatureValidator = function () {
 
     if (regex) {
       if (!regex.test(value.textValue)) {
-        return new _patternValidationError2.default(element);
+        return new _patternValidationError["default"](element);
       }
     }
 
@@ -258,7 +228,7 @@ var FeatureValidator = function () {
     }
 
     if (hasMinLengthError || hasMaxLengthError) {
-      return new _lengthValidationError2.default(element);
+      return new _lengthValidationError["default"](element);
     }
 
     return null;
@@ -270,22 +240,22 @@ var FeatureValidator = function () {
     }
 
     if (!value.isNumeric) {
-      return new _numericFormatValidationError2.default(element);
-    }
+      return new _numericFormatValidationError["default"](element);
+    } // since the number is now normalized to en_US, check for the . separator
 
-    // since the number is now normalized to en_US, check for the . separator
+
     var decimalSeparator = '.';
 
     if (element.isIntegerFormat) {
       if (value.textValue.indexOf(decimalSeparator) > -1) {
-        return new _numericFormatValidationError2.default(element);
+        return new _numericFormatValidationError["default"](element);
       }
     }
 
     var numberValue = +value.textValue;
 
     if (element.hasMin && numberValue < element.min || element.hasMax && numberValue > element.max) {
-      return new _numericRangeValidationError2.default(element);
+      return new _numericRangeValidationError["default"](element);
     }
 
     return null;
@@ -297,7 +267,7 @@ var FeatureValidator = function () {
     }
 
     if (!value.isValid) {
-      return new _dateFormatValidationError2.default(element);
+      return new _dateFormatValidationError["default"](element);
     }
 
     return null;
@@ -309,7 +279,7 @@ var FeatureValidator = function () {
     }
 
     if (!value.isValid) {
-      return new _timeFormatValidationError2.default(element);
+      return new _timeFormatValidationError["default"](element);
     }
 
     return null;
@@ -331,7 +301,6 @@ var FeatureValidator = function () {
       }
 
       var error = _ref3;
-
       messages.push(error.message);
     }
 
@@ -341,5 +310,5 @@ var FeatureValidator = function () {
   return FeatureValidator;
 }();
 
-exports.default = FeatureValidator;
+exports["default"] = FeatureValidator;
 //# sourceMappingURL=feature-validator.js.map

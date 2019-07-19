@@ -1,21 +1,20 @@
-'use strict';
+"use strict";
 
 exports.__esModule = true;
+exports["default"] = void 0;
 
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+var _textUtils = _interopRequireDefault(require("../utils/text-utils"));
 
-var _textUtils = require('../utils/text-utils');
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
-var _textUtils2 = _interopRequireDefault(_textUtils);
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-var Address = function () {
+var Address =
+/*#__PURE__*/
+function () {
   function Address(attributes) {
-    _classCallCheck(this, Address);
-
     if (attributes) {
       this.streetNumber = attributes.sub_thoroughfare;
       this.streetName = attributes.thoroughfare;
@@ -28,9 +27,10 @@ var Address = function () {
     }
   }
 
-  Address.prototype.toJSON = function toJSON() {
-    var json = {};
+  var _proto = Address.prototype;
 
+  _proto.toJSON = function toJSON() {
+    var json = {};
     json.sub_thoroughfare = this.streetNumber || null;
     json.thoroughfare = this.streetName || null;
     json.suite = this.suite || null;
@@ -39,11 +39,10 @@ var Address = function () {
     json.admin_area = this.state || null;
     json.postal_code = this.postalCode || null;
     json.country = this.country || null;
-
     return json;
   };
 
-  Address.prototype.clear = function clear() {
+  _proto.clear = function clear() {
     this.streetNumber = null;
     this.streetName = null;
     this.suite = null;
@@ -54,28 +53,17 @@ var Address = function () {
     this.country = null;
   };
 
-  Address.prototype.line = function line() {
+  _proto.line = function line() {
     var result = [];
 
-    for (var _len = arguments.length, parts = Array(_len), _key = 0; _key < _len; _key++) {
+    for (var _len = arguments.length, parts = new Array(_len), _key = 0; _key < _len; _key++) {
       parts[_key] = arguments[_key];
     }
 
-    for (var _iterator = parts, _isArray = Array.isArray(_iterator), _i = 0, _iterator = _isArray ? _iterator : _iterator[Symbol.iterator]();;) {
-      var _ref;
+    for (var _i = 0, _parts = parts; _i < _parts.length; _i++) {
+      var part = _parts[_i];
 
-      if (_isArray) {
-        if (_i >= _iterator.length) break;
-        _ref = _iterator[_i++];
-      } else {
-        _i = _iterator.next();
-        if (_i.done) break;
-        _ref = _i.value;
-      }
-
-      var part = _ref;
-
-      if (_textUtils2.default.isPresent(part)) {
+      if (_textUtils["default"].isPresent(part)) {
         result.push(part);
       }
     }
@@ -84,45 +72,44 @@ var Address = function () {
   };
 
   _createClass(Address, [{
-    key: 'isEmpty',
+    key: "isEmpty",
     get: function get() {
-      return !(_textUtils2.default.isPresent(this.streetNumber) || _textUtils2.default.isPresent(this.streetName) || _textUtils2.default.isPresent(this.suite) || _textUtils2.default.isPresent(this.city) || _textUtils2.default.isPresent(this.county) || _textUtils2.default.isPresent(this.state) || _textUtils2.default.isPresent(this.postalCode) || _textUtils2.default.isPresent(this.country));
+      return !(_textUtils["default"].isPresent(this.streetNumber) || _textUtils["default"].isPresent(this.streetName) || _textUtils["default"].isPresent(this.suite) || _textUtils["default"].isPresent(this.city) || _textUtils["default"].isPresent(this.county) || _textUtils["default"].isPresent(this.state) || _textUtils["default"].isPresent(this.postalCode) || _textUtils["default"].isPresent(this.country));
     }
   }, {
-    key: 'lines',
+    key: "lines",
     get: function get() {
       var result = [];
-
       var line1 = this.line1;
       var line2 = this.line2;
       var line3 = this.line3;
 
-      if (_textUtils2.default.isPresent(line1)) {
+      if (_textUtils["default"].isPresent(line1)) {
         result.push(line1);
       }
 
-      if (_textUtils2.default.isPresent(line2)) {
+      if (_textUtils["default"].isPresent(line2)) {
         result.push(line2);
       }
 
-      if (_textUtils2.default.isPresent(line3)) {
+      if (_textUtils["default"].isPresent(line3)) {
         result.push(line3);
       }
 
       return result;
     }
   }, {
-    key: 'line1',
+    key: "line1",
     get: function get() {
       return this.line(this.streetNumber, this.streetName, this.suite);
     }
   }, {
-    key: 'line2',
+    key: "line2",
     get: function get() {
       return this.line(this.city, this.state, this.postalCode);
     }
   }, {
-    key: 'line3',
+    key: "line3",
     get: function get() {
       return this.line(this.country);
     }
@@ -131,5 +118,5 @@ var Address = function () {
   return Address;
 }();
 
-exports.default = Address;
+exports["default"] = Address;
 //# sourceMappingURL=address.js.map

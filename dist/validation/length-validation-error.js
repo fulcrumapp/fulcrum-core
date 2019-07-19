@@ -1,37 +1,34 @@
-'use strict';
+"use strict";
 
 exports.__esModule = true;
+exports["default"] = void 0;
 
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+var _elementValidationError = _interopRequireDefault(require("./element-validation-error"));
 
-var _elementValidationError = require('./element-validation-error');
+var _util = require("util");
 
-var _elementValidationError2 = _interopRequireDefault(_elementValidationError);
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
-var _util = require('util');
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
-function _defaults(obj, defaults) { var keys = Object.getOwnPropertyNames(defaults); for (var i = 0; i < keys.length; i++) { var key = keys[i]; var value = Object.getOwnPropertyDescriptor(defaults, key); if (value && value.configurable && obj[key] === undefined) { Object.defineProperty(obj, key, value); } } return obj; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : _defaults(subClass, superClass); }
+function _inheritsLoose(subClass, superClass) { subClass.prototype = Object.create(superClass.prototype); subClass.prototype.constructor = subClass; subClass.__proto__ = superClass; }
 
 var AT_LEAST = 'at-least';
 var AT_MOST = 'at-most';
 var BETWEEN = 'between';
 var EXACTLY = 'exactly';
 
-var LengthValidationError = function (_ElementValidationErr) {
-  _inherits(LengthValidationError, _ElementValidationErr);
+var LengthValidationError =
+/*#__PURE__*/
+function (_ElementValidationErr) {
+  _inheritsLoose(LengthValidationError, _ElementValidationErr);
 
   function LengthValidationError(element) {
-    _classCallCheck(this, LengthValidationError);
+    var _this;
 
-    var _this = _possibleConstructorReturn(this, _ElementValidationErr.call(this, element));
+    _this = _ElementValidationErr.call(this, element) || this;
 
     if (element.hasMinLength && element.hasMaxLength && element.minLength === element.maxLength) {
       _this.type = EXACTLY;
@@ -42,10 +39,13 @@ var LengthValidationError = function (_ElementValidationErr) {
     } else if (element.hasMaxLength) {
       _this.type = AT_MOST;
     }
+
     return _this;
   }
 
-  LengthValidationError.prototype.messageWithFormats = function messageWithFormats(singularFormat, pluralFormat, length) {
+  var _proto = LengthValidationError.prototype;
+
+  _proto.messageWithFormats = function messageWithFormats(singularFormat, pluralFormat, length) {
     if (length === 1) {
       return (0, _util.format)(singularFormat, this.label, length);
     }
@@ -54,7 +54,7 @@ var LengthValidationError = function (_ElementValidationErr) {
   };
 
   _createClass(LengthValidationError, [{
-    key: 'message',
+    key: "message",
     get: function get() {
       if (this.element.isTextElement) {
         return this.textElementMessage;
@@ -73,27 +73,27 @@ var LengthValidationError = function (_ElementValidationErr) {
       return '';
     }
   }, {
-    key: 'isAtLeastError',
+    key: "isAtLeastError",
     get: function get() {
       return this.type === AT_LEAST;
     }
   }, {
-    key: 'isAtMostError',
+    key: "isAtMostError",
     get: function get() {
       return this.type === AT_MOST;
     }
   }, {
-    key: 'isBetweenError',
+    key: "isBetweenError",
     get: function get() {
       return this.type === BETWEEN;
     }
   }, {
-    key: 'isExactlyError',
+    key: "isExactlyError",
     get: function get() {
       return this.type === EXACTLY;
     }
   }, {
-    key: 'textElementMessage',
+    key: "textElementMessage",
     get: function get() {
       if (this.isAtLeastError) {
         return this.messageWithFormats("The field '%s' must have at least 1 character.", "The field '%s' must have at least %s characters.", this.element.minLength);
@@ -108,7 +108,7 @@ var LengthValidationError = function (_ElementValidationErr) {
       return '';
     }
   }, {
-    key: 'photoElementMessage',
+    key: "photoElementMessage",
     get: function get() {
       if (this.isAtLeastError) {
         return this.messageWithFormats("The field '%s' must have at least 1 photo.", "The field '%s' must have at least %s photos.", this.element.minLength);
@@ -123,7 +123,7 @@ var LengthValidationError = function (_ElementValidationErr) {
       return '';
     }
   }, {
-    key: 'videoElementMessage',
+    key: "videoElementMessage",
     get: function get() {
       if (this.isAtLeastError) {
         return this.messageWithFormats("The field '%s' must have at least 1 video.", "The field '%s' must have at least %s videos.", this.element.minLength);
@@ -138,7 +138,7 @@ var LengthValidationError = function (_ElementValidationErr) {
       return '';
     }
   }, {
-    key: 'audioElementMessage',
+    key: "audioElementMessage",
     get: function get() {
       if (this.isAtLeastError) {
         return this.messageWithFormats("The field '%s' must have at least 1 audio file.", "The field '%s' must have at least %s audio files.", this.element.minLength);
@@ -153,7 +153,7 @@ var LengthValidationError = function (_ElementValidationErr) {
       return '';
     }
   }, {
-    key: 'choiceElementMessage',
+    key: "choiceElementMessage",
     get: function get() {
       if (this.isAtLeastError) {
         return this.messageWithFormats("The field '%s' must have at least 1 choice.", "The field '%s' must have at least %s choices.", this.element.minLength);
@@ -168,7 +168,7 @@ var LengthValidationError = function (_ElementValidationErr) {
       return '';
     }
   }, {
-    key: 'repeatableElementMessage',
+    key: "repeatableElementMessage",
     get: function get() {
       if (this.isAtLeastError) {
         return this.messageWithFormats("The field '%s' must have at least 1 item.", "The field '%s' must have at least %s items.", this.element.minLength);
@@ -185,7 +185,7 @@ var LengthValidationError = function (_ElementValidationErr) {
   }]);
 
   return LengthValidationError;
-}(_elementValidationError2.default);
+}(_elementValidationError["default"]);
 
-exports.default = LengthValidationError;
+exports["default"] = LengthValidationError;
 //# sourceMappingURL=length-validation-error.js.map

@@ -1,122 +1,83 @@
-'use strict';
+"use strict";
 
 exports.__esModule = true;
+exports["default"] = void 0;
 
-var _sectionElement = require('./section-element');
+var _sectionElement = _interopRequireDefault(require("./section-element"));
 
-var _sectionElement2 = _interopRequireDefault(_sectionElement);
+var _choiceElement = _interopRequireDefault(require("./choice-element"));
 
-var _choiceElement = require('./choice-element');
+var _textElement = _interopRequireDefault(require("./text-element"));
 
-var _choiceElement2 = _interopRequireDefault(_choiceElement);
+var _dateElement = _interopRequireDefault(require("./date-element"));
 
-var _textElement = require('./text-element');
+var _timeElement = _interopRequireDefault(require("./time-element"));
 
-var _textElement2 = _interopRequireDefault(_textElement);
+var _photoElement = _interopRequireDefault(require("./photo-element"));
 
-var _dateElement = require('./date-element');
+var _videoElement = _interopRequireDefault(require("./video-element"));
 
-var _dateElement2 = _interopRequireDefault(_dateElement);
+var _audioElement = _interopRequireDefault(require("./audio-element"));
 
-var _timeElement = require('./time-element');
+var _signatureElement = _interopRequireDefault(require("./signature-element"));
 
-var _timeElement2 = _interopRequireDefault(_timeElement);
+var _classificationElement = _interopRequireDefault(require("./classification-element"));
 
-var _photoElement = require('./photo-element');
+var _repeatableElement = _interopRequireDefault(require("./repeatable-element"));
 
-var _photoElement2 = _interopRequireDefault(_photoElement);
+var _addressElement = _interopRequireDefault(require("./address-element"));
 
-var _videoElement = require('./video-element');
+var _labelElement = _interopRequireDefault(require("./label-element"));
 
-var _videoElement2 = _interopRequireDefault(_videoElement);
+var _yesNoElement = _interopRequireDefault(require("./yes-no-element"));
 
-var _audioElement = require('./audio-element');
+var _hyperlinkElement = _interopRequireDefault(require("./hyperlink-element"));
 
-var _audioElement2 = _interopRequireDefault(_audioElement);
+var _barcodeElement = _interopRequireDefault(require("./barcode-element"));
 
-var _signatureElement = require('./signature-element');
+var _calculatedElement = _interopRequireDefault(require("./calculated-element"));
 
-var _signatureElement2 = _interopRequireDefault(_signatureElement);
+var _recordLinkElement = _interopRequireDefault(require("./record-link-element"));
 
-var _classificationElement = require('./classification-element');
+var _containerElement = _interopRequireDefault(require("./container-element"));
 
-var _classificationElement2 = _interopRequireDefault(_classificationElement);
-
-var _repeatableElement = require('./repeatable-element');
-
-var _repeatableElement2 = _interopRequireDefault(_repeatableElement);
-
-var _addressElement = require('./address-element');
-
-var _addressElement2 = _interopRequireDefault(_addressElement);
-
-var _labelElement = require('./label-element');
-
-var _labelElement2 = _interopRequireDefault(_labelElement);
-
-var _yesNoElement = require('./yes-no-element');
-
-var _yesNoElement2 = _interopRequireDefault(_yesNoElement);
-
-var _hyperlinkElement = require('./hyperlink-element');
-
-var _hyperlinkElement2 = _interopRequireDefault(_hyperlinkElement);
-
-var _barcodeElement = require('./barcode-element');
-
-var _barcodeElement2 = _interopRequireDefault(_barcodeElement);
-
-var _calculatedElement = require('./calculated-element');
-
-var _calculatedElement2 = _interopRequireDefault(_calculatedElement);
-
-var _recordLinkElement = require('./record-link-element');
-
-var _recordLinkElement2 = _interopRequireDefault(_recordLinkElement);
-
-var _containerElement = require('./container-element');
-
-var _containerElement2 = _interopRequireDefault(_containerElement);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 var Constructors = {
-  Section: _sectionElement2.default,
-  ChoiceField: _choiceElement2.default,
-  TextField: _textElement2.default,
-  DateTimeField: _dateElement2.default,
-  DateField: _dateElement2.default,
-  TimeField: _timeElement2.default,
-  PhotoField: _photoElement2.default,
-  VideoField: _videoElement2.default,
-  AudioField: _audioElement2.default,
-  SignatureField: _signatureElement2.default,
-  ClassificationField: _classificationElement2.default,
-  Repeatable: _repeatableElement2.default,
-  AddressField: _addressElement2.default,
-  Label: _labelElement2.default,
-  YesNoField: _yesNoElement2.default,
-  HyperlinkField: _hyperlinkElement2.default,
-  BarcodeField: _barcodeElement2.default,
-  CalculatedField: _calculatedElement2.default,
-  RecordLinkField: _recordLinkElement2.default
+  Section: _sectionElement["default"],
+  ChoiceField: _choiceElement["default"],
+  TextField: _textElement["default"],
+  DateTimeField: _dateElement["default"],
+  DateField: _dateElement["default"],
+  TimeField: _timeElement["default"],
+  PhotoField: _photoElement["default"],
+  VideoField: _videoElement["default"],
+  AudioField: _audioElement["default"],
+  SignatureField: _signatureElement["default"],
+  ClassificationField: _classificationElement["default"],
+  Repeatable: _repeatableElement["default"],
+  AddressField: _addressElement["default"],
+  Label: _labelElement["default"],
+  YesNoField: _yesNoElement["default"],
+  HyperlinkField: _hyperlinkElement["default"],
+  BarcodeField: _barcodeElement["default"],
+  CalculatedField: _calculatedElement["default"],
+  RecordLinkField: _recordLinkElement["default"]
 };
-
 var initialized = false;
 
-var ElementFactory = function () {
-  function ElementFactory() {
-    _classCallCheck(this, ElementFactory);
-  }
+var ElementFactory =
+/*#__PURE__*/
+function () {
+  function ElementFactory() {}
 
   ElementFactory.create = function create(parent, attributes) {
     var constructor = Constructors[attributes.type];
 
     if (!initialized) {
       initialized = true;
-      _containerElement2.default.initialize();
+
+      _containerElement["default"].initialize();
     }
 
     if (constructor == null) {
@@ -133,5 +94,5 @@ var ElementFactory = function () {
   return ElementFactory;
 }();
 
-exports.default = ElementFactory;
+exports["default"] = ElementFactory;
 //# sourceMappingURL=element-factory.js.map

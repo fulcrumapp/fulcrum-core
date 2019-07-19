@@ -1,55 +1,53 @@
-'use strict';
+"use strict";
 
 exports.__esModule = true;
+exports["default"] = void 0;
 
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+var _formValue = _interopRequireDefault(require("./form-value"));
 
-var _formValue = require('./form-value');
+var _dateUtils = _interopRequireDefault(require("../utils/date-utils"));
 
-var _formValue2 = _interopRequireDefault(_formValue);
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
-var _dateUtils = require('../utils/date-utils');
+function _objectWithoutPropertiesLoose(source, excluded) { if (source == null) return {}; var target = {}; var sourceKeys = Object.keys(source); var key, i; for (i = 0; i < sourceKeys.length; i++) { key = sourceKeys[i]; if (excluded.indexOf(key) >= 0) continue; target[key] = source[key]; } return target; }
 
-var _dateUtils2 = _interopRequireDefault(_dateUtils);
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
-function _defaults(obj, defaults) { var keys = Object.getOwnPropertyNames(defaults); for (var i = 0; i < keys.length; i++) { var key = keys[i]; var value = Object.getOwnPropertyDescriptor(defaults, key); if (value && value.configurable && obj[key] === undefined) { Object.defineProperty(obj, key, value); } } return obj; }
+function _inheritsLoose(subClass, superClass) { subClass.prototype = Object.create(superClass.prototype); subClass.prototype.constructor = subClass; subClass.__proto__ = superClass; }
 
-function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : _defaults(subClass, superClass); }
-
-var SignatureValue = function (_FormValue) {
-  _inherits(SignatureValue, _FormValue);
+var SignatureValue =
+/*#__PURE__*/
+function (_FormValue) {
+  _inheritsLoose(SignatureValue, _FormValue);
 
   function SignatureValue(element, attributes) {
-    _classCallCheck(this, SignatureValue);
+    var _this;
 
-    var _this = _possibleConstructorReturn(this, _FormValue.call(this, element, attributes));
+    _this = _FormValue.call(this, element, attributes) || this;
 
     if (attributes) {
       _this._identifier = attributes.signature_id;
-      _this._timestamp = _dateUtils2.default.parseISOTimestamp(attributes.timestamp);
+      _this._timestamp = _dateUtils["default"].parseISOTimestamp(attributes.timestamp);
     }
+
     return _this;
   }
 
-  SignatureValue.prototype.clear = function clear() {
+  var _proto = SignatureValue.prototype;
+
+  _proto.clear = function clear() {
     this._identifier = null;
     this._timestamp = null;
   };
 
-  SignatureValue.prototype.format = function format(_ref) {
+  _proto.format = function format(_ref) {
     var _ref$part = _ref.part,
-        part = _ref$part === undefined ? null : _ref$part,
+        part = _ref$part === void 0 ? null : _ref$part,
         formatSignatureURL = _ref.formatSignatureURL,
         formatSignatureViewerURL = _ref.formatSignatureViewerURL,
-        args = _objectWithoutProperties(_ref, ['part', 'formatSignatureURL', 'formatSignatureViewerURL']);
+        args = _objectWithoutPropertiesLoose(_ref, ["part", "formatSignatureURL", "formatSignatureViewerURL"]);
 
     if (this.isEmpty) {
       return null;
@@ -66,39 +64,39 @@ var SignatureValue = function (_FormValue) {
     return this.id;
   };
 
-  SignatureValue.prototype.toJSON = function toJSON() {
+  _proto.toJSON = function toJSON() {
     if (this.isEmpty) {
       return null;
     }
 
     return {
       signature_id: this._identifier,
-      timestamp: _dateUtils2.default.formatISOTimestamp(this._timestamp)
+      timestamp: _dateUtils["default"].formatISOTimestamp(this._timestamp)
     };
   };
 
-  SignatureValue.prototype.isEqual = function isEqual(value) {
+  _proto.isEqual = function isEqual(value) {
     return false;
   };
 
-  SignatureValue.prototype.contains = function contains(value) {
+  _proto.contains = function contains(value) {
     return false;
   };
 
-  SignatureValue.prototype.startsWith = function startsWith(value) {
+  _proto.startsWith = function startsWith(value) {
     return false;
   };
 
-  SignatureValue.prototype.isLessThan = function isLessThan(value) {
+  _proto.isLessThan = function isLessThan(value) {
     return false;
   };
 
-  SignatureValue.prototype.isGreaterThan = function isGreaterThan(value) {
+  _proto.isGreaterThan = function isGreaterThan(value) {
     return false;
   };
 
   _createClass(SignatureValue, [{
-    key: 'id',
+    key: "id",
     get: function get() {
       return this._identifier;
     },
@@ -106,7 +104,7 @@ var SignatureValue = function (_FormValue) {
       this._identifier = id;
     }
   }, {
-    key: 'timestamp',
+    key: "timestamp",
     get: function get() {
       return this._timestamp;
     },
@@ -118,48 +116,46 @@ var SignatureValue = function (_FormValue) {
       this._timestamp = timestamp;
     }
   }, {
-    key: 'isEmpty',
+    key: "isEmpty",
     get: function get() {
       return this._identifier == null;
     }
   }, {
-    key: 'displayValue',
+    key: "displayValue",
     get: function get() {
       return this.isEmpty ? null : '1 Signature';
     }
   }, {
-    key: 'searchableValue',
+    key: "searchableValue",
     get: function get() {
       return null;
     }
   }, {
-    key: 'length',
+    key: "length",
     get: function get() {
       return this.isEmpty ? 0 : 1;
     }
   }, {
-    key: 'columnValue',
+    key: "columnValue",
     get: function get() {
       if (this.isEmpty) {
         return null;
       }
 
       var value = {};
-
       value['f' + this.element.key + '_timestamp'] = this.timestamp;
       value['f' + this.element.key] = this._identifier;
-
       return value;
     }
   }, {
-    key: 'multipleValues',
+    key: "multipleValues",
     get: function get() {
       return null;
     }
   }]);
 
   return SignatureValue;
-}(_formValue2.default);
+}(_formValue["default"]);
 
-exports.default = SignatureValue;
+exports["default"] = SignatureValue;
 //# sourceMappingURL=signature-value.js.map

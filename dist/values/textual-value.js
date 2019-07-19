@@ -1,46 +1,40 @@
-'use strict';
+"use strict";
 
 exports.__esModule = true;
+exports["default"] = void 0;
 
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+var _formValue = _interopRequireDefault(require("./form-value"));
 
-var _formValue = require('./form-value');
+var _textUtils = _interopRequireDefault(require("../utils/text-utils"));
 
-var _formValue2 = _interopRequireDefault(_formValue);
+var _numberUtils = _interopRequireDefault(require("../utils/number-utils"));
 
-var _textUtils = require('../utils/text-utils');
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
-var _textUtils2 = _interopRequireDefault(_textUtils);
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
 
-var _numberUtils = require('../utils/number-utils');
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
-var _numberUtils2 = _interopRequireDefault(_numberUtils);
+function _inheritsLoose(subClass, superClass) { subClass.prototype = Object.create(superClass.prototype); subClass.prototype.constructor = subClass; subClass.__proto__ = superClass; }
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _defaults(obj, defaults) { var keys = Object.getOwnPropertyNames(defaults); for (var i = 0; i < keys.length; i++) { var key = keys[i]; var value = Object.getOwnPropertyDescriptor(defaults, key); if (value && value.configurable && obj[key] === undefined) { Object.defineProperty(obj, key, value); } } return obj; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : _defaults(subClass, superClass); }
-
-var TextualValue = function (_FormValue) {
-  _inherits(TextualValue, _FormValue);
+var TextualValue =
+/*#__PURE__*/
+function (_FormValue) {
+  _inheritsLoose(TextualValue, _FormValue);
 
   function TextualValue(element, textValue) {
-    _classCallCheck(this, TextualValue);
+    var _this;
 
-    var _this = _possibleConstructorReturn(this, _FormValue.call(this, element, textValue));
-
+    _this = _FormValue.call(this, element, textValue) || this;
     _this.textValue = textValue != null ? textValue.toString() : null;
     return _this;
   }
 
-  TextualValue.prototype.format = function format(_ref) {
+  var _proto = TextualValue.prototype;
+
+  _proto.format = function format(_ref) {
     var _ref$useDisplayValue = _ref.useDisplayValue,
-        useDisplayValue = _ref$useDisplayValue === undefined ? false : _ref$useDisplayValue;
+        useDisplayValue = _ref$useDisplayValue === void 0 ? false : _ref$useDisplayValue;
 
     if (this.isEmpty) {
       return null;
@@ -49,7 +43,7 @@ var TextualValue = function (_FormValue) {
     return useDisplayValue ? this.displayValue : this.textValue;
   };
 
-  TextualValue.prototype.toJSON = function toJSON() {
+  _proto.toJSON = function toJSON() {
     if (this.isEmpty) {
       return null;
     }
@@ -57,19 +51,18 @@ var TextualValue = function (_FormValue) {
     return this.textValue;
   };
 
-  TextualValue.prototype.isEqual = function isEqual(stringValue) {
+  _proto.isEqual = function isEqual(stringValue) {
     if (this.isEmpty) {
-      return _textUtils2.default.isEmpty(stringValue);
+      return _textUtils["default"].isEmpty(stringValue);
     }
 
     var string = stringValue == null ? '' : stringValue.toString();
-
     return this.textValue.toLowerCase() === string.toLowerCase();
   };
 
-  TextualValue.prototype.contains = function contains(stringValue) {
+  _proto.contains = function contains(stringValue) {
     if (this.isEmpty) {
-      return _textUtils2.default.isEmpty(stringValue);
+      return _textUtils["default"].isEmpty(stringValue);
     }
 
     if (stringValue == null) {
@@ -77,23 +70,22 @@ var TextualValue = function (_FormValue) {
     }
 
     var string = stringValue.toString();
-
-    return _textUtils2.default.contains(this.textValue, string);
+    return _textUtils["default"].contains(this.textValue, string);
   };
 
-  TextualValue.prototype.startsWith = function startsWith(stringValue) {
+  _proto.startsWith = function startsWith(stringValue) {
     if (this.isEmpty) {
-      return _textUtils2.default.isEmpty(stringValue);
+      return _textUtils["default"].isEmpty(stringValue);
     }
 
     if (stringValue == null) {
       return false;
     }
 
-    return _textUtils2.default.startsWith(this.textValue, stringValue.toString());
+    return _textUtils["default"].startsWith(this.textValue, stringValue.toString());
   };
 
-  TextualValue.prototype.isLessThan = function isLessThan(stringValue) {
+  _proto.isLessThan = function isLessThan(stringValue) {
     if (this.textValue == null || stringValue == null) {
       return false;
     }
@@ -104,8 +96,9 @@ var TextualValue = function (_FormValue) {
       string = stringValue.toString();
     }
 
-    var thisValue = _numberUtils2.default.parseDouble(this.textValue);
-    var thatValue = _numberUtils2.default.parseDouble(string);
+    var thisValue = _numberUtils["default"].parseDouble(this.textValue);
+
+    var thatValue = _numberUtils["default"].parseDouble(string);
 
     if (thisValue == null || thatValue == null) {
       return false;
@@ -114,15 +107,16 @@ var TextualValue = function (_FormValue) {
     return thisValue < thatValue;
   };
 
-  TextualValue.prototype.isGreaterThan = function isGreaterThan(stringValue) {
+  _proto.isGreaterThan = function isGreaterThan(stringValue) {
     if (this.textValue == null || stringValue == null) {
       return false;
     }
 
     var string = stringValue == null ? '' : stringValue.toString();
 
-    var thisValue = _numberUtils2.default.parseDouble(this.textValue);
-    var thatValue = _numberUtils2.default.parseDouble(string);
+    var thisValue = _numberUtils["default"].parseDouble(this.textValue);
+
+    var thatValue = _numberUtils["default"].parseDouble(string);
 
     if (thisValue == null || thatValue == null) {
       return false;
@@ -132,22 +126,22 @@ var TextualValue = function (_FormValue) {
   };
 
   _createClass(TextualValue, [{
-    key: 'isEmpty',
+    key: "isEmpty",
     get: function get() {
       return this.textValue == null || this.textValue.length === 0;
     }
   }, {
-    key: 'displayValue',
+    key: "displayValue",
     get: function get() {
       return this.textValue || '';
     }
   }, {
-    key: 'searchableValue',
+    key: "searchableValue",
     get: function get() {
       return this.displayValue || '';
     }
   }, {
-    key: 'length',
+    key: "length",
     get: function get() {
       if (this.textValue != null) {
         return this.textValue.length;
@@ -156,25 +150,25 @@ var TextualValue = function (_FormValue) {
       return 0;
     }
   }, {
-    key: 'columnValue',
+    key: "columnValue",
     get: function get() {
       return this.textValue || null;
     }
   }, {
-    key: 'multipleValues',
+    key: "multipleValues",
     get: function get() {
       return null;
     }
   }, {
-    key: 'numericValue',
+    key: "numericValue",
     get: function get() {
-      return _numberUtils2.default.parseDouble(this.textValue);
+      return _numberUtils["default"].parseDouble(this.textValue);
     }
   }, {
-    key: 'isNumeric',
+    key: "isNumeric",
     get: function get() {
       if (!this.isEmpty) {
-        var number = _numberUtils2.default.parseDouble(this.textValue);
+        var number = _numberUtils["default"].parseDouble(this.textValue);
 
         return number != null;
       }
@@ -184,7 +178,7 @@ var TextualValue = function (_FormValue) {
   }]);
 
   return TextualValue;
-}(_formValue2.default);
+}(_formValue["default"]);
 
-exports.default = TextualValue;
+exports["default"] = TextualValue;
 //# sourceMappingURL=textual-value.js.map

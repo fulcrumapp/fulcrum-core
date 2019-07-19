@@ -1,86 +1,70 @@
-'use strict';
+"use strict";
 
 exports.__esModule = true;
+exports["default"] = void 0;
 
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+var _feature = _interopRequireDefault(require("./feature"));
 
-var _feature = require('./feature');
+var _formValues = _interopRequireDefault(require("./values/form-values"));
 
-var _feature2 = _interopRequireDefault(_feature);
+var _textUtils = _interopRequireDefault(require("./utils/text-utils"));
 
-var _formValues = require('./values/form-values');
+var _dateUtils = _interopRequireDefault(require("./utils/date-utils"));
 
-var _formValues2 = _interopRequireDefault(_formValues);
+var _statusValue = _interopRequireDefault(require("./values/status-value"));
 
-var _textUtils = require('./utils/text-utils');
+var _uuid = _interopRequireDefault(require("uuid"));
 
-var _textUtils2 = _interopRequireDefault(_textUtils);
+var _loadObject = _interopRequireDefault(require("./load-object"));
 
-var _dateUtils = require('./utils/date-utils');
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
-var _dateUtils2 = _interopRequireDefault(_dateUtils);
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
 
-var _statusValue = require('./values/status-value');
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
-var _statusValue2 = _interopRequireDefault(_statusValue);
+function _inheritsLoose(subClass, superClass) { subClass.prototype = Object.create(superClass.prototype); subClass.prototype.constructor = subClass; subClass.__proto__ = superClass; }
 
-var _uuid = require('uuid');
-
-var _uuid2 = _interopRequireDefault(_uuid);
-
-var _loadObject = require('./load-object');
-
-var _loadObject2 = _interopRequireDefault(_loadObject);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _defaults(obj, defaults) { var keys = Object.getOwnPropertyNames(defaults); for (var i = 0; i < keys.length; i++) { var key = keys[i]; var value = Object.getOwnPropertyDescriptor(defaults, key); if (value && value.configurable && obj[key] === undefined) { Object.defineProperty(obj, key, value); } } return obj; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : _defaults(subClass, superClass); }
-
-var Record = function (_Feature) {
-  _inherits(Record, _Feature);
+var Record =
+/*#__PURE__*/
+function (_Feature) {
+  _inheritsLoose(Record, _Feature);
 
   function Record(attributes, form) {
-    _classCallCheck(this, Record);
+    var _this;
 
-    var _this = _possibleConstructorReturn(this, _Feature.call(this));
-
+    _this = _Feature.call(this) || this;
     _this._form = form || null;
 
     _this.updateFromAPIAttributes(attributes);
+
     return _this;
   }
 
-  Record.prototype.loadChangeset = function loadChangeset(dataSource, callback) {
-    return (0, _loadObject2.default)(this, dataSource, 'changeset', 'getChangeset', callback);
+  var _proto = Record.prototype;
+
+  _proto.loadChangeset = function loadChangeset(dataSource, callback) {
+    return (0, _loadObject["default"])(this, dataSource, 'changeset', 'getChangeset', callback);
   };
 
-  Record.prototype.toJSON = function toJSON() {
-    var _ref = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
+  _proto.toJSON = function toJSON(_temp) {
+    var _ref = _temp === void 0 ? {} : _temp,
         simple = _ref.simple;
 
     var json = {};
-
     json.form_id = this._form.id;
-
     json.id = this.id || null;
     json.version = this._version != null ? this._version : null;
-    json.created_at = _dateUtils2.default.formatISOTimestamp(this.createdAt);
-    json.updated_at = _dateUtils2.default.formatISOTimestamp(this.updatedAt);
-    json.client_created_at = _dateUtils2.default.formatISOTimestamp(this.clientCreatedAt);
-    json.client_updated_at = _dateUtils2.default.formatISOTimestamp(this.clientUpdatedAt);
+    json.created_at = _dateUtils["default"].formatISOTimestamp(this.createdAt);
+    json.updated_at = _dateUtils["default"].formatISOTimestamp(this.updatedAt);
+    json.client_created_at = _dateUtils["default"].formatISOTimestamp(this.clientCreatedAt);
+    json.client_updated_at = _dateUtils["default"].formatISOTimestamp(this.clientUpdatedAt);
     json.form_values = simple ? this.formValues.toSimpleJSON() : this.formValues.toJSON();
     json.latitude = this._latitude != null ? this._latitude : null;
     json.longitude = this._longitude != null ? this._longitude : null;
     json.project_id = this._projectID || null;
     json.assigned_to_id = this._assignedToID || null;
     json.status = this._status || null;
-
     json.created_by_id = this._createdByID || null;
     json.created_by = this._createdByName || null;
     json.updated_by_id = this._updatedByID || null;
@@ -112,23 +96,20 @@ var Record = function (_Feature) {
 
     json.created_location = this.createdLocation;
     json.updated_location = this.updatedLocation;
-
     json.created_duration = this.createdDuration;
     json.updated_duration = this.updatedDuration;
     json.edited_duration = this.editedDuration;
-
     return json;
   };
 
-  Record.prototype.updateFromAPIAttributes = function updateFromAPIAttributes(attrs) {
+  _proto.updateFromAPIAttributes = function updateFromAPIAttributes(attrs) {
     var attributes = attrs || {};
-
-    this._id = attributes.id || _uuid2.default.v4();
+    this._id = attributes.id || _uuid["default"].v4();
     this._version = attributes.version != null ? attributes.version : null;
-    this._createdAt = _dateUtils2.default.parseISOTimestamp(attributes.created_at);
-    this._updatedAt = _dateUtils2.default.parseISOTimestamp(attributes.updated_at);
-    this._clientCreatedAt = _dateUtils2.default.parseISOTimestamp(attributes.client_created_at);
-    this._clientUpdatedAt = _dateUtils2.default.parseISOTimestamp(attributes.client_updated_at);
+    this._createdAt = _dateUtils["default"].parseISOTimestamp(attributes.created_at);
+    this._updatedAt = _dateUtils["default"].parseISOTimestamp(attributes.updated_at);
+    this._clientCreatedAt = _dateUtils["default"].parseISOTimestamp(attributes.client_created_at);
+    this._clientUpdatedAt = _dateUtils["default"].parseISOTimestamp(attributes.client_updated_at);
     this._formValuesJSON = attributes.form_values || {};
     this._latitude = attributes.latitude != null ? attributes.latitude : null;
     this._longitude = attributes.longitude != null ? attributes.longitude : null;
@@ -137,26 +118,20 @@ var Record = function (_Feature) {
     this._assignedToID = attributes.assigned_to_id || null;
     this._assignedToName = attributes.assigned_to || null;
     this._status = attributes.status || null;
-
     this._createdByID = attributes.created_by_id || null;
     this._createdByName = attributes.created_by || null;
     this._updatedByID = attributes.updated_by_id || null;
     this._updatedByName = attributes.updated_by || null;
-
     this._horizontalAccuracy = attributes.horizontal_accuracy != null ? attributes.horizontal_accuracy : null;
     this._verticalAccuracy = attributes.vertical_accuracy != null ? attributes.vertical_accuracy : null;
     this._altitude = attributes.altitude != null ? attributes.altitude : null;
     this._speed = attributes.speed != null ? attributes.speed : null;
     this._course = attributes.course != null ? attributes.course : null;
-
     this._changesetID = attributes.changeset_id || null;
-
     this._createdDuration = attributes.created_duration != null ? attributes.created_duration : null;
     this._updatedDuration = attributes.updated_duration != null ? attributes.updated_duration : null;
     this._editedDuration = attributes.edited_duration != null ? attributes.edited_duration : null;
-
     var createdLocation = attributes.created_location;
-
     this._createdLatitude = attributes.created_latitude != null ? attributes.created_latitude : null;
     this._createdLongitude = attributes.created_longitude != null ? attributes.created_longitude : null;
     this._createdAltitude = attributes.created_altitude != null ? attributes.created_altitude : null;
@@ -170,7 +145,6 @@ var Record = function (_Feature) {
     }
 
     var updatedLocation = attributes.updated_location;
-
     this._updatedLatitude = attributes.updated_latitude != null ? attributes.updated_latitude : null;
     this._updatedLongitude = attributes.updated_longitude != null ? attributes.updated_longitude : null;
     this._updatedAltitude = attributes.updated_altitude != null ? attributes.updated_altitude : null;
@@ -184,7 +158,7 @@ var Record = function (_Feature) {
     }
   };
 
-  Record.prototype.updateTimestamps = function updateTimestamps() {
+  _proto.updateTimestamps = function updateTimestamps() {
     var now = new Date();
 
     if (this.clientCreatedAt == null) {
@@ -194,7 +168,7 @@ var Record = function (_Feature) {
     this.clientUpdatedAt = now;
   };
 
-  Record.prototype.get = function get(key, formValues) {
+  _proto.get = function get(key, formValues) {
     if (key === '@status') {
       return this.statusValue;
     }
@@ -202,7 +176,7 @@ var Record = function (_Feature) {
     return formValues.get(key);
   };
 
-  Record.prototype.set = function set(key, value, formValues) {
+  _proto.set = function set(key, value, formValues) {
     if (key === '@status') {
       this.status = value.textValue;
       return;
@@ -211,20 +185,9 @@ var Record = function (_Feature) {
     formValues.set(key, value);
   };
 
-  Record.prototype.updateFromActionAttributes = function updateFromActionAttributes(attributes, role) {
-    for (var _iterator = Object.keys(attributes), _isArray = Array.isArray(_iterator), _i = 0, _iterator = _isArray ? _iterator : _iterator[Symbol.iterator]();;) {
-      var _ref2;
-
-      if (_isArray) {
-        if (_i >= _iterator.length) break;
-        _ref2 = _iterator[_i++];
-      } else {
-        _i = _iterator.next();
-        if (_i.done) break;
-        _ref2 = _i.value;
-      }
-
-      var dataName = _ref2;
+  _proto.updateFromActionAttributes = function updateFromActionAttributes(attributes, role) {
+    for (var _i = 0, _Object$keys = Object.keys(attributes); _i < _Object$keys.length; _i++) {
+      var dataName = _Object$keys[_i];
 
       switch (dataName) {
         case 'project_id':
@@ -292,17 +255,17 @@ var Record = function (_Feature) {
   };
 
   _createClass(Record, [{
-    key: 'isRecord',
+    key: "isRecord",
     get: function get() {
       return true;
     }
   }, {
-    key: 'isRepeatable',
+    key: "isRepeatable",
     get: function get() {
       return false;
     }
   }, {
-    key: 'id',
+    key: "id",
     get: function get() {
       return this._id;
     },
@@ -310,17 +273,17 @@ var Record = function (_Feature) {
       this._id = id;
     }
   }, {
-    key: 'form',
+    key: "form",
     get: function get() {
       return this._form;
     }
   }, {
-    key: 'version',
+    key: "version",
     get: function get() {
       return this._version;
     }
   }, {
-    key: 'createdAt',
+    key: "createdAt",
     get: function get() {
       return this._createdAt;
     },
@@ -328,7 +291,7 @@ var Record = function (_Feature) {
       this._createdAt = createdAt;
     }
   }, {
-    key: 'updatedAt',
+    key: "updatedAt",
     get: function get() {
       return this._updatedAt;
     },
@@ -336,7 +299,7 @@ var Record = function (_Feature) {
       this._updatedAt = updatedAt;
     }
   }, {
-    key: 'clientCreatedAt',
+    key: "clientCreatedAt",
     get: function get() {
       return this._clientCreatedAt;
     },
@@ -344,7 +307,7 @@ var Record = function (_Feature) {
       this._clientCreatedAt = createdAt;
     }
   }, {
-    key: 'clientUpdatedAt',
+    key: "clientUpdatedAt",
     get: function get() {
       return this._clientUpdatedAt;
     },
@@ -352,21 +315,21 @@ var Record = function (_Feature) {
       this._clientUpdatedAt = updatedAt;
     }
   }, {
-    key: 'formValues',
+    key: "formValues",
     get: function get() {
       if (this._formValues == null) {
-        this._formValues = new _formValues2.default(this._form, this._formValuesJSON);
+        this._formValues = new _formValues["default"](this._form, this._formValuesJSON);
       }
 
       return this._formValues;
     }
   }, {
-    key: 'hasCoordinate',
+    key: "hasCoordinate",
     get: function get() {
       return this._latitude != null && this._longitude != null;
     }
   }, {
-    key: 'changeset',
+    key: "changeset",
     get: function get() {
       return this._changeset;
     },
@@ -375,51 +338,50 @@ var Record = function (_Feature) {
       this._changeset = changeset;
     }
   }, {
-    key: 'changesetID',
+    key: "changesetID",
     get: function get() {
       return this._changesetID;
     }
   }, {
-    key: 'isGeometryEnabled',
+    key: "isGeometryEnabled",
     get: function get() {
       return this.form.isGeometryEnabled;
     }
   }, {
-    key: 'statusValue',
+    key: "statusValue",
     get: function get() {
-      return new _statusValue2.default(this.form.statusField, this.status);
+      return new _statusValue["default"](this.form.statusField, this.status);
     }
   }, {
-    key: 'searchableValue',
+    key: "searchableValue",
     get: function get() {
       return this.formValues.searchableValue;
     }
   }, {
-    key: 'displayValue',
+    key: "displayValue",
     get: function get() {
       var titleFieldKeys = this.form.titleFieldKeys;
       var titles = [];
 
-      for (var _iterator2 = titleFieldKeys, _isArray2 = Array.isArray(_iterator2), _i2 = 0, _iterator2 = _isArray2 ? _iterator2 : _iterator2[Symbol.iterator]();;) {
-        var _ref3;
+      for (var _iterator = titleFieldKeys, _isArray = Array.isArray(_iterator), _i2 = 0, _iterator = _isArray ? _iterator : _iterator[Symbol.iterator]();;) {
+        var _ref2;
 
-        if (_isArray2) {
-          if (_i2 >= _iterator2.length) break;
-          _ref3 = _iterator2[_i2++];
+        if (_isArray) {
+          if (_i2 >= _iterator.length) break;
+          _ref2 = _iterator[_i2++];
         } else {
-          _i2 = _iterator2.next();
+          _i2 = _iterator.next();
           if (_i2.done) break;
-          _ref3 = _i2.value;
+          _ref2 = _i2.value;
         }
 
-        var fieldKey = _ref3;
-
+        var fieldKey = _ref2;
         var value = this.formValues.get(fieldKey);
 
         if (value) {
           var displayValue = value.displayValue;
 
-          if (_textUtils2.default.isPresent(displayValue)) {
+          if (_textUtils["default"].isPresent(displayValue)) {
             titles.push(displayValue);
           }
         }
@@ -428,14 +390,14 @@ var Record = function (_Feature) {
       return titles.join(', ');
     }
   }, {
-    key: 'isStatusFieldEnabled',
+    key: "isStatusFieldEnabled",
     get: function get() {
       // invisible if there are no statuses or the status field is marked as hidden
       if (this.form.statusField.choices.length === 0 || this.form.statusField.isHidden) {
         return false;
-      }
+      } // invisible if it's readonly and there's no status (nothing for the user to read)
 
-      // invisible if it's readonly and there's no status (nothing for the user to read)
+
       if (this.status == null && this.form.statusField.isReadOnly) {
         return false;
       }
@@ -443,17 +405,17 @@ var Record = function (_Feature) {
       return this.form.statusField.isEnabled;
     }
   }, {
-    key: 'formID',
+    key: "formID",
     get: function get() {
       return this.form ? this.form.id : null;
     }
   }, {
-    key: 'projectName',
+    key: "projectName",
     get: function get() {
       return this._projectName;
     }
   }, {
-    key: 'projectID',
+    key: "projectID",
     get: function get() {
       return this._projectID;
     },
@@ -464,7 +426,7 @@ var Record = function (_Feature) {
       }
     }
   }, {
-    key: 'project',
+    key: "project",
     set: function set(project) {
       if (project) {
         this._projectID = project.id;
@@ -475,12 +437,12 @@ var Record = function (_Feature) {
       }
     }
   }, {
-    key: 'assignedToName',
+    key: "assignedToName",
     get: function get() {
       return this._assignedToName;
     }
   }, {
-    key: 'assignedToID',
+    key: "assignedToID",
     get: function get() {
       return this._assignedToID;
     },
@@ -491,7 +453,7 @@ var Record = function (_Feature) {
       }
     }
   }, {
-    key: 'assignedTo',
+    key: "assignedTo",
     set: function set(user) {
       if (user) {
         this._assignedToID = user.id;
@@ -502,37 +464,37 @@ var Record = function (_Feature) {
       }
     }
   }, {
-    key: 'createdBy',
+    key: "createdBy",
     get: function get() {
       return this._createdBy;
     }
   }, {
-    key: 'createdByID',
+    key: "createdByID",
     get: function get() {
       return this._createdByID;
     }
   }, {
-    key: 'createdByName',
+    key: "createdByName",
     get: function get() {
       return this._createdByName;
     }
   }, {
-    key: 'updatedBy',
+    key: "updatedBy",
     get: function get() {
       return this._updatedBy;
     }
   }, {
-    key: 'updatedByID',
+    key: "updatedByID",
     get: function get() {
       return this._updatedByID;
     }
   }, {
-    key: 'updatedByName',
+    key: "updatedByName",
     get: function get() {
       return this._updatedByName;
     }
   }, {
-    key: 'status',
+    key: "status",
     get: function get() {
       return this._status;
     },
@@ -540,7 +502,7 @@ var Record = function (_Feature) {
       this._status = status;
     }
   }, {
-    key: 'latitude',
+    key: "latitude",
     get: function get() {
       return this._latitude;
     },
@@ -548,7 +510,7 @@ var Record = function (_Feature) {
       this._latitude = latitude;
     }
   }, {
-    key: 'longitude',
+    key: "longitude",
     get: function get() {
       return this._longitude;
     },
@@ -556,7 +518,7 @@ var Record = function (_Feature) {
       this._longitude = longitude;
     }
   }, {
-    key: 'horizontalAccuracy',
+    key: "horizontalAccuracy",
     get: function get() {
       return this._horizontalAccuracy;
     },
@@ -564,7 +526,7 @@ var Record = function (_Feature) {
       this._horizontalAccuracy = accuracy;
     }
   }, {
-    key: 'verticalAccuracy',
+    key: "verticalAccuracy",
     get: function get() {
       return this._verticalAccuracy;
     },
@@ -572,7 +534,7 @@ var Record = function (_Feature) {
       this._verticalAccuracy = accuracy;
     }
   }, {
-    key: 'altitude',
+    key: "altitude",
     get: function get() {
       return this._altitude;
     },
@@ -580,7 +542,7 @@ var Record = function (_Feature) {
       this._altitude = altitude;
     }
   }, {
-    key: 'speed',
+    key: "speed",
     get: function get() {
       return this._speed;
     },
@@ -588,7 +550,7 @@ var Record = function (_Feature) {
       this._speed = speed;
     }
   }, {
-    key: 'course',
+    key: "course",
     get: function get() {
       return this._course;
     },
@@ -596,7 +558,7 @@ var Record = function (_Feature) {
       this._course = course;
     }
   }, {
-    key: 'geometryAsGeoJSON',
+    key: "geometryAsGeoJSON",
     get: function get() {
       if (!this.hasCoordinate) {
         return null;
@@ -608,7 +570,7 @@ var Record = function (_Feature) {
       };
     }
   }, {
-    key: 'createdDuration',
+    key: "createdDuration",
     get: function get() {
       return this._createdDuration;
     },
@@ -616,7 +578,7 @@ var Record = function (_Feature) {
       this._createdDuration = value != null ? +value : null;
     }
   }, {
-    key: 'updatedDuration',
+    key: "updatedDuration",
     get: function get() {
       return this._updatedDuration;
     },
@@ -624,7 +586,7 @@ var Record = function (_Feature) {
       this._updatedDuration = value != null ? +value : null;
     }
   }, {
-    key: 'editedDuration',
+    key: "editedDuration",
     get: function get() {
       return this._editedDuration;
     },
@@ -632,7 +594,7 @@ var Record = function (_Feature) {
       this._editedDuration = value != null ? +value : null;
     }
   }, {
-    key: 'createdLatitude',
+    key: "createdLatitude",
     get: function get() {
       return this._createdLatitude;
     },
@@ -640,7 +602,7 @@ var Record = function (_Feature) {
       this._createdLatitude = value != null ? +value : null;
     }
   }, {
-    key: 'createdLongitude',
+    key: "createdLongitude",
     get: function get() {
       return this._createdLongitude;
     },
@@ -648,7 +610,7 @@ var Record = function (_Feature) {
       this._createdLongitude = value != null ? +value : null;
     }
   }, {
-    key: 'createdAltitude',
+    key: "createdAltitude",
     get: function get() {
       return this._createdAltitude;
     },
@@ -656,7 +618,7 @@ var Record = function (_Feature) {
       this._createdAltitude = value != null ? +value : null;
     }
   }, {
-    key: 'createdAccuracy',
+    key: "createdAccuracy",
     get: function get() {
       return this._createdAccuracy;
     },
@@ -664,7 +626,7 @@ var Record = function (_Feature) {
       this._createdAccuracy = value != null ? +value : null;
     }
   }, {
-    key: 'updatedLatitude',
+    key: "updatedLatitude",
     get: function get() {
       return this._updatedLatitude;
     },
@@ -672,7 +634,7 @@ var Record = function (_Feature) {
       this._updatedLatitude = value != null ? +value : null;
     }
   }, {
-    key: 'updatedLongitude',
+    key: "updatedLongitude",
     get: function get() {
       return this._updatedLongitude;
     },
@@ -680,7 +642,7 @@ var Record = function (_Feature) {
       this._updatedLongitude = value != null ? +value : null;
     }
   }, {
-    key: 'updatedAltitude',
+    key: "updatedAltitude",
     get: function get() {
       return this._updatedAltitude;
     },
@@ -688,7 +650,7 @@ var Record = function (_Feature) {
       this._updatedAltitude = value != null ? +value : null;
     }
   }, {
-    key: 'updatedAccuracy',
+    key: "updatedAccuracy",
     get: function get() {
       return this._updatedAccuracy;
     },
@@ -696,17 +658,17 @@ var Record = function (_Feature) {
       this._updatedAccuracy = value != null ? +value : null;
     }
   }, {
-    key: 'hasCreatedCoordinate',
+    key: "hasCreatedCoordinate",
     get: function get() {
       return this.createdLatitude != null && this.createdLongitude != null;
     }
   }, {
-    key: 'hasUpdatedCoordinate',
+    key: "hasUpdatedCoordinate",
     get: function get() {
       return this.updatedLatitude != null && this.updatedLongitude != null;
     }
   }, {
-    key: 'createdLocation',
+    key: "createdLocation",
     get: function get() {
       if (this.hasCreatedCoordinate) {
         return {
@@ -720,7 +682,7 @@ var Record = function (_Feature) {
       return null;
     }
   }, {
-    key: 'updatedLocation',
+    key: "updatedLocation",
     get: function get() {
       if (this.hasUpdatedCoordinate) {
         return {
@@ -736,7 +698,7 @@ var Record = function (_Feature) {
   }]);
 
   return Record;
-}(_feature2.default);
+}(_feature["default"]);
 
-exports.default = Record;
+exports["default"] = Record;
 //# sourceMappingURL=record.js.map

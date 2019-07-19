@@ -1,38 +1,35 @@
-'use strict';
+"use strict";
 
 exports.__esModule = true;
+exports["default"] = void 0;
 
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+var _trackSegment = _interopRequireDefault(require("./track-segment"));
 
-var _trackSegment = require('./track-segment');
+var _gpx = _interopRequireDefault(require("./gpx"));
 
-var _trackSegment2 = _interopRequireDefault(_trackSegment);
+var _kml = _interopRequireDefault(require("./kml"));
 
-var _gpx = require('./gpx');
+var _srt = _interopRequireDefault(require("./srt"));
 
-var _gpx2 = _interopRequireDefault(_gpx);
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
-var _kml = require('./kml');
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
 
-var _kml2 = _interopRequireDefault(_kml);
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
-var _srt = require('./srt');
-
-var _srt2 = _interopRequireDefault(_srt);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-var Track = function () {
+var Track =
+/*#__PURE__*/
+function () {
   function Track(id, attributes) {
-    _classCallCheck(this, Track);
-
     this._id = id;
     this._segments = [];
 
     if (Array.isArray(attributes)) {
-      attributes = { tracks: [{ track: attributes }] };
+      attributes = {
+        tracks: [{
+          track: attributes
+        }]
+      };
     }
 
     this._attributes = attributes;
@@ -51,8 +48,7 @@ var Track = function () {
         }
 
         var trackSegment = _ref;
-
-        var segment = new _trackSegment2.default(trackSegment);
+        var segment = new _trackSegment["default"](trackSegment);
 
         if (segment.points.length) {
           this._segments.push(segment);
@@ -61,7 +57,9 @@ var Track = function () {
     }
   }
 
-  Track.prototype._toLineSegments = function _toLineSegments() {
+  var _proto = Track.prototype;
+
+  _proto._toLineSegments = function _toLineSegments() {
     var lines = [];
 
     for (var _iterator2 = this.segments, _isArray2 = Array.isArray(_iterator2), _i2 = 0, _iterator2 = _isArray2 ? _iterator2 : _iterator2[Symbol.iterator]();;) {
@@ -77,7 +75,6 @@ var Track = function () {
       }
 
       var segment = _ref2;
-
       var line = [];
 
       for (var _iterator3 = segment.points, _isArray3 = Array.isArray(_iterator3), _i3 = 0, _iterator3 = _isArray3 ? _iterator3 : _iterator3[Symbol.iterator]();;) {
@@ -107,34 +104,32 @@ var Track = function () {
     return lines;
   };
 
-  Track.prototype.toGPX = function toGPX() {
-    return _gpx2.default.render([this]);
+  _proto.toGPX = function toGPX() {
+    return _gpx["default"].render([this]);
   };
 
-  Track.prototype.toKML = function toKML() {
-    return _kml2.default.render([this]);
+  _proto.toKML = function toKML() {
+    return _kml["default"].render([this]);
   };
 
-  Track.prototype.toSRT = function toSRT() {
-    return _srt2.default.render([this]);
+  _proto.toSRT = function toSRT() {
+    return _srt["default"].render([this]);
   };
 
-  Track.prototype.toJSONString = function toJSONString() {
+  _proto.toJSONString = function toJSONString() {
     return JSON.stringify(this._attributes);
   };
 
-  Track.prototype.toGeoJSONString = function toGeoJSONString() {
+  _proto.toGeoJSONString = function toGeoJSONString() {
     var lineString = this.toGeoJSONMultiLineString();
-
     var features = lineString ? [lineString] : [];
-
     return JSON.stringify({
       type: 'FeatureCollection',
       features: features
     });
   };
 
-  Track.prototype.toGeoJSONLines = function toGeoJSONLines() {
+  _proto.toGeoJSONLines = function toGeoJSONLines() {
     if (this._geoJSONLines) {
       return this._geoJSONLines;
     }
@@ -149,11 +144,10 @@ var Track = function () {
         coordinates: lines[0]
       }
     };
-
     return this._geoJSONLines;
   };
 
-  Track.prototype.toGeoJSONMultiLineString = function toGeoJSONMultiLineString() {
+  _proto.toGeoJSONMultiLineString = function toGeoJSONMultiLineString() {
     if (this._geoJSONMultiLineString) {
       return this._geoJSONMultiLineString;
     }
@@ -172,17 +166,15 @@ var Track = function () {
         coordinates: lines
       }
     };
-
     return this._geoJSONMultiLineString;
   };
 
-  Track.prototype.toGeoJSONSegments = function toGeoJSONSegments() {
+  _proto.toGeoJSONSegments = function toGeoJSONSegments() {
     if (this._geoJSONSegments) {
       return this._geoJSONSegments;
     }
 
     var lines = [];
-
     var previousPoint = null;
 
     for (var _iterator4 = this.segments, _isArray4 = Array.isArray(_iterator4), _i4 = 0, _iterator4 = _isArray4 ? _iterator4 : _iterator4[Symbol.iterator]();;) {
@@ -236,57 +228,56 @@ var Track = function () {
       type: 'FeatureCollection',
       features: lines
     };
-
     return this._geoJSONSegments;
   };
 
   _createClass(Track, [{
-    key: 'id',
+    key: "id",
     get: function get() {
       return this._id;
     }
   }, {
-    key: 'isValid',
+    key: "isValid",
     get: function get() {
       return this.firstLocation != null;
     }
   }, {
-    key: 'segments',
+    key: "segments",
     get: function get() {
       return this._segments;
     }
   }, {
-    key: 'firstSegment',
+    key: "firstSegment",
     get: function get() {
       return this._segments[0];
     }
   }, {
-    key: 'lastSegment',
+    key: "lastSegment",
     get: function get() {
       return this._segments[this._segments.length - 1];
     }
   }, {
-    key: 'firstLocation',
+    key: "firstLocation",
     get: function get() {
       return this.firstSegment && this.firstSegment.firstLocation;
     }
   }, {
-    key: 'lastLocation',
+    key: "lastLocation",
     get: function get() {
       return this.lastSegment && this.lastSegment.lastLocation;
     }
   }, {
-    key: 'firstPoint',
+    key: "firstPoint",
     get: function get() {
       return this.firstSegment && this.firstSegment.firstPoint;
     }
   }, {
-    key: 'lastPoint',
+    key: "lastPoint",
     get: function get() {
       return this.lastSegment && this.lastSegment.lastPoint;
     }
   }, {
-    key: 'representativePoint',
+    key: "representativePoint",
     get: function get() {
       if (this.firstSegment) {
         return this.toGeoJSONLines().geometry.coordinates[0];
@@ -299,5 +290,5 @@ var Track = function () {
   return Track;
 }();
 
-exports.default = Track;
+exports["default"] = Track;
 //# sourceMappingURL=track.js.map

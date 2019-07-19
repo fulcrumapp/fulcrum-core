@@ -1,46 +1,39 @@
-'use strict';
+"use strict";
 
 exports.__esModule = true;
+exports["default"] = void 0;
 
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+var _element = _interopRequireDefault(require("./element"));
 
-var _element = require('./element');
+var _classification = _interopRequireDefault(require("./classification"));
 
-var _element2 = _interopRequireDefault(_element);
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
-var _classification = require('./classification');
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
 
-var _classification2 = _interopRequireDefault(_classification);
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _inheritsLoose(subClass, superClass) { subClass.prototype = Object.create(superClass.prototype); subClass.prototype.constructor = subClass; subClass.__proto__ = superClass; }
 
-function _defaults(obj, defaults) { var keys = Object.getOwnPropertyNames(defaults); for (var i = 0; i < keys.length; i++) { var key = keys[i]; var value = Object.getOwnPropertyDescriptor(defaults, key); if (value && value.configurable && obj[key] === undefined) { Object.defineProperty(obj, key, value); } } return obj; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : _defaults(subClass, superClass); }
-
-var ClassificationElement = function (_Element) {
-  _inherits(ClassificationElement, _Element);
+var ClassificationElement =
+/*#__PURE__*/
+function (_Element) {
+  _inheritsLoose(ClassificationElement, _Element);
 
   function ClassificationElement(parent, attributes) {
-    _classCallCheck(this, ClassificationElement);
+    var _this;
 
-    var _this = _possibleConstructorReturn(this, _Element.call(this, parent, attributes));
-
+    _this = _Element.call(this, parent, attributes) || this;
     _this.allowOther = !!attributes.allow_other;
-
     _this._classificationFilter = null;
-
     _this._overrideClassificationItems = null;
-
     _this._classificationSetID = attributes.classification_set_id;
     return _this;
   }
 
-  ClassificationElement.prototype.load = function load(dataSource, callback) {
+  var _proto = ClassificationElement.prototype;
+
+  _proto.load = function load(dataSource, callback) {
     var _this2 = this;
 
     dataSource.getClassificationSet(this._classificationSetID, function (err, classificationSet) {
@@ -52,12 +45,11 @@ var ClassificationElement = function (_Element) {
       }
 
       _this2.classificationSet = classificationSet;
-
       return callback();
     });
   };
 
-  ClassificationElement.prototype.resetOverrides = function resetOverrides() {
+  _proto.resetOverrides = function resetOverrides() {
     _Element.prototype.resetOverrides.call(this);
 
     this._classificationFilter = null;
@@ -65,12 +57,12 @@ var ClassificationElement = function (_Element) {
   };
 
   _createClass(ClassificationElement, [{
-    key: 'classificationItems',
+    key: "classificationItems",
     get: function get() {
       return this._overrideClassificationItems ? this._overrideClassificationItems : this.filteredClassifications;
     }
   }, {
-    key: 'classificationFilter',
+    key: "classificationFilter",
     get: function get() {
       return this._classificationFilter;
     },
@@ -78,7 +70,7 @@ var ClassificationElement = function (_Element) {
       this._classificationFilter = classificationFilter;
     }
   }, {
-    key: 'overrideClassificationItems',
+    key: "overrideClassificationItems",
     set: function set(overrideClassificationSetItems) {
       if (!overrideClassificationSetItems || overrideClassificationSetItems.length < 1) {
         this._overrideClassificationItems = null;
@@ -100,24 +92,22 @@ var ClassificationElement = function (_Element) {
         }
 
         var classificationAttributes = _ref;
-
-        var classification = new _classification2.default(null, classificationAttributes);
-
+        var classification = new _classification["default"](null, classificationAttributes);
         classificationItems.push(classification);
       }
 
       this._overrideClassificationItems = classificationItems;
     }
   }, {
-    key: 'overrideValues',
+    key: "overrideValues",
     get: function get() {
-      return Object.assign(Object.getOwnPropertyDescriptor(_element2.default.prototype, 'overrideValues').get.call(this), {
+      return Object.assign(Object.getOwnPropertyDescriptor(_element["default"].prototype, 'overrideValues').get.call(this), {
         classificationFilter: this._classificationFilter,
         overrideClassificationItems: this._overrideClassificationItems
       });
     }
   }, {
-    key: 'filteredClassifications',
+    key: "filteredClassifications",
     get: function get() {
       if (!this.classificationSet) {
         return [];
@@ -172,7 +162,7 @@ var ClassificationElement = function (_Element) {
   }]);
 
   return ClassificationElement;
-}(_element2.default);
+}(_element["default"]);
 
-exports.default = ClassificationElement;
+exports["default"] = ClassificationElement;
 //# sourceMappingURL=classification-element.js.map

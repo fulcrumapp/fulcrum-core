@@ -1,50 +1,47 @@
-'use strict';
+"use strict";
 
 exports.__esModule = true;
+exports["default"] = void 0;
 
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+var _textUtils = _interopRequireDefault(require("../utils/text-utils"));
 
-var _textUtils = require('../utils/text-utils');
+var _numberUtils = _interopRequireDefault(require("../utils/number-utils"));
 
-var _textUtils2 = _interopRequireDefault(_textUtils);
+var _dateUtils = _interopRequireDefault(require("../utils/date-utils"));
 
-var _numberUtils = require('../utils/number-utils');
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
-var _numberUtils2 = _interopRequireDefault(_numberUtils);
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
 
-var _dateUtils = require('../utils/date-utils');
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
-var _dateUtils2 = _interopRequireDefault(_dateUtils);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-var DisplayOptions = function () {
+var DisplayOptions =
+/*#__PURE__*/
+function () {
   function DisplayOptions(attributes) {
-    _classCallCheck(this, DisplayOptions);
-
     this.style = attributes.style;
     this.currency = attributes.currency;
   }
 
-  DisplayOptions.prototype.format = function format(value) {
-    if (!_textUtils2.default.isPresent(value)) {
+  var _proto = DisplayOptions.prototype;
+
+  _proto.format = function format(value) {
+    if (!_textUtils["default"].isPresent(value)) {
       return value;
     }
 
     switch (true) {
       case this.isNumber:
         {
-          return _numberUtils2.default.localizedStringFromMachineString(value, true);
+          return _numberUtils["default"].localizedStringFromMachineString(value, true);
         }
 
       case this.isDate:
         {
-          var date = _dateUtils2.default.parseDate(value);
+          var date = _dateUtils["default"].parseDate(value);
 
           if (date != null) {
-            return _dateUtils2.default.formatLocalizedDate(date);
+            return _dateUtils["default"].formatLocalizedDate(date);
           }
 
           break;
@@ -52,7 +49,7 @@ var DisplayOptions = function () {
 
       case this.isCurrency:
         {
-          return _numberUtils2.default.formatCurrency(value, this.currency);
+          return _numberUtils["default"].formatCurrency(value, this.currency);
         }
 
       default:
@@ -63,22 +60,22 @@ var DisplayOptions = function () {
   };
 
   _createClass(DisplayOptions, [{
-    key: 'isCurrency',
+    key: "isCurrency",
     get: function get() {
       return this.style === 'currency';
     }
   }, {
-    key: 'isNumber',
+    key: "isNumber",
     get: function get() {
       return this.style === 'number';
     }
   }, {
-    key: 'isDate',
+    key: "isDate",
     get: function get() {
       return this.style === 'date';
     }
   }, {
-    key: 'isText',
+    key: "isText",
     get: function get() {
       return this.style === 'text';
     }
@@ -87,5 +84,5 @@ var DisplayOptions = function () {
   return DisplayOptions;
 }();
 
-exports.default = DisplayOptions;
+exports["default"] = DisplayOptions;
 //# sourceMappingURL=display-options.js.map

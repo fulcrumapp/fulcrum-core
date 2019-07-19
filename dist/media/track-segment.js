@@ -1,21 +1,20 @@
-'use strict';
+"use strict";
 
 exports.__esModule = true;
+exports["default"] = void 0;
 
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+var _trackPoint = _interopRequireDefault(require("./track-point"));
 
-var _trackPoint = require('./track-point');
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
-var _trackPoint2 = _interopRequireDefault(_trackPoint);
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-var TrackSegment = function () {
+var TrackSegment =
+/*#__PURE__*/
+function () {
   function TrackSegment(attributes) {
-    _classCallCheck(this, TrackSegment);
-
     this._points = [];
 
     if (attributes.track) {
@@ -32,8 +31,7 @@ var TrackSegment = function () {
         }
 
         var trackPoint = _ref;
-
-        var point = new _trackPoint2.default(trackPoint);
+        var point = new _trackPoint["default"](trackPoint);
 
         this._points.push(point);
       }
@@ -41,37 +39,36 @@ var TrackSegment = function () {
   }
 
   _createClass(TrackSegment, [{
-    key: 'points',
+    key: "points",
     get: function get() {
       return this._points;
     }
   }, {
-    key: 'firstPoint',
+    key: "firstPoint",
     get: function get() {
       return this._points[0];
     }
   }, {
-    key: 'lastPoint',
+    key: "lastPoint",
     get: function get() {
       return this._points[this._points.length - 1];
     }
   }, {
-    key: 'locations',
+    key: "locations",
     get: function get() {
       return this.points.filter(function (o) {
         return o.hasCoordinate;
       });
     }
   }, {
-    key: 'firstLocation',
+    key: "firstLocation",
     get: function get() {
       return this.locations[0];
     }
   }, {
-    key: 'lastLocation',
+    key: "lastLocation",
     get: function get() {
       var locations = this.locations;
-
       return locations[locations.length - 1];
     }
   }]);
@@ -79,5 +76,5 @@ var TrackSegment = function () {
   return TrackSegment;
 }();
 
-exports.default = TrackSegment;
+exports["default"] = TrackSegment;
 //# sourceMappingURL=track-segment.js.map

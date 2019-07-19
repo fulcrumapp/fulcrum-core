@@ -1,45 +1,37 @@
-'use strict';
+"use strict";
 
 exports.__esModule = true;
+exports["default"] = void 0;
 
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+var _formValue = _interopRequireDefault(require("./form-value"));
 
-var _formValue = require('./form-value');
+var _multipleValueItem = _interopRequireDefault(require("./multiple-value-item"));
 
-var _formValue2 = _interopRequireDefault(_formValue);
+var _textUtils = _interopRequireDefault(require("../utils/text-utils"));
 
-var _multipleValueItem = require('./multiple-value-item');
+var _numberUtils = _interopRequireDefault(require("../utils/number-utils"));
 
-var _multipleValueItem2 = _interopRequireDefault(_multipleValueItem);
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
-var _textUtils = require('../utils/text-utils');
+function _objectWithoutPropertiesLoose(source, excluded) { if (source == null) return {}; var target = {}; var sourceKeys = Object.keys(source); var key, i; for (i = 0; i < sourceKeys.length; i++) { key = sourceKeys[i]; if (excluded.indexOf(key) >= 0) continue; target[key] = source[key]; } return target; }
 
-var _textUtils2 = _interopRequireDefault(_textUtils);
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
 
-var _numberUtils = require('../utils/number-utils');
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
-var _numberUtils2 = _interopRequireDefault(_numberUtils);
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _inheritsLoose(subClass, superClass) { subClass.prototype = Object.create(superClass.prototype); subClass.prototype.constructor = subClass; subClass.__proto__ = superClass; }
 
-function _defaults(obj, defaults) { var keys = Object.getOwnPropertyNames(defaults); for (var i = 0; i < keys.length; i++) { var key = keys[i]; var value = Object.getOwnPropertyDescriptor(defaults, key); if (value && value.configurable && obj[key] === undefined) { Object.defineProperty(obj, key, value); } } return obj; }
-
-function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : _defaults(subClass, superClass); }
-
-var MediaValue = function (_FormValue) {
-  _inherits(MediaValue, _FormValue);
+var MediaValue =
+/*#__PURE__*/
+function (_FormValue) {
+  _inheritsLoose(MediaValue, _FormValue);
 
   function MediaValue(element, items) {
-    _classCallCheck(this, MediaValue);
+    var _this;
 
-    var _this = _possibleConstructorReturn(this, _FormValue.call(this, element, items));
-
+    _this = _FormValue.call(this, element, items) || this;
     _this._items = [];
 
     if (Array.isArray(items)) {
@@ -57,18 +49,21 @@ var MediaValue = function (_FormValue) {
 
         var item = _ref;
 
-        _this._items.push(new _this.ItemClass(_this, item));
+        _this._items.push(new _this.ItemClass(_assertThisInitialized(_this), item));
       }
     }
+
     return _this;
   }
 
-  MediaValue.prototype.format = function format(_ref2) {
+  var _proto = MediaValue.prototype;
+
+  _proto.format = function format(_ref2) {
     var _ref2$part = _ref2.part,
-        part = _ref2$part === undefined ? null : _ref2$part,
+        part = _ref2$part === void 0 ? null : _ref2$part,
         formatMediaURL = _ref2.formatMediaURL,
         formatMediaViewerURL = _ref2.formatMediaViewerURL,
-        args = _objectWithoutProperties(_ref2, ['part', 'formatMediaURL', 'formatMediaViewerURL']);
+        args = _objectWithoutPropertiesLoose(_ref2, ["part", "formatMediaURL", "formatMediaViewerURL"]);
 
     if (this.isEmpty) {
       return null;
@@ -91,7 +86,7 @@ var MediaValue = function (_FormValue) {
     });
   };
 
-  MediaValue.prototype.toJSON = function toJSON() {
+  _proto.toJSON = function toJSON() {
     if (this.isEmpty) {
       return null;
     }
@@ -111,40 +106,40 @@ var MediaValue = function (_FormValue) {
       }
 
       var item = _ref3;
-
       items.push(item.toJSON());
     }
 
     return items;
   };
 
-  MediaValue.prototype.isEqual = function isEqual(value) {
+  _proto.isEqual = function isEqual(value) {
     return false;
   };
 
-  MediaValue.prototype.contains = function contains(value) {
+  _proto.contains = function contains(value) {
     return false;
   };
 
-  MediaValue.prototype.startsWith = function startsWith(value) {
+  _proto.startsWith = function startsWith(value) {
     return false;
   };
 
-  MediaValue.prototype.isLessThan = function isLessThan(value) {
-    return this.length < _numberUtils2.default.parseDouble(value);
+  _proto.isLessThan = function isLessThan(value) {
+    return this.length < _numberUtils["default"].parseDouble(value);
   };
 
-  MediaValue.prototype.isGreaterThan = function isGreaterThan(value) {
-    return this.length > _numberUtils2.default.parseDouble(value);
+  _proto.isGreaterThan = function isGreaterThan(value) {
+    return this.length > _numberUtils["default"].parseDouble(value);
   };
 
-  MediaValue.prototype.mapItems = function mapItems(callback) {
+  _proto.mapItems = function mapItems(callback) {
     return this._items.slice().map(callback);
   };
 
-  MediaValue.prototype.addItem = function addItem(id, caption) {
-    var item = new this.ItemClass(this, { caption: caption });
-
+  _proto.addItem = function addItem(id, caption) {
+    var item = new this.ItemClass(this, {
+      caption: caption
+    });
     item.mediaID = id;
 
     this._items.push(item);
@@ -152,7 +147,7 @@ var MediaValue = function (_FormValue) {
     return item;
   };
 
-  MediaValue.prototype.removeItem = function removeItem(id) {
+  _proto.removeItem = function removeItem(id) {
     for (var index = 0; index < this._items.length; ++index) {
       if (this._items[index].mediaID === id) {
         var item = this._items[index];
@@ -167,12 +162,12 @@ var MediaValue = function (_FormValue) {
   };
 
   _createClass(MediaValue, [{
-    key: 'isEmpty',
+    key: "isEmpty",
     get: function get() {
       return this._items.length === 0;
     }
   }, {
-    key: 'searchableValue',
+    key: "searchableValue",
     get: function get() {
       if (this.isEmpty) {
         return null;
@@ -194,7 +189,7 @@ var MediaValue = function (_FormValue) {
 
         var item = _ref4;
 
-        if (_textUtils2.default.isPresent(item.caption)) {
+        if (_textUtils["default"].isPresent(item.caption)) {
           ids.push(item.caption);
         }
       }
@@ -202,12 +197,12 @@ var MediaValue = function (_FormValue) {
       return ids.join(' ');
     }
   }, {
-    key: 'length',
+    key: "length",
     get: function get() {
       return this._items.length;
     }
   }, {
-    key: 'columnValue',
+    key: "columnValue",
     get: function get() {
       if (this.isEmpty) {
         return null;
@@ -229,20 +224,17 @@ var MediaValue = function (_FormValue) {
         }
 
         var item = _ref5;
-
         ids.push(item.mediaID);
         captions.push(item.caption);
       }
 
       var value = {};
-
       value['f' + this.element.key + '_captions'] = captions;
       value['f' + this.element.key] = ids;
-
       return value;
     }
   }, {
-    key: 'multipleValues',
+    key: "multipleValues",
     get: function get() {
       var items = [];
 
@@ -259,14 +251,13 @@ var MediaValue = function (_FormValue) {
         }
 
         var item = _ref6;
-
-        items.push(new _multipleValueItem2.default(this.element, item.mediaID));
+        items.push(new _multipleValueItem["default"](this.element, item.mediaID));
       }
 
       return items;
     }
   }, {
-    key: 'hasCaptions',
+    key: "hasCaptions",
     get: function get() {
       for (var _iterator6 = this._items, _isArray6 = Array.isArray(_iterator6), _i6 = 0, _iterator6 = _isArray6 ? _iterator6 : _iterator6[Symbol.iterator]();;) {
         var _ref7;
@@ -282,25 +273,23 @@ var MediaValue = function (_FormValue) {
 
         var item = _ref7;
 
-        if (_textUtils2.default.isPresent(item.caption)) {
+        if (_textUtils["default"].isPresent(item.caption)) {
           return true;
         }
       }
 
       return false;
-    }
-
-    // return a copy until it's determined that a mutable API is necessary
+    } // return a copy until it's determined that a mutable API is necessary
 
   }, {
-    key: 'items',
+    key: "items",
     get: function get() {
       return this._items.slice();
     }
   }]);
 
   return MediaValue;
-}(_formValue2.default);
+}(_formValue["default"]);
 
-exports.default = MediaValue;
+exports["default"] = MediaValue;
 //# sourceMappingURL=media-value.js.map

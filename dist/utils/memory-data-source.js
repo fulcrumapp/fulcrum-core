@@ -1,13 +1,12 @@
 "use strict";
 
 exports.__esModule = true;
+exports["default"] = void 0;
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-var MemoryDataSource = function () {
+var MemoryDataSource =
+/*#__PURE__*/
+function () {
   function MemoryDataSource(name) {
-    _classCallCheck(this, MemoryDataSource);
-
     this.cache = {};
     this.projects = null;
     this.users = null;
@@ -17,109 +16,113 @@ var MemoryDataSource = function () {
     this.tracks = {};
   }
 
-  MemoryDataSource.prototype.getChoiceList = function getChoiceList(id, callback) {
+  var _proto = MemoryDataSource.prototype;
+
+  _proto.getChoiceList = function getChoiceList(id, callback) {
     return callback(null, this.cache[id]);
   };
 
-  MemoryDataSource.prototype.getClassificationSet = function getClassificationSet(id, callback) {
+  _proto.getClassificationSet = function getClassificationSet(id, callback) {
     return callback(null, this.cache[id]);
   };
 
-  MemoryDataSource.prototype.getForm = function getForm(id, callback) {
+  _proto.getForm = function getForm(id, callback) {
     return callback(null, this.cache[id]);
   };
 
-  MemoryDataSource.prototype.getRecord = function getRecord(id, form, callback) {
+  _proto.getRecord = function getRecord(id, form, callback) {
     return callback(null, this.cache[id]);
   };
 
-  MemoryDataSource.prototype.getUsers = function getUsers(params, callback) {
+  _proto.getUsers = function getUsers(params, callback) {
     return callback(null, this.users);
   };
 
-  MemoryDataSource.prototype.getUser = function getUser(id, callback) {
+  _proto.getUser = function getUser(id, callback) {
     return callback(null, this.cache[id]);
   };
 
-  MemoryDataSource.prototype.getProjects = function getProjects(params, callback) {
+  _proto.getProjects = function getProjects(params, callback) {
     return callback(null, this.projects);
   };
 
-  MemoryDataSource.prototype.getPhoto = function getPhoto(id, callback) {
+  _proto.getPhoto = function getPhoto(id, callback) {
     return callback(null, this.photos[id]);
   };
 
-  MemoryDataSource.prototype.getAudio = function getAudio(id, callback) {
+  _proto.getAudio = function getAudio(id, callback) {
     return callback(null, this.audio[id]);
   };
 
-  MemoryDataSource.prototype.getAudioTrack = function getAudioTrack(id, callback) {
+  _proto.getAudioTrack = function getAudioTrack(id, callback) {
     return callback(null, this.tracks[id]);
   };
 
-  MemoryDataSource.prototype.getVideo = function getVideo(id, callback) {
+  _proto.getVideo = function getVideo(id, callback) {
     return callback(null, this.videos[id]);
   };
 
-  MemoryDataSource.prototype.getVideoTrack = function getVideoTrack(id, callback) {
+  _proto.getVideoTrack = function getVideoTrack(id, callback) {
     return callback(null, this.tracks[id]);
   };
 
-  MemoryDataSource.prototype.getChoiceListComplete = function getChoiceListComplete(id, object, callback) {
+  _proto.getChoiceListComplete = function getChoiceListComplete(id, object, callback) {
     this.cache[id] = object;
     callback();
   };
 
-  MemoryDataSource.prototype.getClassificationSetComplete = function getClassificationSetComplete(id, object, callback) {
+  _proto.getClassificationSetComplete = function getClassificationSetComplete(id, object, callback) {
     this.cache[id] = object;
     callback();
   };
 
-  MemoryDataSource.prototype.getFormComplete = function getFormComplete(id, object, callback) {
+  _proto.getFormComplete = function getFormComplete(id, object, callback) {
     this.cache[id] = object;
     callback();
   };
 
-  MemoryDataSource.prototype.getRecordComplete = function getRecordComplete(id, form, object, callback) {
+  _proto.getRecordComplete = function getRecordComplete(id, form, object, callback) {
     this.cache[id] = object;
     callback();
   };
 
-  MemoryDataSource.prototype.getUserComplete = function getUserComplete(id, object, callback) {
+  _proto.getUserComplete = function getUserComplete(id, object, callback) {
     this.cache[id] = object;
     callback();
   };
 
-  MemoryDataSource.prototype.getUsersComplete = function getUsersComplete(params, object, callback) {
+  _proto.getUsersComplete = function getUsersComplete(params, object, callback) {
     this.users = object;
     callback();
   };
 
-  MemoryDataSource.prototype.getProjectsComplete = function getProjectsComplete(params, object, callback) {
+  _proto.getProjectsComplete = function getProjectsComplete(params, object, callback) {
     this.projects = object;
     callback();
   };
 
-  MemoryDataSource.prototype.getPhotoComplete = function getPhotoComplete(id, object, callback) {
+  _proto.getPhotoComplete = function getPhotoComplete(id, object, callback) {
     if (object.processed) {
       this.photos[id] = object;
     }
+
     callback();
   };
 
-  MemoryDataSource.prototype.getAudioComplete = function getAudioComplete(id, object, callback) {
+  _proto.getAudioComplete = function getAudioComplete(id, object, callback) {
     if (object.processed) {
       this.audio[id] = object;
     }
+
     callback();
   };
 
-  MemoryDataSource.prototype.getAudioTrackComplete = function getAudioTrackComplete(id, object, callback) {
+  _proto.getAudioTrackComplete = function getAudioTrackComplete(id, object, callback) {
     this.tracks[id] = object;
     callback();
   };
 
-  MemoryDataSource.prototype.getVideoComplete = function getVideoComplete(id, object, callback) {
+  _proto.getVideoComplete = function getVideoComplete(id, object, callback) {
     if (object.processed) {
       this.videos[id] = object;
     }
@@ -127,7 +130,7 @@ var MemoryDataSource = function () {
     callback();
   };
 
-  MemoryDataSource.prototype.getVideoTrackComplete = function getVideoTrackComplete(id, object, callback) {
+  _proto.getVideoTrackComplete = function getVideoTrackComplete(id, object, callback) {
     this.tracks[id] = object;
     callback();
   };
@@ -135,5 +138,5 @@ var MemoryDataSource = function () {
   return MemoryDataSource;
 }();
 
-exports.default = MemoryDataSource;
+exports["default"] = MemoryDataSource;
 //# sourceMappingURL=memory-data-source.js.map

@@ -1,4 +1,12 @@
 {
-  "presets": ["es2015-loose", "stage-1"],
-  "plugins": ["transform-proto-to-assign"]
+  "presets": [
+    ["@babel/preset-env", {
+      "loose": true
+    }]
+  ],
+  "plugins": [
+    ["@babel/plugin-proposal-class-properties", { "loose": false }],
+    ["@babel/plugin-proposal-export-default-from"]
+  ]
 }
+

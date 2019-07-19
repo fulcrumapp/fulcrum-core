@@ -1,33 +1,31 @@
-'use strict';
+"use strict";
 
 exports.__esModule = true;
+exports["default"] = void 0;
 
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+var _form = _interopRequireDefault(require("../form"));
 
-var _form = require('../form');
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
-var _form2 = _interopRequireDefault(_form);
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-var ElementValidationError = function () {
+var ElementValidationError =
+/*#__PURE__*/
+function () {
   function ElementValidationError(element) {
-    _classCallCheck(this, ElementValidationError);
-
     this.element = element;
   }
 
   _createClass(ElementValidationError, [{
-    key: 'label',
+    key: "label",
     get: function get() {
       var parents = [];
-
       var iterator = this.element.parent;
 
       while (iterator) {
-        if (!(iterator instanceof _form2.default)) {
+        if (!(iterator instanceof _form["default"])) {
           parents.push(iterator.label);
         }
 
@@ -35,7 +33,6 @@ var ElementValidationError = function () {
       }
 
       var parentLabels = parents.reverse().concat([this.element.label]);
-
       return parentLabels.join(' / ');
     }
   }]);
@@ -43,5 +40,5 @@ var ElementValidationError = function () {
   return ElementValidationError;
 }();
 
-exports.default = ElementValidationError;
+exports["default"] = ElementValidationError;
 //# sourceMappingURL=element-validation-error.js.map

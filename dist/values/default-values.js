@@ -1,31 +1,24 @@
-'use strict';
+"use strict";
 
 exports.__esModule = true;
+exports["default"] = void 0;
 
-var _dateUtils = require('../utils/date-utils');
+var _dateUtils = _interopRequireDefault(require("../utils/date-utils"));
 
-var _dateUtils2 = _interopRequireDefault(_dateUtils);
+var _textUtils = _interopRequireDefault(require("../utils/text-utils"));
 
-var _textUtils = require('../utils/text-utils');
-
-var _textUtils2 = _interopRequireDefault(_textUtils);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 var NOW = 'now';
 
-var DefaultValues = function () {
-  function DefaultValues() {
-    _classCallCheck(this, DefaultValues);
-  }
+var DefaultValues =
+/*#__PURE__*/
+function () {
+  function DefaultValues() {}
 
   DefaultValues.applyDefaultValue = function applyDefaultValue(elementDefaultValue, element, formValues) {
     var defaultValue = elementDefaultValue;
-
     var value = formValues.get(element.key);
-
     var hasValue = value && !value.isEmpty;
 
     if (hasValue || defaultValue == null || defaultValue.length === 0) {
@@ -33,9 +26,9 @@ var DefaultValues = function () {
     }
 
     if (element.isDateElement && defaultValue === NOW) {
-      defaultValue = _dateUtils2.default.formatDate(new Date());
+      defaultValue = _dateUtils["default"].formatDate(new Date());
     } else if (element.isTimeElement && defaultValue === NOW) {
-      defaultValue = _dateUtils2.default.formatTime(new Date());
+      defaultValue = _dateUtils["default"].formatTime(new Date());
     }
 
     var fieldValue = formValues.createValueFromString(element, defaultValue);
@@ -49,6 +42,7 @@ var DefaultValues = function () {
     if (defaultValues == null) {
       return;
     }
+
     var elements = DefaultValues.elementsWithPreviousDefaultsEnabledWithinElements(formValues.elements, record.form);
 
     for (var _iterator = elements, _isArray = Array.isArray(_iterator), _i = 0, _iterator = _isArray ? _iterator : _iterator[Symbol.iterator]();;) {
@@ -64,13 +58,11 @@ var DefaultValues = function () {
       }
 
       var element = _ref;
-
       var previousDefaultAsJSON = defaultValues[element.key];
 
       if (previousDefaultAsJSON) {
         var fieldValue = formValues.createValue(element, previousDefaultAsJSON);
         var currentValue = record.get(element.key, formValues);
-
         var isCurrentlyEmpty = currentValue == null || currentValue.isEmpty;
 
         if (fieldValue && isCurrentlyEmpty) {
@@ -86,10 +78,7 @@ var DefaultValues = function () {
 
   DefaultValues.applyDefaultValuesForRecordLinkValue = function applyDefaultValuesForRecordLinkValue(recordLinkValue, formValues, record) {
     var recordLinkElement = recordLinkValue.element;
-
-    var itemValue = recordLinkValue.items[recordLinkValue.length - 1];
-
-    // TODO(zhm) reload?
+    var itemValue = recordLinkValue.items[recordLinkValue.length - 1]; // TODO(zhm) reload?
     // [itemValue.record reload];
 
     var otherRecord = itemValue.record;
@@ -107,11 +96,9 @@ var DefaultValues = function () {
       }
 
       var recordDefault = _ref2;
-
-      var otherValue = otherRecord.get(recordDefault.sourceKey, otherRecord.formValues);
-
-      // TODO(zhm) verify container here
+      var otherValue = otherRecord.get(recordDefault.sourceKey, otherRecord.formValues); // TODO(zhm) verify container here
       // FCMElement *newElement = [record.form elementByKey:recordDefault.destinationKey withinContainer:nil];
+
       var newElement = record.form.elementsByKey[recordDefault.destinationKey];
 
       if (newElement) {
@@ -135,9 +122,9 @@ var DefaultValues = function () {
   };
 
   DefaultValues.applyDefaultValuesForElements = function applyDefaultValuesForElements(elements, formValues, record) {
-    var hasStatusDefault = record.form.statusField && _textUtils2.default.isPresent(record.form.statusField.defaultValue) && record.form.statusField.isEnabled;
+    var hasStatusDefault = record.form.statusField && _textUtils["default"].isPresent(record.form.statusField.defaultValue) && record.form.statusField.isEnabled;
 
-    if (hasStatusDefault && _textUtils2.default.isEmpty(record.status)) {
+    if (hasStatusDefault && _textUtils["default"].isEmpty(record.status)) {
       record.status = record.form.statusField.defaultValue;
     }
 
@@ -202,5 +189,5 @@ var DefaultValues = function () {
   return DefaultValues;
 }();
 
-exports.default = DefaultValues;
+exports["default"] = DefaultValues;
 //# sourceMappingURL=default-values.js.map

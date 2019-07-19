@@ -1,29 +1,28 @@
 "use strict";
 
 exports.__esModule = true;
+exports["default"] = void 0;
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-var MediaItemValue = function () {
+var MediaItemValue =
+/*#__PURE__*/
+function () {
   function MediaItemValue(mediaValue, attributes) {
-    _classCallCheck(this, MediaItemValue);
-
     this.mediaValue = mediaValue;
     this.caption = attributes.caption;
     this.mediaID = attributes[this.mediaKey];
   }
 
-  MediaItemValue.prototype.toJSON = function toJSON() {
-    var json = {};
+  var _proto = MediaItemValue.prototype;
 
+  _proto.toJSON = function toJSON() {
+    var json = {};
     json.caption = this.caption || null;
     json[this.mediaKey] = this.mediaID || null;
-
     return json;
   };
 
   return MediaItemValue;
 }();
 
-exports.default = MediaItemValue;
+exports["default"] = MediaItemValue;
 //# sourceMappingURL=media-item-value.js.map

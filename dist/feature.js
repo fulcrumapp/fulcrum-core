@@ -1,90 +1,93 @@
-'use strict';
+"use strict";
 
 exports.__esModule = true;
+exports["default"] = void 0;
 
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
 var notImplemented = function notImplemented() {
   throw new Error('Not implemented');
 };
 
-var Feature = function () {
-  function Feature() {
-    _classCallCheck(this, Feature);
-  }
+var Feature =
+/*#__PURE__*/
+function () {
+  function Feature() {}
 
-  Feature.prototype.toJSON = function toJSON() {
+  var _proto = Feature.prototype;
+
+  _proto.toJSON = function toJSON() {
     notImplemented();
   };
 
-  Feature.prototype.updateTimetamps = function updateTimetamps() {
+  _proto.updateTimetamps = function updateTimetamps() {
     notImplemented();
   };
 
   _createClass(Feature, [{
-    key: 'id',
+    key: "id",
     get: function get() {
       notImplemented();
     }
   }, {
-    key: 'createdAt',
+    key: "createdAt",
     get: function get() {
       notImplemented();
     }
   }, {
-    key: 'updatedAt',
+    key: "updatedAt",
     get: function get() {
       notImplemented();
     }
   }, {
-    key: 'formValues',
+    key: "formValues",
     get: function get() {
       notImplemented();
     }
   }, {
-    key: 'hasCoordinate',
+    key: "hasCoordinate",
     get: function get() {
       notImplemented();
     }
   }, {
-    key: 'isGeometryEnabled',
+    key: "isGeometryEnabled",
     get: function get() {
       notImplemented();
     }
   }, {
-    key: 'displayValue',
+    key: "displayValue",
     get: function get() {
       notImplemented();
     }
   }, {
-    key: 'searchableValue',
+    key: "searchableValue",
     get: function get() {
       notImplemented();
     }
   }, {
-    key: 'createdDuration',
+    key: "createdDuration",
     get: function get() {
       notImplemented();
     }
   }, {
-    key: 'updatedDuration',
+    key: "updatedDuration",
     get: function get() {
       notImplemented();
     }
   }, {
-    key: 'editedDuration',
+    key: "editedDuration",
     get: function get() {
       notImplemented();
     }
   }, {
-    key: 'hasCreatedCoordinate',
+    key: "hasCreatedCoordinate",
     get: function get() {
       notImplemented();
     }
   }, {
-    key: 'hasUpdatedCoordinate',
+    key: "hasUpdatedCoordinate",
     get: function get() {
       notImplemented();
     }
@@ -93,5 +96,5 @@ var Feature = function () {
   return Feature;
 }();
 
-exports.default = Feature;
+exports["default"] = Feature;
 //# sourceMappingURL=feature.js.map

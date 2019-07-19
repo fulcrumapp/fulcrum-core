@@ -1,343 +1,274 @@
-'use strict';
+"use strict";
 
 exports.__esModule = true;
-exports.TrackPlayer = exports.TrackSegment = exports.TrackPoint = exports.Track = exports.Changeset = exports.Project = exports.Role = exports.User = exports.StatusValue = exports.StatusChoice = exports.StatusElement = exports.MediaItemValue = exports.MediaValue = exports.MediaElement = exports.CustomValidationError = exports.DefaultValues = exports.LevelDBDataSource = exports.MemoryDataSource = exports.DataSource = exports.FeatureValidator = exports.RecordLinkItemValue = exports.RecordLinkValue = exports.RecordLinkElement = exports.SignatureValue = exports.SignatureElement = exports.SectionElement = exports.TextValue = exports.TextElement = exports.CalculatedValue = exports.CalculatedElement = exports.TimeValue = exports.TimeElement = exports.DateValue = exports.DateElement = exports.ClassificationValue = exports.ClassificationElement = exports.ChoiceValue = exports.ChoiceElement = exports.BarcodeValue = exports.BarcodeElement = exports.AddressValue = exports.AddressElement = exports.VideoValue = exports.VideoItemValue = exports.PhotoValue = exports.PhotoItemValue = exports.AudioValue = exports.AudioItemValue = exports.RepeatableElement = exports.Condition = exports.ChildElements = exports.NumberUtils = exports.DateUtils = exports.TextUtils = exports.FormValues = exports.Feature = exports.RepeatableValue = exports.RepeatableItemValue = exports.ElementFactory = exports.ClassificationSet = exports.Classification = exports.ChoiceList = exports.Choice = exports.FormValue = exports.Element = exports.Record = exports.Form = undefined;
 
-var _form = require('./form');
+var _form = _interopRequireDefault(require("./form"));
 
-var _form2 = _interopRequireDefault(_form);
+exports.Form = _form["default"];
 
-var _record = require('./record');
+var _record = _interopRequireDefault(require("./record"));
 
-var _record2 = _interopRequireDefault(_record);
+exports.Record = _record["default"];
 
-var _element = require('./elements/element');
+var _element = _interopRequireDefault(require("./elements/element"));
 
-var _element2 = _interopRequireDefault(_element);
+exports.Element = _element["default"];
 
-var _formValue = require('./values/form-value');
+var _formValue = _interopRequireDefault(require("./values/form-value"));
 
-var _formValue2 = _interopRequireDefault(_formValue);
+exports.FormValue = _formValue["default"];
 
-var _choice = require('./elements/choice');
+var _choice = _interopRequireDefault(require("./elements/choice"));
 
-var _choice2 = _interopRequireDefault(_choice);
+exports.Choice = _choice["default"];
 
-var _choiceList = require('./choice-list');
+var _choiceList = _interopRequireDefault(require("./choice-list"));
 
-var _choiceList2 = _interopRequireDefault(_choiceList);
+exports.ChoiceList = _choiceList["default"];
 
-var _classification = require('./elements/classification');
+var _classification = _interopRequireDefault(require("./elements/classification"));
 
-var _classification2 = _interopRequireDefault(_classification);
+exports.Classification = _classification["default"];
 
-var _classificationSet = require('./classification-set');
+var _classificationSet = _interopRequireDefault(require("./classification-set"));
 
-var _classificationSet2 = _interopRequireDefault(_classificationSet);
+exports.ClassificationSet = _classificationSet["default"];
 
-var _elementFactory = require('./elements/element-factory');
+var _elementFactory = _interopRequireDefault(require("./elements/element-factory"));
 
-var _elementFactory2 = _interopRequireDefault(_elementFactory);
+exports.ElementFactory = _elementFactory["default"];
 
-var _repeatableItemValue = require('./values/repeatable-item-value');
+var _repeatableItemValue = _interopRequireDefault(require("./values/repeatable-item-value"));
 
-var _repeatableItemValue2 = _interopRequireDefault(_repeatableItemValue);
+exports.RepeatableItemValue = _repeatableItemValue["default"];
 
-var _repeatableValue = require('./values/repeatable-value');
+var _repeatableValue = _interopRequireDefault(require("./values/repeatable-value"));
 
-var _repeatableValue2 = _interopRequireDefault(_repeatableValue);
+exports.RepeatableValue = _repeatableValue["default"];
 
-var _feature = require('./feature');
+var _feature = _interopRequireDefault(require("./feature"));
 
-var _feature2 = _interopRequireDefault(_feature);
+exports.Feature = _feature["default"];
 
-var _formValues = require('./values/form-values');
+var _formValues = _interopRequireDefault(require("./values/form-values"));
 
-var _formValues2 = _interopRequireDefault(_formValues);
+exports.FormValues = _formValues["default"];
 
-var _textUtils = require('./utils/text-utils');
+var _textUtils = _interopRequireDefault(require("./utils/text-utils"));
 
-var _textUtils2 = _interopRequireDefault(_textUtils);
+exports.TextUtils = _textUtils["default"];
 
-var _dateUtils = require('./utils/date-utils');
+var _dateUtils = _interopRequireDefault(require("./utils/date-utils"));
 
-var _dateUtils2 = _interopRequireDefault(_dateUtils);
+exports.DateUtils = _dateUtils["default"];
 
-var _numberUtils = require('./utils/number-utils');
+var _numberUtils = _interopRequireDefault(require("./utils/number-utils"));
 
-var _numberUtils2 = _interopRequireDefault(_numberUtils);
+exports.NumberUtils = _numberUtils["default"];
 
-var _childElements = require('./elements/child-elements');
+var _childElements = _interopRequireDefault(require("./elements/child-elements"));
 
-var _childElements2 = _interopRequireDefault(_childElements);
+exports.ChildElements = _childElements["default"];
 
-var _condition = require('./elements/condition');
+var _condition = _interopRequireDefault(require("./elements/condition"));
 
-var _condition2 = _interopRequireDefault(_condition);
+exports.Condition = _condition["default"];
 
-var _repeatableElement = require('./elements/repeatable-element');
+var _repeatableElement = _interopRequireDefault(require("./elements/repeatable-element"));
 
-var _repeatableElement2 = _interopRequireDefault(_repeatableElement);
+exports.RepeatableElement = _repeatableElement["default"];
 
-var _audioItemValue = require('./values/audio-item-value');
+var _audioItemValue = _interopRequireDefault(require("./values/audio-item-value"));
 
-var _audioItemValue2 = _interopRequireDefault(_audioItemValue);
+exports.AudioItemValue = _audioItemValue["default"];
 
-var _audioValue = require('./values/audio-value');
+var _audioValue = _interopRequireDefault(require("./values/audio-value"));
 
-var _audioValue2 = _interopRequireDefault(_audioValue);
+exports.AudioValue = _audioValue["default"];
 
-var _photoItemValue = require('./values/photo-item-value');
+var _photoItemValue = _interopRequireDefault(require("./values/photo-item-value"));
 
-var _photoItemValue2 = _interopRequireDefault(_photoItemValue);
+exports.PhotoItemValue = _photoItemValue["default"];
 
-var _photoValue = require('./values/photo-value');
+var _photoValue = _interopRequireDefault(require("./values/photo-value"));
 
-var _photoValue2 = _interopRequireDefault(_photoValue);
+exports.PhotoValue = _photoValue["default"];
 
-var _videoItemValue = require('./values/video-item-value');
+var _videoItemValue = _interopRequireDefault(require("./values/video-item-value"));
 
-var _videoItemValue2 = _interopRequireDefault(_videoItemValue);
+exports.VideoItemValue = _videoItemValue["default"];
 
-var _videoValue = require('./values/video-value');
+var _videoValue = _interopRequireDefault(require("./values/video-value"));
 
-var _videoValue2 = _interopRequireDefault(_videoValue);
+exports.VideoValue = _videoValue["default"];
 
-var _addressElement = require('./elements/address-element');
+var _addressElement = _interopRequireDefault(require("./elements/address-element"));
 
-var _addressElement2 = _interopRequireDefault(_addressElement);
+exports.AddressElement = _addressElement["default"];
 
-var _addressValue = require('./values/address-value');
+var _addressValue = _interopRequireDefault(require("./values/address-value"));
 
-var _addressValue2 = _interopRequireDefault(_addressValue);
+exports.AddressValue = _addressValue["default"];
 
-var _barcodeElement = require('./elements/barcode-element');
+var _barcodeElement = _interopRequireDefault(require("./elements/barcode-element"));
 
-var _barcodeElement2 = _interopRequireDefault(_barcodeElement);
+exports.BarcodeElement = _barcodeElement["default"];
 
-var _barcodeValue = require('./values/barcode-value');
+var _barcodeValue = _interopRequireDefault(require("./values/barcode-value"));
 
-var _barcodeValue2 = _interopRequireDefault(_barcodeValue);
+exports.BarcodeValue = _barcodeValue["default"];
 
-var _choiceElement = require('./elements/choice-element');
+var _choiceElement = _interopRequireDefault(require("./elements/choice-element"));
 
-var _choiceElement2 = _interopRequireDefault(_choiceElement);
+exports.ChoiceElement = _choiceElement["default"];
 
-var _choiceValue = require('./values/choice-value');
+var _choiceValue = _interopRequireDefault(require("./values/choice-value"));
 
-var _choiceValue2 = _interopRequireDefault(_choiceValue);
+exports.ChoiceValue = _choiceValue["default"];
 
-var _classificationElement = require('./elements/classification-element');
+var _classificationElement = _interopRequireDefault(require("./elements/classification-element"));
 
-var _classificationElement2 = _interopRequireDefault(_classificationElement);
+exports.ClassificationElement = _classificationElement["default"];
 
-var _classificationValue = require('./values/classification-value');
+var _classificationValue = _interopRequireDefault(require("./values/classification-value"));
 
-var _classificationValue2 = _interopRequireDefault(_classificationValue);
+exports.ClassificationValue = _classificationValue["default"];
 
-var _dateElement = require('./elements/date-element');
+var _dateElement = _interopRequireDefault(require("./elements/date-element"));
 
-var _dateElement2 = _interopRequireDefault(_dateElement);
+exports.DateElement = _dateElement["default"];
 
-var _dateValue = require('./values/date-value');
+var _dateValue = _interopRequireDefault(require("./values/date-value"));
 
-var _dateValue2 = _interopRequireDefault(_dateValue);
+exports.DateValue = _dateValue["default"];
 
-var _timeElement = require('./elements/time-element');
+var _timeElement = _interopRequireDefault(require("./elements/time-element"));
 
-var _timeElement2 = _interopRequireDefault(_timeElement);
+exports.TimeElement = _timeElement["default"];
 
-var _timeValue = require('./values/time-value');
+var _timeValue = _interopRequireDefault(require("./values/time-value"));
 
-var _timeValue2 = _interopRequireDefault(_timeValue);
+exports.TimeValue = _timeValue["default"];
 
-var _calculatedElement = require('./elements/calculated-element');
+var _calculatedElement = _interopRequireDefault(require("./elements/calculated-element"));
 
-var _calculatedElement2 = _interopRequireDefault(_calculatedElement);
+exports.CalculatedElement = _calculatedElement["default"];
 
-var _calculatedValue = require('./values/calculated-value');
+var _calculatedValue = _interopRequireDefault(require("./values/calculated-value"));
 
-var _calculatedValue2 = _interopRequireDefault(_calculatedValue);
+exports.CalculatedValue = _calculatedValue["default"];
 
-var _textElement = require('./elements/text-element');
+var _textElement = _interopRequireDefault(require("./elements/text-element"));
 
-var _textElement2 = _interopRequireDefault(_textElement);
+exports.TextElement = _textElement["default"];
 
-var _textValue = require('./values/text-value');
+var _textValue = _interopRequireDefault(require("./values/text-value"));
 
-var _textValue2 = _interopRequireDefault(_textValue);
+exports.TextValue = _textValue["default"];
 
-var _sectionElement = require('./elements/section-element');
+var _sectionElement = _interopRequireDefault(require("./elements/section-element"));
 
-var _sectionElement2 = _interopRequireDefault(_sectionElement);
+exports.SectionElement = _sectionElement["default"];
 
-var _signatureElement = require('./elements/signature-element');
+var _signatureElement = _interopRequireDefault(require("./elements/signature-element"));
 
-var _signatureElement2 = _interopRequireDefault(_signatureElement);
+exports.SignatureElement = _signatureElement["default"];
 
-var _signatureValue = require('./values/signature-value');
+var _signatureValue = _interopRequireDefault(require("./values/signature-value"));
 
-var _signatureValue2 = _interopRequireDefault(_signatureValue);
+exports.SignatureValue = _signatureValue["default"];
 
-var _recordLinkElement = require('./elements/record-link-element');
+var _recordLinkElement = _interopRequireDefault(require("./elements/record-link-element"));
 
-var _recordLinkElement2 = _interopRequireDefault(_recordLinkElement);
+exports.RecordLinkElement = _recordLinkElement["default"];
 
-var _recordLinkValue = require('./values/record-link-value');
+var _recordLinkValue = _interopRequireDefault(require("./values/record-link-value"));
 
-var _recordLinkValue2 = _interopRequireDefault(_recordLinkValue);
+exports.RecordLinkValue = _recordLinkValue["default"];
 
-var _recordLinkItemValue = require('./values/record-link-item-value');
+var _recordLinkItemValue = _interopRequireDefault(require("./values/record-link-item-value"));
 
-var _recordLinkItemValue2 = _interopRequireDefault(_recordLinkItemValue);
+exports.RecordLinkItemValue = _recordLinkItemValue["default"];
 
-var _featureValidator = require('./validation/feature-validator');
+var _featureValidator = _interopRequireDefault(require("./validation/feature-validator"));
 
-var _featureValidator2 = _interopRequireDefault(_featureValidator);
+exports.FeatureValidator = _featureValidator["default"];
 
-var _dataSource = require('./data-source');
+var _dataSource = _interopRequireDefault(require("./data-source"));
 
-var _dataSource2 = _interopRequireDefault(_dataSource);
+exports.DataSource = _dataSource["default"];
 
-var _memoryDataSource = require('./utils/memory-data-source');
+var _memoryDataSource = _interopRequireDefault(require("./utils/memory-data-source"));
 
-var _memoryDataSource2 = _interopRequireDefault(_memoryDataSource);
+exports.MemoryDataSource = _memoryDataSource["default"];
 
-var _leveldbDataSource = require('./utils/leveldb-data-source');
+var _leveldbDataSource = _interopRequireDefault(require("./utils/leveldb-data-source"));
 
-var _leveldbDataSource2 = _interopRequireDefault(_leveldbDataSource);
+exports.LevelDBDataSource = _leveldbDataSource["default"];
 
-var _defaultValues = require('./values/default-values');
+var _defaultValues = _interopRequireDefault(require("./values/default-values"));
 
-var _defaultValues2 = _interopRequireDefault(_defaultValues);
+exports.DefaultValues = _defaultValues["default"];
 
-var _customValidationError = require('./validation/custom-validation-error');
+var _customValidationError = _interopRequireDefault(require("./validation/custom-validation-error"));
 
-var _customValidationError2 = _interopRequireDefault(_customValidationError);
+exports.CustomValidationError = _customValidationError["default"];
 
-var _mediaElement = require('./elements/media-element');
+var _mediaElement = _interopRequireDefault(require("./elements/media-element"));
 
-var _mediaElement2 = _interopRequireDefault(_mediaElement);
+exports.MediaElement = _mediaElement["default"];
 
-var _mediaValue = require('./values/media-value');
+var _mediaValue = _interopRequireDefault(require("./values/media-value"));
 
-var _mediaValue2 = _interopRequireDefault(_mediaValue);
+exports.MediaValue = _mediaValue["default"];
 
-var _mediaItemValue = require('./values/media-item-value');
+var _mediaItemValue = _interopRequireDefault(require("./values/media-item-value"));
 
-var _mediaItemValue2 = _interopRequireDefault(_mediaItemValue);
+exports.MediaItemValue = _mediaItemValue["default"];
 
-var _statusElement = require('./elements/status-element');
+var _statusElement = _interopRequireDefault(require("./elements/status-element"));
 
-var _statusElement2 = _interopRequireDefault(_statusElement);
+exports.StatusElement = _statusElement["default"];
 
-var _statusChoice = require('./elements/status-choice');
+var _statusChoice = _interopRequireDefault(require("./elements/status-choice"));
 
-var _statusChoice2 = _interopRequireDefault(_statusChoice);
+exports.StatusChoice = _statusChoice["default"];
 
-var _statusValue = require('./values/status-value');
+var _statusValue = _interopRequireDefault(require("./values/status-value"));
 
-var _statusValue2 = _interopRequireDefault(_statusValue);
+exports.StatusValue = _statusValue["default"];
 
-var _user = require('./user');
+var _user = _interopRequireDefault(require("./user"));
 
-var _user2 = _interopRequireDefault(_user);
+exports.User = _user["default"];
 
-var _role = require('./role');
+var _role = _interopRequireDefault(require("./role"));
 
-var _role2 = _interopRequireDefault(_role);
+exports.Role = _role["default"];
 
-var _project = require('./project');
+var _project = _interopRequireDefault(require("./project"));
 
-var _project2 = _interopRequireDefault(_project);
+exports.Project = _project["default"];
 
-var _changeset = require('./changeset');
+var _changeset = _interopRequireDefault(require("./changeset"));
 
-var _changeset2 = _interopRequireDefault(_changeset);
+exports.Changeset = _changeset["default"];
 
-var _track = require('./media/track');
+var _track = _interopRequireDefault(require("./media/track"));
 
-var _track2 = _interopRequireDefault(_track);
+exports.Track = _track["default"];
 
-var _trackPoint = require('./media/track-point');
+var _trackPoint = _interopRequireDefault(require("./media/track-point"));
 
-var _trackPoint2 = _interopRequireDefault(_trackPoint);
+exports.TrackPoint = _trackPoint["default"];
 
-var _trackSegment = require('./media/track-segment');
+var _trackSegment = _interopRequireDefault(require("./media/track-segment"));
 
-var _trackSegment2 = _interopRequireDefault(_trackSegment);
+exports.TrackSegment = _trackSegment["default"];
 
-var _trackPlayer = require('./media/track-player');
+var _trackPlayer = _interopRequireDefault(require("./media/track-player"));
 
-var _trackPlayer2 = _interopRequireDefault(_trackPlayer);
+exports.TrackPlayer = _trackPlayer["default"];
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-exports.Form = _form2.default;
-exports.Record = _record2.default;
-exports.Element = _element2.default;
-exports.FormValue = _formValue2.default;
-exports.Choice = _choice2.default;
-exports.ChoiceList = _choiceList2.default;
-exports.Classification = _classification2.default;
-exports.ClassificationSet = _classificationSet2.default;
-exports.ElementFactory = _elementFactory2.default;
-exports.RepeatableItemValue = _repeatableItemValue2.default;
-exports.RepeatableValue = _repeatableValue2.default;
-exports.Feature = _feature2.default;
-exports.FormValues = _formValues2.default;
-exports.TextUtils = _textUtils2.default;
-exports.DateUtils = _dateUtils2.default;
-exports.NumberUtils = _numberUtils2.default;
-exports.ChildElements = _childElements2.default;
-exports.Condition = _condition2.default;
-exports.RepeatableElement = _repeatableElement2.default;
-exports.AudioItemValue = _audioItemValue2.default;
-exports.AudioValue = _audioValue2.default;
-exports.PhotoItemValue = _photoItemValue2.default;
-exports.PhotoValue = _photoValue2.default;
-exports.VideoItemValue = _videoItemValue2.default;
-exports.VideoValue = _videoValue2.default;
-exports.AddressElement = _addressElement2.default;
-exports.AddressValue = _addressValue2.default;
-exports.BarcodeElement = _barcodeElement2.default;
-exports.BarcodeValue = _barcodeValue2.default;
-exports.ChoiceElement = _choiceElement2.default;
-exports.ChoiceValue = _choiceValue2.default;
-exports.ClassificationElement = _classificationElement2.default;
-exports.ClassificationValue = _classificationValue2.default;
-exports.DateElement = _dateElement2.default;
-exports.DateValue = _dateValue2.default;
-exports.TimeElement = _timeElement2.default;
-exports.TimeValue = _timeValue2.default;
-exports.CalculatedElement = _calculatedElement2.default;
-exports.CalculatedValue = _calculatedValue2.default;
-exports.TextElement = _textElement2.default;
-exports.TextValue = _textValue2.default;
-exports.SectionElement = _sectionElement2.default;
-exports.SignatureElement = _signatureElement2.default;
-exports.SignatureValue = _signatureValue2.default;
-exports.RecordLinkElement = _recordLinkElement2.default;
-exports.RecordLinkValue = _recordLinkValue2.default;
-exports.RecordLinkItemValue = _recordLinkItemValue2.default;
-exports.FeatureValidator = _featureValidator2.default;
-exports.DataSource = _dataSource2.default;
-exports.MemoryDataSource = _memoryDataSource2.default;
-exports.LevelDBDataSource = _leveldbDataSource2.default;
-exports.DefaultValues = _defaultValues2.default;
-exports.CustomValidationError = _customValidationError2.default;
-exports.MediaElement = _mediaElement2.default;
-exports.MediaValue = _mediaValue2.default;
-exports.MediaItemValue = _mediaItemValue2.default;
-exports.StatusElement = _statusElement2.default;
-exports.StatusChoice = _statusChoice2.default;
-exports.StatusValue = _statusValue2.default;
-exports.User = _user2.default;
-exports.Role = _role2.default;
-exports.Project = _project2.default;
-exports.Changeset = _changeset2.default;
-exports.Track = _track2.default;
-exports.TrackPoint = _trackPoint2.default;
-exports.TrackSegment = _trackSegment2.default;
-exports.TrackPlayer = _trackPlayer2.default;
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 //# sourceMappingURL=index.js.map

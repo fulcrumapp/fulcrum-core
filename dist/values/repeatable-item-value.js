@@ -1,76 +1,63 @@
-'use strict';
+"use strict";
 
 exports.__esModule = true;
+exports["default"] = void 0;
 
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+var _feature = _interopRequireDefault(require("../feature"));
 
-var _feature = require('../feature');
+var _formValues = _interopRequireDefault(require("./form-values"));
 
-var _feature2 = _interopRequireDefault(_feature);
+var _dateUtils = _interopRequireDefault(require("../utils/date-utils"));
 
-var _formValues = require('./form-values');
+var _textUtils = _interopRequireDefault(require("../utils/text-utils"));
 
-var _formValues2 = _interopRequireDefault(_formValues);
+var _loadObject = _interopRequireDefault(require("../load-object"));
 
-var _dateUtils = require('../utils/date-utils');
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
-var _dateUtils2 = _interopRequireDefault(_dateUtils);
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
 
-var _textUtils = require('../utils/text-utils');
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
-var _textUtils2 = _interopRequireDefault(_textUtils);
+function _inheritsLoose(subClass, superClass) { subClass.prototype = Object.create(superClass.prototype); subClass.prototype.constructor = subClass; subClass.__proto__ = superClass; }
 
-var _loadObject = require('../load-object');
-
-var _loadObject2 = _interopRequireDefault(_loadObject);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _defaults(obj, defaults) { var keys = Object.getOwnPropertyNames(defaults); for (var i = 0; i < keys.length; i++) { var key = keys[i]; var value = Object.getOwnPropertyDescriptor(defaults, key); if (value && value.configurable && obj[key] === undefined) { Object.defineProperty(obj, key, value); } } return obj; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : _defaults(subClass, superClass); }
-
-var RepeatableItemValue = function (_Feature) {
-  _inherits(RepeatableItemValue, _Feature);
+var RepeatableItemValue =
+/*#__PURE__*/
+function (_Feature) {
+  _inheritsLoose(RepeatableItemValue, _Feature);
 
   function RepeatableItemValue(element, attrs, index) {
-    _classCallCheck(this, RepeatableItemValue);
+    var _this;
 
-    var _this = _possibleConstructorReturn(this, _Feature.call(this));
-
+    _this = _Feature.call(this) || this;
     _this._index = index;
     _this._element = element;
 
     _this.updateFromAPIAttributes(attrs);
+
     return _this;
   }
 
-  RepeatableItemValue.prototype.updateFromAPIAttributes = function updateFromAPIAttributes(attrs) {
+  var _proto = RepeatableItemValue.prototype;
+
+  _proto.updateFromAPIAttributes = function updateFromAPIAttributes(attrs) {
     this._id = attrs.id;
-    this._createdAt = _dateUtils2.default.parseEpochTimestamp(attrs.created_at);
-    this._updatedAt = _dateUtils2.default.parseEpochTimestamp(attrs.updated_at);
+    this._createdAt = _dateUtils["default"].parseEpochTimestamp(attrs.created_at);
+    this._updatedAt = _dateUtils["default"].parseEpochTimestamp(attrs.updated_at);
     this._formValuesJSON = attrs.form_values;
     this._version = attrs.version != null ? attrs.version : 1;
     this._changesetID = attrs.changeset_id;
-
     this._recordID = attrs.record_id || null;
     this._parentID = attrs.parent_id || null;
-
     this._recordProjectID = attrs.record_project_id || null;
     this._recordProjectName = attrs.record_project || null;
     this._recordAssignedToID = attrs.record_assigned_to_id || null;
     this._recordAssignedToName = attrs.record_assigned_to || null;
     this._recordStatus = attrs.record_status || null;
-
     this._createdByID = attrs.created_by_id || null;
     this._createdByName = attrs.created_by || null;
     this._updatedByID = attrs.updated_by_id || null;
     this._updatedByName = attrs.updated_by || null;
-
     var geometry = attrs.geometry;
 
     if (geometry != null && geometry.type === 'Point' && geometry.coordinates && geometry.coordinates.length > 1) {
@@ -81,9 +68,7 @@ var RepeatableItemValue = function (_Feature) {
     this._createdDuration = attrs.created_duration != null ? attrs.created_duration : null;
     this._updatedDuration = attrs.updated_duration != null ? attrs.updated_duration : null;
     this._editedDuration = attrs.edited_duration != null ? attrs.edited_duration : null;
-
     var createdLocation = attrs.created_location;
-
     this._createdLatitude = null;
     this._createdLongitude = null;
     this._createdAltitude = null;
@@ -97,7 +82,6 @@ var RepeatableItemValue = function (_Feature) {
     }
 
     var updatedLocation = attrs.updated_location;
-
     this._updatedLatitude = null;
     this._updatedLongitude = null;
     this._updatedAltitude = null;
@@ -111,15 +95,14 @@ var RepeatableItemValue = function (_Feature) {
     }
   };
 
-  RepeatableItemValue.prototype.toJSON = function toJSON() {
-    var _ref = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
+  _proto.toJSON = function toJSON(_temp) {
+    var _ref = _temp === void 0 ? {} : _temp,
         simple = _ref.simple;
 
     var json = {};
-
     json.id = this.id;
-    json.created_at = _dateUtils2.default.formatEpochTimestamp(this.createdAt);
-    json.updated_at = _dateUtils2.default.formatEpochTimestamp(this.updatedAt);
+    json.created_at = _dateUtils["default"].formatEpochTimestamp(this.createdAt);
+    json.updated_at = _dateUtils["default"].formatEpochTimestamp(this.updatedAt);
     json.form_values = simple ? this.formValues.toSimpleJSON() : this.formValues.toJSON();
     json.geometry = this.geometryAsGeoJSON;
     json.created_location = this.createdLocation;
@@ -131,11 +114,10 @@ var RepeatableItemValue = function (_Feature) {
     json.updated_by_id = this._updatedByID != null ? this._updatedByID : null;
     json.version = this._version != null ? this._version : null;
     json.changeset_id = this._changesetID != null ? this._changesetID : null;
-
     return json;
   };
 
-  RepeatableItemValue.prototype.updateTimestamps = function updateTimestamps() {
+  _proto.updateTimestamps = function updateTimestamps() {
     var now = new Date();
 
     if (!this._createdAt) {
@@ -145,45 +127,45 @@ var RepeatableItemValue = function (_Feature) {
     this._updatedAt = now;
   };
 
-  RepeatableItemValue.prototype.loadChangeset = function loadChangeset(dataSource, callback) {
-    return (0, _loadObject2.default)(this, dataSource, 'changeset', 'getChangeset', callback);
+  _proto.loadChangeset = function loadChangeset(dataSource, callback) {
+    return (0, _loadObject["default"])(this, dataSource, 'changeset', 'getChangeset', callback);
   };
 
-  RepeatableItemValue.prototype.loadCreatedBy = function loadCreatedBy(dataSource, callback) {
-    return (0, _loadObject2.default)(this, dataSource, 'createdBy', 'getUser', callback);
+  _proto.loadCreatedBy = function loadCreatedBy(dataSource, callback) {
+    return (0, _loadObject["default"])(this, dataSource, 'createdBy', 'getUser', callback);
   };
 
-  RepeatableItemValue.prototype.loadUpdatedBy = function loadUpdatedBy(dataSource, callback) {
-    return (0, _loadObject2.default)(this, dataSource, 'updatedBy', 'getUser', callback);
+  _proto.loadUpdatedBy = function loadUpdatedBy(dataSource, callback) {
+    return (0, _loadObject["default"])(this, dataSource, 'updatedBy', 'getUser', callback);
   };
 
   _createClass(RepeatableItemValue, [{
-    key: 'isRecord',
+    key: "isRecord",
     get: function get() {
       return false;
     }
   }, {
-    key: 'isRepeatable',
+    key: "isRepeatable",
     get: function get() {
       return true;
     }
   }, {
-    key: 'element',
+    key: "element",
     get: function get() {
       return this._element;
     }
   }, {
-    key: 'id',
+    key: "id",
     get: function get() {
       return this._id;
     }
   }, {
-    key: 'index',
+    key: "index",
     get: function get() {
       return this._index;
     }
   }, {
-    key: 'createdAt',
+    key: "createdAt",
     get: function get() {
       return this._createdAt;
     },
@@ -195,12 +177,12 @@ var RepeatableItemValue = function (_Feature) {
       this._createdAt = createdAt;
     }
   }, {
-    key: 'version',
+    key: "version",
     get: function get() {
       return this._version;
     }
   }, {
-    key: 'updatedAt',
+    key: "updatedAt",
     get: function get() {
       return this._updatedAt;
     },
@@ -212,26 +194,26 @@ var RepeatableItemValue = function (_Feature) {
       this._updatedAt = updatedAt;
     }
   }, {
-    key: 'formValues',
+    key: "formValues",
     get: function get() {
       if (!this._formValues) {
-        this._formValues = new _formValues2.default(this._element, this._formValuesJSON);
+        this._formValues = new _formValues["default"](this._element, this._formValuesJSON);
       }
 
       return this._formValues;
     }
   }, {
-    key: 'hasCoordinate',
+    key: "hasCoordinate",
     get: function get() {
       return this._latitude != null && this._longitude != null;
     }
   }, {
-    key: 'isGeometryEnabled',
+    key: "isGeometryEnabled",
     get: function get() {
       return this._element.isGeometryEnabled;
     }
   }, {
-    key: 'displayValue',
+    key: "displayValue",
     get: function get() {
       var titleFieldKeys = this._element.titleFieldKeys;
       var titles = [];
@@ -249,13 +231,12 @@ var RepeatableItemValue = function (_Feature) {
         }
 
         var fieldKey = _ref2;
-
         var formValue = this.formValues.get(fieldKey);
 
         if (formValue) {
           var displayValue = formValue.displayValue;
 
-          if (_textUtils2.default.isPresent(displayValue)) {
+          if (_textUtils["default"].isPresent(displayValue)) {
             titles.push(displayValue);
           }
         }
@@ -264,12 +245,12 @@ var RepeatableItemValue = function (_Feature) {
       return titles.join(', ');
     }
   }, {
-    key: 'searchableValue',
+    key: "searchableValue",
     get: function get() {
       return this.formValues.searchableValue;
     }
   }, {
-    key: 'geometryAsGeoJSON',
+    key: "geometryAsGeoJSON",
     get: function get() {
       if (!this.hasCoordinate) {
         return null;
@@ -281,7 +262,7 @@ var RepeatableItemValue = function (_Feature) {
       };
     }
   }, {
-    key: 'latitude',
+    key: "latitude",
     get: function get() {
       return this._latitude;
     },
@@ -289,7 +270,7 @@ var RepeatableItemValue = function (_Feature) {
       this._latitude = latitude;
     }
   }, {
-    key: 'longitude',
+    key: "longitude",
     get: function get() {
       return this._longitude;
     },
@@ -297,37 +278,37 @@ var RepeatableItemValue = function (_Feature) {
       this._longitude = longitude;
     }
   }, {
-    key: 'changesetID',
+    key: "changesetID",
     get: function get() {
       return this._changesetID;
     }
   }, {
-    key: 'createdByID',
+    key: "createdByID",
     get: function get() {
       return this._createdByID;
     }
   }, {
-    key: 'updatedByID',
+    key: "updatedByID",
     get: function get() {
       return this._updatedByID;
     }
   }, {
-    key: 'changeset',
+    key: "changeset",
     get: function get() {
       return this._changeset;
     }
   }, {
-    key: 'updatedBy',
+    key: "updatedBy",
     get: function get() {
       return this._updatedBy;
     }
   }, {
-    key: 'createdBy',
+    key: "createdBy",
     get: function get() {
       return this._createdBy;
     }
   }, {
-    key: 'createdDuration',
+    key: "createdDuration",
     get: function get() {
       return this._createdDuration;
     },
@@ -335,7 +316,7 @@ var RepeatableItemValue = function (_Feature) {
       this._createdDuration = value != null ? +value : null;
     }
   }, {
-    key: 'updatedDuration',
+    key: "updatedDuration",
     get: function get() {
       return this._updatedDuration;
     },
@@ -343,7 +324,7 @@ var RepeatableItemValue = function (_Feature) {
       this._updatedDuration = value != null ? +value : null;
     }
   }, {
-    key: 'editedDuration',
+    key: "editedDuration",
     get: function get() {
       return this._editedDuration;
     },
@@ -351,7 +332,7 @@ var RepeatableItemValue = function (_Feature) {
       this._editedDuration = value != null ? +value : null;
     }
   }, {
-    key: 'createdLatitude',
+    key: "createdLatitude",
     get: function get() {
       return this._createdLatitude;
     },
@@ -359,7 +340,7 @@ var RepeatableItemValue = function (_Feature) {
       this._createdLatitude = value != null ? +value : null;
     }
   }, {
-    key: 'createdLongitude',
+    key: "createdLongitude",
     get: function get() {
       return this._createdLongitude;
     },
@@ -367,7 +348,7 @@ var RepeatableItemValue = function (_Feature) {
       this._createdLongitude = value != null ? +value : null;
     }
   }, {
-    key: 'createdAltitude',
+    key: "createdAltitude",
     get: function get() {
       return this._createdAltitude;
     },
@@ -375,7 +356,7 @@ var RepeatableItemValue = function (_Feature) {
       this._createdAltitude = value != null ? +value : null;
     }
   }, {
-    key: 'createdAccuracy',
+    key: "createdAccuracy",
     get: function get() {
       return this._createdAccuracy;
     },
@@ -383,7 +364,7 @@ var RepeatableItemValue = function (_Feature) {
       this._createdAccuracy = value != null ? +value : null;
     }
   }, {
-    key: 'updatedLatitude',
+    key: "updatedLatitude",
     get: function get() {
       return this._updatedLatitude;
     },
@@ -391,7 +372,7 @@ var RepeatableItemValue = function (_Feature) {
       this._updatedLatitude = value != null ? +value : null;
     }
   }, {
-    key: 'updatedLongitude',
+    key: "updatedLongitude",
     get: function get() {
       return this._updatedLongitude;
     },
@@ -399,7 +380,7 @@ var RepeatableItemValue = function (_Feature) {
       this._updatedLongitude = value != null ? +value : null;
     }
   }, {
-    key: 'updatedAltitude',
+    key: "updatedAltitude",
     get: function get() {
       return this._updatedAltitude;
     },
@@ -407,7 +388,7 @@ var RepeatableItemValue = function (_Feature) {
       this._updatedAltitude = value != null ? +value : null;
     }
   }, {
-    key: 'updatedAccuracy',
+    key: "updatedAccuracy",
     get: function get() {
       return this._updatedAccuracy;
     },
@@ -415,17 +396,17 @@ var RepeatableItemValue = function (_Feature) {
       this._updatedAccuracy = value != null ? +value : null;
     }
   }, {
-    key: 'hasCreatedCoordinate',
+    key: "hasCreatedCoordinate",
     get: function get() {
       return this.createdLatitude != null && this.createdLongitude != null;
     }
   }, {
-    key: 'hasUpdatedCoordinate',
+    key: "hasUpdatedCoordinate",
     get: function get() {
       return this.updatedLatitude != null && this.updatedLongitude != null;
     }
   }, {
-    key: 'createdLocation',
+    key: "createdLocation",
     get: function get() {
       if (this.hasCreatedCoordinate) {
         return {
@@ -439,7 +420,7 @@ var RepeatableItemValue = function (_Feature) {
       return null;
     }
   }, {
-    key: 'updatedLocation',
+    key: "updatedLocation",
     get: function get() {
       if (this.hasUpdatedCoordinate) {
         return {
@@ -453,17 +434,17 @@ var RepeatableItemValue = function (_Feature) {
       return null;
     }
   }, {
-    key: 'recordID',
+    key: "recordID",
     get: function get() {
       return this._recordID;
     }
   }, {
-    key: 'parentID',
+    key: "parentID",
     get: function get() {
       return this._parentID;
     }
   }, {
-    key: 'createdByName',
+    key: "createdByName",
     get: function get() {
       return this._createdByName;
     },
@@ -471,7 +452,7 @@ var RepeatableItemValue = function (_Feature) {
       this._createdByName = name;
     }
   }, {
-    key: 'updatedByName',
+    key: "updatedByName",
     get: function get() {
       return this._updatedByName;
     },
@@ -479,7 +460,7 @@ var RepeatableItemValue = function (_Feature) {
       this._updatedByName = name;
     }
   }, {
-    key: 'recordProjectName',
+    key: "recordProjectName",
     get: function get() {
       return this._recordProjectName;
     },
@@ -487,7 +468,7 @@ var RepeatableItemValue = function (_Feature) {
       this._recordProjectName = name;
     }
   }, {
-    key: 'recordProjectID',
+    key: "recordProjectID",
     get: function get() {
       return this._recordProjectID;
     },
@@ -495,7 +476,7 @@ var RepeatableItemValue = function (_Feature) {
       this._recordProjectID = id;
     }
   }, {
-    key: 'recordAssignedToName',
+    key: "recordAssignedToName",
     get: function get() {
       return this._recordAssignedToName;
     },
@@ -503,7 +484,7 @@ var RepeatableItemValue = function (_Feature) {
       this._recordAssignedToName = name;
     }
   }, {
-    key: 'recordAssignedToID',
+    key: "recordAssignedToID",
     get: function get() {
       return this._recordAssignedToID;
     },
@@ -511,14 +492,14 @@ var RepeatableItemValue = function (_Feature) {
       this._recordAssignedToID = id;
     }
   }, {
-    key: 'recordStatus',
+    key: "recordStatus",
     get: function get() {
       return this._recordStatus;
     }
   }]);
 
   return RepeatableItemValue;
-}(_feature2.default);
+}(_feature["default"]);
 
-exports.default = RepeatableItemValue;
+exports["default"] = RepeatableItemValue;
 //# sourceMappingURL=repeatable-item-value.js.map

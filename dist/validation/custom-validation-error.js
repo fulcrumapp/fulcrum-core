@@ -1,14 +1,11 @@
 "use strict";
 
 exports.__esModule = true;
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+exports["default"] = void 0;
 
 var CustomValidationError = function CustomValidationError(message) {
-  _classCallCheck(this, CustomValidationError);
-
   this.message = message;
 };
 
-exports.default = CustomValidationError;
+exports["default"] = CustomValidationError;
 //# sourceMappingURL=custom-validation-error.js.map

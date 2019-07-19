@@ -1,86 +1,82 @@
-'use strict';
+"use strict";
 
 exports.__esModule = true;
+exports["default"] = void 0;
 
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+var _choice = _interopRequireDefault(require("./elements/choice"));
 
-var _choice = require('./elements/choice');
+var _dateUtils = _interopRequireDefault(require("./utils/date-utils"));
 
-var _choice2 = _interopRequireDefault(_choice);
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
-var _dateUtils = require('./utils/date-utils');
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
 
-var _dateUtils2 = _interopRequireDefault(_dateUtils);
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-var ChoiceList = function () {
+var ChoiceList =
+/*#__PURE__*/
+function () {
   function ChoiceList(attributes) {
-    _classCallCheck(this, ChoiceList);
-
     this.updateFromAPIAttributes(attributes);
   }
 
-  ChoiceList.prototype.updateFromAPIAttributes = function updateFromAPIAttributes(attrs) {
-    var attributes = attrs || {};
+  var _proto = ChoiceList.prototype;
 
+  _proto.updateFromAPIAttributes = function updateFromAPIAttributes(attrs) {
+    var attributes = attrs || {};
     this._id = attributes.id;
     this._name = attributes.name;
     this._description = attributes.description;
     this._choicesJSON = attributes.choices || [];
     this._version = attributes.version;
-    this._createdAt = _dateUtils2.default.parseISOTimestamp(attributes.created_at);
-    this._updatedAt = _dateUtils2.default.parseISOTimestamp(attributes.updated_at);
+    this._createdAt = _dateUtils["default"].parseISOTimestamp(attributes.created_at);
+    this._updatedAt = _dateUtils["default"].parseISOTimestamp(attributes.updated_at);
   };
 
-  ChoiceList.prototype.toJSON = function toJSON() {
+  _proto.toJSON = function toJSON() {
     var json = {};
-
     json.id = this.id || null;
     json.name = this.name || null;
     json.description = this.description || null;
     json.choices = this._choicesJSON || null;
     json.version = this.version;
-    json.created_at = _dateUtils2.default.formatISOTimestamp(this.createdAt);
-    json.updated_at = _dateUtils2.default.formatISOTimestamp(this.updatedAt);
-
+    json.created_at = _dateUtils["default"].formatISOTimestamp(this.createdAt);
+    json.updated_at = _dateUtils["default"].formatISOTimestamp(this.updatedAt);
     return json;
   };
 
   _createClass(ChoiceList, [{
-    key: 'id',
+    key: "id",
     get: function get() {
       return this._id;
     }
   }, {
-    key: 'name',
+    key: "name",
     get: function get() {
       return this._name;
     }
   }, {
-    key: 'description',
+    key: "description",
     get: function get() {
       return this._description;
     }
   }, {
-    key: 'version',
+    key: "version",
     get: function get() {
       return this._version;
     }
   }, {
-    key: 'createdAt',
+    key: "createdAt",
     get: function get() {
       return this._createdAt;
     }
   }, {
-    key: 'updatedAt',
+    key: "updatedAt",
     get: function get() {
       return this._updatedAt;
     }
   }, {
-    key: 'choices',
+    key: "choices",
     get: function get() {
       if (!this._choices) {
         this._choices = [];
@@ -99,7 +95,7 @@ var ChoiceList = function () {
 
           var choice = _ref;
 
-          this._choices.push(new _choice2.default(choice));
+          this._choices.push(new _choice["default"](choice));
         }
       }
 
@@ -110,5 +106,5 @@ var ChoiceList = function () {
   return ChoiceList;
 }();
 
-exports.default = ChoiceList;
+exports["default"] = ChoiceList;
 //# sourceMappingURL=choice-list.js.map

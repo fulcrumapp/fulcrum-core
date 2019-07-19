@@ -1,27 +1,27 @@
-'use strict';
+"use strict";
 
 exports.__esModule = true;
+exports["default"] = void 0;
 
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+var _dateUtils = _interopRequireDefault(require("./utils/date-utils"));
 
-var _dateUtils = require('./utils/date-utils');
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
-var _dateUtils2 = _interopRequireDefault(_dateUtils);
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-var Role = function () {
+var Role =
+/*#__PURE__*/
+function () {
   function Role(attrs) {
-    _classCallCheck(this, Role);
-
     this.updateFromAPIAttributes(attrs);
   }
 
-  Role.prototype.updateFromAPIAttributes = function updateFromAPIAttributes(attrs) {
-    var attributes = attrs || {};
+  var _proto = Role.prototype;
 
+  _proto.updateFromAPIAttributes = function updateFromAPIAttributes(attrs) {
+    var attributes = attrs || {};
     this._id = attributes.id;
     this._name = attributes.name;
     this._isSystem = !!attributes.is_system;
@@ -46,132 +46,132 @@ var Role = function () {
     this._canExportRecords = !!attributes.can_export_records;
     this._canImportRecords = !!attributes.can_import_records;
     this._canManageAuthorizations = !!attributes.can_manage_authorizations;
-    this._createdAt = _dateUtils2.default.parseISOTimestamp(attributes.created_at);
-    this._updatedAt = _dateUtils2.default.parseISOTimestamp(attributes.updated_at);
+    this._createdAt = _dateUtils["default"].parseISOTimestamp(attributes.created_at);
+    this._updatedAt = _dateUtils["default"].parseISOTimestamp(attributes.updated_at);
   };
 
   _createClass(Role, [{
-    key: 'id',
+    key: "id",
     get: function get() {
       return this._id;
     }
   }, {
-    key: 'name',
+    key: "name",
     get: function get() {
       return this._name;
     }
   }, {
-    key: 'createdAt',
+    key: "createdAt",
     get: function get() {
       return this._createdAt;
     }
   }, {
-    key: 'updatedAt',
+    key: "updatedAt",
     get: function get() {
       return this._updatedAt;
     }
   }, {
-    key: 'isSystem',
+    key: "isSystem",
     get: function get() {
       return this._isSystem;
     }
   }, {
-    key: 'isDefault',
+    key: "isDefault",
     get: function get() {
       return this._isDefault;
     }
   }, {
-    key: 'canManageSubscription',
+    key: "canManageSubscription",
     get: function get() {
       return this._canManageSubscription;
     }
   }, {
-    key: 'canUpdateOrganization',
+    key: "canUpdateOrganization",
     get: function get() {
       return this._canUpdateOrganization;
     }
   }, {
-    key: 'canManageMembers',
+    key: "canManageMembers",
     get: function get() {
       return this._canManageMembers;
     }
   }, {
-    key: 'canManageRoles',
+    key: "canManageRoles",
     get: function get() {
       return this._canManageRoles;
     }
   }, {
-    key: 'canManageLayers',
+    key: "canManageLayers",
     get: function get() {
       return this._canManageLayers;
     }
   }, {
-    key: 'canManageApps',
+    key: "canManageApps",
     get: function get() {
       return this._canManageApps;
     }
   }, {
-    key: 'canManageProjects',
+    key: "canManageProjects",
     get: function get() {
       return this._canManageProjects;
     }
   }, {
-    key: 'canManageChoiceLists',
+    key: "canManageChoiceLists",
     get: function get() {
       return this._canManageChoiceLists;
     }
   }, {
-    key: 'canManageClassificationSets',
+    key: "canManageClassificationSets",
     get: function get() {
       return this._canManageClassificationSets;
     }
   }, {
-    key: 'canChangeLocation',
+    key: "canChangeLocation",
     get: function get() {
       return this._canChangeLocation;
     }
   }, {
-    key: 'canImportRecords',
+    key: "canImportRecords",
     get: function get() {
       return this._canImportRecords;
     }
   }, {
-    key: 'canChangeStatus',
+    key: "canChangeStatus",
     get: function get() {
       return this._canChangeStatus;
     }
   }, {
-    key: 'canChangeProject',
+    key: "canChangeProject",
     get: function get() {
       return this._canChangeProject;
     }
   }, {
-    key: 'canAssignRecords',
+    key: "canAssignRecords",
     get: function get() {
       return this._canAssignRecords;
     }
   }, {
-    key: 'canCreateRecords',
+    key: "canCreateRecords",
     get: function get() {
       return this._canCreateRecords;
     }
   }, {
-    key: 'canUpdateRecords',
+    key: "canUpdateRecords",
     get: function get() {
       return this._canUpdateRecords;
     }
   }, {
-    key: 'canDeleteRecords',
+    key: "canDeleteRecords",
     get: function get() {
       return this._canDeleteRecords;
     }
   }, {
-    key: 'canExportRecords',
+    key: "canExportRecords",
     get: function get() {
       return this._canExportRecords;
     }
   }, {
-    key: 'canRunReports',
+    key: "canRunReports",
     get: function get() {
       return this._canRunReports;
     }
@@ -180,5 +180,5 @@ var Role = function () {
   return Role;
 }();
 
-exports.default = Role;
+exports["default"] = Role;
 //# sourceMappingURL=role.js.map

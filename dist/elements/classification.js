@@ -1,15 +1,16 @@
 "use strict";
 
 exports.__esModule = true;
+exports["default"] = void 0;
 
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
-var Classification = function () {
+var Classification =
+/*#__PURE__*/
+function () {
   function Classification(parent, attributes) {
-    _classCallCheck(this, Classification);
-
     this.parent = parent;
     this.label = attributes.label;
     this.value = attributes.value || attributes.label;
@@ -35,7 +36,9 @@ var Classification = function () {
     }
   }
 
-  Classification.prototype.toJSON = function toJSON() {
+  var _proto = Classification.prototype;
+
+  _proto.toJSON = function toJSON() {
     var values = [];
 
     for (var _iterator2 = this.exploded, _isArray2 = Array.isArray(_iterator2), _i2 = 0, _iterator2 = _isArray2 ? _iterator2 : _iterator2[Symbol.iterator]();;) {
@@ -70,8 +73,8 @@ var Classification = function () {
     get: function get() {
       // return an array of all classifications including all parent items
       var classifications = [];
-
       /* eslint-disable consistent-this */
+
       var iterator = this;
       /* eslint-enable consistent-this */
 
@@ -91,5 +94,5 @@ var Classification = function () {
   return Classification;
 }();
 
-exports.default = Classification;
+exports["default"] = Classification;
 //# sourceMappingURL=classification.js.map

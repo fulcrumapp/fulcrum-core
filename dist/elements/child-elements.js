@@ -1,37 +1,32 @@
-'use strict';
+"use strict";
 
 exports.__esModule = true;
+exports["default"] = void 0;
 
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+var _mixmatch = _interopRequireDefault(require("mixmatch"));
 
-var _mixmatch = require('mixmatch');
+var _elementFactory = _interopRequireDefault(require("./element-factory"));
 
-var _mixmatch2 = _interopRequireDefault(_mixmatch);
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
-var _elementFactory = require('./element-factory');
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
 
-var _elementFactory2 = _interopRequireDefault(_elementFactory);
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _inheritsLoose(subClass, superClass) { subClass.prototype = Object.create(superClass.prototype); subClass.prototype.constructor = subClass; subClass.__proto__ = superClass; }
 
-function _defaults(obj, defaults) { var keys = Object.getOwnPropertyNames(defaults); for (var i = 0; i < keys.length; i++) { var key = keys[i]; var value = Object.getOwnPropertyDescriptor(defaults, key); if (value && value.configurable && obj[key] === undefined) { Object.defineProperty(obj, key, value); } } return obj; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : _defaults(subClass, superClass); }
-
-var ChildElements = function (_Mixin) {
-  _inherits(ChildElements, _Mixin);
+var ChildElements =
+/*#__PURE__*/
+function (_Mixin) {
+  _inheritsLoose(ChildElements, _Mixin);
 
   function ChildElements() {
-    _classCallCheck(this, ChildElements);
-
-    return _possibleConstructorReturn(this, _Mixin.apply(this, arguments));
+    return _Mixin.apply(this, arguments) || this;
   }
 
-  ChildElements.prototype.createChildElements = function createChildElements(elements) {
+  var _proto = ChildElements.prototype;
+
+  _proto.createChildElements = function createChildElements(elements) {
     this._elements = [];
 
     if (elements) {
@@ -49,7 +44,7 @@ var ChildElements = function (_Mixin) {
 
         var element = _ref;
 
-        var el = _elementFactory2.default.create(this, element);
+        var el = _elementFactory["default"].create(this, element);
 
         if (el) {
           this._elements.push(el);
@@ -58,8 +53,10 @@ var ChildElements = function (_Mixin) {
     }
   };
 
-  ChildElements.prototype.elementsOfType = function elementsOfType(type) {
-    var recurseRepeatables = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : true;
+  _proto.elementsOfType = function elementsOfType(type, recurseRepeatables) {
+    if (recurseRepeatables === void 0) {
+      recurseRepeatables = true;
+    }
 
     var result = [];
 
@@ -85,14 +82,18 @@ var ChildElements = function (_Mixin) {
     return result;
   };
 
-  ChildElements.prototype.flattenElements = function flattenElements() {
-    var recurseRepeatables = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : true;
+  _proto.flattenElements = function flattenElements(recurseRepeatables) {
+    if (recurseRepeatables === void 0) {
+      recurseRepeatables = true;
+    }
 
     return this._flattenElements(this.elements, recurseRepeatables);
   };
 
-  ChildElements.prototype._flattenElements = function _flattenElements(elements) {
-    var recurseRepeatables = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : true;
+  _proto._flattenElements = function _flattenElements(elements, recurseRepeatables) {
+    if (recurseRepeatables === void 0) {
+      recurseRepeatables = true;
+    }
 
     var flat = [];
 
@@ -109,9 +110,7 @@ var ChildElements = function (_Mixin) {
       }
 
       var element = _ref3;
-
       flat.push(element);
-
       var recurse = true;
 
       if (!recurseRepeatables && element.isRepeatableElement) {
@@ -126,7 +125,7 @@ var ChildElements = function (_Mixin) {
     return flat;
   };
 
-  ChildElements.prototype._flattenElementsByAttribute = function _flattenElementsByAttribute(elements, attr) {
+  _proto._flattenElementsByAttribute = function _flattenElementsByAttribute(elements, attr) {
     var flat = {};
 
     for (var _iterator4 = elements, _isArray4 = Array.isArray(_iterator4), _i4 = 0, _iterator4 = _isArray4 ? _iterator4 : _iterator4[Symbol.iterator]();;) {
@@ -142,26 +141,13 @@ var ChildElements = function (_Mixin) {
       }
 
       var element = _ref4;
-
       flat[element[attr]] = element;
 
       if (element.elements) {
         var children = this._flattenElementsByAttribute(element.elements, attr);
 
-        for (var _iterator5 = Object.keys(children), _isArray5 = Array.isArray(_iterator5), _i5 = 0, _iterator5 = _isArray5 ? _iterator5 : _iterator5[Symbol.iterator]();;) {
-          var _ref5;
-
-          if (_isArray5) {
-            if (_i5 >= _iterator5.length) break;
-            _ref5 = _iterator5[_i5++];
-          } else {
-            _i5 = _iterator5.next();
-            if (_i5.done) break;
-            _ref5 = _i5.value;
-          }
-
-          var key = _ref5;
-
+        for (var _i5 = 0, _Object$keys = Object.keys(children); _i5 < _Object$keys.length; _i5++) {
+          var key = _Object$keys[_i5];
           flat[key] = children[key];
         }
       }
@@ -171,7 +157,7 @@ var ChildElements = function (_Mixin) {
   };
 
   _createClass(ChildElements, [{
-    key: 'elements',
+    key: "elements",
     get: function get() {
       if (!this._elements) {
         this.createChildElements(this._elementsJSON);
@@ -180,12 +166,12 @@ var ChildElements = function (_Mixin) {
       return this._elements;
     }
   }, {
-    key: 'allElements',
+    key: "allElements",
     get: function get() {
       return this._flattenElements(this.elements);
     }
   }, {
-    key: 'elementsByKey',
+    key: "elementsByKey",
     get: function get() {
       if (this._elementsByKey == null) {
         this._elementsByKey = this._flattenElementsByAttribute(this.elements, 'key');
@@ -194,7 +180,7 @@ var ChildElements = function (_Mixin) {
       return this._elementsByKey;
     }
   }, {
-    key: 'elementsByDataName',
+    key: "elementsByDataName",
     get: function get() {
       if (this._elementsByDataName == null) {
         this._elementsByDataName = this._flattenElementsByAttribute(this.elements, 'dataName');
@@ -205,7 +191,7 @@ var ChildElements = function (_Mixin) {
   }]);
 
   return ChildElements;
-}(_mixmatch2.default);
+}(_mixmatch["default"]);
 
-exports.default = ChildElements;
+exports["default"] = ChildElements;
 //# sourceMappingURL=child-elements.js.map

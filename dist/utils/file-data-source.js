@@ -1,70 +1,61 @@
-'use strict';
+"use strict";
 
 exports.__esModule = true;
+exports["default"] = void 0;
 
-var _fs = require('fs');
+var _fs = _interopRequireDefault(require("fs"));
 
-var _fs2 = _interopRequireDefault(_fs);
+var _path = _interopRequireDefault(require("path"));
 
-var _path = require('path');
+var _form = _interopRequireDefault(require("../form"));
 
-var _path2 = _interopRequireDefault(_path);
+var _choiceList = _interopRequireDefault(require("../choice-list"));
 
-var _form = require('../form');
+var _classificationSet = _interopRequireDefault(require("../classification-set"));
 
-var _form2 = _interopRequireDefault(_form);
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
-var _choiceList = require('../choice-list');
-
-var _choiceList2 = _interopRequireDefault(_choiceList);
-
-var _classificationSet = require('../classification-set');
-
-var _classificationSet2 = _interopRequireDefault(_classificationSet);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-var FileDataSource = function () {
+var FileDataSource =
+/*#__PURE__*/
+function () {
   function FileDataSource(root) {
-    _classCallCheck(this, FileDataSource);
-
     this.root = root.toString();
   }
 
-  FileDataSource.prototype.json = function json(jsonPath) {
-    return JSON.parse(_fs2.default.readFileSync(jsonPath).toString());
+  var _proto = FileDataSource.prototype;
+
+  _proto.json = function json(jsonPath) {
+    return JSON.parse(_fs["default"].readFileSync(jsonPath).toString());
   };
 
-  FileDataSource.prototype.getChoiceList = function getChoiceList(id, callback) {
-    var jsonPath = _path2.default.join(this.root, 'choice_lists', id + '.json');
+  _proto.getChoiceList = function getChoiceList(id, callback) {
+    var jsonPath = _path["default"].join(this.root, 'choice_lists', id + '.json');
 
-    return callback(null, new _choiceList2.default(this.json(jsonPath).choice_list));
+    return callback(null, new _choiceList["default"](this.json(jsonPath).choice_list));
   };
 
-  FileDataSource.prototype.getClassificationSet = function getClassificationSet(id, callback) {
-    var jsonPath = _path2.default.join(this.root, 'classification_sets', id + '.json');
+  _proto.getClassificationSet = function getClassificationSet(id, callback) {
+    var jsonPath = _path["default"].join(this.root, 'classification_sets', id + '.json');
 
-    return callback(null, new _classificationSet2.default(this.json(jsonPath).classification_set));
+    return callback(null, new _classificationSet["default"](this.json(jsonPath).classification_set));
   };
 
-  FileDataSource.prototype.getForm = function getForm(id, callback) {
-    var jsonPath = _path2.default.join(this.root, 'forms', id + '.json');
+  _proto.getForm = function getForm(id, callback) {
+    var jsonPath = _path["default"].join(this.root, 'forms', id + '.json');
 
-    return callback(null, new _form2.default(this.json(jsonPath).form));
+    return callback(null, new _form["default"](this.json(jsonPath).form));
   };
 
-  FileDataSource.prototype.getUsers = function getUsers(params, callback) {
+  _proto.getUsers = function getUsers(params, callback) {
     return callback(null, []);
   };
 
-  FileDataSource.prototype.getProjects = function getProjects(params, callback) {
+  _proto.getProjects = function getProjects(params, callback) {
     return callback(null, []);
   };
 
   return FileDataSource;
 }();
 
-exports.default = FileDataSource;
+exports["default"] = FileDataSource;
 //# sourceMappingURL=file-data-source.js.map

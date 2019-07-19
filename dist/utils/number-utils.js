@@ -1,16 +1,15 @@
-'use strict';
+"use strict";
 
 exports.__esModule = true;
+exports["default"] = void 0;
 
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+var _locale = _interopRequireDefault(require("./locale"));
 
-var _locale = require('./locale');
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
-var _locale2 = _interopRequireDefault(_locale);
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
 var MachineFormatterOptions = {
   style: 'decimal',
@@ -18,7 +17,6 @@ var MachineFormatterOptions = {
   minimumFractionDigits: 0,
   maximumFractionDigits: 20
 };
-
 var intl = null;
 
 if (typeof Intl !== 'undefined') {
@@ -27,10 +25,10 @@ if (typeof Intl !== 'undefined') {
   /* eslint-enable no-undef */
 }
 
-var NumberUtils = function () {
-  function NumberUtils() {
-    _classCallCheck(this, NumberUtils);
-  }
+var NumberUtils =
+/*#__PURE__*/
+function () {
+  function NumberUtils() {}
 
   NumberUtils.parseDouble = function parseDouble(input) {
     var number = +input;
@@ -42,8 +40,10 @@ var NumberUtils = function () {
     return number;
   };
 
-  NumberUtils.localizedStringFromMachineString = function localizedStringFromMachineString(machineString) {
-    var allowDecimals = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : true;
+  NumberUtils.localizedStringFromMachineString = function localizedStringFromMachineString(machineString, allowDecimals) {
+    if (allowDecimals === void 0) {
+      allowDecimals = true;
+    }
 
     if (allowDecimals && NumberUtils.localeDecimalFormatter) {
       return NumberUtils.localeDecimalFormatter.format(machineString);
@@ -67,7 +67,7 @@ var NumberUtils = function () {
   };
 
   NumberUtils.__formatCurrency = function __formatCurrency(number, currency) {
-    if (!_locale2.default.supportsECMA402()) {
+    if (!_locale["default"].supportsECMA402()) {
       return number;
     }
 
@@ -78,9 +78,7 @@ var NumberUtils = function () {
       minimumFractionDigits: 2,
       maximumFractionDigits: 2
     };
-
-    var formatter = new global.Intl.NumberFormat(_locale2.default.currentLocale(), options);
-
+    var formatter = new global.Intl.NumberFormat(_locale["default"].currentLocale(), options);
     return formatter.format(number);
   };
 
@@ -99,7 +97,7 @@ var NumberUtils = function () {
   };
 
   _createClass(NumberUtils, null, [{
-    key: 'localeDecimalFormatter',
+    key: "localeDecimalFormatter",
     get: function get() {
       if (!this._localeDecimalFormatter && intl) {
         this._localeDecimalFormatter = new intl.NumberFormat([], MachineFormatterOptions);
@@ -108,16 +106,19 @@ var NumberUtils = function () {
       return this._localeDecimalFormatter;
     }
   }, {
-    key: 'localeIntegerFormatter',
+    key: "localeIntegerFormatter",
     get: function get() {
       if (!this._localeIntegerFormatter && intl) {
-        this._localeIntegerFormatter = new intl.NumberFormat([], { useGrouping: false, maximumFractionDigits: 0 });
+        this._localeIntegerFormatter = new intl.NumberFormat([], {
+          useGrouping: false,
+          maximumFractionDigits: 0
+        });
       }
 
       return this._localeIntegerFormatter;
     }
   }, {
-    key: 'machineFormatter',
+    key: "machineFormatter",
     get: function get() {
       if (!this._machineFormatter && intl) {
         this._machineFormatter = new intl.NumberFormat(['en-US'], MachineFormatterOptions);
@@ -130,5 +131,5 @@ var NumberUtils = function () {
   return NumberUtils;
 }();
 
-exports.default = NumberUtils;
+exports["default"] = NumberUtils;
 //# sourceMappingURL=number-utils.js.map

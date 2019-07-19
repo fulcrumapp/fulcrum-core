@@ -1,7 +1,8 @@
-'use strict';
+"use strict";
 
 exports.__esModule = true;
-exports.default = loadObject;
+exports["default"] = loadObject;
+
 function loadObject(object, dataSource, attribute, loader, callback) {
   var ivar = '_' + attribute + 'ID';
 
@@ -16,7 +17,6 @@ function loadObject(object, dataSource, attribute, loader, callback) {
     }
 
     object['_' + attribute] = result;
-
     return callback();
   });
 }

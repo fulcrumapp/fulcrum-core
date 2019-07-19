@@ -1,10 +1,13 @@
 "use strict";
 
 exports.__esModule = true;
+exports["default"] = void 0;
 
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 // [0]: Millisecond Offset Since Recording Start
 // [1]: Latitude
@@ -16,11 +19,10 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 // [7]: Speed
 // [8]: Viewport Bearing (Optional)
 // [9]: Viewport Inclination (Optional)
-
-var TrackPoint = function () {
+var TrackPoint =
+/*#__PURE__*/
+function () {
   function TrackPoint(values) {
-    _classCallCheck(this, TrackPoint);
-
     this._values = values;
   }
 
@@ -89,15 +91,25 @@ var TrackPoint = function () {
   return TrackPoint;
 }();
 
-TrackPoint.IDX_TIME = 0;
-TrackPoint.IDX_LATITUDE = 1;
-TrackPoint.IDX_LONGITUDE = 2;
-TrackPoint.IDX_ALTITUDE = 3;
-TrackPoint.IDX_HORIZONTAL_ACCURACY = 4;
-TrackPoint.IDX_VERTICAL_ACCURACY = 5;
-TrackPoint.IDX_COURSE = 6;
-TrackPoint.IDX_SPEED = 7;
-TrackPoint.IDX_VIEWPORT = 8;
-TrackPoint.IDX_INCLINATION = 9;
-exports.default = TrackPoint;
+exports["default"] = TrackPoint;
+
+_defineProperty(TrackPoint, "IDX_TIME", 0);
+
+_defineProperty(TrackPoint, "IDX_LATITUDE", 1);
+
+_defineProperty(TrackPoint, "IDX_LONGITUDE", 2);
+
+_defineProperty(TrackPoint, "IDX_ALTITUDE", 3);
+
+_defineProperty(TrackPoint, "IDX_HORIZONTAL_ACCURACY", 4);
+
+_defineProperty(TrackPoint, "IDX_VERTICAL_ACCURACY", 5);
+
+_defineProperty(TrackPoint, "IDX_COURSE", 6);
+
+_defineProperty(TrackPoint, "IDX_SPEED", 7);
+
+_defineProperty(TrackPoint, "IDX_VIEWPORT", 8);
+
+_defineProperty(TrackPoint, "IDX_INCLINATION", 9);
 //# sourceMappingURL=track-point.js.map

@@ -1,17 +1,17 @@
-'use strict';
+"use strict";
 
 exports.__esModule = true;
+exports["default"] = void 0;
 
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
-var User = function () {
+var User =
+/*#__PURE__*/
+function () {
   function User(attrs) {
-    _classCallCheck(this, User);
-
     var attributes = attrs || {};
-
     this._id = attributes.id;
     this._firstName = attributes.first_name;
     this._lastName = attributes.last_name;
@@ -20,27 +20,27 @@ var User = function () {
   }
 
   _createClass(User, [{
-    key: 'id',
+    key: "id",
     get: function get() {
       return this._id;
     }
   }, {
-    key: 'firstName',
+    key: "firstName",
     get: function get() {
       return this._firstName;
     }
   }, {
-    key: 'lastName',
+    key: "lastName",
     get: function get() {
       return this._lastName;
     }
   }, {
-    key: 'fullName',
+    key: "fullName",
     get: function get() {
       return this._fullName || this.firstName + ' ' + this.lastName;
     }
   }, {
-    key: 'email',
+    key: "email",
     get: function get() {
       return this._email;
     }
@@ -49,5 +49,5 @@ var User = function () {
   return User;
 }();
 
-exports.default = User;
+exports["default"] = User;
 //# sourceMappingURL=user.js.map

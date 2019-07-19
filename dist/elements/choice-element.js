@@ -1,45 +1,36 @@
-'use strict';
+"use strict";
 
 exports.__esModule = true;
+exports["default"] = void 0;
 
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+var _element = _interopRequireDefault(require("./element"));
 
-var _element = require('./element');
+var _choice = _interopRequireDefault(require("./choice"));
 
-var _element2 = _interopRequireDefault(_element);
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
-var _choice = require('./choice');
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
 
-var _choice2 = _interopRequireDefault(_choice);
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _inheritsLoose(subClass, superClass) { subClass.prototype = Object.create(superClass.prototype); subClass.prototype.constructor = subClass; subClass.__proto__ = superClass; }
 
-function _defaults(obj, defaults) { var keys = Object.getOwnPropertyNames(defaults); for (var i = 0; i < keys.length; i++) { var key = keys[i]; var value = Object.getOwnPropertyDescriptor(defaults, key); if (value && value.configurable && obj[key] === undefined) { Object.defineProperty(obj, key, value); } } return obj; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : _defaults(subClass, superClass); }
-
-var ChoiceElement = function (_Element) {
-  _inherits(ChoiceElement, _Element);
+var ChoiceElement =
+/*#__PURE__*/
+function (_Element) {
+  _inheritsLoose(ChoiceElement, _Element);
 
   function ChoiceElement(parent, attributes) {
-    _classCallCheck(this, ChoiceElement);
+    var _this;
 
-    var _this = _possibleConstructorReturn(this, _Element.call(this, parent, attributes));
-
+    _this = _Element.call(this, parent, attributes) || this;
     _this.multiple = !!attributes.multiple;
     _this.allowOther = !!attributes.allow_other;
-
     _this._choiceFilter = null;
     _this._overrideChoices = null;
-
     _this._choiceListID = attributes.choice_list_id;
-    _this._choices = [];
+    _this._choices = []; // TODO(zhm) the loading needs to be re-worked to support choice lists
 
-    // TODO(zhm) the loading needs to be re-worked to support choice lists
     if (attributes.choices) {
       for (var _iterator = attributes.choices, _isArray = Array.isArray(_iterator), _i = 0, _iterator = _isArray ? _iterator : _iterator[Symbol.iterator]();;) {
         var _ref;
@@ -55,13 +46,16 @@ var ChoiceElement = function (_Element) {
 
         var choice = _ref;
 
-        _this._choices.push(new _choice2.default(choice));
+        _this._choices.push(new _choice["default"](choice));
       }
     }
+
     return _this;
   }
 
-  ChoiceElement.prototype.load = function load(dataSource, callback) {
+  var _proto = ChoiceElement.prototype;
+
+  _proto.load = function load(dataSource, callback) {
     var _this2 = this;
 
     this._choicesByValue = null;
@@ -77,7 +71,6 @@ var ChoiceElement = function (_Element) {
 
         _this2.choiceList = choiceList;
         _this2._choices = _this2.choiceList.choices.slice();
-
         return callback();
       });
     } else {
@@ -85,14 +78,14 @@ var ChoiceElement = function (_Element) {
     }
   };
 
-  ChoiceElement.prototype.resetOverrides = function resetOverrides() {
+  _proto.resetOverrides = function resetOverrides() {
     _Element.prototype.resetOverrides.call(this);
 
     this._choiceFilter = null;
     this._overrideChoices = null;
   };
 
-  ChoiceElement.prototype.choiceByValue = function choiceByValue(value) {
+  _proto.choiceByValue = function choiceByValue(value) {
     if (!this._choicesByValue) {
       this._choicesByValue = {};
 
@@ -109,7 +102,6 @@ var ChoiceElement = function (_Element) {
         }
 
         var choice = _ref2;
-
         this._choicesByValue[choice.value] = choice;
       }
     }
@@ -118,17 +110,17 @@ var ChoiceElement = function (_Element) {
   };
 
   _createClass(ChoiceElement, [{
-    key: 'isLengthValidationSupported',
+    key: "isLengthValidationSupported",
     get: function get() {
       return this.multiple;
     }
   }, {
-    key: 'choices',
+    key: "choices",
     get: function get() {
       return this._overrideChoices ? this._overrideChoices : this.filteredChoices;
     }
   }, {
-    key: 'choiceFilter',
+    key: "choiceFilter",
     get: function get() {
       return this._choiceFilter;
     },
@@ -136,7 +128,7 @@ var ChoiceElement = function (_Element) {
       this._choiceFilter = choiceFilter;
     }
   }, {
-    key: 'filteredChoices',
+    key: "filteredChoices",
     get: function get() {
       var items = this._choices;
 
@@ -174,7 +166,6 @@ var ChoiceElement = function (_Element) {
           }
 
           var filter = _ref4;
-
           var isMatch = item.value.toLowerCase().indexOf(filter.toLowerCase()) !== -1;
 
           if (isMatch && !matchedValues[item.value]) {
@@ -187,7 +178,7 @@ var ChoiceElement = function (_Element) {
       return filteredItems;
     }
   }, {
-    key: 'overrideChoices',
+    key: "overrideChoices",
     get: function get() {
       return this._overrideChoices;
     },
@@ -214,18 +205,16 @@ var ChoiceElement = function (_Element) {
         }
 
         var choiceAttributes = _ref5;
-
-        var choice = new _choice2.default(choiceAttributes);
-
+        var choice = new _choice["default"](choiceAttributes);
         choices.push(choice);
       }
 
       this._overrideChoices = choices;
     }
   }, {
-    key: 'overrideValues',
+    key: "overrideValues",
     get: function get() {
-      return Object.assign(Object.getOwnPropertyDescriptor(_element2.default.prototype, 'overrideValues').get.call(this), {
+      return Object.assign(Object.getOwnPropertyDescriptor(_element["default"].prototype, 'overrideValues').get.call(this), {
         choiceFilter: this._choiceFilter,
         overrideChoices: this._overrideChoices
       });
@@ -233,7 +222,7 @@ var ChoiceElement = function (_Element) {
   }]);
 
   return ChoiceElement;
-}(_element2.default);
+}(_element["default"]);
 
-exports.default = ChoiceElement;
+exports["default"] = ChoiceElement;
 //# sourceMappingURL=choice-element.js.map

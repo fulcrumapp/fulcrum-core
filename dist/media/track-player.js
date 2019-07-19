@@ -1,13 +1,12 @@
 "use strict";
 
 exports.__esModule = true;
+exports["default"] = void 0;
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-var TrackPlayer = function () {
+var TrackPlayer =
+/*#__PURE__*/
+function () {
   function TrackPlayer(track) {
-    _classCallCheck(this, TrackPlayer);
-
     this.track = track;
 
     if (this.track.firstSegment) {
@@ -17,12 +16,12 @@ var TrackPlayer = function () {
     }
   }
 
-  TrackPlayer.prototype.findPreviousTrackPointIndexes = function findPreviousTrackPointIndexes(time) {
+  var _proto = TrackPlayer.prototype;
+
+  _proto.findPreviousTrackPointIndexes = function findPreviousTrackPointIndexes(time) {
     var segmentIndex = 0;
     var pointIndex = 0;
-
     var timestamp = null;
-
     var milliseconds = time;
 
     for (var _iterator = this.track.segments, _isArray = Array.isArray(_iterator), _i = 0, _iterator = _isArray ? _iterator : _iterator[Symbol.iterator]();;) {
@@ -52,7 +51,6 @@ var TrackPlayer = function () {
         }
 
         var point = _ref2;
-
         timestamp = point.time;
 
         if (timestamp > milliseconds) {
@@ -63,9 +61,9 @@ var TrackPlayer = function () {
       }
 
       ++segmentIndex;
-    }
+    } // if the video time is beyond the end of the track, return the last index
 
-    // if the video time is beyond the end of the track, return the last index
+
     if (milliseconds >= this.lastTimestamp) {
       return [this.track.segments.length - 1, this.track.lastSegment.points.length - 1];
     }
@@ -73,18 +71,18 @@ var TrackPlayer = function () {
     return [0, 0];
   };
 
-  TrackPlayer.prototype.findPreviousTrackPoint = function findPreviousTrackPoint(time) {
-    var _findPreviousTrackPoi = this.findPreviousTrackPointIndexes(time),
-        segmentIndex = _findPreviousTrackPoi[0],
-        pointIndex = _findPreviousTrackPoi[1];
+  _proto.findPreviousTrackPoint = function findPreviousTrackPoint(time) {
+    var _this$findPreviousTra = this.findPreviousTrackPointIndexes(time),
+        segmentIndex = _this$findPreviousTra[0],
+        pointIndex = _this$findPreviousTra[1];
 
     return this.track.segments[segmentIndex].points[pointIndex];
   };
 
-  TrackPlayer.prototype.findNextTrackPoint = function findNextTrackPoint(time) {
-    var _findPreviousTrackPoi2 = this.findPreviousTrackPointIndexes(time),
-        segmentIndex = _findPreviousTrackPoi2[0],
-        pointIndex = _findPreviousTrackPoi2[1];
+  _proto.findNextTrackPoint = function findNextTrackPoint(time) {
+    var _this$findPreviousTra2 = this.findPreviousTrackPointIndexes(time),
+        segmentIndex = _this$findPreviousTra2[0],
+        pointIndex = _this$findPreviousTra2[1];
 
     if (pointIndex + 1 < this.track.segments[segmentIndex].points.length) {
       return this.track.segments[segmentIndex].points[pointIndex + 1];
@@ -93,25 +91,20 @@ var TrackPlayer = function () {
     return this.track.segments[segmentIndex].points[pointIndex];
   };
 
-  TrackPlayer.prototype.point = function point(trackTime) {
+  _proto.point = function point(trackTime) {
     if (this.track == null || this.track.segments.length === 0) {
       return null;
     }
 
     var time = trackTime * 1000.0 + this.firstTimestamp;
-
     var lastPoint = this.findPreviousTrackPoint(time);
     var nextPoint = this.findNextTrackPoint(time);
-
     var lastTimestamp = lastPoint.time;
     var nextTimestamp = nextPoint.time;
-
     var lastLatitude = lastPoint.latitude;
     var lastLongitude = lastPoint.longitude;
-
     var nextLatitude = nextPoint.latitude;
     var nextLongitude = nextPoint.longitude;
-
     var isLastPointInvalid = lastLatitude == null || lastLongitude == null;
     var isNextPointInvalid = nextLatitude == null || nextLongitude == null;
 
@@ -121,26 +114,18 @@ var TrackPlayer = function () {
 
     var range = nextTimestamp - lastTimestamp;
     var percentage = range === 0 ? 0 : (time - lastTimestamp) / range;
-
     var lastLocation = [lastPoint.latitude, lastPoint.longitude];
     var nextLocation = [nextPoint.latitude, nextPoint.longitude];
-
     var lon = (nextLocation[1] - lastLocation[1]) * percentage + lastLocation[1];
     var lat = (nextLocation[0] - lastLocation[0]) * percentage + lastLocation[0];
-
     var location = [lat, lon];
-
     var headingDiff = nextPoint.viewport - lastPoint.viewport;
     var courseDiff = nextPoint.course - lastPoint.course;
-
     var accuracyDiff = nextPoint.horizontalAccuracy - lastPoint.horizontalAccuracy;
-
     var lastAltitude = lastPoint.altitude;
     var nextAltitude = nextPoint.altitude;
-
     var lastSpeed = lastPoint.speed;
     var nextSpeed = nextPoint.speed;
-
     var altitudeDiff = null;
 
     if (lastAltitude != null && nextAltitude != null) {
@@ -152,7 +137,6 @@ var TrackPlayer = function () {
     if (lastSpeed != null && nextSpeed != null && lastSpeed > -1 && nextSpeed > -1) {
       speedDiff = nextSpeed - lastSpeed;
     }
-
     /*
      When the diff between the 2 points is greater than 180, we need
     to reverse the direction of the tweening so it produces the fastest
@@ -165,6 +149,7 @@ var TrackPlayer = function () {
       going from 350 to 30 should produce a 40 degree clockwise
       result, not a 320 counterclockwise animation
      */
+
 
     if (Math.abs(headingDiff) > 180) {
       if (nextPoint.viewport > lastPoint.viewport) {
@@ -185,7 +170,6 @@ var TrackPlayer = function () {
     var heading = headingDiff * percentage + lastPoint.viewport;
     var course = courseDiff * percentage + lastPoint.course;
     var accuracy = accuracyDiff * percentage + lastPoint.horizontalAccuracy;
-
     var altitude = null;
     var speed = null;
 
@@ -213,5 +197,5 @@ var TrackPlayer = function () {
   return TrackPlayer;
 }();
 
-exports.default = TrackPlayer;
+exports["default"] = TrackPlayer;
 //# sourceMappingURL=track-player.js.map

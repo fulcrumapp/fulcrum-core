@@ -1,43 +1,34 @@
-'use strict';
+"use strict";
 
 exports.__esModule = true;
+exports["default"] = void 0;
 
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+var _formValue = _interopRequireDefault(require("./form-value"));
 
-var _formValue = require('./form-value');
+var _textUtils = _interopRequireDefault(require("../utils/text-utils"));
 
-var _formValue2 = _interopRequireDefault(_formValue);
+var _classification = _interopRequireDefault(require("../elements/classification"));
 
-var _textUtils = require('../utils/text-utils');
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
-var _textUtils2 = _interopRequireDefault(_textUtils);
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
 
-var _classification = require('../elements/classification');
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
-var _classification2 = _interopRequireDefault(_classification);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _defaults(obj, defaults) { var keys = Object.getOwnPropertyNames(defaults); for (var i = 0; i < keys.length; i++) { var key = keys[i]; var value = Object.getOwnPropertyDescriptor(defaults, key); if (value && value.configurable && obj[key] === undefined) { Object.defineProperty(obj, key, value); } } return obj; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : _defaults(subClass, superClass); }
+function _inheritsLoose(subClass, superClass) { subClass.prototype = Object.create(superClass.prototype); subClass.prototype.constructor = subClass; subClass.__proto__ = superClass; }
 
 var DisplaySeparator = ' ▸ ';
-
 var SearchSeparator = ' ';
 
-var ClassificationValue = function (_FormValue) {
-  _inherits(ClassificationValue, _FormValue);
+var ClassificationValue =
+/*#__PURE__*/
+function (_FormValue) {
+  _inheritsLoose(ClassificationValue, _FormValue);
 
   function ClassificationValue(element, attributes) {
-    _classCallCheck(this, ClassificationValue);
+    var _this;
 
-    var _this = _possibleConstructorReturn(this, _FormValue.call(this, element, attributes));
-
+    _this = _FormValue.call(this, element, attributes) || this;
     _this._choiceValues = [];
     _this._otherValues = [];
 
@@ -57,7 +48,7 @@ var ClassificationValue = function (_FormValue) {
 
           var choice = _ref;
 
-          if (_textUtils2.default.isPresent(choice)) {
+          if (_textUtils["default"].isPresent(choice)) {
             _this._choiceValues.push(choice);
           }
         }
@@ -78,28 +69,26 @@ var ClassificationValue = function (_FormValue) {
 
           var _choice = _ref2;
 
-          if (_textUtils2.default.isPresent(_choice)) {
+          if (_textUtils["default"].isPresent(_choice)) {
             _this._otherValues.push(_choice);
           }
         }
       }
     }
+
     return _this;
   }
 
-  ClassificationValue.prototype.isEqual = function isEqual(value) {
+  var _proto = ClassificationValue.prototype;
+
+  _proto.isEqual = function isEqual(value) {
     var classification = this.selectedClassification;
-
     var choiceValues = classification ? classification.toJSON() : null;
-
     var ESCAPED = /\\,/g;
-
     var parts = value.replace(ESCAPED, '\t\t').split(',').map(function (part) {
       return part.replace(/\t\t/g, ',');
     });
-
     var allMatchSoFar = false;
-
     var partIndex = 0;
 
     for (var _iterator3 = parts, _isArray3 = Array.isArray(_iterator3), _i3 = 0, _iterator3 = _isArray3 ? _iterator3 : _iterator3[Symbol.iterator]();;) {
@@ -129,17 +118,17 @@ var ClassificationValue = function (_FormValue) {
     return allMatchSoFar;
   };
 
-  ClassificationValue.prototype.contains = function contains(value) {
+  _proto.contains = function contains(value) {
     return this.isEqual(value);
   };
 
-  ClassificationValue.prototype.startsWith = function startsWith(value) {
+  _proto.startsWith = function startsWith(value) {
     return this.contains(value);
   };
 
-  ClassificationValue.prototype.format = function format(_ref4) {
+  _proto.format = function format(_ref4) {
     var _ref4$useDisplayValue = _ref4.useDisplayValue,
-        useDisplayValue = _ref4$useDisplayValue === undefined ? false : _ref4$useDisplayValue;
+        useDisplayValue = _ref4$useDisplayValue === void 0 ? false : _ref4$useDisplayValue;
 
     if (this.isEmpty) {
       return null;
@@ -148,12 +137,13 @@ var ClassificationValue = function (_FormValue) {
     return useDisplayValue ? this.labelStrings : this.valueStrings;
   };
 
-  ClassificationValue.prototype.toJSON = function toJSON() {
+  _proto.toJSON = function toJSON() {
     if (this.isEmpty) {
       return null;
     }
 
     var choiceValues = this._choiceValues.slice();
+
     var otherValues = this._otherValues.slice();
 
     return {
@@ -162,8 +152,8 @@ var ClassificationValue = function (_FormValue) {
     };
   };
 
-  ClassificationValue.prototype.toSimpleJSON = function toSimpleJSON() {
-    var _ref5 = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
+  _proto.toSimpleJSON = function toSimpleJSON(_temp) {
+    var _ref5 = _temp === void 0 ? {} : _temp,
         labels = _ref5.labels;
 
     if (this.isEmpty) {
@@ -171,19 +161,18 @@ var ClassificationValue = function (_FormValue) {
     }
 
     var strings = labels ? this.labelStrings : this.valueStrings;
-
     return strings;
   };
 
-  ClassificationValue.prototype.setSelectedClassification = function setSelectedClassification(classification, otherValue) {
-    if (classification instanceof _classification2.default) {
+  _proto.setSelectedClassification = function setSelectedClassification(classification, otherValue) {
+    if (classification instanceof _classification["default"]) {
       this.setSelectedClassificationJSON(classification.toJSON(), otherValue);
     } else {
       this.setSelectedClassificationJSON(null, otherValue);
     }
   };
 
-  ClassificationValue.prototype.setSelectedClassificationJSON = function setSelectedClassificationJSON(classificationAsJSON, otherValue) {
+  _proto.setSelectedClassificationJSON = function setSelectedClassificationJSON(classificationAsJSON, otherValue) {
     if (classificationAsJSON && classificationAsJSON.length) {
       this._choiceValues = classificationAsJSON;
     } else {
@@ -198,7 +187,7 @@ var ClassificationValue = function (_FormValue) {
   };
 
   _createClass(ClassificationValue, [{
-    key: 'isEmpty',
+    key: "isEmpty",
     get: function get() {
       if (this._choiceValues.length) {
         return false;
@@ -211,10 +200,9 @@ var ClassificationValue = function (_FormValue) {
       return true;
     }
   }, {
-    key: 'labelStrings',
+    key: "labelStrings",
     get: function get() {
       var labels = [];
-
       var classification = this.selectedClassification;
 
       if (classification) {
@@ -245,7 +233,7 @@ var ClassificationValue = function (_FormValue) {
       return labels;
     }
   }, {
-    key: 'valueStrings',
+    key: "valueStrings",
     get: function get() {
       var values = [];
 
@@ -262,7 +250,6 @@ var ClassificationValue = function (_FormValue) {
         }
 
         var value = _ref7;
-
         values.push(value);
       }
 
@@ -279,22 +266,20 @@ var ClassificationValue = function (_FormValue) {
         }
 
         var _value = _ref8;
-
         values.push(_value);
       }
 
       return values;
     }
   }, {
-    key: 'displayValue',
+    key: "displayValue",
     get: function get() {
       return this.labelStrings.join(DisplaySeparator);
     }
   }, {
-    key: 'searchableValue',
+    key: "searchableValue",
     get: function get() {
       var values = [];
-
       var classification = this.selectedClassification;
 
       if (classification) {
@@ -329,12 +314,12 @@ var ClassificationValue = function (_FormValue) {
       return values.join(SearchSeparator);
     }
   }, {
-    key: 'length',
+    key: "length",
     get: function get() {
       return this._choiceValues.length + this._otherValues.length;
     }
   }, {
-    key: 'columnValue',
+    key: "columnValue",
     get: function get() {
       var allValues = this.valueStrings;
 
@@ -345,17 +330,17 @@ var ClassificationValue = function (_FormValue) {
       return allValues;
     }
   }, {
-    key: 'multipleValues',
+    key: "multipleValues",
     get: function get() {
       return null;
     }
   }, {
-    key: 'hasOtherValue',
+    key: "hasOtherValue",
     get: function get() {
       return this._otherValues.length !== 0;
     }
   }, {
-    key: 'otherValue',
+    key: "otherValue",
     get: function get() {
       if (!this.hasOtherValue) {
         return null;
@@ -371,7 +356,7 @@ var ClassificationValue = function (_FormValue) {
       }
     }
   }, {
-    key: 'selectedClassification',
+    key: "selectedClassification",
     get: function get() {
       var result = null;
 
@@ -422,7 +407,7 @@ var ClassificationValue = function (_FormValue) {
   }]);
 
   return ClassificationValue;
-}(_formValue2.default);
+}(_formValue["default"]);
 
-exports.default = ClassificationValue;
+exports["default"] = ClassificationValue;
 //# sourceMappingURL=classification-value.js.map

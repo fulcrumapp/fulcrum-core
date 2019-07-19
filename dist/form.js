@@ -1,47 +1,37 @@
-'use strict';
+"use strict";
 
 exports.__esModule = true;
+exports["default"] = void 0;
 
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+var _childElements = _interopRequireDefault(require("./elements/child-elements"));
 
-var _childElements = require('./elements/child-elements');
+var _statusElement = _interopRequireDefault(require("./elements/status-element"));
 
-var _childElements2 = _interopRequireDefault(_childElements);
+var _defaultValues = _interopRequireDefault(require("./values/default-values"));
 
-var _statusElement = require('./elements/status-element');
+var _record = _interopRequireDefault(require("./record"));
 
-var _statusElement2 = _interopRequireDefault(_statusElement);
+var _async = _interopRequireDefault(require("async"));
 
-var _defaultValues = require('./values/default-values');
+var _dateUtils = _interopRequireDefault(require("./utils/date-utils"));
 
-var _defaultValues2 = _interopRequireDefault(_defaultValues);
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
-var _record = require('./record');
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
 
-var _record2 = _interopRequireDefault(_record);
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
-var _async = require('async');
-
-var _async2 = _interopRequireDefault(_async);
-
-var _dateUtils = require('./utils/date-utils');
-
-var _dateUtils2 = _interopRequireDefault(_dateUtils);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-var Form = function () {
+var Form =
+/*#__PURE__*/
+function () {
   function Form(attributes) {
-    _classCallCheck(this, Form);
-
     this.updateFromAPIAttributes(attributes);
   }
 
-  Form.prototype.updateFromAPIAttributes = function updateFromAPIAttributes(attrs) {
-    var attributes = attrs || {};
+  var _proto = Form.prototype;
 
+  _proto.updateFromAPIAttributes = function updateFromAPIAttributes(attrs) {
+    var attributes = attrs || {};
     this._id = attributes.id;
     this._name = attributes.name;
     this._description = attributes.description;
@@ -55,13 +45,12 @@ var Form = function () {
     this._reportTemplatesJSON = attributes.report_templates;
     this._boundingBox = attributes.bounding_box;
     this._version = attributes.version;
-    this._createdAt = _dateUtils2.default.parseISOTimestamp(attributes.created_at);
-    this._updatedAt = _dateUtils2.default.parseISOTimestamp(attributes.updated_at);
+    this._createdAt = _dateUtils["default"].parseISOTimestamp(attributes.created_at);
+    this._updatedAt = _dateUtils["default"].parseISOTimestamp(attributes.updated_at);
     this._image = attributes.image;
     this._imageLarge = attributes.image_large;
     this._imageSmall = attributes.image_small;
     this._imageThumbnail = attributes.image_thumbnail;
-
     this._projectEnabled = attributes.projects_enabled != null ? !!attributes.projects_enabled : true;
     this._assignmentEnabled = attributes.assignment_enabled != null ? !!attributes.assignment_enabled : true;
     this._autoAssign = attributes.auto_assign != null ? !!attributes.auto_assign : false;
@@ -74,14 +63,13 @@ var Form = function () {
     }
   };
 
-  Form.prototype.load = function load(dataSource, callback) {
+  _proto.load = function load(dataSource, callback) {
     if (this._schemaLoaded) {
       callback();
       return;
     }
 
     this._schemaLoaded = true;
-
     var loadElements = [];
 
     for (var _iterator = this.allElements, _isArray = Array.isArray(_iterator), _i = 0, _iterator = _isArray ? _iterator : _iterator[Symbol.iterator]();;) {
@@ -103,10 +91,9 @@ var Form = function () {
       }
     }
 
-    _async2.default.each(loadElements, function (element, cb) {
+    _async["default"].each(loadElements, function (element, cb) {
       element.load(dataSource, function (err) {
-        if (err) {
-          // TODO(zhm) We need a parameter to control what happens when there's an error. We don't
+        if (err) {// TODO(zhm) We need a parameter to control what happens when there's an error. We don't
           // want to throw right here because some actual forms have orphaned objects. We can't have this
           // blow up here because in a migration we need to keep going even when a form is 'slightly bogus'.
           // In some cases it might be desirable to have more strict verification of the choice lists and
@@ -118,25 +105,24 @@ var Form = function () {
     }, callback);
   };
 
-  Form.prototype.createRecord = function createRecord(attributes) {
-    var record = new _record2.default(attributes, this);
+  _proto.createRecord = function createRecord(attributes) {
+    var record = new _record["default"](attributes, this);
 
-    _defaultValues2.default.applyDefaultValuesForElements(this.elements, record.formValues, record);
+    _defaultValues["default"].applyDefaultValuesForElements(this.elements, record.formValues, record);
 
     return record;
   };
 
-  Form.prototype.get = function get(key) {
+  _proto.get = function get(key) {
     return this.elementsByKey[key];
   };
 
-  Form.prototype.find = function find(dataName) {
+  _proto.find = function find(dataName) {
     return this.elementsByDataName[dataName];
   };
 
-  Form.prototype.toJSON = function toJSON() {
+  _proto.toJSON = function toJSON() {
     var json = {};
-
     json.id = this.id || null;
     json.name = this.name || null;
     json.description = this.description || null;
@@ -152,8 +138,8 @@ var Form = function () {
     json.report_templates = this.reportTemplates;
     json.bounding_box = this.boundingBox;
     json.version = this.version;
-    json.created_at = _dateUtils2.default.formatISOTimestamp(this.createdAt);
-    json.updated_at = _dateUtils2.default.formatISOTimestamp(this.updatedAt);
+    json.created_at = _dateUtils["default"].formatISOTimestamp(this.createdAt);
+    json.updated_at = _dateUtils["default"].formatISOTimestamp(this.updatedAt);
 
     if (this._statusFieldJSON) {
       json.status_field = JSON.parse(JSON.stringify(this._statusFieldJSON));
@@ -162,7 +148,7 @@ var Form = function () {
     return json;
   };
 
-  Form.prototype.resetOverrides = function resetOverrides() {
+  _proto.resetOverrides = function resetOverrides() {
     for (var _iterator2 = this.elements, _isArray2 = Array.isArray(_iterator2), _i2 = 0, _iterator2 = _isArray2 ? _iterator2 : _iterator2[Symbol.iterator]();;) {
       var _ref2;
 
@@ -176,166 +162,165 @@ var Form = function () {
       }
 
       var element = _ref2;
-
       element.resetOverrides();
     }
 
     this.statusField.resetOverrides();
-
     this._overrideManualLocationEnabled = null;
     this._overrideMediaGalleryEnabled = null;
   };
 
   _createClass(Form, [{
-    key: 'id',
+    key: "id",
     get: function get() {
       return this._id;
     }
   }, {
-    key: 'version',
+    key: "version",
     get: function get() {
       return this._version;
     }
   }, {
-    key: 'createdAt',
+    key: "createdAt",
     get: function get() {
       return this._createdAt;
     }
   }, {
-    key: 'updatedAt',
+    key: "updatedAt",
     get: function get() {
       return this._updatedAt;
     }
   }, {
-    key: 'statusField',
+    key: "statusField",
     get: function get() {
       if (!this._statusField) {
-        this._statusField = new _statusElement2.default(this, this._statusFieldJSON);
+        this._statusField = new _statusElement["default"](this, this._statusFieldJSON);
       }
+
       return this._statusField;
     }
   }, {
-    key: 'hasHiddenParent',
+    key: "hasHiddenParent",
     get: function get() {
       return false;
     }
   }, {
-    key: 'isProjectEnabled',
+    key: "isProjectEnabled",
     get: function get() {
       return this._projectEnabled;
     }
   }, {
-    key: 'isAssignmentEnabled',
+    key: "isAssignmentEnabled",
     get: function get() {
       return this._assignmentEnabled;
     }
   }, {
-    key: 'isAutoAssign',
+    key: "isAutoAssign",
     get: function get() {
       return this._autoAssign;
     }
   }, {
-    key: 'isHiddenOnDashboard',
+    key: "isHiddenOnDashboard",
     get: function get() {
       return this._hiddenOnDashboard;
     }
   }, {
-    key: 'boundingBox',
+    key: "boundingBox",
     get: function get() {
       return this._boundingBox;
     }
   }, {
-    key: 'image',
+    key: "image",
     get: function get() {
       return this._image;
     }
   }, {
-    key: 'imageLarge',
+    key: "imageLarge",
     get: function get() {
       return this._imageLarge;
     }
   }, {
-    key: 'imageSmall',
+    key: "imageSmall",
     get: function get() {
       return this._imageSmall;
     }
   }, {
-    key: 'imageThumbnail',
+    key: "imageThumbnail",
     get: function get() {
       return this._imageThumbnail;
     }
   }, {
-    key: 'isGeometryEnabled',
+    key: "isGeometryEnabled",
     get: function get() {
       return this._geometryTypes && this._geometryTypes.length > 0;
     }
   }, {
-    key: 'isGeometryRequired',
+    key: "isGeometryRequired",
     get: function get() {
       return this._geometryRequired;
     }
   }, {
-    key: 'name',
+    key: "name",
     get: function get() {
       return this._name;
     }
   }, {
-    key: 'description',
+    key: "description",
     get: function get() {
       return this._description;
     }
   }, {
-    key: 'script',
+    key: "script",
     get: function get() {
       return this._script;
     }
   }, {
-    key: 'titleFieldKeys',
+    key: "titleFieldKeys",
     get: function get() {
       return this._titleFieldKeysJSON || [];
     }
   }, {
-    key: 'reportTemplates',
+    key: "reportTemplates",
     get: function get() {
       return this._reportTemplatesJSON || [];
     }
   }, {
-    key: 'reportTemplate',
+    key: "reportTemplate",
     get: function get() {
       return this.reportTemplates.length ? this.reportTemplates[0] : null;
     }
   }, {
-    key: 'overrideManualLocationEnabled',
+    key: "overrideManualLocationEnabled",
     set: function set(override) {
       this._overrideManualLocationEnabled = override;
     }
   }, {
-    key: 'isManualLocationEnabled',
+    key: "isManualLocationEnabled",
     get: function get() {
       return this._overrideManualLocationEnabled != null ? !!this._overrideManualLocationEnabled : true;
     }
   }, {
-    key: 'overrideMediaGalleryEnabled',
+    key: "overrideMediaGalleryEnabled",
     set: function set(override) {
       this._overrideMediaGalleryEnabled = override;
     }
   }, {
-    key: 'isMediaGalleryEnabled',
+    key: "isMediaGalleryEnabled",
     get: function get() {
       return this._overrideMediaGalleryEnabled != null ? !!this._overrideMediaGalleryEnabled : true;
     }
   }, {
-    key: 'overrideEditDurationsEnabled',
+    key: "overrideEditDurationsEnabled",
     set: function set(override) {
       this._overrideEditDurationsEnabled = override;
     }
   }, {
-    key: 'isEditDurationsEnabled',
+    key: "isEditDurationsEnabled",
     get: function get() {
       return this._overrideEditDurationsEnabled != null ? !!this._overrideEditDurationsEnabled : true;
     }
   }, {
-    key: 'overrideValues',
+    key: "overrideValues",
     get: function get() {
       return {
         overrideManualLocationEnabled: this._overrideManualLocationEnabled,
@@ -348,8 +333,7 @@ var Form = function () {
   return Form;
 }();
 
-exports.default = Form;
+exports["default"] = Form;
 
-
-_childElements2.default.includeInto(Form);
+_childElements["default"].includeInto(Form);
 //# sourceMappingURL=form.js.map

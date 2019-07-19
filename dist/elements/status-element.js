@@ -1,30 +1,21 @@
-'use strict';
+"use strict";
 
 exports.__esModule = true;
+exports["default"] = void 0;
 
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+var _textualElement = _interopRequireDefault(require("./textual-element"));
 
-var _textualElement = require('./textual-element');
+var _statusChoice = _interopRequireDefault(require("./status-choice"));
 
-var _textualElement2 = _interopRequireDefault(_textualElement);
+var _element = _interopRequireDefault(require("./element"));
 
-var _statusChoice = require('./status-choice');
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
-var _statusChoice2 = _interopRequireDefault(_statusChoice);
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
 
-var _element = require('./element');
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
-var _element2 = _interopRequireDefault(_element);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _defaults(obj, defaults) { var keys = Object.getOwnPropertyNames(defaults); for (var i = 0; i < keys.length; i++) { var key = keys[i]; var value = Object.getOwnPropertyDescriptor(defaults, key); if (value && value.configurable && obj[key] === undefined) { Object.defineProperty(obj, key, value); } } return obj; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : _defaults(subClass, superClass); }
+function _inheritsLoose(subClass, superClass) { subClass.prototype = Object.create(superClass.prototype); subClass.prototype.constructor = subClass; subClass.__proto__ = superClass; }
 
 var DEFAULT_STATUS_ELEMENT = {
   label: 'Status',
@@ -35,20 +26,18 @@ var DEFAULT_STATUS_ELEMENT = {
   choices: []
 };
 
-var StatusElement = function (_TextualElement) {
-  _inherits(StatusElement, _TextualElement);
+var StatusElement =
+/*#__PURE__*/
+function (_TextualElement) {
+  _inheritsLoose(StatusElement, _TextualElement);
 
   function StatusElement(parent, attributes) {
-    _classCallCheck(this, StatusElement);
+    var _this;
 
     attributes.type = 'StatusField';
-
     var attrs = Object.assign({}, DEFAULT_STATUS_ELEMENT, attributes);
-
-    var _this = _possibleConstructorReturn(this, _TextualElement.call(this, parent, attrs));
-
+    _this = _TextualElement.call(this, parent, attrs) || this;
     _this._statusFilter = null;
-
     _this._choices = [];
 
     if (attrs.choices) {
@@ -66,7 +55,7 @@ var StatusElement = function (_TextualElement) {
 
         var choice = _ref;
 
-        _this._choices.push(new _statusChoice2.default(choice));
+        _this._choices.push(new _statusChoice["default"](choice));
       }
     }
 
@@ -75,7 +64,9 @@ var StatusElement = function (_TextualElement) {
     return _this;
   }
 
-  StatusElement.prototype.statusForValue = function statusForValue(value) {
+  var _proto = StatusElement.prototype;
+
+  _proto.statusForValue = function statusForValue(value) {
     for (var _iterator2 = this.choices, _isArray2 = Array.isArray(_iterator2), _i2 = 0, _iterator2 = _isArray2 ? _iterator2 : _iterator2[Symbol.iterator]();;) {
       var _ref2;
 
@@ -98,29 +89,29 @@ var StatusElement = function (_TextualElement) {
     return null;
   };
 
-  StatusElement.prototype.resetOverrides = function resetOverrides() {
+  _proto.resetOverrides = function resetOverrides() {
     _TextualElement.prototype.resetOverrides.call(this);
 
     this._statusFilter = null;
   };
 
   _createClass(StatusElement, [{
-    key: 'choices',
+    key: "choices",
     get: function get() {
       return this.filteredChoices;
     }
   }, {
-    key: 'isEnabled',
+    key: "isEnabled",
     get: function get() {
       return this._enabled;
     }
   }, {
-    key: 'isReadOnly',
+    key: "isReadOnly",
     get: function get() {
       return this._overrideIsDisabled != null ? this._overrideIsDisabled : this._readOnly;
     }
   }, {
-    key: 'statusFilter',
+    key: "statusFilter",
     get: function get() {
       return this._statusFilter;
     },
@@ -128,7 +119,7 @@ var StatusElement = function (_TextualElement) {
       this._statusFilter = statusFilter;
     }
   }, {
-    key: 'filteredChoices',
+    key: "filteredChoices",
     get: function get() {
       var items = this._choices;
 
@@ -175,16 +166,16 @@ var StatusElement = function (_TextualElement) {
       return filteredItems;
     }
   }, {
-    key: 'overrideValues',
+    key: "overrideValues",
     get: function get() {
-      return Object.assign(Object.getOwnPropertyDescriptor(_element2.default.prototype, 'overrideValues').get.call(this), {
+      return Object.assign(Object.getOwnPropertyDescriptor(_element["default"].prototype, 'overrideValues').get.call(this), {
         statusFilter: this._statusFilter
       });
     }
   }]);
 
   return StatusElement;
-}(_textualElement2.default);
+}(_textualElement["default"]);
 
-exports.default = StatusElement;
+exports["default"] = StatusElement;
 //# sourceMappingURL=status-element.js.map

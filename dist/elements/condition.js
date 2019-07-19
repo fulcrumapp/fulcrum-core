@@ -1,19 +1,16 @@
-'use strict';
+"use strict";
 
 exports.__esModule = true;
+exports["default"] = void 0;
 
-var _textUtils = require('../utils/text-utils');
+var _textUtils = _interopRequireDefault(require("../utils/text-utils"));
 
-var _textUtils2 = _interopRequireDefault(_textUtils);
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-var Condition = function () {
+var Condition =
+/*#__PURE__*/
+function () {
   function Condition(element, attributes) {
-    _classCallCheck(this, Condition);
-
     this.element = element;
     this.fieldKey = attributes.field_key;
     this.operator = attributes.operator;
@@ -22,8 +19,9 @@ var Condition = function () {
 
   Condition.isEqual = function isEqual(formValue, stringValue) {
     if (formValue == null) {
-      return _textUtils2.default.isEmpty(stringValue);
+      return _textUtils["default"].isEmpty(stringValue);
     }
+
     return formValue.isEqual(stringValue);
   };
 
@@ -33,29 +31,33 @@ var Condition = function () {
 
   Condition.contains = function contains(formValue, stringValue) {
     if (formValue == null) {
-      return _textUtils2.default.isEmpty(stringValue);
+      return _textUtils["default"].isEmpty(stringValue);
     }
+
     return formValue.contains(stringValue);
   };
 
   Condition.startsWith = function startsWith(formValue, stringValue) {
     if (formValue == null) {
-      return _textUtils2.default.isEmpty(stringValue);
+      return _textUtils["default"].isEmpty(stringValue);
     }
+
     return formValue.startsWith(stringValue);
   };
 
   Condition.isLessThan = function isLessThan(formValue, stringValue) {
     if (formValue == null) {
-      return _textUtils2.default.isEmpty(stringValue);
+      return _textUtils["default"].isEmpty(stringValue);
     }
+
     return formValue.isLessThan(stringValue);
   };
 
   Condition.isGreaterThan = function isGreaterThan(formValue, stringValue) {
     if (formValue == null) {
-      return _textUtils2.default.isEmpty(stringValue);
+      return _textUtils["default"].isEmpty(stringValue);
     }
+
     return formValue.isGreaterThan(stringValue);
   };
 
@@ -65,7 +67,6 @@ var Condition = function () {
     }
 
     var cache = visibilityCache || {};
-
     var shouldBeVisible = Condition.shouldElementBeVisibleRecursive(element, record, values, cache);
 
     if (element.isSectionElement) {
@@ -84,7 +85,6 @@ var Condition = function () {
         }
 
         var childElement = _ref;
-
         var visible = Condition.shouldElementBeVisibleRecursive(childElement, record, values, cache);
 
         if (visible) {
@@ -102,14 +102,13 @@ var Condition = function () {
   Condition.shouldElementBeVisibleRecursive = function shouldElementBeVisibleRecursive(element, record, values, cache) {
     if (cache != null && cache[element.key] != null) {
       return cache[element.key];
-    }
-
-    // break circular conditions by assigning an early `true` value so if this
+    } // break circular conditions by assigning an early `true` value so if this
     // method is re-entered again for the same element before the recursion
     // ends, it early exits instead of blowing the stack
-    cache[element.key] = true;
 
-    // if the override value is set, always return it (SETHIDDEN() always wins)
+
+    cache[element.key] = true; // if the override value is set, always return it (SETHIDDEN() always wins)
+
     if (element.overrideIsHidden != null) {
       cache[element.key] = !element.isHidden;
       return !element.isHidden;
@@ -140,7 +139,6 @@ var Condition = function () {
         }
 
         var condition = _ref2;
-
         var isSatisfied = condition.isSatisfied(record, values, cache);
 
         if (isSatisfied) {
@@ -171,17 +169,15 @@ var Condition = function () {
           shouldBeVisible = false;
         }
       }
-    }
-
-    // Make sure all parent elements are also visible according to these same rules.
+    } // Make sure all parent elements are also visible according to these same rules.
     // If a section is hidden because of a rule, all child elements are implicitly hidden
     // and should return NO from this method. This makes it very easy to determine value relevance
     // by looking at only the field values without having to worry about Section elements and
     // dependencies. See clearInvisibleValuesWithConditionValues for usage of this method that
     // relies on this behavior.
 
-    var parentsVisible = true;
 
+    var parentsVisible = true;
     var iterator = element.parent;
 
     while (iterator != null) {
@@ -196,9 +192,7 @@ var Condition = function () {
     }
 
     var result = parentsVisible && shouldBeVisible;
-
     cache[element.key] = result;
-
     return result;
   };
 
@@ -210,7 +204,6 @@ var Condition = function () {
     }
 
     var cache = {};
-
     var shouldBeRequired = false;
 
     if (element.requiredConditionsType === 'any') {
@@ -227,7 +220,6 @@ var Condition = function () {
         }
 
         var condition = _ref4;
-
         var isSatisfied = condition.isSatisfied(record, values, cache);
 
         if (isSatisfied) {
@@ -268,6 +260,7 @@ var Condition = function () {
     if (condition.fieldKey === '@status') {
       return record.statusValue;
     }
+
     return values.get(condition.fieldKey);
   };
 
@@ -275,19 +268,20 @@ var Condition = function () {
     if (condition.fieldKey === '@status') {
       return record.statusValue.element;
     }
+
     return record.form.elementsByKey[condition.fieldKey];
   };
 
-  Condition.prototype.isSatisfied = function isSatisfied(record, values, cache) {
-    var referencedElement = Condition.elementForCondition(this, record);
+  var _proto = Condition.prototype;
 
+  _proto.isSatisfied = function isSatisfied(record, values, cache) {
+    var referencedElement = Condition.elementForCondition(this, record);
     var isReferencedFieldSatisfied = true;
 
     if (referencedElement != null) {
       // If the referenced element or one its parents is explicitly marked as hidden, it's a special
       // case and the referenced element should always be considered satisfied so that it's possible
       // to put conditions on explicitly hidden values.
-
       var skipElement = referencedElement.isHidden || referencedElement.hasHiddenParent;
 
       if (!skipElement) {
@@ -298,10 +292,8 @@ var Condition = function () {
     return this._isSatisfied(record, values, isReferencedFieldSatisfied);
   };
 
-  Condition.prototype._isSatisfied = function _isSatisfied(record, values, isReferencedFieldSatisfied) {
-    var formValue = null;
-
-    // if all of this field's conditions aren't also satisfied, treat the value as nil (empty). This has the same
+  _proto._isSatisfied = function _isSatisfied(record, values, isReferencedFieldSatisfied) {
+    var formValue = null; // if all of this field's conditions aren't also satisfied, treat the value as nil (empty). This has the same
     // effect as 'clearing' invisible values by treating them as blank when their conditions aren't met, regardless
     // of the actual preserved value in the field. If a field is invisible, its value is always nil with respect
     // to condition logic.
@@ -345,5 +337,5 @@ var Condition = function () {
   return Condition;
 }();
 
-exports.default = Condition;
+exports["default"] = Condition;
 //# sourceMappingURL=condition.js.map
