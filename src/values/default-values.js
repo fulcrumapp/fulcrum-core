@@ -32,6 +32,7 @@ export default class DefaultValues {
     if (defaultValues == null) {
       return;
     }
+
     const elements = DefaultValues.elementsWithPreviousDefaultsEnabledWithinElements(formValues.elements, record.form);
 
     for (const element of elements) {
@@ -59,10 +60,11 @@ export default class DefaultValues {
 
     const itemValue = recordLinkValue.items[recordLinkValue.length - 1];
 
-    // TODO(zhm) reload?
-    // [itemValue.record reload];
-
     const otherRecord = itemValue.record;
+
+    if (otherRecord == null) {
+      return;
+    }
 
     for (const recordDefault of recordLinkElement.recordDefaults) {
       const otherValue = otherRecord.get(recordDefault.sourceKey, otherRecord.formValues);

@@ -78,10 +78,12 @@ function () {
 
   DefaultValues.applyDefaultValuesForRecordLinkValue = function applyDefaultValuesForRecordLinkValue(recordLinkValue, formValues, record) {
     var recordLinkElement = recordLinkValue.element;
-    var itemValue = recordLinkValue.items[recordLinkValue.length - 1]; // TODO(zhm) reload?
-    // [itemValue.record reload];
-
+    var itemValue = recordLinkValue.items[recordLinkValue.length - 1];
     var otherRecord = itemValue.record;
+
+    if (otherRecord == null) {
+      return;
+    }
 
     for (var _iterator2 = recordLinkElement.recordDefaults, _isArray2 = Array.isArray(_iterator2), _i2 = 0, _iterator2 = _isArray2 ? _iterator2 : _iterator2[Symbol.iterator]();;) {
       var _ref2;
