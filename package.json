@@ -1,6 +1,6 @@
 {
   "name": "fulcrum-core",
-  "version": "0.12.0",
+  "version": "0.12.1",
   "description": "Fulcrum Core",
   "homepage": "http://github.com/fulcrumapp/fulcrum-core",
   "main": "dist/index.js",
@@ -51,7 +51,7 @@
     "lodash.trim": "^4.5.1",
     "mixmatch": "^0.0.3",
     "relative-date": "^1.1.3",
-    "uuid": "^3.0.1"
+    "uuid": "^3.3.2"
   },
   "keywords": [
     "fulcrum"
