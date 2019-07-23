@@ -1,5 +1,6 @@
 import DateUtils from '../utils/date-utils';
 import TextUtils from '../utils/text-utils';
+import async from 'async';
 
 const NOW = 'now';
 
@@ -28,15 +29,18 @@ export default class DefaultValues {
     }
   }
 
-  static applyPreviousDefaults(defaultValues, formValues, record) {
+  static applyPreviousDefaults(dataSource, defaultValues, formValues, record, callback) {
     if (defaultValues == null) {
       return;
     }
 
     const elements = DefaultValues.elementsWithPreviousDefaultsEnabledWithinElements(formValues.elements, record.form);
 
-    for (const element of elements) {
+    async.eachSeries(elements, (element, next) => {
       const previousDefaultAsJSON = defaultValues[element.key];
+
+      // the default completion is just to continue the loop
+      let completion = next;
 
       if (previousDefaultAsJSON) {
         const fieldValue = formValues.createValue(element, previousDefaultAsJSON);
@@ -48,39 +52,53 @@ export default class DefaultValues {
           record.set(element.key, fieldValue, formValues);
 
           if (element.isRecordLinkElement) {
-            DefaultValues.applyDefaultValuesForRecordLinkValue(fieldValue, formValues, record);
+            completion = () => {
+              DefaultValues.applyDefaultValuesForRecordLinkValue(dataSource, fieldValue, formValues, record, next);
+            };
           }
         }
       }
-    }
+
+      completion();
+    }, callback);
   }
 
-  static applyDefaultValuesForRecordLinkValue(recordLinkValue, formValues, record) {
+  static applyDefaultValuesForRecordLinkValue(dataSource, recordLinkValue, formValues, record, callback) {
     const recordLinkElement = recordLinkValue.element;
 
     const itemValue = recordLinkValue.items[recordLinkValue.length - 1];
 
-    const otherRecord = itemValue.record;
+    const maybeLoadRecord = (itemValue, callback) => {
+      if (itemValue.record) {
+        callback();
+      } else {
+        itemValue.load(dataSource, callback);
+      }
+    };
 
-    if (otherRecord == null) {
-      return;
-    }
+    maybeLoadRecord(itemValue, () => {
+      const otherRecord = itemValue.record;
 
-    for (const recordDefault of recordLinkElement.recordDefaults) {
-      const otherValue = otherRecord.get(recordDefault.sourceKey, otherRecord.formValues);
+      if (otherRecord) {
+        for (const recordDefault of recordLinkElement.recordDefaults) {
+          const otherValue = otherRecord.get(recordDefault.sourceKey, otherRecord.formValues);
 
-      // TODO(zhm) verify container here
-      // FCMElement *newElement = [record.form elementByKey:recordDefault.destinationKey withinContainer:nil];
-      const newElement = record.form.elementsByKey[recordDefault.destinationKey];
+          // TODO(zhm) verify container here
+          // FCMElement *newElement = [record.form elementByKey:recordDefault.destinationKey withinContainer:nil];
+          const newElement = record.form.elementsByKey[recordDefault.destinationKey];
 
-      if (newElement) {
-        const newValue = formValues.createValueFromOtherValue(newElement, otherValue);
+          if (newElement) {
+            const newValue = formValues.createValueFromOtherValue(newElement, otherValue);
 
-        if (newValue) {
-          record.set(recordDefault.destinationKey, newValue, formValues);
+            if (newValue) {
+              record.set(recordDefault.destinationKey, newValue, formValues);
+            }
+          }
         }
       }
-    }
+
+      callback();
+    });
   }
 
   static applyDefaultValueForElement(element, formValues) {
