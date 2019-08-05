@@ -1,6 +1,6 @@
 /* eslint no-unused-expressions:0 */
 
-require('babel-core/register')();
+require('@babel/register')();
 
 var chai = require('chai');
 

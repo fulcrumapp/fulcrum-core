@@ -31,6 +31,7 @@
     "@babel/plugin-proposal-export-default-from": "^7.5.2",
     "@babel/preset-env": "^7.5.5",
     "@babel/preset-stage-1": "^7.0.0",
+    "@babel/register": "^7.5.5",
     "babel-eslint": "^10.0.2",
     "chai": "^3.5.0",
     "eslint": "^3.12.2",
