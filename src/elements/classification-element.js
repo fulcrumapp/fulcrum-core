@@ -88,7 +88,7 @@ export default class ClassificationElement extends Element {
     if (items) {
       for (const item of items) {
         for (const filter of this.classificationFilter) {
-          if (filter.toLowerCase().indexOf(item.value.toLowerCase()) !== -1) {
+          if (filter.toLowerCase() === item.value.toLowerCase()) {
             filteredItems.push(item);
           }
         }
