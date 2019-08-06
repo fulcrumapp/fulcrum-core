@@ -150,7 +150,7 @@ function (_Element) {
 
             var filter = _ref3;
 
-            if (filter.toLowerCase().indexOf(item.value.toLowerCase()) !== -1) {
+            if (filter.toLowerCase() === item.value.toLowerCase()) {
               filteredItems.push(item);
             }
           }
