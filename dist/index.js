@@ -270,5 +270,9 @@ var _trackPlayer = _interopRequireDefault(require("./media/track-player"));
 
 exports.TrackPlayer = _trackPlayer["default"];
 
+var _view = _interopRequireDefault(require("./view"));
+
+exports.View = _view["default"];
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 //# sourceMappingURL=index.js.map
