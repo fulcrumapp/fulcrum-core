@@ -5,7 +5,7 @@
   "homepage": "http://github.com/fulcrumapp/fulcrum-core",
   "main": "dist/index.js",
   "scripts": {
-    "test": "node_modules/.bin/mocha ./test/setup.js ./test/test.js ./test/track.js ./test/elements/*.js",
+    "test": "node_modules/.bin/mocha ./test/setup.js ./test/test.js ./test/track.js ./test/view.js ./test/elements/*.js",
     "simpletest": "node_modules/.bin/mocha ./test/setup.js ./test/test.js ./test/elements/*.js",
     "prepublish": "npm run clean && npm run build",
     "lint": "node_modules/.bin/eslint src/* src/**/*",

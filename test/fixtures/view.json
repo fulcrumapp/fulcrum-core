@@ -1,0 +1,152 @@
+{
+	"view": {
+		"name": "Created in the last 30 days",
+		"queries": [{
+			"form_id": "d025cda2-efff-4874-9bec-48d1ffd8a40b",
+			"filter": {
+				"type": "and",
+				"expressions": [{
+					"field": "_server_created_at",
+					"operator": "date_last_30_days",
+					"value": []
+				}]
+			},
+			"sorting": [],
+			"options": {
+				"time_zone": "America/New_York"
+			},
+			"bounding_box": null,
+			"search_filter": "",
+			"date_filter": null,
+			"columns": [{
+				"hidden": true,
+				"column": {
+					"id": "_record_id"
+				}
+			}, {
+				"hidden": false,
+				"column": {
+					"id": "_status"
+				}
+			}, {
+				"hidden": false,
+				"column": {
+					"id": "_title"
+				}
+			}, {
+				"hidden": true,
+				"column": {
+					"id": "_version"
+				}
+			}, {
+				"hidden": true,
+				"column": {
+					"id": "_server_created_at"
+				}
+			}, {
+				"hidden": false,
+				"column": {
+					"id": "_server_updated_at"
+				}
+			}, {
+				"hidden": true,
+				"column": {
+					"id": "_created_at"
+				}
+			}, {
+				"hidden": true,
+				"column": {
+					"id": "_updated_at"
+				}
+			}, {
+				"hidden": false,
+				"column": {
+					"id": "assigned_to.name"
+				}
+			}, {
+				"hidden": true,
+				"column": {
+					"id": "created_by.name"
+				}
+			}, {
+				"hidden": false,
+				"column": {
+					"id": "updated_by.name"
+				}
+			}, {
+				"hidden": true,
+				"column": {
+					"id": "_geometry"
+				}
+			}, {
+				"hidden": true,
+				"column": {
+					"id": "_latitude"
+				}
+			}, {
+				"hidden": true,
+				"column": {
+					"id": "_longitude"
+				}
+			}, {
+				"hidden": true,
+				"column": {
+					"id": "_altitude"
+				}
+			}, {
+				"hidden": true,
+				"column": {
+					"id": "_horizontal_accuracy"
+				}
+			}, {
+				"hidden": true,
+				"column": {
+					"id": "_changeset_id"
+				}
+			}, {
+				"hidden": true,
+				"column": {
+					"id": "_created_duration"
+				}
+			}, {
+				"hidden": true,
+				"column": {
+					"id": "_updated_duration"
+				}
+			}, {
+				"hidden": true,
+				"column": {
+					"id": "_edited_duration"
+				}
+			}, {
+				"hidden": false,
+				"column": {
+					"id": "15cd"
+				}
+			}, {
+				"hidden": false,
+				"column": {
+					"id": "4f64"
+				}
+			}, {
+				"hidden": false,
+				"column": {
+					"id": "1a8a"
+				}
+			}, {
+				"hidden": false,
+				"column": {
+					"id": "794a"
+				}
+			}],
+			"status_filter": null,
+			"changeset_filter": null,
+			"project_filter": null,
+			"assignment_filter": null
+		}],
+		"options": {},
+		"id": "73d51a92-707a-4dfb-8f80-502073fd7c10",
+		"created_at": "2019-10-03T01:57:59Z",
+		"updated_at": "2019-10-03T01:58:23Z"
+	}
+}

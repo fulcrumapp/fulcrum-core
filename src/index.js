@@ -65,3 +65,4 @@ export Track from './media/track';
 export TrackPoint from './media/track-point';
 export TrackSegment from './media/track-segment';
 export TrackPlayer from './media/track-player';
+export View from './view';
