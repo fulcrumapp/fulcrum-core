@@ -115,6 +115,12 @@ export default class ClassificationValue extends FormValue {
   }
 
   get displayValue() {
+    // When a classification entry has been removed but this record still has
+    // the value associated with the removed entry, just show the raw value.
+    if (this.labelStrings.length === 0) {
+      return this.valueStrings.join(DisplaySeparator);
+    }
+
     return this.labelStrings.join(DisplaySeparator);
   }
 
