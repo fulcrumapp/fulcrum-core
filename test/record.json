@@ -34,6 +34,12 @@
                 ],
                 "other_values": []
             },
+            "4413": {
+                "choice_values": [
+                    "solaris"
+                ],
+                "other_values": []
+            },
             "7b1f": "Inline name",
             "849a": "EC1532 014123",
             "8530": [

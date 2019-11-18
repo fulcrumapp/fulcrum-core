@@ -167,4 +167,10 @@ describe('classification fields', () => {
 
     value.otherValue.should.eql('2015');
   });
+
+  it('displays the value if the label is not found', () => {
+    const value = record.formValues.find('operating_system');
+
+    value.displayValue.should.eql('solaris');
+  });
 });
