@@ -3,6 +3,7 @@
     "name": "Test Form (fulcrum-core)",
     "description": null,
     "record_title_key": "ae75",
+    "projects_enabled": true,
     "title_field_keys": [
       "ae75",
       "a861",

@@ -55,7 +55,7 @@ describe('Record', () => {
 
 describe('Form', () => {
   it('parses project_enabled', () => {
-    form.isProjectEnabled.should.eql(false);
+    form.isProjectEnabled.should.eql(true);
   });
 
   it('parses assignment_enabled', () => {
