@@ -57,6 +57,7 @@ export MediaItemValue from './values/media-item-value';
 export StatusElement from './elements/status-element';
 export StatusChoice from './elements/status-choice';
 export StatusValue from './values/status-value';
+export ProjectElement from './elements/project-element';
 export User from './user';
 export Role from './role';
 export Project from './project';
