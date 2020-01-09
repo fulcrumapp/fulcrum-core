@@ -1,5 +1,6 @@
 import ChildElements from './elements/child-elements';
 import StatusElement from './elements/status-element';
+import ProjectElement from './elements/project-element';
 import DefaultValues from './values/default-values';
 import Record from './record';
 import async from 'async';
@@ -34,6 +35,7 @@ export default class Form {
     this._imageThumbnail = attributes.image_thumbnail;
 
     this._projectEnabled = attributes.projects_enabled != null ? !!attributes.projects_enabled : true;
+    this._projectField = null;
     this._assignmentEnabled = attributes.assignment_enabled != null ? !!attributes.assignment_enabled : true;
     this._autoAssign = attributes.auto_assign != null ? !!attributes.auto_assign : false;
     this._hiddenOnDashboard = attributes.hidden_on_dashboard != null ? !!attributes.hidden_on_dashboard : false;
@@ -107,6 +109,14 @@ export default class Form {
       this._statusField = new StatusElement(this, this._statusFieldJSON);
     }
     return this._statusField;
+  }
+
+  get projectField() {
+    if (!this._projectField && this._projectEnabled) {
+      this._projectField = new ProjectElement(this, {});
+    }
+
+    return this._projectField;
   }
 
   get(key) {
