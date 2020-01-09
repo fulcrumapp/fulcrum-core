@@ -7,6 +7,8 @@ var _childElements = _interopRequireDefault(require("./elements/child-elements")
 
 var _statusElement = _interopRequireDefault(require("./elements/status-element"));
 
+var _projectElement = _interopRequireDefault(require("./elements/project-element"));
+
 var _defaultValues = _interopRequireDefault(require("./values/default-values"));
 
 var _record = _interopRequireDefault(require("./record"));
@@ -52,6 +54,7 @@ function () {
     this._imageSmall = attributes.image_small;
     this._imageThumbnail = attributes.image_thumbnail;
     this._projectEnabled = attributes.projects_enabled != null ? !!attributes.projects_enabled : true;
+    this._projectField = null;
     this._assignmentEnabled = attributes.assignment_enabled != null ? !!attributes.assignment_enabled : true;
     this._autoAssign = attributes.auto_assign != null ? !!attributes.auto_assign : false;
     this._hiddenOnDashboard = attributes.hidden_on_dashboard != null ? !!attributes.hidden_on_dashboard : false;
@@ -198,6 +201,15 @@ function () {
       }
 
       return this._statusField;
+    }
+  }, {
+    key: "projectField",
+    get: function get() {
+      if (!this._projectField && this._projectEnabled) {
+        this._projectField = new _projectElement["default"](this, {});
+      }
+
+      return this._projectField;
     }
   }, {
     key: "hasHiddenParent",

@@ -134,7 +134,7 @@ function (_FormValue) {
       return null;
     }
 
-    return useDisplayValue ? this.labelStrings : this.valueStrings;
+    return useDisplayValue && this.labelStrings.length > 0 ? this.labelStrings : this.valueStrings;
   };
 
   _proto.toJSON = function toJSON() {

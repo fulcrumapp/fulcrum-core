@@ -238,6 +238,10 @@ var _statusValue = _interopRequireDefault(require("./values/status-value"));
 
 exports.StatusValue = _statusValue["default"];
 
+var _projectElement = _interopRequireDefault(require("./elements/project-element"));
+
+exports.ProjectElement = _projectElement["default"];
+
 var _user = _interopRequireDefault(require("./user"));
 
 exports.User = _user["default"];
