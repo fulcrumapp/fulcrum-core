@@ -95,6 +95,9 @@ export default class RepeatableItemValue extends Feature {
     this._createdByName = attrs.created_by || null;
     this._updatedByID = attrs.updated_by_id || null;
     this._updatedByName = attrs.updated_by || null;
+  
+    this._latitude = attrs.latitude || null;
+    this._longitude = attrs.longitude || null;
 
     const geometry = attrs.geometry;
 
