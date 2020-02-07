@@ -19,6 +19,8 @@ export default class ProjectElement extends TextualElement {
 
     this._disabled = !!attrs.disabled;
     this._hidden = !!attrs.hidden;
+
+    this._projectFilter = null;
   }
 
   get isEnabled() {
@@ -27,6 +29,14 @@ export default class ProjectElement extends TextualElement {
 
   get isReadOnly() {
     return this._overrideIsDisabled != null ? this._overrideIsDisabled : this._readOnly;
+  }
+
+  get projectFilter() {
+    return this._projectFilter;
+  }
+
+  set projectFilter(projectFilter) {
+    this._projectFilter = projectFilter;
   }
 
   projectForValue(value) {
