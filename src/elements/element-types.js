@@ -35,5 +35,7 @@ export default {
 
   RecordLinkElement: 'RecordLinkField',
 
-  StatusElement: 'StatusField'
+  StatusElement: 'StatusField',
+
+  ProjectElement: 'ProjectField'
 };

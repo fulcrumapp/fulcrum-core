@@ -332,4 +332,8 @@ export default class Element {
   get isStatusElement() {
     return this.isType(Types.StatusElement);
   }
+
+  get isProjectElement() {
+    return this.isType(Types.ProjectElement);
+  }
 }
