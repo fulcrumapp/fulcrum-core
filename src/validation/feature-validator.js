@@ -1,6 +1,7 @@
 import RepeatableItemValue from '../values/repeatable-item-value';
 import Record from '../record';
 import Condition from '../elements/condition';
+import CustomValidationError from './custom-validation-error';
 import RequiredFieldValidationError from './required-field-validation-error';
 import GeometryRequiredValidationError from './geometry-required-validation-error';
 import PatternValidationError from './pattern-validation-error';
@@ -28,8 +29,12 @@ export default class FeatureValidator {
 
     const errors = [];
 
-    if (record.isStatusFieldEnabled && record.status == null) {
-      errors.push(new RequiredFieldValidationError(record.form.statusField));
+    if (record.isStatusFieldEnabled) {
+      if (record.status == null) {
+        errors.push(new RequiredFieldValidationError(record.form.statusField));
+      } else if (record.form.statusField.statusForValue(record.status) == null) {
+        errors.push(new CustomValidationError(`${record.status} is not a valid status`));
+      }
     }
 
     if (record.form.isGeometryRequired) {
