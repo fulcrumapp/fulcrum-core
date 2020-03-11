@@ -1,6 +1,9 @@
 import fs from 'fs';
 import path from 'path';
 import {Form, Record} from '../src';
+import FeatureValidator from '../src/validation/feature-validator';
+import RequiredFieldValidationError from '../src/validation/required-field-validation-error';
+import CustomValidationError from '../src/validation/custom-validation-error';
 import DataSource from '../src/data-source';
 import MemoryDataSource from '../src/utils/memory-data-source';
 import FileDataSource from '../src/utils/file-data-source';
@@ -64,5 +67,16 @@ describe('Form', () => {
 
   it('parses auto_assign', () => {
     form.isAutoAssign.should.eql(true);
+  });
+});
+
+describe('FeatureValidator', () => {
+  it('validates the presence of a status if status is enabled', () => {
+    record.status = null;
+
+    const [ error ] = FeatureValidator.validateRecord(record, record.formValues);
+
+    error.should.be.instanceOf(RequiredFieldValidationError);
+    error.message.should.eql("The field 'Record Status' is required.");
   });
 });
