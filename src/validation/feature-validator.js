@@ -33,7 +33,7 @@ export default class FeatureValidator {
       if (record.status == null) {
         errors.push(new RequiredFieldValidationError(record.form.statusField));
       } else if (record.form.statusField.statusForValue(record.status) == null) {
-        errors.push(new CustomValidationError(`${record.status} is not a valid status`));
+        errors.push(new CustomValidationError(`${record.status} is not a valid status.`));
       }
     }
 

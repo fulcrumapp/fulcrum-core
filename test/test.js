@@ -79,4 +79,13 @@ describe('FeatureValidator', () => {
     error.should.be.instanceOf(RequiredFieldValidationError);
     error.message.should.eql("The field 'Record Status' is required.");
   });
+
+  it('validates that the status value is valid', () => {
+    record.status = 'fail';
+
+    const [ error ] = FeatureValidator.validateRecord(record, record.formValues);
+
+    error.should.be.instanceOf(CustomValidationError);
+    error.message.should.eql('fail is not a valid status.');
+  });
 });
