@@ -9,6 +9,8 @@ var _record = _interopRequireDefault(require("../record"));
 
 var _condition = _interopRequireDefault(require("../elements/condition"));
 
+var _customValidationError = _interopRequireDefault(require("./custom-validation-error"));
+
 var _requiredFieldValidationError = _interopRequireDefault(require("./required-field-validation-error"));
 
 var _geometryRequiredValidationError = _interopRequireDefault(require("./geometry-required-validation-error"));
@@ -49,8 +51,12 @@ function () {
 
     var errors = [];
 
-    if (record.isStatusFieldEnabled && record.status == null) {
-      errors.push(new _requiredFieldValidationError["default"](record.form.statusField));
+    if (record.isStatusFieldEnabled) {
+      if (record.status == null) {
+        errors.push(new _requiredFieldValidationError["default"](record.form.statusField));
+      } else if (record.form.statusField.statusForValue(record.status) == null) {
+        errors.push(new _customValidationError["default"](record.status + " is not a valid status."));
+      }
     }
 
     if (record.form.isGeometryRequired) {
