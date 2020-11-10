@@ -56,7 +56,7 @@ export default class Condition {
 
     let shouldBeVisible = Condition.shouldElementBeVisibleRecursive(element, record, values, cache);
 
-    if (element.isSectionElement) {
+    if (element.isSectionElement || element.isRepeatableElement) {
       let hasVisibleChildren = false;
 
       for (const childElement of element.elements) {
