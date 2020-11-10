@@ -60,7 +60,7 @@ export default class FormValues {
   }
 
   loadValue(element, attributes) {
-    if (element.isSectionElement) {
+    if (element.isSectionElement || element.isRepeatableElement) {
       this.loadValues(element.elements, attributes);
     } else {
       const rawValue = attributes[element.key];
