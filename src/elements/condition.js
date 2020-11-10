@@ -137,6 +137,7 @@ export default class Condition {
       const parentVisible = Condition.shouldElementBeVisibleRecursive(iterator, record, values, cache);
 
       if (!parentVisible) {
+        console.log('parentNotVisible: ', iterator.label);
         parentsVisible = false;
         break;
       }
