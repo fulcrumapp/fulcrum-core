@@ -57,7 +57,9 @@ var Constructors = {
   RecordLinkField: _recordLinkValue["default"]
 };
 
-var FormValueFactory = /*#__PURE__*/function () {
+var FormValueFactory =
+/*#__PURE__*/
+function () {
   function FormValueFactory() {}
 
   FormValueFactory.create = function create(element, attributes) {

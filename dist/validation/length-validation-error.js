@@ -20,7 +20,9 @@ var AT_MOST = 'at-most';
 var BETWEEN = 'between';
 var EXACTLY = 'exactly';
 
-var LengthValidationError = /*#__PURE__*/function (_ElementValidationErr) {
+var LengthValidationError =
+/*#__PURE__*/
+function (_ElementValidationErr) {
   _inheritsLoose(LengthValidationError, _ElementValidationErr);
 
   function LengthValidationError(element) {

@@ -13,7 +13,9 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 function _inheritsLoose(subClass, superClass) { subClass.prototype = Object.create(superClass.prototype); subClass.prototype.constructor = subClass; subClass.__proto__ = superClass; }
 
-var RepeatableElement = /*#__PURE__*/function (_ContainerElement) {
+var RepeatableElement =
+/*#__PURE__*/
+function (_ContainerElement) {
   _inheritsLoose(RepeatableElement, _ContainerElement);
 
   function RepeatableElement(parent, attributes) {

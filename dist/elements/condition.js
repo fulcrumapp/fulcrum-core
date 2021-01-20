@@ -7,13 +7,9 @@ var _textUtils = _interopRequireDefault(require("../utils/text-utils"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
-function _createForOfIteratorHelperLoose(o, allowArrayLike) { var it; if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; return function () { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } it = o[Symbol.iterator](); return it.next.bind(it); }
-
-function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
-
-function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
-
-var Condition = /*#__PURE__*/function () {
+var Condition =
+/*#__PURE__*/
+function () {
   function Condition(element, attributes) {
     this.element = element;
     this.fieldKey = attributes.field_key;
@@ -76,8 +72,19 @@ var Condition = /*#__PURE__*/function () {
     if (element.isSectionElement) {
       var hasVisibleChildren = false;
 
-      for (var _iterator = _createForOfIteratorHelperLoose(element.elements), _step; !(_step = _iterator()).done;) {
-        var childElement = _step.value;
+      for (var _iterator = element.elements, _isArray = Array.isArray(_iterator), _i = 0, _iterator = _isArray ? _iterator : _iterator[Symbol.iterator]();;) {
+        var _ref;
+
+        if (_isArray) {
+          if (_i >= _iterator.length) break;
+          _ref = _iterator[_i++];
+        } else {
+          _i = _iterator.next();
+          if (_i.done) break;
+          _ref = _i.value;
+        }
+
+        var childElement = _ref;
         var visible = Condition.shouldElementBeVisibleRecursive(childElement, record, values, cache);
 
         if (visible) {
@@ -119,8 +126,19 @@ var Condition = /*#__PURE__*/function () {
     }
 
     if (element.visibleConditionsType === 'any') {
-      for (var _iterator2 = _createForOfIteratorHelperLoose(element.visibleConditions), _step2; !(_step2 = _iterator2()).done;) {
-        var condition = _step2.value;
+      for (var _iterator2 = element.visibleConditions, _isArray2 = Array.isArray(_iterator2), _i2 = 0, _iterator2 = _isArray2 ? _iterator2 : _iterator2[Symbol.iterator]();;) {
+        var _ref2;
+
+        if (_isArray2) {
+          if (_i2 >= _iterator2.length) break;
+          _ref2 = _iterator2[_i2++];
+        } else {
+          _i2 = _iterator2.next();
+          if (_i2.done) break;
+          _ref2 = _i2.value;
+        }
+
+        var condition = _ref2;
         var isSatisfied = condition.isSatisfied(record, values, cache);
 
         if (isSatisfied) {
@@ -131,8 +149,19 @@ var Condition = /*#__PURE__*/function () {
     } else if (element.visibleConditionsType === 'all') {
       shouldBeVisible = true;
 
-      for (var _iterator3 = _createForOfIteratorHelperLoose(element.visibleConditions), _step3; !(_step3 = _iterator3()).done;) {
-        var _condition = _step3.value;
+      for (var _iterator3 = element.visibleConditions, _isArray3 = Array.isArray(_iterator3), _i3 = 0, _iterator3 = _isArray3 ? _iterator3 : _iterator3[Symbol.iterator]();;) {
+        var _ref3;
+
+        if (_isArray3) {
+          if (_i3 >= _iterator3.length) break;
+          _ref3 = _iterator3[_i3++];
+        } else {
+          _i3 = _iterator3.next();
+          if (_i3.done) break;
+          _ref3 = _i3.value;
+        }
+
+        var _condition = _ref3;
 
         var _isSatisfied2 = _condition.isSatisfied(record, values, cache);
 
@@ -178,8 +207,19 @@ var Condition = /*#__PURE__*/function () {
     var shouldBeRequired = false;
 
     if (element.requiredConditionsType === 'any') {
-      for (var _iterator4 = _createForOfIteratorHelperLoose(element.requiredConditions), _step4; !(_step4 = _iterator4()).done;) {
-        var condition = _step4.value;
+      for (var _iterator4 = element.requiredConditions, _isArray4 = Array.isArray(_iterator4), _i4 = 0, _iterator4 = _isArray4 ? _iterator4 : _iterator4[Symbol.iterator]();;) {
+        var _ref4;
+
+        if (_isArray4) {
+          if (_i4 >= _iterator4.length) break;
+          _ref4 = _iterator4[_i4++];
+        } else {
+          _i4 = _iterator4.next();
+          if (_i4.done) break;
+          _ref4 = _i4.value;
+        }
+
+        var condition = _ref4;
         var isSatisfied = condition.isSatisfied(record, values, cache);
 
         if (isSatisfied) {
@@ -190,8 +230,19 @@ var Condition = /*#__PURE__*/function () {
     } else if (element.requiredConditionsType === 'all') {
       shouldBeRequired = true;
 
-      for (var _iterator5 = _createForOfIteratorHelperLoose(element.requiredConditions), _step5; !(_step5 = _iterator5()).done;) {
-        var _condition2 = _step5.value;
+      for (var _iterator5 = element.requiredConditions, _isArray5 = Array.isArray(_iterator5), _i5 = 0, _iterator5 = _isArray5 ? _iterator5 : _iterator5[Symbol.iterator]();;) {
+        var _ref5;
+
+        if (_isArray5) {
+          if (_i5 >= _iterator5.length) break;
+          _ref5 = _iterator5[_i5++];
+        } else {
+          _i5 = _iterator5.next();
+          if (_i5.done) break;
+          _ref5 = _i5.value;
+        }
+
+        var _condition2 = _ref5;
 
         var _isSatisfied3 = _condition2.isSatisfied(record, values, cache);
 

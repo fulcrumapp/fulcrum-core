@@ -13,7 +13,9 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 function _inheritsLoose(subClass, superClass) { subClass.prototype = Object.create(superClass.prototype); subClass.prototype.constructor = subClass; subClass.__proto__ = superClass; }
 
-var StatusValue = /*#__PURE__*/function (_TextualValue) {
+var StatusValue =
+/*#__PURE__*/
+function (_TextualValue) {
   _inheritsLoose(StatusValue, _TextualValue);
 
   function StatusValue() {

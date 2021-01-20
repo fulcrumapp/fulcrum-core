@@ -19,7 +19,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 // [7]: Speed
 // [8]: Viewport Bearing (Optional)
 // [9]: Viewport Inclination (Optional)
-var TrackPoint = /*#__PURE__*/function () {
+var TrackPoint =
+/*#__PURE__*/
+function () {
   function TrackPoint(values) {
     this._values = values;
   }

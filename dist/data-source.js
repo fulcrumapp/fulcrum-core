@@ -19,7 +19,9 @@ function noop() {
   params[params.length - 1]();
 }
 
-var DataSource = /*#__PURE__*/function () {
+var DataSource =
+/*#__PURE__*/
+function () {
   function DataSource() {
     this.sources = [];
   }

@@ -15,7 +15,9 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 function _inheritsLoose(subClass, superClass) { subClass.prototype = Object.create(superClass.prototype); subClass.prototype.constructor = subClass; subClass.__proto__ = superClass; }
 
-var TimeFormatValidationError = /*#__PURE__*/function (_ElementValidationErr) {
+var TimeFormatValidationError =
+/*#__PURE__*/
+function (_ElementValidationErr) {
   _inheritsLoose(TimeFormatValidationError, _ElementValidationErr);
 
   function TimeFormatValidationError() {

@@ -13,7 +13,9 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 function _inheritsLoose(subClass, superClass) { subClass.prototype = Object.create(superClass.prototype); subClass.prototype.constructor = subClass; subClass.__proto__ = superClass; }
 
-var TextElement = /*#__PURE__*/function (_TextualElement) {
+var TextElement =
+/*#__PURE__*/
+function (_TextualElement) {
   _inheritsLoose(TextElement, _TextualElement);
 
   function TextElement(parent, attributes) {

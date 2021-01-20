@@ -17,7 +17,9 @@ if (typeof Intl !== 'undefined') {
   intl = global.Intl;
 }
 
-var DateUtils = /*#__PURE__*/function () {
+var DateUtils =
+/*#__PURE__*/
+function () {
   function DateUtils() {}
 
   DateUtils.parseDate = function parseDate(dateString) {

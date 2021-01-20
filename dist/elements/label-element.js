@@ -9,7 +9,9 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "d
 
 function _inheritsLoose(subClass, superClass) { subClass.prototype = Object.create(superClass.prototype); subClass.prototype.constructor = subClass; subClass.__proto__ = superClass; }
 
-var LabelElement = /*#__PURE__*/function (_Element) {
+var LabelElement =
+/*#__PURE__*/
+function (_Element) {
   _inheritsLoose(LabelElement, _Element);
 
   function LabelElement() {

@@ -17,7 +17,9 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 function _inheritsLoose(subClass, superClass) { subClass.prototype = Object.create(superClass.prototype); subClass.prototype.constructor = subClass; subClass.__proto__ = superClass; }
 
-var SignatureValue = /*#__PURE__*/function (_FormValue) {
+var SignatureValue =
+/*#__PURE__*/
+function (_FormValue) {
   _inheritsLoose(SignatureValue, _FormValue);
 
   function SignatureValue(element, attributes) {

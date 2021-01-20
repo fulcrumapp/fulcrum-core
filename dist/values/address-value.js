@@ -15,7 +15,9 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 function _inheritsLoose(subClass, superClass) { subClass.prototype = Object.create(superClass.prototype); subClass.prototype.constructor = subClass; subClass.__proto__ = superClass; }
 
-var AddressValue = /*#__PURE__*/function (_FormValue) {
+var AddressValue =
+/*#__PURE__*/
+function (_FormValue) {
   _inheritsLoose(AddressValue, _FormValue);
 
   function AddressValue(element, attributes) {

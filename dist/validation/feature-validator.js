@@ -29,13 +29,9 @@ var _timeFormatValidationError = _interopRequireDefault(require("./time-format-v
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
-function _createForOfIteratorHelperLoose(o, allowArrayLike) { var it; if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; return function () { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } it = o[Symbol.iterator](); return it.next.bind(it); }
-
-function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
-
-function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
-
-var FeatureValidator = /*#__PURE__*/function () {
+var FeatureValidator =
+/*#__PURE__*/
+function () {
   function FeatureValidator() {}
 
   FeatureValidator.validateFeature = function validateFeature(feature, record, formValues) {
@@ -95,8 +91,19 @@ var FeatureValidator = /*#__PURE__*/function () {
   FeatureValidator.validateFieldsInElements = function validateFieldsInElements(elements, record, formValues, errors, visibilityCache) {
     var cache = visibilityCache || {};
 
-    for (var _iterator = _createForOfIteratorHelperLoose(elements), _step; !(_step = _iterator()).done;) {
-      var element = _step.value;
+    for (var _iterator = elements, _isArray = Array.isArray(_iterator), _i = 0, _iterator = _isArray ? _iterator : _iterator[Symbol.iterator]();;) {
+      var _ref;
+
+      if (_isArray) {
+        if (_i >= _iterator.length) break;
+        _ref = _iterator[_i++];
+      } else {
+        _i = _iterator.next();
+        if (_i.done) break;
+        _ref = _i.value;
+      }
+
+      var element = _ref;
 
       if (element.isSectionElement) {
         var visible = _condition["default"].shouldElementBeVisible(element, record, formValues, cache);
@@ -171,8 +178,19 @@ var FeatureValidator = /*#__PURE__*/function () {
           var repeatableValue = formValues.get(element.key);
 
           if (repeatableValue) {
-            for (var _iterator2 = _createForOfIteratorHelperLoose(repeatableValue.items), _step2; !(_step2 = _iterator2()).done;) {
-              var item = _step2.value;
+            for (var _iterator2 = repeatableValue.items, _isArray2 = Array.isArray(_iterator2), _i2 = 0, _iterator2 = _isArray2 ? _iterator2 : _iterator2[Symbol.iterator]();;) {
+              var _ref2;
+
+              if (_isArray2) {
+                if (_i2 >= _iterator2.length) break;
+                _ref2 = _iterator2[_i2++];
+              } else {
+                _i2 = _iterator2.next();
+                if (_i2.done) break;
+                _ref2 = _i2.value;
+              }
+
+              var item = _ref2;
               var itemValues = item.formValues.copy();
               itemValues.merge(formValues);
               FeatureValidator.validateFieldsInElements(item.element.elements, record, itemValues, errors, null);
@@ -276,8 +294,19 @@ var FeatureValidator = /*#__PURE__*/function () {
   FeatureValidator.formatErrors = function formatErrors(errors) {
     var messages = [];
 
-    for (var _iterator3 = _createForOfIteratorHelperLoose(errors), _step3; !(_step3 = _iterator3()).done;) {
-      var error = _step3.value;
+    for (var _iterator3 = errors, _isArray3 = Array.isArray(_iterator3), _i3 = 0, _iterator3 = _isArray3 ? _iterator3 : _iterator3[Symbol.iterator]();;) {
+      var _ref3;
+
+      if (_isArray3) {
+        if (_i3 >= _iterator3.length) break;
+        _ref3 = _iterator3[_i3++];
+      } else {
+        _i3 = _iterator3.next();
+        if (_i3.done) break;
+        _ref3 = _i3.value;
+      }
+
+      var error = _ref3;
       messages.push(error.message);
     }
 
