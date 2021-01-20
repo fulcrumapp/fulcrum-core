@@ -17,9 +17,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 function _inheritsLoose(subClass, superClass) { subClass.prototype = Object.create(superClass.prototype); subClass.prototype.constructor = subClass; subClass.__proto__ = superClass; }
 
-var TimeValue =
-/*#__PURE__*/
-function (_TextualValue) {
+var TimeValue = /*#__PURE__*/function (_TextualValue) {
   _inheritsLoose(TimeValue, _TextualValue);
 
   function TimeValue() {

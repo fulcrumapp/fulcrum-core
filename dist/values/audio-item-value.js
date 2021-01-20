@@ -13,9 +13,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 function _inheritsLoose(subClass, superClass) { subClass.prototype = Object.create(superClass.prototype); subClass.prototype.constructor = subClass; subClass.__proto__ = superClass; }
 
-var AudioItemValue =
-/*#__PURE__*/
-function (_MediaItemValue) {
+var AudioItemValue = /*#__PURE__*/function (_MediaItemValue) {
   _inheritsLoose(AudioItemValue, _MediaItemValue);
 
   function AudioItemValue() {

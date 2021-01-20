@@ -17,9 +17,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 function _inheritsLoose(subClass, superClass) { subClass.prototype = Object.create(superClass.prototype); subClass.prototype.constructor = subClass; subClass.__proto__ = superClass; }
 
-var SignatureValue =
-/*#__PURE__*/
-function (_FormValue) {
+var SignatureValue = /*#__PURE__*/function (_FormValue) {
   _inheritsLoose(SignatureValue, _FormValue);
 
   function SignatureValue(element, attributes) {
@@ -47,7 +45,8 @@ function (_FormValue) {
         part = _ref$part === void 0 ? null : _ref$part,
         formatSignatureURL = _ref.formatSignatureURL,
         formatSignatureViewerURL = _ref.formatSignatureViewerURL,
-        args = _objectWithoutPropertiesLoose(_ref, ["part", "formatSignatureURL", "formatSignatureViewerURL"]);
+        formatSignatureName = _ref.formatSignatureName,
+        args = _objectWithoutPropertiesLoose(_ref, ["part", "formatSignatureURL", "formatSignatureViewerURL", "formatSignatureName"]);
 
     if (this.isEmpty) {
       return null;
@@ -59,6 +58,8 @@ function (_FormValue) {
       return formatSignatureViewerURL(this, args);
     } else if (part === 'url' && formatSignatureURL) {
       return formatSignatureURL(this, args);
+    } else if (part === 'name' && formatSignatureName) {
+      return formatSignatureName(this, args);
     }
 
     return this.id;

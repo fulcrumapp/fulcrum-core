@@ -9,9 +9,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "d
 
 function _inheritsLoose(subClass, superClass) { subClass.prototype = Object.create(superClass.prototype); subClass.prototype.constructor = subClass; subClass.__proto__ = superClass; }
 
-var BarcodeValue =
-/*#__PURE__*/
-function (_TextualValue) {
+var BarcodeValue = /*#__PURE__*/function (_TextualValue) {
   _inheritsLoose(BarcodeValue, _TextualValue);
 
   function BarcodeValue() {

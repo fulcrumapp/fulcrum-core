@@ -11,9 +11,7 @@ var _lodash3 = _interopRequireDefault(require("lodash.trim"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
-var TextUtils =
-/*#__PURE__*/
-function () {
+var TextUtils = /*#__PURE__*/function () {
   function TextUtils() {}
 
   TextUtils.isEmpty = function isEmpty(value) {

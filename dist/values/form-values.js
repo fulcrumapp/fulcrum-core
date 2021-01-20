@@ -23,15 +23,19 @@ var _recordLinkValue = _interopRequireDefault(require("./record-link-value"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
+function _createForOfIteratorHelperLoose(o, allowArrayLike) { var it; if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; return function () { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } it = o[Symbol.iterator](); return it.next.bind(it); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
 
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
 var SearchValueSeparator = ' ';
 
-var FormValues =
-/*#__PURE__*/
-function () {
+var FormValues = /*#__PURE__*/function () {
   function FormValues(container, attributes) {
     this._values = {};
     this.container = container;
@@ -67,19 +71,8 @@ function () {
   };
 
   _proto.loadValues = function loadValues(elements, attributes) {
-    for (var _iterator = elements, _isArray = Array.isArray(_iterator), _i = 0, _iterator = _isArray ? _iterator : _iterator[Symbol.iterator]();;) {
-      var _ref;
-
-      if (_isArray) {
-        if (_i >= _iterator.length) break;
-        _ref = _iterator[_i++];
-      } else {
-        _i = _iterator.next();
-        if (_i.done) break;
-        _ref = _i.value;
-      }
-
-      var element = _ref;
+    for (var _iterator = _createForOfIteratorHelperLoose(elements), _step; !(_step = _iterator()).done;) {
+      var element = _step.value;
       this.loadValue(element, attributes);
     }
   };
@@ -101,8 +94,8 @@ function () {
   _proto.toJSON = function toJSON() {
     var json = {};
 
-    for (var _i2 = 0, _Object$keys = Object.keys(this._values); _i2 < _Object$keys.length; _i2++) {
-      var key = _Object$keys[_i2];
+    for (var _i = 0, _Object$keys = Object.keys(this._values); _i < _Object$keys.length; _i++) {
+      var key = _Object$keys[_i];
       var formValue = this._values[key];
 
       if (formValue) {
@@ -120,8 +113,8 @@ function () {
   _proto.toSimpleJSON = function toSimpleJSON() {
     var json = {};
 
-    for (var _i3 = 0, _Object$keys2 = Object.keys(this._values); _i3 < _Object$keys2.length; _i3++) {
-      var key = _Object$keys2[_i3];
+    for (var _i2 = 0, _Object$keys2 = Object.keys(this._values); _i2 < _Object$keys2.length; _i2++) {
+      var key = _Object$keys2[_i2];
       var formValue = this._values[key];
 
       if (formValue) {
@@ -145,8 +138,8 @@ function () {
       throw new Error('Invalid values');
     }
 
-    for (var _i4 = 0, _Object$keys3 = Object.keys(formValues._values); _i4 < _Object$keys3.length; _i4++) {
-      var key = _Object$keys3[_i4];
+    for (var _i3 = 0, _Object$keys3 = Object.keys(formValues._values); _i3 < _Object$keys3.length; _i3++) {
+      var key = _Object$keys3[_i3];
       var formValue = formValues._values[key];
       this.set(key, formValue);
     }
@@ -244,39 +237,28 @@ function () {
     var elementsToRemove = [];
     var cache = {};
 
-    for (var _iterator2 = this.all, _isArray2 = Array.isArray(_iterator2), _i5 = 0, _iterator2 = _isArray2 ? _iterator2 : _iterator2[Symbol.iterator]();;) {
-      var _ref2;
-
-      if (_isArray2) {
-        if (_i5 >= _iterator2.length) break;
-        _ref2 = _iterator2[_i5++];
-      } else {
-        _i5 = _iterator2.next();
-        if (_i5.done) break;
-        _ref2 = _i5.value;
-      }
-
-      var formValue = _ref2;
-      var element = formValue.element; // don't clear out fields that are:
+    for (var _iterator2 = _createForOfIteratorHelperLoose(this.all), _step2; !(_step2 = _iterator2()).done;) {
+      var formValue = _step2.value;
+      var _element = formValue.element; // don't clear out fields that are:
       //   * are explicitly marked hidden
       //   * or have any parents explicitly marked as hidden
       //   * or have any parents explicitly marked to preserve values
 
-      var skipElement = element.isHidden || element.hasHiddenParent || element.isPreserved;
+      var skipElement = _element.isHidden || _element.hasHiddenParent || _element.isPreserved;
 
       if (!skipElement) {
-        var shouldBeVisible = _condition["default"].shouldElementBeVisible(element, record, valuesForConditions, cache);
+        var shouldBeVisible = _condition["default"].shouldElementBeVisible(_element, record, valuesForConditions, cache);
 
         if (!shouldBeVisible) {
-          elementsToRemove.push(element);
+          elementsToRemove.push(_element);
         }
       }
     }
 
-    for (var _i6 = 0, _elementsToRemove = elementsToRemove; _i6 < _elementsToRemove.length; _i6++) {
-      var _element = _elementsToRemove[_i6];
-      var blankValue = this.createValue(_element, null);
-      this.set(_element.key, blankValue);
+    for (var _i4 = 0, _elementsToRemove = elementsToRemove; _i4 < _elementsToRemove.length; _i4++) {
+      var element = _elementsToRemove[_i4];
+      var blankValue = this.createValue(element, null);
+      this.set(element.key, blankValue);
     }
   };
 
@@ -285,8 +267,8 @@ function () {
     get: function get() {
       var result = [];
 
-      for (var _i7 = 0, _Object$keys4 = Object.keys(this._values); _i7 < _Object$keys4.length; _i7++) {
-        var key = _Object$keys4[_i7];
+      for (var _i5 = 0, _Object$keys4 = Object.keys(this._values); _i5 < _Object$keys4.length; _i5++) {
+        var key = _Object$keys4[_i5];
         result.push(this._values[key]);
       }
 
@@ -302,8 +284,8 @@ function () {
     get: function get() {
       var searchValues = [];
 
-      for (var _i8 = 0, _Object$keys5 = Object.keys(this._values); _i8 < _Object$keys5.length; _i8++) {
-        var key = _Object$keys5[_i8];
+      for (var _i6 = 0, _Object$keys5 = Object.keys(this._values); _i6 < _Object$keys5.length; _i6++) {
+        var key = _Object$keys5[_i6];
         var formValue = this._values[key];
 
         if (formValue) {
@@ -322,38 +304,16 @@ function () {
     get: function get() {
       var values = [];
 
-      for (var _iterator3 = this.all, _isArray3 = Array.isArray(_iterator3), _i9 = 0, _iterator3 = _isArray3 ? _iterator3 : _iterator3[Symbol.iterator]();;) {
-        var _ref3;
-
-        if (_isArray3) {
-          if (_i9 >= _iterator3.length) break;
-          _ref3 = _iterator3[_i9++];
-        } else {
-          _i9 = _iterator3.next();
-          if (_i9.done) break;
-          _ref3 = _i9.value;
-        }
-
-        var formValue = _ref3;
+      for (var _iterator3 = _createForOfIteratorHelperLoose(this.all), _step3; !(_step3 = _iterator3()).done;) {
+        var formValue = _step3.value;
 
         if (formValue instanceof _mediaValue["default"]) {
           values.push.apply(values, formValue.items);
         } else if (formValue instanceof _signatureValue["default"]) {
           values.push(formValue);
         } else if (formValue instanceof _repeatableValue["default"]) {
-          for (var _iterator4 = formValue.items, _isArray4 = Array.isArray(_iterator4), _i10 = 0, _iterator4 = _isArray4 ? _iterator4 : _iterator4[Symbol.iterator]();;) {
-            var _ref4;
-
-            if (_isArray4) {
-              if (_i10 >= _iterator4.length) break;
-              _ref4 = _iterator4[_i10++];
-            } else {
-              _i10 = _iterator4.next();
-              if (_i10.done) break;
-              _ref4 = _i10.value;
-            }
-
-            var item = _ref4;
+          for (var _iterator4 = _createForOfIteratorHelperLoose(formValue.items), _step4; !(_step4 = _iterator4()).done;) {
+            var item = _step4.value;
             values.push.apply(values, item.formValues.mediaValues);
           }
         }
@@ -366,36 +326,14 @@ function () {
     get: function get() {
       var items = [];
 
-      for (var _iterator5 = this.all, _isArray5 = Array.isArray(_iterator5), _i11 = 0, _iterator5 = _isArray5 ? _iterator5 : _iterator5[Symbol.iterator]();;) {
-        var _ref5;
-
-        if (_isArray5) {
-          if (_i11 >= _iterator5.length) break;
-          _ref5 = _iterator5[_i11++];
-        } else {
-          _i11 = _iterator5.next();
-          if (_i11.done) break;
-          _ref5 = _i11.value;
-        }
-
-        var formValue = _ref5;
+      for (var _iterator5 = _createForOfIteratorHelperLoose(this.all), _step5; !(_step5 = _iterator5()).done;) {
+        var formValue = _step5.value;
 
         if (formValue instanceof _repeatableValue["default"]) {
           items.push.apply(items, formValue.items);
 
-          for (var _iterator6 = formValue.items, _isArray6 = Array.isArray(_iterator6), _i12 = 0, _iterator6 = _isArray6 ? _iterator6 : _iterator6[Symbol.iterator]();;) {
-            var _ref6;
-
-            if (_isArray6) {
-              if (_i12 >= _iterator6.length) break;
-              _ref6 = _iterator6[_i12++];
-            } else {
-              _i12 = _iterator6.next();
-              if (_i12.done) break;
-              _ref6 = _i12.value;
-            }
-
-            var item = _ref6;
+          for (var _iterator6 = _createForOfIteratorHelperLoose(formValue.items), _step6; !(_step6 = _iterator6()).done;) {
+            var item = _step6.value;
             items.push.apply(items, item.formValues.repeatableItems);
           }
         }
@@ -408,36 +346,14 @@ function () {
     get: function get() {
       var items = [];
 
-      for (var _iterator7 = this.all, _isArray7 = Array.isArray(_iterator7), _i13 = 0, _iterator7 = _isArray7 ? _iterator7 : _iterator7[Symbol.iterator]();;) {
-        var _ref7;
-
-        if (_isArray7) {
-          if (_i13 >= _iterator7.length) break;
-          _ref7 = _iterator7[_i13++];
-        } else {
-          _i13 = _iterator7.next();
-          if (_i13.done) break;
-          _ref7 = _i13.value;
-        }
-
-        var formValue = _ref7;
+      for (var _iterator7 = _createForOfIteratorHelperLoose(this.all), _step7; !(_step7 = _iterator7()).done;) {
+        var formValue = _step7.value;
 
         if (formValue instanceof _recordLinkValue["default"]) {
           items.push.apply(items, formValue.items);
         } else if (formValue instanceof _repeatableValue["default"]) {
-          for (var _iterator8 = formValue.items, _isArray8 = Array.isArray(_iterator8), _i14 = 0, _iterator8 = _isArray8 ? _iterator8 : _iterator8[Symbol.iterator]();;) {
-            var _ref8;
-
-            if (_isArray8) {
-              if (_i14 >= _iterator8.length) break;
-              _ref8 = _iterator8[_i14++];
-            } else {
-              _i14 = _iterator8.next();
-              if (_i14.done) break;
-              _ref8 = _i14.value;
-            }
-
-            var item = _ref8;
+          for (var _iterator8 = _createForOfIteratorHelperLoose(formValue.items), _step8; !(_step8 = _iterator8()).done;) {
+            var item = _step8.value;
             items.push.apply(items, item.formValues.recordLinkItems);
           }
         }

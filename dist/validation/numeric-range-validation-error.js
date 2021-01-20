@@ -15,9 +15,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 function _inheritsLoose(subClass, superClass) { subClass.prototype = Object.create(superClass.prototype); subClass.prototype.constructor = subClass; subClass.__proto__ = superClass; }
 
-var NumericRangeValidationError =
-/*#__PURE__*/
-function (_ElementValidationErr) {
+var NumericRangeValidationError = /*#__PURE__*/function (_ElementValidationErr) {
   _inheritsLoose(NumericRangeValidationError, _ElementValidationErr);
 
   function NumericRangeValidationError() {

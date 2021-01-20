@@ -66,9 +66,7 @@ var Constructors = {
 };
 var initialized = false;
 
-var ElementFactory =
-/*#__PURE__*/
-function () {
+var ElementFactory = /*#__PURE__*/function () {
   function ElementFactory() {}
 
   ElementFactory.create = function create(parent, attributes) {

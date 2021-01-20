@@ -11,9 +11,7 @@ var notImplemented = function notImplemented() {
   throw new Error('Not implemented');
 };
 
-var Feature =
-/*#__PURE__*/
-function () {
+var Feature = /*#__PURE__*/function () {
   function Feature() {}
 
   var _proto = Feature.prototype;

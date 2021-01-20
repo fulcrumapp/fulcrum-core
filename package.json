@@ -1,12 +1,12 @@
 {
   "name": "fulcrum-core",
-  "version": "0.12.6",
+  "version": "0.12.8",
   "description": "Fulcrum Core",
   "homepage": "http://github.com/fulcrumapp/fulcrum-core",
   "main": "dist/index.js",
   "scripts": {
-    "test": "node_modules/.bin/mocha ./test/setup.js ./test/test.js ./test/track.js ./test/elements/*.js",
-    "simpletest": "node_modules/.bin/mocha ./test/setup.js ./test/test.js ./test/elements/*.js",
+    "test": "node_modules/.bin/mocha ./test/setup.js ./test/test.js ./test/track.js ./test/elements/*.js ./test/values/*.js",
+    "simpletest": "node_modules/.bin/mocha ./test/setup.js ./test/test.js ./test/elements/*.js ./test/values/*.js",
     "prepublish": "npm run clean && npm run build",
     "lint": "node_modules/.bin/eslint src/* src/**/*",
     "build": "node_modules/.bin/babel src --out-dir dist --source-maps",

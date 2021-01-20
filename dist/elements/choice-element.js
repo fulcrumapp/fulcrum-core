@@ -9,15 +9,19 @@ var _choice = _interopRequireDefault(require("./choice"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
+function _createForOfIteratorHelperLoose(o, allowArrayLike) { var it; if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; return function () { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } it = o[Symbol.iterator](); return it.next.bind(it); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
 
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
 function _inheritsLoose(subClass, superClass) { subClass.prototype = Object.create(superClass.prototype); subClass.prototype.constructor = subClass; subClass.__proto__ = superClass; }
 
-var ChoiceElement =
-/*#__PURE__*/
-function (_Element) {
+var ChoiceElement = /*#__PURE__*/function (_Element) {
   _inheritsLoose(ChoiceElement, _Element);
 
   function ChoiceElement(parent, attributes) {
@@ -32,19 +36,8 @@ function (_Element) {
     _this._choices = []; // TODO(zhm) the loading needs to be re-worked to support choice lists
 
     if (attributes.choices) {
-      for (var _iterator = attributes.choices, _isArray = Array.isArray(_iterator), _i = 0, _iterator = _isArray ? _iterator : _iterator[Symbol.iterator]();;) {
-        var _ref;
-
-        if (_isArray) {
-          if (_i >= _iterator.length) break;
-          _ref = _iterator[_i++];
-        } else {
-          _i = _iterator.next();
-          if (_i.done) break;
-          _ref = _i.value;
-        }
-
-        var choice = _ref;
+      for (var _iterator = _createForOfIteratorHelperLoose(attributes.choices), _step; !(_step = _iterator()).done;) {
+        var choice = _step.value;
 
         _this._choices.push(new _choice["default"](choice));
       }
@@ -89,19 +82,8 @@ function (_Element) {
     if (!this._choicesByValue) {
       this._choicesByValue = {};
 
-      for (var _iterator2 = this.choices, _isArray2 = Array.isArray(_iterator2), _i2 = 0, _iterator2 = _isArray2 ? _iterator2 : _iterator2[Symbol.iterator]();;) {
-        var _ref2;
-
-        if (_isArray2) {
-          if (_i2 >= _iterator2.length) break;
-          _ref2 = _iterator2[_i2++];
-        } else {
-          _i2 = _iterator2.next();
-          if (_i2.done) break;
-          _ref2 = _i2.value;
-        }
-
-        var choice = _ref2;
+      for (var _iterator2 = _createForOfIteratorHelperLoose(this.choices), _step2; !(_step2 = _iterator2()).done;) {
+        var choice = _step2.value;
         this._choicesByValue[choice.value] = choice;
       }
     }
@@ -139,33 +121,11 @@ function (_Element) {
       var filteredItems = [];
       var matchedValues = {};
 
-      for (var _iterator3 = items, _isArray3 = Array.isArray(_iterator3), _i3 = 0, _iterator3 = _isArray3 ? _iterator3 : _iterator3[Symbol.iterator]();;) {
-        var _ref3;
+      for (var _iterator3 = _createForOfIteratorHelperLoose(items), _step3; !(_step3 = _iterator3()).done;) {
+        var item = _step3.value;
 
-        if (_isArray3) {
-          if (_i3 >= _iterator3.length) break;
-          _ref3 = _iterator3[_i3++];
-        } else {
-          _i3 = _iterator3.next();
-          if (_i3.done) break;
-          _ref3 = _i3.value;
-        }
-
-        var item = _ref3;
-
-        for (var _iterator4 = this.choiceFilter, _isArray4 = Array.isArray(_iterator4), _i4 = 0, _iterator4 = _isArray4 ? _iterator4 : _iterator4[Symbol.iterator]();;) {
-          var _ref4;
-
-          if (_isArray4) {
-            if (_i4 >= _iterator4.length) break;
-            _ref4 = _iterator4[_i4++];
-          } else {
-            _i4 = _iterator4.next();
-            if (_i4.done) break;
-            _ref4 = _i4.value;
-          }
-
-          var filter = _ref4;
+        for (var _iterator4 = _createForOfIteratorHelperLoose(this.choiceFilter), _step4; !(_step4 = _iterator4()).done;) {
+          var filter = _step4.value;
           var isMatch = item.value.toLowerCase().indexOf(filter.toLowerCase()) !== -1;
 
           if (isMatch && !matchedValues[item.value]) {
@@ -192,19 +152,8 @@ function (_Element) {
 
       var choices = [];
 
-      for (var _iterator5 = overrideChoices, _isArray5 = Array.isArray(_iterator5), _i5 = 0, _iterator5 = _isArray5 ? _iterator5 : _iterator5[Symbol.iterator]();;) {
-        var _ref5;
-
-        if (_isArray5) {
-          if (_i5 >= _iterator5.length) break;
-          _ref5 = _iterator5[_i5++];
-        } else {
-          _i5 = _iterator5.next();
-          if (_i5.done) break;
-          _ref5 = _i5.value;
-        }
-
-        var choiceAttributes = _ref5;
+      for (var _iterator5 = _createForOfIteratorHelperLoose(overrideChoices), _step5; !(_step5 = _iterator5()).done;) {
+        var choiceAttributes = _step5.value;
         var choice = new _choice["default"](choiceAttributes);
         choices.push(choice);
       }

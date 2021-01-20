@@ -13,9 +13,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 function _inheritsLoose(subClass, superClass) { subClass.prototype = Object.create(superClass.prototype); subClass.prototype.constructor = subClass; subClass.__proto__ = superClass; }
 
-var SectionElement =
-/*#__PURE__*/
-function (_ContainerElement) {
+var SectionElement = /*#__PURE__*/function (_ContainerElement) {
   _inheritsLoose(SectionElement, _ContainerElement);
 
   function SectionElement(parent, attributes) {

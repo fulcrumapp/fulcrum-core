@@ -13,9 +13,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 function _inheritsLoose(subClass, superClass) { subClass.prototype = Object.create(superClass.prototype); subClass.prototype.constructor = subClass; subClass.__proto__ = superClass; }
 
-var MediaElement =
-/*#__PURE__*/
-function (_Element) {
+var MediaElement = /*#__PURE__*/function (_Element) {
   _inheritsLoose(MediaElement, _Element);
 
   function MediaElement() {

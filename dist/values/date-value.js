@@ -17,9 +17,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 function _inheritsLoose(subClass, superClass) { subClass.prototype = Object.create(superClass.prototype); subClass.prototype.constructor = subClass; subClass.__proto__ = superClass; }
 
-var DateValue =
-/*#__PURE__*/
-function (_TextualValue) {
+var DateValue = /*#__PURE__*/function (_TextualValue) {
   _inheritsLoose(DateValue, _TextualValue);
 
   function DateValue() {

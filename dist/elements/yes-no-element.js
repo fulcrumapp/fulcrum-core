@@ -9,9 +9,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "d
 
 function _inheritsLoose(subClass, superClass) { subClass.prototype = Object.create(superClass.prototype); subClass.prototype.constructor = subClass; subClass.__proto__ = superClass; }
 
-var YesNoElement =
-/*#__PURE__*/
-function (_TextualElement) {
+var YesNoElement = /*#__PURE__*/function (_TextualElement) {
   _inheritsLoose(YesNoElement, _TextualElement);
 
   function YesNoElement(parent, attributes) {

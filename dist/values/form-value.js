@@ -15,9 +15,7 @@ function notImplemented() {
   throw new Error('Not implemented');
 }
 
-var FormValue =
-/*#__PURE__*/
-function () {
+var FormValue = /*#__PURE__*/function () {
   function FormValue(element, value) {
     this._element = element;
     this._rawValue = value;

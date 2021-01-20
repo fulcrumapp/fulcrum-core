@@ -21,7 +21,7 @@
             },
             "38b1": [
                 {
-                    "caption": null,
+                    "caption": "video caption",
                     "video_id": "b7c7fd6f-37bb-4e62-acb5-c5db638bfc4e"
                 }
             ],
@@ -45,7 +45,7 @@
             "8530": [
                 {
                     "audio_id": "e5539685-1eca-4dfd-baf7-fd6f1021ca7b",
-                    "caption": null
+                    "caption": "audio caption"
                 }
             ],
             "857d": "1337",
@@ -119,7 +119,7 @@
             "e1f6": "text value",
             "e840": [
                 {
-                    "caption": null,
+                    "caption": "photo caption",
                     "photo_id": "2b1fa188-39f6-4540-8bcd-9c6641e7748a"
                 }
             ],

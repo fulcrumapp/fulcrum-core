@@ -25,9 +25,7 @@ if (typeof Intl !== 'undefined') {
   /* eslint-enable no-undef */
 }
 
-var NumberUtils =
-/*#__PURE__*/
-function () {
+var NumberUtils = /*#__PURE__*/function () {
   function NumberUtils() {}
 
   NumberUtils.parseDouble = function parseDouble(input) {
