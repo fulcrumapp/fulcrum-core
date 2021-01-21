@@ -47,7 +47,8 @@ function (_FormValue) {
         part = _ref$part === void 0 ? null : _ref$part,
         formatSignatureURL = _ref.formatSignatureURL,
         formatSignatureViewerURL = _ref.formatSignatureViewerURL,
-        args = _objectWithoutPropertiesLoose(_ref, ["part", "formatSignatureURL", "formatSignatureViewerURL"]);
+        formatSignatureName = _ref.formatSignatureName,
+        args = _objectWithoutPropertiesLoose(_ref, ["part", "formatSignatureURL", "formatSignatureViewerURL", "formatSignatureName"]);
 
     if (this.isEmpty) {
       return null;
@@ -59,6 +60,8 @@ function (_FormValue) {
       return formatSignatureViewerURL(this, args);
     } else if (part === 'url' && formatSignatureURL) {
       return formatSignatureURL(this, args);
+    } else if (part === 'name' && formatSignatureName) {
+      return formatSignatureName(this, args);
     }
 
     return this.id;

@@ -63,7 +63,8 @@ function (_FormValue) {
         part = _ref2$part === void 0 ? null : _ref2$part,
         formatMediaURL = _ref2.formatMediaURL,
         formatMediaViewerURL = _ref2.formatMediaViewerURL,
-        args = _objectWithoutPropertiesLoose(_ref2, ["part", "formatMediaURL", "formatMediaViewerURL"]);
+        formatMediaName = _ref2.formatMediaName,
+        args = _objectWithoutPropertiesLoose(_ref2, ["part", "formatMediaURL", "formatMediaViewerURL", "formatMediaName"]);
 
     if (this.isEmpty) {
       return null;
@@ -78,6 +79,10 @@ function (_FormValue) {
     } else if (part === 'urls' && formatMediaURL) {
       return this.items.map(function (item) {
         return formatMediaURL(item, args);
+      });
+    } else if (part === 'name' && formatMediaName) {
+      return this.items.map(function (item) {
+        return formatMediaName(item, args);
       });
     }
 
