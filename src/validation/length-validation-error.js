@@ -32,6 +32,8 @@ export default class LengthValidationError extends ElementValidationError {
       return this.videoElementMessage;
     } else if (this.element.isAudioElement) {
       return this.audioElementMessage;
+    } else if (this.element.isAttachmentElement) {
+      return this.attachmentElementMessage;
     } else if (this.element.isRepeatableElement) {
       return this.repeatableElementMessage;
     }
@@ -141,6 +143,29 @@ export default class LengthValidationError extends ElementValidationError {
     } else if (this.isExactlyError) {
       return this.messageWithFormats("The field '%s' must have exactly 1 audio file.",
                                      "The field '%s' must have exactly %s audio files.",
+                                     this.element.minLength);
+    }
+
+    return '';
+  }
+
+  get attachmentElementMessage() {
+    if (this.isAtLeastError) {
+      return this.messageWithFormats("The field '%s' must have at least 1 file.",
+                                     "The field '%s' must have at least %s files.",
+                                     this.element.minLength);
+    } else if (this.isAtMostError) {
+      return this.messageWithFormats("The field '%s' cannot have more than 1 file.",
+                                     "The field '%s' cannot have more than %s files.",
+                                     this.element.maxLength);
+    } else if (this.isBetweenError) {
+      return format("The field '%s' must have between %s and %s files.",
+                    this.label,
+                    this.element.minLength,
+                    this.element.maxLength);
+    } else if (this.isExactlyError) {
+      return this.messageWithFormats("The field '%s' must have exactly 1 file.",
+                                     "The field '%s' must have exactly %s files.",
                                      this.element.minLength);
     }
 

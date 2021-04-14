@@ -15,6 +15,8 @@ export default {
 
   AudioElement: 'AudioField',
 
+  AttachmentElement: 'AttachmentField',
+
   SignatureElement: 'SignatureField',
 
   ClassificationElement: 'ClassificationField',
