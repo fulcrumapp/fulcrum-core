@@ -203,6 +203,10 @@ export default class DataSource {
     this.invoke(this.root, 'getPhoto', [ id ], callback);
   }
 
+  getAttachment(id, callback) {
+    this.invoke(this.root, 'getAttachment', [ id ], callback);
+  }
+
   getAudio(id, callback) {
     this.invoke(this.root, 'getAudio', [ id ], callback);
   }
@@ -221,6 +225,10 @@ export default class DataSource {
 
   createPhoto(accessKey, file, progress, callback) {
     this.invoke(this.root, 'createPhoto', [ accessKey, file, progress ], callback);
+  }
+
+  createAttachment(accessKey, file, progress, callback) {
+    this.invoke(this.root, 'createAttachment', [ accessKey, file, progress ], callback);
   }
 
   createVideo(accessKey, file, progress, callback) {

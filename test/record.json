@@ -127,6 +127,10 @@
                 {   
                     "caption": "attachment caption",
                     "attachment_id": "2b1fa188-39f6-4540-8bcd-9c6641e7749b"
+                },
+                {   
+                    "caption": "a different attachment caption",
+                    "attachment_id": "2b1fa188-39f6-4540-8bcd-9c6641e7742c"
                 }
             ],
             "f464": {
