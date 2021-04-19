@@ -343,6 +343,22 @@
         "max_length": null
       },
       {
+        "type": "AttachmentField",
+        "key": "0d81",
+        "label": "Attachments",
+        "description": null,
+        "required": true,
+        "disabled": false,
+        "hidden": false,
+        "data_name": "attachment",
+        "default_value": null,
+        "visible_conditions_type": null,
+        "visible_conditions_behavior": "clear",
+        "visible_conditions": null,
+        "required_conditions_type": null,
+        "required_conditions": null
+        },
+      {
         "type": "VideoField",
         "key": "38b1",
         "label": "Videos",

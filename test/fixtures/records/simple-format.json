@@ -28,6 +28,12 @@
                 "caption": "audio caption"
             }
         ],
+        "attachment": [
+            {
+                "attachment_id": "2b1fa188-39f6-4540-8bcd-9c6641e7749b",
+                "caption": "attachment caption"
+            }
+        ],
         "barcode": "EC1532 014123",
         "currency_calculation": "1337.37",
         "date": "2015-12-02",
