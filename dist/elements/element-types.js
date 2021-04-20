@@ -11,6 +11,7 @@ var _default = {
   PhotoElement: 'PhotoField',
   VideoElement: 'VideoField',
   AudioElement: 'AudioField',
+  AttachmentElement: 'AttachmentField',
   SignatureElement: 'SignatureField',
   ClassificationElement: 'ClassificationField',
   RepeatableElement: 'Repeatable',

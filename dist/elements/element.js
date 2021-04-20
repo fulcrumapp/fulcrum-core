@@ -353,6 +353,11 @@ function () {
       return this.isType(_elementTypes["default"].AudioElement);
     }
   }, {
+    key: "isAttachmentElement",
+    get: function get() {
+      return this.isType(_elementTypes["default"].AttachmentElement);
+    }
+  }, {
     key: "isClassificationElement",
     get: function get() {
       return this.isType(_elementTypes["default"].ClassificationElement);

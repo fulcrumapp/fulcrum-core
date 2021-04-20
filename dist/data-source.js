@@ -178,6 +178,10 @@ function () {
     this.invoke(this.root, 'getPhoto', [id], callback);
   };
 
+  _proto.getAttachment = function getAttachment(id, callback) {
+    this.invoke(this.root, 'getAttachment', [id], callback);
+  };
+
   _proto.getAudio = function getAudio(id, callback) {
     this.invoke(this.root, 'getAudio', [id], callback);
   };
@@ -196,6 +200,10 @@ function () {
 
   _proto.createPhoto = function createPhoto(accessKey, file, progress, callback) {
     this.invoke(this.root, 'createPhoto', [accessKey, file, progress], callback);
+  };
+
+  _proto.createAttachment = function createAttachment(accessKey, file, progress, callback) {
+    this.invoke(this.root, 'createAttachment', [accessKey, file, progress], callback);
   };
 
   _proto.createVideo = function createVideo(accessKey, file, progress, callback) {

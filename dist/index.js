@@ -94,6 +94,18 @@ var _photoValue = _interopRequireDefault(require("./values/photo-value"));
 
 exports.PhotoValue = _photoValue["default"];
 
+var _attachmentElement = _interopRequireDefault(require("./elements/attachment-element"));
+
+exports.AttachmentElement = _attachmentElement["default"];
+
+var _attachmentItemValue = _interopRequireDefault(require("./values/attachment-item-value"));
+
+exports.AttachmentItemValue = _attachmentItemValue["default"];
+
+var _attachmentValue = _interopRequireDefault(require("./values/attachment-value"));
+
+exports.AttachmentValue = _attachmentValue["default"];
+
 var _videoItemValue = _interopRequireDefault(require("./values/video-item-value"));
 
 exports.VideoItemValue = _videoItemValue["default"];
