@@ -5,6 +5,7 @@ import TimeValue from './time-value';
 import PhotoValue from './photo-value';
 import VideoValue from './video-value';
 import AudioValue from './audio-value';
+import AttachmentValue from './attachment-value';
 import SignatureValue from './signature-value';
 import ClassificationValue from './classification-value';
 import RepeatableValue from './repeatable-value';
@@ -24,6 +25,7 @@ const Constructors = {
   PhotoField: PhotoValue,
   VideoField: VideoValue,
   AudioField: AudioValue,
+  AttachmentField: AttachmentValue,
   SignatureField: SignatureValue,
   ClassificationField: ClassificationValue,
   Repeatable: RepeatableValue,

@@ -41,6 +41,10 @@ export default class MemoryDataSource {
     return callback(null, this.photos[id]);
   }
 
+  getAttachment(id, callback) {
+    return callback(null, this.photos[id]);
+  }
+
   getAudio(id, callback) {
     return callback(null, this.audio[id]);
   }
@@ -95,6 +99,13 @@ export default class MemoryDataSource {
   getPhotoComplete(id, object, callback) {
     if (object.processed) {
       this.photos[id] = object;
+    }
+    callback();
+  }
+
+  getAttachmentComplete(id, object, callback) {
+    if (object.processed) {
+      this.attachments[id] = object;
     }
     callback();
   }

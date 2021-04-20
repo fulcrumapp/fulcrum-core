@@ -19,6 +19,8 @@ var _videoElement = _interopRequireDefault(require("./video-element"));
 
 var _audioElement = _interopRequireDefault(require("./audio-element"));
 
+var _attachmentElement = _interopRequireDefault(require("./attachment-element"));
+
 var _signatureElement = _interopRequireDefault(require("./signature-element"));
 
 var _classificationElement = _interopRequireDefault(require("./classification-element"));
@@ -53,6 +55,7 @@ var Constructors = {
   PhotoField: _photoElement["default"],
   VideoField: _videoElement["default"],
   AudioField: _audioElement["default"],
+  AttachmentField: _attachmentElement["default"],
   SignatureField: _signatureElement["default"],
   ClassificationField: _classificationElement["default"],
   Repeatable: _repeatableElement["default"],

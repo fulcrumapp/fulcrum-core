@@ -123,6 +123,16 @@
                     "photo_id": "2b1fa188-39f6-4540-8bcd-9c6641e7748a"
                 }
             ],
+            "0d81": [
+                {   
+                    "caption": "attachment caption",
+                    "attachment_id": "2b1fa188-39f6-4540-8bcd-9c6641e7749b"
+                },
+                {   
+                    "caption": "a different attachment caption",
+                    "attachment_id": "2b1fa188-39f6-4540-8bcd-9c6641e7742c"
+                }
+            ],
             "f464": {
                 "choice_values": [
                     "24",

@@ -1,0 +1,36 @@
+"use strict";
+
+exports.__esModule = true;
+exports["default"] = void 0;
+
+var _mediaItemValue = _interopRequireDefault(require("./media-item-value"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _inheritsLoose(subClass, superClass) { subClass.prototype = Object.create(superClass.prototype); subClass.prototype.constructor = subClass; subClass.__proto__ = superClass; }
+
+var AttachmentItemValue =
+/*#__PURE__*/
+function (_MediaItemValue) {
+  _inheritsLoose(AttachmentItemValue, _MediaItemValue);
+
+  function AttachmentItemValue() {
+    return _MediaItemValue.apply(this, arguments) || this;
+  }
+
+  _createClass(AttachmentItemValue, [{
+    key: "mediaKey",
+    get: function get() {
+      return 'attachment_id';
+    }
+  }]);
+
+  return AttachmentItemValue;
+}(_mediaItemValue["default"]);
+
+exports["default"] = AttachmentItemValue;
+//# sourceMappingURL=attachment-item-value.js.map

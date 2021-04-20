@@ -50,6 +50,10 @@ function () {
     return callback(null, this.photos[id]);
   };
 
+  _proto.getAttachment = function getAttachment(id, callback) {
+    return callback(null, this.photos[id]);
+  };
+
   _proto.getAudio = function getAudio(id, callback) {
     return callback(null, this.audio[id]);
   };
@@ -104,6 +108,14 @@ function () {
   _proto.getPhotoComplete = function getPhotoComplete(id, object, callback) {
     if (object.processed) {
       this.photos[id] = object;
+    }
+
+    callback();
+  };
+
+  _proto.getAttachmentComplete = function getAttachmentComplete(id, object, callback) {
+    if (object.processed) {
+      this.attachments[id] = object;
     }
 
     callback();

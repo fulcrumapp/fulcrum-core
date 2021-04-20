@@ -6,6 +6,7 @@ import TimeElement from './time-element';
 import PhotoElement from './photo-element';
 import VideoElement from './video-element';
 import AudioElement from './audio-element';
+import AttachmentElement from './attachment-element';
 import SignatureElement from './signature-element';
 import ClassificationElement from './classification-element';
 import RepeatableElement from './repeatable-element';
@@ -28,6 +29,7 @@ const Constructors = {
   PhotoField: PhotoElement,
   VideoField: VideoElement,
   AudioField: AudioElement,
+  AttachmentField: AttachmentElement,
   SignatureField: SignatureElement,
   ClassificationField: ClassificationElement,
   Repeatable: RepeatableElement,

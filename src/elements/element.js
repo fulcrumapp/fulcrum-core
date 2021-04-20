@@ -289,6 +289,10 @@ export default class Element {
     return this.isType(Types.AudioElement);
   }
 
+  get isAttachmentElement() {
+    return this.isType(Types.AttachmentElement);
+  }
+
   get isClassificationElement() {
     return this.isType(Types.ClassificationElement);
   }
