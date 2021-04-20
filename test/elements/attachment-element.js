@@ -13,11 +13,11 @@ beforeEach((done) => {
 
 describe('attachment fields', () => {
   it('finds an attachment field in the form', () => {
-    record.form.find('attachment').should.be.instanceof(AttachmentElement);
+    record.form.find('attachments').should.be.instanceof(AttachmentElement);
   });
 
   it('finds an attachment value in the record', () => {
-    const value = record.formValues.find('attachment');
+    const value = record.formValues.find('attachments');
 
     value.should.be.instanceof(AttachmentValue);
 
