@@ -192,13 +192,6 @@ export default class Condition {
       return record.statusValue;
     }
 
-    // Also search repeatables for fieldKey as it may exist in a nested object
-    for (let i = 0; i < values.repeatableItems.length; i++) {
-      const formValues = values.repeatableItems[i]._formValues;
-      const value = formValues.get(condition.fieldKey);
-      if (value) return value;
-    }
-
     return values.get(condition.fieldKey);
   }
 
