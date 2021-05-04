@@ -259,13 +259,6 @@ function () {
   Condition.valueForCondition = function valueForCondition(condition, values, record) {
     if (condition.fieldKey === '@status') {
       return record.statusValue;
-    } // Also search repeatables for fieldKey as it may exist in a nested object
-
-
-    for (var i = 0; i < values.repeatableItems.length; i++) {
-      var formValues = values.repeatableItems[i]._formValues;
-      var value = formValues.get(condition.fieldKey);
-      if (value) return value;
     }
 
     return values.get(condition.fieldKey);
