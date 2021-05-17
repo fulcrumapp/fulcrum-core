@@ -31,6 +31,14 @@ describe('AttachmentValue', () => {
     });
   });
 
+  describe('addItem', () => {
+    it('adds an item', () => {
+      attachmentValue.addItem('123', 'test_three.pdf');
+      attachmentValue.items.length.should.eql(3);
+      attachmentValue.items[2].toJSON().should.eql({ attachment_id: '123', name: 'test_three.pdf'});
+    });
+  });
+
   describe('length', () => {
     it('returns the number of items', () => {
       attachmentValue.length.should.eql(2);

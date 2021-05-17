@@ -26,6 +26,19 @@ function (_MediaValue) {
     return _MediaValue.apply(this, arguments) || this;
   }
 
+  var _proto = AttachmentValue.prototype;
+
+  _proto.addItem = function addItem(id, name) {
+    var item = new this.ItemClass(this, {
+      name: name
+    });
+    item.mediaID = id;
+
+    this._items.push(item);
+
+    return item;
+  };
+
   _createClass(AttachmentValue, [{
     key: "ItemClass",
     get: function get() {

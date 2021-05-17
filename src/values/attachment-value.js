@@ -30,4 +30,14 @@ export default class AttachmentValue extends MediaValue {
 
     return ids.join(' ');
   }
+
+  addItem(id, name) {
+    const item = new this.ItemClass(this, { name: name });
+
+    item.mediaID = id;
+
+    this._items.push(item);
+
+    return item;
+  }
 }
