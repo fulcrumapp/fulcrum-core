@@ -31,11 +31,11 @@
         "attachments": [
             {
                 "attachment_id": "2b1fa188-39f6-4540-8bcd-9c6641e7749b",
-                "caption": "attachment caption"
+                "name": "test_one.pdf"
             },
             {
                 "attachment_id": "2b1fa188-39f6-4540-8bcd-9c6641e7742c",
-                "caption": "a different attachment caption"
+                "name": "test_two.pdf"
             }
         ],
         "barcode": "EC1532 014123",

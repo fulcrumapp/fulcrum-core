@@ -18,9 +18,22 @@ var AttachmentItemValue =
 function (_MediaItemValue) {
   _inheritsLoose(AttachmentItemValue, _MediaItemValue);
 
-  function AttachmentItemValue() {
-    return _MediaItemValue.apply(this, arguments) || this;
+  function AttachmentItemValue(mediaValue, attributes) {
+    var _this;
+
+    _this = _MediaItemValue.call(this, mediaValue, attributes) || this;
+    _this.name = attributes.name;
+    return _this;
   }
+
+  var _proto = AttachmentItemValue.prototype;
+
+  _proto.toJSON = function toJSON() {
+    var json = {};
+    json.name = this.name || null;
+    json[this.mediaKey] = this.mediaID || null;
+    return json;
+  };
 
   _createClass(AttachmentItemValue, [{
     key: "mediaKey",

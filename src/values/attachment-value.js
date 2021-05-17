@@ -1,4 +1,5 @@
 import MediaValue from './media-value';
+import TextUtils from '../utils/text-utils';
 import AttachmentItemValue from './attachment-item-value';
 
 export default class AttachmentValue extends MediaValue {
@@ -12,5 +13,31 @@ export default class AttachmentValue extends MediaValue {
     }
 
     return `${this.length} Attachments`;
+  }
+
+  get searchableValue() {
+    if (this.isEmpty) {
+      return null;
+    }
+
+    const ids = [];
+
+    for (const item of this._items) {
+      if (TextUtils.isPresent(item.name)) {
+        ids.push(item.name);
+      }
+    }
+
+    return ids.join(' ');
+  }
+
+  addItem(id, name) {
+    const item = new this.ItemClass(this, { name: name });
+
+    item.mediaID = id;
+
+    this._items.push(item);
+
+    return item;
   }
 }

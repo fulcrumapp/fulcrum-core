@@ -27,7 +27,15 @@ describe('AttachmentValue', () => {
 
   describe('searchableValue', () => {
     it('returns a string of the media captions', () => {
-      attachmentValue.searchableValue.should.eql('attachment caption a different attachment caption');
+      attachmentValue.searchableValue.should.eql('test_one.pdf test_two.pdf');
+    });
+  });
+
+  describe('addItem', () => {
+    it('adds an item', () => {
+      attachmentValue.addItem('123', 'test_three.pdf');
+      attachmentValue.items.length.should.eql(3);
+      attachmentValue.items[2].toJSON().should.eql({ attachment_id: '123', name: 'test_three.pdf'});
     });
   });
 
@@ -44,7 +52,7 @@ describe('AttachmentValue', () => {
         part: null,
         formatMediaURL: () => ['https://formatted.media/url', 'https://formatted.media/url'],
         formatMediaViewerURL: () => ['https://formatted.media.viewer/url', 'https://formatted.media.viewer/url'],
-        formatMediaName: () => ['formatted-media-name', 'formatted-media-name'],
+        formatMediaName: (item, args) => item.name,
         args: 'args'
       };
     });
@@ -75,12 +83,12 @@ describe('AttachmentValue', () => {
       });
     });
 
-    describe('when part is captions', () => {
-      it('returns an array of captions', () => {
-        options.part = 'captions';
+    describe('when part is name', () => {
+      it('returns an array of names', () => {
+        options.part = 'name';
         attachmentValue.format(options).should.eql([
-          'attachment caption', 
-          'a different attachment caption'
+          'test_one.pdf', 
+          'test_two.pdf'
         ]);
       });
     });

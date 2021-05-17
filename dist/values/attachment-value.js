@@ -5,6 +5,8 @@ exports["default"] = void 0;
 
 var _mediaValue = _interopRequireDefault(require("./media-value"));
 
+var _textUtils = _interopRequireDefault(require("../utils/text-utils"));
+
 var _attachmentItemValue = _interopRequireDefault(require("./attachment-item-value"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
@@ -24,6 +26,19 @@ function (_MediaValue) {
     return _MediaValue.apply(this, arguments) || this;
   }
 
+  var _proto = AttachmentValue.prototype;
+
+  _proto.addItem = function addItem(id, name) {
+    var item = new this.ItemClass(this, {
+      name: name
+    });
+    item.mediaID = id;
+
+    this._items.push(item);
+
+    return item;
+  };
+
   _createClass(AttachmentValue, [{
     key: "ItemClass",
     get: function get() {
@@ -37,6 +52,36 @@ function (_MediaValue) {
       }
 
       return this.length + " Attachments";
+    }
+  }, {
+    key: "searchableValue",
+    get: function get() {
+      if (this.isEmpty) {
+        return null;
+      }
+
+      var ids = [];
+
+      for (var _iterator = this._items, _isArray = Array.isArray(_iterator), _i = 0, _iterator = _isArray ? _iterator : _iterator[Symbol.iterator]();;) {
+        var _ref;
+
+        if (_isArray) {
+          if (_i >= _iterator.length) break;
+          _ref = _iterator[_i++];
+        } else {
+          _i = _iterator.next();
+          if (_i.done) break;
+          _ref = _i.value;
+        }
+
+        var item = _ref;
+
+        if (_textUtils["default"].isPresent(item.name)) {
+          ids.push(item.name);
+        }
+      }
+
+      return ids.join(' ');
     }
   }]);
 
