@@ -25,15 +25,15 @@ describe('attachment fields', () => {
 
     value.displayValue.should.eql('2 Attachments');
 
-    value.searchableValue.should.eql('attachment caption a different attachment caption');
+    value.searchableValue.should.eql('test_one.pdf test_two.pdf');
 
     value.toJSON().should.eql([ 
       {
          'attachment_id': '2b1fa188-39f6-4540-8bcd-9c6641e7749b',
-         'caption': 'attachment caption'
+         'name': 'test_one.pdf'
       },
       {   
-        'caption': 'a different attachment caption',
+        'name': 'test_two.pdf',
         'attachment_id': '2b1fa188-39f6-4540-8bcd-9c6641e7742c'
       }
     ]);
@@ -46,8 +46,8 @@ describe('attachment fields', () => {
         '2b1fa188-39f6-4540-8bcd-9c6641e7742c'
       ], 
       'f0d81_captions': [
-        'attachment caption',
-        'a different attachment caption'
+        undefined,
+        undefined
       ]
     });
   });
