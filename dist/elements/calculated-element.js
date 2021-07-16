@@ -20,6 +20,7 @@ function (_TextualElement) {
     var _this;
 
     _this = _TextualElement.call(this, parent, attributes) || this;
+    _this._attributes.display = attributes.display.attributes;
     _this.expression = attributes.expression;
     _this.display = new _displayOptions["default"](attributes.display);
     return _this;
