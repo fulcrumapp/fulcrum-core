@@ -5,6 +5,8 @@ export default class CalculatedElement extends TextualElement {
   constructor(parent, attributes) {
     super(parent, attributes);
 
+    this._attributes.display = attributes.display.attributes;
+
     this.expression = attributes.expression;
     this.display = new DisplayOptions(attributes.display);
   }
