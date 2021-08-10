@@ -40,6 +40,8 @@ export TimeElement from './elements/time-element';
 export TimeValue from './values/time-value';
 export CalculatedElement from './elements/calculated-element';
 export CalculatedValue from './values/calculated-value';
+export HyperlinkElement from './elements/hyperlink-element';
+export HyperlinkValue from './values/hyperlink-value';
 export TextElement from './elements/text-element';
 export TextValue from './values/text-value';
 export SectionElement from './elements/section-element';
