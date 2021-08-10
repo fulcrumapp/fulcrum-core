@@ -170,6 +170,14 @@ var _calculatedValue = _interopRequireDefault(require("./values/calculated-value
 
 exports.CalculatedValue = _calculatedValue["default"];
 
+var _hyperlinkElement = _interopRequireDefault(require("./elements/hyperlink-element"));
+
+exports.HyperlinkElement = _hyperlinkElement["default"];
+
+var _hyperlinkValue = _interopRequireDefault(require("./values/hyperlink-value"));
+
+exports.HyperlinkValue = _hyperlinkValue["default"];
+
 var _textElement = _interopRequireDefault(require("./elements/text-element"));
 
 exports.TextElement = _textElement["default"];
