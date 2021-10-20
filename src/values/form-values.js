@@ -110,7 +110,17 @@ export default class FormValues {
   }
 
   copy() {
-    return new FormValues(this.container, this.toJSON());
+    const copy = new FormValues(this.container);
+
+    for (const value of this.all) {
+      // deep copy all of the field values
+      copy.set(
+        value.element.key,
+        copy.createValue(value.element, value != null ? value.toJSON() : null)
+      );
+    }
+
+    return copy;
   }
 
   merge(formValues) {
