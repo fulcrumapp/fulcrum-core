@@ -329,7 +329,7 @@ function () {
           var searchValue = formValue.searchableValue;
 
           if (searchValue != null) {
-            searchValues.push(searchValue.trim());
+            searchValues.push(searchValue);
           }
         }
       }
