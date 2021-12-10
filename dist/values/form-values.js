@@ -334,7 +334,7 @@ function () {
         }
       }
 
-      return searchValues.join(SearchValueSeparator).trim();
+      return searchValues.join(SearchValueSeparator);
     }
   }, {
     key: "mediaValues",

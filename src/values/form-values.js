@@ -240,7 +240,7 @@ export default class FormValues {
       }
     }
 
-    return searchValues.join(SearchValueSeparator).trim();
+    return searchValues.join(SearchValueSeparator);
   }
 
   clearInvisibleValues(valuesForConditions, record) {
