@@ -400,7 +400,7 @@ function (_FormValue) {
 
           var classification = _ref11;
 
-          if (classification.value === classificationValue) {
+          if (_textUtils["default"].trim(classification.value) === _textUtils["default"].trim(classificationValue)) {
             result = classification;
             currentClassifications = classification.items;
             break;
