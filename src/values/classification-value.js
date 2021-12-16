@@ -229,7 +229,7 @@ export default class ClassificationValue extends FormValue {
 
     for (const classificationValue of this._choiceValues) {
       for (const classification of currentClassifications) {
-        if (classification.value === classificationValue) {
+        if (TextUtils.trim(classification.value) === TextUtils.trim(classificationValue)) {
           result = classification;
           currentClassifications = classification.items;
           break;
