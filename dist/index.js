@@ -262,6 +262,14 @@ var _projectElement = _interopRequireDefault(require("./elements/project-element
 
 exports.ProjectElement = _projectElement["default"];
 
+var _checkboxElement = _interopRequireDefault(require("./elements/checkbox-element"));
+
+exports.CheckBoxElement = _checkboxElement["default"];
+
+var _checkboxValue = _interopRequireDefault(require("./values/checkbox-value"));
+
+exports.CheckBoxValue = _checkboxValue["default"];
+
 var _user = _interopRequireDefault(require("./user"));
 
 exports.User = _user["default"];

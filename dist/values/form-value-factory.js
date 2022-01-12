@@ -37,6 +37,8 @@ var _calculatedValue = _interopRequireDefault(require("./calculated-value"));
 
 var _recordLinkValue = _interopRequireDefault(require("./record-link-value"));
 
+var _checkboxValue = _interopRequireDefault(require("./checkbox-value"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 var Constructors = {
@@ -57,7 +59,8 @@ var Constructors = {
   HyperlinkField: _hyperlinkValue["default"],
   BarcodeField: _barcodeValue["default"],
   CalculatedField: _calculatedValue["default"],
-  RecordLinkField: _recordLinkValue["default"]
+  RecordLinkField: _recordLinkValue["default"],
+  CheckBoxField: _checkboxValue["default"]
 };
 
 var FormValueFactory =

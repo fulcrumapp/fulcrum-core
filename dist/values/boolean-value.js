@@ -52,6 +52,16 @@ function (_FormValue) {
       return this.booleanValue.toString();
     }
   }, {
+    key: "length",
+    get: function get() {
+      return 1;
+    }
+  }, {
+    key: "isEmpty",
+    get: function get() {
+      return false;
+    }
+  }, {
     key: "searchableValue",
     get: function get() {
       return this.booleanValue.toString();

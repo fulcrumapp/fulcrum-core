@@ -3,7 +3,7 @@
 exports.__esModule = true;
 exports["default"] = void 0;
 
-var _textualValue = _interopRequireDefault(require("./textual-value"));
+var _booleanValue = _interopRequireDefault(require("./boolean-value"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
@@ -27,45 +27,10 @@ function (_BooleanValue) {
     get: function get() {
       return this.booleanValue;
     }
-  }, {
-    key: "isNegative",
-    get: function get() {
-      if (this.element.negativeChoice) {
-        return this.textValue === this.element.negativeChoice.value;
-      }
-
-      return false;
-    }
-  }, {
-    key: "isNeutral",
-    get: function get() {
-      if (this.element.neutralChoice) {
-        return this.textValue === this.element.neutralChoice.value;
-      }
-
-      return false;
-    }
-  }, {
-    key: "displayValue",
-    get: function get() {
-      switch (true) {
-        case this.isPositive:
-          return this.element.positiveChoice.label;
-
-        case this.isNegative:
-          return this.element.negativeChoice.label;
-
-        case this.isNeutral:
-          return this.element.neutralChoice.label;
-
-        default:
-          return this.textValue;
-      }
-    }
   }]);
 
   return CheckBoxValue;
-}(BooleanValue);
+}(_booleanValue["default"]);
 
 exports["default"] = CheckBoxValue;
 //# sourceMappingURL=checkbox-value.js.map
