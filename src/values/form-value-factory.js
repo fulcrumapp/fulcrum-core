@@ -15,6 +15,7 @@ import HyperlinkValue from './hyperlink-value';
 import BarcodeValue from './barcode-value';
 import CalculatedValue from './calculated-value';
 import RecordLinkValue from './record-link-value';
+import CheckBoxValue from './checkbox-value';
 
 const Constructors = {
   ChoiceField: ChoiceValue,
@@ -34,7 +35,8 @@ const Constructors = {
   HyperlinkField: HyperlinkValue,
   BarcodeField: BarcodeValue,
   CalculatedField: CalculatedValue,
-  RecordLinkField: RecordLinkValue
+  RecordLinkField: RecordLinkValue,
+  CheckBoxField: CheckBoxValue
 };
 
 export default class FormValueFactory {

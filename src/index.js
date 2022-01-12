@@ -63,6 +63,8 @@ export StatusElement from './elements/status-element';
 export StatusChoice from './elements/status-choice';
 export StatusValue from './values/status-value';
 export ProjectElement from './elements/project-element';
+export CheckBoxElement from './elements/checkbox-element';
+export CheckBoxValue from './values/checkbox-value';
 export User from './user';
 export Role from './role';
 export Project from './project';

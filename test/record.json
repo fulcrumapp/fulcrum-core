@@ -151,7 +151,8 @@
                 "sub_thoroughfare": "4261",
                 "suite": null,
                 "thoroughfare": "55th Ave N"
-            }
+            },
+            "92ab": true
         },
         "horizontal_accuracy": 88.0370385747084,
         "id": "20eda76b-90aa-4a6b-8a69-a5dca3db4d15",

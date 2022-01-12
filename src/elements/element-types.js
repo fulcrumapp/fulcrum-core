@@ -37,5 +37,9 @@ export default {
 
   RecordLinkElement: 'RecordLinkField',
 
-  StatusElement: 'StatusField'
+  StatusElement: 'StatusField',
+
+  CheckBoxElement: 'CheckBoxField',
+
+  DynamicElementsElement: 'DynamicElementsField'
 };

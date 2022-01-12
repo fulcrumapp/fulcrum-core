@@ -715,6 +715,17 @@
         },
         "default_values": null,
         "default_previous_value": false
+      },
+      {
+        "type": "CheckBoxField",
+        "key": "92ab",
+        "label": "CheckBox Field",
+        "description": null,
+        "required": true,
+        "disabled": false,
+        "hidden": false,
+        "data_name": "checkbox_field",
+        "default_value": null
       }
     ],
     "image": null
