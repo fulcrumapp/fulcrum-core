@@ -1,73 +1,47 @@
 import FormValue from './form-value';
-import DateUtils from '../utils/date-utils';
+import DynamicElementsItemValue from './dynamic-elements-item-value';
+import MultipleValueItem from './multiple-value-item';
+import NumberUtils from '../utils/number-utils';
 
 export default class DynamicElementsValue extends FormValue {
-  constructor(element, attributes) {
-    super(element, attributes);
+  constructor(element, items) {
+    super(element, items);
 
-    if (attributes) {
-      this._identifier = attributes.signature_id;
-      this._timestamp = DateUtils.parseISOTimestamp(attributes.timestamp);
+    this._items = [];
+
+    if (Array.isArray(items)) {
+      for (const item of items) {
+        this._items.push(new this.ItemClass(this, item));
+      }
     }
   }
 
-  get id() {
-    return this._identifier;
-  }
-
-  set id(id) {
-    this._identifier = id;
-  }
-
-  get timestamp() {
-    return this._timestamp;
-  }
-
-  set timestamp(timestamp) {
-    if (!(timestamp instanceof Date)) {
-      throw new TypeError('timestamp must be a Date');
-    }
-
-    this._timestamp = timestamp;
-  }
-
-  clear() {
-    this._identifier = null;
-    this._timestamp = null;
+  get ItemClass() {
+    return DynamicElementsItemValue;
   }
 
   get isEmpty() {
-    return this._identifier == null;
-  }
-
-  get displayValue() {
-    return this.isEmpty ? null : '1 Signature';
+    return this._items.length === 0;
   }
 
   get searchableValue() {
     return null;
   }
 
-  format({part = null, formatSignatureURL, formatSignatureViewerURL, formatSignatureName, ...args}) {
+  get length() {
+    return this._items.length;
+  }
+
+  format({part = null}) {
     if (this.isEmpty) {
       return null;
     }
 
-    if (part === 'timestamp') {
-      return this.timestamp;
-    } else if (part === 'view' && formatSignatureViewerURL) {
-      return formatSignatureViewerURL(this, args);
-    } else if (part === 'url' && formatSignatureURL) {
-      return formatSignatureURL(this, args);
-    } else if (part === 'name' && formatSignatureName) {
-      return formatSignatureName(this, args);
+    if (part === 'elements') {
+      return this.items.map(item => item.elements);
     }
 
-    return this.id;
-  }
-
-  get length() {
-    return this.isEmpty ? 0 : 1;
+    return this.items.map(item => item.values);
   }
 
   get columnValue() {
@@ -75,16 +49,20 @@ export default class DynamicElementsValue extends FormValue {
       return null;
     }
 
+    const values = [];
+    const elements = [];
+
+    for (const item of this._items) {
+      values.push(item.values);
+      elements.push(item.elements);
+    }
+
     const value = {};
 
-    value['f' + this.element.key + '_timestamp'] = this.timestamp;
-    value['f' + this.element.key] = this._identifier;
+    value['f' + this.element.key + '_elements'] = elements;
+    value['f' + this.element.key] = values;
 
     return value;
-  }
-
-  get multipleValues() {
-    return null;
   }
 
   toJSON() {
@@ -92,10 +70,23 @@ export default class DynamicElementsValue extends FormValue {
       return null;
     }
 
-    return {
-      signature_id: this._identifier,
-      timestamp: DateUtils.formatISOTimestamp(this._timestamp)
-    };
+    const items = [];
+
+    for (const item of this._items) {
+      items.push(item.toJSON());
+    }
+
+    return items;
+  }
+
+  get multipleValues() {
+    const items = [];
+
+    for (const item of this._items) {
+      items.push(new MultipleValueItem(this.element, item.values));
+    }
+
+    return items;
   }
 
   isEqual(value) {
@@ -111,10 +102,56 @@ export default class DynamicElementsValue extends FormValue {
   }
 
   isLessThan(value) {
-    return false;
+    return this.length < NumberUtils.parseDouble(value);
   }
 
   isGreaterThan(value) {
-    return false;
+    return this.length > NumberUtils.parseDouble(value);
+  }
+
+  get items() {
+    return this._items.slice();
+  }
+
+  addRecord(record) {
+    const item = new DynamicElementsItemValue(this, {record_id: record.id});
+
+    item._record = record;
+
+    this.insertItem(item);
+  }
+
+  itemIndex(id) {
+    for (let index = 0; index < this._items.length; ++index) {
+      if (id === this._items[index].id) {
+        return index;
+      }
+    }
+
+    return -1;
+  }
+
+  insertItem(item) {
+    const index = this.itemIndex(item.id);
+
+    if (index > -1) {
+      this._items[index] = item;
+    } else {
+      this._items.push(item);
+    }
+  }
+
+  removeItem(id) {
+    const index = this.itemIndex(id);
+
+    if (index > -1) {
+      const item = this._items[index];
+
+      this._items.splice(index, 1);
+
+      return item;
+    }
+
+    return null;
   }
 }

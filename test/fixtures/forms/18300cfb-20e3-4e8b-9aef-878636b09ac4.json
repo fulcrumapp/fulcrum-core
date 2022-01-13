@@ -661,7 +661,18 @@
             "hidden": false,
             "data_name": "checkbox_field",
             "default_value": null
-        }
+        },
+        {
+          "type": "DynamicElementsField",
+          "key": "92ac",
+          "label": "DynamicElementsField Field",
+          "description": null,
+          "required": true,
+          "disabled": false,
+          "hidden": false,
+          "data_name": "checklist",
+          "default_value": null
+      }
       ]
   }
 }

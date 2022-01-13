@@ -156,7 +156,27 @@
         ],
         "yesno": "yes",
         "yesnona": "no",
-        "checkbox_field": true
+        "checkbox_field": true,
+        "checklist": [
+            {
+                "elements": [
+                    {
+                        "type": "CheckBoxField",
+                        "key": "1",
+                        "label": "Checkbox Field",
+                        "description": null,
+                        "required": true,
+                        "disabled": false,
+                        "hidden": false,
+                        "data_name": "1",
+                        "default_value": null
+                    }
+                ],
+                "values": {
+                    "1": true
+                }
+            }
+        ]
     },
     "horizontal_accuracy": 88.0370385747084,
     "id": "20eda76b-90aa-4a6b-8a69-a5dca3db4d15",
