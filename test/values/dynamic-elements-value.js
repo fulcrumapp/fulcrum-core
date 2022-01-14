@@ -37,37 +37,39 @@ describe('DynamicValue', () => {
     });
   });
 
-  // describe('format', () => {
-  //   let options = null;
-  //   beforeEach(() => {
-  //     options = {
-  //       part: null,
-  //       formatMediaURL: () => 'https://formatted.media/url',
-  //       formatMediaViewerURL: () => 'https://formatted.media.viewer/url',
-  //       formatMediaName: () => 'formatted-media-name',
-  //       args: 'args'
-  //     };
-  //   });
-
-  describe('when empty', () => {
-    it('returns null', () => {
-      checklist = new DynamicValue('element', []);
-      shouldBeNull(checklist.format({}));
+  describe('format', () => {
+    let options = null;
+    beforeEach(() => {
+      options = {
+        part: null,
+        args: 'args'
+      };
     });
-  });
 
-  //   describe('when part is null', () => {
-  //     it('returns an array of ids', () => {
-  //       mediaValue.format({}).should.eql(['2b1fa188-39f6-4540-8bcd-9c6641e7748a']);
-  //     });
-  //   });
+    describe('when empty', () => {
+      it('returns null', () => {
+        checklist = new DynamicValue('element', []);
+        shouldBeNull(checklist.format({}));
+      });
+    });
 
-  //   describe('when part is captions', () => {
-  //     it('returns an array of captions', () => {
-  //       options.part = 'captions';
-  //       mediaValue.format(options).should.eql(['photo caption']);
-  //     });
-  //   });
+    // describe('when part is null', () => {
+    //   it('returns an array of values', () => {
+    //     checklist.format({}).should.eql(['2b1fa188-39f6-4540-8bcd-9c6641e7748a']);
+    //   });
+    // });
+
+    // describe('when part is metadata', () => {
+    //   it('returns an array of metadata', () => {
+    //     options.part = 'metadata';
+
+    //     const x = checklist.format(options);
+    //     console.log(typeof x[0]);
+
+
+    //     checklist.format(options).should.eql(['xxx']);
+    //   });
+    // });
 
   //   describe('when part is view', () => {
   //     it('returns a media viewer url', () => {
@@ -89,5 +91,5 @@ describe('DynamicValue', () => {
   //       mediaValue.format(options).should.eql(['formatted-media-name']);
   //     });
   //   });
-  // });
+  });
 });

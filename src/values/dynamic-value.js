@@ -38,7 +38,9 @@ export default class DynamicValue extends FormValue {
     }
 
     if (part === 'elements') {
-      return this.items.map(item => item.elements);
+      return this.items.map(item => item._elementsJSON);
+    } else if (part === 'metadata') {
+      return this.items.map(item => item._metadataJSON);
     }
 
     return this.items.map(item => item.values);

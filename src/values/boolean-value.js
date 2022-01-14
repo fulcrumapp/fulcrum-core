@@ -1,6 +1,4 @@
 import FormValue from './form-value';
-import TextUtils from '../utils/text-utils';
-import NumberUtils from '../utils/number-utils';
 
 export default class BooleanValue extends FormValue {
   constructor(element, booleanValue) {
@@ -10,7 +8,7 @@ export default class BooleanValue extends FormValue {
   }
 
   format({useDisplayValue = false}) {
-    return this.booleanValue.toString;
+    return useDisplayValue ? this.displayValue : this.booleanValue;
   }
 
   get displayValue() {
@@ -42,6 +40,6 @@ export default class BooleanValue extends FormValue {
   }
 
   isEqual(booleanValue) {
-    return this.booleanValues === booleanValue;
+    return this.booleanValue === booleanValue;
   }
 }
