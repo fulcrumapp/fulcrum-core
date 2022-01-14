@@ -36,6 +36,8 @@ describe('dynamic elements fields', () => {
 
     cbValue.columnValue.should.eql(true);
 
+    value.items[0].metadata.timestamp.should.eql('2022-12-03T02:15:06Z');
+
     // value.displayValue.should.eql('true');
 
     // value.searchableValue.should.eql('true');

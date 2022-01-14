@@ -6,6 +6,7 @@ export default class DynamicElementsItemValue {
     this.dynamicElementValue = dynamicElementValue;
     this._formValuesJSON = attributes.values;
     this._elementsJSON = attributes.elements;
+    this._metadataJSON = attributes.metadata;
   }
 
   toJSON() {
@@ -13,8 +14,13 @@ export default class DynamicElementsItemValue {
 
     json.values = this._formValuesJSON || null;
     json.elements = this._elementsJSON || null;
+    json.metadata = this._metadataJSON || null;
 
     return json;
+  }
+
+  get metadata() {
+    return this._metadataJSON;
   }
 
   get formValues() {

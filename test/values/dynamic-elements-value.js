@@ -31,11 +31,11 @@ describe('DynamicElementsValue', () => {
   //   });
   // });
 
-  // describe('length', () => {
-  //   it('returns the number of items', () => {
-  //     mediaValue.length.should.eql(1);
-  //   });
-  // });
+  describe('length', () => {
+    it('returns the number of items', () => {
+      checklist.length.should.eql(1);
+    });
+  });
 
   // describe('format', () => {
   //   let options = null;
@@ -49,12 +49,12 @@ describe('DynamicElementsValue', () => {
   //     };
   //   });
 
-  //   describe('when empty', () => {
-  //     it('returns null', () => {
-  //       mediaValue = new MediaValue('element', []);
-  //       shouldBeNull(mediaValue.format({}));
-  //     });
-  //   });
+  describe('when empty', () => {
+    it('returns null', () => {
+      checklist = new DynamicElementsValue('element', []);
+      shouldBeNull(checklist.format({}));
+    });
+  });
 
   //   describe('when part is null', () => {
   //     it('returns an array of ids', () => {

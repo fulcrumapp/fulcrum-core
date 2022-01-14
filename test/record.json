@@ -170,6 +170,9 @@
                     ],
                     "values": {
                         "1": true
+                    },
+                    "metadata": {
+                        "timestamp": "2022-12-03T02:15:06Z"
                     }
                 }
             ]
