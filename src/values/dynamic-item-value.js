@@ -1,7 +1,7 @@
 import ChildElements from '../elements/child-elements';
-import FormValues from '../values/form-values';
+import FormValues from './form-values';
 
-export default class DynamicElementsItemValue {
+export default class DynamicItemValue {
   constructor(dynamicElementValue, attributes) {
     this.dynamicElementValue = dynamicElementValue;
     this._formValuesJSON = attributes.values;
@@ -32,4 +32,4 @@ export default class DynamicElementsItemValue {
   }
 }
 
-ChildElements.includeInto(DynamicElementsItemValue);
+ChildElements.includeInto(DynamicItemValue);

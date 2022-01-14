@@ -1,7 +1,7 @@
 import setup from '../helper';
 import fuzz from '../fuzz';
 
-import { CheckBoxElement, CheckBoxValue } from '../../src';
+import { CheckboxElement, CheckboxValue } from '../../src';
 
 let record = null;
 
@@ -16,13 +16,13 @@ describe('checkbox fields', () => {
   it('finds a checkbox field in the form', () => {
     const field = record.form.find('checkbox_field');
 
-    field.should.be.instanceof(CheckBoxElement);
+    field.should.be.instanceof(CheckboxElement);
   });
 
   it('finds a boolean value in the record', () => {
     const value = record.formValues.find('checkbox_field');
 
-    value.should.be.instanceof(CheckBoxValue);
+    value.should.be.instanceof(CheckboxValue);
 
     value.isEmpty.should.eql(false);
 

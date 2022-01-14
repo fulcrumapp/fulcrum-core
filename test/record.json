@@ -157,7 +157,7 @@
                 {
                     "elements": [
                         {
-                            "type": "CheckBoxField",
+                            "type": "CheckboxField",
                             "key": "1",
                             "label": "Checkbox Field",
                             "description": null,

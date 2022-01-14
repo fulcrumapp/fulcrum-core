@@ -1,9 +1,9 @@
 import FormValue from './form-value';
-import DynamicElementsItemValue from './dynamic-elements-item-value';
+import DynamicItemValue from './dynamic-item-value';
 import MultipleValueItem from './multiple-value-item';
 import NumberUtils from '../utils/number-utils';
 
-export default class DynamicElementsValue extends FormValue {
+export default class DynamicValue extends FormValue {
   constructor(element, items) {
     super(element, items);
 
@@ -17,7 +17,7 @@ export default class DynamicElementsValue extends FormValue {
   }
 
   get ItemClass() {
-    return DynamicElementsItemValue;
+    return DynamicItemValue;
   }
 
   get isEmpty() {
@@ -114,7 +114,7 @@ export default class DynamicElementsValue extends FormValue {
   }
 
   addRecord(record) {
-    const item = new DynamicElementsItemValue(this, {record_id: record.id});
+    const item = new DynamicItemValue(this, {record_id: record.id});
 
     item._record = record;
 

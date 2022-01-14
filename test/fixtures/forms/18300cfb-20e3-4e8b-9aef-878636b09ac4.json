@@ -652,7 +652,7 @@
               "default_previous_value": false
           },
           {
-            "type": "CheckBoxField",
+            "type": "CheckboxField",
             "key": "92ab",
             "label": "Checkbox Field",
             "description": null,
@@ -663,9 +663,9 @@
             "default_value": null
         },
         {
-          "type": "DynamicElementsField",
+          "type": "DynamicField",
           "key": "92ac",
-          "label": "DynamicElementsField Field",
+          "label": "DynamicField Field",
           "description": null,
           "required": true,
           "disabled": false,

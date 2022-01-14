@@ -39,7 +39,7 @@ export default {
 
   StatusElement: 'StatusField',
 
-  CheckBoxElement: 'CheckBoxField',
+  CheckboxElement: 'CheckboxField',
 
-  DynamicElementsElement: 'DynamicElementsField'
+  DynamicElement: 'DynamicField'
 };

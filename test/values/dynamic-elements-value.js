@@ -1,6 +1,6 @@
 import setup from '../helper';
 
-import { DynamicElementsValue } from '../../src';
+import { DynamicValue } from '../../src';
 
 let record = null;
 let checklist = null;
@@ -13,10 +13,10 @@ beforeEach((done) => {
   });
 });
 
-describe('DynamicElementsValue', () => {
+describe('DynamicValue', () => {
   describe('isEmpty', () => {
     it('is true when there are no items', () => {
-      checklist = new DynamicElementsValue('element', []);
+      checklist = new DynamicValue('element', []);
       checklist.isEmpty.should.eql(true);
     });
 
@@ -51,7 +51,7 @@ describe('DynamicElementsValue', () => {
 
   describe('when empty', () => {
     it('returns null', () => {
-      checklist = new DynamicElementsValue('element', []);
+      checklist = new DynamicValue('element', []);
       shouldBeNull(checklist.format({}));
     });
   });

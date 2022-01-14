@@ -15,8 +15,8 @@ import HyperlinkValue from './hyperlink-value';
 import BarcodeValue from './barcode-value';
 import CalculatedValue from './calculated-value';
 import RecordLinkValue from './record-link-value';
-import CheckBoxValue from './checkbox-value';
-import DynamicElementsValue from './dynamic-elements-value';
+import CheckboxValue from './checkbox-value';
+import DynamicValue from './dynamic-value';
 
 const Constructors = {
   ChoiceField: ChoiceValue,
@@ -37,8 +37,8 @@ const Constructors = {
   BarcodeField: BarcodeValue,
   CalculatedField: CalculatedValue,
   RecordLinkField: RecordLinkValue,
-  CheckBoxField: CheckBoxValue,
-  DynamicElementsField: DynamicElementsValue
+  CheckboxField: CheckboxValue,
+  DynamicField: DynamicValue
 };
 
 export default class FormValueFactory {
