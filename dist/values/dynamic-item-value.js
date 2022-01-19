@@ -16,36 +16,41 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 var DynamicItemValue =
 /*#__PURE__*/
 function () {
-  function DynamicItemValue(dynamicElementValue, attributes) {
-    this.dynamicElementValue = dynamicElementValue;
-    this._formValuesJSON = attributes.values;
-    this._elementsJSON = attributes.elements;
+  function DynamicItemValue(dynamicValue, attributes) {
+    this.dynamicValue = dynamicValue;
     this._metadataJSON = attributes.metadata;
+    this._elementsJSON = attributes.elements;
+    this._valuesJSON = attributes.values;
   }
 
   var _proto = DynamicItemValue.prototype;
 
   _proto.toJSON = function toJSON() {
     var json = {};
-    json.values = this._formValuesJSON || null;
-    json.elements = this._elementsJSON || null;
     json.metadata = this._metadataJSON || null;
+    json.elements = this._elementsJSON || null;
+    json.values = this.values.toJSON() || null;
     return json;
   };
 
   _createClass(DynamicItemValue, [{
+    key: "id",
+    get: function get() {
+      return this.metadata.id;
+    }
+  }, {
     key: "metadata",
     get: function get() {
       return this._metadataJSON;
     }
   }, {
-    key: "formValues",
+    key: "values",
     get: function get() {
-      if (this._formValues == null) {
-        this._formValues = new _formValues["default"](this, this._formValuesJSON);
+      if (this._values == null) {
+        this._values = new _formValues["default"](this, this._valuesJSON);
       }
 
-      return this._formValues;
+      return this._values;
     }
   }]);
 

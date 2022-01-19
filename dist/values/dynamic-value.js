@@ -11,6 +11,8 @@ var _multipleValueItem = _interopRequireDefault(require("./multiple-value-item")
 
 var _numberUtils = _interopRequireDefault(require("../utils/number-utils"));
 
+var _uuid = _interopRequireDefault(require("uuid"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
@@ -64,18 +66,18 @@ function (_FormValue) {
       return null;
     }
 
-    if (part === 'elements') {
-      return this.items.map(function (item) {
-        return item._elementsJSON;
-      });
-    } else if (part === 'metadata') {
+    if (part === 'metadata') {
       return this.items.map(function (item) {
         return item._metadataJSON;
+      });
+    } else if (part === 'elements') {
+      return this.items.map(function (item) {
+        return item._elementsJSON;
       });
     }
 
     return this.items.map(function (item) {
-      return item.values;
+      return item.values.toJSON();
     });
   };
 
@@ -125,12 +127,8 @@ function (_FormValue) {
     return this.length > _numberUtils["default"].parseDouble(value);
   };
 
-  _proto.addRecord = function addRecord(record) {
-    var item = new _dynamicItemValue["default"](this, {
-      record_id: record.id
-    });
-    item._record = record;
-    this.insertItem(item);
+  _proto.mapItems = function mapItems(callback) {
+    return this._items.slice().map(callback);
   };
 
   _proto.itemIndex = function itemIndex(id) {
@@ -167,6 +165,17 @@ function (_FormValue) {
     return null;
   };
 
+  _proto.createNewItem = function createNewItem() {
+    var attributes = {
+      metadata: {
+        id: _uuid["default"].v4()
+      },
+      elements: [],
+      values: {}
+    };
+    return new this.ItemClass(this, attributes);
+  };
+
   _createClass(DynamicValue, [{
     key: "ItemClass",
     get: function get() {
@@ -194,8 +203,9 @@ function (_FormValue) {
         return null;
       }
 
-      var values = [];
+      var metadata = [];
       var elements = [];
+      var values = [];
 
       for (var _iterator3 = this._items, _isArray3 = Array.isArray(_iterator3), _i3 = 0, _iterator3 = _isArray3 ? _iterator3 : _iterator3[Symbol.iterator]();;) {
         var _ref4;
@@ -210,13 +220,15 @@ function (_FormValue) {
         }
 
         var item = _ref4;
-        values.push(item.values);
+        metadata.push(item.metadata);
         elements.push(item.elements);
+        values.push(item.values);
       }
 
       var value = {};
+      value['f' + this.element.key + '_metadata'] = metadata;
       value['f' + this.element.key + '_elements'] = elements;
-      value['f' + this.element.key] = values;
+      value['f' + this.element.key + '_values'] = values;
       return value;
     }
   }, {

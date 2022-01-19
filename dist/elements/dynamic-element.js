@@ -25,7 +25,7 @@ function (_Element) {
   _createClass(DynamicElement, [{
     key: "isLengthValidationSupported",
     get: function get() {
-      return false;
+      return true;
     }
   }]);
 
