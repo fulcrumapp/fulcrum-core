@@ -3,7 +3,7 @@
 exports.__esModule = true;
 exports["default"] = void 0;
 
-var _booleanValue = _interopRequireDefault(require("./boolean-value"));
+var _element = _interopRequireDefault(require("./element"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
@@ -13,24 +13,24 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 function _inheritsLoose(subClass, superClass) { subClass.prototype = Object.create(superClass.prototype); subClass.prototype.constructor = subClass; subClass.__proto__ = superClass; }
 
-var CheckboxValue =
+var DynamicElement =
 /*#__PURE__*/
-function (_BooleanValue) {
-  _inheritsLoose(CheckboxValue, _BooleanValue);
+function (_Element) {
+  _inheritsLoose(DynamicElement, _Element);
 
-  function CheckboxValue() {
-    return _BooleanValue.apply(this, arguments) || this;
+  function DynamicElement() {
+    return _Element.apply(this, arguments) || this;
   }
 
-  _createClass(CheckboxValue, [{
-    key: "isChecked",
+  _createClass(DynamicElement, [{
+    key: "isLengthValidationSupported",
     get: function get() {
-      return this.booleanValue;
+      return false;
     }
   }]);
 
-  return CheckboxValue;
-}(_booleanValue["default"]);
+  return DynamicElement;
+}(_element["default"]);
 
-exports["default"] = CheckboxValue;
-//# sourceMappingURL=checkbox-value.js.map
+exports["default"] = DynamicElement;
+//# sourceMappingURL=dynamic-element.js.map

@@ -45,7 +45,7 @@ var _containerElement = _interopRequireDefault(require("./container-element"));
 
 var _checkboxElement = _interopRequireDefault(require("./checkbox-element"));
 
-var _dynamicElementsElement = _interopRequireDefault(require("./dynamic-elements-element"));
+var _dynamicElement = _interopRequireDefault(require("./dynamic-element"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
@@ -70,8 +70,8 @@ var Constructors = {
   BarcodeField: _barcodeElement["default"],
   CalculatedField: _calculatedElement["default"],
   RecordLinkField: _recordLinkElement["default"],
-  CheckBoxField: _checkboxElement["default"],
-  DynamicElementsField: _dynamicElementsElement["default"]
+  CheckboxField: _checkboxElement["default"],
+  DynamicField: _dynamicElement["default"]
 };
 var initialized = false;
 
