@@ -2,33 +2,37 @@ import ChildElements from '../elements/child-elements';
 import FormValues from './form-values';
 
 export default class DynamicItemValue {
-  constructor(dynamicElementValue, attributes) {
-    this.dynamicElementValue = dynamicElementValue;
-    this._formValuesJSON = attributes.values;
-    this._elementsJSON = attributes.elements;
+  constructor(dynamicValue, attributes) {
+    this.dynamicValue = dynamicValue;
     this._metadataJSON = attributes.metadata;
+    this._elementsJSON = attributes.elements;
+    this._valuesJSON = attributes.values;
   }
 
   toJSON() {
     const json = {};
 
-    json.values = this._formValuesJSON || null;
-    json.elements = this._elementsJSON || null;
     json.metadata = this._metadataJSON || null;
+    json.elements = this._elementsJSON || null;
+    json.values = this.values.toJSON() || null;
 
     return json;
+  }
+
+  get id() {
+    return this.metadata.id;
   }
 
   get metadata() {
     return this._metadataJSON;
   }
 
-  get formValues() {
-    if (this._formValues == null) {
-      this._formValues = new FormValues(this, this._formValuesJSON);
+  get values() {
+    if (this._values == null) {
+      this._values = new FormValues(this, this._valuesJSON);
     }
 
-    return this._formValues;
+    return this._values;
   }
 }
 

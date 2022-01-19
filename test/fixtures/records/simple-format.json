@@ -159,6 +159,10 @@
         "checkbox_field": true,
         "checklist": [
             {
+                "metadata": {
+                    "id": "bacd0c33-ad90-429d-b791-b8a05f0d2487",
+                    "timestamp": "2022-12-03T02:15:06Z"
+                },
                 "elements": [
                     {
                         "type": "CheckboxField",
@@ -174,9 +178,6 @@
                 ],
                 "values": {
                     "1": true
-                },
-                "metadata": {
-                    "timestamp": "2022-12-03T02:15:06Z"
                 }
             }
         ]

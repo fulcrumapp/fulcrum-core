@@ -2,6 +2,7 @@ import FormValue from './form-value';
 import DynamicItemValue from './dynamic-item-value';
 import MultipleValueItem from './multiple-value-item';
 import NumberUtils from '../utils/number-utils';
+import uuid from 'uuid';
 
 export default class DynamicValue extends FormValue {
   constructor(element, items) {
@@ -37,13 +38,13 @@ export default class DynamicValue extends FormValue {
       return null;
     }
 
-    if (part === 'elements') {
-      return this.items.map(item => item._elementsJSON);
-    } else if (part === 'metadata') {
+    if (part === 'metadata') {
       return this.items.map(item => item._metadataJSON);
+    } else if (part === 'elements') {
+      return this.items.map(item => item._elementsJSON);
     }
 
-    return this.items.map(item => item.values);
+    return this.items.map(item => item.values.toJSON());
   }
 
   get columnValue() {
@@ -51,18 +52,21 @@ export default class DynamicValue extends FormValue {
       return null;
     }
 
-    const values = [];
+    const metadata = [];
     const elements = [];
+    const values = [];
 
     for (const item of this._items) {
-      values.push(item.values);
+      metadata.push(item.metadata);
       elements.push(item.elements);
+      values.push(item.values);
     }
 
     const value = {};
 
+    value['f' + this.element.key + '_metadata'] = metadata;
     value['f' + this.element.key + '_elements'] = elements;
-    value['f' + this.element.key] = values;
+    value['f' + this.element.key + '_values'] = values;
 
     return value;
   }
@@ -111,16 +115,12 @@ export default class DynamicValue extends FormValue {
     return this.length > NumberUtils.parseDouble(value);
   }
 
-  get items() {
-    return this._items.slice();
+  mapItems(callback) {
+    return this._items.slice().map(callback);
   }
 
-  addRecord(record) {
-    const item = new DynamicItemValue(this, {record_id: record.id});
-
-    item._record = record;
-
-    this.insertItem(item);
+  get items() {
+    return this._items.slice();
   }
 
   itemIndex(id) {
@@ -155,5 +155,17 @@ export default class DynamicValue extends FormValue {
     }
 
     return null;
+  }
+
+  createNewItem() {
+    const attributes = {
+      metadata: {
+        id: uuid.v4()
+      },
+      elements: [],
+      values: {}
+    };
+
+    return new this.ItemClass(this, attributes);
   }
 }
