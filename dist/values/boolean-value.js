@@ -5,10 +5,6 @@ exports["default"] = void 0;
 
 var _formValue = _interopRequireDefault(require("./form-value"));
 
-var _textUtils = _interopRequireDefault(require("../utils/text-utils"));
-
-var _numberUtils = _interopRequireDefault(require("../utils/number-utils"));
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
@@ -35,7 +31,7 @@ function (_FormValue) {
   _proto.format = function format(_ref) {
     var _ref$useDisplayValue = _ref.useDisplayValue,
         useDisplayValue = _ref$useDisplayValue === void 0 ? false : _ref$useDisplayValue;
-    return this.booleanValue.toString;
+    return useDisplayValue ? this.displayValue : this.booleanValue;
   };
 
   _proto.toJSON = function toJSON() {
@@ -43,7 +39,7 @@ function (_FormValue) {
   };
 
   _proto.isEqual = function isEqual(booleanValue) {
-    return this.booleanValues === booleanValue;
+    return this.booleanValue === booleanValue;
   };
 
   _createClass(BooleanValue, [{

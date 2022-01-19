@@ -23,8 +23,8 @@ var _default = {
   CalculatedElement: 'CalculatedField',
   RecordLinkElement: 'RecordLinkField',
   StatusElement: 'StatusField',
-  CheckBoxElement: 'CheckBoxField',
-  DynamicElementsElement: 'DynamicElementsField'
+  CheckboxElement: 'CheckboxField',
+  DynamicElement: 'DynamicField'
 };
 exports["default"] = _default;
 //# sourceMappingURL=element-types.js.map
