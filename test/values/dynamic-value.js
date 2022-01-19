@@ -45,11 +45,6 @@ describe('DynamicValue', () => {
       const testValue = checklist.items[1].values.get(testElement.key);
       testValue.should.be.instanceof(TextValue);
 
-      console.log(checklist.items[1].metadata.id);
-      console.log(typeof checklist.items[1].metadata.id);
-      console.log(newItem.metadata.id);
-      console.log(typeof newItem.metadata.id);
-
       checklist.items[1].toJSON().metadata.id.should.eql(newItem.metadata.id);
       // checklist.items[1].toJSON().should.eql({ metadata: { id: 'aaa'}, elements: [], values: {} });
     });
