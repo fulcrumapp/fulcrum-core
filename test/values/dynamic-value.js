@@ -33,7 +33,7 @@ describe('DynamicValue', () => {
 
       delete metadata.x;
       checklist.items[0].metadata.id.should.eql('bacd0c33-ad90-429d-b791-b8a05f0d2487');
-      (checklist.items[0].metadata.x === undefined).should.true;
+      (checklist.items[0].metadata.x === undefined).should.be.true;
     });
   });
 
