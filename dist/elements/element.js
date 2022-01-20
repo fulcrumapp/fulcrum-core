@@ -412,6 +412,16 @@ function () {
     get: function get() {
       return this.isType(_elementTypes["default"].StatusElement);
     }
+  }, {
+    key: "isCheckboxElement",
+    get: function get() {
+      return this.isType(_elementTypes["default"].CheckboxElement);
+    }
+  }, {
+    key: "isDynamicElement",
+    get: function get() {
+      return this.isType(_elementTypes["default"].DynamicElement);
+    }
   }]);
 
   return Element;
