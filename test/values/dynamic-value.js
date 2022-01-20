@@ -25,6 +25,14 @@ describe('DynamicValue', () => {
     });
   });
 
+  describe('modifiyItem', () => {
+    it('updates the metadata', () => {
+      const metadata = checklist.items[0].metadata;
+      metadata.x = true;
+      checklist.items[0].metadata.x.should.eql(true);
+    });
+  });
+
   describe('addItem', () => {
     it('adds an item', () => {
       const newItem = checklist.createNewItem();
