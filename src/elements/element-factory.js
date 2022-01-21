@@ -18,6 +18,8 @@ import BarcodeElement from './barcode-element';
 import CalculatedElement from './calculated-element';
 import RecordLinkElement from './record-link-element';
 import ContainerElement from './container-element';
+import CheckboxElement from './checkbox-element';
+import DynamicElement from './dynamic-element';
 
 const Constructors = {
   Section: SectionElement,
@@ -39,7 +41,9 @@ const Constructors = {
   HyperlinkField: HyperlinkElement,
   BarcodeField: BarcodeElement,
   CalculatedField: CalculatedElement,
-  RecordLinkField: RecordLinkElement
+  RecordLinkField: RecordLinkElement,
+  CheckboxField: CheckboxElement,
+  DynamicField: DynamicElement
 };
 
 let initialized = false;

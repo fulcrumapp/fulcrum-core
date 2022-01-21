@@ -262,6 +262,22 @@ var _projectElement = _interopRequireDefault(require("./elements/project-element
 
 exports.ProjectElement = _projectElement["default"];
 
+var _checkboxElement = _interopRequireDefault(require("./elements/checkbox-element"));
+
+exports.CheckboxElement = _checkboxElement["default"];
+
+var _checkboxValue = _interopRequireDefault(require("./values/checkbox-value"));
+
+exports.CheckboxValue = _checkboxValue["default"];
+
+var _dynamicElement = _interopRequireDefault(require("./elements/dynamic-element"));
+
+exports.DynamicElement = _dynamicElement["default"];
+
+var _dynamicValue = _interopRequireDefault(require("./values/dynamic-value"));
+
+exports.DynamicValue = _dynamicValue["default"];
+
 var _user = _interopRequireDefault(require("./user"));
 
 exports.User = _user["default"];

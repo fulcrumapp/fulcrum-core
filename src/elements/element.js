@@ -336,4 +336,12 @@ export default class Element {
   get isStatusElement() {
     return this.isType(Types.StatusElement);
   }
+
+  get isCheckboxElement() {
+    return this.isType(Types.CheckboxElement);
+  }
+
+  get isDynamicElement() {
+    return this.isType(Types.DynamicElement);
+  }
 }

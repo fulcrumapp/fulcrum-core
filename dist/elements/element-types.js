@@ -22,7 +22,9 @@ var _default = {
   BarcodeElement: 'BarcodeField',
   CalculatedElement: 'CalculatedField',
   RecordLinkElement: 'RecordLinkField',
-  StatusElement: 'StatusField'
+  StatusElement: 'StatusField',
+  CheckboxElement: 'CheckboxField',
+  DynamicElement: 'DynamicField'
 };
 exports["default"] = _default;
 //# sourceMappingURL=element-types.js.map

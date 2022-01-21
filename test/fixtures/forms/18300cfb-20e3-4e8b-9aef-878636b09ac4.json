@@ -650,7 +650,29 @@
               },
               "default_values": null,
               "default_previous_value": false
-          }
-      ]
+          },
+          {
+            "type": "CheckboxField",
+            "key": "92ab",
+            "label": "Checkbox Field",
+            "description": null,
+            "required": true,
+            "disabled": false,
+            "hidden": false,
+            "data_name": "checkbox_field",
+            "default_value": null
+        },
+        {
+          "type": "DynamicField",
+          "key": "92ac",
+          "label": "DynamicField Field",
+          "description": null,
+          "required": true,
+          "disabled": false,
+          "hidden": false,
+          "data_name": "checklist",
+          "default_value": null
+      }
+    ]
   }
 }
