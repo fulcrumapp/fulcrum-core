@@ -107,7 +107,6 @@ describe('DynamicValue', () => {
             visible_conditions: null,
             required_conditions_type: null,
             required_conditions: null,
-            default_previous_value: false
           }
         ],
         values: {

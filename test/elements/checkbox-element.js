@@ -26,7 +26,6 @@ describe('checkbox fields', () => {
       data_name: 'checkbox_field',
       description: null,
       default_value: null,
-      default_previous_value: false,
       disabled: false,
       hidden: false,
       required: true,
