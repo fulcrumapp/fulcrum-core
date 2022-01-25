@@ -295,12 +295,12 @@ function () {
   }, {
     key: "hasMinLength",
     get: function get() {
-      return this.minLength > 0;
+      return this.minLength != null && this.minLength > 0;
     }
   }, {
     key: "hasMaxLength",
     get: function get() {
-      return this.maxLength > 0;
+      return this.maxLength != null && this.maxLength > 0;
     }
   }, {
     key: "hasRequiredConditions",

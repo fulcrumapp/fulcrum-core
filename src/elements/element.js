@@ -220,11 +220,11 @@ export default class Element {
   }
 
   get hasMinLength() {
-    return this.minLength > 0;
+    return this.minLength != null && this.minLength > 0;
   }
 
   get hasMaxLength() {
-    return this.maxLength > 0;
+    return this.maxLength != null && this.maxLength > 0;
   }
 
   get hasRequiredConditions() {
