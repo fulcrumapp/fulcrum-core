@@ -71,8 +71,8 @@ export default class TextElement extends TextualElement {
 
     if (this.isNumeric) {
       json.format = this.format || 'decimal';
-      json.min = this.hasMin ? this.min : null
-      json.max = this.hasMax ? this.max : null
+      json.min = this.hasMin ? this.min : null;
+      json.max = this.hasMax ? this.max : null;
     } else {
       json.pattern = this.hasPattern ? this.pattern : null;
       json.pattern_description = this.hasPatternDescription ? this.patternDescription : null;
