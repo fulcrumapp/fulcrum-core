@@ -59,4 +59,30 @@ export default class TextElement extends TextualElement {
   get hasPattern() {
     return this.pattern && this.pattern.length;
   }
+
+  get hasPatternDescription() {
+    return this.patternDescription && this.patternDescription.length;
+  }
+
+  toJSON() {
+    const json = super.toJSON();
+
+    json.numeric = this._isNumeric;
+
+    if (this.isNumeric) {
+      json.format = this.format || 'decimal';
+      json.min = this.hasMin ? this.min : null
+      json.max = this.hasMax ? this.max : null
+    } else {
+      json.pattern = this.hasPattern ? this.pattern : null;
+      json.pattern_description = this.hasPatternDescription ? this.patternDescription : null;
+    }
+
+    json.min_length = this.minLength;
+    json.max_length = this.maxLength;
+
+    json.default_previous_value = !!this._defaultPreviousValue;
+
+    return json;
+  }
 }

@@ -74,8 +74,8 @@ function () {
       }
     }
 
-    this._minLength = -1;
-    this._maxLength = -1;
+    this._minLength = null;
+    this._maxLength = null;
 
     if (attributes.min_length != null) {
       this._minLength = +attributes.min_length;
@@ -104,6 +104,29 @@ function () {
     this._overrideIsDisabled = null;
     this._overrideMinLength = null;
     this._overrideMaxLength = null;
+  };
+
+  _proto.toJSON = function toJSON() {
+    return {
+      type: this._type || null,
+      key: this._key,
+      label: this._label || null,
+      description: this._description || null,
+      required: this._isRequired,
+      disabled: this._isDisabled,
+      hidden: this._isHidden,
+      data_name: this._dataName,
+      default_value: this._defaultValue || null,
+      visible_conditions_type: this._visibleConditionsType || null,
+      visible_conditions_behavior: this._visibleConditionsBehavior || null,
+      visible_conditions: this._visibleConditions.length > 0 ? this._visibleConditions.map(function (c) {
+        return c.toJSON();
+      }) : null,
+      required_conditions_type: this._requiredConditionsType || null,
+      required_conditions: this._requiredConditions.length > 0 ? this._requiredConditions.map(function (c) {
+        return c.toJSON();
+      }) : null
+    };
   };
 
   _proto.isType = function isType(type) {

@@ -40,7 +40,7 @@ describe('DynamicValue', () => {
   describe('addItem', () => {
     it('adds an item', () => {
       const newItem = checklist.createNewItem();
-      const newElement = new TextElement('element', {key: '2', data_name: '2'});
+      const newElement = new TextElement(null, { type: 'TextField', key: '2', data_name: '2' });
       newItem.elements.push(newElement);
       const newValue = new TextValue(newElement, 'testtext');
       newItem.values.set('2', newValue);
@@ -57,8 +57,36 @@ describe('DynamicValue', () => {
       const testValue = checklist.items[1].values.get(testElement.key);
       testValue.should.be.instanceof(TextValue);
 
-      checklist.items[1].toJSON().metadata.id.should.eql(newItem.metadata.id);
-      // checklist.items[1].toJSON().should.eql({ metadata: { id: 'aaa'}, elements: [], values: {} });
+      checklist.items[1].toJSON().should.eql({
+        metadata: {
+          id: newItem.metadata.id
+        },
+        elements: [
+          {
+            type: 'TextField',
+            key: '2',
+            label: null,
+            description: null,
+            required: false,
+            disabled: false,
+            hidden: false,
+            data_name: '2',
+            default_value: null,
+            visible_conditions_type: null,
+            visible_conditions_behavior: 'clear',
+            visible_conditions: null,
+            required_conditions_type: null,
+            required_conditions: null,
+            numeric: false,
+            pattern: null,
+            pattern_description: null,
+            min_length: null,
+            max_length: null,
+            default_previous_value: false
+          }
+        ],
+        values: { '2': 'testtext' }
+      });
     });
   });
 

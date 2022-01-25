@@ -5,6 +5,8 @@ exports["default"] = void 0;
 
 var _childElements = _interopRequireDefault(require("../elements/child-elements"));
 
+var _elementFactory = _interopRequireDefault(require("../elements/element-factory"));
+
 var _formValues = _interopRequireDefault(require("./form-values"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
@@ -28,8 +30,25 @@ function () {
   _proto.toJSON = function toJSON() {
     var json = {};
     json.metadata = this._metadataJSON || null;
-    json.elements = this._elementsJSON || null;
-    json.values = this.values.toJSON() || null;
+    json.elements = [];
+
+    for (var _iterator = this.elements, _isArray = Array.isArray(_iterator), _i = 0, _iterator = _isArray ? _iterator : _iterator[Symbol.iterator]();;) {
+      var _ref;
+
+      if (_isArray) {
+        if (_i >= _iterator.length) break;
+        _ref = _iterator[_i++];
+      } else {
+        _i = _iterator.next();
+        if (_i.done) break;
+        _ref = _i.value;
+      }
+
+      var element = _ref;
+      json.elements.push(element.toJSON());
+    }
+
+    json.values = this.values.toJSON();
     return json;
   };
 
@@ -42,6 +61,32 @@ function () {
     key: "metadata",
     get: function get() {
       return this._metadataJSON;
+    }
+  }, {
+    key: "elements",
+    get: function get() {
+      if (this._elements == null) {
+        this._elements = [];
+
+        for (var _iterator2 = this._elementsJSON, _isArray2 = Array.isArray(_iterator2), _i2 = 0, _iterator2 = _isArray2 ? _iterator2 : _iterator2[Symbol.iterator]();;) {
+          var _ref2;
+
+          if (_isArray2) {
+            if (_i2 >= _iterator2.length) break;
+            _ref2 = _iterator2[_i2++];
+          } else {
+            _i2 = _iterator2.next();
+            if (_i2.done) break;
+            _ref2 = _i2.value;
+          }
+
+          var elementJSON = _ref2;
+
+          this._elements.push(_elementFactory["default"].create(null, elementJSON));
+        }
+      }
+
+      return this._elements;
     }
   }, {
     key: "values",

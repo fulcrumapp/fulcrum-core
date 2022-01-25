@@ -1,4 +1,5 @@
 import ChildElements from '../elements/child-elements';
+import ElementFactory from '../elements/element-factory';
 import FormValues from './form-values';
 
 export default class DynamicItemValue {
@@ -13,8 +14,13 @@ export default class DynamicItemValue {
     const json = {};
 
     json.metadata = this._metadataJSON || null;
-    json.elements = this._elementsJSON || null;
-    json.values = this.values.toJSON() || null;
+
+    json.elements = [];
+    for (const element of this.elements) {
+      json.elements.push(element.toJSON());
+    }
+
+    json.values = this.values.toJSON();
 
     return json;
   }
@@ -25,6 +31,17 @@ export default class DynamicItemValue {
 
   get metadata() {
     return this._metadataJSON;
+  }
+
+  get elements() {
+    if (this._elements == null) {
+      this._elements = [];
+      for (const elementJSON of this._elementsJSON) {
+        this._elements.push(ElementFactory.create(null, elementJSON));
+      }
+    }
+
+    return this._elements;
   }
 
   get values() {

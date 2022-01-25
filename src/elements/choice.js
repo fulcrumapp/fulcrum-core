@@ -3,4 +3,11 @@ export default class Choice {
     this.label = attributes.label;
     this.value = attributes.value || attributes.label;
   }
+
+  toJSON() {
+    return {
+      label: this.label,
+      value: this.value
+    };
+  }
 }

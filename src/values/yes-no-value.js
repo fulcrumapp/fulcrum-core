@@ -34,7 +34,7 @@ export default class YesNoValue extends TextualValue {
       case this.isNeutral:
         return this.element.neutralChoice.label;
       default:
-        return this.textValue;
+        return this.textValueo || '';
     }
   }
 }
