@@ -37,7 +37,10 @@ export default class DynamicItemValue {
     if (this._elements == null) {
       this._elements = [];
       for (const elementJSON of this._elementsJSON) {
-        this._elements.push(ElementFactory.create(null, elementJSON));
+        const element = ElementFactory.create(null, elementJSON);
+        if (element) {
+          this._elements.push(element);
+        }
       }
     }
 
@@ -52,5 +55,3 @@ export default class DynamicItemValue {
     return this._values;
   }
 }
-
-ChildElements.includeInto(DynamicItemValue);
