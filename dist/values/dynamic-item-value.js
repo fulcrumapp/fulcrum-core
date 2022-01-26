@@ -82,7 +82,11 @@ function () {
 
           var elementJSON = _ref2;
 
-          this._elements.push(_elementFactory["default"].create(null, elementJSON));
+          var element = _elementFactory["default"].create(null, elementJSON);
+
+          if (element) {
+            this._elements.push(element);
+          }
         }
       }
 
@@ -103,6 +107,4 @@ function () {
 }();
 
 exports["default"] = DynamicItemValue;
-
-_childElements["default"].includeInto(DynamicItemValue);
 //# sourceMappingURL=dynamic-item-value.js.map
