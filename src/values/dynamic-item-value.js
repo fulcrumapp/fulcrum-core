@@ -1,4 +1,3 @@
-import ChildElements from '../elements/child-elements';
 import ElementFactory from '../elements/element-factory';
 import FormValues from './form-values';
 
