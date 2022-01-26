@@ -63,7 +63,7 @@ function (_TextualValue) {
           return this.element.neutralChoice.label;
 
         default:
-          return this.textValueo || '';
+          return this.textValue || '';
       }
     }
   }]);
