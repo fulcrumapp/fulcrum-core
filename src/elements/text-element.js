@@ -67,7 +67,7 @@ export default class TextElement extends TextualElement {
   toJSON() {
     const json = super.toJSON();
 
-    json.numeric = this._isNumeric;
+    json.numeric = this.isNumeric;
 
     if (this.isNumeric) {
       json.format = this.format || 'decimal';
@@ -78,8 +78,8 @@ export default class TextElement extends TextualElement {
       json.pattern_description = this.hasPatternDescription ? this.patternDescription : null;
     }
 
-    json.min_length = this.minLength;
-    json.max_length = this.maxLength;
+    json.min_length = this._minLength;
+    json.max_length = this._maxLength;
 
     json.default_previous_value = !!this._defaultPreviousValue;
 

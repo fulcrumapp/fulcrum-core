@@ -53,7 +53,7 @@ function (_TextualElement) {
   _proto.toJSON = function toJSON() {
     var json = _TextualElement.prototype.toJSON.call(this);
 
-    json.numeric = this._isNumeric;
+    json.numeric = this.isNumeric;
 
     if (this.isNumeric) {
       json.format = this.format || 'decimal';
@@ -64,8 +64,8 @@ function (_TextualElement) {
       json.pattern_description = this.hasPatternDescription ? this.patternDescription : null;
     }
 
-    json.min_length = this.minLength;
-    json.max_length = this.maxLength;
+    json.min_length = this._minLength;
+    json.max_length = this._maxLength;
     json.default_previous_value = !!this._defaultPreviousValue;
     return json;
   };

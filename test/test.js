@@ -1,6 +1,6 @@
 import fs from 'fs';
 import path from 'path';
-import {Form, Record} from '../src';
+import {Form, FormValue, Record} from '../src';
 import FeatureValidator from '../src/validation/feature-validator';
 import RequiredFieldValidationError from '../src/validation/required-field-validation-error';
 import CustomValidationError from '../src/validation/custom-validation-error';
@@ -87,5 +87,15 @@ describe('FeatureValidator', () => {
 
     error.should.be.instanceOf(CustomValidationError);
     error.message.should.eql('fail is not a valid status.');
+  });
+
+  it('validates a required checkbox is checked', () => {
+    const checkboxElement = record.formValues.find('checkbox_field').element;
+    record.formValues.set(checkboxElement.key, FormValue.create(checkboxElement, false));
+
+    const [ error ] = FeatureValidator.validateRecord(record, record.formValues);
+
+    error.should.be.instanceOf(RequiredFieldValidationError);
+    error.message.should.eql("The field 'Checkbox Field' is required.");
   });
 });
