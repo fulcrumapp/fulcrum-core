@@ -122,54 +122,56 @@ function () {
         if (validatable) {
           if (required) {
             var fieldValue = formValues.get(element.key);
+            var error = FeatureValidator.validateRequiredField(element, fieldValue);
 
-            if (fieldValue == null || fieldValue.isEmpty) {
-              errors.push(new _requiredFieldValidationError["default"](element));
+            if (error) {
+              errors.push(error);
             }
           }
 
           if (element.isTextElement) {
             if (element.isNumeric) {
               var textValue = formValues.get(element.key);
-              var error = FeatureValidator.validateNumericField(element, textValue);
 
-              if (error) {
-                errors.push(error);
+              var _error = FeatureValidator.validateNumericField(element, textValue);
+
+              if (_error) {
+                errors.push(_error);
               }
             } else if (element.hasPattern) {
               var _textValue = formValues.get(element.key);
 
-              var _error = FeatureValidator.validatePatternOfElement(element, _textValue);
+              var _error2 = FeatureValidator.validatePatternOfElement(element, _textValue);
 
-              if (_error) {
-                errors.push(_error);
+              if (_error2) {
+                errors.push(_error2);
               }
             }
           }
 
           if (element.isDateElement) {
-            var _error2 = FeatureValidator.validateDateField(element, formValues.get(element.key));
-
-            if (_error2) {
-              errors.push(_error2);
-            }
-          }
-
-          if (element.isTimeElement) {
-            var _error3 = FeatureValidator.validateTimeField(element, formValues.get(element.key));
+            var _error3 = FeatureValidator.validateDateField(element, formValues.get(element.key));
 
             if (_error3) {
               errors.push(_error3);
             }
           }
 
-          if (element.isLengthValidationSupported) {
-            var _fieldValue = formValues.get(element.key);
-
-            var _error4 = FeatureValidator.validateLengthForElement(element, _fieldValue);
+          if (element.isTimeElement) {
+            var _error4 = FeatureValidator.validateTimeField(element, formValues.get(element.key));
 
             if (_error4) {
               errors.push(_error4);
+            }
+          }
+
+          if (element.isLengthValidationSupported) {
+            var _fieldValue = formValues.get(element.key);
+
+            var _error5 = FeatureValidator.validateLengthForElement(element, _fieldValue);
+
+            if (_error5) {
+              errors.push(_error5);
             }
           }
         }
@@ -199,6 +201,14 @@ function () {
         }
       }
     }
+  };
+
+  FeatureValidator.validateRequiredField = function validateRequiredField(element, value) {
+    if (value == null || value.isEmpty) {
+      return new _requiredFieldValidationError["default"](element);
+    }
+
+    return null;
   };
 
   FeatureValidator.validatePatternOfElement = function validatePatternOfElement(element, value) {

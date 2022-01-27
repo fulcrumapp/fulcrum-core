@@ -22,6 +22,95 @@ describe('text fields', () => {
     field.patternDescription.should.eql('Alphanumeric Only');
     field.minLength.should.eql(1);
     field.maxLength.should.eql(30);
+
+    field.toJSON().should.eql({
+      type: 'TextField',
+      label: 'Name',
+      key: 'ae75',
+      data_name: 'name',
+      description: 'Enter your name',
+      default_value: 'no name',
+      default_previous_value: false,
+      disabled: false,
+      hidden: false,
+      max_length: 30,
+      min_length: 1,
+      numeric: false,
+      pattern: '[a-zA-Z0-9]+',
+      pattern_description: 'Alphanumeric Only',
+      required: true,
+      required_conditions: null,
+      required_conditions_type: null,
+      visible_conditions: null,
+      visible_conditions_behavior: 'clear',
+      visible_conditions_type: null,
+    });
+  });
+
+  it('finds a integer numeric text field in the form', () => {
+    const field = record.form.find('integer_number');
+
+    field.should.be.instanceof(TextElement);
+    field.isNumeric.should.eql(true);
+    shouldBeNull(field.minLength);
+    shouldBeNull(field.maxLength);
+
+    field.toJSON().should.eql({
+      type: 'TextField',
+      label: 'Integer Number',
+      key: 'a861',
+      data_name: 'integer_number',
+      description: null,
+      default_value: null,
+      default_previous_value: false,
+      disabled: false,
+      format: 'integer',
+      hidden: false,
+      max: null,
+      min: null,
+      max_length: null,
+      min_length: null,
+      numeric: true,
+      required: true,
+      required_conditions: null,
+      required_conditions_type: null,
+      visible_conditions: null,
+      visible_conditions_behavior: 'clear',
+      visible_conditions_type: null,
+    });
+  });
+
+  it('finds a decimal numeric text field in the form', () => {
+    const field = record.form.find('decimal_number');
+
+    field.should.be.instanceof(TextElement);
+    field.isNumeric.should.eql(true);
+    shouldBeNull(field.minLength)
+    shouldBeNull(field.maxLength)
+
+    field.toJSON().should.eql({
+      type: 'TextField',
+      label: 'Decimal Number',
+      key: 'cfe6',
+      data_name: 'decimal_number',
+      description: null,
+      default_value: null,
+      default_previous_value: false,
+      disabled: false,
+      format: 'decimal',
+      hidden: false,
+      max: null,
+      min: null,
+      max_length: null,
+      min_length: null,
+      numeric: true,
+      required: false,
+      required_conditions: null,
+      required_conditions_type: null,
+      visible_conditions: null,
+      visible_conditions_behavior: 'clear',
+      visible_conditions_type: null,
+    });
   });
 
   it('finds a text value in the record', () => {

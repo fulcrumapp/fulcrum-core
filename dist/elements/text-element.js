@@ -48,6 +48,28 @@ function (_TextualElement) {
     return _this;
   }
 
+  var _proto = TextElement.prototype;
+
+  _proto.toJSON = function toJSON() {
+    var json = _TextualElement.prototype.toJSON.call(this);
+
+    json.numeric = this.isNumeric;
+
+    if (this.isNumeric) {
+      json.format = this.format || 'decimal';
+      json.min = this.hasMin ? this.min : null;
+      json.max = this.hasMax ? this.max : null;
+    } else {
+      json.pattern = this.hasPattern ? this.pattern : null;
+      json.pattern_description = this.hasPatternDescription ? this.patternDescription : null;
+    }
+
+    json.min_length = this._minLength;
+    json.max_length = this._maxLength;
+    json.default_previous_value = !!this._defaultPreviousValue;
+    return json;
+  };
+
   _createClass(TextElement, [{
     key: "isLengthValidationSupported",
     get: function get() {
@@ -82,6 +104,11 @@ function (_TextualElement) {
     key: "hasPattern",
     get: function get() {
       return this.pattern && this.pattern.length;
+    }
+  }, {
+    key: "hasPatternDescription",
+    get: function get() {
+      return this.patternDescription && this.patternDescription.length;
     }
   }]);
 

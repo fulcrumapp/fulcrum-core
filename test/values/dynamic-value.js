@@ -1,6 +1,12 @@
 import setup from '../helper';
 
-import { DynamicValue, TextElement, TextValue, CheckboxElement } from '../../src';
+import {
+  CheckboxElement,
+  CheckboxValue,
+  DynamicValue,
+  TextElement,
+  TextValue
+} from '../../src';
 
 let record = null;
 let checklist = null;
@@ -40,25 +46,74 @@ describe('DynamicValue', () => {
   describe('addItem', () => {
     it('adds an item', () => {
       const newItem = checklist.createNewItem();
-      const newElement = new TextElement('element', {key: '2', data_name: '2'});
-      newItem.elements.push(newElement);
-      const newValue = new TextValue(newElement, 'testtext');
-      newItem.values.set('2', newValue);
+      const textElement = new TextElement(null, { type: 'TextField', key: '2', data_name: '2' });
+      const textValue = new TextValue(textElement, 'testtext');
+      const checkboxElement = new CheckboxElement(null, { type: 'CheckboxField', key: '3', data_name: '3' });
+      const checkboxValue = new CheckboxValue(checkboxElement, true);
 
-      newItem.elements[0].should.be.instanceof(TextElement);
-      newItem.elements.length.should.eql(1);
+      newItem.elements.push(textElement);
+      newItem.values.set(textElement.key, textValue);
+      newItem.elements.push(checkboxElement);
+      newItem.values.set(checkboxElement.key, checkboxValue);
 
       checklist.insertItem(newItem);
 
       checklist.itemIndex(newItem.metadata.id).should.eql(1);
       checklist.items.length.should.eql(2);
-      const testElement = checklist.items[1].elements[0];
-      testElement.should.be.instanceof(TextElement);
-      const testValue = checklist.items[1].values.get(testElement.key);
-      testValue.should.be.instanceof(TextValue);
+      checklist.items[1].elements[0].should.be.instanceof(TextElement);
+      checklist.items[1].values.get(textElement.key).should.be.instanceof(TextValue);
+      checklist.items[1].elements[1].should.be.instanceof(CheckboxElement);
+      checklist.items[1].values.get(checkboxElement.key).should.be.instanceof(CheckboxValue);
 
-      checklist.items[1].toJSON().metadata.id.should.eql(newItem.metadata.id);
-      // checklist.items[1].toJSON().should.eql({ metadata: { id: 'aaa'}, elements: [], values: {} });
+      checklist.items[1].toJSON().should.eql({
+        metadata: {
+          id: newItem.metadata.id
+        },
+        elements: [
+          {
+            type: 'TextField',
+            key: '2',
+            label: null,
+            description: null,
+            required: false,
+            disabled: false,
+            hidden: false,
+            data_name: '2',
+            default_value: null,
+            visible_conditions_type: null,
+            visible_conditions_behavior: 'clear',
+            visible_conditions: null,
+            required_conditions_type: null,
+            required_conditions: null,
+            numeric: false,
+            pattern: null,
+            pattern_description: null,
+            min_length: null,
+            max_length: null,
+            default_previous_value: false
+          },
+          {
+            type: 'CheckboxField',
+            key: '3',
+            label: null,
+            description: null,
+            required: false,
+            disabled: false,
+            hidden: false,
+            data_name: '3',
+            default_value: null,
+            visible_conditions_type: null,
+            visible_conditions_behavior: 'clear',
+            visible_conditions: null,
+            required_conditions_type: null,
+            required_conditions: null,
+          }
+        ],
+        values: {
+          '2': 'testtext',
+          '3': true
+        }
+      });
     });
   });
 

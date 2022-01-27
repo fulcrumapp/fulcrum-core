@@ -19,8 +19,12 @@ export default class BooleanValue extends FormValue {
     return 1;
   }
 
+  // This is really more a "falsey" value rather than empty.
+  // It is used with the is_empty and is_not_empty visibility
+  // conditions (e.g. what value would this field have that
+  // could toggle visibility of other elements?)
   get isEmpty() {
-    return false;
+    return !this.booleanValue;
   }
 
   get searchableValue() {

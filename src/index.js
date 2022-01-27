@@ -44,6 +44,8 @@ export HyperlinkElement from './elements/hyperlink-element';
 export HyperlinkValue from './values/hyperlink-value';
 export TextElement from './elements/text-element';
 export TextValue from './values/text-value';
+export YesNoElement from './elements/yes-no-element';
+export YesNoValue from './values/yes-no-value';
 export SectionElement from './elements/section-element';
 export SignatureElement from './elements/signature-element';
 export SignatureValue from './values/signature-value';

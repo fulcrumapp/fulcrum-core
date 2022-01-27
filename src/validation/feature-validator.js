@@ -92,8 +92,10 @@ export default class FeatureValidator {
           if (required) {
             const fieldValue = formValues.get(element.key);
 
-            if (fieldValue == null || fieldValue.isEmpty) {
-              errors.push(new RequiredFieldValidationError(element));
+            const error = FeatureValidator.validateRequiredField(element, fieldValue);
+
+            if (error) {
+              errors.push(error);
             }
           }
 
@@ -158,6 +160,14 @@ export default class FeatureValidator {
         }
       }
     }
+  }
+
+  static validateRequiredField(element, value) {
+    if (value == null || value.isEmpty) {
+      return new RequiredFieldValidationError(element);
+    }
+
+    return null;
   }
 
   static validatePatternOfElement(element, value) {

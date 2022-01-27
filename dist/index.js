@@ -186,6 +186,14 @@ var _textValue = _interopRequireDefault(require("./values/text-value"));
 
 exports.TextValue = _textValue["default"];
 
+var _yesNoElement = _interopRequireDefault(require("./elements/yes-no-element"));
+
+exports.YesNoElement = _yesNoElement["default"];
+
+var _yesNoValue = _interopRequireDefault(require("./values/yes-no-value"));
+
+exports.YesNoValue = _yesNoValue["default"];
+
 var _sectionElement = _interopRequireDefault(require("./elements/section-element"));
 
 exports.SectionElement = _sectionElement["default"];

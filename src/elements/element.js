@@ -49,8 +49,8 @@ export default class Element {
       }
     }
 
-    this._minLength = -1;
-    this._maxLength = -1;
+    this._minLength = null;
+    this._maxLength = null;
 
     if (attributes.min_length != null) {
       this._minLength = +attributes.min_length;
@@ -220,11 +220,11 @@ export default class Element {
   }
 
   get hasMinLength() {
-    return this.minLength > 0;
+    return this.minLength != null && this.minLength > 0;
   }
 
   get hasMaxLength() {
-    return this.maxLength > 0;
+    return this.maxLength != null && this.maxLength > 0;
   }
 
   get hasRequiredConditions() {
@@ -251,6 +251,25 @@ export default class Element {
       return this.preserveValueWhenConditionallyHidden;
     }
     return this.parent.isPreserved;
+  }
+
+  toJSON() {
+    return {
+      type: this._type || null,
+      key: this._key,
+      label: this._label || null,
+      description: this._description || null,
+      required: this._isRequired,
+      disabled: this._isDisabled,
+      hidden: this._isHidden,
+      data_name: this._dataName,
+      default_value: this._defaultValue || null,
+      visible_conditions_type: this._visibleConditionsType || null,
+      visible_conditions_behavior: this._visibleConditionsBehavior || null,
+      visible_conditions: this._visibleConditions.length > 0 ? this._visibleConditions.map((c) => c.toJSON()) : null,
+      required_conditions_type: this._requiredConditionsType || null,
+      required_conditions: this._requiredConditions.length > 0 ? this._requiredConditions.map((c) => c.toJSON()) : null
+    };
   }
 
   isType(type) {

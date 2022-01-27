@@ -202,6 +202,14 @@ export default class Condition {
     return record.form.elementsByKey[condition.fieldKey];
   }
 
+  toJSON() {
+    return {
+      field_key: this.fieldKey,
+      operator: this.operator,
+      value: this.value
+    };
+  }
+
   isSatisfied(record, values, cache) {
     const referencedElement = Condition.elementForCondition(this, record);
 

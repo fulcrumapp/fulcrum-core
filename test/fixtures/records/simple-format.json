@@ -173,7 +173,12 @@
                         "disabled": false,
                         "hidden": false,
                         "data_name": "1",
-                        "default_value": null
+                        "default_value": null,
+                        "visible_conditions_type": null,
+                        "visible_conditions_behavior": "clear",
+                        "visible_conditions": null,
+                        "required_conditions_type": null,
+                        "required_conditions": null
                     }
                 ],
                 "values": {

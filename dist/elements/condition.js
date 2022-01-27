@@ -274,6 +274,14 @@ function () {
 
   var _proto = Condition.prototype;
 
+  _proto.toJSON = function toJSON() {
+    return {
+      field_key: this.fieldKey,
+      operator: this.operator,
+      value: this.value
+    };
+  };
+
   _proto.isSatisfied = function isSatisfied(record, values, cache) {
     var referencedElement = Condition.elementForCondition(this, record);
     var isReferencedFieldSatisfied = true;
