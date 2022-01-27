@@ -167,10 +167,6 @@ export default class FeatureValidator {
       return new RequiredFieldValidationError(element);
     }
 
-    if (element.isCheckboxElement && !value.isChecked) {
-      return new RequiredFieldValidationError(element);
-    }
-
     return null;
   }
 

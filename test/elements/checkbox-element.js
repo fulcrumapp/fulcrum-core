@@ -61,7 +61,7 @@ describe('checkbox fields', () => {
     // clear the value
     value.booleanValue = false;
     value.columnValue.should.eql(false);
-    value.isEmpty.should.eql(false);
+    value.isEmpty.should.eql(true);
     value.displayValue.should.eql('false');
     value.searchableValue.should.eql('false');
     value.toJSON().should.eql(false);

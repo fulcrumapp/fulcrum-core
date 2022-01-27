@@ -208,10 +208,6 @@ function () {
       return new _requiredFieldValidationError["default"](element);
     }
 
-    if (element.isCheckboxElement && !value.isChecked) {
-      return new _requiredFieldValidationError["default"](element);
-    }
-
     return null;
   };
 
