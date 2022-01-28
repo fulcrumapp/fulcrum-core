@@ -258,10 +258,10 @@ function (_FormValue) {
     key: "displayValue",
     get: function get() {
       if (this.length === 1) {
-        return '1 Dynamic field';
+        return '1 item';
       }
 
-      return this.length + " Dynamic Fields";
+      return this.length + " items";
     }
   }, {
     key: "items",
