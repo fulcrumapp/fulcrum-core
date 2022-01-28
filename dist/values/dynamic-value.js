@@ -255,6 +255,15 @@ function (_FormValue) {
       return items;
     }
   }, {
+    key: "displayValue",
+    get: function get() {
+      if (this.length === 1) {
+        return '1 Dynamic field';
+      }
+
+      return this.length + " Dynamic Fields";
+    }
+  }, {
     key: "items",
     get: function get() {
       return this._items.slice();
