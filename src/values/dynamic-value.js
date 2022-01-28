@@ -97,10 +97,10 @@ export default class DynamicValue extends FormValue {
 
   get displayValue() {
     if (this.length === 1) {
-      return '1 Dynamic field';
+      return '1 item';
     }
 
-    return `${this.length} Dynamic Fields`;
+    return `${this.length} items`;
   }
 
   isEqual(value) {
