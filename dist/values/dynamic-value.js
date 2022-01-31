@@ -255,6 +255,15 @@ function (_FormValue) {
       return items;
     }
   }, {
+    key: "displayValue",
+    get: function get() {
+      if (this.length === 1) {
+        return '1 item';
+      }
+
+      return this.length + " items";
+    }
+  }, {
     key: "items",
     get: function get() {
       return this._items.slice();
