@@ -14,3 +14,5 @@ Provide any background information or relevant links to documentation.
 - Are any config changes needed to test this?
 - What steps would one perform to manually test this change?
 - What areas or workflows could this change effect?
+
+NOTE TO AUTHOR: Notify Slack channel #chaos-env-updates of upcoming changes to this widely-used tool.
