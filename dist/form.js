@@ -131,7 +131,7 @@ function () {
     json.name = this.name || null;
     json.description = this.description || null;
     json.script = this.script || null;
-    json.field_effects = this.field_effects || null;
+    json.field_effects = this.fieldEffects || null;
     json.elements = JSON.parse(JSON.stringify(this._elementsJSON));
     json.assignment_enabled = this.isAssignmentEnabled;
     json.hidden_on_dashboard = this.isHiddenOnDashboard;
