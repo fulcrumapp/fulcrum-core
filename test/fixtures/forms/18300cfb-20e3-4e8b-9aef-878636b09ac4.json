@@ -55,6 +55,19 @@
       ],
       "geometry_required": false,
       "script": null,
+      "field_effects": {
+        "effects": [
+          {
+            "event": { "name": "change", "field": "single_choice" },
+            "conditions": [
+              { "field": "single_choice", "operator": "equals", "value": "Important" }
+            ],
+            "actions": [
+              { "type": "setvalue", "field": "name", "value": "Important Name" }
+            ]
+          }
+        ]
+      },
       "id": "18300cfb-20e3-4e8b-9aef-878636b09ac4",
       "created_at": "2015-12-03T01:36:21Z",
       "updated_at": "2015-12-04T00:16:01Z",

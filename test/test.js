@@ -68,6 +68,19 @@ describe('Form', () => {
   it('parses auto_assign', () => {
     form.isAutoAssign.should.eql(true);
   });
+
+  it('parses field effects', () => {
+    form.fieldEffects.should.eql({
+      effects: [
+        {
+          event: { name: 'change', field: 'single_choice' },
+          conditions: [{ field: 'single_choice', operator: 'equals', value: 'Important' }],
+          actions: [{ type: 'setvalue', field: 'name', value: 'Important Name' }]
+        }
+      ]
+    });
+
+  });
 });
 
 describe('FeatureValidator', () => {

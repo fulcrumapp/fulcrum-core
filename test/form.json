@@ -47,6 +47,19 @@
     ],
     "geometry_required": false,
     "script": null,
+    "field_effects": {
+      "effects": [
+        {
+          "event": { "name": "change", "field": "single_choice" },
+          "conditions": [
+            { "field": "single_choice", "operator": "equals", "value": "Important" }
+          ],
+          "actions": [
+            { "type": "setvalue", "field": "name", "value": "Important Name" }
+          ]
+        }
+      ]
+    },
     "elements": [
       {
         "type": "TextField",

@@ -22,6 +22,7 @@ export default class Form {
     this._statusFieldJSON = attributes.status_field;
     this._statusField = null;
     this._script = attributes.script;
+    this._fieldEffects = attributes.field_effects;
     this._geometryRequired = !!attributes.geometry_required;
     this._geometryTypes = attributes.geometry_types;
     this._reportTemplatesJSON = attributes.report_templates;
@@ -174,6 +175,7 @@ export default class Form {
     json.name = this.name || null;
     json.description = this.description || null;
     json.script = this.script || null;
+    json.field_effects = this.fieldEffects || null;
     json.elements = JSON.parse(JSON.stringify(this._elementsJSON));
     json.assignment_enabled = this.isAssignmentEnabled;
     json.hidden_on_dashboard = this.isHiddenOnDashboard;
@@ -213,6 +215,10 @@ export default class Form {
 
   get script() {
     return this._script;
+  }
+
+  get fieldEffects() {
+    return this._fieldEffects;
   }
 
   get titleFieldKeys() {
