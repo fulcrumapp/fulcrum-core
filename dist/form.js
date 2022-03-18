@@ -42,6 +42,7 @@ function () {
     this._statusFieldJSON = attributes.status_field;
     this._statusField = null;
     this._script = attributes.script;
+    this._fieldEffects = attributes.field_effects;
     this._geometryRequired = !!attributes.geometry_required;
     this._geometryTypes = attributes.geometry_types;
     this._reportTemplatesJSON = attributes.report_templates;
@@ -130,6 +131,7 @@ function () {
     json.name = this.name || null;
     json.description = this.description || null;
     json.script = this.script || null;
+    json.field_effects = this.field_effects || null;
     json.elements = JSON.parse(JSON.stringify(this._elementsJSON));
     json.assignment_enabled = this.isAssignmentEnabled;
     json.hidden_on_dashboard = this.isHiddenOnDashboard;
@@ -285,6 +287,11 @@ function () {
     key: "script",
     get: function get() {
       return this._script;
+    }
+  }, {
+    key: "fieldEffects",
+    get: function get() {
+      return this._fieldEffects;
     }
   }, {
     key: "titleFieldKeys",
