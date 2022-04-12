@@ -69,10 +69,13 @@ function (_Feature) {
     json.created_by = this._createdByName || null;
     json.updated_by_id = this._updatedByID || null;
     json.updated_by = this._updatedBy || null;
-    json.horizontal_accuracy = this._horizontalAccuracy || null;
-    json.vertical_accuracy = this._verticalAccuracy || null;
-    json.speed = this._speed || null;
-    json.course = this._course || null;
+    /* eslint-disable no-undefined */
+
+    json.horizontal_accuracy = this._horizontalAccuracy === undefined ? null : this._horizontalAccuracy;
+    json.vertical_accuracy = this._verticalAccuracy === undefined ? null : this._verticalAccuracy;
+    json.speed = this._speed === undefined ? null : this._speed;
+    json.course = this._course === undefined ? null : this._course;
+    /* eslint-enable no-undefined */
 
     if (this._altitude != null) {
       json.altitude = this._altitude;
