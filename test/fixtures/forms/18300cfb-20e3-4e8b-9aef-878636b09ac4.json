@@ -685,6 +685,17 @@
               "hidden": false,
               "data_name": "checklist",
               "default_value": null
+          },
+          {
+            "type": "LocationField",
+            "key": "7ds7",
+            "label": "LocationField Field",
+            "description": null,
+            "required": true,
+            "disabled": false,
+            "hidden": false,
+            "data_name": "location",
+            "default_value": null
           }
       ]
   }

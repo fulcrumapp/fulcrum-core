@@ -17,6 +17,7 @@ import CalculatedValue from './calculated-value';
 import RecordLinkValue from './record-link-value';
 import CheckboxValue from './checkbox-value';
 import DynamicValue from './dynamic-value';
+import LocationValue from './location-value';
 
 const Constructors = {
   ChoiceField: ChoiceValue,
@@ -38,7 +39,8 @@ const Constructors = {
   CalculatedField: CalculatedValue,
   RecordLinkField: RecordLinkValue,
   CheckboxField: CheckboxValue,
-  DynamicField: DynamicValue
+  DynamicField: DynamicValue,
+  LocationField: LocationValue
 };
 
 export default class FormValueFactory {
