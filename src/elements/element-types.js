@@ -41,5 +41,7 @@ export default {
 
   CheckboxElement: 'CheckboxField',
 
-  DynamicElement: 'DynamicField'
+  DynamicElement: 'DynamicField',
+
+  LocationElement: 'LocationField'
 };

@@ -20,6 +20,7 @@ import RecordLinkElement from './record-link-element';
 import ContainerElement from './container-element';
 import CheckboxElement from './checkbox-element';
 import DynamicElement from './dynamic-element';
+import LocationElement from './location-element';
 
 const Constructors = {
   Section: SectionElement,
@@ -43,7 +44,8 @@ const Constructors = {
   CalculatedField: CalculatedElement,
   RecordLinkField: RecordLinkElement,
   CheckboxField: CheckboxElement,
-  DynamicField: DynamicElement
+  DynamicField: DynamicElement,
+  LocationField: LocationElement
 };
 
 let initialized = false;

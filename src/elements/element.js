@@ -363,4 +363,8 @@ export default class Element {
   get isDynamicElement() {
     return this.isType(Types.DynamicElement);
   }
+
+  get isLocationElement() {
+    return this.isType(Types.LocationElement);
+  }
 }
