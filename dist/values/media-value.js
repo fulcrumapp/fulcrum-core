@@ -11,21 +11,29 @@ var _textUtils = _interopRequireDefault(require("../utils/text-utils"));
 
 var _numberUtils = _interopRequireDefault(require("../utils/number-utils"));
 
+var _excluded = ["part", "formatMediaURL", "formatMediaViewerURL", "formatMediaName"];
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 function _objectWithoutPropertiesLoose(source, excluded) { if (source == null) return {}; var target = {}; var sourceKeys = Object.keys(source); var key, i; for (i = 0; i < sourceKeys.length; i++) { key = sourceKeys[i]; if (excluded.indexOf(key) >= 0) continue; target[key] = source[key]; } return target; }
 
+function _createForOfIteratorHelperLoose(o, allowArrayLike) { var it = typeof Symbol !== "undefined" && o[Symbol.iterator] || o["@@iterator"]; if (it) return (it = it.call(o)).next.bind(it); if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; return function () { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
 
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); Object.defineProperty(Constructor, "prototype", { writable: false }); return Constructor; }
 
 function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
 
-function _inheritsLoose(subClass, superClass) { subClass.prototype = Object.create(superClass.prototype); subClass.prototype.constructor = subClass; subClass.__proto__ = superClass; }
+function _inheritsLoose(subClass, superClass) { subClass.prototype = Object.create(superClass.prototype); subClass.prototype.constructor = subClass; _setPrototypeOf(subClass, superClass); }
 
-var MediaValue =
-/*#__PURE__*/
-function (_FormValue) {
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+var MediaValue = /*#__PURE__*/function (_FormValue) {
   _inheritsLoose(MediaValue, _FormValue);
 
   function MediaValue(element, items) {
@@ -35,19 +43,8 @@ function (_FormValue) {
     _this._items = [];
 
     if (Array.isArray(items)) {
-      for (var _iterator = items, _isArray = Array.isArray(_iterator), _i = 0, _iterator = _isArray ? _iterator : _iterator[Symbol.iterator]();;) {
-        var _ref;
-
-        if (_isArray) {
-          if (_i >= _iterator.length) break;
-          _ref = _iterator[_i++];
-        } else {
-          _i = _iterator.next();
-          if (_i.done) break;
-          _ref = _i.value;
-        }
-
-        var item = _ref;
+      for (var _iterator = _createForOfIteratorHelperLoose(items), _step; !(_step = _iterator()).done;) {
+        var item = _step.value;
 
         _this._items.push(new _this.ItemClass(_assertThisInitialized(_this), item));
       }
@@ -58,13 +55,13 @@ function (_FormValue) {
 
   var _proto = MediaValue.prototype;
 
-  _proto.format = function format(_ref2) {
-    var _ref2$part = _ref2.part,
-        part = _ref2$part === void 0 ? null : _ref2$part,
-        formatMediaURL = _ref2.formatMediaURL,
-        formatMediaViewerURL = _ref2.formatMediaViewerURL,
-        formatMediaName = _ref2.formatMediaName,
-        args = _objectWithoutPropertiesLoose(_ref2, ["part", "formatMediaURL", "formatMediaViewerURL", "formatMediaName"]);
+  _proto.format = function format(_ref) {
+    var _ref$part = _ref.part,
+        part = _ref$part === void 0 ? null : _ref$part,
+        formatMediaURL = _ref.formatMediaURL,
+        formatMediaViewerURL = _ref.formatMediaViewerURL,
+        formatMediaName = _ref.formatMediaName,
+        args = _objectWithoutPropertiesLoose(_ref, _excluded);
 
     if (this.isEmpty) {
       return null;
@@ -98,19 +95,8 @@ function (_FormValue) {
 
     var items = [];
 
-    for (var _iterator2 = this._items, _isArray2 = Array.isArray(_iterator2), _i2 = 0, _iterator2 = _isArray2 ? _iterator2 : _iterator2[Symbol.iterator]();;) {
-      var _ref3;
-
-      if (_isArray2) {
-        if (_i2 >= _iterator2.length) break;
-        _ref3 = _iterator2[_i2++];
-      } else {
-        _i2 = _iterator2.next();
-        if (_i2.done) break;
-        _ref3 = _i2.value;
-      }
-
-      var item = _ref3;
+    for (var _iterator2 = _createForOfIteratorHelperLoose(this._items), _step2; !(_step2 = _iterator2()).done;) {
+      var item = _step2.value;
       items.push(item.toJSON());
     }
 
@@ -180,19 +166,8 @@ function (_FormValue) {
 
       var ids = [];
 
-      for (var _iterator3 = this._items, _isArray3 = Array.isArray(_iterator3), _i3 = 0, _iterator3 = _isArray3 ? _iterator3 : _iterator3[Symbol.iterator]();;) {
-        var _ref4;
-
-        if (_isArray3) {
-          if (_i3 >= _iterator3.length) break;
-          _ref4 = _iterator3[_i3++];
-        } else {
-          _i3 = _iterator3.next();
-          if (_i3.done) break;
-          _ref4 = _i3.value;
-        }
-
-        var item = _ref4;
+      for (var _iterator3 = _createForOfIteratorHelperLoose(this._items), _step3; !(_step3 = _iterator3()).done;) {
+        var item = _step3.value;
 
         if (_textUtils["default"].isPresent(item.caption)) {
           ids.push(item.caption);
@@ -216,19 +191,8 @@ function (_FormValue) {
       var ids = [];
       var captions = [];
 
-      for (var _iterator4 = this._items, _isArray4 = Array.isArray(_iterator4), _i4 = 0, _iterator4 = _isArray4 ? _iterator4 : _iterator4[Symbol.iterator]();;) {
-        var _ref5;
-
-        if (_isArray4) {
-          if (_i4 >= _iterator4.length) break;
-          _ref5 = _iterator4[_i4++];
-        } else {
-          _i4 = _iterator4.next();
-          if (_i4.done) break;
-          _ref5 = _i4.value;
-        }
-
-        var item = _ref5;
+      for (var _iterator4 = _createForOfIteratorHelperLoose(this._items), _step4; !(_step4 = _iterator4()).done;) {
+        var item = _step4.value;
         ids.push(item.mediaID);
         captions.push(item.caption);
       }
@@ -243,19 +207,8 @@ function (_FormValue) {
     get: function get() {
       var items = [];
 
-      for (var _iterator5 = this._items, _isArray5 = Array.isArray(_iterator5), _i5 = 0, _iterator5 = _isArray5 ? _iterator5 : _iterator5[Symbol.iterator]();;) {
-        var _ref6;
-
-        if (_isArray5) {
-          if (_i5 >= _iterator5.length) break;
-          _ref6 = _iterator5[_i5++];
-        } else {
-          _i5 = _iterator5.next();
-          if (_i5.done) break;
-          _ref6 = _i5.value;
-        }
-
-        var item = _ref6;
+      for (var _iterator5 = _createForOfIteratorHelperLoose(this._items), _step5; !(_step5 = _iterator5()).done;) {
+        var item = _step5.value;
         items.push(new _multipleValueItem["default"](this.element, item.mediaID));
       }
 
@@ -264,19 +217,8 @@ function (_FormValue) {
   }, {
     key: "hasCaptions",
     get: function get() {
-      for (var _iterator6 = this._items, _isArray6 = Array.isArray(_iterator6), _i6 = 0, _iterator6 = _isArray6 ? _iterator6 : _iterator6[Symbol.iterator]();;) {
-        var _ref7;
-
-        if (_isArray6) {
-          if (_i6 >= _iterator6.length) break;
-          _ref7 = _iterator6[_i6++];
-        } else {
-          _i6 = _iterator6.next();
-          if (_i6.done) break;
-          _ref7 = _i6.value;
-        }
-
-        var item = _ref7;
+      for (var _iterator6 = _createForOfIteratorHelperLoose(this._items), _step6; !(_step6 = _iterator6()).done;) {
+        var item = _step6.value;
 
         if (_textUtils["default"].isPresent(item.caption)) {
           return true;

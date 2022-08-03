@@ -3,7 +3,7 @@
 exports.__esModule = true;
 exports["default"] = void 0;
 
-var _booleanElement = _interopRequireDefault(require("./boolean-element"));
+var _element = _interopRequireDefault(require("./element"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
@@ -11,15 +11,15 @@ function _inheritsLoose(subClass, superClass) { subClass.prototype = Object.crea
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 
-var CheckboxElement = /*#__PURE__*/function (_BooleanElement) {
-  _inheritsLoose(CheckboxElement, _BooleanElement);
+var LocationElement = /*#__PURE__*/function (_Element) {
+  _inheritsLoose(LocationElement, _Element);
 
-  function CheckboxElement() {
-    return _BooleanElement.apply(this, arguments) || this;
+  function LocationElement() {
+    return _Element.apply(this, arguments) || this;
   }
 
-  return CheckboxElement;
-}(_booleanElement["default"]);
+  return LocationElement;
+}(_element["default"]);
 
-exports["default"] = CheckboxElement;
-//# sourceMappingURL=checkbox-element.js.map
+exports["default"] = LocationElement;
+//# sourceMappingURL=location-element.js.map

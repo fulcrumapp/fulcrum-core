@@ -3,9 +3,7 @@
 exports.__esModule = true;
 exports["default"] = void 0;
 
-var Locale =
-/*#__PURE__*/
-function () {
+var Locale = /*#__PURE__*/function () {
   function Locale() {}
 
   Locale.currentLocale = function currentLocale() {

@@ -7,19 +7,21 @@ var _formValue = _interopRequireDefault(require("./form-value"));
 
 var _dateUtils = _interopRequireDefault(require("../utils/date-utils"));
 
+var _excluded = ["part", "formatSignatureURL", "formatSignatureViewerURL", "formatSignatureName"];
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 function _objectWithoutPropertiesLoose(source, excluded) { if (source == null) return {}; var target = {}; var sourceKeys = Object.keys(source); var key, i; for (i = 0; i < sourceKeys.length; i++) { key = sourceKeys[i]; if (excluded.indexOf(key) >= 0) continue; target[key] = source[key]; } return target; }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
 
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); Object.defineProperty(Constructor, "prototype", { writable: false }); return Constructor; }
 
-function _inheritsLoose(subClass, superClass) { subClass.prototype = Object.create(superClass.prototype); subClass.prototype.constructor = subClass; subClass.__proto__ = superClass; }
+function _inheritsLoose(subClass, superClass) { subClass.prototype = Object.create(superClass.prototype); subClass.prototype.constructor = subClass; _setPrototypeOf(subClass, superClass); }
 
-var SignatureValue =
-/*#__PURE__*/
-function (_FormValue) {
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+var SignatureValue = /*#__PURE__*/function (_FormValue) {
   _inheritsLoose(SignatureValue, _FormValue);
 
   function SignatureValue(element, attributes) {
@@ -48,7 +50,7 @@ function (_FormValue) {
         formatSignatureURL = _ref.formatSignatureURL,
         formatSignatureViewerURL = _ref.formatSignatureViewerURL,
         formatSignatureName = _ref.formatSignatureName,
-        args = _objectWithoutPropertiesLoose(_ref, ["part", "formatSignatureURL", "formatSignatureViewerURL", "formatSignatureName"]);
+        args = _objectWithoutPropertiesLoose(_ref, _excluded);
 
     if (this.isEmpty) {
       return null;

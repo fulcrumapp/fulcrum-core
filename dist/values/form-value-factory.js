@@ -41,6 +41,8 @@ var _checkboxValue = _interopRequireDefault(require("./checkbox-value"));
 
 var _dynamicValue = _interopRequireDefault(require("./dynamic-value"));
 
+var _locationValue = _interopRequireDefault(require("./location-value"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 var Constructors = {
@@ -63,12 +65,11 @@ var Constructors = {
   CalculatedField: _calculatedValue["default"],
   RecordLinkField: _recordLinkValue["default"],
   CheckboxField: _checkboxValue["default"],
-  DynamicField: _dynamicValue["default"]
+  DynamicField: _dynamicValue["default"],
+  LocationField: _locationValue["default"]
 };
 
-var FormValueFactory =
-/*#__PURE__*/
-function () {
+var FormValueFactory = /*#__PURE__*/function () {
   function FormValueFactory() {}
 
   FormValueFactory.create = function create(element, attributes) {

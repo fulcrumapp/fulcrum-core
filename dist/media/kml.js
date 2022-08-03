@@ -3,9 +3,7 @@
 exports.__esModule = true;
 exports["default"] = void 0;
 
-var KML =
-/*#__PURE__*/
-function () {
+var KML = /*#__PURE__*/function () {
   function KML() {}
 
   KML.render = function render(tracks) {

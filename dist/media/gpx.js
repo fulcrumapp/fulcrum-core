@@ -3,9 +3,7 @@
 exports.__esModule = true;
 exports["default"] = void 0;
 
-var GPX =
-/*#__PURE__*/
-function () {
+var GPX = /*#__PURE__*/function () {
   function GPX() {}
 
   GPX.render = function render(tracks) {

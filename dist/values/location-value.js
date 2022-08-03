@@ -15,71 +15,75 @@ function _inheritsLoose(subClass, superClass) { subClass.prototype = Object.crea
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 
-var BooleanValue = /*#__PURE__*/function (_FormValue) {
-  _inheritsLoose(BooleanValue, _FormValue);
+var LocationValue = /*#__PURE__*/function (_FormValue) {
+  _inheritsLoose(LocationValue, _FormValue);
 
-  function BooleanValue(element, booleanValue) {
+  function LocationValue(element, attributes) {
     var _this;
 
-    _this = _FormValue.call(this, element, booleanValue) || this;
-    _this.booleanValue = !!booleanValue;
+    _this = _FormValue.call(this, element, attributes) || this;
+
+    if (attributes) {
+      _this._latitude = attributes.latitude;
+      _this._longitude = attributes.longitude;
+      _this._address = attributes.address;
+    }
+
     return _this;
   }
 
-  var _proto = BooleanValue.prototype;
-
-  _proto.format = function format(_ref) {
-    var _ref$useDisplayValue = _ref.useDisplayValue,
-        useDisplayValue = _ref$useDisplayValue === void 0 ? false : _ref$useDisplayValue;
-    return useDisplayValue ? this.displayValue : this.booleanValue;
-  };
+  var _proto = LocationValue.prototype;
 
   _proto.toJSON = function toJSON() {
-    return this.booleanValue;
+    var json = {};
+    json.latitude = this._latitude || null;
+    json.longitude = this._longitude || null;
+    json.address = this._address || null;
+    return json;
   };
 
-  _proto.isEqual = function isEqual(booleanValue) {
-    return this.booleanValue === booleanValue;
-  };
-
-  _createClass(BooleanValue, [{
-    key: "displayValue",
+  _createClass(LocationValue, [{
+    key: "latitude",
     get: function get() {
-      return this.booleanValue.toString();
+      return this._latitude;
+    },
+    set: function set(lat) {
+      this._latitude = lat;
     }
   }, {
-    key: "length",
+    key: "longitude",
     get: function get() {
-      return 1;
-    } // This is really more a "falsey" value rather than empty.
-    // It is used with the is_empty and is_not_empty visibility
-    // conditions (e.g. what value would this field have that
-    // could toggle visibility of other elements?)
-
-  }, {
-    key: "isEmpty",
-    get: function get() {
-      return !this.booleanValue;
+      return this._longitude;
+    },
+    set: function set(lng) {
+      this._longitude = lng;
     }
   }, {
-    key: "searchableValue",
+    key: "address",
     get: function get() {
-      return this.booleanValue.toString();
+      return this._address;
+    },
+    set: function set(address) {
+      this._address = address;
     }
   }, {
     key: "columnValue",
     get: function get() {
-      return this.booleanValue;
+      var value = {};
+      value['f' + this.element.key + '_latitude'] = this._latitude;
+      value['f' + this.element.key + '_longitude'] = this._longitude;
+      value['f' + this.element.key + '_address'] = this._address;
+      return value;
     }
   }, {
-    key: "multipleValues",
+    key: "isEmpty",
     get: function get() {
-      return null;
+      return !Object.keys(this._rawValue).length;
     }
   }]);
 
-  return BooleanValue;
+  return LocationValue;
 }(_formValue["default"]);
 
-exports["default"] = BooleanValue;
-//# sourceMappingURL=boolean-value.js.map
+exports["default"] = LocationValue;
+//# sourceMappingURL=location-value.js.map
