@@ -286,6 +286,14 @@ var _dynamicValue = _interopRequireDefault(require("./values/dynamic-value"));
 
 exports.DynamicValue = _dynamicValue["default"];
 
+var _locationElement = _interopRequireDefault(require("./elements/location-element"));
+
+exports.LocationElement = _locationElement["default"];
+
+var _locationValue = _interopRequireDefault(require("./values/location-value"));
+
+exports.LocationValue = _locationValue["default"];
+
 var _user = _interopRequireDefault(require("./user"));
 
 exports.User = _user["default"];

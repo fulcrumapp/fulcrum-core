@@ -24,7 +24,8 @@ var _default = {
   RecordLinkElement: 'RecordLinkField',
   StatusElement: 'StatusField',
   CheckboxElement: 'CheckboxField',
-  DynamicElement: 'DynamicField'
+  DynamicElement: 'DynamicField',
+  LocationElement: 'LocationField'
 };
 exports["default"] = _default;
 //# sourceMappingURL=element-types.js.map

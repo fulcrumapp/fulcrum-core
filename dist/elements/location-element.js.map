@@ -1,0 +1,1 @@
+{"version":3,"file":"location-element.js","names":["LocationElement","Element"],"sources":["../../src/elements/location-element.js"],"sourcesContent":["import Element from './element';\n\nexport default class LocationElement extends Element {\n}\n"],"mappings":";;;;;AAAA;;;;;;;;IAEqBA,e;;;;;;;;EAAwBC,mB"}
