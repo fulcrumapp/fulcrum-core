@@ -1,93 +1,62 @@
 "use strict";
-
-exports.__esModule = true;
-exports["default"] = void 0;
-
-var _choiceValue = _interopRequireDefault(require("./choice-value"));
-
-var _textValue = _interopRequireDefault(require("./text-value"));
-
-var _dateValue = _interopRequireDefault(require("./date-value"));
-
-var _timeValue = _interopRequireDefault(require("./time-value"));
-
-var _photoValue = _interopRequireDefault(require("./photo-value"));
-
-var _videoValue = _interopRequireDefault(require("./video-value"));
-
-var _audioValue = _interopRequireDefault(require("./audio-value"));
-
-var _attachmentValue = _interopRequireDefault(require("./attachment-value"));
-
-var _signatureValue = _interopRequireDefault(require("./signature-value"));
-
-var _classificationValue = _interopRequireDefault(require("./classification-value"));
-
-var _repeatableValue = _interopRequireDefault(require("./repeatable-value"));
-
-var _addressValue = _interopRequireDefault(require("./address-value"));
-
-var _yesNoValue = _interopRequireDefault(require("./yes-no-value"));
-
-var _hyperlinkValue = _interopRequireDefault(require("./hyperlink-value"));
-
-var _barcodeValue = _interopRequireDefault(require("./barcode-value"));
-
-var _calculatedValue = _interopRequireDefault(require("./calculated-value"));
-
-var _recordLinkValue = _interopRequireDefault(require("./record-link-value"));
-
-var _checkboxValue = _interopRequireDefault(require("./checkbox-value"));
-
-var _dynamicValue = _interopRequireDefault(require("./dynamic-value"));
-
-var _locationValue = _interopRequireDefault(require("./location-value"));
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
-
-var Constructors = {
-  ChoiceField: _choiceValue["default"],
-  TextField: _textValue["default"],
-  DateTimeField: _dateValue["default"],
-  DateField: _dateValue["default"],
-  TimeField: _timeValue["default"],
-  PhotoField: _photoValue["default"],
-  VideoField: _videoValue["default"],
-  AudioField: _audioValue["default"],
-  AttachmentField: _attachmentValue["default"],
-  SignatureField: _signatureValue["default"],
-  ClassificationField: _classificationValue["default"],
-  Repeatable: _repeatableValue["default"],
-  AddressField: _addressValue["default"],
-  YesNoField: _yesNoValue["default"],
-  HyperlinkField: _hyperlinkValue["default"],
-  BarcodeField: _barcodeValue["default"],
-  CalculatedField: _calculatedValue["default"],
-  RecordLinkField: _recordLinkValue["default"],
-  CheckboxField: _checkboxValue["default"],
-  DynamicField: _dynamicValue["default"],
-  LocationField: _locationValue["default"]
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
 };
-
-var FormValueFactory = /*#__PURE__*/function () {
-  function FormValueFactory() {}
-
-  FormValueFactory.create = function create(element, attributes) {
-    var constructor = Constructors[element.type];
-
-    if (constructor == null) {
-      return null;
+Object.defineProperty(exports, "__esModule", { value: true });
+const choice_value_1 = __importDefault(require("./choice-value"));
+const text_value_1 = __importDefault(require("./text-value"));
+const date_value_1 = __importDefault(require("./date-value"));
+const time_value_1 = __importDefault(require("./time-value"));
+const photo_value_1 = __importDefault(require("./photo-value"));
+const video_value_1 = __importDefault(require("./video-value"));
+const audio_value_1 = __importDefault(require("./audio-value"));
+const attachment_value_1 = __importDefault(require("./attachment-value"));
+const signature_value_1 = __importDefault(require("./signature-value"));
+const classification_value_1 = __importDefault(require("./classification-value"));
+const repeatable_value_1 = __importDefault(require("./repeatable-value"));
+const address_value_1 = __importDefault(require("./address-value"));
+const yes_no_value_1 = __importDefault(require("./yes-no-value"));
+const hyperlink_value_1 = __importDefault(require("./hyperlink-value"));
+const barcode_value_1 = __importDefault(require("./barcode-value"));
+const calculated_value_1 = __importDefault(require("./calculated-value"));
+const record_link_value_1 = __importDefault(require("./record-link-value"));
+const checkbox_value_1 = __importDefault(require("./checkbox-value"));
+const dynamic_value_1 = __importDefault(require("./dynamic-value"));
+const location_value_1 = __importDefault(require("./location-value"));
+const Constructors = {
+    ChoiceField: choice_value_1.default,
+    TextField: text_value_1.default,
+    DateTimeField: date_value_1.default,
+    DateField: date_value_1.default,
+    TimeField: time_value_1.default,
+    PhotoField: photo_value_1.default,
+    VideoField: video_value_1.default,
+    AudioField: audio_value_1.default,
+    AttachmentField: attachment_value_1.default,
+    SignatureField: signature_value_1.default,
+    ClassificationField: classification_value_1.default,
+    Repeatable: repeatable_value_1.default,
+    AddressField: address_value_1.default,
+    YesNoField: yes_no_value_1.default,
+    HyperlinkField: hyperlink_value_1.default,
+    BarcodeField: barcode_value_1.default,
+    CalculatedField: calculated_value_1.default,
+    RecordLinkField: record_link_value_1.default,
+    CheckboxField: checkbox_value_1.default,
+    DynamicField: dynamic_value_1.default,
+    LocationField: location_value_1.default
+};
+class FormValueFactory {
+    static create(element, attributes) {
+        const constructor = Constructors[element.type];
+        if (constructor == null) {
+            return null;
+        }
+        return new constructor(element, attributes);
     }
-
-    return new constructor(element, attributes);
-  };
-
-  FormValueFactory.classes = function classes() {
-    return Constructors;
-  };
-
-  return FormValueFactory;
-}();
-
-exports["default"] = FormValueFactory;
+    static classes() {
+        return Constructors;
+    }
+}
+exports.default = FormValueFactory;
 //# sourceMappingURL=form-value-factory.js.map

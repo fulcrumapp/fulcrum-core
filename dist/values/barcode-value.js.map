@@ -1,1 +1,1 @@
-{"version":3,"file":"barcode-value.js","names":["BarcodeValue","TextualValue"],"sources":["../../src/values/barcode-value.js"],"sourcesContent":["import TextualValue from './textual-value';\n\nexport default class BarcodeValue extends TextualValue {\n}\n"],"mappings":";;;;;AAAA;;;;;;;;IAEqBA,Y;;;;;;;;EAAqBC,wB"}
+{"version":3,"file":"barcode-value.js","sourceRoot":"","sources":["../../src/values/barcode-value.js"],"names":[],"mappings":";;;;;AAAA,oEAA2C;AAE3C,MAAqB,YAAa,SAAQ,uBAAY;CACrD;AADD,+BACC"}

@@ -1,1 +1,1 @@
-{"version":3,"file":"attachment-element.js","names":["AttachmentElement","MediaElement"],"sources":["../../src/elements/attachment-element.js"],"sourcesContent":["import MediaElement from './media-element';\n\nexport default class AttachmentElement extends MediaElement {\n}\n"],"mappings":";;;;;AAAA;;;;;;;;IAEqBA,iB;;;;;;;;EAA0BC,wB"}
+{"version":3,"file":"attachment-element.js","sourceRoot":"","sources":["../../src/elements/attachment-element.js"],"names":[],"mappings":";;;;;AAAA,oEAA2C;AAE3C,MAAqB,iBAAkB,SAAQ,uBAAY;CAC1D;AADD,oCACC"}

@@ -1,12 +1,10 @@
 "use strict";
-
-exports.__esModule = true;
-exports["default"] = void 0;
-
-var MultipleValueItem = function MultipleValueItem(element, value) {
-  this.element = element;
-  this.value = value;
-};
-
-exports["default"] = MultipleValueItem;
+Object.defineProperty(exports, "__esModule", { value: true });
+class MultipleValueItem {
+    constructor(element, value) {
+        this.element = element;
+        this.value = value;
+    }
+}
+exports.default = MultipleValueItem;
 //# sourceMappingURL=multiple-value-item.js.map

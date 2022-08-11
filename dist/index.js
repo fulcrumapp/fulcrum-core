@@ -1,330 +1,172 @@
 "use strict";
-
-exports.__esModule = true;
-
-var _form = _interopRequireDefault(require("./form"));
-
-exports.Form = _form["default"];
-
-var _record = _interopRequireDefault(require("./record"));
-
-exports.Record = _record["default"];
-
-var _element = _interopRequireDefault(require("./elements/element"));
-
-exports.Element = _element["default"];
-
-var _formValue = _interopRequireDefault(require("./values/form-value"));
-
-exports.FormValue = _formValue["default"];
-
-var _choice = _interopRequireDefault(require("./elements/choice"));
-
-exports.Choice = _choice["default"];
-
-var _choiceList = _interopRequireDefault(require("./choice-list"));
-
-exports.ChoiceList = _choiceList["default"];
-
-var _classification = _interopRequireDefault(require("./elements/classification"));
-
-exports.Classification = _classification["default"];
-
-var _classificationSet = _interopRequireDefault(require("./classification-set"));
-
-exports.ClassificationSet = _classificationSet["default"];
-
-var _elementFactory = _interopRequireDefault(require("./elements/element-factory"));
-
-exports.ElementFactory = _elementFactory["default"];
-
-var _repeatableItemValue = _interopRequireDefault(require("./values/repeatable-item-value"));
-
-exports.RepeatableItemValue = _repeatableItemValue["default"];
-
-var _repeatableValue = _interopRequireDefault(require("./values/repeatable-value"));
-
-exports.RepeatableValue = _repeatableValue["default"];
-
-var _feature = _interopRequireDefault(require("./feature"));
-
-exports.Feature = _feature["default"];
-
-var _formValues = _interopRequireDefault(require("./values/form-values"));
-
-exports.FormValues = _formValues["default"];
-
-var _textUtils = _interopRequireDefault(require("./utils/text-utils"));
-
-exports.TextUtils = _textUtils["default"];
-
-var _dateUtils = _interopRequireDefault(require("./utils/date-utils"));
-
-exports.DateUtils = _dateUtils["default"];
-
-var _numberUtils = _interopRequireDefault(require("./utils/number-utils"));
-
-exports.NumberUtils = _numberUtils["default"];
-
-var _childElements = _interopRequireDefault(require("./elements/child-elements"));
-
-exports.ChildElements = _childElements["default"];
-
-var _condition = _interopRequireDefault(require("./elements/condition"));
-
-exports.Condition = _condition["default"];
-
-var _repeatableElement = _interopRequireDefault(require("./elements/repeatable-element"));
-
-exports.RepeatableElement = _repeatableElement["default"];
-
-var _audioItemValue = _interopRequireDefault(require("./values/audio-item-value"));
-
-exports.AudioItemValue = _audioItemValue["default"];
-
-var _audioValue = _interopRequireDefault(require("./values/audio-value"));
-
-exports.AudioValue = _audioValue["default"];
-
-var _photoItemValue = _interopRequireDefault(require("./values/photo-item-value"));
-
-exports.PhotoItemValue = _photoItemValue["default"];
-
-var _photoValue = _interopRequireDefault(require("./values/photo-value"));
-
-exports.PhotoValue = _photoValue["default"];
-
-var _attachmentElement = _interopRequireDefault(require("./elements/attachment-element"));
-
-exports.AttachmentElement = _attachmentElement["default"];
-
-var _attachmentItemValue = _interopRequireDefault(require("./values/attachment-item-value"));
-
-exports.AttachmentItemValue = _attachmentItemValue["default"];
-
-var _attachmentValue = _interopRequireDefault(require("./values/attachment-value"));
-
-exports.AttachmentValue = _attachmentValue["default"];
-
-var _videoItemValue = _interopRequireDefault(require("./values/video-item-value"));
-
-exports.VideoItemValue = _videoItemValue["default"];
-
-var _videoValue = _interopRequireDefault(require("./values/video-value"));
-
-exports.VideoValue = _videoValue["default"];
-
-var _addressElement = _interopRequireDefault(require("./elements/address-element"));
-
-exports.AddressElement = _addressElement["default"];
-
-var _addressValue = _interopRequireDefault(require("./values/address-value"));
-
-exports.AddressValue = _addressValue["default"];
-
-var _barcodeElement = _interopRequireDefault(require("./elements/barcode-element"));
-
-exports.BarcodeElement = _barcodeElement["default"];
-
-var _barcodeValue = _interopRequireDefault(require("./values/barcode-value"));
-
-exports.BarcodeValue = _barcodeValue["default"];
-
-var _choiceElement = _interopRequireDefault(require("./elements/choice-element"));
-
-exports.ChoiceElement = _choiceElement["default"];
-
-var _choiceValue = _interopRequireDefault(require("./values/choice-value"));
-
-exports.ChoiceValue = _choiceValue["default"];
-
-var _classificationElement = _interopRequireDefault(require("./elements/classification-element"));
-
-exports.ClassificationElement = _classificationElement["default"];
-
-var _classificationValue = _interopRequireDefault(require("./values/classification-value"));
-
-exports.ClassificationValue = _classificationValue["default"];
-
-var _dateElement = _interopRequireDefault(require("./elements/date-element"));
-
-exports.DateElement = _dateElement["default"];
-
-var _dateValue = _interopRequireDefault(require("./values/date-value"));
-
-exports.DateValue = _dateValue["default"];
-
-var _timeElement = _interopRequireDefault(require("./elements/time-element"));
-
-exports.TimeElement = _timeElement["default"];
-
-var _timeValue = _interopRequireDefault(require("./values/time-value"));
-
-exports.TimeValue = _timeValue["default"];
-
-var _calculatedElement = _interopRequireDefault(require("./elements/calculated-element"));
-
-exports.CalculatedElement = _calculatedElement["default"];
-
-var _calculatedValue = _interopRequireDefault(require("./values/calculated-value"));
-
-exports.CalculatedValue = _calculatedValue["default"];
-
-var _hyperlinkElement = _interopRequireDefault(require("./elements/hyperlink-element"));
-
-exports.HyperlinkElement = _hyperlinkElement["default"];
-
-var _hyperlinkValue = _interopRequireDefault(require("./values/hyperlink-value"));
-
-exports.HyperlinkValue = _hyperlinkValue["default"];
-
-var _textElement = _interopRequireDefault(require("./elements/text-element"));
-
-exports.TextElement = _textElement["default"];
-
-var _textValue = _interopRequireDefault(require("./values/text-value"));
-
-exports.TextValue = _textValue["default"];
-
-var _yesNoElement = _interopRequireDefault(require("./elements/yes-no-element"));
-
-exports.YesNoElement = _yesNoElement["default"];
-
-var _yesNoValue = _interopRequireDefault(require("./values/yes-no-value"));
-
-exports.YesNoValue = _yesNoValue["default"];
-
-var _sectionElement = _interopRequireDefault(require("./elements/section-element"));
-
-exports.SectionElement = _sectionElement["default"];
-
-var _signatureElement = _interopRequireDefault(require("./elements/signature-element"));
-
-exports.SignatureElement = _signatureElement["default"];
-
-var _signatureValue = _interopRequireDefault(require("./values/signature-value"));
-
-exports.SignatureValue = _signatureValue["default"];
-
-var _recordLinkElement = _interopRequireDefault(require("./elements/record-link-element"));
-
-exports.RecordLinkElement = _recordLinkElement["default"];
-
-var _recordLinkValue = _interopRequireDefault(require("./values/record-link-value"));
-
-exports.RecordLinkValue = _recordLinkValue["default"];
-
-var _recordLinkItemValue = _interopRequireDefault(require("./values/record-link-item-value"));
-
-exports.RecordLinkItemValue = _recordLinkItemValue["default"];
-
-var _featureValidator = _interopRequireDefault(require("./validation/feature-validator"));
-
-exports.FeatureValidator = _featureValidator["default"];
-
-var _dataSource = _interopRequireDefault(require("./data-source"));
-
-exports.DataSource = _dataSource["default"];
-
-var _memoryDataSource = _interopRequireDefault(require("./utils/memory-data-source"));
-
-exports.MemoryDataSource = _memoryDataSource["default"];
-
-var _leveldbDataSource = _interopRequireDefault(require("./utils/leveldb-data-source"));
-
-exports.LevelDBDataSource = _leveldbDataSource["default"];
-
-var _defaultValues = _interopRequireDefault(require("./values/default-values"));
-
-exports.DefaultValues = _defaultValues["default"];
-
-var _customValidationError = _interopRequireDefault(require("./validation/custom-validation-error"));
-
-exports.CustomValidationError = _customValidationError["default"];
-
-var _mediaElement = _interopRequireDefault(require("./elements/media-element"));
-
-exports.MediaElement = _mediaElement["default"];
-
-var _mediaValue = _interopRequireDefault(require("./values/media-value"));
-
-exports.MediaValue = _mediaValue["default"];
-
-var _mediaItemValue = _interopRequireDefault(require("./values/media-item-value"));
-
-exports.MediaItemValue = _mediaItemValue["default"];
-
-var _statusElement = _interopRequireDefault(require("./elements/status-element"));
-
-exports.StatusElement = _statusElement["default"];
-
-var _statusChoice = _interopRequireDefault(require("./elements/status-choice"));
-
-exports.StatusChoice = _statusChoice["default"];
-
-var _statusValue = _interopRequireDefault(require("./values/status-value"));
-
-exports.StatusValue = _statusValue["default"];
-
-var _projectElement = _interopRequireDefault(require("./elements/project-element"));
-
-exports.ProjectElement = _projectElement["default"];
-
-var _checkboxElement = _interopRequireDefault(require("./elements/checkbox-element"));
-
-exports.CheckboxElement = _checkboxElement["default"];
-
-var _checkboxValue = _interopRequireDefault(require("./values/checkbox-value"));
-
-exports.CheckboxValue = _checkboxValue["default"];
-
-var _dynamicElement = _interopRequireDefault(require("./elements/dynamic-element"));
-
-exports.DynamicElement = _dynamicElement["default"];
-
-var _dynamicValue = _interopRequireDefault(require("./values/dynamic-value"));
-
-exports.DynamicValue = _dynamicValue["default"];
-
-var _locationElement = _interopRequireDefault(require("./elements/location-element"));
-
-exports.LocationElement = _locationElement["default"];
-
-var _locationValue = _interopRequireDefault(require("./values/location-value"));
-
-exports.LocationValue = _locationValue["default"];
-
-var _user = _interopRequireDefault(require("./user"));
-
-exports.User = _user["default"];
-
-var _role = _interopRequireDefault(require("./role"));
-
-exports.Role = _role["default"];
-
-var _project = _interopRequireDefault(require("./project"));
-
-exports.Project = _project["default"];
-
-var _changeset = _interopRequireDefault(require("./changeset"));
-
-exports.Changeset = _changeset["default"];
-
-var _track = _interopRequireDefault(require("./media/track"));
-
-exports.Track = _track["default"];
-
-var _trackPoint = _interopRequireDefault(require("./media/track-point"));
-
-exports.TrackPoint = _trackPoint["default"];
-
-var _trackSegment = _interopRequireDefault(require("./media/track-segment"));
-
-exports.TrackSegment = _trackSegment["default"];
-
-var _trackPlayer = _interopRequireDefault(require("./media/track-player"));
-
-exports.TrackPlayer = _trackPlayer["default"];
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.SignatureElement = exports.SectionElement = exports.YesNoValue = exports.YesNoElement = exports.TextValue = exports.TextElement = exports.HyperlinkValue = exports.HyperlinkElement = exports.CalculatedValue = exports.CalculatedElement = exports.TimeValue = exports.TimeElement = exports.DateValue = exports.DateElement = exports.ClassificationValue = exports.ClassificationElement = exports.ChoiceValue = exports.ChoiceElement = exports.BarcodeValue = exports.BarcodeElement = exports.AddressValue = exports.AddressElement = exports.VideoValue = exports.VideoItemValue = exports.AttachmentValue = exports.AttachmentItemValue = exports.AttachmentElement = exports.PhotoValue = exports.PhotoItemValue = exports.AudioValue = exports.AudioItemValue = exports.RepeatableElement = exports.Condition = exports.ChildElements = exports.NumberUtils = exports.DateUtils = exports.TextUtils = exports.FormValues = exports.Feature = exports.RepeatableValue = exports.RepeatableItemValue = exports.ElementFactory = exports.ClassificationSet = exports.Classification = exports.ChoiceList = exports.Choice = exports.FormValue = exports.Element = exports.Record = exports.Form = void 0;
+exports.TrackPlayer = exports.TrackSegment = exports.TrackPoint = exports.Track = exports.Changeset = exports.Project = exports.Role = exports.User = exports.LocationValue = exports.LocationElement = exports.DynamicValue = exports.DynamicElement = exports.CheckboxValue = exports.CheckboxElement = exports.ProjectElement = exports.StatusValue = exports.StatusChoice = exports.StatusElement = exports.MediaItemValue = exports.MediaValue = exports.MediaElement = exports.CustomValidationError = exports.DefaultValues = exports.FileDataSource = exports.LevelDBDataSource = exports.MemoryDataSource = exports.DataSource = exports.FeatureValidator = exports.RecordLinkItemValue = exports.RecordLinkValue = exports.RecordLinkElement = exports.SignatureValue = void 0;
+var form_1 = require("./form");
+Object.defineProperty(exports, "Form", { enumerable: true, get: function () { return __importDefault(form_1).default; } });
+var record_1 = require("./record");
+Object.defineProperty(exports, "Record", { enumerable: true, get: function () { return __importDefault(record_1).default; } });
+var element_1 = require("./elements/element");
+Object.defineProperty(exports, "Element", { enumerable: true, get: function () { return __importDefault(element_1).default; } });
+var form_value_1 = require("./values/form-value");
+Object.defineProperty(exports, "FormValue", { enumerable: true, get: function () { return __importDefault(form_value_1).default; } });
+var choice_1 = require("./elements/choice");
+Object.defineProperty(exports, "Choice", { enumerable: true, get: function () { return __importDefault(choice_1).default; } });
+var choice_list_1 = require("./choice-list");
+Object.defineProperty(exports, "ChoiceList", { enumerable: true, get: function () { return __importDefault(choice_list_1).default; } });
+var classification_1 = require("./elements/classification");
+Object.defineProperty(exports, "Classification", { enumerable: true, get: function () { return __importDefault(classification_1).default; } });
+var classification_set_1 = require("./classification-set");
+Object.defineProperty(exports, "ClassificationSet", { enumerable: true, get: function () { return __importDefault(classification_set_1).default; } });
+var element_factory_1 = require("./elements/element-factory");
+Object.defineProperty(exports, "ElementFactory", { enumerable: true, get: function () { return __importDefault(element_factory_1).default; } });
+var repeatable_item_value_1 = require("./values/repeatable-item-value");
+Object.defineProperty(exports, "RepeatableItemValue", { enumerable: true, get: function () { return __importDefault(repeatable_item_value_1).default; } });
+var repeatable_value_1 = require("./values/repeatable-value");
+Object.defineProperty(exports, "RepeatableValue", { enumerable: true, get: function () { return __importDefault(repeatable_value_1).default; } });
+var feature_1 = require("./feature");
+Object.defineProperty(exports, "Feature", { enumerable: true, get: function () { return __importDefault(feature_1).default; } });
+var form_values_1 = require("./values/form-values");
+Object.defineProperty(exports, "FormValues", { enumerable: true, get: function () { return __importDefault(form_values_1).default; } });
+var text_utils_1 = require("./utils/text-utils");
+Object.defineProperty(exports, "TextUtils", { enumerable: true, get: function () { return __importDefault(text_utils_1).default; } });
+var date_utils_1 = require("./utils/date-utils");
+Object.defineProperty(exports, "DateUtils", { enumerable: true, get: function () { return __importDefault(date_utils_1).default; } });
+var number_utils_1 = require("./utils/number-utils");
+Object.defineProperty(exports, "NumberUtils", { enumerable: true, get: function () { return __importDefault(number_utils_1).default; } });
+var child_elements_1 = require("./elements/child-elements");
+Object.defineProperty(exports, "ChildElements", { enumerable: true, get: function () { return __importDefault(child_elements_1).default; } });
+var condition_1 = require("./elements/condition");
+Object.defineProperty(exports, "Condition", { enumerable: true, get: function () { return __importDefault(condition_1).default; } });
+var repeatable_element_1 = require("./elements/repeatable-element");
+Object.defineProperty(exports, "RepeatableElement", { enumerable: true, get: function () { return __importDefault(repeatable_element_1).default; } });
+var audio_item_value_1 = require("./values/audio-item-value");
+Object.defineProperty(exports, "AudioItemValue", { enumerable: true, get: function () { return __importDefault(audio_item_value_1).default; } });
+var audio_value_1 = require("./values/audio-value");
+Object.defineProperty(exports, "AudioValue", { enumerable: true, get: function () { return __importDefault(audio_value_1).default; } });
+var photo_item_value_1 = require("./values/photo-item-value");
+Object.defineProperty(exports, "PhotoItemValue", { enumerable: true, get: function () { return __importDefault(photo_item_value_1).default; } });
+var photo_value_1 = require("./values/photo-value");
+Object.defineProperty(exports, "PhotoValue", { enumerable: true, get: function () { return __importDefault(photo_value_1).default; } });
+var attachment_element_1 = require("./elements/attachment-element");
+Object.defineProperty(exports, "AttachmentElement", { enumerable: true, get: function () { return __importDefault(attachment_element_1).default; } });
+var attachment_item_value_1 = require("./values/attachment-item-value");
+Object.defineProperty(exports, "AttachmentItemValue", { enumerable: true, get: function () { return __importDefault(attachment_item_value_1).default; } });
+var attachment_value_1 = require("./values/attachment-value");
+Object.defineProperty(exports, "AttachmentValue", { enumerable: true, get: function () { return __importDefault(attachment_value_1).default; } });
+var video_item_value_1 = require("./values/video-item-value");
+Object.defineProperty(exports, "VideoItemValue", { enumerable: true, get: function () { return __importDefault(video_item_value_1).default; } });
+var video_value_1 = require("./values/video-value");
+Object.defineProperty(exports, "VideoValue", { enumerable: true, get: function () { return __importDefault(video_value_1).default; } });
+var address_element_1 = require("./elements/address-element");
+Object.defineProperty(exports, "AddressElement", { enumerable: true, get: function () { return __importDefault(address_element_1).default; } });
+var address_value_1 = require("./values/address-value");
+Object.defineProperty(exports, "AddressValue", { enumerable: true, get: function () { return __importDefault(address_value_1).default; } });
+var barcode_element_1 = require("./elements/barcode-element");
+Object.defineProperty(exports, "BarcodeElement", { enumerable: true, get: function () { return __importDefault(barcode_element_1).default; } });
+var barcode_value_1 = require("./values/barcode-value");
+Object.defineProperty(exports, "BarcodeValue", { enumerable: true, get: function () { return __importDefault(barcode_value_1).default; } });
+var choice_element_1 = require("./elements/choice-element");
+Object.defineProperty(exports, "ChoiceElement", { enumerable: true, get: function () { return __importDefault(choice_element_1).default; } });
+var choice_value_1 = require("./values/choice-value");
+Object.defineProperty(exports, "ChoiceValue", { enumerable: true, get: function () { return __importDefault(choice_value_1).default; } });
+var classification_element_1 = require("./elements/classification-element");
+Object.defineProperty(exports, "ClassificationElement", { enumerable: true, get: function () { return __importDefault(classification_element_1).default; } });
+var classification_value_1 = require("./values/classification-value");
+Object.defineProperty(exports, "ClassificationValue", { enumerable: true, get: function () { return __importDefault(classification_value_1).default; } });
+var date_element_1 = require("./elements/date-element");
+Object.defineProperty(exports, "DateElement", { enumerable: true, get: function () { return __importDefault(date_element_1).default; } });
+var date_value_1 = require("./values/date-value");
+Object.defineProperty(exports, "DateValue", { enumerable: true, get: function () { return __importDefault(date_value_1).default; } });
+var time_element_1 = require("./elements/time-element");
+Object.defineProperty(exports, "TimeElement", { enumerable: true, get: function () { return __importDefault(time_element_1).default; } });
+var time_value_1 = require("./values/time-value");
+Object.defineProperty(exports, "TimeValue", { enumerable: true, get: function () { return __importDefault(time_value_1).default; } });
+var calculated_element_1 = require("./elements/calculated-element");
+Object.defineProperty(exports, "CalculatedElement", { enumerable: true, get: function () { return __importDefault(calculated_element_1).default; } });
+var calculated_value_1 = require("./values/calculated-value");
+Object.defineProperty(exports, "CalculatedValue", { enumerable: true, get: function () { return __importDefault(calculated_value_1).default; } });
+var hyperlink_element_1 = require("./elements/hyperlink-element");
+Object.defineProperty(exports, "HyperlinkElement", { enumerable: true, get: function () { return __importDefault(hyperlink_element_1).default; } });
+var hyperlink_value_1 = require("./values/hyperlink-value");
+Object.defineProperty(exports, "HyperlinkValue", { enumerable: true, get: function () { return __importDefault(hyperlink_value_1).default; } });
+var text_element_1 = require("./elements/text-element");
+Object.defineProperty(exports, "TextElement", { enumerable: true, get: function () { return __importDefault(text_element_1).default; } });
+var text_value_1 = require("./values/text-value");
+Object.defineProperty(exports, "TextValue", { enumerable: true, get: function () { return __importDefault(text_value_1).default; } });
+var yes_no_element_1 = require("./elements/yes-no-element");
+Object.defineProperty(exports, "YesNoElement", { enumerable: true, get: function () { return __importDefault(yes_no_element_1).default; } });
+var yes_no_value_1 = require("./values/yes-no-value");
+Object.defineProperty(exports, "YesNoValue", { enumerable: true, get: function () { return __importDefault(yes_no_value_1).default; } });
+var section_element_1 = require("./elements/section-element");
+Object.defineProperty(exports, "SectionElement", { enumerable: true, get: function () { return __importDefault(section_element_1).default; } });
+var signature_element_1 = require("./elements/signature-element");
+Object.defineProperty(exports, "SignatureElement", { enumerable: true, get: function () { return __importDefault(signature_element_1).default; } });
+var signature_value_1 = require("./values/signature-value");
+Object.defineProperty(exports, "SignatureValue", { enumerable: true, get: function () { return __importDefault(signature_value_1).default; } });
+var record_link_element_1 = require("./elements/record-link-element");
+Object.defineProperty(exports, "RecordLinkElement", { enumerable: true, get: function () { return __importDefault(record_link_element_1).default; } });
+var record_link_value_1 = require("./values/record-link-value");
+Object.defineProperty(exports, "RecordLinkValue", { enumerable: true, get: function () { return __importDefault(record_link_value_1).default; } });
+var record_link_item_value_1 = require("./values/record-link-item-value");
+Object.defineProperty(exports, "RecordLinkItemValue", { enumerable: true, get: function () { return __importDefault(record_link_item_value_1).default; } });
+var feature_validator_1 = require("./validation/feature-validator");
+Object.defineProperty(exports, "FeatureValidator", { enumerable: true, get: function () { return __importDefault(feature_validator_1).default; } });
+var data_source_1 = require("./data-source");
+Object.defineProperty(exports, "DataSource", { enumerable: true, get: function () { return __importDefault(data_source_1).default; } });
+var memory_data_source_1 = require("./utils/memory-data-source");
+Object.defineProperty(exports, "MemoryDataSource", { enumerable: true, get: function () { return __importDefault(memory_data_source_1).default; } });
+var leveldb_data_source_1 = require("./utils/leveldb-data-source");
+Object.defineProperty(exports, "LevelDBDataSource", { enumerable: true, get: function () { return __importDefault(leveldb_data_source_1).default; } });
+var file_data_source_1 = require("./utils/file-data-source");
+Object.defineProperty(exports, "FileDataSource", { enumerable: true, get: function () { return __importDefault(file_data_source_1).default; } });
+var default_values_1 = require("./values/default-values");
+Object.defineProperty(exports, "DefaultValues", { enumerable: true, get: function () { return __importDefault(default_values_1).default; } });
+var custom_validation_error_1 = require("./validation/custom-validation-error");
+Object.defineProperty(exports, "CustomValidationError", { enumerable: true, get: function () { return __importDefault(custom_validation_error_1).default; } });
+var media_element_1 = require("./elements/media-element");
+Object.defineProperty(exports, "MediaElement", { enumerable: true, get: function () { return __importDefault(media_element_1).default; } });
+var media_value_1 = require("./values/media-value");
+Object.defineProperty(exports, "MediaValue", { enumerable: true, get: function () { return __importDefault(media_value_1).default; } });
+var media_item_value_1 = require("./values/media-item-value");
+Object.defineProperty(exports, "MediaItemValue", { enumerable: true, get: function () { return __importDefault(media_item_value_1).default; } });
+var status_element_1 = require("./elements/status-element");
+Object.defineProperty(exports, "StatusElement", { enumerable: true, get: function () { return __importDefault(status_element_1).default; } });
+var status_choice_1 = require("./elements/status-choice");
+Object.defineProperty(exports, "StatusChoice", { enumerable: true, get: function () { return __importDefault(status_choice_1).default; } });
+var status_value_1 = require("./values/status-value");
+Object.defineProperty(exports, "StatusValue", { enumerable: true, get: function () { return __importDefault(status_value_1).default; } });
+var project_element_1 = require("./elements/project-element");
+Object.defineProperty(exports, "ProjectElement", { enumerable: true, get: function () { return __importDefault(project_element_1).default; } });
+var checkbox_element_1 = require("./elements/checkbox-element");
+Object.defineProperty(exports, "CheckboxElement", { enumerable: true, get: function () { return __importDefault(checkbox_element_1).default; } });
+var checkbox_value_1 = require("./values/checkbox-value");
+Object.defineProperty(exports, "CheckboxValue", { enumerable: true, get: function () { return __importDefault(checkbox_value_1).default; } });
+var dynamic_element_1 = require("./elements/dynamic-element");
+Object.defineProperty(exports, "DynamicElement", { enumerable: true, get: function () { return __importDefault(dynamic_element_1).default; } });
+var dynamic_value_1 = require("./values/dynamic-value");
+Object.defineProperty(exports, "DynamicValue", { enumerable: true, get: function () { return __importDefault(dynamic_value_1).default; } });
+var location_element_1 = require("./elements/location-element");
+Object.defineProperty(exports, "LocationElement", { enumerable: true, get: function () { return __importDefault(location_element_1).default; } });
+var location_value_1 = require("./values/location-value");
+Object.defineProperty(exports, "LocationValue", { enumerable: true, get: function () { return __importDefault(location_value_1).default; } });
+var user_1 = require("./user");
+Object.defineProperty(exports, "User", { enumerable: true, get: function () { return __importDefault(user_1).default; } });
+var role_1 = require("./role");
+Object.defineProperty(exports, "Role", { enumerable: true, get: function () { return __importDefault(role_1).default; } });
+var project_1 = require("./project");
+Object.defineProperty(exports, "Project", { enumerable: true, get: function () { return __importDefault(project_1).default; } });
+var changeset_1 = require("./changeset");
+Object.defineProperty(exports, "Changeset", { enumerable: true, get: function () { return __importDefault(changeset_1).default; } });
+var track_1 = require("./media/track");
+Object.defineProperty(exports, "Track", { enumerable: true, get: function () { return __importDefault(track_1).default; } });
+var track_point_1 = require("./media/track-point");
+Object.defineProperty(exports, "TrackPoint", { enumerable: true, get: function () { return __importDefault(track_point_1).default; } });
+var track_segment_1 = require("./media/track-segment");
+Object.defineProperty(exports, "TrackSegment", { enumerable: true, get: function () { return __importDefault(track_segment_1).default; } });
+var track_player_1 = require("./media/track-player");
+Object.defineProperty(exports, "TrackPlayer", { enumerable: true, get: function () { return __importDefault(track_player_1).default; } });
 //# sourceMappingURL=index.js.map

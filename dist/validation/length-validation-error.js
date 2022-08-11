@@ -1,208 +1,177 @@
 "use strict";
-
-exports.__esModule = true;
-exports["default"] = void 0;
-
-var _elementValidationError = _interopRequireDefault(require("./element-validation-error"));
-
-var _util = require("util");
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); Object.defineProperty(Constructor, "prototype", { writable: false }); return Constructor; }
-
-function _inheritsLoose(subClass, superClass) { subClass.prototype = Object.create(superClass.prototype); subClass.prototype.constructor = subClass; _setPrototypeOf(subClass, superClass); }
-
-function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
-
-var AT_LEAST = 'at-least';
-var AT_MOST = 'at-most';
-var BETWEEN = 'between';
-var EXACTLY = 'exactly';
-
-var LengthValidationError = /*#__PURE__*/function (_ElementValidationErr) {
-  _inheritsLoose(LengthValidationError, _ElementValidationErr);
-
-  function LengthValidationError(element) {
-    var _this;
-
-    _this = _ElementValidationErr.call(this, element) || this;
-
-    if (element.hasMinLength && element.hasMaxLength && element.minLength === element.maxLength) {
-      _this.type = EXACTLY;
-    } else if (element.hasMinLength && element.hasMaxLength) {
-      _this.type = BETWEEN;
-    } else if (element.hasMinLength) {
-      _this.type = AT_LEAST;
-    } else if (element.hasMaxLength) {
-      _this.type = AT_MOST;
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const element_validation_error_1 = __importDefault(require("./element-validation-error"));
+const util_1 = require("util");
+const AT_LEAST = 'at-least';
+const AT_MOST = 'at-most';
+const BETWEEN = 'between';
+const EXACTLY = 'exactly';
+class LengthValidationError extends element_validation_error_1.default {
+    constructor(element) {
+        super(element);
+        if (element.hasMinLength && element.hasMaxLength && element.minLength === element.maxLength) {
+            this.type = EXACTLY;
+        }
+        else if (element.hasMinLength && element.hasMaxLength) {
+            this.type = BETWEEN;
+        }
+        else if (element.hasMinLength) {
+            this.type = AT_LEAST;
+        }
+        else if (element.hasMaxLength) {
+            this.type = AT_MOST;
+        }
     }
-
-    return _this;
-  }
-
-  var _proto = LengthValidationError.prototype;
-
-  _proto.messageWithFormats = function messageWithFormats(singularFormat, pluralFormat, length) {
-    if (length === 1) {
-      return (0, _util.format)(singularFormat, this.label, length);
+    get message() {
+        if (this.element.isTextElement) {
+            return this.textElementMessage;
+        }
+        else if (this.element.isChoiceElement) {
+            return this.choiceElementMessage;
+        }
+        else if (this.element.isPhotoElement) {
+            return this.photoElementMessage;
+        }
+        else if (this.element.isVideoElement) {
+            return this.videoElementMessage;
+        }
+        else if (this.element.isAudioElement) {
+            return this.audioElementMessage;
+        }
+        else if (this.element.isAttachmentElement) {
+            return this.attachmentElementMessage;
+        }
+        else if (this.element.isRepeatableElement) {
+            return this.repeatableElementMessage;
+        }
+        return '';
     }
-
-    return (0, _util.format)(pluralFormat, this.label, length);
-  };
-
-  _createClass(LengthValidationError, [{
-    key: "message",
-    get: function get() {
-      if (this.element.isTextElement) {
-        return this.textElementMessage;
-      } else if (this.element.isChoiceElement) {
-        return this.choiceElementMessage;
-      } else if (this.element.isPhotoElement) {
-        return this.photoElementMessage;
-      } else if (this.element.isVideoElement) {
-        return this.videoElementMessage;
-      } else if (this.element.isAudioElement) {
-        return this.audioElementMessage;
-      } else if (this.element.isAttachmentElement) {
-        return this.attachmentElementMessage;
-      } else if (this.element.isRepeatableElement) {
-        return this.repeatableElementMessage;
-      }
-
-      return '';
+    get isAtLeastError() {
+        return this.type === AT_LEAST;
     }
-  }, {
-    key: "isAtLeastError",
-    get: function get() {
-      return this.type === AT_LEAST;
+    get isAtMostError() {
+        return this.type === AT_MOST;
     }
-  }, {
-    key: "isAtMostError",
-    get: function get() {
-      return this.type === AT_MOST;
+    get isBetweenError() {
+        return this.type === BETWEEN;
     }
-  }, {
-    key: "isBetweenError",
-    get: function get() {
-      return this.type === BETWEEN;
+    get isExactlyError() {
+        return this.type === EXACTLY;
     }
-  }, {
-    key: "isExactlyError",
-    get: function get() {
-      return this.type === EXACTLY;
+    get textElementMessage() {
+        if (this.isAtLeastError) {
+            return this.messageWithFormats("The field '%s' must have at least 1 character.", "The field '%s' must have at least %s characters.", this.element.minLength);
+        }
+        else if (this.isAtMostError) {
+            return this.messageWithFormats("The field '%s' cannot have more than 1 character.", "The field '%s' cannot have more than %s characters.", this.element.maxLength);
+        }
+        else if (this.isBetweenError) {
+            return (0, util_1.format)("The field '%s' must have between %s and %s characters.", this.label, this.element.minLength, this.element.maxLength);
+        }
+        else if (this.isExactlyError) {
+            return this.messageWithFormats("The field '%s' must have exactly 1 character.", "The field '%s' must have exactly %s characters.", this.element.minLength);
+        }
+        return '';
     }
-  }, {
-    key: "textElementMessage",
-    get: function get() {
-      if (this.isAtLeastError) {
-        return this.messageWithFormats("The field '%s' must have at least 1 character.", "The field '%s' must have at least %s characters.", this.element.minLength);
-      } else if (this.isAtMostError) {
-        return this.messageWithFormats("The field '%s' cannot have more than 1 character.", "The field '%s' cannot have more than %s characters.", this.element.maxLength);
-      } else if (this.isBetweenError) {
-        return (0, _util.format)("The field '%s' must have between %s and %s characters.", this.label, this.element.minLength, this.element.maxLength);
-      } else if (this.isExactlyError) {
-        return this.messageWithFormats("The field '%s' must have exactly 1 character.", "The field '%s' must have exactly %s characters.", this.element.minLength);
-      }
-
-      return '';
+    get photoElementMessage() {
+        if (this.isAtLeastError) {
+            return this.messageWithFormats("The field '%s' must have at least 1 photo.", "The field '%s' must have at least %s photos.", this.element.minLength);
+        }
+        else if (this.isAtMostError) {
+            return this.messageWithFormats("The field '%s' cannot have more than 1 photo.", "The field '%s' cannot have more than %s photos.", this.element.maxLength);
+        }
+        else if (this.isBetweenError) {
+            return (0, util_1.format)("The field '%s' must have between %s and %s photos.", this.label, this.element.minLength, this.element.maxLength);
+        }
+        else if (this.isExactlyError) {
+            return this.messageWithFormats("The field '%s' must have exactly 1 photo.", "The field '%s' must have exactly %s photos.", this.element.minLength);
+        }
+        return '';
     }
-  }, {
-    key: "photoElementMessage",
-    get: function get() {
-      if (this.isAtLeastError) {
-        return this.messageWithFormats("The field '%s' must have at least 1 photo.", "The field '%s' must have at least %s photos.", this.element.minLength);
-      } else if (this.isAtMostError) {
-        return this.messageWithFormats("The field '%s' cannot have more than 1 photo.", "The field '%s' cannot have more than %s photos.", this.element.maxLength);
-      } else if (this.isBetweenError) {
-        return (0, _util.format)("The field '%s' must have between %s and %s photos.", this.label, this.element.minLength, this.element.maxLength);
-      } else if (this.isExactlyError) {
-        return this.messageWithFormats("The field '%s' must have exactly 1 photo.", "The field '%s' must have exactly %s photos.", this.element.minLength);
-      }
-
-      return '';
+    get videoElementMessage() {
+        if (this.isAtLeastError) {
+            return this.messageWithFormats("The field '%s' must have at least 1 video.", "The field '%s' must have at least %s videos.", this.element.minLength);
+        }
+        else if (this.isAtMostError) {
+            return this.messageWithFormats("The field '%s' cannot have more than 1 video.", "The field '%s' cannot have more than %s videos.", this.element.maxLength);
+        }
+        else if (this.isBetweenError) {
+            return (0, util_1.format)("The field '%s' must have between %s and %s videos.", this.label, this.element.minLength, this.element.maxLength);
+        }
+        else if (this.isExactlyError) {
+            return this.messageWithFormats("The field '%s' must have exactly 1 video.", "The field '%s' must have exactly %s videos.", this.element.minLength);
+        }
+        return '';
     }
-  }, {
-    key: "videoElementMessage",
-    get: function get() {
-      if (this.isAtLeastError) {
-        return this.messageWithFormats("The field '%s' must have at least 1 video.", "The field '%s' must have at least %s videos.", this.element.minLength);
-      } else if (this.isAtMostError) {
-        return this.messageWithFormats("The field '%s' cannot have more than 1 video.", "The field '%s' cannot have more than %s videos.", this.element.maxLength);
-      } else if (this.isBetweenError) {
-        return (0, _util.format)("The field '%s' must have between %s and %s videos.", this.label, this.element.minLength, this.element.maxLength);
-      } else if (this.isExactlyError) {
-        return this.messageWithFormats("The field '%s' must have exactly 1 video.", "The field '%s' must have exactly %s videos.", this.element.minLength);
-      }
-
-      return '';
+    get audioElementMessage() {
+        if (this.isAtLeastError) {
+            return this.messageWithFormats("The field '%s' must have at least 1 audio file.", "The field '%s' must have at least %s audio files.", this.element.minLength);
+        }
+        else if (this.isAtMostError) {
+            return this.messageWithFormats("The field '%s' cannot have more than 1 audio file.", "The field '%s' cannot have more than %s audio files.", this.element.maxLength);
+        }
+        else if (this.isBetweenError) {
+            return (0, util_1.format)("The field '%s' must have between %s and %s audio files.", this.label, this.element.minLength, this.element.maxLength);
+        }
+        else if (this.isExactlyError) {
+            return this.messageWithFormats("The field '%s' must have exactly 1 audio file.", "The field '%s' must have exactly %s audio files.", this.element.minLength);
+        }
+        return '';
     }
-  }, {
-    key: "audioElementMessage",
-    get: function get() {
-      if (this.isAtLeastError) {
-        return this.messageWithFormats("The field '%s' must have at least 1 audio file.", "The field '%s' must have at least %s audio files.", this.element.minLength);
-      } else if (this.isAtMostError) {
-        return this.messageWithFormats("The field '%s' cannot have more than 1 audio file.", "The field '%s' cannot have more than %s audio files.", this.element.maxLength);
-      } else if (this.isBetweenError) {
-        return (0, _util.format)("The field '%s' must have between %s and %s audio files.", this.label, this.element.minLength, this.element.maxLength);
-      } else if (this.isExactlyError) {
-        return this.messageWithFormats("The field '%s' must have exactly 1 audio file.", "The field '%s' must have exactly %s audio files.", this.element.minLength);
-      }
-
-      return '';
+    get attachmentElementMessage() {
+        if (this.isAtLeastError) {
+            return this.messageWithFormats("The field '%s' must have at least 1 file.", "The field '%s' must have at least %s files.", this.element.minLength);
+        }
+        else if (this.isAtMostError) {
+            return this.messageWithFormats("The field '%s' cannot have more than 1 file.", "The field '%s' cannot have more than %s files.", this.element.maxLength);
+        }
+        else if (this.isBetweenError) {
+            return (0, util_1.format)("The field '%s' must have between %s and %s files.", this.label, this.element.minLength, this.element.maxLength);
+        }
+        else if (this.isExactlyError) {
+            return this.messageWithFormats("The field '%s' must have exactly 1 file.", "The field '%s' must have exactly %s files.", this.element.minLength);
+        }
+        return '';
     }
-  }, {
-    key: "attachmentElementMessage",
-    get: function get() {
-      if (this.isAtLeastError) {
-        return this.messageWithFormats("The field '%s' must have at least 1 file.", "The field '%s' must have at least %s files.", this.element.minLength);
-      } else if (this.isAtMostError) {
-        return this.messageWithFormats("The field '%s' cannot have more than 1 file.", "The field '%s' cannot have more than %s files.", this.element.maxLength);
-      } else if (this.isBetweenError) {
-        return (0, _util.format)("The field '%s' must have between %s and %s files.", this.label, this.element.minLength, this.element.maxLength);
-      } else if (this.isExactlyError) {
-        return this.messageWithFormats("The field '%s' must have exactly 1 file.", "The field '%s' must have exactly %s files.", this.element.minLength);
-      }
-
-      return '';
+    get choiceElementMessage() {
+        if (this.isAtLeastError) {
+            return this.messageWithFormats("The field '%s' must have at least 1 choice.", "The field '%s' must have at least %s choices.", this.element.minLength);
+        }
+        else if (this.isAtMostError) {
+            return this.messageWithFormats("The field '%s' cannot have more than 1 choice.", "The field '%s' cannot have more than %s choices.", this.element.maxLength);
+        }
+        else if (this.isBetweenError) {
+            return (0, util_1.format)("The field '%s' must have between %s and %s choices.", this.label, this.element.minLength, this.element.maxLength);
+        }
+        else if (this.isExactlyError) {
+            return this.messageWithFormats("The field '%s' must have exactly 1 choice.", "The field '%s' must have exactly %s choices.", this.element.minLength);
+        }
+        return '';
     }
-  }, {
-    key: "choiceElementMessage",
-    get: function get() {
-      if (this.isAtLeastError) {
-        return this.messageWithFormats("The field '%s' must have at least 1 choice.", "The field '%s' must have at least %s choices.", this.element.minLength);
-      } else if (this.isAtMostError) {
-        return this.messageWithFormats("The field '%s' cannot have more than 1 choice.", "The field '%s' cannot have more than %s choices.", this.element.maxLength);
-      } else if (this.isBetweenError) {
-        return (0, _util.format)("The field '%s' must have between %s and %s choices.", this.label, this.element.minLength, this.element.maxLength);
-      } else if (this.isExactlyError) {
-        return this.messageWithFormats("The field '%s' must have exactly 1 choice.", "The field '%s' must have exactly %s choices.", this.element.minLength);
-      }
-
-      return '';
+    get repeatableElementMessage() {
+        if (this.isAtLeastError) {
+            return this.messageWithFormats("The field '%s' must have at least 1 item.", "The field '%s' must have at least %s items.", this.element.minLength);
+        }
+        else if (this.isAtMostError) {
+            return this.messageWithFormats("The field '%s' cannot have more than 1 item.", "The field '%s' cannot have more than %s items.", this.element.maxLength);
+        }
+        else if (this.isBetweenError) {
+            return (0, util_1.format)("The field '%s' must have between %s and %s items.", this.label, this.element.minLength, this.element.maxLength);
+        }
+        else if (this.isExactlyError) {
+            return this.messageWithFormats("The field '%s' must have exactly 1 item.", "The field '%s' must have exactly %s items.", this.element.minLength);
+        }
+        return '';
     }
-  }, {
-    key: "repeatableElementMessage",
-    get: function get() {
-      if (this.isAtLeastError) {
-        return this.messageWithFormats("The field '%s' must have at least 1 item.", "The field '%s' must have at least %s items.", this.element.minLength);
-      } else if (this.isAtMostError) {
-        return this.messageWithFormats("The field '%s' cannot have more than 1 item.", "The field '%s' cannot have more than %s items.", this.element.maxLength);
-      } else if (this.isBetweenError) {
-        return (0, _util.format)("The field '%s' must have between %s and %s items.", this.label, this.element.minLength, this.element.maxLength);
-      } else if (this.isExactlyError) {
-        return this.messageWithFormats("The field '%s' must have exactly 1 item.", "The field '%s' must have exactly %s items.", this.element.minLength);
-      }
-
-      return '';
+    messageWithFormats(singularFormat, pluralFormat, length) {
+        if (length === 1) {
+            return (0, util_1.format)(singularFormat, this.label, length);
+        }
+        return (0, util_1.format)(pluralFormat, this.label, length);
     }
-  }]);
-
-  return LengthValidationError;
-}(_elementValidationError["default"]);
-
-exports["default"] = LengthValidationError;
+}
+exports.default = LengthValidationError;
 //# sourceMappingURL=length-validation-error.js.map

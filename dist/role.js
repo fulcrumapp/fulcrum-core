@@ -1,182 +1,117 @@
 "use strict";
-
-exports.__esModule = true;
-exports["default"] = void 0;
-
-var _dateUtils = _interopRequireDefault(require("./utils/date-utils"));
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); Object.defineProperty(Constructor, "prototype", { writable: false }); return Constructor; }
-
-var Role = /*#__PURE__*/function () {
-  function Role(attrs) {
-    this.updateFromAPIAttributes(attrs);
-  }
-
-  var _proto = Role.prototype;
-
-  _proto.updateFromAPIAttributes = function updateFromAPIAttributes(attrs) {
-    var attributes = attrs || {};
-    this._id = attributes.id;
-    this._name = attributes.name;
-    this._isSystem = !!attributes.is_system;
-    this._isDefault = !!attributes.is_default;
-    this._canManageSubscription = !!attributes.can_manage_subscription;
-    this._canUpdateOrganization = !!attributes.can_update_organization;
-    this._canManageMembers = !!attributes.can_manage_members;
-    this._canManageRoles = !!attributes.can_manage_roles;
-    this._canManageLayers = !!attributes.can_manage_layers;
-    this._canManageApps = !!attributes.can_manage_apps;
-    this._canManageProjects = !!attributes.can_manage_projects;
-    this._canManageChoiceLists = !!attributes.can_manage_choice_lists;
-    this._canManageClassificationSets = !!attributes.can_manage_classification_sets;
-    this._canChangeStatus = !!attributes.can_change_status;
-    this._canChangeProject = !!attributes.can_change_project;
-    this._canChangeLocation = !!attributes.can_change_location;
-    this._canAssignRecords = !!attributes.can_assign_records;
-    this._canRunReports = !!attributes.can_run_reports;
-    this._canCreateRecords = !!attributes.can_create_records;
-    this._canUpdateRecords = !!attributes.can_update_records;
-    this._canDeleteRecords = !!attributes.can_delete_records;
-    this._canExportRecords = !!attributes.can_export_records;
-    this._canImportRecords = !!attributes.can_import_records;
-    this._canManageAuthorizations = !!attributes.can_manage_authorizations;
-    this._createdAt = _dateUtils["default"].parseISOTimestamp(attributes.created_at);
-    this._updatedAt = _dateUtils["default"].parseISOTimestamp(attributes.updated_at);
-  };
-
-  _createClass(Role, [{
-    key: "id",
-    get: function get() {
-      return this._id;
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const date_utils_1 = __importDefault(require("./utils/date-utils"));
+class Role {
+    constructor(attrs) {
+        this.updateFromAPIAttributes(attrs);
     }
-  }, {
-    key: "name",
-    get: function get() {
-      return this._name;
+    updateFromAPIAttributes(attrs) {
+        const attributes = attrs || {};
+        this._id = attributes.id;
+        this._name = attributes.name;
+        this._isSystem = !!attributes.is_system;
+        this._isDefault = !!attributes.is_default;
+        this._canManageSubscription = !!attributes.can_manage_subscription;
+        this._canUpdateOrganization = !!attributes.can_update_organization;
+        this._canManageMembers = !!attributes.can_manage_members;
+        this._canManageRoles = !!attributes.can_manage_roles;
+        this._canManageLayers = !!attributes.can_manage_layers;
+        this._canManageApps = !!attributes.can_manage_apps;
+        this._canManageProjects = !!attributes.can_manage_projects;
+        this._canManageChoiceLists = !!attributes.can_manage_choice_lists;
+        this._canManageClassificationSets = !!attributes.can_manage_classification_sets;
+        this._canChangeStatus = !!attributes.can_change_status;
+        this._canChangeProject = !!attributes.can_change_project;
+        this._canChangeLocation = !!attributes.can_change_location;
+        this._canAssignRecords = !!attributes.can_assign_records;
+        this._canRunReports = !!attributes.can_run_reports;
+        this._canCreateRecords = !!attributes.can_create_records;
+        this._canUpdateRecords = !!attributes.can_update_records;
+        this._canDeleteRecords = !!attributes.can_delete_records;
+        this._canExportRecords = !!attributes.can_export_records;
+        this._canImportRecords = !!attributes.can_import_records;
+        this._canManageAuthorizations = !!attributes.can_manage_authorizations;
+        this._createdAt = date_utils_1.default.parseISOTimestamp(attributes.created_at);
+        this._updatedAt = date_utils_1.default.parseISOTimestamp(attributes.updated_at);
     }
-  }, {
-    key: "createdAt",
-    get: function get() {
-      return this._createdAt;
+    get id() {
+        return this._id;
     }
-  }, {
-    key: "updatedAt",
-    get: function get() {
-      return this._updatedAt;
+    get name() {
+        return this._name;
     }
-  }, {
-    key: "isSystem",
-    get: function get() {
-      return this._isSystem;
+    get createdAt() {
+        return this._createdAt;
     }
-  }, {
-    key: "isDefault",
-    get: function get() {
-      return this._isDefault;
+    get updatedAt() {
+        return this._updatedAt;
     }
-  }, {
-    key: "canManageSubscription",
-    get: function get() {
-      return this._canManageSubscription;
+    get isSystem() {
+        return this._isSystem;
     }
-  }, {
-    key: "canUpdateOrganization",
-    get: function get() {
-      return this._canUpdateOrganization;
+    get isDefault() {
+        return this._isDefault;
     }
-  }, {
-    key: "canManageMembers",
-    get: function get() {
-      return this._canManageMembers;
+    get canManageSubscription() {
+        return this._canManageSubscription;
     }
-  }, {
-    key: "canManageRoles",
-    get: function get() {
-      return this._canManageRoles;
+    get canUpdateOrganization() {
+        return this._canUpdateOrganization;
     }
-  }, {
-    key: "canManageLayers",
-    get: function get() {
-      return this._canManageLayers;
+    get canManageMembers() {
+        return this._canManageMembers;
     }
-  }, {
-    key: "canManageApps",
-    get: function get() {
-      return this._canManageApps;
+    get canManageRoles() {
+        return this._canManageRoles;
     }
-  }, {
-    key: "canManageProjects",
-    get: function get() {
-      return this._canManageProjects;
+    get canManageLayers() {
+        return this._canManageLayers;
     }
-  }, {
-    key: "canManageChoiceLists",
-    get: function get() {
-      return this._canManageChoiceLists;
+    get canManageApps() {
+        return this._canManageApps;
     }
-  }, {
-    key: "canManageClassificationSets",
-    get: function get() {
-      return this._canManageClassificationSets;
+    get canManageProjects() {
+        return this._canManageProjects;
     }
-  }, {
-    key: "canChangeLocation",
-    get: function get() {
-      return this._canChangeLocation;
+    get canManageChoiceLists() {
+        return this._canManageChoiceLists;
     }
-  }, {
-    key: "canImportRecords",
-    get: function get() {
-      return this._canImportRecords;
+    get canManageClassificationSets() {
+        return this._canManageClassificationSets;
     }
-  }, {
-    key: "canChangeStatus",
-    get: function get() {
-      return this._canChangeStatus;
+    get canChangeLocation() {
+        return this._canChangeLocation;
     }
-  }, {
-    key: "canChangeProject",
-    get: function get() {
-      return this._canChangeProject;
+    get canImportRecords() {
+        return this._canImportRecords;
     }
-  }, {
-    key: "canAssignRecords",
-    get: function get() {
-      return this._canAssignRecords;
+    get canChangeStatus() {
+        return this._canChangeStatus;
     }
-  }, {
-    key: "canCreateRecords",
-    get: function get() {
-      return this._canCreateRecords;
+    get canChangeProject() {
+        return this._canChangeProject;
     }
-  }, {
-    key: "canUpdateRecords",
-    get: function get() {
-      return this._canUpdateRecords;
+    get canAssignRecords() {
+        return this._canAssignRecords;
     }
-  }, {
-    key: "canDeleteRecords",
-    get: function get() {
-      return this._canDeleteRecords;
+    get canCreateRecords() {
+        return this._canCreateRecords;
     }
-  }, {
-    key: "canExportRecords",
-    get: function get() {
-      return this._canExportRecords;
+    get canUpdateRecords() {
+        return this._canUpdateRecords;
     }
-  }, {
-    key: "canRunReports",
-    get: function get() {
-      return this._canRunReports;
+    get canDeleteRecords() {
+        return this._canDeleteRecords;
     }
-  }]);
-
-  return Role;
-}();
-
-exports["default"] = Role;
+    get canExportRecords() {
+        return this._canExportRecords;
+    }
+    get canRunReports() {
+        return this._canRunReports;
+    }
+}
+exports.default = Role;
 //# sourceMappingURL=role.js.map

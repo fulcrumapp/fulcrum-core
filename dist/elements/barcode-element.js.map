@@ -1,1 +1,1 @@
-{"version":3,"file":"barcode-element.js","names":["BarcodeElement","TextualElement"],"sources":["../../src/elements/barcode-element.js"],"sourcesContent":["import TextualElement from './textual-element';\n\nexport default class BarcodeElement extends TextualElement {\n}\n"],"mappings":";;;;;AAAA;;;;;;;;IAEqBA,c;;;;;;;;EAAuBC,0B"}
+{"version":3,"file":"barcode-element.js","sourceRoot":"","sources":["../../src/elements/barcode-element.js"],"names":[],"mappings":";;;;;AAAA,wEAA+C;AAE/C,MAAqB,cAAe,SAAQ,yBAAc;CACzD;AADD,iCACC"}

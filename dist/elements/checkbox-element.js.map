@@ -1,1 +1,1 @@
-{"version":3,"file":"checkbox-element.js","names":["CheckboxElement","BooleanElement"],"sources":["../../src/elements/checkbox-element.js"],"sourcesContent":["import BooleanElement from './boolean-element';\n\nexport default class CheckboxElement extends BooleanElement {\n}\n"],"mappings":";;;;;AAAA;;;;;;;;IAEqBA,e;;;;;;;;EAAwBC,0B"}
+{"version":3,"file":"checkbox-element.js","sourceRoot":"","sources":["../../src/elements/checkbox-element.js"],"names":[],"mappings":";;;;;AAAA,wEAA+C;AAE/C,MAAqB,eAAgB,SAAQ,yBAAc;CAC1D;AADD,kCACC"}

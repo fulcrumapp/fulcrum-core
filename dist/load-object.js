@@ -1,23 +1,18 @@
 "use strict";
-
-exports.__esModule = true;
-exports["default"] = loadObject;
-
+Object.defineProperty(exports, "__esModule", { value: true });
 function loadObject(object, dataSource, attribute, loader, callback) {
-  var ivar = '_' + attribute + 'ID';
-
-  if (object[ivar] == null) {
-    callback();
-    return;
-  }
-
-  dataSource[loader](object[ivar], function (err, result) {
-    if (err) {
-      return callback(err);
+    const ivar = '_' + attribute + 'ID';
+    if (object[ivar] == null) {
+        callback();
+        return;
     }
-
-    object['_' + attribute] = result;
-    return callback();
-  });
+    dataSource[loader](object[ivar], (err, result) => {
+        if (err) {
+            return callback(err);
+        }
+        object['_' + attribute] = result;
+        return callback();
+    });
 }
+exports.default = loadObject;
 //# sourceMappingURL=load-object.js.map

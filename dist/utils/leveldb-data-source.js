@@ -1,255 +1,165 @@
 "use strict";
-
-exports.__esModule = true;
-exports["default"] = void 0;
-
-var _choiceList = _interopRequireDefault(require("../choice-list"));
-
-var _classificationSet = _interopRequireDefault(require("../classification-set"));
-
-var _form = _interopRequireDefault(require("../form"));
-
-var _async = _interopRequireDefault(require("async"));
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
-
-function _createForOfIteratorHelperLoose(o, allowArrayLike) { var it = typeof Symbol !== "undefined" && o[Symbol.iterator] || o["@@iterator"]; if (it) return (it = it.call(o)).next.bind(it); if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; return function () { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
-
-function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
-
-function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
-
-var CACHE_VERSION = 1;
-
-var LevelDBDataSource = /*#__PURE__*/function () {
-  function LevelDBDataSource(db, cacheVersion) {
-    this.db = db;
-    this.callbacks = [];
-    this.cacheVersion = cacheVersion || CACHE_VERSION;
-  }
-
-  var _proto = LevelDBDataSource.prototype;
-
-  _proto.initialize = function initialize(_ref, callback) {
-    var _this = this;
-
-    var formVersions = _ref.formVersions,
-        choiceListVersions = _ref.choiceListVersions,
-        classificationSetVersions = _ref.classificationSetVersions;
-    var objects = [];
-    this.checkVersion(function () {
-      for (var _i = 0, _Object$keys = Object.keys(formVersions); _i < _Object$keys.length; _i++) {
-        var id = _Object$keys[_i];
-        objects.push({
-          type: 'form',
-          id: id,
-          version: formVersions[id]
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const choice_list_1 = __importDefault(require("../choice-list"));
+const classification_set_1 = __importDefault(require("../classification-set"));
+const form_1 = __importDefault(require("../form"));
+const async_1 = __importDefault(require("async"));
+const CACHE_VERSION = 1;
+class LevelDBDataSource {
+    constructor(db, cacheVersion) {
+        this.db = db;
+        this.callbacks = [];
+        this.cacheVersion = cacheVersion || CACHE_VERSION;
+    }
+    initialize({ formVersions, choiceListVersions, classificationSetVersions }, callback) {
+        const objects = [];
+        this.checkVersion(() => {
+            for (const id of Object.keys(formVersions)) {
+                objects.push({ type: 'form', id, version: formVersions[id] });
+            }
+            for (const id of Object.keys(choiceListVersions)) {
+                objects.push({ type: 'choice-list', id, version: choiceListVersions[id] });
+            }
+            for (const id of Object.keys(classificationSetVersions)) {
+                objects.push({ type: 'classification-set', id, version: classificationSetVersions[id] });
+            }
+            this.getVersions((err, versions) => {
+                if (err) {
+                    return callback(err);
+                }
+                return async_1.default.each(objects, (object, cb) => {
+                    const key = this.key(object.type, object.id);
+                    const version = object.version;
+                    // delete the object from the cache if the versions don't match
+                    if (versions[key] == null || versions[key] !== version) {
+                        return this.del(key, cb);
+                    }
+                    return cb(err);
+                }, callback);
+            });
         });
-      }
-
-      for (var _i2 = 0, _Object$keys2 = Object.keys(choiceListVersions); _i2 < _Object$keys2.length; _i2++) {
-        var _id = _Object$keys2[_i2];
-        objects.push({
-          type: 'choice-list',
-          id: _id,
-          version: choiceListVersions[_id]
-        });
-      }
-
-      for (var _i3 = 0, _Object$keys3 = Object.keys(classificationSetVersions); _i3 < _Object$keys3.length; _i3++) {
-        var _id2 = _Object$keys3[_i3];
-        objects.push({
-          type: 'classification-set',
-          id: _id2,
-          version: classificationSetVersions[_id2]
-        });
-      }
-
-      _this.getVersions(function (err, versions) {
-        if (err) {
-          return callback(err);
+    }
+    checkAlreadyFetching(id, callback) {
+        if (!this.callbacks[id]) {
+            this.callbacks[id] = [];
         }
-
-        return _async["default"].each(objects, function (object, cb) {
-          var key = _this.key(object.type, object.id);
-
-          var version = object.version; // delete the object from the cache if the versions don't match
-
-          if (versions[key] == null || versions[key] !== version) {
-            return _this.del(key, cb);
-          }
-
-          return cb(err);
-        }, callback);
-      });
-    });
-  };
-
-  _proto.checkAlreadyFetching = function checkAlreadyFetching(id, callback) {
-    if (!this.callbacks[id]) {
-      this.callbacks[id] = [];
+        this.callbacks[id].push(callback);
+        return this.callbacks[id].length > 1;
     }
-
-    this.callbacks[id].push(callback);
-    return this.callbacks[id].length > 1;
-  };
-
-  _proto.invokeCallbacks = function invokeCallbacks(id, err, object) {
-    for (var _iterator = _createForOfIteratorHelperLoose(this.callbacks[id]), _step; !(_step = _iterator()).done;) {
-      var handler = _step.value;
-      handler(err, object);
+    invokeCallbacks(id, err, object) {
+        for (const handler of this.callbacks[id]) {
+            handler(err, object);
+        }
+        delete this.callbacks[id];
     }
-
-    delete this.callbacks[id];
-  };
-
-  _proto.get = function get(key, callback) {
-    return this.db.get(key, function (err, value) {
-      if (err && err.notFound) {
-        return callback(null, null);
-      }
-
-      return callback(err, value && JSON.parse(value));
-    });
-  };
-
-  _proto.del = function del(key, callback) {
-    return this.db.del(key, callback);
-  };
-
-  _proto.put = function put(key, value, callback) {
-    return this.db.put(key, JSON.stringify(value), callback);
-  };
-
-  _proto.key = function key(type, id) {
-    return [type, id].join(':');
-  };
-
-  _proto.getChoiceList = function getChoiceList(id, callback) {
-    var _this2 = this;
-
-    if (this.checkAlreadyFetching(id, callback)) {
-      return;
-    }
-
-    this.get(this.key('choice-list', id), function (err, json) {
-      _this2.invokeCallbacks(id, err, json ? new _choiceList["default"](json) : null);
-    });
-  };
-
-  _proto.getClassificationSet = function getClassificationSet(id, callback) {
-    var _this3 = this;
-
-    if (this.checkAlreadyFetching(id, callback)) {
-      return;
-    }
-
-    this.get(this.key('classification-set', id), function (err, json) {
-      _this3.invokeCallbacks(id, err, json ? new _classificationSet["default"](json) : null);
-    });
-  };
-
-  _proto.getForm = function getForm(id, callback) {
-    var _this4 = this;
-
-    if (this.checkAlreadyFetching(id, callback)) {
-      return;
-    }
-
-    this.get(this.key('form', id), function (err, json) {
-      _this4.invokeCallbacks(id, err, json ? new _form["default"](json) : null);
-    });
-  };
-
-  _proto.getChoiceListComplete = function getChoiceListComplete(id, object, callback) {
-    this.updateObject(this.key('choice-list', id), object, callback);
-  };
-
-  _proto.getClassificationSetComplete = function getClassificationSetComplete(id, object, callback) {
-    this.updateObject(this.key('classification-set', id), object, callback);
-  };
-
-  _proto.getFormComplete = function getFormComplete(id, object, callback) {
-    this.updateObject(this.key('form', id), object, callback);
-  };
-
-  _proto.updateObject = function updateObject(key, object, callback) {
-    var _this5 = this;
-
-    this.put(key, object, function (err) {
-      if (err) {
-        return callback(err);
-      }
-
-      return _this5.updateVersion(key, object.version, callback);
-    });
-  };
-
-  _proto.getVersions = function getVersions(callback) {
-    this.get('versions', function (err, object) {
-      if (err) {
-        return callback(err);
-      }
-
-      return callback(null, object || {});
-    });
-  };
-
-  _proto.updateVersion = function updateVersion(key, version, callback) {
-    var _this6 = this;
-
-    this.getVersions(function (err, versions) {
-      if (err) {
-        return callback(err);
-      }
-
-      versions[key] = version;
-
-      _this6.put('versions', versions, callback);
-
-      return null;
-    });
-  };
-
-  _proto.checkVersion = function checkVersion(callback) {
-    var _this7 = this;
-
-    this.get('version', function (err, version) {
-      if (err) {
-        return callback(err);
-      }
-
-      if (version !== _this7.cacheVersion) {
-        _this7.deleteAll(function (err) {
-          if (err) {
-            return callback(err);
-          }
-
-          return _this7.put('version', _this7.cacheVersion, callback);
+    get(key, callback) {
+        return this.db.get(key, (err, value) => {
+            if (err && err.notFound) {
+                return callback(null, null);
+            }
+            return callback(err, value && JSON.parse(value));
         });
-
-        return null;
-      }
-
-      return callback();
-    });
-  };
-
-  _proto.deleteAll = function deleteAll(callback) {
-    var _this8 = this;
-
-    var keys = [];
-    this.db.createKeyStream().on('data', function (key) {
-      keys.push(key);
-    }).on('close', function () {
-      _async["default"].each(keys, function (key, cb) {
-        _this8.del(key, cb);
-      }, callback);
-    });
-  };
-
-  return LevelDBDataSource;
-}();
-
-exports["default"] = LevelDBDataSource;
+    }
+    del(key, callback) {
+        return this.db.del(key, callback);
+    }
+    put(key, value, callback) {
+        return this.db.put(key, JSON.stringify(value), callback);
+    }
+    key(type, id) {
+        return [type, id].join(':');
+    }
+    getChoiceList(id, callback) {
+        if (this.checkAlreadyFetching(id, callback)) {
+            return;
+        }
+        this.get(this.key('choice-list', id), (err, json) => {
+            this.invokeCallbacks(id, err, json ? new choice_list_1.default(json) : null);
+        });
+    }
+    getClassificationSet(id, callback) {
+        if (this.checkAlreadyFetching(id, callback)) {
+            return;
+        }
+        this.get(this.key('classification-set', id), (err, json) => {
+            this.invokeCallbacks(id, err, json ? new classification_set_1.default(json) : null);
+        });
+    }
+    getForm(id, callback) {
+        if (this.checkAlreadyFetching(id, callback)) {
+            return;
+        }
+        this.get(this.key('form', id), (err, json) => {
+            this.invokeCallbacks(id, err, json ? new form_1.default(json) : null);
+        });
+    }
+    getChoiceListComplete(id, object, callback) {
+        this.updateObject(this.key('choice-list', id), object, callback);
+    }
+    getClassificationSetComplete(id, object, callback) {
+        this.updateObject(this.key('classification-set', id), object, callback);
+    }
+    getFormComplete(id, object, callback) {
+        this.updateObject(this.key('form', id), object, callback);
+    }
+    updateObject(key, object, callback) {
+        this.put(key, object, (err) => {
+            if (err) {
+                return callback(err);
+            }
+            return this.updateVersion(key, object.version, callback);
+        });
+    }
+    getVersions(callback) {
+        this.get('versions', (err, object) => {
+            if (err) {
+                return callback(err);
+            }
+            return callback(null, object || {});
+        });
+    }
+    updateVersion(key, version, callback) {
+        this.getVersions((err, versions) => {
+            if (err) {
+                return callback(err);
+            }
+            versions[key] = version;
+            this.put('versions', versions, callback);
+            return null;
+        });
+    }
+    checkVersion(callback) {
+        this.get('version', (err, version) => {
+            if (err) {
+                return callback(err);
+            }
+            if (version !== this.cacheVersion) {
+                this.deleteAll((err) => {
+                    if (err) {
+                        return callback(err);
+                    }
+                    return this.put('version', this.cacheVersion, callback);
+                });
+                return null;
+            }
+            return callback();
+        });
+    }
+    deleteAll(callback) {
+        const keys = [];
+        this.db.createKeyStream()
+            .on('data', (key) => {
+            keys.push(key);
+        })
+            .on('close', () => {
+            async_1.default.each(keys, (key, cb) => {
+                this.del(key, cb);
+            }, callback);
+        });
+    }
+}
+exports.default = LevelDBDataSource;
 //# sourceMappingURL=leveldb-data-source.js.map

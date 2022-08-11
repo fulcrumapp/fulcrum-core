@@ -1,1 +1,1 @@
-{"version":3,"file":"textual-element.js","names":["TextualElement","Element"],"sources":["../../src/elements/textual-element.js"],"sourcesContent":["import Element from './element';\n\nexport default class TextualElement extends Element {\n}\n"],"mappings":";;;;;AAAA;;;;;;;;IAEqBA,c;;;;;;;;EAAuBC,mB"}
+{"version":3,"file":"textual-element.js","sourceRoot":"","sources":["../../src/elements/textual-element.js"],"names":[],"mappings":";;;;;AAAA,wDAAgC;AAEhC,MAAqB,cAAe,SAAQ,iBAAO;CAClD;AADD,iCACC"}

@@ -1,251 +1,184 @@
 "use strict";
-
-exports.__esModule = true;
-exports["default"] = void 0;
-
-var _locale = _interopRequireDefault(require("./locale"));
-
-var _lodash = _interopRequireDefault(require("lodash.padstart"));
-
-var _relativeDate = _interopRequireDefault(require("relative-date"));
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
-
-var intl = null;
-
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const locale_1 = __importDefault(require("./locale"));
+const lodash_padstart_1 = __importDefault(require("lodash.padstart"));
+const relative_date_1 = __importDefault(require("relative-date"));
+let intl = null;
 if (typeof Intl !== 'undefined') {
-  intl = global.Intl;
+    intl = global.Intl;
 }
-
-var DateUtils = /*#__PURE__*/function () {
-  function DateUtils() {}
-
-  DateUtils.parseDate = function parseDate(dateString) {
-    var date = new Date(dateString.replace(/-/g, '/'));
-
-    if (date == null || isNaN(date.getTime())) {
-      return null;
+class DateUtils {
+    static parseDate(dateString) {
+        const date = new Date(dateString.replace(/-/g, '/'));
+        if (date == null || isNaN(date.getTime())) {
+            return null;
+        }
+        return date;
     }
-
-    return date;
-  };
-
-  DateUtils.parseTime = function parseTime(timeString) {
-    if (!(timeString != null && timeString.length === 5)) {
-      return null;
+    static parseTime(timeString) {
+        if (!((timeString != null) && timeString.length === 5)) {
+            return null;
+        }
+        let [hours, minutes] = timeString.split(':');
+        if (hours == null || minutes == null) {
+            return null;
+        }
+        hours = +hours;
+        minutes = +minutes;
+        if (isNaN(hours) || isNaN(minutes)) {
+            return null;
+        }
+        return (hours * 60) + minutes;
     }
-
-    var _timeString$split = timeString.split(':'),
-        hours = _timeString$split[0],
-        minutes = _timeString$split[1];
-
-    if (hours == null || minutes == null) {
-      return null;
+    static formatTime(date) {
+        const hours = (0, lodash_padstart_1.default)(date.getHours(), 2, '0');
+        const minutes = (0, lodash_padstart_1.default)(date.getMinutes(), 2, '0');
+        return hours + ':' + minutes;
     }
-
-    hours = +hours;
-    minutes = +minutes;
-
-    if (isNaN(hours) || isNaN(minutes)) {
-      return null;
+    static formatTimeSeconds(seconds, milliseconds = false) {
+        const ss = +seconds % 60;
+        const div = (+seconds - ss) / 60;
+        const mm = div % 60;
+        const hh = (div - mm) / 60;
+        const ms = (ss * 1000 % 1000);
+        const h = (0, lodash_padstart_1.default)(Math.floor(hh), 2, '0');
+        const m = (0, lodash_padstart_1.default)(Math.floor(mm), 2, '0');
+        const s = (0, lodash_padstart_1.default)(Math.floor(ss), 2, '0');
+        const u = (0, lodash_padstart_1.default)(Math.floor(ms), 3, '0');
+        return h + ':' + m + ':' + s + (milliseconds ? '.' + u : '');
     }
-
-    return hours * 60 + minutes;
-  };
-
-  DateUtils.formatTime = function formatTime(date) {
-    var hours = (0, _lodash["default"])(date.getHours(), 2, '0');
-    var minutes = (0, _lodash["default"])(date.getMinutes(), 2, '0');
-    return hours + ':' + minutes;
-  };
-
-  DateUtils.formatTimeSeconds = function formatTimeSeconds(seconds, milliseconds) {
-    if (milliseconds === void 0) {
-      milliseconds = false;
+    static formatTimeParts(hours, minutes, seconds) {
+        const h = (0, lodash_padstart_1.default)(+hours, 2, '0');
+        const m = (0, lodash_padstart_1.default)(+minutes, 2, '0');
+        const s = (0, lodash_padstart_1.default)(+seconds, 2, '0');
+        return h + ':' + m + ':' + s;
     }
-
-    var ss = +seconds % 60;
-    var div = (+seconds - ss) / 60;
-    var mm = div % 60;
-    var hh = (div - mm) / 60;
-    var ms = ss * 1000 % 1000;
-    var h = (0, _lodash["default"])(Math.floor(hh), 2, '0');
-    var m = (0, _lodash["default"])(Math.floor(mm), 2, '0');
-    var s = (0, _lodash["default"])(Math.floor(ss), 2, '0');
-    var u = (0, _lodash["default"])(Math.floor(ms), 3, '0');
-    return h + ':' + m + ':' + s + (milliseconds ? '.' + u : '');
-  };
-
-  DateUtils.formatTimeParts = function formatTimeParts(hours, minutes, seconds) {
-    var h = (0, _lodash["default"])(+hours, 2, '0');
-    var m = (0, _lodash["default"])(+minutes, 2, '0');
-    var s = (0, _lodash["default"])(+seconds, 2, '0');
-    return h + ':' + m + ':' + s;
-  };
-
-  DateUtils.parseISOTimestamp = function parseISOTimestamp(timestampString) {
-    if (!timestampString) {
-      return null;
+    static parseISOTimestamp(timestampString) {
+        if (!timestampString) {
+            return null;
+        }
+        return new Date(timestampString);
     }
-
-    return new Date(timestampString);
-  };
-
-  DateUtils.parseEpochTimestamp = function parseEpochTimestamp(timestampString) {
-    if (!timestampString) {
-      return null;
+    static parseEpochTimestamp(timestampString) {
+        if (!timestampString) {
+            return null;
+        }
+        return new Date(parseFloat(timestampString) * 1000);
     }
-
-    return new Date(parseFloat(timestampString) * 1000);
-  };
-
-  DateUtils.formatISOTimestamp = function formatISOTimestamp(date) {
-    if (date == null || isNaN(date.getTime())) {
-      return null;
+    static formatISOTimestamp(date) {
+        if (date == null || isNaN(date.getTime())) {
+            return null;
+        }
+        return date.toISOString();
     }
-
-    return date.toISOString();
-  };
-
-  DateUtils.formatEpochTimestamp = function formatEpochTimestamp(date) {
-    if (date == null || isNaN(date.getTime())) {
-      return null;
+    static formatEpochTimestamp(date) {
+        if (date == null || isNaN(date.getTime())) {
+            return null;
+        }
+        return (date.getTime() / 1000).toFixed(3);
     }
-
-    return (date.getTime() / 1000).toFixed(3);
-  };
-
-  DateUtils.isValidTime = function isValidTime(timeString) {
-    if (timeString == null) {
-      return true;
+    static isValidTime(timeString) {
+        if (timeString == null) {
+            return true;
+        }
+        if (timeString.length !== 5) {
+            return false;
+        }
+        const parts = timeString.split(':');
+        if (parts.length !== 2) {
+            return false;
+        }
+        const [hourPart, minutePart] = parts;
+        if (hourPart.length !== 2 || minutePart.length !== 2) {
+            return false;
+        }
+        const hour = +hourPart;
+        const minute = +minutePart;
+        if (isNaN(hour) || isNaN(minute)) {
+            return false;
+        }
+        if (hour < 0 || hour >= 24) {
+            return false;
+        }
+        if (minute < 0 || minute >= 60) {
+            return false;
+        }
+        return true;
     }
-
-    if (timeString.length !== 5) {
-      return false;
+    static isValidDate(dateString) {
+        if (dateString == null) {
+            return true;
+        }
+        if (dateString.length !== 10) {
+            return false;
+        }
+        const parts = dateString.split('-');
+        if (parts.length !== 3) {
+            return false;
+        }
+        const [yearPart, monthPart, dayPart] = parts;
+        if (yearPart.length !== 4 ||
+            monthPart.length !== 2 ||
+            dayPart.length !== 2) {
+            return false;
+        }
+        const year = +yearPart;
+        const month = +monthPart;
+        const day = +dayPart;
+        if (isNaN(year) || isNaN(month) || isNaN(day)) {
+            return false;
+        }
+        const parsed = DateUtils.parseDate(dateString);
+        return parsed && !isNaN(parsed);
     }
-
-    var parts = timeString.split(':');
-
-    if (parts.length !== 2) {
-      return false;
+    static formatDate(date) {
+        if (date == null) {
+            return null;
+        }
+        const year = date.getFullYear();
+        const month = (0, lodash_padstart_1.default)(date.getMonth() + 1, 2, '0');
+        const day = (0, lodash_padstart_1.default)(date.getDate(), 2, '0');
+        return year + '-' + month + '-' + day;
     }
-
-    var hourPart = parts[0],
-        minutePart = parts[1];
-
-    if (hourPart.length !== 2 || minutePart.length !== 2) {
-      return false;
+    static formatLocalizedDate(date) {
+        if (date == null) {
+            return null;
+        }
+        return DateUtils.__formatLocalizedDate(date);
     }
-
-    var hour = +hourPart;
-    var minute = +minutePart;
-
-    if (isNaN(hour) || isNaN(minute)) {
-      return false;
+    static formatLocalizedTimestamp(date) {
+        if (date == null) {
+            return null;
+        }
+        return date.toLocaleString();
     }
-
-    if (hour < 0 || hour >= 24) {
-      return false;
+    static formatRelativeTimestamp(date) {
+        return (0, relative_date_1.default)(date);
     }
-
-    if (minute < 0 || minute >= 60) {
-      return false;
+    static __formatLocalizedDate(date) {
+        if (!locale_1.default.supportsECMA402()) {
+            const year = date.getFullYear();
+            const month = (0, lodash_padstart_1.default)(date.getMonth() + 1, 2, '0');
+            const day = (0, lodash_padstart_1.default)(date.getDate(), 2, '0');
+            return year + '-' + month + '-' + day;
+        }
+        const options = {
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric'
+        };
+        let result = null;
+        try {
+            result = new intl.DateTimeFormat(locale_1.default.currentLocale(), options).format(date);
+        }
+        catch (ex) {
+            // RangeError: Provided date is not in valid range.
+        }
+        return result;
     }
-
-    return true;
-  };
-
-  DateUtils.isValidDate = function isValidDate(dateString) {
-    if (dateString == null) {
-      return true;
-    }
-
-    if (dateString.length !== 10) {
-      return false;
-    }
-
-    var parts = dateString.split('-');
-
-    if (parts.length !== 3) {
-      return false;
-    }
-
-    var yearPart = parts[0],
-        monthPart = parts[1],
-        dayPart = parts[2];
-
-    if (yearPart.length !== 4 || monthPart.length !== 2 || dayPart.length !== 2) {
-      return false;
-    }
-
-    var year = +yearPart;
-    var month = +monthPart;
-    var day = +dayPart;
-
-    if (isNaN(year) || isNaN(month) || isNaN(day)) {
-      return false;
-    }
-
-    var parsed = DateUtils.parseDate(dateString);
-    return parsed && !isNaN(parsed);
-  };
-
-  DateUtils.formatDate = function formatDate(date) {
-    if (date == null) {
-      return null;
-    }
-
-    var year = date.getFullYear();
-    var month = (0, _lodash["default"])(date.getMonth() + 1, 2, '0');
-    var day = (0, _lodash["default"])(date.getDate(), 2, '0');
-    return year + '-' + month + '-' + day;
-  };
-
-  DateUtils.formatLocalizedDate = function formatLocalizedDate(date) {
-    if (date == null) {
-      return null;
-    }
-
-    return DateUtils.__formatLocalizedDate(date);
-  };
-
-  DateUtils.formatLocalizedTimestamp = function formatLocalizedTimestamp(date) {
-    if (date == null) {
-      return null;
-    }
-
-    return date.toLocaleString();
-  };
-
-  DateUtils.formatRelativeTimestamp = function formatRelativeTimestamp(date) {
-    return (0, _relativeDate["default"])(date);
-  };
-
-  DateUtils.__formatLocalizedDate = function __formatLocalizedDate(date) {
-    if (!_locale["default"].supportsECMA402()) {
-      var year = date.getFullYear();
-      var month = (0, _lodash["default"])(date.getMonth() + 1, 2, '0');
-      var day = (0, _lodash["default"])(date.getDate(), 2, '0');
-      return year + '-' + month + '-' + day;
-    }
-
-    var options = {
-      year: 'numeric',
-      month: 'long',
-      day: 'numeric'
-    };
-    var result = null;
-
-    try {
-      result = new intl.DateTimeFormat(_locale["default"].currentLocale(), options).format(date);
-    } catch (ex) {// RangeError: Provided date is not in valid range.
-    }
-
-    return result;
-  };
-
-  return DateUtils;
-}();
-
-exports["default"] = DateUtils;
+}
+exports.default = DateUtils;
 //# sourceMappingURL=date-utils.js.map
