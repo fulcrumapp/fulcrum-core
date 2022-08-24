@@ -32,6 +32,11 @@ describe('time fields', () => {
     record.formValues.get('dfd5').columnValue.should.not.be.null
   })
 
+  it('when the time format is not correct it should be null', () => {
+    record.formValues.get('dfd5').textValue = '12:43:0';
+    shouldBeNull(record.formValues.get('dfd5').columnValue);
+  })
+
   it('finds a time value in the record by data name', () => {
     record.formValues.find('time').should.be.instanceof(TimeValue);
     record.formValues.find('time').textValue.should.eql('21:14');
