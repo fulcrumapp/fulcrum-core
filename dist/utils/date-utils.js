@@ -120,18 +120,19 @@ var DateUtils = /*#__PURE__*/function () {
       return true;
     }
 
-    if (timeString.length !== 5) {
+    if (timeString.length < 5 || timeString.length > 8) {
       return false;
     }
 
     var parts = timeString.split(':');
 
-    if (parts.length !== 2) {
+    if (parts.length < 2 || parts.length > 3) {
       return false;
     }
 
     var hourPart = parts[0],
-        minutePart = parts[1];
+        minutePart = parts[1],
+        secondsPart = parts[2];
 
     if (hourPart.length !== 2 || minutePart.length !== 2) {
       return false;
@@ -150,6 +151,22 @@ var DateUtils = /*#__PURE__*/function () {
 
     if (minute < 0 || minute >= 60) {
       return false;
+    }
+
+    if (secondsPart) {
+      if (secondsPart.length !== 2) {
+        return false;
+      }
+
+      var seconds = +secondsPart;
+
+      if (isNaN(seconds)) {
+        return false;
+      }
+
+      if (seconds < 0 || seconds >= 60) {
+        return false;
+      }
     }
 
     return true;
