@@ -71,6 +71,7 @@ export DynamicElement from './elements/dynamic-element';
 export DynamicValue from './values/dynamic-value';
 export LocationElement from './elements/location-element';
 export LocationValue from './values/location-value';
+export ButtonElement from './elements/button-element';
 export User from './user';
 export Role from './role';
 export Project from './project';

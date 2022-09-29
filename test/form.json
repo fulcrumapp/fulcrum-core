@@ -750,7 +750,18 @@
         "hidden": false,
         "data_name": "location",
         "default_value": null
-      } 
+      },
+      {
+        "type": "ButtonField",
+        "key": "bgd4",
+        "label": "Button",
+        "description": null,
+        "required": false,
+        "disabled": false,
+        "hidden": false,
+        "data_name": "button",
+        "default_value": null
+      }
     ],
     "image": null
   }

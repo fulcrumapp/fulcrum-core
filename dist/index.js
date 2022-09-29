@@ -294,6 +294,10 @@ var _locationValue = _interopRequireDefault(require("./values/location-value"));
 
 exports.LocationValue = _locationValue["default"];
 
+var _buttonElement = _interopRequireDefault(require("./elements/button-element"));
+
+exports.ButtonElement = _buttonElement["default"];
+
 var _user = _interopRequireDefault(require("./user"));
 
 exports.User = _user["default"];

@@ -432,6 +432,11 @@ var Element = /*#__PURE__*/function () {
     get: function get() {
       return this.isType(_elementTypes["default"].LocationElement);
     }
+  }, {
+    key: "isButtonElement",
+    get: function get() {
+      return this.isType(_elementTypes["default"].ButtonElement);
+    }
   }]);
 
   return Element;

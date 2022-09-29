@@ -181,6 +181,10 @@
                 "latitude": 1.2,
                 "longitude": -1.2,
                 "address": "City Test"
+            },
+            "bgd4": {
+                "label": "test label",
+                "type": "test_type"
             }
         },
         "horizontal_accuracy": 88.0370385747084,

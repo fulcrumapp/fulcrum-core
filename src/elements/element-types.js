@@ -43,5 +43,7 @@ export default {
 
   DynamicElement: 'DynamicField',
 
-  LocationElement: 'LocationField'
+  LocationElement: 'LocationField',
+
+  ButtonElement: 'ButtonField'
 };
