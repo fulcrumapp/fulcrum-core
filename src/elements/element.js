@@ -367,4 +367,8 @@ export default class Element {
   get isLocationElement() {
     return this.isType(Types.LocationElement);
   }
+
+  get isButtonElement() {
+    return this.isType(Types.ButtonElement);
+  }
 }

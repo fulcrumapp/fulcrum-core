@@ -49,6 +49,8 @@ var _dynamicElement = _interopRequireDefault(require("./dynamic-element"));
 
 var _locationElement = _interopRequireDefault(require("./location-element"));
 
+var _buttonElement = _interopRequireDefault(require("./button-element"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 var Constructors = {
@@ -74,7 +76,8 @@ var Constructors = {
   RecordLinkField: _recordLinkElement["default"],
   CheckboxField: _checkboxElement["default"],
   DynamicField: _dynamicElement["default"],
-  LocationField: _locationElement["default"]
+  LocationField: _locationElement["default"],
+  ButtonField: _buttonElement["default"]
 };
 var initialized = false;
 

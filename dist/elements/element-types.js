@@ -25,7 +25,8 @@ var _default = {
   StatusElement: 'StatusField',
   CheckboxElement: 'CheckboxField',
   DynamicElement: 'DynamicField',
-  LocationElement: 'LocationField'
+  LocationElement: 'LocationField',
+  ButtonElement: 'ButtonField'
 };
 exports["default"] = _default;
 //# sourceMappingURL=element-types.js.map
