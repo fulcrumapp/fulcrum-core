@@ -15,7 +15,9 @@ var _classificationSet = _interopRequireDefault(require("../classification-set")
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
-var FileDataSource = /*#__PURE__*/function () {
+var FileDataSource =
+/*#__PURE__*/
+function () {
   function FileDataSource(root) {
     this.root = root.toString();
   }
