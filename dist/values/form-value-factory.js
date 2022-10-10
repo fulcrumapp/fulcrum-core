@@ -69,7 +69,9 @@ var Constructors = {
   LocationField: _locationValue["default"]
 };
 
-var FormValueFactory = /*#__PURE__*/function () {
+var FormValueFactory =
+/*#__PURE__*/
+function () {
   function FormValueFactory() {}
 
   FormValueFactory.create = function create(element, attributes) {

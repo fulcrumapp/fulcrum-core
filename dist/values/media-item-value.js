@@ -3,7 +3,9 @@
 exports.__esModule = true;
 exports["default"] = void 0;
 
-var MediaItemValue = /*#__PURE__*/function () {
+var MediaItemValue =
+/*#__PURE__*/
+function () {
   function MediaItemValue(mediaValue, attributes) {
     this.mediaValue = mediaValue;
     this.caption = attributes.caption;
