@@ -2,28 +2,17 @@
 
 exports.__esModule = true;
 exports["default"] = void 0;
-
 var _dateUtils = _interopRequireDefault(require("./utils/date-utils"));
-
 var _util = require("util");
-
 var _lodash = _interopRequireDefault(require("lodash.compact"));
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
-
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-var Changeset =
-/*#__PURE__*/
-function () {
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); Object.defineProperty(Constructor, "prototype", { writable: false }); return Constructor; }
+var Changeset = /*#__PURE__*/function () {
   function Changeset(attributes) {
     this.updateFromAPIAttributes(attributes);
   }
-
   var _proto = Changeset.prototype;
-
   _proto.updateFromAPIAttributes = function updateFromAPIAttributes(attrs) {
     var attributes = attrs || {};
     this._id = attributes.id;
@@ -47,7 +36,6 @@ function () {
     this._updatedByID = attributes.updated_by_id;
     this._formID = attributes.form_id;
   };
-
   _proto.toJSON = function toJSON() {
     var json = {};
     json.id = this._id;
@@ -71,7 +59,6 @@ function () {
     json.updated_by_id = this._updatedByID;
     json.form_id = this._formID;
   };
-
   _createClass(Changeset, [{
     key: "id",
     get: function get() {
@@ -118,7 +105,6 @@ function () {
       if (this._metadata.import_id) {
         return 'Fulcrum Importer';
       }
-
       return this._metadata.application;
     }
   }, {
@@ -127,13 +113,10 @@ function () {
       if (!this._metadata) {
         return null;
       }
-
       var parts = [];
-
       for (var _i = 0, _Object$keys = Object.keys(this._metadata); _i < _Object$keys.length; _i++) {
         var key = _Object$keys[_i];
         var value = this._metadata[key];
-
         if (typeof value === 'string') {
           parts.push(value);
         } else if (typeof value === 'number') {
@@ -142,7 +125,6 @@ function () {
           parts.push(JSON.stringify(value));
         }
       }
-
       return parts.length ? parts.join(' ') : null;
     }
   }, {
@@ -157,30 +139,25 @@ function () {
       if (this._minLat == null || this._maxLat == null || this._minLon == null || this._maxLon == null) {
         return null;
       }
-
       if (this._minLat === this._maxLat && this._minLon === this._maxLon) {
         return {
           type: 'Point',
           coordinates: [this._minLon, this._minLat]
         };
       }
-
       if (this._minLat === this._maxLat || this._minLon === this._maxLon) {
         return {
           type: 'LineString',
           coordinates: [[this._minLon, this._minLat], [this._maxLon, this._maxLat]]
         };
       }
-
       return {
         type: 'Polygon',
         coordinates: [[[this._minLon, this._minLat], [this._minLon, this._maxLat], [this._maxLon, this._maxLat], [this._maxLon, this._minLat], [this._minLon, this._minLat]]]
       };
     }
   }]);
-
   return Changeset;
 }();
-
 exports["default"] = Changeset;
 //# sourceMappingURL=changeset.js.map

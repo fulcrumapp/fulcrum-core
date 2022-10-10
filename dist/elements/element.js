@@ -2,20 +2,15 @@
 
 exports.__esModule = true;
 exports["default"] = void 0;
-
 var _elementTypes = _interopRequireDefault(require("./element-types"));
-
 var _condition2 = _interopRequireDefault(require("./condition"));
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
-
+function _createForOfIteratorHelperLoose(o, allowArrayLike) { var it = typeof Symbol !== "undefined" && o[Symbol.iterator] || o["@@iterator"]; if (it) return (it = it.call(o)).next.bind(it); if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; return function () { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-var Element =
-/*#__PURE__*/
-function () {
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); Object.defineProperty(Constructor, "prototype", { writable: false }); return Constructor; }
+var Element = /*#__PURE__*/function () {
   function Element(parent, attributes) {
     this._parent = parent;
     this._attributes = attributes;
@@ -32,59 +27,28 @@ function () {
     this._visibleConditionsType = attributes.visible_conditions_type;
     this._visibleConditionsBehavior = attributes.visible_conditions_behavior || 'clear';
     this._visibleConditions = [];
-
     if (attributes.visible_conditions) {
-      for (var _iterator = attributes.visible_conditions, _isArray = Array.isArray(_iterator), _i = 0, _iterator = _isArray ? _iterator : _iterator[Symbol.iterator]();;) {
-        var _ref;
-
-        if (_isArray) {
-          if (_i >= _iterator.length) break;
-          _ref = _iterator[_i++];
-        } else {
-          _i = _iterator.next();
-          if (_i.done) break;
-          _ref = _i.value;
-        }
-
-        var condition = _ref;
-
+      for (var _iterator = _createForOfIteratorHelperLoose(attributes.visible_conditions), _step; !(_step = _iterator()).done;) {
+        var condition = _step.value;
         this._visibleConditions.push(new _condition2["default"](this, condition));
       }
     }
-
     this._requiredConditionsType = attributes.required_conditions_type;
     this._requiredConditions = [];
-
     if (attributes.required_conditions) {
-      for (var _iterator2 = attributes.required_conditions, _isArray2 = Array.isArray(_iterator2), _i2 = 0, _iterator2 = _isArray2 ? _iterator2 : _iterator2[Symbol.iterator]();;) {
-        var _ref2;
-
-        if (_isArray2) {
-          if (_i2 >= _iterator2.length) break;
-          _ref2 = _iterator2[_i2++];
-        } else {
-          _i2 = _iterator2.next();
-          if (_i2.done) break;
-          _ref2 = _i2.value;
-        }
-
-        var _condition = _ref2;
-
+      for (var _iterator2 = _createForOfIteratorHelperLoose(attributes.required_conditions), _step2; !(_step2 = _iterator2()).done;) {
+        var _condition = _step2.value;
         this._requiredConditions.push(new _condition2["default"](this, _condition));
       }
     }
-
     this._minLength = null;
     this._maxLength = null;
-
     if (attributes.min_length != null) {
       this._minLength = +attributes.min_length;
     }
-
     if (attributes.max_length != null) {
       this._maxLength = +attributes.max_length;
     }
-
     this._overrideLabel = null;
     this._overrideDescription = null;
     this._overrideIsRequired = null;
@@ -93,9 +57,7 @@ function () {
     this._overrideMinLength = null;
     this._overrideMaxLength = null;
   }
-
   var _proto = Element.prototype;
-
   _proto.resetOverrides = function resetOverrides() {
     this._overrideLabel = null;
     this._overrideDescription = null;
@@ -105,7 +67,6 @@ function () {
     this._overrideMinLength = null;
     this._overrideMaxLength = null;
   };
-
   _proto.toJSON = function toJSON() {
     return {
       type: this._type || null,
@@ -128,11 +89,9 @@ function () {
       }) : null
     };
   };
-
   _proto.isType = function isType(type) {
     return this.type === type;
   };
-
   _createClass(Element, [{
     key: "parent",
     get: function get() {
@@ -318,7 +277,6 @@ function () {
       if (this.parent == null || this.isHidden) {
         return this.isHidden;
       }
-
       return this.parent.hasHiddenParent;
     }
   }, {
@@ -332,7 +290,6 @@ function () {
       if (this.parent == null || this.preserveValueWhenConditionallyHidden) {
         return this.preserveValueWhenConditionallyHidden;
       }
-
       return this.parent.isPreserved;
     }
   }, {
@@ -456,9 +413,7 @@ function () {
       return this.isType(_elementTypes["default"].ButtonElement);
     }
   }]);
-
   return Element;
 }();
-
 exports["default"] = Element;
 //# sourceMappingURL=element.js.map

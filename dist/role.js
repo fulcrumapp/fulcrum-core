@@ -2,24 +2,15 @@
 
 exports.__esModule = true;
 exports["default"] = void 0;
-
 var _dateUtils = _interopRequireDefault(require("./utils/date-utils"));
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
-
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-var Role =
-/*#__PURE__*/
-function () {
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); Object.defineProperty(Constructor, "prototype", { writable: false }); return Constructor; }
+var Role = /*#__PURE__*/function () {
   function Role(attrs) {
     this.updateFromAPIAttributes(attrs);
   }
-
   var _proto = Role.prototype;
-
   _proto.updateFromAPIAttributes = function updateFromAPIAttributes(attrs) {
     var attributes = attrs || {};
     this._id = attributes.id;
@@ -51,7 +42,6 @@ function () {
     this._createdAt = _dateUtils["default"].parseISOTimestamp(attributes.created_at);
     this._updatedAt = _dateUtils["default"].parseISOTimestamp(attributes.updated_at);
   };
-
   _createClass(Role, [{
     key: "id",
     get: function get() {
@@ -188,9 +178,7 @@ function () {
       return this._canConfigureIssuesAndTasks;
     }
   }]);
-
   return Role;
 }();
-
 exports["default"] = Role;
 //# sourceMappingURL=role.js.map

@@ -2,18 +2,11 @@
 
 exports.__esModule = true;
 exports["default"] = void 0;
-
 var _textUtils = _interopRequireDefault(require("../utils/text-utils"));
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
-
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-var Address =
-/*#__PURE__*/
-function () {
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); Object.defineProperty(Constructor, "prototype", { writable: false }); return Constructor; }
+var Address = /*#__PURE__*/function () {
   function Address(attributes) {
     if (attributes) {
       this.streetNumber = attributes.sub_thoroughfare;
@@ -26,9 +19,7 @@ function () {
       this.country = attributes.country;
     }
   }
-
   var _proto = Address.prototype;
-
   _proto.toJSON = function toJSON() {
     var json = {};
     json.sub_thoroughfare = this.streetNumber || null;
@@ -41,7 +32,6 @@ function () {
     json.country = this.country || null;
     return json;
   };
-
   _proto.clear = function clear() {
     this.streetNumber = null;
     this.streetName = null;
@@ -52,25 +42,19 @@ function () {
     this.postalCode = null;
     this.country = null;
   };
-
   _proto.line = function line() {
     var result = [];
-
     for (var _len = arguments.length, parts = new Array(_len), _key = 0; _key < _len; _key++) {
       parts[_key] = arguments[_key];
     }
-
     for (var _i = 0, _parts = parts; _i < _parts.length; _i++) {
       var part = _parts[_i];
-
       if (_textUtils["default"].isPresent(part)) {
         result.push(part);
       }
     }
-
     return result.join(' ');
   };
-
   _createClass(Address, [{
     key: "isEmpty",
     get: function get() {
@@ -83,19 +67,15 @@ function () {
       var line1 = this.line1;
       var line2 = this.line2;
       var line3 = this.line3;
-
       if (_textUtils["default"].isPresent(line1)) {
         result.push(line1);
       }
-
       if (_textUtils["default"].isPresent(line2)) {
         result.push(line2);
       }
-
       if (_textUtils["default"].isPresent(line3)) {
         result.push(line3);
       }
-
       return result;
     }
   }, {
@@ -114,9 +94,7 @@ function () {
       return this.line(this.country);
     }
   }]);
-
   return Address;
 }();
-
 exports["default"] = Address;
 //# sourceMappingURL=address.js.map

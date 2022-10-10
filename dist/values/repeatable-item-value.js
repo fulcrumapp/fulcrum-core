@@ -2,44 +2,30 @@
 
 exports.__esModule = true;
 exports["default"] = void 0;
-
 var _feature = _interopRequireDefault(require("../feature"));
-
 var _formValues = _interopRequireDefault(require("./form-values"));
-
 var _dateUtils = _interopRequireDefault(require("../utils/date-utils"));
-
 var _textUtils = _interopRequireDefault(require("../utils/text-utils"));
-
 var _loadObject = _interopRequireDefault(require("../load-object"));
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
-
+function _createForOfIteratorHelperLoose(o, allowArrayLike) { var it = typeof Symbol !== "undefined" && o[Symbol.iterator] || o["@@iterator"]; if (it) return (it = it.call(o)).next.bind(it); if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; return function () { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-function _inheritsLoose(subClass, superClass) { subClass.prototype = Object.create(superClass.prototype); subClass.prototype.constructor = subClass; subClass.__proto__ = superClass; }
-
-var RepeatableItemValue =
-/*#__PURE__*/
-function (_Feature) {
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); Object.defineProperty(Constructor, "prototype", { writable: false }); return Constructor; }
+function _inheritsLoose(subClass, superClass) { subClass.prototype = Object.create(superClass.prototype); subClass.prototype.constructor = subClass; _setPrototypeOf(subClass, superClass); }
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+var RepeatableItemValue = /*#__PURE__*/function (_Feature) {
   _inheritsLoose(RepeatableItemValue, _Feature);
-
   function RepeatableItemValue(element, attrs, index) {
     var _this;
-
     _this = _Feature.call(this) || this;
     _this._index = index;
     _this._element = element;
-
     _this.updateFromAPIAttributes(attrs);
-
     return _this;
   }
-
   var _proto = RepeatableItemValue.prototype;
-
   _proto.updateFromAPIAttributes = function updateFromAPIAttributes(attrs) {
     this._id = attrs.id;
     this._createdAt = _dateUtils["default"].parseEpochTimestamp(attrs.created_at);
@@ -61,12 +47,10 @@ function (_Feature) {
     this._latitude = attrs.latitude || null;
     this._longitude = attrs.longitude || null;
     var geometry = attrs.geometry;
-
     if (geometry != null && geometry.type === 'Point' && geometry.coordinates && geometry.coordinates.length > 1) {
       this._latitude = geometry.coordinates[1];
       this._longitude = geometry.coordinates[0];
     }
-
     this._createdDuration = attrs.created_duration != null ? attrs.created_duration : null;
     this._updatedDuration = attrs.updated_duration != null ? attrs.updated_duration : null;
     this._editedDuration = attrs.edited_duration != null ? attrs.edited_duration : null;
@@ -75,20 +59,17 @@ function (_Feature) {
     this._createdLongitude = null;
     this._createdAltitude = null;
     this._createdAccuracy = null;
-
     if (createdLocation) {
       this._createdLatitude = createdLocation.latitude;
       this._createdLongitude = createdLocation.longitude;
       this._createdAltitude = createdLocation.altitude;
       this._createdAccuracy = createdLocation.horizontal_accuracy;
     }
-
     var updatedLocation = attrs.updated_location;
     this._updatedLatitude = null;
     this._updatedLongitude = null;
     this._updatedAltitude = null;
     this._updatedAccuracy = null;
-
     if (updatedLocation) {
       this._updatedLatitude = updatedLocation.latitude;
       this._updatedLongitude = updatedLocation.longitude;
@@ -96,11 +77,9 @@ function (_Feature) {
       this._updatedAccuracy = updatedLocation.horizontal_accuracy;
     }
   };
-
   _proto.toJSON = function toJSON(_temp) {
     var _ref = _temp === void 0 ? {} : _temp,
-        simple = _ref.simple;
-
+      simple = _ref.simple;
     var json = {};
     json.id = this.id;
     json.created_at = _dateUtils["default"].formatEpochTimestamp(this.createdAt);
@@ -118,29 +97,22 @@ function (_Feature) {
     json.changeset_id = this._changesetID != null ? this._changesetID : null;
     return json;
   };
-
   _proto.updateTimestamps = function updateTimestamps() {
     var now = new Date();
-
     if (!this._createdAt) {
       this._createdAt = now;
     }
-
     this._updatedAt = now;
   };
-
   _proto.loadChangeset = function loadChangeset(dataSource, callback) {
     return (0, _loadObject["default"])(this, dataSource, 'changeset', 'getChangeset', callback);
   };
-
   _proto.loadCreatedBy = function loadCreatedBy(dataSource, callback) {
     return (0, _loadObject["default"])(this, dataSource, 'createdBy', 'getUser', callback);
   };
-
   _proto.loadUpdatedBy = function loadUpdatedBy(dataSource, callback) {
     return (0, _loadObject["default"])(this, dataSource, 'updatedBy', 'getUser', callback);
   };
-
   _createClass(RepeatableItemValue, [{
     key: "isRecord",
     get: function get() {
@@ -175,7 +147,6 @@ function (_Feature) {
       if (createdAt != null && !(createdAt instanceof Date)) {
         throw new TypeError('createdAt must be a Date');
       }
-
       this._createdAt = createdAt;
     }
   }, {
@@ -192,7 +163,6 @@ function (_Feature) {
       if (updatedAt != null && !(updatedAt instanceof Date)) {
         throw new TypeError('updatedAt must be a Date');
       }
-
       this._updatedAt = updatedAt;
     }
   }, {
@@ -201,7 +171,6 @@ function (_Feature) {
       if (!this._formValues) {
         this._formValues = new _formValues["default"](this._element, this._formValuesJSON);
       }
-
       return this._formValues;
     }
   }, {
@@ -219,31 +188,16 @@ function (_Feature) {
     get: function get() {
       var titleFieldKeys = this._element.titleFieldKeys;
       var titles = [];
-
-      for (var _iterator = titleFieldKeys, _isArray = Array.isArray(_iterator), _i = 0, _iterator = _isArray ? _iterator : _iterator[Symbol.iterator]();;) {
-        var _ref2;
-
-        if (_isArray) {
-          if (_i >= _iterator.length) break;
-          _ref2 = _iterator[_i++];
-        } else {
-          _i = _iterator.next();
-          if (_i.done) break;
-          _ref2 = _i.value;
-        }
-
-        var fieldKey = _ref2;
+      for (var _iterator = _createForOfIteratorHelperLoose(titleFieldKeys), _step; !(_step = _iterator()).done;) {
+        var fieldKey = _step.value;
         var formValue = this.formValues.get(fieldKey);
-
         if (formValue) {
           var displayValue = formValue.displayValue;
-
           if (_textUtils["default"].isPresent(displayValue)) {
             titles.push(displayValue);
           }
         }
       }
-
       return titles.join(', ');
     }
   }, {
@@ -257,7 +211,6 @@ function (_Feature) {
       if (!this.hasCoordinate) {
         return null;
       }
-
       return {
         type: 'Point',
         coordinates: [this._longitude, this._latitude]
@@ -418,7 +371,6 @@ function (_Feature) {
           horizontal_accuracy: this.createdAccuracy
         };
       }
-
       return null;
     }
   }, {
@@ -432,7 +384,6 @@ function (_Feature) {
           horizontal_accuracy: this.updatedAccuracy
         };
       }
-
       return null;
     }
   }, {
@@ -499,9 +450,7 @@ function (_Feature) {
       return this._recordStatus;
     }
   }]);
-
   return RepeatableItemValue;
 }(_feature["default"]);
-
 exports["default"] = RepeatableItemValue;
 //# sourceMappingURL=repeatable-item-value.js.map

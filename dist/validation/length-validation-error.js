@@ -2,34 +2,22 @@
 
 exports.__esModule = true;
 exports["default"] = void 0;
-
 var _elementValidationError = _interopRequireDefault(require("./element-validation-error"));
-
 var _util = require("util");
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
-
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-function _inheritsLoose(subClass, superClass) { subClass.prototype = Object.create(superClass.prototype); subClass.prototype.constructor = subClass; subClass.__proto__ = superClass; }
-
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); Object.defineProperty(Constructor, "prototype", { writable: false }); return Constructor; }
+function _inheritsLoose(subClass, superClass) { subClass.prototype = Object.create(superClass.prototype); subClass.prototype.constructor = subClass; _setPrototypeOf(subClass, superClass); }
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 var AT_LEAST = 'at-least';
 var AT_MOST = 'at-most';
 var BETWEEN = 'between';
 var EXACTLY = 'exactly';
-
-var LengthValidationError =
-/*#__PURE__*/
-function (_ElementValidationErr) {
+var LengthValidationError = /*#__PURE__*/function (_ElementValidationErr) {
   _inheritsLoose(LengthValidationError, _ElementValidationErr);
-
   function LengthValidationError(element) {
     var _this;
-
     _this = _ElementValidationErr.call(this, element) || this;
-
     if (element.hasMinLength && element.hasMaxLength && element.minLength === element.maxLength) {
       _this.type = EXACTLY;
     } else if (element.hasMinLength && element.hasMaxLength) {
@@ -39,20 +27,15 @@ function (_ElementValidationErr) {
     } else if (element.hasMaxLength) {
       _this.type = AT_MOST;
     }
-
     return _this;
   }
-
   var _proto = LengthValidationError.prototype;
-
   _proto.messageWithFormats = function messageWithFormats(singularFormat, pluralFormat, length) {
     if (length === 1) {
       return (0, _util.format)(singularFormat, this.label, length);
     }
-
     return (0, _util.format)(pluralFormat, this.label, length);
   };
-
   _createClass(LengthValidationError, [{
     key: "message",
     get: function get() {
@@ -71,7 +54,6 @@ function (_ElementValidationErr) {
       } else if (this.element.isRepeatableElement) {
         return this.repeatableElementMessage;
       }
-
       return '';
     }
   }, {
@@ -106,7 +88,6 @@ function (_ElementValidationErr) {
       } else if (this.isExactlyError) {
         return this.messageWithFormats("The field '%s' must have exactly 1 character.", "The field '%s' must have exactly %s characters.", this.element.minLength);
       }
-
       return '';
     }
   }, {
@@ -121,7 +102,6 @@ function (_ElementValidationErr) {
       } else if (this.isExactlyError) {
         return this.messageWithFormats("The field '%s' must have exactly 1 photo.", "The field '%s' must have exactly %s photos.", this.element.minLength);
       }
-
       return '';
     }
   }, {
@@ -136,7 +116,6 @@ function (_ElementValidationErr) {
       } else if (this.isExactlyError) {
         return this.messageWithFormats("The field '%s' must have exactly 1 video.", "The field '%s' must have exactly %s videos.", this.element.minLength);
       }
-
       return '';
     }
   }, {
@@ -151,7 +130,6 @@ function (_ElementValidationErr) {
       } else if (this.isExactlyError) {
         return this.messageWithFormats("The field '%s' must have exactly 1 audio file.", "The field '%s' must have exactly %s audio files.", this.element.minLength);
       }
-
       return '';
     }
   }, {
@@ -166,7 +144,6 @@ function (_ElementValidationErr) {
       } else if (this.isExactlyError) {
         return this.messageWithFormats("The field '%s' must have exactly 1 file.", "The field '%s' must have exactly %s files.", this.element.minLength);
       }
-
       return '';
     }
   }, {
@@ -181,7 +158,6 @@ function (_ElementValidationErr) {
       } else if (this.isExactlyError) {
         return this.messageWithFormats("The field '%s' must have exactly 1 choice.", "The field '%s' must have exactly %s choices.", this.element.minLength);
       }
-
       return '';
     }
   }, {
@@ -196,13 +172,10 @@ function (_ElementValidationErr) {
       } else if (this.isExactlyError) {
         return this.messageWithFormats("The field '%s' must have exactly 1 item.", "The field '%s' must have exactly %s items.", this.element.minLength);
       }
-
       return '';
     }
   }]);
-
   return LengthValidationError;
 }(_elementValidationError["default"]);
-
 exports["default"] = LengthValidationError;
 //# sourceMappingURL=length-validation-error.js.map
