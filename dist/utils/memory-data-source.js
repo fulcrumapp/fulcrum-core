@@ -3,7 +3,9 @@
 exports.__esModule = true;
 exports["default"] = void 0;
 
-var MemoryDataSource = /*#__PURE__*/function () {
+var MemoryDataSource =
+/*#__PURE__*/
+function () {
   function MemoryDataSource(name) {
     this.cache = {};
     this.projects = null;

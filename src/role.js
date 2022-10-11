@@ -32,6 +32,8 @@ export default class Role {
     this._canExportRecords = !!attributes.can_export_records;
     this._canImportRecords = !!attributes.can_import_records;
     this._canManageAuthorizations = !!attributes.can_manage_authorizations;
+    this._canAccessIssuesAndTasks = !!attributes.can_access_issues_and_tasks;
+    this._canConfigureIssuesAndTasks = !!attributes.can_configure_issues_and_tasks;
     this._createdAt = DateUtils.parseISOTimestamp(attributes.created_at);
     this._updatedAt = DateUtils.parseISOTimestamp(attributes.updated_at);
   }
@@ -134,5 +136,13 @@ export default class Role {
 
   get canRunReports() {
     return this._canRunReports;
+  }
+
+  get canAccessIssuesAndTasks() {
+    return this._canAccessIssuesAndTasks;
+  }
+
+  get canConfigureIssuesAndTasks() {
+    return this._canConfigureIssuesAndTasks;
   }
 }

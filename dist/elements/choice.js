@@ -3,7 +3,9 @@
 exports.__esModule = true;
 exports["default"] = void 0;
 
-var Choice = /*#__PURE__*/function () {
+var Choice =
+/*#__PURE__*/
+function () {
   function Choice(attributes) {
     this.label = attributes.label;
     this.value = attributes.value || attributes.label;
