@@ -142,7 +142,7 @@ export default class Role {
     return this._canAccessIssuesAndTasks;
   }
 
-  get _canConfigureIssuesAndTasks() {
+  get canConfigureIssuesAndTasks() {
     return this._canConfigureIssuesAndTasks;
   }
 }

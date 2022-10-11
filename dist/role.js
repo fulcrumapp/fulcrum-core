@@ -183,7 +183,7 @@ function () {
       return this._canAccessIssuesAndTasks;
     }
   }, {
-    key: "_canConfigureIssuesAndTasks",
+    key: "canConfigureIssuesAndTasks",
     get: function get() {
       return this._canConfigureIssuesAndTasks;
     }
