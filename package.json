@@ -10,7 +10,8 @@
     "prepublish": "yarn run clean && yarn run build",
     "lint": "eslint src/* src/**/*",
     "build": "tsc",
-    "clean": "rm -rf dist"
+    "clean": "rm -rf dist",
+    "typecheck": "tsc -b"
   },
   "author": "Fulcrum",
   "license": "BSD-3-Clause",
