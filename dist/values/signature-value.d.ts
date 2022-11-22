@@ -16,7 +16,7 @@ export default class SignatureValue extends FormValue {
         formatSignatureViewerURL: any;
         formatSignatureName: any;
     }): any;
-    get length(): 1 | 0;
+    get length(): 0 | 1;
     get columnValue(): {} | null;
     get multipleValues(): null;
     toJSON(): {
