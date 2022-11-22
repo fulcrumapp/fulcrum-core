@@ -24,7 +24,7 @@ export default class DateUtils {
       return null;
     }
 
-    let [ hours, minutes ] = timeString.split(':');
+    let [hours, minutes] = timeString.split(':');
 
     if (hours == null || minutes == null) {
       return null;
@@ -105,17 +105,17 @@ export default class DateUtils {
       return true;
     }
 
-    if (timeString.length !== 5) {
+    if (timeString.length < 5 || timeString.length > 8) {
       return false;
     }
 
     const parts = timeString.split(':');
 
-    if (parts.length !== 2) {
+    if (parts.length < 2 || parts.length > 3) {
       return false;
     }
 
-    const [ hourPart, minutePart ] = parts;
+    const [hourPart, minutePart, secondsPart] = parts;
 
     if (hourPart.length !== 2 || minutePart.length !== 2) {
       return false;
@@ -136,6 +136,22 @@ export default class DateUtils {
       return false;
     }
 
+    if (secondsPart) {
+      if (secondsPart.length !== 2) {
+        return false;
+      }
+
+      const seconds = +secondsPart;
+
+      if (isNaN(seconds)) {
+        return false;
+      }
+
+      if (seconds < 0 || seconds >= 60) {
+        return false;
+      }
+    }
+
     return true;
   }
 
@@ -154,11 +170,11 @@ export default class DateUtils {
       return false;
     }
 
-    const [ yearPart, monthPart, dayPart ] = parts;
+    const [yearPart, monthPart, dayPart] = parts;
 
     if (yearPart.length !== 4 ||
-        monthPart.length !== 2 ||
-        dayPart.length !== 2) {
+      monthPart.length !== 2 ||
+      dayPart.length !== 2) {
       return false;
     }
 

@@ -22,5 +22,6 @@ declare namespace _default {
     const CheckboxElement: string;
     const DynamicElement: string;
     const LocationElement: string;
+    const ButtonElement: string;
 }
 export default _default;

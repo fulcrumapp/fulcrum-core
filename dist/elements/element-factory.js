@@ -26,6 +26,7 @@ const container_element_1 = __importDefault(require("./container-element"));
 const checkbox_element_1 = __importDefault(require("./checkbox-element"));
 const dynamic_element_1 = __importDefault(require("./dynamic-element"));
 const location_element_1 = __importDefault(require("./location-element"));
+const button_element_1 = __importDefault(require("./button-element"));
 const Constructors = {
     Section: section_element_1.default,
     ChoiceField: choice_element_1.default,
@@ -49,7 +50,8 @@ const Constructors = {
     RecordLinkField: record_link_element_1.default,
     CheckboxField: checkbox_element_1.default,
     DynamicField: dynamic_element_1.default,
-    LocationField: location_element_1.default
+    LocationField: location_element_1.default,
+    ButtonField: button_element_1.default
 };
 let initialized = false;
 class ElementFactory {

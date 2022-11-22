@@ -123,5 +123,6 @@ export default class Element {
     get isCheckboxElement(): boolean;
     get isDynamicElement(): boolean;
     get isLocationElement(): boolean;
+    get isButtonElement(): boolean;
 }
 import Condition from "./condition";

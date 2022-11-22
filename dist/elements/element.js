@@ -283,6 +283,9 @@ class Element {
     get isLocationElement() {
         return this.isType(element_types_1.default.LocationElement);
     }
+    get isButtonElement() {
+        return this.isType(element_types_1.default.ButtonElement);
+    }
 }
 exports.default = Element;
 //# sourceMappingURL=element.js.map

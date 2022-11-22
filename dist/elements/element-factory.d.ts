@@ -24,6 +24,7 @@ export default class ElementFactory {
         CheckboxField: typeof CheckboxElement;
         DynamicField: typeof DynamicElement;
         LocationField: typeof LocationElement;
+        ButtonField: typeof ButtonElement;
     };
 }
 import SectionElement from "./section-element";
@@ -48,3 +49,4 @@ import RecordLinkElement from "./record-link-element";
 import CheckboxElement from "./checkbox-element";
 import DynamicElement from "./dynamic-element";
 import LocationElement from "./location-element";
+import ButtonElement from "./button-element";
