@@ -1,30 +1,15 @@
 "use strict";
-
-exports.__esModule = true;
-exports["default"] = void 0;
-
-var _mediaElement = _interopRequireDefault(require("./media-element"));
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
-
-function _inheritsLoose(subClass, superClass) { subClass.prototype = Object.create(superClass.prototype); subClass.prototype.constructor = subClass; _setPrototypeOf(subClass, superClass); }
-
-function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
-
-var VideoElement = /*#__PURE__*/function (_MediaElement) {
-  _inheritsLoose(VideoElement, _MediaElement);
-
-  function VideoElement(parent, attributes) {
-    var _this;
-
-    _this = _MediaElement.call(this, parent, attributes) || this;
-    _this.trackEnabled = !!attributes.track_enabled;
-    _this.audioEnabled = !!attributes.audio_enabled;
-    return _this;
-  }
-
-  return VideoElement;
-}(_mediaElement["default"]);
-
-exports["default"] = VideoElement;
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const media_element_1 = __importDefault(require("./media-element"));
+class VideoElement extends media_element_1.default {
+    constructor(parent, attributes) {
+        super(parent, attributes);
+        this.trackEnabled = !!attributes.track_enabled;
+        this.audioEnabled = !!attributes.audio_enabled;
+    }
+}
+exports.default = VideoElement;
 //# sourceMappingURL=video-element.js.map

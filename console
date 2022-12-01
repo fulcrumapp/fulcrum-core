@@ -1,18 +1,15 @@
 #!/usr/bin/env node
 
-var fs = require('fs');
-var path = require('path');
-
-var ElementFactory = require('./dist/elements/element-factory').default;
-var FileProvider = require('./dist/utils/file-provider').default;
+const fs = require('fs');
+const path = require('path');
+const repl = require('repl');
+const Fulcrum = require('./dist');
 
 require('source-map-support').install();
 
-var Fulcrum = require('./dist').default;
-
 const fileRoot = path.join('.', 'test', 'fixtures');
 
-ElementFactory.setProvider(new FileProvider(fileRoot));
+const dataSource = new Fulcrum.DataSource().add(new Fulcrum.FileDataSource(fileRoot));
 
 // import the API into the global scope to make it easier
 for (var prop in Fulcrum) {
@@ -21,12 +18,12 @@ for (var prop in Fulcrum) {
   }
 }
 
-var formJson = JSON.parse(fs.readFileSync('./test/fixtures/forms/18300cfb-20e3-4e8b-9aef-878636b09ac4.json')).form;
-var recordJson = JSON.parse(fs.readFileSync('./test/record.json')).record;
+const formJson = JSON.parse(fs.readFileSync('./test/fixtures/forms/18300cfb-20e3-4e8b-9aef-878636b09ac4.json')).form;
+const recordJson = JSON.parse(fs.readFileSync('./test/record.json')).record;
 
 global.form = new Fulcrum.Form(formJson);
-global.record = new Fulcrum.Record(global.form, recordJson);
+global.form.load(dataSource, () => {});
 
-var repl = require('repl');
+global.record = new Fulcrum.Record(global.form, recordJson);
 
 repl.start('fulcrum> ');

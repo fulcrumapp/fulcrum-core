@@ -1,166 +1,115 @@
 "use strict";
-
-exports.__esModule = true;
-exports["default"] = void 0;
-
-var _formValue = _interopRequireDefault(require("./form-value"));
-
-var _dateUtils = _interopRequireDefault(require("../utils/date-utils"));
-
-var _excluded = ["part", "formatSignatureURL", "formatSignatureViewerURL", "formatSignatureName"];
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
-
-function _objectWithoutPropertiesLoose(source, excluded) { if (source == null) return {}; var target = {}; var sourceKeys = Object.keys(source); var key, i; for (i = 0; i < sourceKeys.length; i++) { key = sourceKeys[i]; if (excluded.indexOf(key) >= 0) continue; target[key] = source[key]; } return target; }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); Object.defineProperty(Constructor, "prototype", { writable: false }); return Constructor; }
-
-function _inheritsLoose(subClass, superClass) { subClass.prototype = Object.create(superClass.prototype); subClass.prototype.constructor = subClass; _setPrototypeOf(subClass, superClass); }
-
-function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
-
-var SignatureValue = /*#__PURE__*/function (_FormValue) {
-  _inheritsLoose(SignatureValue, _FormValue);
-
-  function SignatureValue(element, attributes) {
-    var _this;
-
-    _this = _FormValue.call(this, element, attributes) || this;
-
-    if (attributes) {
-      _this._identifier = attributes.signature_id;
-      _this._timestamp = _dateUtils["default"].parseISOTimestamp(attributes.timestamp);
+var __rest = (this && this.__rest) || function (s, e) {
+    var t = {};
+    for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p) && e.indexOf(p) < 0)
+        t[p] = s[p];
+    if (s != null && typeof Object.getOwnPropertySymbols === "function")
+        for (var i = 0, p = Object.getOwnPropertySymbols(s); i < p.length; i++) {
+            if (e.indexOf(p[i]) < 0 && Object.prototype.propertyIsEnumerable.call(s, p[i]))
+                t[p[i]] = s[p[i]];
+        }
+    return t;
+};
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const form_value_1 = __importDefault(require("./form-value"));
+const date_utils_1 = __importDefault(require("../utils/date-utils"));
+class SignatureValue extends form_value_1.default {
+    constructor(element, attributes) {
+        super(element, attributes);
+        if (attributes) {
+            this._identifier = attributes.signature_id;
+            this._timestamp = date_utils_1.default.parseISOTimestamp(attributes.timestamp);
+        }
     }
-
-    return _this;
-  }
-
-  var _proto = SignatureValue.prototype;
-
-  _proto.clear = function clear() {
-    this._identifier = null;
-    this._timestamp = null;
-  };
-
-  _proto.format = function format(_ref) {
-    var _ref$part = _ref.part,
-        part = _ref$part === void 0 ? null : _ref$part,
-        formatSignatureURL = _ref.formatSignatureURL,
-        formatSignatureViewerURL = _ref.formatSignatureViewerURL,
-        formatSignatureName = _ref.formatSignatureName,
-        args = _objectWithoutPropertiesLoose(_ref, _excluded);
-
-    if (this.isEmpty) {
-      return null;
+    get id() {
+        return this._identifier;
     }
-
-    if (part === 'timestamp') {
-      return this.timestamp;
-    } else if (part === 'view' && formatSignatureViewerURL) {
-      return formatSignatureViewerURL(this, args);
-    } else if (part === 'url' && formatSignatureURL) {
-      return formatSignatureURL(this, args);
-    } else if (part === 'name' && formatSignatureName) {
-      return formatSignatureName(this, args);
+    set id(id) {
+        this._identifier = id;
     }
-
-    return this.id;
-  };
-
-  _proto.toJSON = function toJSON() {
-    if (this.isEmpty) {
-      return null;
+    get timestamp() {
+        return this._timestamp;
     }
-
-    return {
-      signature_id: this._identifier,
-      timestamp: _dateUtils["default"].formatISOTimestamp(this._timestamp)
-    };
-  };
-
-  _proto.isEqual = function isEqual(value) {
-    return false;
-  };
-
-  _proto.contains = function contains(value) {
-    return false;
-  };
-
-  _proto.startsWith = function startsWith(value) {
-    return false;
-  };
-
-  _proto.isLessThan = function isLessThan(value) {
-    return false;
-  };
-
-  _proto.isGreaterThan = function isGreaterThan(value) {
-    return false;
-  };
-
-  _createClass(SignatureValue, [{
-    key: "id",
-    get: function get() {
-      return this._identifier;
-    },
-    set: function set(id) {
-      this._identifier = id;
+    set timestamp(timestamp) {
+        if (!(timestamp instanceof Date)) {
+            throw new TypeError('timestamp must be a Date');
+        }
+        this._timestamp = timestamp;
     }
-  }, {
-    key: "timestamp",
-    get: function get() {
-      return this._timestamp;
-    },
-    set: function set(timestamp) {
-      if (!(timestamp instanceof Date)) {
-        throw new TypeError('timestamp must be a Date');
-      }
-
-      this._timestamp = timestamp;
+    clear() {
+        this._identifier = null;
+        this._timestamp = null;
     }
-  }, {
-    key: "isEmpty",
-    get: function get() {
-      return this._identifier == null;
+    get isEmpty() {
+        return this._identifier == null;
     }
-  }, {
-    key: "displayValue",
-    get: function get() {
-      return this.isEmpty ? null : '1 Signature';
+    get displayValue() {
+        return this.isEmpty ? null : '1 Signature';
     }
-  }, {
-    key: "searchableValue",
-    get: function get() {
-      return null;
-    }
-  }, {
-    key: "length",
-    get: function get() {
-      return this.isEmpty ? 0 : 1;
-    }
-  }, {
-    key: "columnValue",
-    get: function get() {
-      if (this.isEmpty) {
+    get searchableValue() {
         return null;
-      }
-
-      var value = {};
-      value['f' + this.element.key + '_timestamp'] = this.timestamp;
-      value['f' + this.element.key] = this._identifier;
-      return value;
     }
-  }, {
-    key: "multipleValues",
-    get: function get() {
-      return null;
+    format(_a) {
+        var { part = null, formatSignatureURL, formatSignatureViewerURL, formatSignatureName } = _a, args = __rest(_a, ["part", "formatSignatureURL", "formatSignatureViewerURL", "formatSignatureName"]);
+        if (this.isEmpty) {
+            return null;
+        }
+        if (part === 'timestamp') {
+            return this.timestamp;
+        }
+        else if (part === 'view' && formatSignatureViewerURL) {
+            return formatSignatureViewerURL(this, args);
+        }
+        else if (part === 'url' && formatSignatureURL) {
+            return formatSignatureURL(this, args);
+        }
+        else if (part === 'name' && formatSignatureName) {
+            return formatSignatureName(this, args);
+        }
+        return this.id;
     }
-  }]);
-
-  return SignatureValue;
-}(_formValue["default"]);
-
-exports["default"] = SignatureValue;
+    get length() {
+        return this.isEmpty ? 0 : 1;
+    }
+    get columnValue() {
+        if (this.isEmpty) {
+            return null;
+        }
+        const value = {};
+        value['f' + this.element.key + '_timestamp'] = this.timestamp;
+        value['f' + this.element.key] = this._identifier;
+        return value;
+    }
+    get multipleValues() {
+        return null;
+    }
+    toJSON() {
+        if (this.isEmpty) {
+            return null;
+        }
+        return {
+            signature_id: this._identifier,
+            timestamp: date_utils_1.default.formatISOTimestamp(this._timestamp)
+        };
+    }
+    isEqual(value) {
+        return false;
+    }
+    contains(value) {
+        return false;
+    }
+    startsWith(value) {
+        return false;
+    }
+    isLessThan(value) {
+        return false;
+    }
+    isGreaterThan(value) {
+        return false;
+    }
+}
+exports.default = SignatureValue;
 //# sourceMappingURL=signature-value.js.map

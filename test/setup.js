@@ -1,7 +1,5 @@
 /* eslint no-unused-expressions:0 */
 
-require('@babel/register')();
-
 var chai = require('chai');
 
 chai.should();

@@ -1,1 +1,1 @@
-{"version":3,"file":"boolean-element.js","names":["BooleanElement","Element"],"sources":["../../src/elements/boolean-element.js"],"sourcesContent":["import Element from './element';\n\nexport default class BooleanElement extends Element {\n}\n"],"mappings":";;;;;AAAA;;;;;;;;IAEqBA,c;;;;;;;;EAAuBC,mB"}
+{"version":3,"file":"boolean-element.js","sourceRoot":"","sources":["../../src/elements/boolean-element.js"],"names":[],"mappings":";;;;;AAAA,wDAAgC;AAEhC,MAAqB,cAAe,SAAQ,iBAAO;CAClD;AADD,iCACC"}

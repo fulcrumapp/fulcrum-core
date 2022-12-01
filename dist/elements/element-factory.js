@@ -1,111 +1,74 @@
 "use strict";
-
-exports.__esModule = true;
-exports["default"] = void 0;
-
-var _sectionElement = _interopRequireDefault(require("./section-element"));
-
-var _choiceElement = _interopRequireDefault(require("./choice-element"));
-
-var _textElement = _interopRequireDefault(require("./text-element"));
-
-var _dateElement = _interopRequireDefault(require("./date-element"));
-
-var _timeElement = _interopRequireDefault(require("./time-element"));
-
-var _photoElement = _interopRequireDefault(require("./photo-element"));
-
-var _videoElement = _interopRequireDefault(require("./video-element"));
-
-var _audioElement = _interopRequireDefault(require("./audio-element"));
-
-var _attachmentElement = _interopRequireDefault(require("./attachment-element"));
-
-var _signatureElement = _interopRequireDefault(require("./signature-element"));
-
-var _classificationElement = _interopRequireDefault(require("./classification-element"));
-
-var _repeatableElement = _interopRequireDefault(require("./repeatable-element"));
-
-var _addressElement = _interopRequireDefault(require("./address-element"));
-
-var _labelElement = _interopRequireDefault(require("./label-element"));
-
-var _yesNoElement = _interopRequireDefault(require("./yes-no-element"));
-
-var _hyperlinkElement = _interopRequireDefault(require("./hyperlink-element"));
-
-var _barcodeElement = _interopRequireDefault(require("./barcode-element"));
-
-var _calculatedElement = _interopRequireDefault(require("./calculated-element"));
-
-var _recordLinkElement = _interopRequireDefault(require("./record-link-element"));
-
-var _containerElement = _interopRequireDefault(require("./container-element"));
-
-var _checkboxElement = _interopRequireDefault(require("./checkbox-element"));
-
-var _dynamicElement = _interopRequireDefault(require("./dynamic-element"));
-
-var _locationElement = _interopRequireDefault(require("./location-element"));
-
-var _buttonElement = _interopRequireDefault(require("./button-element"));
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
-
-var Constructors = {
-  Section: _sectionElement["default"],
-  ChoiceField: _choiceElement["default"],
-  TextField: _textElement["default"],
-  DateTimeField: _dateElement["default"],
-  DateField: _dateElement["default"],
-  TimeField: _timeElement["default"],
-  PhotoField: _photoElement["default"],
-  VideoField: _videoElement["default"],
-  AudioField: _audioElement["default"],
-  AttachmentField: _attachmentElement["default"],
-  SignatureField: _signatureElement["default"],
-  ClassificationField: _classificationElement["default"],
-  Repeatable: _repeatableElement["default"],
-  AddressField: _addressElement["default"],
-  Label: _labelElement["default"],
-  YesNoField: _yesNoElement["default"],
-  HyperlinkField: _hyperlinkElement["default"],
-  BarcodeField: _barcodeElement["default"],
-  CalculatedField: _calculatedElement["default"],
-  RecordLinkField: _recordLinkElement["default"],
-  CheckboxField: _checkboxElement["default"],
-  DynamicField: _dynamicElement["default"],
-  LocationField: _locationElement["default"],
-  ButtonField: _buttonElement["default"]
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
 };
-var initialized = false;
-
-var ElementFactory = /*#__PURE__*/function () {
-  function ElementFactory() {}
-
-  ElementFactory.create = function create(parent, attributes) {
-    var constructor = Constructors[attributes.type];
-
-    if (!initialized) {
-      initialized = true;
-
-      _containerElement["default"].initialize();
+Object.defineProperty(exports, "__esModule", { value: true });
+const section_element_1 = __importDefault(require("./section-element"));
+const choice_element_1 = __importDefault(require("./choice-element"));
+const text_element_1 = __importDefault(require("./text-element"));
+const date_element_1 = __importDefault(require("./date-element"));
+const time_element_1 = __importDefault(require("./time-element"));
+const photo_element_1 = __importDefault(require("./photo-element"));
+const video_element_1 = __importDefault(require("./video-element"));
+const audio_element_1 = __importDefault(require("./audio-element"));
+const attachment_element_1 = __importDefault(require("./attachment-element"));
+const signature_element_1 = __importDefault(require("./signature-element"));
+const classification_element_1 = __importDefault(require("./classification-element"));
+const repeatable_element_1 = __importDefault(require("./repeatable-element"));
+const address_element_1 = __importDefault(require("./address-element"));
+const label_element_1 = __importDefault(require("./label-element"));
+const yes_no_element_1 = __importDefault(require("./yes-no-element"));
+const hyperlink_element_1 = __importDefault(require("./hyperlink-element"));
+const barcode_element_1 = __importDefault(require("./barcode-element"));
+const calculated_element_1 = __importDefault(require("./calculated-element"));
+const record_link_element_1 = __importDefault(require("./record-link-element"));
+const container_element_1 = __importDefault(require("./container-element"));
+const checkbox_element_1 = __importDefault(require("./checkbox-element"));
+const dynamic_element_1 = __importDefault(require("./dynamic-element"));
+const location_element_1 = __importDefault(require("./location-element"));
+const button_element_1 = __importDefault(require("./button-element"));
+const Constructors = {
+    Section: section_element_1.default,
+    ChoiceField: choice_element_1.default,
+    TextField: text_element_1.default,
+    DateTimeField: date_element_1.default,
+    DateField: date_element_1.default,
+    TimeField: time_element_1.default,
+    PhotoField: photo_element_1.default,
+    VideoField: video_element_1.default,
+    AudioField: audio_element_1.default,
+    AttachmentField: attachment_element_1.default,
+    SignatureField: signature_element_1.default,
+    ClassificationField: classification_element_1.default,
+    Repeatable: repeatable_element_1.default,
+    AddressField: address_element_1.default,
+    Label: label_element_1.default,
+    YesNoField: yes_no_element_1.default,
+    HyperlinkField: hyperlink_element_1.default,
+    BarcodeField: barcode_element_1.default,
+    CalculatedField: calculated_element_1.default,
+    RecordLinkField: record_link_element_1.default,
+    CheckboxField: checkbox_element_1.default,
+    DynamicField: dynamic_element_1.default,
+    LocationField: location_element_1.default,
+    ButtonField: button_element_1.default
+};
+let initialized = false;
+class ElementFactory {
+    static create(parent, attributes) {
+        const constructor = Constructors[attributes.type];
+        if (!initialized) {
+            initialized = true;
+            container_element_1.default.initialize();
+        }
+        if (constructor == null) {
+            return null;
+        }
+        return new constructor(parent, attributes);
     }
-
-    if (constructor == null) {
-      return null;
+    static classes() {
+        return Constructors;
     }
-
-    return new constructor(parent, attributes);
-  };
-
-  ElementFactory.classes = function classes() {
-    return Constructors;
-  };
-
-  return ElementFactory;
-}();
-
-exports["default"] = ElementFactory;
+}
+exports.default = ElementFactory;
 //# sourceMappingURL=element-factory.js.map
