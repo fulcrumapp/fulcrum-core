@@ -1,6 +1,6 @@
 {
   "name": "fulcrum-core",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Fulcrum Core",
   "homepage": "http://github.com/fulcrumapp/fulcrum-core",
   "main": "dist/index.js",

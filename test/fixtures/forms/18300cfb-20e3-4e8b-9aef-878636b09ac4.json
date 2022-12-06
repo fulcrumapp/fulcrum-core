@@ -706,7 +706,8 @@
             "disabled": false,
             "hidden": false,
             "data_name": "button",
-            "default_value": null
+            "default_value": null,
+            "button_type": "Progress"
           }
       ]
   }

@@ -16,5 +16,6 @@ describe('button element field', () => {
     const field = record.form.find('button');
 
     field.should.be.instanceof(ButtonElement);
+    field.buttonType.should.eql('Progress');
   });
 });
