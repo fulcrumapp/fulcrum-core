@@ -10,10 +10,7 @@ export default class RepeatableValue extends FormValue {
         created_at: string | null;
         updated_at: string | null;
         form_values: {};
-        geometry: {
-            type: string;
-            coordinates: any[];
-        } | null;
+        geometry: any;
         created_location: {
             latitude: any;
             longitude: any;
@@ -39,10 +36,7 @@ export default class RepeatableValue extends FormValue {
         created_at: string | null;
         updated_at: string | null;
         form_values: {};
-        geometry: {
-            type: string;
-            coordinates: any[];
-        } | null;
+        geometry: any;
         created_location: {
             latitude: any;
             longitude: any;

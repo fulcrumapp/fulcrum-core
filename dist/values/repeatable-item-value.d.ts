@@ -35,6 +35,7 @@ export default class RepeatableItemValue extends Feature {
     _updatedByName: any;
     _latitude: any;
     _longitude: any;
+    _geometry: any;
     _createdDuration: any;
     _updatedDuration: any;
     _editedDuration: any;
@@ -53,10 +54,7 @@ export default class RepeatableItemValue extends Feature {
         created_at: string | null;
         updated_at: string | null;
         form_values: {};
-        geometry: {
-            type: string;
-            coordinates: any[];
-        } | null;
+        geometry: any;
         created_location: {
             latitude: any;
             longitude: any;
@@ -81,14 +79,13 @@ export default class RepeatableItemValue extends Feature {
     get isGeometryEnabled(): any;
     get displayValue(): string;
     get searchableValue(): string;
-    get geometryAsGeoJSON(): {
-        type: string;
-        coordinates: any[];
-    } | null;
+    get geometryAsGeoJSON(): any;
     set latitude(arg: any);
     get latitude(): any;
     set longitude(arg: any);
     get longitude(): any;
+    set geometry(arg: any);
+    get geometry(): any;
     get changesetID(): any;
     get createdByID(): any;
     get updatedByID(): any;

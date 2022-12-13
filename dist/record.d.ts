@@ -42,6 +42,7 @@ export default class Record extends Feature {
         form_values: {};
         latitude: any;
         longitude: any;
+        geometry: any;
         project_id: any;
         assigned_to_id: any;
         status: any;
@@ -76,6 +77,7 @@ export default class Record extends Feature {
     _formValuesJSON: any;
     _latitude: any;
     _longitude: any;
+    _geometry: any;
     _projectID: any;
     _projectName: any;
     _assignedToID: any;
@@ -130,6 +132,8 @@ export default class Record extends Feature {
     get latitude(): any;
     set longitude(arg: any);
     get longitude(): any;
+    set geometry(arg: any);
+    get geometry(): any;
     set horizontalAccuracy(arg: any);
     get horizontalAccuracy(): any;
     set verticalAccuracy(arg: any);

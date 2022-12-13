@@ -101,6 +101,8 @@ export default class RepeatableItemValue extends Feature {
 
     const geometry = attrs.geometry;
 
+    this._geometry = geometry;
+
     if (geometry != null &&
         geometry.type === 'Point' &&
         geometry.coordinates &&
@@ -202,7 +204,7 @@ export default class RepeatableItemValue extends Feature {
 
   get geometryAsGeoJSON() {
     if (!this.hasCoordinate) {
-      return null;
+      return this.geometry;
     }
 
     return {
@@ -225,6 +227,14 @@ export default class RepeatableItemValue extends Feature {
 
   set longitude(longitude) {
     this._longitude = longitude;
+  }
+
+  get geometry() {
+    return this._geometry;
+  }
+
+  set geometry(geometry) {
+    this._geometry = geometry;
   }
 
   get changesetID() {

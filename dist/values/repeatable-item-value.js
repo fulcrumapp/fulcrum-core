@@ -81,6 +81,7 @@ class RepeatableItemValue extends feature_1.default {
         this._latitude = attrs.latitude || null;
         this._longitude = attrs.longitude || null;
         const geometry = attrs.geometry;
+        this._geometry = geometry;
         if (geometry != null &&
             geometry.type === 'Point' &&
             geometry.coordinates &&
@@ -161,7 +162,7 @@ class RepeatableItemValue extends feature_1.default {
     }
     get geometryAsGeoJSON() {
         if (!this.hasCoordinate) {
-            return null;
+            return this.geometry;
         }
         return {
             type: 'Point',
@@ -179,6 +180,12 @@ class RepeatableItemValue extends feature_1.default {
     }
     set longitude(longitude) {
         this._longitude = longitude;
+    }
+    get geometry() {
+        return this._geometry;
+    }
+    set geometry(geometry) {
+        this._geometry = geometry;
     }
     get changesetID() {
         return this._changesetID;

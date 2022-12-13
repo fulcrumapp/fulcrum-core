@@ -114,6 +114,7 @@ export default class Record extends Feature {
     json.form_values = simple ? this.formValues.toSimpleJSON() : this.formValues.toJSON();
     json.latitude = this._latitude != null ? this._latitude : null;
     json.longitude = this._longitude != null ? this._longitude : null;
+    json.geometry = this._geometry != null ? this._geometry : null;
     json.project_id = this._projectID || null;
     json.assigned_to_id = this._assignedToID || null;
     json.status = this._status || null;
@@ -158,6 +159,7 @@ export default class Record extends Feature {
     this._formValuesJSON = attributes.form_values || {};
     this._latitude = attributes.latitude != null ? attributes.latitude : null;
     this._longitude = attributes.longitude != null ? attributes.longitude : null;
+    this._geometry = attributes.geometry != null ? attributes.geometry : null;
     this._projectID = attributes.project_id || null;
     this._projectName = attributes.project || null;
     this._assignedToID = attributes.assigned_to_id || null;
@@ -382,6 +384,14 @@ export default class Record extends Feature {
 
   set longitude(longitude) {
     this._longitude = longitude;
+  }
+
+  get geometry() {
+    return this._geometry;
+  }
+
+  set geometry(geometry) {
+    this._geometry = geometry;
   }
 
   get horizontalAccuracy() {
