@@ -57,7 +57,14 @@ Starts an interactive node terminal with the library available to use
 - `git tag -a vx.x.x -m "x.x.x"`
 - `git push origin --tags`
 - Create vx.x.x release for tag in github
-- Move .npmrc off to fulcrum.npmrc and `npm login` (1password) support@fulcrumapp.com
-- `npm publish`
-- Move fulcrum.npmrc back to .npmrc and `npm login` (1password) support@fulcrumapp.com
-- `npm publish`
+  - Choose the tag and use tag as the release title
+  - Auto-generate release nots
+  - Click the "Publish release" button
+- Publish to the public NPM registry
+  - `mv $HOME/.npmrc $HOME/fulcrum.npmrc`
+  - `npm login` using creds from "npmjs (fulcrumapp)" in 1password
+  - use "support@fulcrumapp.com" for the email address when prompted
+  - `npm publish`
+- Publish to artifactory
+  - `mv $HOME/fulcrum.npmrc $HOME/.npmrc`
+  - `npm publish`
