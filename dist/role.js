@@ -17,6 +17,7 @@ class Role {
         this._canManageSubscription = !!attributes.can_manage_subscription;
         this._canUpdateOrganization = !!attributes.can_update_organization;
         this._canManageMembers = !!attributes.can_manage_members;
+        this._canManageGroups = !!attributes.can_manage_groups;
         this._canManageRoles = !!attributes.can_manage_roles;
         this._canManageLayers = !!attributes.can_manage_layers;
         this._canManageApps = !!attributes.can_manage_apps;
@@ -63,6 +64,9 @@ class Role {
     }
     get canManageMembers() {
         return this._canManageMembers;
+    }
+    get canManageGroups() {
+        return this._canManageGroups;
     }
     get canManageRoles() {
         return this._canManageRoles;

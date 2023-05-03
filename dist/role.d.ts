@@ -8,6 +8,7 @@ export default class Role {
     _canManageSubscription: boolean | undefined;
     _canUpdateOrganization: boolean | undefined;
     _canManageMembers: boolean | undefined;
+    _canManageGroups: boolean | undefined;
     _canManageRoles: boolean | undefined;
     _canManageLayers: boolean | undefined;
     _canManageApps: boolean | undefined;
@@ -36,6 +37,7 @@ export default class Role {
     get canManageSubscription(): boolean | undefined;
     get canUpdateOrganization(): boolean | undefined;
     get canManageMembers(): boolean | undefined;
+    get canManageGroups(): boolean | undefined;
     get canManageRoles(): boolean | undefined;
     get canManageLayers(): boolean | undefined;
     get canManageApps(): boolean | undefined;
