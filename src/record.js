@@ -425,6 +425,7 @@ export default class Record extends Feature {
   }
 
   get geometryAsGeoJSON() {
+    console.log("Hello there!!!!")
     if (!this.hasCoordinate) {
       return null;
     }
