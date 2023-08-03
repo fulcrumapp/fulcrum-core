@@ -140,7 +140,6 @@ export default class Record extends Feature {
     get speed(): any;
     set course(arg: any);
     get course(): any;
-    get isExtendable(): boolean;
     get geometryAsGeoJSON(): {
         type: string;
         coordinates: any[];

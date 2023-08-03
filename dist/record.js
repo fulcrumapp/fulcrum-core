@@ -335,12 +335,8 @@ class Record extends feature_1.default {
     set course(course) {
         this._course = course;
     }
-    get isExtendable() {
-        console.log("This should show up");
-        return true;
-    }
     get geometryAsGeoJSON() {
-        console.log("Hello there!!!!");
+        console.log("This will show up when location changes");
         if (!this.hasCoordinate) {
             return null;
         }
