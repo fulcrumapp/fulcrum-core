@@ -424,6 +424,11 @@ export default class Record extends Feature {
     this._course = course;
   }
 
+  get isExtendable() {
+    console.log("This should show up")
+    return true;
+  }
+
   get geometryAsGeoJSON() {
     console.log("Hello there!!!!")
     if (!this.hasCoordinate) {
