@@ -23,6 +23,7 @@ export default class Record extends Feature {
     get formValues(): FormValues;
     _formValues: FormValues | undefined;
     get hasCoordinate(): boolean;
+    get geometry(): any;
     set changeset(arg: any);
     get changeset(): any;
     _changesetID: any;
@@ -70,6 +71,7 @@ export default class Record extends Feature {
         created_duration: any;
         updated_duration: any;
         edited_duration: any;
+        geometry: any;
     };
     updateFromAPIAttributes(attrs: any): void;
     _version: any;
@@ -101,6 +103,7 @@ export default class Record extends Feature {
     _updatedLongitude: any;
     _updatedAltitude: any;
     _updatedAccuracy: any;
+    _geometry: any;
     updateTimestamps(): void;
     get isGeometryEnabled(): any;
     get(key: any, formValues: any): any;
