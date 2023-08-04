@@ -365,9 +365,15 @@ class Record extends feature_1.default {
         return null;
     }
     buildGeoJsonFromGeometry() {
+        const coords = [];
+        this.geometry.coordinates.array.forEach((coord) => {
+            console.log('Processing coord', coord);
+            return [coord.longitude, coord.latitude];
+        });
+        console.log('Complete coords', coords);
         return {
             type: this.geometry.type,
-            coordinates: this.geometry.coordinates.map((coord) => ([coord.longitude, coord.latitude])),
+            coordinates: coords,
         };
     }
     buildPointFromLatLong() {

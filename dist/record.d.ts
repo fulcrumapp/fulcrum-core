@@ -146,11 +146,11 @@ export default class Record extends Feature {
     get course(): any;
     get geometryAsGeoJSON(): {
         type: any;
-        coordinates: any;
+        coordinates: any[];
     } | null;
     buildGeoJsonFromGeometry(): {
         type: any;
-        coordinates: any;
+        coordinates: any[];
     };
     buildPointFromLatLong(): {
         type: string;
