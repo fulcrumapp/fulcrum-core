@@ -346,7 +346,7 @@ class Record extends feature_1.default {
         this._course = course;
     }
     get geometryAsGeoJSON() {
-        if (this.isGeometryEnabled()) {
+        if (this.isGeometryEnabled) {
             if (this.hasGeometry) {
                 return this.geometry;
             }
