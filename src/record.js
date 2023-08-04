@@ -87,6 +87,10 @@ export default class Record extends Feature {
     return this._geometry;
   }
 
+  set geometry(geometry) {
+    this._geometry = geometry;
+  }
+
   get changeset() {
     return this._changeset;
   }
@@ -435,16 +439,30 @@ export default class Record extends Feature {
   }
 
   get geometryAsGeoJSON() {
-    if (!this.hasCoordinate) {
-      return null;
+    if (this.isGeometryEnabled()) {
+      if (this.hasGeometry) {
+        return this.geometry;
+      }
+
+      if (this.hasCoordinate) {
+        return this.buildPointFromLatLong();
+      }
     }
 
+    if (this.hasCoordinate) {
+      return this.buildPointFromLatLong();
+    }
+
+    return null;
+  }
+
+  buildPointFromLatLong() {
     return {
       type: 'Point',
       coordinates: [
         this.longitude,
-        this.latitude
-      ]
+        this.latitude,
+      ],
     };
   }
 
