@@ -441,18 +441,22 @@ export default class Record extends Feature {
   get geometryAsGeoJSON() {
     if (this.isGeometryEnabled) {
       if (this.hasGeometry) {
+        console.log("Returning Geometry");
         return this.geometry;
       }
 
       if (this.hasCoordinate) {
+        console.log("Returning coordinates because !hasGeometry")
         return this.buildPointFromLatLong();
       }
     }
 
     if (this.hasCoordinate) {
+      console.log("Returning coordinates because !isGeometryEnabled")
       return this.buildPointFromLatLong();
     }
 
+    console.log("I got nothin'")
     return null;
   }
 
