@@ -144,7 +144,14 @@ export default class Record extends Feature {
     get speed(): any;
     set course(arg: any);
     get course(): any;
-    get geometryAsGeoJSON(): any;
+    get geometryAsGeoJSON(): {
+        type: any;
+        coordinates: any;
+    } | null;
+    buildGeoJsonFromGeometry(): {
+        type: any;
+        coordinates: any;
+    };
     buildPointFromLatLong(): {
         type: string;
         coordinates: any[];
