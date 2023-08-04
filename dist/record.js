@@ -371,7 +371,7 @@ class Record extends feature_1.default {
             console.log('Going to process', this.geometry.coordinates);
             coordinates.forEach((coord) => {
                 console.log('Processing coord', coord);
-                return [coord.longitude, coord.latitude];
+                coords.push([coord.longitude, coord.latitude]);
             });
         }
         console.log('Complete coords', coords);
