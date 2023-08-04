@@ -440,7 +440,7 @@ export default class Record extends Feature {
 
   get geometryAsGeoJSON() {
     if (this.isGeometryEnabled) {
-      if (this.hasGeometry) {
+      if (this.geometry) {
         console.log("Returning Geometry");
         return this.geometry;
       }

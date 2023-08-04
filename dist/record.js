@@ -347,7 +347,7 @@ class Record extends feature_1.default {
     }
     get geometryAsGeoJSON() {
         if (this.isGeometryEnabled) {
-            if (this.hasGeometry) {
+            if (this.geometry) {
                 console.log("Returning Geometry");
                 return this.geometry;
             }
