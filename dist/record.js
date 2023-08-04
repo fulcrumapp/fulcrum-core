@@ -366,15 +366,16 @@ class Record extends feature_1.default {
     }
     buildGeoJsonFromGeometry() {
         const coords = [];
-        this.geometry.coordinates.array.forEach((coord) => {
-            console.log('Processing coord', coord);
-            return [coord.longitude, coord.latitude];
-        });
+        const { type, coordinates } = this.geometry;
+        if (coordinates && coordinates.length > 0) {
+            console.log('Going to process', this.geometry.coordinates);
+            coordinates.forEach((coord) => {
+                console.log('Processing coord', coord);
+                return [coord.longitude, coord.latitude];
+            });
+        }
         console.log('Complete coords', coords);
-        return {
-            type: this.geometry.type,
-            coordinates: coords,
-        };
+        return { type, coordinates: coords };
     }
     buildPointFromLatLong() {
         return {
