@@ -23,6 +23,9 @@ export default class Record extends Feature {
     get formValues(): FormValues;
     _formValues: FormValues | undefined;
     get hasCoordinate(): boolean;
+    set geometry(arg: any);
+    get geometry(): any;
+    _geometry: any;
     set changeset(arg: any);
     get changeset(): any;
     _changesetID: any;
@@ -70,6 +73,7 @@ export default class Record extends Feature {
         created_duration: any;
         updated_duration: any;
         edited_duration: any;
+        geometry: any;
     };
     updateFromAPIAttributes(attrs: any): void;
     _version: any;
@@ -140,10 +144,11 @@ export default class Record extends Feature {
     get speed(): any;
     set course(arg: any);
     get course(): any;
-    get geometryAsGeoJSON(): {
+    get geometryAsGeoJSON(): any;
+    buildPointFromLatLong(): {
         type: string;
         coordinates: any[];
-    } | null;
+    };
     set createdDuration(arg: any);
     get createdDuration(): any;
     set updatedDuration(arg: any);

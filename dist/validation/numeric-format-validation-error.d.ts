@@ -1,4 +1,4 @@
 export default class NumericFormatValidationError extends ElementValidationError {
-    get message(): string;
+    get message(): any;
 }
 import ElementValidationError from "./element-validation-error";
