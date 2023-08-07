@@ -348,19 +348,15 @@ class Record extends feature_1.default {
     get geometryAsGeoJSON() {
         if (this.isGeometryEnabled) {
             if (this.geometry) {
-                console.log('Returning Geometry:', this.geometry);
                 return this.geometry;
             }
             if (this.hasCoordinate) {
-                console.log("Returning coordinates because !hasGeometry");
                 return this.buildPointFromLatLong();
             }
         }
         if (this.hasCoordinate) {
-            console.log("Returning coordinates because !isGeometryEnabled");
             return this.buildPointFromLatLong();
         }
-        console.log("I got nothin'");
         return null;
     }
     buildGeoJsonFromGeometry() {

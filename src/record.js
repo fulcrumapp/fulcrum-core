@@ -220,7 +220,7 @@ export default class Record extends Feature {
     }
 
     if (attributes.geometry) {
-      this._geometry = attributes.geometry
+      this._geometry = attributes.geometry;
     }
   }
 
@@ -441,22 +441,18 @@ export default class Record extends Feature {
   get geometryAsGeoJSON() {
     if (this.isGeometryEnabled) {
       if (this.geometry) {
-        console.log('Returning Geometry:', this.geometry);
         return this.geometry;
       }
 
       if (this.hasCoordinate) {
-        console.log("Returning coordinates because !hasGeometry")
         return this.buildPointFromLatLong();
       }
     }
 
     if (this.hasCoordinate) {
-      console.log("Returning coordinates because !isGeometryEnabled")
       return this.buildPointFromLatLong();
     }
 
-    console.log("I got nothin'")
     return null;
   }
 
