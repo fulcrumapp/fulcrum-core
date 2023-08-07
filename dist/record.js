@@ -346,13 +346,8 @@ class Record extends feature_1.default {
         this._course = course;
     }
     get geometryAsGeoJSON() {
-        if (this.isGeometryEnabled) {
-            if (this.geometry) {
-                return this.geometry;
-            }
-            if (this.hasCoordinate) {
-                return this.buildPointFromLatLong();
-            }
+        if (this.isGeometryEnabled && this.geometry) {
+            return this.geometry;
         }
         if (this.hasCoordinate) {
             return this.buildPointFromLatLong();

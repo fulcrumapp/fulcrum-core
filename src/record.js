@@ -439,14 +439,8 @@ export default class Record extends Feature {
   }
 
   get geometryAsGeoJSON() {
-    if (this.isGeometryEnabled) {
-      if (this.geometry) {
-        return this.geometry;
-      }
-
-      if (this.hasCoordinate) {
-        return this.buildPointFromLatLong();
-      }
+    if (this.isGeometryEnabled && this.geometry) {
+      return this.geometry;
     }
 
     if (this.hasCoordinate) {
