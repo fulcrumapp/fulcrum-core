@@ -441,9 +441,8 @@ export default class Record extends Feature {
   get geometryAsGeoJSON() {
     if (this.isGeometryEnabled) {
       if (this.geometry) {
-        const geoJson = this.buildGeoJsonFromGeometry()
-        console.log("Returning Geometry:", geoJson);
-        return geoJson;
+        console.log('Returning Geometry:', this.geometry);
+        return this.geometry;
       }
 
       if (this.hasCoordinate) {
@@ -462,18 +461,9 @@ export default class Record extends Feature {
   }
 
   buildGeoJsonFromGeometry() {
-    const coords = [];
     const { type, coordinates } = this.geometry;
-    if (coordinates && coordinates.length > 0) {
-      console.log('Going to process', this.geometry.coordinates);
-      coordinates.forEach((coord) => {
-        console.log('Processing coord', coord);
-        coords.push([coord.longitude, coord.latitude]);
-      });
-    }
 
-    console.log('Complete coords', coords);
-    return { type, coordinates: coords };
+    return { type, coordinates };
   }
 
   buildPointFromLatLong() {
