@@ -67,12 +67,6 @@ class Record extends feature_1.default {
     get hasCoordinate() {
         return this._latitude != null && this._longitude != null;
     }
-    get geometry() {
-        return this._geometry;
-    }
-    set geometry(geometry) {
-        this._geometry = geometry;
-    }
     get changeset() {
         return this._changeset;
     }
@@ -120,7 +114,6 @@ class Record extends feature_1.default {
         json.created_duration = this.createdDuration;
         json.updated_duration = this.updatedDuration;
         json.edited_duration = this.editedDuration;
-        json.geometry = this.geometry;
         return json;
     }
     updateFromAPIAttributes(attrs) {
@@ -173,9 +166,6 @@ class Record extends feature_1.default {
             this._updatedLongitude = updatedLocation.longitude;
             this._updatedAltitude = updatedLocation.altitude;
             this._updatedAccuracy = updatedLocation.horizontal_accuracy;
-        }
-        if (attributes.geometry) {
-            this._geometry = attributes.geometry;
         }
     }
     updateTimestamps() {
@@ -346,26 +336,15 @@ class Record extends feature_1.default {
         this._course = course;
     }
     get geometryAsGeoJSON() {
-        if (this.isGeometryEnabled) {
-            if (this.geometry) {
-                return this.geometry;
-            }
-            if (this.hasCoordinate) {
-                return this.buildPointFromLatLong();
-            }
+        if (!this.hasCoordinate) {
+            return null;
         }
-        if (this.hasCoordinate) {
-            return this.buildPointFromLatLong();
-        }
-        return null;
-    }
-    buildPointFromLatLong() {
         return {
             type: 'Point',
             coordinates: [
                 this.longitude,
-                this.latitude,
-            ],
+                this.latitude
+            ]
         };
     }
     get createdDuration() {
