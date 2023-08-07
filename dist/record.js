@@ -359,10 +359,6 @@ class Record extends feature_1.default {
         }
         return null;
     }
-    buildGeoJsonFromGeometry() {
-        const { type, coordinates } = this.geometry;
-        return { type, coordinates };
-    }
     buildPointFromLatLong() {
         return {
             type: 'Point',

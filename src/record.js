@@ -456,12 +456,6 @@ export default class Record extends Feature {
     return null;
   }
 
-  buildGeoJsonFromGeometry() {
-    const { type, coordinates } = this.geometry;
-
-    return { type, coordinates };
-  }
-
   buildPointFromLatLong() {
     return {
       type: 'Point',
