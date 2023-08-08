@@ -124,6 +124,7 @@ class Record extends feature_1.default {
         return json;
     }
     updateFromAPIAttributes(attrs) {
+        var _a;
         const attributes = attrs || {};
         this._id = attributes.id || uuid_1.default.v4();
         this._version = attributes.version != null ? attributes.version : null;
@@ -175,7 +176,7 @@ class Record extends feature_1.default {
             this._updatedAccuracy = updatedLocation.horizontal_accuracy;
         }
         if (attributes.geometry) {
-            this._geometry = attributes.geometry;
+            this._geometry = (_a = attributes.geometry) !== null && _a !== void 0 ? _a : null;
         }
     }
     updateTimestamps() {
@@ -346,7 +347,7 @@ class Record extends feature_1.default {
         this._course = course;
     }
     get geometryAsGeoJSON() {
-        if (this.isGeometryEnabled && this.geometry) {
+        if (this.geometry) {
             return this.geometry;
         }
         if (this.hasCoordinate) {

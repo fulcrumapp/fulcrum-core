@@ -220,7 +220,7 @@ export default class Record extends Feature {
     }
 
     if (attributes.geometry) {
-      this._geometry = attributes.geometry;
+      this._geometry = attributes.geometry ?? null;
     }
   }
 
@@ -439,7 +439,7 @@ export default class Record extends Feature {
   }
 
   get geometryAsGeoJSON() {
-    if (this.isGeometryEnabled && this.geometry) {
+    if (this.geometry) {
       return this.geometry;
     }
 
