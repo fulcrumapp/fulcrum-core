@@ -65,6 +65,5 @@ Starts an interactive node terminal with the library available to use
   - `npm login` using creds from "npmjs (fulcrumapp)" in 1password
   - use "support@fulcrumapp.com" for the email address when prompted
   - `npm publish`
-- Publish to artifactory
+- Restore your .npmrc file
   - `mv $HOME/fulcrum.npmrc $HOME/.npmrc`
-  - `npm publish`
