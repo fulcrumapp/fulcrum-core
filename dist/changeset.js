@@ -5,7 +5,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const date_utils_1 = __importDefault(require("./utils/date-utils"));
 const util_1 = require("util");
-const lodash_compact_1 = __importDefault(require("lodash.compact"));
+const compact_1 = __importDefault(require("lodash/compact"));
 class Changeset {
     constructor(attributes) {
         this.updateFromAPIAttributes(attributes);
@@ -107,16 +107,16 @@ class Changeset {
     }
     get metadataDescription() {
         const parts = [
-            (0, lodash_compact_1.default)([this.application,
+            (0, compact_1.default)([this.application,
                 this._metadata.application_version]).join(' '),
-            (0, lodash_compact_1.default)([this._metadata.browser,
+            (0, compact_1.default)([this._metadata.browser,
                 this._metadata.browser_version]).join(' '),
-            (0, lodash_compact_1.default)([this._metadata.platform,
+            (0, compact_1.default)([this._metadata.platform,
                 this._metadata.platform_version]).join(' '),
-            (0, lodash_compact_1.default)([this._metadata.device_manufacturer,
+            (0, compact_1.default)([this._metadata.device_manufacturer,
                 this._metadata.device_model]).join(' ')
         ];
-        return (0, lodash_compact_1.default)(parts).join(' / ');
+        return (0, compact_1.default)(parts).join(' / ');
     }
     get boundingBoxAsGeoJSON() {
         if (this._minLat == null || this._maxLat == null ||

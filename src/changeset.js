@@ -1,6 +1,6 @@
 import DateUtils from './utils/date-utils';
 import { format } from 'util';
-import compact from 'lodash.compact';
+import compact from 'lodash/compact';
 
 export default class Changeset {
   constructor(attributes) {
