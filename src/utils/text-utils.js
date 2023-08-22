@@ -1,6 +1,4 @@
-import includes from 'lodash/includes';
-import startsWith from 'lodash/startswith';
-import trim from 'lodash/trim';
+import { includes, startsWith, trim } from 'lodash';
 
 export default class TextUtils {
   static isEmpty(value) {

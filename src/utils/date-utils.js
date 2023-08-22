@@ -1,5 +1,5 @@
 import Locale from './locale';
-import padStart from 'lodash/padstart';
+import { padStart } from 'lodash';
 import relativeDate from 'relative-date';
 
 let intl = null;

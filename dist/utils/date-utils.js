@@ -4,7 +4,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const locale_1 = __importDefault(require("./locale"));
-const padstart_1 = __importDefault(require("lodash/padstart"));
+const lodash_1 = require("lodash");
 const relative_date_1 = __importDefault(require("relative-date"));
 let intl = null;
 if (typeof Intl !== 'undefined') {
@@ -34,8 +34,8 @@ class DateUtils {
         return (hours * 60) + minutes;
     }
     static formatTime(date) {
-        const hours = (0, padstart_1.default)(date.getHours(), 2, '0');
-        const minutes = (0, padstart_1.default)(date.getMinutes(), 2, '0');
+        const hours = (0, lodash_1.padStart)(date.getHours(), 2, '0');
+        const minutes = (0, lodash_1.padStart)(date.getMinutes(), 2, '0');
         return hours + ':' + minutes;
     }
     static formatTimeSeconds(seconds, milliseconds = false) {
@@ -44,16 +44,16 @@ class DateUtils {
         const mm = div % 60;
         const hh = (div - mm) / 60;
         const ms = (ss * 1000 % 1000);
-        const h = (0, padstart_1.default)(Math.floor(hh), 2, '0');
-        const m = (0, padstart_1.default)(Math.floor(mm), 2, '0');
-        const s = (0, padstart_1.default)(Math.floor(ss), 2, '0');
-        const u = (0, padstart_1.default)(Math.floor(ms), 3, '0');
+        const h = (0, lodash_1.padStart)(Math.floor(hh), 2, '0');
+        const m = (0, lodash_1.padStart)(Math.floor(mm), 2, '0');
+        const s = (0, lodash_1.padStart)(Math.floor(ss), 2, '0');
+        const u = (0, lodash_1.padStart)(Math.floor(ms), 3, '0');
         return h + ':' + m + ':' + s + (milliseconds ? '.' + u : '');
     }
     static formatTimeParts(hours, minutes, seconds) {
-        const h = (0, padstart_1.default)(+hours, 2, '0');
-        const m = (0, padstart_1.default)(+minutes, 2, '0');
-        const s = (0, padstart_1.default)(+seconds, 2, '0');
+        const h = (0, lodash_1.padStart)(+hours, 2, '0');
+        const m = (0, lodash_1.padStart)(+minutes, 2, '0');
+        const s = (0, lodash_1.padStart)(+seconds, 2, '0');
         return h + ':' + m + ':' + s;
     }
     static parseISOTimestamp(timestampString) {
@@ -151,8 +151,8 @@ class DateUtils {
             return null;
         }
         const year = date.getFullYear();
-        const month = (0, padstart_1.default)(date.getMonth() + 1, 2, '0');
-        const day = (0, padstart_1.default)(date.getDate(), 2, '0');
+        const month = (0, lodash_1.padStart)(date.getMonth() + 1, 2, '0');
+        const day = (0, lodash_1.padStart)(date.getDate(), 2, '0');
         return year + '-' + month + '-' + day;
     }
     static formatLocalizedDate(date) {
@@ -173,8 +173,8 @@ class DateUtils {
     static __formatLocalizedDate(date) {
         if (!locale_1.default.supportsECMA402()) {
             const year = date.getFullYear();
-            const month = (0, padstart_1.default)(date.getMonth() + 1, 2, '0');
-            const day = (0, padstart_1.default)(date.getDate(), 2, '0');
+            const month = (0, lodash_1.padStart)(date.getMonth() + 1, 2, '0');
+            const day = (0, lodash_1.padStart)(date.getDate(), 2, '0');
             return year + '-' + month + '-' + day;
         }
         const options = {

@@ -1,4 +1,4 @@
-import padStart from 'lodash/padstart';
+import { padStart } from 'lodash';
 
 export default class SRT {
   static render(tracks) {

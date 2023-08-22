@@ -5,7 +5,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const form_value_1 = __importDefault(require("./form-value"));
 const text_utils_1 = __importDefault(require("../utils/text-utils"));
-const includes_1 = __importDefault(require("lodash/includes"));
+const lodash_1 = require("lodash");
 const ChoiceDisplaySeparator = ', ';
 const ChoiceSearchSeparator = ' ';
 class ChoiceValue extends form_value_1.default {
@@ -157,7 +157,7 @@ class ChoiceValue extends form_value_1.default {
         return this._otherValues[0];
     }
     isEqual(value) {
-        if ((0, includes_1.default)(this.selectedValues, value)) {
+        if ((0, lodash_1.includes)(this.selectedValues, value)) {
             return true;
         }
         return this.otherValue === value;
