@@ -24,19 +24,13 @@ Includes:
 ### Setup
 
 ```sh
-npm install fulcrum-core
+yarn install
 ```
 
 ### Tests
 
 ```sh
-npm test
-```
-
-### Build
-
-```sh
-make
+yarn test
 ```
 
 ### Console
@@ -46,7 +40,6 @@ Starts an interactive node terminal with the library available to use
 ```sh
 ./console
 ```
-
 
 ### Publishing
 
@@ -64,6 +57,6 @@ Starts an interactive node terminal with the library available to use
   - `mv $HOME/.npmrc $HOME/fulcrum.npmrc`
   - `npm login` using creds from "npmjs (fulcrumapp)" in 1password
   - use "support@fulcrumapp.com" for the email address when prompted
-  - `npm publish`
+  - `yarn publish`
 - Restore your .npmrc file
   - `mv $HOME/fulcrum.npmrc $HOME/.npmrc`
