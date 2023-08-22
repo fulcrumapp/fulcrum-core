@@ -1,7 +1,7 @@
 import FormValue from './form-value';
 import RepeatableItemValue from './repeatable-item-value';
 import TextUtils from '../utils/text-utils';
-import uuid from 'uuid';
+import { v4 as uuidv4 } from 'uuid'
 
 const SearchSeparator = ' ';
 
@@ -165,7 +165,7 @@ export default class RepeatableValue extends FormValue {
 
   createNewItem() {
     const attributes = {
-      id: uuid.v4(),
+      id: uuidv4(),
       form_values: {}
     };
 

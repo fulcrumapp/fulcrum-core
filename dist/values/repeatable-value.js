@@ -6,7 +6,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const form_value_1 = __importDefault(require("./form-value"));
 const repeatable_item_value_1 = __importDefault(require("./repeatable-item-value"));
 const text_utils_1 = __importDefault(require("../utils/text-utils"));
-const uuid_1 = __importDefault(require("uuid"));
+const uuid_1 = require("uuid");
 const SearchSeparator = ' ';
 class RepeatableValue extends form_value_1.default {
     constructor(element, items) {
@@ -128,7 +128,7 @@ class RepeatableValue extends form_value_1.default {
     }
     createNewItem() {
         const attributes = {
-            id: uuid_1.default.v4(),
+            id: (0, uuid_1.v4)(),
             form_values: {}
         };
         return new repeatable_item_value_1.default(this.element, attributes, this._items.length);

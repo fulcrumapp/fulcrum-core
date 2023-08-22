@@ -2,7 +2,7 @@ import FormValue from './form-value';
 import DynamicItemValue from './dynamic-item-value';
 import MultipleValueItem from './multiple-value-item';
 import NumberUtils from '../utils/number-utils';
-import uuid from 'uuid';
+import { v4 as uuidv4 } from 'uuid'
 
 export default class DynamicValue extends FormValue {
   constructor(element, items) {
@@ -168,7 +168,7 @@ export default class DynamicValue extends FormValue {
   createNewItem() {
     const attributes = {
       metadata: {
-        id: uuid.v4()
+        id: uuidv4()
       },
       elements: [],
       values: {}
