@@ -52,8 +52,8 @@ Starts an interactive node terminal with the library available to use
 
 - `yarn clean && yarn build`
 - Bump package.json version
-- Merge to ~~main~~ master
-- Checkout master, `git pull`
+- Merge to main
+- Checkout main, `git pull`
 - `git tag -a vx.x.x -m "x.x.x"`
 - `git push origin --tags`
 - Create vx.x.x release for tag in github

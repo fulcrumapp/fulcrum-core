@@ -23,6 +23,7 @@ export default class Role {
     _canCreateRecords: boolean | undefined;
     _canUpdateRecords: boolean | undefined;
     _canDeleteRecords: boolean | undefined;
+    _canBulkDeleteRecords: boolean | undefined;
     _canExportRecords: boolean | undefined;
     _canImportRecords: boolean | undefined;
     _canManageAuthorizations: boolean | undefined;
@@ -52,6 +53,7 @@ export default class Role {
     get canCreateRecords(): boolean | undefined;
     get canUpdateRecords(): boolean | undefined;
     get canDeleteRecords(): boolean | undefined;
+    get canBulkDeleteRecords(): boolean | undefined;
     get canExportRecords(): boolean | undefined;
     get canRunReports(): boolean | undefined;
 }
