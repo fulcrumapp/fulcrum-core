@@ -8,7 +8,7 @@ const form_values_1 = __importDefault(require("./values/form-values"));
 const text_utils_1 = __importDefault(require("./utils/text-utils"));
 const date_utils_1 = __importDefault(require("./utils/date-utils"));
 const status_value_1 = __importDefault(require("./values/status-value"));
-const uuid_1 = __importDefault(require("uuid"));
+const uuid_1 = require("uuid");
 const load_object_1 = __importDefault(require("./load-object"));
 class Record extends feature_1.default {
     constructor(attributes, form) {
@@ -126,7 +126,7 @@ class Record extends feature_1.default {
     updateFromAPIAttributes(attrs) {
         var _a;
         const attributes = attrs || {};
-        this._id = attributes.id || uuid_1.default.v4();
+        this._id = attributes.id || (0, uuid_1.v4)();
         this._version = attributes.version != null ? attributes.version : null;
         this._createdAt = date_utils_1.default.parseISOTimestamp(attributes.created_at);
         this._updatedAt = date_utils_1.default.parseISOTimestamp(attributes.updated_at);

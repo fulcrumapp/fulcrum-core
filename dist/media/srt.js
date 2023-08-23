@@ -1,22 +1,19 @@
 "use strict";
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
-const lodash_padstart_1 = __importDefault(require("lodash.padstart"));
+const lodash_1 = require("lodash");
 class SRT {
     static render(tracks) {
         return new SRT().render(tracks);
     }
     timestamp(t) {
         let x = t - this._firstTimestamp;
-        const ms = (0, lodash_padstart_1.default)(Math.floor(x % 1000), 2, '0');
+        const ms = (0, lodash_1.padStart)(Math.floor(x % 1000), 2, '0');
         x /= 1000;
-        const ss = (0, lodash_padstart_1.default)(Math.floor(x % 60), 2, '0');
+        const ss = (0, lodash_1.padStart)(Math.floor(x % 60), 2, '0');
         x /= 60;
-        const mm = (0, lodash_padstart_1.default)(Math.floor(x % 60), 2, '0');
+        const mm = (0, lodash_1.padStart)(Math.floor(x % 60), 2, '0');
         x /= 60;
-        const hh = (0, lodash_padstart_1.default)(Math.floor(x % 24), 2, '0');
+        const hh = (0, lodash_1.padStart)(Math.floor(x % 24), 2, '0');
         return `${hh}:${mm}:${ss},${ms}`;
     }
     render(tracks) {

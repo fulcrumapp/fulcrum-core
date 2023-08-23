@@ -1,11 +1,6 @@
 "use strict";
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
-const lodash_includes_1 = __importDefault(require("lodash.includes"));
-const lodash_startswith_1 = __importDefault(require("lodash.startswith"));
-const lodash_trim_1 = __importDefault(require("lodash.trim"));
+const lodash_1 = require("lodash");
 class TextUtils {
     static isEmpty(value) {
         if (value == null) {
@@ -23,16 +18,16 @@ class TextUtils {
         if (needle == null) {
             return false;
         }
-        return (0, lodash_includes_1.default)(haystack.toLowerCase(), needle.toLowerCase());
+        return (0, lodash_1.includes)(haystack.toLowerCase(), needle.toLowerCase());
     }
     static startsWith(haystack, needle) {
         if (needle == null) {
             return false;
         }
-        return (0, lodash_startswith_1.default)(haystack, needle);
+        return (0, lodash_1.startsWith)(haystack, needle);
     }
     static trim(value) {
-        return (0, lodash_trim_1.default)(value);
+        return (0, lodash_1.trim)(value);
     }
 }
 exports.default = TextUtils;

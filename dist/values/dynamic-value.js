@@ -7,7 +7,7 @@ const form_value_1 = __importDefault(require("./form-value"));
 const dynamic_item_value_1 = __importDefault(require("./dynamic-item-value"));
 const multiple_value_item_1 = __importDefault(require("./multiple-value-item"));
 const number_utils_1 = __importDefault(require("../utils/number-utils"));
-const uuid_1 = __importDefault(require("uuid"));
+const uuid_1 = require("uuid");
 class DynamicValue extends form_value_1.default {
     constructor(element, items) {
         super(element, items);
@@ -133,7 +133,7 @@ class DynamicValue extends form_value_1.default {
     createNewItem() {
         const attributes = {
             metadata: {
-                id: uuid_1.default.v4()
+                id: (0, uuid_1.v4)()
             },
             elements: [],
             values: {}

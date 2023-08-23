@@ -3,7 +3,7 @@ import FormValues from './values/form-values';
 import TextUtils from './utils/text-utils';
 import DateUtils from './utils/date-utils';
 import StatusValue from './values/status-value';
-import uuid from 'uuid';
+import { v4 as uuidv4 } from 'uuid'
 import loadObject from './load-object';
 
 export default class Record extends Feature {
@@ -159,7 +159,7 @@ export default class Record extends Feature {
   updateFromAPIAttributes(attrs) {
     const attributes = attrs || {};
 
-    this._id = attributes.id || uuid.v4();
+    this._id = attributes.id || uuidv4();
     this._version = attributes.version != null ? attributes.version : null;
     this._createdAt = DateUtils.parseISOTimestamp(attributes.created_at);
     this._updatedAt = DateUtils.parseISOTimestamp(attributes.updated_at);

@@ -1,6 +1,6 @@
 import FormValue from './form-value';
 import TextUtils from '../utils/text-utils';
-import includes from 'lodash.includes';
+import { includes } from 'lodash';
 
 const ChoiceDisplaySeparator = ', ';
 const ChoiceSearchSeparator = ' ';
