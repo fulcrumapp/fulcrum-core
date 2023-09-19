@@ -16,6 +16,9 @@ export default class RepeatableItemValue extends Feature {
     _updatedAt: any;
     get formValues(): FormValues;
     _formValues: FormValues | undefined;
+    set geometry(arg: any);
+    get geometry(): any;
+    _geometry: any;
     get hasCoordinate(): boolean;
     updateFromAPIAttributes(attrs: any): void;
     _id: any;
@@ -53,10 +56,7 @@ export default class RepeatableItemValue extends Feature {
         created_at: string | null;
         updated_at: string | null;
         form_values: {};
-        geometry: {
-            type: string;
-            coordinates: any[];
-        } | null;
+        geometry: any;
         created_location: {
             latitude: any;
             longitude: any;
@@ -81,10 +81,11 @@ export default class RepeatableItemValue extends Feature {
     get isGeometryEnabled(): any;
     get displayValue(): string;
     get searchableValue(): string;
-    get geometryAsGeoJSON(): {
+    get geometryAsGeoJSON(): any;
+    buildPointFromLatLong(): {
         type: string;
         coordinates: any[];
-    } | null;
+    };
     set latitude(arg: any);
     get latitude(): any;
     set longitude(arg: any);
