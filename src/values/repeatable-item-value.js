@@ -70,6 +70,14 @@ export default class RepeatableItemValue extends Feature {
     return this._formValues;
   }
 
+  get geometry() {
+    return this._geometry;
+  }
+
+  set geometry(geometry) {
+    this._geometry = geometry;
+  }
+
   get hasCoordinate() {
     return this._latitude != null && this._longitude != null;
   }
@@ -100,6 +108,8 @@ export default class RepeatableItemValue extends Feature {
     this._longitude = attrs.longitude || null;
 
     const geometry = attrs.geometry;
+
+    this._geometry = attrs.geometry ?? null;
 
     if (geometry != null &&
         geometry.type === 'Point' &&
@@ -149,7 +159,7 @@ export default class RepeatableItemValue extends Feature {
     json.created_at = DateUtils.formatEpochTimestamp(this.createdAt);
     json.updated_at = DateUtils.formatEpochTimestamp(this.updatedAt);
     json.form_values = simple ? this.formValues.toSimpleJSON() : this.formValues.toJSON();
-    json.geometry = this.geometryAsGeoJSON;
+    json.geometry = this.geometry;
     json.created_location = this.createdLocation;
     json.updated_location = this.updatedLocation;
     json.created_duration = this._createdDuration != null ? this._createdDuration : null;
@@ -201,13 +211,24 @@ export default class RepeatableItemValue extends Feature {
   }
 
   get geometryAsGeoJSON() {
-    if (!this.hasCoordinate) {
-      return null;
+    if (this.geometry) {
+      return this.geometry;
     }
 
+    if (this.hasCoordinate) {
+      return this.buildPointFromLatLong();
+    }
+
+    return null;
+  }
+
+  buildPointFromLatLong() {
     return {
       type: 'Point',
-      coordinates: [ this._longitude, this._latitude ]
+      coordinates: [
+        this.longitude,
+        this.latitude,
+      ],
     };
   }
 

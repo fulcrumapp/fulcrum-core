@@ -57,10 +57,17 @@ class RepeatableItemValue extends feature_1.default {
         }
         return this._formValues;
     }
+    get geometry() {
+        return this._geometry;
+    }
+    set geometry(geometry) {
+        this._geometry = geometry;
+    }
     get hasCoordinate() {
         return this._latitude != null && this._longitude != null;
     }
     updateFromAPIAttributes(attrs) {
+        var _a;
         this._id = attrs.id;
         this._createdAt = date_utils_1.default.parseEpochTimestamp(attrs.created_at);
         this._updatedAt = date_utils_1.default.parseEpochTimestamp(attrs.updated_at);
@@ -81,6 +88,7 @@ class RepeatableItemValue extends feature_1.default {
         this._latitude = attrs.latitude || null;
         this._longitude = attrs.longitude || null;
         const geometry = attrs.geometry;
+        this._geometry = (_a = attrs.geometry) !== null && _a !== void 0 ? _a : null;
         if (geometry != null &&
             geometry.type === 'Point' &&
             geometry.coordinates &&
@@ -120,7 +128,7 @@ class RepeatableItemValue extends feature_1.default {
         json.created_at = date_utils_1.default.formatEpochTimestamp(this.createdAt);
         json.updated_at = date_utils_1.default.formatEpochTimestamp(this.updatedAt);
         json.form_values = simple ? this.formValues.toSimpleJSON() : this.formValues.toJSON();
-        json.geometry = this.geometryAsGeoJSON;
+        json.geometry = this.geometry;
         json.created_location = this.createdLocation;
         json.updated_location = this.updatedLocation;
         json.created_duration = this._createdDuration != null ? this._createdDuration : null;
@@ -160,12 +168,21 @@ class RepeatableItemValue extends feature_1.default {
         return this.formValues.searchableValue;
     }
     get geometryAsGeoJSON() {
-        if (!this.hasCoordinate) {
-            return null;
+        if (this.geometry) {
+            return this.geometry;
         }
+        if (this.hasCoordinate) {
+            return this.buildPointFromLatLong();
+        }
+        return null;
+    }
+    buildPointFromLatLong() {
         return {
             type: 'Point',
-            coordinates: [this._longitude, this._latitude]
+            coordinates: [
+                this.longitude,
+                this.latitude,
+            ],
         };
     }
     get latitude() {
