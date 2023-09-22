@@ -159,7 +159,7 @@ export default class RepeatableItemValue extends Feature {
     json.created_at = DateUtils.formatEpochTimestamp(this.createdAt);
     json.updated_at = DateUtils.formatEpochTimestamp(this.updatedAt);
     json.form_values = simple ? this.formValues.toSimpleJSON() : this.formValues.toJSON();
-    json.geometry = this.geometry;
+    json.geometry = this.geometryAsGeoJSON;
     json.created_location = this.createdLocation;
     json.updated_location = this.updatedLocation;
     json.created_duration = this._createdDuration != null ? this._createdDuration : null;
