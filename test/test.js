@@ -87,6 +87,15 @@ describe('Record', () => {
     });
   });
 
+  it('does not return GeoJSON with no location or geometry', () => {
+    record.geometry = null;
+    record.latitude = null;
+    record.longitude = null;
+
+    record.hasCoordinate.should.eql(false);
+    shouldBeNull(record.geometryAsGeoJSON);
+  });
+
   it('returns GeoJSON with only a latitude and longitude inside a repeatable', () => {
     const [ child ] = record.formValues.find('rooms').items;
 
@@ -121,6 +130,16 @@ describe('Record', () => {
       ]
     });
   });
+});
+
+it('does not return GeoJSON with no geometry inside a repeatable', () => {
+  const [ child ] = record.formValues.find('rooms').items;
+  child.geometry = null;
+  child.latitude = null;
+  child.longitude = null;
+
+  child.hasCoordinate.should.eql(false);
+  shouldBeNull(child.geometryAsGeoJSON);
 });
 
 describe('Form', () => {
