@@ -145,10 +145,6 @@ export default class Record extends Feature {
     set course(arg: any);
     get course(): any;
     get geometryAsGeoJSON(): any;
-    buildPointFromLatLong(): {
-        type: string;
-        coordinates: any[];
-    };
     set createdDuration(arg: any);
     get createdDuration(): any;
     set updatedDuration(arg: any);

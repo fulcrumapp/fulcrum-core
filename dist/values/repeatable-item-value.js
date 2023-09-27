@@ -64,7 +64,7 @@ class RepeatableItemValue extends feature_1.default {
         this._geometry = geometry;
     }
     get hasCoordinate() {
-        return this._latitude != null && this._longitude != null;
+        return (this._latitude != null && this._longitude != null) || this.geometry != null;
     }
     updateFromAPIAttributes(attrs) {
         var _a;
@@ -172,18 +172,15 @@ class RepeatableItemValue extends feature_1.default {
             return this.geometry;
         }
         if (this.hasCoordinate) {
-            return this.buildPointFromLatLong();
+            return {
+                type: 'Point',
+                coordinates: [
+                    this.longitude,
+                    this.latitude,
+                ],
+            };
         }
         return null;
-    }
-    buildPointFromLatLong() {
-        return {
-            type: 'Point',
-            coordinates: [
-                this.longitude,
-                this.latitude,
-            ],
-        };
     }
     get latitude() {
         return this._latitude;
