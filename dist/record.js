@@ -65,7 +65,7 @@ class Record extends feature_1.default {
         return this._formValues;
     }
     get hasCoordinate() {
-        return this._latitude != null && this._longitude != null;
+        return (this._latitude != null && this._longitude != null) || this.geometry != null;
     }
     get geometry() {
         return this._geometry;
@@ -351,18 +351,15 @@ class Record extends feature_1.default {
             return this.geometry;
         }
         if (this.hasCoordinate) {
-            return this.buildPointFromLatLong();
+            return {
+                type: 'Point',
+                coordinates: [
+                    this.longitude,
+                    this.latitude,
+                ],
+            };
         }
         return null;
-    }
-    buildPointFromLatLong() {
-        return {
-            type: 'Point',
-            coordinates: [
-                this.longitude,
-                this.latitude,
-            ],
-        };
     }
     get createdDuration() {
         return this._createdDuration;

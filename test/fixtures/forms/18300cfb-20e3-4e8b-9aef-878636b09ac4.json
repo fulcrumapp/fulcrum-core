@@ -53,7 +53,7 @@
       "geometry_types": [
           "Point"
       ],
-      "geometry_required": false,
+      "geometry_required": true,
       "script": null,
       "field_effects": {
         "effects": [
@@ -523,7 +523,7 @@
               "geometry_types": [
                   "Point"
               ],
-              "geometry_required": false,
+              "geometry_required": true,
               "min_length": null,
               "max_length": null
           },

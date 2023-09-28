@@ -82,10 +82,6 @@ export default class RepeatableItemValue extends Feature {
     get displayValue(): string;
     get searchableValue(): string;
     get geometryAsGeoJSON(): any;
-    buildPointFromLatLong(): {
-        type: string;
-        coordinates: any[];
-    };
     set latitude(arg: any);
     get latitude(): any;
     set longitude(arg: any);
