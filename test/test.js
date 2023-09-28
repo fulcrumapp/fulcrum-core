@@ -130,16 +130,60 @@ describe('Record', () => {
       ]
     });
   });
-});
 
-it('does not return GeoJSON with no geometry inside a repeatable', () => {
-  const [ child ] = record.formValues.find('rooms').items;
-  child.geometry = null;
-  child.latitude = null;
-  child.longitude = null;
+  it('update the latitude and longitude when updating the geometry', () => {
+    record.geometry = {
+      type: "LineString",
+      coordinates: [
+        [-82.47576689405734, 27.977757676187323],
+        [-82.47699950483403, 27.974250052144896],
+      ]
+    };
 
-  child.hasCoordinate.should.eql(false);
-  shouldBeNull(child.geometryAsGeoJSON);
+    shouldBeNull(record.latitude);
+    shouldBeNull(record.longitude);
+
+    record.geometry = {
+      type: "Point",
+      coordinates: [-82.47576689405734, 27.977757676187323]
+    };
+
+    record.latitude.should.eql(27.977757676187323);
+    record.longitude.should.eql(-82.47576689405734);
+  });
+
+  it('update the latitude and longitude when updating the geometry of a repeatable', () => {
+    const [ child ] = record.formValues.find('rooms').items;
+
+    child.geometry = {
+      type: "LineString",
+      coordinates: [
+        [-82.47576689405734, 27.977757676187323],
+        [-82.47699950483403, 27.974250052144896],
+      ]
+    };
+
+    shouldBeNull(child.latitude);
+    shouldBeNull(child.longitude);
+
+    child.geometry = {
+      type: "Point",
+      coordinates: [-82.47576689405734, 27.977757676187323]
+    };
+
+    child.latitude.should.eql(27.977757676187323);
+    child.longitude.should.eql(-82.47576689405734);
+  });
+
+  it('does not return GeoJSON with no geometry inside a repeatable', () => {
+    const [ child ] = record.formValues.find('rooms').items;
+    child.geometry = null;
+    child.latitude = null;
+    child.longitude = null;
+
+    child.hasCoordinate.should.eql(false);
+    shouldBeNull(child.geometryAsGeoJSON);
+  });
 });
 
 describe('Form', () => {
@@ -200,8 +244,6 @@ describe('FeatureValidator', () => {
 
   describe('geometry validation', () => {
     it('returns an error when there is no geometry', () => {
-      record.latitude = null;
-      record.longitude = null;
       record.geometry = null;
 
       const [ error ] = FeatureValidator.validateRecord(record, record.formValues);
@@ -211,9 +253,10 @@ describe('FeatureValidator', () => {
     });
 
     it('does not return an error when there is a latitude and longitude', () => {
-      record.latitude = 1;
-      record.longitude = 2;
-      record.geometry = null;
+      record.geometry = {
+        type: "Point",
+        coordinates: [1, 2]
+      };
 
       const errors = FeatureValidator.validateRecord(record, record.formValues);
 
@@ -221,8 +264,6 @@ describe('FeatureValidator', () => {
     });
 
     it('does not return an error when there is a geometry', () => {
-      record.latitude = null;
-      record.longitude = null;
       record.geometry = {
         type: "LineString",
         coordinates: [
@@ -239,8 +280,6 @@ describe('FeatureValidator', () => {
     it('returns an error when there is no geometry in a repeatable', () => {
       const [ child ] = record.formValues.find('rooms').items;
 
-      child.latitude = null;
-      child.longitude = null;
       child.geometry = null;
 
       const [ error ] = FeatureValidator.validateFeature(child, record, child.formValues);
@@ -252,9 +291,10 @@ describe('FeatureValidator', () => {
     it('does not return an error when there is a latitude and longitude in a repeatable', () => {
       const [ child ] = record.formValues.find('rooms').items;
 
-      child.latitude = 1;
-      child.longitude = 2;
-      child.geometry = null;
+      child.geometry = {
+        type: "Point",
+        coordinates: [1, 2]
+      };
 
       const errors = FeatureValidator.validateFeature(child, record, child.formValues);
 
@@ -264,8 +304,6 @@ describe('FeatureValidator', () => {
     it('does not return an error when there is a geometry in a repeatable', () => {
       const [ child ] = record.formValues.find('rooms').items;
 
-      child.latitude = null;
-      child.longitude = null;
       child.geometry = {
         type: "LineString",
         coordinates: [

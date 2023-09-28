@@ -76,6 +76,14 @@ export default class RepeatableItemValue extends Feature {
 
   set geometry(geometry) {
     this._geometry = geometry;
+
+    if (geometry?.type === 'Point') {
+      this._latitude = geometry.coordinates[1];
+      this._longitude = geometry.coordinates[0];
+    } else {
+      this._latitude = null;
+      this._longitude = null;
+    }
   }
 
   get hasCoordinate() {

@@ -19,6 +19,8 @@ export default class RepeatableItemValue extends Feature {
     set geometry(arg: any);
     get geometry(): any;
     _geometry: any;
+    _latitude: any;
+    _longitude: any;
     get hasCoordinate(): boolean;
     updateFromAPIAttributes(attrs: any): void;
     _id: any;
@@ -36,8 +38,6 @@ export default class RepeatableItemValue extends Feature {
     _createdByName: any;
     _updatedByID: any;
     _updatedByName: any;
-    _latitude: any;
-    _longitude: any;
     _createdDuration: any;
     _updatedDuration: any;
     _editedDuration: any;
