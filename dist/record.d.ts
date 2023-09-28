@@ -26,6 +26,8 @@ export default class Record extends Feature {
     set geometry(arg: any);
     get geometry(): any;
     _geometry: any;
+    _latitude: any;
+    _longitude: any;
     set changeset(arg: any);
     get changeset(): any;
     _changesetID: any;
@@ -78,8 +80,6 @@ export default class Record extends Feature {
     updateFromAPIAttributes(attrs: any): void;
     _version: any;
     _formValuesJSON: any;
-    _latitude: any;
-    _longitude: any;
     _projectID: any;
     _projectName: any;
     _assignedToID: any;

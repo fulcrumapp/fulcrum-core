@@ -72,6 +72,14 @@ class Record extends feature_1.default {
     }
     set geometry(geometry) {
         this._geometry = geometry;
+        if ((geometry === null || geometry === void 0 ? void 0 : geometry.type) === 'Point') {
+            this._latitude = geometry.coordinates[1];
+            this._longitude = geometry.coordinates[0];
+        }
+        else {
+            this._latitude = null;
+            this._longitude = null;
+        }
     }
     get changeset() {
         return this._changeset;
