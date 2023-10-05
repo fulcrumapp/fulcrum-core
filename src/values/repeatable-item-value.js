@@ -87,7 +87,11 @@ export default class RepeatableItemValue extends Feature {
   }
 
   get hasCoordinate() {
-    return (this._latitude != null && this._longitude != null) || this.geometry != null;
+    return this._latitude != null && this._longitude != null;
+  }
+
+  get hasLocation() {
+    return this.hasCoordinate || this.geometry != null;
   }
 
   updateFromAPIAttributes(attrs) {

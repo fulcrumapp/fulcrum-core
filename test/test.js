@@ -62,6 +62,7 @@ describe('Record', () => {
     record.longitude = 2;
 
     record.hasCoordinate.should.eql(true);
+    record.hasLocation.should.eql(true);
     record.geometryAsGeoJSON.should.eql({
       type: 'Point',
       coordinates: [2, 1]
@@ -77,7 +78,8 @@ describe('Record', () => {
       ]
     };
 
-    record.hasCoordinate.should.eql(true);
+    record.hasCoordinate.should.eql(false);
+    record.hasLocation.should.eql(true);
     record.geometryAsGeoJSON.should.eql({
       type: "LineString",
       coordinates: [
@@ -93,6 +95,7 @@ describe('Record', () => {
     record.longitude = null;
 
     record.hasCoordinate.should.eql(false);
+    record.hasLocation.should.eql(false);
     shouldBeNull(record.geometryAsGeoJSON);
   });
 
@@ -104,6 +107,7 @@ describe('Record', () => {
     child.longitude = 2;
 
     child.hasCoordinate.should.eql(true);
+    child.hasLocation.should.eql(true);
     child.geometryAsGeoJSON.should.eql({
       type: 'Point',
       coordinates: [2, 1]
@@ -121,7 +125,8 @@ describe('Record', () => {
       ]
     };
 
-    child.hasCoordinate.should.eql(true);
+    child.hasCoordinate.should.eql(false);
+    child.hasLocation.should.eql(true);
     child.geometryAsGeoJSON.should.eql({
       type: "LineString",
       coordinates: [
@@ -182,6 +187,7 @@ describe('Record', () => {
     child.longitude = null;
 
     child.hasCoordinate.should.eql(false);
+    child.hasLocation.should.eql(false);
     shouldBeNull(child.geometryAsGeoJSON);
   });
 });
