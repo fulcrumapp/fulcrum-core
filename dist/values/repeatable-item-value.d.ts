@@ -22,6 +22,7 @@ export default class RepeatableItemValue extends Feature {
     _latitude: any;
     _longitude: any;
     get hasCoordinate(): boolean;
+    get hasLocation(): boolean;
     updateFromAPIAttributes(attrs: any): void;
     _id: any;
     _formValuesJSON: any;

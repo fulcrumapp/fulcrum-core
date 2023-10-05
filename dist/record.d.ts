@@ -23,6 +23,7 @@ export default class Record extends Feature {
     get formValues(): FormValues;
     _formValues: FormValues | undefined;
     get hasCoordinate(): boolean;
+    get hasLocation(): boolean;
     set geometry(arg: any);
     get geometry(): any;
     _geometry: any;

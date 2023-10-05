@@ -66,13 +66,12 @@ class RepeatableItemValue extends feature_1.default {
             this._latitude = geometry.coordinates[1];
             this._longitude = geometry.coordinates[0];
         }
-        else {
-            this._latitude = null;
-            this._longitude = null;
-        }
     }
     get hasCoordinate() {
-        return (this._latitude != null && this._longitude != null) || this.geometry != null;
+        return this._latitude != null && this._longitude != null;
+    }
+    get hasLocation() {
+        return this.hasCoordinate || this.geometry != null;
     }
     updateFromAPIAttributes(attrs) {
         var _a;

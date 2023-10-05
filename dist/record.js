@@ -65,7 +65,10 @@ class Record extends feature_1.default {
         return this._formValues;
     }
     get hasCoordinate() {
-        return (this._latitude != null && this._longitude != null) || this.geometry != null;
+        return this._latitude != null && this._longitude != null;
+    }
+    get hasLocation() {
+        return this.hasCoordinate || this.geometry != null;
     }
     get geometry() {
         return this._geometry;
@@ -75,10 +78,6 @@ class Record extends feature_1.default {
         if ((geometry === null || geometry === void 0 ? void 0 : geometry.type) === 'Point') {
             this._latitude = geometry.coordinates[1];
             this._longitude = geometry.coordinates[0];
-        }
-        else {
-            this._latitude = null;
-            this._longitude = null;
         }
     }
     get changeset() {
