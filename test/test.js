@@ -62,6 +62,7 @@ describe('Record', () => {
     record.longitude = 2;
 
     record.hasCoordinate.should.eql(true);
+    record.hasLocation.should.eql(true);
     record.geometryAsGeoJSON.should.eql({
       type: 'Point',
       coordinates: [2, 1]
@@ -76,8 +77,11 @@ describe('Record', () => {
         [-82.47699950483403, 27.974250052144896],
       ]
     };
+    record.latitude = null;
+    record.longitude = null;
 
-    record.hasCoordinate.should.eql(true);
+    record.hasCoordinate.should.eql(false);
+    record.hasLocation.should.eql(true);
     record.geometryAsGeoJSON.should.eql({
       type: "LineString",
       coordinates: [
@@ -93,6 +97,7 @@ describe('Record', () => {
     record.longitude = null;
 
     record.hasCoordinate.should.eql(false);
+    record.hasLocation.should.eql(false);
     shouldBeNull(record.geometryAsGeoJSON);
   });
 
@@ -104,6 +109,7 @@ describe('Record', () => {
     child.longitude = 2;
 
     child.hasCoordinate.should.eql(true);
+    child.hasLocation.should.eql(true);
     child.geometryAsGeoJSON.should.eql({
       type: 'Point',
       coordinates: [2, 1]
@@ -120,8 +126,11 @@ describe('Record', () => {
         [-82.47699950483403, 27.974250052144896],
       ]
     };
+    child.latitude = null;
+    child.longitude = null;
 
-    child.hasCoordinate.should.eql(true);
+    child.hasCoordinate.should.eql(false);
+    child.hasLocation.should.eql(true);
     child.geometryAsGeoJSON.should.eql({
       type: "LineString",
       coordinates: [
@@ -131,18 +140,7 @@ describe('Record', () => {
     });
   });
 
-  it('update the latitude and longitude when updating the geometry', () => {
-    record.geometry = {
-      type: "LineString",
-      coordinates: [
-        [-82.47576689405734, 27.977757676187323],
-        [-82.47699950483403, 27.974250052144896],
-      ]
-    };
-
-    shouldBeNull(record.latitude);
-    shouldBeNull(record.longitude);
-
+  it('update the latitude and longitude when updating Point geometry', () => {
     record.geometry = {
       type: "Point",
       coordinates: [-82.47576689405734, 27.977757676187323]
@@ -154,17 +152,6 @@ describe('Record', () => {
 
   it('update the latitude and longitude when updating the geometry of a repeatable', () => {
     const [ child ] = record.formValues.find('rooms').items;
-
-    child.geometry = {
-      type: "LineString",
-      coordinates: [
-        [-82.47576689405734, 27.977757676187323],
-        [-82.47699950483403, 27.974250052144896],
-      ]
-    };
-
-    shouldBeNull(child.latitude);
-    shouldBeNull(child.longitude);
 
     child.geometry = {
       type: "Point",
@@ -182,6 +169,7 @@ describe('Record', () => {
     child.longitude = null;
 
     child.hasCoordinate.should.eql(false);
+    child.hasLocation.should.eql(false);
     shouldBeNull(child.geometryAsGeoJSON);
   });
 });
@@ -245,6 +233,8 @@ describe('FeatureValidator', () => {
   describe('geometry validation', () => {
     it('returns an error when there is no geometry', () => {
       record.geometry = null;
+      record.latitude = null;
+      record.longitude = null;
 
       const [ error ] = FeatureValidator.validateRecord(record, record.formValues);
 
@@ -253,10 +243,9 @@ describe('FeatureValidator', () => {
     });
 
     it('does not return an error when there is a latitude and longitude', () => {
-      record.geometry = {
-        type: "Point",
-        coordinates: [1, 2]
-      };
+      record.latitude = 27.977757676187323;
+      record.longitude = -82.47576689405734;
+      record.geometry = null;
 
       const errors = FeatureValidator.validateRecord(record, record.formValues);
 
@@ -271,6 +260,8 @@ describe('FeatureValidator', () => {
           [-82.47699950483403, 27.974250052144896],
         ]
       };
+      record.longitude = null;
+      record.latitude = null;
 
       const errors = FeatureValidator.validateRecord(record, record.formValues);
 
@@ -281,6 +272,8 @@ describe('FeatureValidator', () => {
       const [ child ] = record.formValues.find('rooms').items;
 
       child.geometry = null;
+      child.latitude = null;
+      child.longitude = null;
 
       const [ error ] = FeatureValidator.validateFeature(child, record, child.formValues);
 
@@ -291,10 +284,9 @@ describe('FeatureValidator', () => {
     it('does not return an error when there is a latitude and longitude in a repeatable', () => {
       const [ child ] = record.formValues.find('rooms').items;
 
-      child.geometry = {
-        type: "Point",
-        coordinates: [1, 2]
-      };
+      child.latitude = 27.977757676187323;
+      child.longitude = -82.47576689405734;
+      child.geometry = null;
 
       const errors = FeatureValidator.validateFeature(child, record, child.formValues);
 
@@ -311,6 +303,8 @@ describe('FeatureValidator', () => {
           [-82.47699950483403, 27.974250052144896],
         ]
       };
+      child.latitude = null;
+      child.longitude = null;
 
       const errors = FeatureValidator.validateFeature(child, record, child.formValues);
 
