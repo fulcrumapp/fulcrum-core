@@ -78,6 +78,8 @@ export default class Condition {
 
   static shouldElementBeVisibleRecursive(element, record, values, cache) {
     if (cache != null && cache[element.key] != null) {
+      console.log('shouldElementBeVisibleRecursive cache return element', element);
+      console.log('shouldElementBeVisibleRecursive cache return value', values);
       return cache[element.key];
     }
 
@@ -88,11 +90,13 @@ export default class Condition {
 
     // if the override value is set, always return it (SETHIDDEN() always wins)
     if (element.overrideIsHidden != null) {
+      console.log('element.overrideIsHidden != null');
       cache[element.key] = !element.isHidden;
       return !element.isHidden;
     }
 
     if (element.isHidden || element.hasHiddenParent) {
+      console.log('element.isHidden || element.hasHiddenParent');
       cache[element.key] = false;
       return false;
     }
@@ -100,10 +104,12 @@ export default class Condition {
     let shouldBeVisible = false;
 
     if (!element.hasVisibilityConditions) {
+      console.log('!element.hasVisibilityConditions');
       shouldBeVisible = true;
     }
 
     if (element.visibleConditionsType === 'any') {
+      console.log("element.visibleConditionsType === 'any'");
       for (const condition of element.visibleConditions) {
         const isSatisfied = condition.isSatisfied(record, values, cache);
 
@@ -113,6 +119,7 @@ export default class Condition {
         }
       }
     } else if (element.visibleConditionsType === 'all') {
+      console.log("element.visibleConditionsType === 'all'");
       shouldBeVisible = true;
 
       for (const condition of element.visibleConditions) {
@@ -137,7 +144,7 @@ export default class Condition {
 
     while (iterator != null) {
       const parentVisible = Condition.shouldElementBeVisibleRecursive(iterator, record, values, cache);
-
+      console.log('iterator != null');
       if (!parentVisible) {
         parentsVisible = false;
         break;
@@ -147,7 +154,7 @@ export default class Condition {
     }
 
     const result = parentsVisible && shouldBeVisible;
-
+    console.log('result', parentsVisible && shouldBeVisible);
     cache[element.key] = result;
 
     return result;
