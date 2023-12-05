@@ -46,19 +46,24 @@ class Condition {
     }
     static shouldElementBeVisible(element, record, values, visibilityCache) {
         if (visibilityCache != null && visibilityCache[element.key] != null) {
+            console.log('in cache', visibilityCache[element.key]);
             return visibilityCache[element.key];
         }
         const cache = visibilityCache || {};
         let shouldBeVisible = Condition.shouldElementBeVisibleRecursive(element, record, values, cache);
+        console.log('shoushouldBeVisibleld', shouldBeVisible);
         if (element.isSectionElement) {
             let hasVisibleChildren = false;
             for (const childElement of element.elements) {
                 const visible = Condition.shouldElementBeVisibleRecursive(childElement, record, values, cache);
+                console.log('childElement', childElement);
+                console.log('child visible ', visible);
                 if (visible) {
                     hasVisibleChildren = true;
                     break;
                 }
             }
+            console.log('hasVisibleChildren', hasVisibleChildren);
             shouldBeVisible = shouldBeVisible && hasVisibleChildren;
         }
         return shouldBeVisible;
