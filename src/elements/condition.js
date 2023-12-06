@@ -62,6 +62,7 @@ export default class Condition {
 
       for (const childElement of element.elements) {
         const visible = Condition.shouldElementBeVisibleRecursive(childElement, record, values, cache);
+        console.log('values', values);
         console.log('childElement', childElement);
         console.log('child visible ', visible);
         if (visible) {
@@ -77,6 +78,7 @@ export default class Condition {
   }
 
   static shouldElementBeVisibleRecursive(element, record, values, cache) {
+    console.log('shouldElementBeVisibleRecursive begin for ', element);
     if (cache != null && cache[element.key] != null) {
       console.log('shouldElementBeVisibleRecursive cache return element', element);
       console.log('shouldElementBeVisibleRecursive cache return value', values);
@@ -86,15 +88,16 @@ export default class Condition {
     // break circular conditions by assigning an early `true` value so if this
     // method is re-entered again for the same element before the recursion
     // ends, it early exits instead of blowing the stack
+    console.log('assigning cache[element.key]=true');
     cache[element.key] = true;
-
+    console.log('assigned cache[element.key]=true', cache[element.key]);
     // if the override value is set, always return it (SETHIDDEN() always wins)
     if (element.overrideIsHidden != null) {
       console.log('element.overrideIsHidden != null');
       cache[element.key] = !element.isHidden;
       return !element.isHidden;
     }
-
+    console.log('element.isHidden || element.hasHiddenParent ? ');
     if (element.isHidden || element.hasHiddenParent) {
       console.log('element.isHidden || element.hasHiddenParent');
       cache[element.key] = false;
@@ -102,12 +105,12 @@ export default class Condition {
     }
 
     let shouldBeVisible = false;
-
+    console.log('about to enter !element.hasVisibilityConditions');
     if (!element.hasVisibilityConditions) {
       console.log('!element.hasVisibilityConditions');
       shouldBeVisible = true;
     }
-
+    console.log('checking visibility rule type');
     if (element.visibleConditionsType === 'any') {
       console.log("element.visibleConditionsType === 'any'");
       for (const condition of element.visibleConditions) {
@@ -119,12 +122,13 @@ export default class Condition {
         }
       }
     } else if (element.visibleConditionsType === 'all') {
-      console.log("element.visibleConditionsType === 'all'");
+      console.log("checking for all conditions");
       shouldBeVisible = true;
 
       for (const condition of element.visibleConditions) {
+        console.log('condition', condition);
         const isSatisfied = condition.isSatisfied(record, values, cache);
-
+        console.log('isSatisfied', isSatisfied);
         if (!isSatisfied) {
           shouldBeVisible = false;
         }
@@ -139,9 +143,9 @@ export default class Condition {
     // relies on this behavior.
 
     let parentsVisible = true;
-
+    console.log('element.parent', element.parent);
     let iterator = element.parent;
-
+    console.log('entering iterator');
     while (iterator != null) {
       const parentVisible = Condition.shouldElementBeVisibleRecursive(iterator, record, values, cache);
       console.log('iterator != null');
