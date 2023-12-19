@@ -92,17 +92,23 @@ class FormValues {
     }
     copy() {
         const copy = new FormValues(this.container);
+        console.log('fulcrum-core copy copy', copy);
         for (const value of this.all) {
             // deep copy all of the field values
+            console.log(`fulcrum-core deep copy ${value.element.dataName}`, value);
             copy.set(value.element.key, copy.createValue(value.element, value != null ? value.toJSON() : null));
+            console.log(`fulcrum-core post deep copy ${value.element.dataName}`, value);
         }
         return copy;
     }
     merge(formValues) {
+        console.log('fulcrum-core formValues', formValues);
         if (!(formValues instanceof FormValues)) {
+            console.log('fulcrum-core Throwing ');
             throw new Error('Invalid values');
         }
         for (const key of Object.keys(formValues._values)) {
+            console.log('fulcrum-core');
             const formValue = formValues._values[key];
             this.set(key, formValue);
         }
@@ -217,16 +223,22 @@ class FormValues {
             //   * or have any parents explicitly marked as hidden
             //   * or have any parents explicitly marked to preserve values
             const skipElement = element.isHidden || element.hasHiddenParent || element.isPreserved;
+            console.log('fulcrum-core clearInvisibleValues', element, skipElement);
             if (!skipElement) {
+                console.log('fulcrum-core clearInvisibleValues skipping element start');
                 const shouldBeVisible = condition_1.default.shouldElementBeVisible(element, record, valuesForConditions, cache);
                 if (!shouldBeVisible) {
                     elementsToRemove.push(element);
                 }
+                console.log('fulcrum-core clearInvisibleValues shouldBeVisible', shouldBeVisible);
             }
         }
+        console.log('fulcrum-core clearInvisibleValues elementsToRemove', elementsToRemove);
         for (const element of elementsToRemove) {
             const blankValue = this.createValue(element, null);
+            console.log('fulcrum-core clearInvisibleValues blankValue', blankValue);
             this.set(element.key, blankValue);
+            console.log('fulcrum-core clearInvisibleValues blankValue done setting', blankValue);
         }
     }
     get mediaValues() {
