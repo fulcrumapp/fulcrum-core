@@ -15,6 +15,7 @@ const record_link_value_1 = __importDefault(require("./record-link-value"));
 const SearchValueSeparator = ' ';
 class FormValues {
     constructor(container, attributes) {
+        console.log('fulcrum-core FormValues constructor', container, attributes);
         this._values = {};
         this.container = container;
         this.loadValues(container.elements, attributes || {});
@@ -31,12 +32,15 @@ class FormValues {
     }
     set(key, value) {
         if (value && !(value instanceof form_value_1.default)) {
+            console.log(`${key} is invalid`);
             throw new Error('Invalid value ' + value);
         }
         if (value != null) {
             this._values[key] = value;
+            console.log(`${key} is ${this._values[key]}`);
         }
         else {
+            console.log(`${key} is deleted`);
             delete this._values[key];
         }
     }
@@ -48,19 +52,27 @@ class FormValues {
         return null;
     }
     loadValues(elements, attributes) {
+        console.log('fulcrum-core loadValues');
         for (const element of elements) {
+            console.log('fulcrum-core loadValues element', element);
             this.loadValue(element, attributes);
         }
     }
     loadValue(element, attributes) {
+        console.log('fulcrum-core loadValue', element, attributes);
         if (element.isSectionElement) {
             this.loadValues(element.elements, attributes);
         }
         else {
             const rawValue = attributes[element.key];
+            console.log('fulcrum-core loadValue', rawValue);
             if (rawValue != null) {
                 const formValue = form_value_factory_1.default.create(element, rawValue);
+                console.log('fulcrum-core loadValue formValue', formValue);
                 this.set(element.key, formValue);
+            }
+            else {
+                console.log(`fulcrum-core loadValue ${element.dataName} is null`);
             }
         }
     }
