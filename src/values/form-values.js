@@ -12,8 +12,7 @@ const SearchValueSeparator = ' ';
 
 export default class FormValues {
   constructor(container, attributes) {
-    console.log('fulcrum-core FormValues constructor', container, attributes)
-
+    console.log('fulcrum-core FormValues constructor', container, attributes);
     this._values = {};
     this.container = container;
     this.loadValues(container.elements, attributes || {});

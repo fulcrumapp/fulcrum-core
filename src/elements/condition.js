@@ -48,16 +48,18 @@ export default class Condition {
   }
 
   static shouldElementBeVisible(element, record, values, visibilityCache) {
+    console.log(`START HERE ${element.dataname}`);
     if (visibilityCache != null && visibilityCache[element.key] != null) {
-      console.log('in cache', visibilityCache[element.key]);
+      console.log(`in cache ${element.dataName}`, visibilityCache[element.key]);
       return visibilityCache[element.key];
     }
 
     const cache = visibilityCache || {};
     
     let shouldBeVisible = Condition.shouldElementBeVisibleRecursive(element, record, values, cache);
-    console.log('shoushouldBeVisibleld', shouldBeVisible);
+    console.log(`${element.dataName} shouldBeVisibleld`, shouldBeVisible);
     if (element.isSectionElement) {
+      console.log(`${element.dataName} is section`)
       let hasVisibleChildren = false;
 
       for (const childElement of element.elements) {
@@ -78,7 +80,8 @@ export default class Condition {
   }
 
   static shouldElementBeVisibleRecursive(element, record, values, cache) {
-    console.log('shouldElementBeVisibleRecursive begin for ', element);
+    console.log('shouldElementBeVisibleRecursive begin for ', element.dataName);
+    console.log('cache at this time ' cache)
     if (cache != null && cache[element.key] != null) {
       console.log('shouldElementBeVisibleRecursive cache return element', element);
       console.log('shouldElementBeVisibleRecursive cache return value', values);
@@ -88,7 +91,7 @@ export default class Condition {
     // break circular conditions by assigning an early `true` value so if this
     // method is re-entered again for the same element before the recursion
     // ends, it early exits instead of blowing the stack
-    console.log('assigning cache[element.key]=true');
+    // console.log('assigning cache[element.key]=true');
     cache[element.key] = true;
     console.log('assigned cache[element.key]=true', cache[element.key]);
     // if the override value is set, always return it (SETHIDDEN() always wins)
@@ -224,8 +227,9 @@ export default class Condition {
   }
 
   isSatisfied(record, values, cache) {
+    console.log('in isSatisfied', record, values, cache)
     const referencedElement = Condition.elementForCondition(this, record);
-
+    console.log('isSatisfied referencedElement ', referencedElement )
     let isReferencedFieldSatisfied = true;
 
     if (referencedElement != null) {
@@ -234,8 +238,9 @@ export default class Condition {
       // to put conditions on explicitly hidden values.
 
       const skipElement = referencedElement.isHidden || referencedElement.hasHiddenParent;
-
+      console.log(`isSatisfied referencedElement.isHidden: ${referencedElement.isHidden} OR referencedElement.hasHiddenParent ${referencedElement.hasHiddenParent}`)
       if (!skipElement) {
+        console.log(`isSatisfied !skipElement ${!skipElement}`)
         isReferencedFieldSatisfied = Condition.shouldElementBeVisibleRecursive(referencedElement, record, values, cache);
       }
     }
@@ -244,6 +249,8 @@ export default class Condition {
   }
 
   _isSatisfied(record, values, isReferencedFieldSatisfied) {
+
+    console.log('_isSatisfied isReferencedFieldSatisfied', isReferencedFieldSatisfied)
     let formValue = null;
 
     // if all of this field's conditions aren't also satisfied, treat the value as nil (empty). This has the same
@@ -253,8 +260,9 @@ export default class Condition {
 
     if (isReferencedFieldSatisfied) {
       formValue = Condition.valueForCondition(this, values, record);
+      console.log('_isSatisfied formValue', formValue)
     }
-
+    console.log('_isSatisfied this.operator', this.operator)
     switch (this.operator) {
       case 'equal_to':
         return Condition.isEqual(formValue, this.value);
