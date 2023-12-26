@@ -15,11 +15,10 @@ const record_link_value_1 = __importDefault(require("./record-link-value"));
 const SearchValueSeparator = ' ';
 class FormValues {
     constructor(container, attributes) {
-        
+        console.log('fulcrum-core FormValues constructor', container, attributes);
         this._values = {};
         this.container = container;
         this.loadValues(container.elements, attributes || {});
-        console.log('fulcrum-core FormValues constructor', container, attributes);
     }
     get all() {
         const result = [];
