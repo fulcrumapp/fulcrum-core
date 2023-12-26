@@ -81,7 +81,7 @@ export default class Condition {
 
   static shouldElementBeVisibleRecursive(element, record, values, cache) {
     console.log('shouldElementBeVisibleRecursive begin for ', element.dataName);
-    console.log('cache at this time ' cache)
+    console.log('cache at this time ', cache)
     if (cache != null && cache[element.key] != null) {
       console.log('shouldElementBeVisibleRecursive cache return element', element);
       console.log('shouldElementBeVisibleRecursive cache return value', values);
@@ -118,7 +118,7 @@ export default class Condition {
       console.log("element.visibleConditionsType === 'any'");
       for (const condition of element.visibleConditions) {
         const isSatisfied = condition.isSatisfied(record, values, cache);
-
+        console.log('shouldElementBeVisibleRecursive isSatisfied', isSatisfied)
         if (isSatisfied) {
           shouldBeVisible = true;
           break;
