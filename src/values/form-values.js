@@ -130,7 +130,7 @@ export default class FormValues {
 
     for (const key of Object.keys(formValues._values)) {
       const formValue = formValues._values[key];
-
+      if(this._values[key]) continue;
       this.set(key, formValue);
     }
   }
