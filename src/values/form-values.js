@@ -41,8 +41,9 @@ export default class FormValues {
 
     if (value != null) {
       if(this._values[key]){
-        console.log("local value", this._values[key]);
-        console.log("incoming value", value);
+        console.log("fulcrum-core set local value", this._values[key]);
+        console.log("fulcrum-core set incoming value", value);
+        return;
       }
       this._values[key] = value;
       console.log(`${key} is `, this._values[key]);
@@ -146,14 +147,14 @@ export default class FormValues {
   }
 
   merge(formValues) {
-    console.log('fulcrum-core formValues', formValues);
+    console.log('fulcrum-core merge formValues', formValues);
     if (!(formValues instanceof FormValues)) {
-      console.log('fulcrum-core Throwing ');
+      console.log('fulcrum-core merge Throwing ');
       throw new Error('Invalid values');
     }
 
     for (const key of Object.keys(formValues._values)) {
-      console.log(`fulcrum-core iterating ${key} `);
+      console.log(`fulcrum-core merge iterating ${key} `);
       const formValue = formValues._values[key];
 
       this.set(key, formValue);
