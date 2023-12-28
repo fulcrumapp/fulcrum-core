@@ -40,9 +40,12 @@ export default class FormValues {
     }
 
     if (value != null) {
+      if(this._values[key]){
+        console.log("local value", this._values[key]);
+        console.log("incoming value", value);
+      }
       this._values[key] = value;
-      console.log(`${key} is ${this._values[key]}`);
-
+      console.log(`${key} is `, this._values[key]);
     } else {
       console.log(`${key} is deleted`);
 
@@ -150,7 +153,7 @@ export default class FormValues {
     }
 
     for (const key of Object.keys(formValues._values)) {
-      console.log('fulcrum-core')
+      console.log(`fulcrum-core iterating ${key} `);
       const formValue = formValues._values[key];
 
       this.set(key, formValue);
