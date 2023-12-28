@@ -34,7 +34,6 @@ class FormValues {
             throw new Error('Invalid value ' + value);
         }
         if (value != null) {
-            if (this._values[key]) return;
             this._values[key] = value;
         }
         else {
