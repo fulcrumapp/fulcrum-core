@@ -13,6 +13,9 @@ import TimeFormatValidationError from './time-format-validation-error';
 
 export default class FeatureValidator {
   static validateFeature(feature, record, formValues) {
+    console.log('fulcrum-core FeatureValidator feature', feature);
+    console.log('fulcrum-core FeatureValidator record', record);
+    console.log('fulcrum-core FeatureValidator formValues', formValues);
     if (feature instanceof Record) {
       return FeatureValidator.validateRecord(record, formValues);
     } else if (feature instanceof RepeatableItemValue) {
@@ -82,6 +85,9 @@ export default class FeatureValidator {
         }
       } else {
         const required = Condition.shouldElementBeRequired(element, record, formValues);
+        console.log('fulcrum-core validateFieldsInElements element', element);
+        console.log('fulcrum-core validateFieldsInElements required', required);
+
         const visible = Condition.shouldElementBeVisible(element, record, formValues, cache);
 
         const disabled = element.isDisabled;
