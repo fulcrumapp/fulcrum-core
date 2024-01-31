@@ -17,6 +17,9 @@ const date_format_validation_error_1 = __importDefault(require("./date-format-va
 const time_format_validation_error_1 = __importDefault(require("./time-format-validation-error"));
 class FeatureValidator {
     static validateFeature(feature, record, formValues) {
+        console.log('fulcrum-core FeatureValidator feature', feature);
+        console.log('fulcrum-core FeatureValidator record', record);
+        console.log('fulcrum-core FeatureValidator formValues', formValues);
         if (feature instanceof record_1.default) {
             return FeatureValidator.validateRecord(record, formValues);
         }
@@ -72,6 +75,8 @@ class FeatureValidator {
             }
             else {
                 const required = condition_1.default.shouldElementBeRequired(element, record, formValues);
+                console.log('fulcrum-core validateFieldsInElements element', element);
+                console.log('fulcrum-core validateFieldsInElements required', required);
                 const visible = condition_1.default.shouldElementBeVisible(element, record, formValues, cache);
                 const disabled = element.isDisabled;
                 const validatable = (visible && !disabled);
