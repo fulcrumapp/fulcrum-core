@@ -21,9 +21,11 @@ class FeatureValidator {
         console.log('fulcrum-core FeatureValidator record', record);
         console.log('fulcrum-core FeatureValidator formValues', formValues);
         if (feature instanceof record_1.default) {
+            console.log('fulcrum-core FeatureValidator feature instanceof Record');
             return FeatureValidator.validateRecord(record, formValues);
         }
         else if (feature instanceof repeatable_item_value_1.default) {
+            console.log('fulcrum-core FeatureValidator feature instanceof RepeatableItemValue');
             return FeatureValidator.validateRepeatableItem(feature, record, formValues);
         }
         return [];

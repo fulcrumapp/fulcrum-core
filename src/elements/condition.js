@@ -155,6 +155,8 @@ export default class Condition {
     // If there are no conditions, or if the override value is set, always return
     // the current required flag. (SETREQUIRED() always wins)
     if (!element.hasRequiredConditions || element.overrideIsRequired != null) {
+      console.log('fulcrum-core shouldElementBeRequired element.hasRequiredConditions', !element.hasRequiredConditions);
+      console.log('fulcrum-core shouldElementBeRequired element.overrideIsRequired != null', element.overrideIsRequired != null);
       return element.isRequired;
     }
 
@@ -164,8 +166,9 @@ export default class Condition {
 
     if (element.requiredConditionsType === 'any') {
       for (const condition of element.requiredConditions) {
+        
         const isSatisfied = condition.isSatisfied(record, values, cache);
-
+        console.log('fulcrum-core shouldElementBeRequired isSatisfied', isSatisfied);
         if (isSatisfied) {
           shouldBeRequired = true;
           break;

@@ -17,8 +17,10 @@ export default class FeatureValidator {
     console.log('fulcrum-core FeatureValidator record', record);
     console.log('fulcrum-core FeatureValidator formValues', formValues);
     if (feature instanceof Record) {
+      console.log('fulcrum-core FeatureValidator feature instanceof Record');
       return FeatureValidator.validateRecord(record, formValues);
     } else if (feature instanceof RepeatableItemValue) {
+      console.log('fulcrum-core FeatureValidator feature instanceof RepeatableItemValue');
       return FeatureValidator.validateRepeatableItem(feature, record, formValues);
     }
 
