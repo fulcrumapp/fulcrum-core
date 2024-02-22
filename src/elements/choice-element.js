@@ -40,7 +40,7 @@ export default class ChoiceElement extends Element {
         return callback();
       });
     } else {
-      setImmediate(callback);
+      setTimeout(callback, 0);
     }
   }
 
