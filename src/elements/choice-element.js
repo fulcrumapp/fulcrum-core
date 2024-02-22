@@ -25,6 +25,7 @@ export default class ChoiceElement extends Element {
   load(dataSource, callback) {
     this._choicesByValue = null;
 
+    console.log("I'm here! before the drama")
     if (this._choiceListID) {
       console.log("I'm here! this._choiceListID is true")
       dataSource.getChoiceList(this._choiceListID, (err, choiceList) => {
