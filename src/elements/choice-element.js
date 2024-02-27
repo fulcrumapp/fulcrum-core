@@ -25,9 +25,7 @@ export default class ChoiceElement extends Element {
   load(dataSource, callback) {
     this._choicesByValue = null;
 
-    console.log("I'm here! before the drama")
     if (this._choiceListID) {
-      console.log("I'm here! this._choiceListID is true")
       dataSource.getChoiceList(this._choiceListID, (err, choiceList) => {
         // TODO(zhm) Some forms have orphaned choice lists (life sucks)
         // Maybe we should add a parameter to the load() method to throw
@@ -42,7 +40,6 @@ export default class ChoiceElement extends Element {
         return callback();
       });
     } else {
-      console.log("I'm here! this._choiceListID is false")
       setTimeout(callback, 0);
     }
   }

@@ -156,8 +156,6 @@ export default class DataSource {
   }
 
   getChoiceList(id, callback) {
-
-    console.log("I'm here! this._choiceListID is true and got to getChoiceList")
     this.invoke(this.root, 'getChoiceList', [ id ], callback);
   }
 
