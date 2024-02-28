@@ -12,4 +12,4 @@ export default class BooleanValue extends FormValue {
     toJSON(): boolean;
     isEqual(booleanValue: any): boolean;
 }
-import FormValue from "./form-value";
+import FormValue from './form-value';

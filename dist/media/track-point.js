@@ -52,7 +52,6 @@ class TrackPoint {
             this.latitude !== 0 && this.longitude !== 0);
     }
 }
-exports.default = TrackPoint;
 TrackPoint.IDX_TIME = 0;
 TrackPoint.IDX_LATITUDE = 1;
 TrackPoint.IDX_LONGITUDE = 2;
@@ -63,4 +62,5 @@ TrackPoint.IDX_COURSE = 6;
 TrackPoint.IDX_SPEED = 7;
 TrackPoint.IDX_VIEWPORT = 8;
 TrackPoint.IDX_INCLINATION = 9;
+exports.default = TrackPoint;
 //# sourceMappingURL=track-point.js.map

@@ -3,4 +3,4 @@ export default class YesNoValue extends TextualValue {
     get isNegative(): boolean;
     get isNeutral(): boolean;
 }
-import TextualValue from "./textual-value";
+import TextualValue from './textual-value';

@@ -7,13 +7,13 @@ export default class LocationValue extends FormValue {
         longitude: any;
         address: any;
     };
-    set latitude(arg: any);
+    set latitude(lat: any);
     get latitude(): any;
-    set longitude(arg: any);
+    set longitude(lng: any);
     get longitude(): any;
-    set address(arg: any);
+    set address(address: any);
     get address(): any;
     get columnValue(): {};
     get isEmpty(): boolean;
 }
-import FormValue from "./form-value";
+import FormValue from './form-value';

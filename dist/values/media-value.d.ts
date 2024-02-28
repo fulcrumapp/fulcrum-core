@@ -24,5 +24,5 @@ export default class MediaValue extends FormValue {
     get hasCaptions(): boolean;
     get items(): any[];
 }
-import FormValue from "./form-value";
-import MultipleValueItem from "./multiple-value-item";
+import FormValue from './form-value';
+import MultipleValueItem from './multiple-value-item';
