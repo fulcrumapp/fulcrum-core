@@ -18,4 +18,4 @@ export default class TextualValue extends FormValue {
     get numericValue(): number | null;
     get isNumeric(): boolean;
 }
-import FormValue from "./form-value";
+import FormValue from './form-value';

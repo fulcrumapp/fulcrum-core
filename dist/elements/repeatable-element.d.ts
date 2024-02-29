@@ -5,4 +5,4 @@ export default class RepeatableElement extends ContainerElement {
     get isGeometryEnabled(): any;
     get isGeometryRequired(): any;
 }
-import ContainerElement from "./container-element";
+import ContainerElement from './container-element';

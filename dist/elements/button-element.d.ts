@@ -1,4 +1,4 @@
 export default class ButtonElement extends Element {
     buttonType: any;
 }
-import Element from "./element";
+import Element from './element';

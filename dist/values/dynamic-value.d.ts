@@ -27,6 +27,6 @@ export default class DynamicValue extends FormValue {
     removeItem(id: any): DynamicItemValue | null;
     createNewItem(): DynamicItemValue;
 }
-import FormValue from "./form-value";
-import DynamicItemValue from "./dynamic-item-value";
-import MultipleValueItem from "./multiple-value-item";
+import FormValue from './form-value';
+import DynamicItemValue from './dynamic-item-value';
+import MultipleValueItem from './multiple-value-item';

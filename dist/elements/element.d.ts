@@ -43,19 +43,19 @@ export default class Element {
     get requiredConditions(): Condition[];
     get minLength(): any;
     get maxLength(): any;
-    set overrideLabel(arg: any);
+    set overrideLabel(value: any);
     get overrideLabel(): any;
-    set overrideDescription(arg: any);
+    set overrideDescription(value: any);
     get overrideDescription(): any;
-    set overrideIsRequired(arg: any);
+    set overrideIsRequired(value: any);
     get overrideIsRequired(): any;
-    set overrideIsHidden(arg: any);
+    set overrideIsHidden(value: any);
     get overrideIsHidden(): any;
-    set overrideIsDisabled(arg: any);
+    set overrideIsDisabled(value: any);
     get overrideIsDisabled(): any;
-    set overrideMinLength(arg: any);
+    set overrideMinLength(value: any);
     get overrideMinLength(): any;
-    set overrideMaxLength(arg: any);
+    set overrideMaxLength(value: any);
     get overrideMaxLength(): any;
     get overrideValues(): {
         overrideLabel: any;
@@ -125,4 +125,4 @@ export default class Element {
     get isLocationElement(): boolean;
     get isButtonElement(): boolean;
 }
-import Condition from "./condition";
+import Condition from './condition';

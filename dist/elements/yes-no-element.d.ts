@@ -42,5 +42,5 @@ export default class YesNoElement extends TextualElement {
         }[] | null;
     };
 }
-import TextualElement from "./textual-element";
-import Choice from "./choice";
+import TextualElement from './textual-element';
+import Choice from './choice';

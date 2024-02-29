@@ -1,7 +1,7 @@
 export default class MediaElement extends Element {
-    set overrideMediaGalleryEnabled(arg: any);
+    set overrideMediaGalleryEnabled(override: any);
     get overrideMediaGalleryEnabled(): any;
     _overrideMediaGalleryEnabled: any;
     get overrideValues(): any;
 }
-import Element from "./element";
+import Element from './element';
