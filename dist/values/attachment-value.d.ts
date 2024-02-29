@@ -3,5 +3,5 @@ export default class AttachmentValue extends MediaValue {
     get displayValue(): string;
     addItem(id: any, name: any): AttachmentItemValue;
 }
-import MediaValue from './media-value';
-import AttachmentItemValue from './attachment-item-value';
+import MediaValue from "./media-value";
+import AttachmentItemValue from "./attachment-item-value";

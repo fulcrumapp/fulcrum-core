@@ -72,5 +72,5 @@ export default class RepeatableValue extends FormValue {
     removeItem(id: any): RepeatableItemValue | null;
     createNewItem(): RepeatableItemValue;
 }
-import FormValue from './form-value';
-import RepeatableItemValue from './repeatable-item-value';
+import FormValue from "./form-value";
+import RepeatableItemValue from "./repeatable-item-value";

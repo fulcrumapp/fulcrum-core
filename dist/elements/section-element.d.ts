@@ -3,4 +3,4 @@ export default class SectionElement extends ContainerElement {
     get isDrillDown(): boolean;
     get isInline(): boolean;
 }
-import ContainerElement from './container-element';
+import ContainerElement from "./container-element";

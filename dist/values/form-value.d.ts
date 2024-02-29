@@ -3,7 +3,7 @@ export default class FormValue {
     constructor(element: any, value: any);
     _element: any;
     _rawValue: any;
-    set element(element: any);
+    set element(arg: any);
     get element(): any;
     get isEmpty(): void;
     get displayValue(): void;

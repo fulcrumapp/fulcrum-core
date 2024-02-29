@@ -20,13 +20,13 @@ export default class ChoiceValue extends FormValue {
     get columnValue(): any;
     get multipleValues(): null;
     get hasOtherValue(): boolean;
-    set selectedValues(values: any[]);
+    set selectedValues(arg: any[]);
     get selectedValues(): any[];
-    set otherValues(values: any[]);
+    set otherValues(arg: any[]);
     get otherValues(): any[];
     get otherValue(): any;
     isEqual(value: any): boolean;
     contains(value: any): boolean;
     startsWith(value: any): boolean;
 }
-import FormValue from './form-value';
+import FormValue from "./form-value";
