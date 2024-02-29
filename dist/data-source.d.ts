@@ -1,0 +1,35 @@
+export default class DataSource {
+    sources: any[];
+    get source(): any;
+    invoke(dataSource: any, method: any, params: any, callback: any): void;
+    process(dataSource: any, method: any, params: any, objects: any, callback: any): any;
+    add(source: any): this;
+    prepare(formID: any, callback: any): void;
+    get root(): any;
+    getChoiceList(id: any, callback: any): void;
+    getClassificationSet(id: any, callback: any): void;
+    getForm(id: any, callback: any): void;
+    getUser(id: any, callback: any): void;
+    getRecord(id: any, form: any, callback: any): void;
+    getRecords(form: any, params: any, callback: any): void;
+    queryRecords(form: any, params: any, callback: any): void;
+    getUsers(params: any, callback: any): void;
+    getProjects(params: any, callback: any): void;
+    getProject(id: any, callback: any): void;
+    getChangeset(id: any, callback: any): void;
+    getPhoto(id: any, callback: any): void;
+    getAttachment(id: any, callback: any): void;
+    getAudio(id: any, callback: any): void;
+    getAudioTrack(id: any, callback: any): void;
+    getVideo(id: any, callback: any): void;
+    getVideoTrack(id: any, callback: any): void;
+    createPhoto(accessKey: any, file: any, progress: any, callback: any): void;
+    createAttachment(accessKey: any, file: any, progress: any, callback: any): void;
+    createVideo(accessKey: any, file: any, progress: any, callback: any): void;
+    createAudio(accessKey: any, file: any, progress: any, callback: any): void;
+    createSignature(accessKey: any, file: any, progress: any, callback: any): void;
+    saveVideoTrack(accessKey: any, file: any, progress: any, callback: any): void;
+    saveAudioTrack(accessKey: any, file: any, progress: any, callback: any): void;
+    saveRecord(record: any, callback: any): void;
+    deleteRecord(record: any, callback: any): void;
+}

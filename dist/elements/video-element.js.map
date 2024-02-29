@@ -1,0 +1,1 @@
+{"version":3,"file":"video-element.js","sourceRoot":"","sources":["../../src/elements/video-element.js"],"names":[],"mappings":";;;;;AAAA,oEAA2C;AAE3C,MAAqB,YAAa,SAAQ,uBAAY;IACpD,YAAY,MAAM,EAAE,UAAU;QAC5B,KAAK,CAAC,MAAM,EAAE,UAAU,CAAC,CAAC;QAE1B,IAAI,CAAC,YAAY,GAAG,CAAC,CAAC,UAAU,CAAC,aAAa,CAAC;QAC/C,IAAI,CAAC,YAAY,GAAG,CAAC,CAAC,UAAU,CAAC,aAAa,CAAC;IACjD,CAAC;CACF;AAPD,+BAOC"}

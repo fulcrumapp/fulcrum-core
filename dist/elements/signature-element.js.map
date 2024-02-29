@@ -1,0 +1,1 @@
+{"version":3,"file":"signature-element.js","sourceRoot":"","sources":["../../src/elements/signature-element.js"],"names":[],"mappings":";;;;;AAAA,wDAAgC;AAEhC,MAAqB,gBAAiB,SAAQ,iBAAO;IACnD,YAAY,MAAM,EAAE,UAAU;QAC5B,KAAK,CAAC,MAAM,EAAE,UAAU,CAAC,CAAC;QAE1B,IAAI,CAAC,aAAa,GAAG,UAAU,CAAC,cAAc,CAAC;IACjD,CAAC;CACF;AAND,mCAMC"}
