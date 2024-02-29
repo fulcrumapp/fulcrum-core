@@ -10,6 +10,6 @@ export default class RecordLinkElement extends Element {
     load(dataSource: any, callback: any): void;
     form: any;
 }
-import Element from "./element";
-import RecordLinkCondition from "./record-link-condition";
-import RecordLinkDefault from "./record-link-default";
+import Element from './element';
+import RecordLinkCondition from './record-link-condition';
+import RecordLinkDefault from './record-link-default';

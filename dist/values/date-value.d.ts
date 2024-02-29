@@ -3,4 +3,4 @@ export default class DateValue extends TextualValue {
     get dateValue(): Date | null;
     get columnValue(): Date | null;
 }
-import TextualValue from "./textual-value";
+import TextualValue from './textual-value';

@@ -23,10 +23,10 @@ export default class ClassificationValue extends FormValue {
     get columnValue(): any[] | null;
     get multipleValues(): null;
     get hasOtherValue(): boolean;
-    set otherValue(arg: any);
+    set otherValue(value: any);
     get otherValue(): any;
     get selectedClassification(): any;
     setSelectedClassification(classification: any, otherValue: any): void;
     setSelectedClassificationJSON(classificationAsJSON: any, otherValue: any): void;
 }
-import FormValue from "./form-value";
+import FormValue from './form-value';

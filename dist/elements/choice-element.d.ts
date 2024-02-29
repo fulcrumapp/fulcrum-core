@@ -9,13 +9,13 @@ export default class ChoiceElement extends Element {
     _choicesByValue: {} | null | undefined;
     choiceList: any;
     get choices(): any;
-    set choiceFilter(arg: any);
+    set choiceFilter(choiceFilter: any);
     get choiceFilter(): any;
     get filteredChoices(): Choice[];
-    set overrideChoices(arg: any);
+    set overrideChoices(overrideChoices: any);
     get overrideChoices(): any;
     get overrideValues(): any;
     choiceByValue(value: any): any;
 }
-import Element from "./element";
-import Choice from "./choice";
+import Element from './element';
+import Choice from './choice';

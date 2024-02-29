@@ -37,7 +37,7 @@ class ChoiceElement extends element_1.default {
             });
         }
         else {
-            setImmediate(callback);
+            setTimeout(callback, 0);
         }
     }
     get isLengthValidationSupported() {

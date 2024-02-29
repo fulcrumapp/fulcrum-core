@@ -3,7 +3,7 @@ export default class DataSource {
     get source(): any;
     invoke(dataSource: any, method: any, params: any, callback: any): void;
     process(dataSource: any, method: any, params: any, objects: any, callback: any): any;
-    add(source: any): DataSource;
+    add(source: any): this;
     prepare(formID: any, callback: any): void;
     get root(): any;
     getChoiceList(id: any, callback: any): void;

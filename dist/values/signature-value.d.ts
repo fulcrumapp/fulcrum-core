@@ -1,9 +1,9 @@
 export default class SignatureValue extends FormValue {
     _identifier: any;
     _timestamp: Date | null | undefined;
-    set id(arg: any);
+    set id(id: any);
     get id(): any;
-    set timestamp(arg: Date | null | undefined);
+    set timestamp(timestamp: Date | null | undefined);
     get timestamp(): Date | null | undefined;
     clear(): void;
     get isEmpty(): boolean;
@@ -29,4 +29,4 @@ export default class SignatureValue extends FormValue {
     isLessThan(value: any): boolean;
     isGreaterThan(value: any): boolean;
 }
-import FormValue from "./form-value";
+import FormValue from './form-value';

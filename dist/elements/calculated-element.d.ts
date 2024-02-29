@@ -4,5 +4,5 @@ export default class CalculatedElement extends TextualElement {
     expression: any;
     display: DisplayOptions;
 }
-import TextualElement from "./textual-element";
-import DisplayOptions from "./display-options";
+import TextualElement from './textual-element';
+import DisplayOptions from './display-options';

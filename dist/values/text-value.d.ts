@@ -1,3 +1,3 @@
 export default class TextValue extends TextualValue {
 }
-import TextualValue from "./textual-value";
+import TextualValue from './textual-value';

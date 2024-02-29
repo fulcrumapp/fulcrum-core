@@ -8,4 +8,4 @@ export default class TrackSegment {
     get firstLocation(): TrackPoint;
     get lastLocation(): TrackPoint;
 }
-import TrackPoint from "./track-point";
+import TrackPoint from './track-point';

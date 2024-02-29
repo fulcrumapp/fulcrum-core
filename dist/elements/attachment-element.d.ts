@@ -1,3 +1,3 @@
 export default class AttachmentElement extends MediaElement {
 }
-import MediaElement from "./media-element";
+import MediaElement from './media-element';

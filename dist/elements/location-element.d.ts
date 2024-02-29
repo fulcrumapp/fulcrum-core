@@ -1,3 +1,3 @@
 export default class LocationElement extends Element {
 }
-import Element from "./element";
+import Element from './element';
