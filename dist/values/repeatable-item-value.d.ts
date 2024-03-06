@@ -2,6 +2,7 @@ export default class RepeatableItemValue extends Feature {
     constructor(element: any, attrs: any, index: any);
     _index: any;
     _element: any;
+    _isRepeatableItem: boolean;
     get isRecord(): boolean;
     get isRepeatable(): boolean;
     get element(): any;

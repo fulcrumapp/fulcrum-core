@@ -4,7 +4,6 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const form_value_1 = __importDefault(require("./form-value"));
-const dynamic_item_value_1 = __importDefault(require("./dynamic-item-value"));
 const multiple_value_item_1 = __importDefault(require("./multiple-value-item"));
 const number_utils_1 = __importDefault(require("../utils/number-utils"));
 const uuid_1 = require("uuid");
@@ -19,7 +18,8 @@ class DynamicValue extends form_value_1.default {
         }
     }
     get ItemClass() {
-        return dynamic_item_value_1.default;
+        const DynamicItemValue = require('./dynamic-item-value').default; // Import the module here to avoid circular dependency
+        return DynamicItemValue;
     }
     get isEmpty() {
         return this._items.length === 0;
