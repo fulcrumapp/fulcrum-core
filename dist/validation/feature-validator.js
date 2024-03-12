@@ -39,7 +39,7 @@ class FeatureValidator {
             }
         }
         if (record.form.isGeometryRequired) {
-            if (!record.hasCoordinate) {
+            if (!record.hasLocation) {
                 errors.push(new geometry_required_validation_error_1.default());
             }
         }
@@ -53,7 +53,7 @@ class FeatureValidator {
         }
         const errors = [];
         if (repeatableItem.element.isGeometryRequired) {
-            if (!repeatableItem.hasCoordinate) {
+            if (!repeatableItem.hasLocation) {
                 errors.push(new geometry_required_validation_error_1.default());
             }
         }

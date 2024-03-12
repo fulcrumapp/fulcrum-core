@@ -3,6 +3,7 @@ import path from 'path';
 import {Form, FormValue, Record} from '../src';
 import FeatureValidator from '../src/validation/feature-validator';
 import RequiredFieldValidationError from '../src/validation/required-field-validation-error';
+import GeometryRequiredValidationError from '../src/validation/geometry-required-validation-error';
 import CustomValidationError from '../src/validation/custom-validation-error';
 import DataSource from '../src/data-source';
 import MemoryDataSource from '../src/utils/memory-data-source';
@@ -53,6 +54,123 @@ describe('Record', () => {
 
   it('produces simple JSON', () => {
     record.toJSON({simple: true}).should.eql(simpleJson);
+  });
+
+  it('returns GeoJSON with only a latitude and longitude', () => {
+    record.geometry = null;
+    record.latitude = 1;
+    record.longitude = 2;
+
+    record.hasCoordinate.should.eql(true);
+    record.hasLocation.should.eql(true);
+    record.geometryAsGeoJSON.should.eql({
+      type: 'Point',
+      coordinates: [2, 1]
+    });
+  });
+
+  it('returns GeoJSON with a geometry', () => {
+    record.geometry = {
+      type: "LineString",
+      coordinates: [
+        [-82.47576689405734, 27.977757676187323],
+        [-82.47699950483403, 27.974250052144896],
+      ]
+    };
+    record.latitude = null;
+    record.longitude = null;
+
+    record.hasCoordinate.should.eql(false);
+    record.hasLocation.should.eql(true);
+    record.geometryAsGeoJSON.should.eql({
+      type: "LineString",
+      coordinates: [
+        [-82.47576689405734, 27.977757676187323],
+        [-82.47699950483403, 27.974250052144896],
+      ]
+    });
+  });
+
+  it('does not return GeoJSON with no location or geometry', () => {
+    record.geometry = null;
+    record.latitude = null;
+    record.longitude = null;
+
+    record.hasCoordinate.should.eql(false);
+    record.hasLocation.should.eql(false);
+    shouldBeNull(record.geometryAsGeoJSON);
+  });
+
+  it('returns GeoJSON with only a latitude and longitude inside a repeatable', () => {
+    const [ child ] = record.formValues.find('rooms').items;
+
+    child.geometry = null;
+    child.latitude = 1;
+    child.longitude = 2;
+
+    child.hasCoordinate.should.eql(true);
+    child.hasLocation.should.eql(true);
+    child.geometryAsGeoJSON.should.eql({
+      type: 'Point',
+      coordinates: [2, 1]
+    });
+  });
+
+  it('returns GeoJSON with a geometry inside a repeatable', () => {
+    const [ child ] = record.formValues.find('rooms').items;
+
+    child.geometry = {
+      type: "LineString",
+      coordinates: [
+        [-82.47576689405734, 27.977757676187323],
+        [-82.47699950483403, 27.974250052144896],
+      ]
+    };
+    child.latitude = null;
+    child.longitude = null;
+
+    child.hasCoordinate.should.eql(false);
+    child.hasLocation.should.eql(true);
+    child.geometryAsGeoJSON.should.eql({
+      type: "LineString",
+      coordinates: [
+        [-82.47576689405734, 27.977757676187323],
+        [-82.47699950483403, 27.974250052144896],
+      ]
+    });
+  });
+
+  it('update the latitude and longitude when updating Point geometry', () => {
+    record.geometry = {
+      type: "Point",
+      coordinates: [-82.47576689405734, 27.977757676187323]
+    };
+
+    record.latitude.should.eql(27.977757676187323);
+    record.longitude.should.eql(-82.47576689405734);
+  });
+
+  it('update the latitude and longitude when updating the geometry of a repeatable', () => {
+    const [ child ] = record.formValues.find('rooms').items;
+
+    child.geometry = {
+      type: "Point",
+      coordinates: [-82.47576689405734, 27.977757676187323]
+    };
+
+    child.latitude.should.eql(27.977757676187323);
+    child.longitude.should.eql(-82.47576689405734);
+  });
+
+  it('does not return GeoJSON with no geometry inside a repeatable', () => {
+    const [ child ] = record.formValues.find('rooms').items;
+    child.geometry = null;
+    child.latitude = null;
+    child.longitude = null;
+
+    child.hasCoordinate.should.eql(false);
+    child.hasLocation.should.eql(false);
+    shouldBeNull(child.geometryAsGeoJSON);
   });
 });
 
@@ -110,5 +228,87 @@ describe('FeatureValidator', () => {
 
     error.should.be.instanceOf(RequiredFieldValidationError);
     error.message.should.eql("The field 'Checkbox Field' is required.");
+  });
+
+  describe('geometry validation', () => {
+    it('returns an error when there is no geometry', () => {
+      record.geometry = null;
+      record.latitude = null;
+      record.longitude = null;
+
+      const [ error ] = FeatureValidator.validateRecord(record, record.formValues);
+
+      error.should.be.instanceOf(GeometryRequiredValidationError);
+      error.message.should.eql("A validation location is required.");
+    });
+
+    it('does not return an error when there is a latitude and longitude', () => {
+      record.latitude = 27.977757676187323;
+      record.longitude = -82.47576689405734;
+      record.geometry = null;
+
+      const errors = FeatureValidator.validateRecord(record, record.formValues);
+
+      errors.length.should.eql(0);
+    });
+
+    it('does not return an error when there is a geometry', () => {
+      record.geometry = {
+        type: "LineString",
+        coordinates: [
+          [-82.47576689405734, 27.977757676187323],
+          [-82.47699950483403, 27.974250052144896],
+        ]
+      };
+      record.longitude = null;
+      record.latitude = null;
+
+      const errors = FeatureValidator.validateRecord(record, record.formValues);
+
+      errors.length.should.eql(0);
+    });
+
+    it('returns an error when there is no geometry in a repeatable', () => {
+      const [ child ] = record.formValues.find('rooms').items;
+
+      child.geometry = null;
+      child.latitude = null;
+      child.longitude = null;
+
+      const [ error ] = FeatureValidator.validateFeature(child, record, child.formValues);
+
+      error.should.be.instanceOf(GeometryRequiredValidationError);
+      error.message.should.eql("A validation location is required.");
+    });
+
+    it('does not return an error when there is a latitude and longitude in a repeatable', () => {
+      const [ child ] = record.formValues.find('rooms').items;
+
+      child.latitude = 27.977757676187323;
+      child.longitude = -82.47576689405734;
+      child.geometry = null;
+
+      const errors = FeatureValidator.validateFeature(child, record, child.formValues);
+
+      errors.length.should.eql(0);
+    });
+
+    it('does not return an error when there is a geometry in a repeatable', () => {
+      const [ child ] = record.formValues.find('rooms').items;
+
+      child.geometry = {
+        type: "LineString",
+        coordinates: [
+          [-82.47576689405734, 27.977757676187323],
+          [-82.47699950483403, 27.974250052144896],
+        ]
+      };
+      child.latitude = null;
+      child.longitude = null;
+
+      const errors = FeatureValidator.validateFeature(child, record, child.formValues);
+
+      errors.length.should.eql(0);
+    });
   });
 });

@@ -63,9 +63,16 @@ class RepeatableItemValue extends feature_1.default {
     }
     set geometry(geometry) {
         this._geometry = geometry;
+        if ((geometry === null || geometry === void 0 ? void 0 : geometry.type) === 'Point') {
+            this._latitude = geometry.coordinates[1];
+            this._longitude = geometry.coordinates[0];
+        }
     }
     get hasCoordinate() {
         return this._latitude != null && this._longitude != null;
+    }
+    get hasLocation() {
+        return this.hasCoordinate || this.geometry != null;
     }
     updateFromAPIAttributes(attrs) {
         var _a;
@@ -173,18 +180,15 @@ class RepeatableItemValue extends feature_1.default {
             return this.geometry;
         }
         if (this.hasCoordinate) {
-            return this.buildPointFromLatLong();
+            return {
+                type: 'Point',
+                coordinates: [
+                    this.longitude,
+                    this.latitude,
+                ],
+            };
         }
         return null;
-    }
-    buildPointFromLatLong() {
-        return {
-            type: 'Point',
-            coordinates: [
-                this.longitude,
-                this.latitude,
-            ],
-        };
     }
     get latitude() {
         return this._latitude;

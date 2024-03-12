@@ -38,7 +38,7 @@ export default class FeatureValidator {
     }
 
     if (record.form.isGeometryRequired) {
-      if (!record.hasCoordinate) {
+      if (!record.hasLocation) {
         errors.push(new GeometryRequiredValidationError());
       }
     }
@@ -58,7 +58,7 @@ export default class FeatureValidator {
     const errors = [];
 
     if (repeatableItem.element.isGeometryRequired) {
-      if (!repeatableItem.hasCoordinate) {
+      if (!repeatableItem.hasLocation) {
         errors.push(new GeometryRequiredValidationError());
       }
     }

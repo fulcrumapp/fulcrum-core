@@ -67,11 +67,18 @@ class Record extends feature_1.default {
     get hasCoordinate() {
         return this._latitude != null && this._longitude != null;
     }
+    get hasLocation() {
+        return this.hasCoordinate || this.geometry != null;
+    }
     get geometry() {
         return this._geometry;
     }
     set geometry(geometry) {
         this._geometry = geometry;
+        if ((geometry === null || geometry === void 0 ? void 0 : geometry.type) === 'Point') {
+            this._latitude = geometry.coordinates[1];
+            this._longitude = geometry.coordinates[0];
+        }
     }
     get changeset() {
         return this._changeset;
@@ -351,18 +358,15 @@ class Record extends feature_1.default {
             return this.geometry;
         }
         if (this.hasCoordinate) {
-            return this.buildPointFromLatLong();
+            return {
+                type: 'Point',
+                coordinates: [
+                    this.longitude,
+                    this.latitude,
+                ],
+            };
         }
         return null;
-    }
-    buildPointFromLatLong() {
-        return {
-            type: 'Point',
-            coordinates: [
-                this.longitude,
-                this.latitude,
-            ],
-        };
     }
     get createdDuration() {
         return this._createdDuration;
