@@ -70,6 +70,6 @@ export default class RepeatableValue extends FormValue {
     itemIndex(id: any): number;
     insertItem(item: any): void;
     removeItem(id: any): import("./repeatable-item-value").default | null;
-    createNewItem(): any;
+    createNewItem(): import("./repeatable-item-value").default;
 }
 import FormValue from "./form-value";

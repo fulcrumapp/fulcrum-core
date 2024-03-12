@@ -131,6 +131,7 @@ class RepeatableValue extends form_value_1.default {
             id: (0, uuid_1.v4)(),
             form_values: {}
         };
+        const RepeatableItemValue = require('./repeatable-item-value').default;
         return new RepeatableItemValue(this.element, attributes, this._items.length);
     }
 }
