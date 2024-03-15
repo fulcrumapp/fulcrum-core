@@ -1,4 +1,4 @@
 export default class StatusChoice extends Choice {
     color: any;
 }
-import Choice from './choice';
+import Choice from "./choice";

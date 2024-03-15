@@ -5,6 +5,6 @@ export default class Classification {
     value: any;
     _items: Classification[];
     get items(): Classification[];
-    get exploded(): this[];
+    get exploded(): Classification[];
     toJSON(): any[];
 }

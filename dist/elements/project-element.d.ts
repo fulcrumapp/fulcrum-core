@@ -5,4 +5,4 @@ export default class ProjectElement extends TextualElement {
     get isReadOnly(): any;
     projectForValue(value: any): any;
 }
-import TextualElement from './textual-element';
+import TextualElement from "./textual-element";

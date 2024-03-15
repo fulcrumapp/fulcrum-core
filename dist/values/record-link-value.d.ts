@@ -23,6 +23,6 @@ export default class RecordLinkValue extends FormValue {
     insertItem(item: any): void;
     removeItem(id: any): RecordLinkItemValue | null;
 }
-import FormValue from './form-value';
-import RecordLinkItemValue from './record-link-item-value';
-import MultipleValueItem from './multiple-value-item';
+import FormValue from "./form-value";
+import RecordLinkItemValue from "./record-link-item-value";
+import MultipleValueItem from "./multiple-value-item";
