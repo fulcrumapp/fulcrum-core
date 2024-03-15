@@ -14,7 +14,7 @@ class RepeatableValue extends form_value_1.default {
         this._items = [];
         if (items != null) {
             for (const item of items) {
-                this._items.push(new repeatable_item_value_1.default(this.element, item, this._items.length));
+                this._items.push(new repeatable_item_value_1.default(this.element, item, this._items.length, this));
             }
         }
     }
@@ -131,7 +131,7 @@ class RepeatableValue extends form_value_1.default {
             id: (0, uuid_1.v4)(),
             form_values: {}
         };
-        return new repeatable_item_value_1.default(this.element, attributes, this._items.length);
+        return new repeatable_item_value_1.default(this.element, attributes, this._items.length, this);
     }
 }
 exports.default = RepeatableValue;

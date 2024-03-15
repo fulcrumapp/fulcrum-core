@@ -5,13 +5,18 @@ import TextUtils from '../utils/text-utils';
 import loadObject from '../load-object';
 
 export default class RepeatableItemValue extends Feature {
-  constructor(element, attrs, index) {
+  constructor(element, attrs, index, repeatableValue) {
     super();
 
     this._index = index;
     this._element = element;
+    this._repeatableValue = repeatableValue;
 
     this.updateFromAPIAttributes(attrs);
+  }
+
+  get repeatableValue() {
+    return this._repeatableValue;
   }
 
   get isRecord() {

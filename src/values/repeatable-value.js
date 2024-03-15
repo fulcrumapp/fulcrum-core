@@ -13,7 +13,7 @@ export default class RepeatableValue extends FormValue {
 
     if (items != null) {
       for (const item of items) {
-        this._items.push(new RepeatableItemValue(this.element, item, this._items.length));
+        this._items.push(new RepeatableItemValue(this.element, item, this._items.length, this));
       }
     }
   }
@@ -169,6 +169,6 @@ export default class RepeatableValue extends FormValue {
       form_values: {}
     };
 
-    return new RepeatableItemValue(this.element, attributes, this._items.length);
+    return new RepeatableItemValue(this.element, attributes, this._items.length, this);
   }
 }

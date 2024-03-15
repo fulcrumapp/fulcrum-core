@@ -9,11 +9,15 @@ const date_utils_1 = __importDefault(require("../utils/date-utils"));
 const text_utils_1 = __importDefault(require("../utils/text-utils"));
 const load_object_1 = __importDefault(require("../load-object"));
 class RepeatableItemValue extends feature_1.default {
-    constructor(element, attrs, index) {
+    constructor(element, attrs, index, repeatableValue) {
         super();
         this._index = index;
         this._element = element;
+        this._repeatableValue = repeatableValue;
         this.updateFromAPIAttributes(attrs);
+    }
+    get repeatableValue() {
+        return this._repeatableValue;
     }
     get isRecord() {
         return false;
