@@ -13,4 +13,4 @@ export default class TextElement extends TextualElement {
     get hasPattern(): any;
     get hasPatternDescription(): any;
 }
-import TextualElement from './textual-element';
+import TextualElement from "./textual-element";

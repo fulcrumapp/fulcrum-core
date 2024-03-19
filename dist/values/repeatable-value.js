@@ -4,7 +4,6 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const form_value_1 = __importDefault(require("./form-value"));
-const repeatable_item_value_1 = __importDefault(require("./repeatable-item-value"));
 const text_utils_1 = __importDefault(require("../utils/text-utils"));
 const uuid_1 = require("uuid");
 const SearchSeparator = ' ';
@@ -14,7 +13,8 @@ class RepeatableValue extends form_value_1.default {
         this._items = [];
         if (items != null) {
             for (const item of items) {
-                this._items.push(new repeatable_item_value_1.default(this.element, item, this._items.length));
+                const RepeatableItemValue = require('./repeatable-item-value').default; // Import the module here to avoid circular dependency
+                this._items.push(new RepeatableItemValue(this.element, item, this._items.length));
             }
         }
     }
@@ -131,7 +131,8 @@ class RepeatableValue extends form_value_1.default {
             id: (0, uuid_1.v4)(),
             form_values: {}
         };
-        return new repeatable_item_value_1.default(this.element, attributes, this._items.length);
+        const RepeatableItemValue = require('./repeatable-item-value').default;
+        return new RepeatableItemValue(this.element, attributes, this._items.length);
     }
 }
 exports.default = RepeatableValue;

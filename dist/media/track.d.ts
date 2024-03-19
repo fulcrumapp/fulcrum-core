@@ -78,4 +78,4 @@ export default class Track {
         }[];
     } | undefined;
 }
-import TrackSegment from './track-segment';
+import TrackSegment from "./track-segment";

@@ -78,13 +78,13 @@ export default class Form {
     get titleFieldKeys(): any;
     get reportTemplates(): any;
     get reportTemplate(): any;
-    set overrideManualLocationEnabled(override: any);
+    set overrideManualLocationEnabled(arg: any);
     _overrideManualLocationEnabled: any;
     get isManualLocationEnabled(): boolean;
-    set overrideMediaGalleryEnabled(override: any);
+    set overrideMediaGalleryEnabled(arg: any);
     _overrideMediaGalleryEnabled: any;
     get isMediaGalleryEnabled(): boolean;
-    set overrideEditDurationsEnabled(override: any);
+    set overrideEditDurationsEnabled(arg: any);
     _overrideEditDurationsEnabled: any;
     get isEditDurationsEnabled(): boolean;
     get overrideValues(): {
@@ -94,6 +94,6 @@ export default class Form {
     };
     resetOverrides(): void;
 }
-import StatusElement from './elements/status-element';
-import ProjectElement from './elements/project-element';
-import Record from './record';
+import StatusElement from "./elements/status-element";
+import ProjectElement from "./elements/project-element";
+import Record from "./record";

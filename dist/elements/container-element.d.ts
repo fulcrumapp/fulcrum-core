@@ -1,4 +1,4 @@
 export default class ContainerElement extends Element {
     static initialize(): void;
 }
-import Element from './element';
+import Element from "./element";

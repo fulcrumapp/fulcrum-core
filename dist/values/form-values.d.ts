@@ -22,4 +22,4 @@ export default class FormValues {
     get repeatableItems(): any[];
     get recordLinkItems(): any[];
 }
-import SignatureValue from './signature-value';
+import SignatureValue from "./signature-value";

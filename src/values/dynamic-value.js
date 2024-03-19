@@ -1,5 +1,4 @@
 import FormValue from './form-value';
-import DynamicItemValue from './dynamic-item-value';
 import MultipleValueItem from './multiple-value-item';
 import NumberUtils from '../utils/number-utils';
 import { v4 as uuidv4 } from 'uuid'
@@ -18,6 +17,7 @@ export default class DynamicValue extends FormValue {
   }
 
   get ItemClass() {
+    const DynamicItemValue = require('./dynamic-item-value').default; // Import the module here to avoid circular dependency
     return DynamicItemValue;
   }
 
