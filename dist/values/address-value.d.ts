@@ -25,5 +25,5 @@ export default class AddressValue extends FormValue {
     isLessThan(stringValue: any): boolean;
     isGreaterThan(stringValue: any): boolean;
 }
-import FormValue from './form-value';
-import Address from './address';
+import FormValue from "./form-value";
+import Address from "./address";

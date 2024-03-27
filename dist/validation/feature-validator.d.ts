@@ -11,12 +11,12 @@ export default class FeatureValidator {
     static validateTimeField(element: any, value: any): TimeFormatValidationError | null;
     static formatErrors(errors: any): string;
 }
-import CustomValidationError from './custom-validation-error';
-import RequiredFieldValidationError from './required-field-validation-error';
-import GeometryRequiredValidationError from './geometry-required-validation-error';
-import PatternValidationError from './pattern-validation-error';
-import LengthValidationError from './length-validation-error';
-import NumericFormatValidationError from './numeric-format-validation-error';
-import NumericRangeValidationError from './numeric-range-validation-error';
-import DateFormatValidationError from './date-format-validation-error';
-import TimeFormatValidationError from './time-format-validation-error';
+import CustomValidationError from "./custom-validation-error";
+import RequiredFieldValidationError from "./required-field-validation-error";
+import GeometryRequiredValidationError from "./geometry-required-validation-error";
+import PatternValidationError from "./pattern-validation-error";
+import LengthValidationError from "./length-validation-error";
+import NumericFormatValidationError from "./numeric-format-validation-error";
+import NumericRangeValidationError from "./numeric-range-validation-error";
+import DateFormatValidationError from "./date-format-validation-error";
+import TimeFormatValidationError from "./time-format-validation-error";

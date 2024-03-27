@@ -5,4 +5,4 @@ export default class AttachmentItemValue extends MediaItemValue {
     };
     get mediaKey(): string;
 }
-import MediaItemValue from './media-item-value';
+import MediaItemValue from "./media-item-value";

@@ -55,8 +55,7 @@ Starts an interactive node terminal with the library available to use
   - Click the "Publish release" button
 - Publish to the public NPM registry
   - `mv $HOME/.npmrc $HOME/fulcrum.npmrc`
-  - `npm login` using creds from "npmjs (fulcrumapp)" in 1password
-  - use "support@fulcrumapp.com" for the email address when prompted
+  - `npm login`
   - `yarn publish`
 - Restore your .npmrc file
   - `mv $HOME/fulcrum.npmrc $HOME/.npmrc`

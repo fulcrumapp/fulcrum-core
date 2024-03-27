@@ -3,6 +3,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+/* eslint-disable no-underscore-dangle */
 const form_value_factory_1 = __importDefault(require("./form-value-factory"));
 const form_value_1 = __importDefault(require("./form-value"));
 const textual_element_1 = __importDefault(require("../elements/textual-element"));
@@ -10,7 +11,6 @@ const text_utils_1 = __importDefault(require("../utils/text-utils"));
 const condition_1 = __importDefault(require("../elements/condition"));
 const media_value_1 = __importDefault(require("./media-value"));
 const signature_value_1 = __importDefault(require("./signature-value"));
-const repeatable_value_1 = __importDefault(require("./repeatable-value"));
 const record_link_value_1 = __importDefault(require("./record-link-value"));
 const SearchValueSeparator = ' ';
 class FormValues {
@@ -238,7 +238,7 @@ class FormValues {
             else if (formValue instanceof signature_value_1.default) {
                 values.push(formValue);
             }
-            else if (formValue instanceof repeatable_value_1.default) {
+            else if (formValue._isRepeatableItem) {
                 for (const item of formValue.items) {
                     values.push.apply(values, item.formValues.mediaValues);
                 }
@@ -249,7 +249,7 @@ class FormValues {
     get repeatableItems() {
         const items = [];
         for (const formValue of this.all) {
-            if (formValue instanceof repeatable_value_1.default) {
+            if (formValue._isRepeatableItem) {
                 items.push.apply(items, formValue.items);
                 for (const item of formValue.items) {
                     items.push.apply(items, item.formValues.repeatableItems);
@@ -264,7 +264,7 @@ class FormValues {
             if (formValue instanceof record_link_value_1.default) {
                 items.push.apply(items, formValue.items);
             }
-            else if (formValue instanceof repeatable_value_1.default) {
+            else if (formValue._isRepeatableItem) {
                 for (const item of formValue.items) {
                     items.push.apply(items, item.formValues.recordLinkItems);
                 }

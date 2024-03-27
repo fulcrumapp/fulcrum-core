@@ -14,4 +14,4 @@ export default class LengthValidationError extends ElementValidationError {
     get repeatableElementMessage(): any;
     messageWithFormats(singularFormat: any, pluralFormat: any, length: any): any;
 }
-import ElementValidationError from './element-validation-error';
+import ElementValidationError from "./element-validation-error";

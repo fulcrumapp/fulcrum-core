@@ -4,7 +4,6 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const mixmatch_1 = __importDefault(require("mixmatch"));
-const element_factory_1 = __importDefault(require("./element-factory"));
 class ChildElements extends mixmatch_1.default {
     get elements() {
         if (!this._elements) {
@@ -15,8 +14,9 @@ class ChildElements extends mixmatch_1.default {
     createChildElements(elements) {
         this._elements = [];
         if (elements) {
+            const ElementFactory = require('./element-factory').default; // Import the module here to avoid circular dependency
             for (const element of elements) {
-                const el = element_factory_1.default.create(this, element);
+                const el = ElementFactory.create(this, element);
                 if (el) {
                     this._elements.push(el);
                 }

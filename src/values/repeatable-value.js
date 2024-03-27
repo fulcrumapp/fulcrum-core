@@ -1,5 +1,4 @@
 import FormValue from './form-value';
-import RepeatableItemValue from './repeatable-item-value';
 import TextUtils from '../utils/text-utils';
 import { v4 as uuidv4 } from 'uuid'
 
@@ -13,6 +12,7 @@ export default class RepeatableValue extends FormValue {
 
     if (items != null) {
       for (const item of items) {
+        const RepeatableItemValue = require('./repeatable-item-value').default; // Import the module here to avoid circular dependency
         this._items.push(new RepeatableItemValue(this.element, item, this._items.length));
       }
     }
@@ -168,6 +168,7 @@ export default class RepeatableValue extends FormValue {
       id: uuidv4(),
       form_values: {}
     };
+    const RepeatableItemValue = require('./repeatable-item-value').default;
 
     return new RepeatableItemValue(this.element, attributes, this._items.length);
   }

@@ -1,3 +1,4 @@
+/* eslint-disable no-underscore-dangle */
 import FormValueFactory from './form-value-factory';
 import FormValue from './form-value';
 import TextualElement from '../elements/textual-element';
@@ -5,7 +6,6 @@ import TextUtils from '../utils/text-utils';
 import Condition from '../elements/condition';
 import MediaValue from './media-value';
 import SignatureValue from './signature-value';
-import RepeatableValue from './repeatable-value';
 import RecordLinkValue from './record-link-value';
 
 const SearchValueSeparator = ' ';
@@ -284,7 +284,7 @@ export default class FormValues {
         values.push.apply(values, formValue.items);
       } else if (formValue instanceof SignatureValue) {
         values.push(formValue);
-      } else if (formValue instanceof RepeatableValue) {
+      } else if (formValue._isRepeatableItem) {
         for (const item of formValue.items) {
           values.push.apply(values, item.formValues.mediaValues);
         }
@@ -298,7 +298,7 @@ export default class FormValues {
     const items = [];
 
     for (const formValue of this.all) {
-      if (formValue instanceof RepeatableValue) {
+      if (formValue._isRepeatableItem) {
         items.push.apply(items, formValue.items);
 
         for (const item of formValue.items) {
@@ -316,7 +316,7 @@ export default class FormValues {
     for (const formValue of this.all) {
       if (formValue instanceof RecordLinkValue) {
         items.push.apply(items, formValue.items);
-      } else if (formValue instanceof RepeatableValue) {
+      } else if (formValue._isRepeatableItem) {
         for (const item of formValue.items) {
           items.push.apply(items, item.formValues.recordLinkItems);
         }

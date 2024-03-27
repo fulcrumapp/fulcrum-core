@@ -1,6 +1,6 @@
 export default class DynamicValue extends FormValue {
-    _items: DynamicItemValue[];
-    get ItemClass(): typeof DynamicItemValue;
+    _items: import("./dynamic-item-value").default[];
+    get ItemClass(): typeof import("./dynamic-item-value").default;
     get isEmpty(): boolean;
     get searchableValue(): null;
     get length(): number;
@@ -21,12 +21,11 @@ export default class DynamicValue extends FormValue {
     isLessThan(value: any): boolean;
     isGreaterThan(value: any): boolean;
     mapItems(callback: any): any[];
-    get items(): DynamicItemValue[];
+    get items(): import("./dynamic-item-value").default[];
     itemIndex(id: any): number;
     insertItem(item: any): void;
-    removeItem(id: any): DynamicItemValue | null;
-    createNewItem(): DynamicItemValue;
+    removeItem(id: any): import("./dynamic-item-value").default | null;
+    createNewItem(): import("./dynamic-item-value").default;
 }
-import FormValue from './form-value';
-import DynamicItemValue from './dynamic-item-value';
-import MultipleValueItem from './multiple-value-item';
+import FormValue from "./form-value";
+import MultipleValueItem from "./multiple-value-item";

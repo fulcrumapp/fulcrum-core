@@ -1,5 +1,4 @@
 import Mixin from 'mixmatch';
-import ElementFactory from './element-factory';
 
 export default class ChildElements extends Mixin {
   get elements() {
@@ -14,6 +13,7 @@ export default class ChildElements extends Mixin {
     this._elements = [];
 
     if (elements) {
+      const ElementFactory = require('./element-factory').default; // Import the module here to avoid circular dependency
       for (const element of elements) {
         const el = ElementFactory.create(this, element);
 

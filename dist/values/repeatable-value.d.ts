@@ -1,5 +1,5 @@
 export default class RepeatableValue extends FormValue {
-    _items: RepeatableItemValue[];
+    _items: import("./repeatable-item-value").default[];
     get isEmpty(): boolean;
     get displayValue(): string;
     get searchableValue(): string | null;
@@ -65,12 +65,11 @@ export default class RepeatableValue extends FormValue {
     isLessThan(value: any): boolean;
     isGreaterThan(value: any): boolean;
     mapItems(callback: any): any[];
-    get items(): RepeatableItemValue[];
+    get items(): import("./repeatable-item-value").default[];
     forEachItem(callback: any): void;
     itemIndex(id: any): number;
     insertItem(item: any): void;
-    removeItem(id: any): RepeatableItemValue | null;
-    createNewItem(): RepeatableItemValue;
+    removeItem(id: any): import("./repeatable-item-value").default | null;
+    createNewItem(): import("./repeatable-item-value").default;
 }
-import FormValue from './form-value';
-import RepeatableItemValue from './repeatable-item-value';
+import FormValue from "./form-value";
