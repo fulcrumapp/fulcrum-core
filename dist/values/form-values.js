@@ -230,6 +230,7 @@ class FormValues {
         }
     }
     get mediaValues() {
+        const { default: RepeatableValue } = require('./repeatable-value');
         const values = [];
         for (const formValue of this.all) {
             if (formValue instanceof media_value_1.default) {
@@ -238,7 +239,7 @@ class FormValues {
             else if (formValue instanceof signature_value_1.default) {
                 values.push(formValue);
             }
-            else if (formValue._isRepeatableItem) {
+            else if (formValue instanceof RepeatableValue) {
                 for (const item of formValue.items) {
                     values.push.apply(values, item.formValues.mediaValues);
                 }
@@ -247,9 +248,10 @@ class FormValues {
         return values;
     }
     get repeatableItems() {
+        const { default: RepeatableValue } = require('./repeatable-value');
         const items = [];
         for (const formValue of this.all) {
-            if (formValue._isRepeatableItem) {
+            if (formValue instanceof RepeatableValue) {
                 items.push.apply(items, formValue.items);
                 for (const item of formValue.items) {
                     items.push.apply(items, item.formValues.repeatableItems);
@@ -259,12 +261,13 @@ class FormValues {
         return items;
     }
     get recordLinkItems() {
+        const { default: RepeatableValue } = require('./repeatable-value');
         const items = [];
         for (const formValue of this.all) {
             if (formValue instanceof record_link_value_1.default) {
                 items.push.apply(items, formValue.items);
             }
-            else if (formValue._isRepeatableItem) {
+            else if (formValue instanceof RepeatableValue) {
                 for (const item of formValue.items) {
                     items.push.apply(items, item.formValues.recordLinkItems);
                 }

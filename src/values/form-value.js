@@ -6,7 +6,6 @@ export default class FormValue {
   constructor(element, value) {
     this._element = element;
     this._rawValue = value;
-    this._isRepeatableItem = false;
   }
 
   get element() {

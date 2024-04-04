@@ -3,7 +3,6 @@ export default class FormValue {
     constructor(element: any, value: any);
     _element: any;
     _rawValue: any;
-    _isRepeatableItem: boolean;
     set element(arg: any);
     get element(): any;
     get isEmpty(): void;
