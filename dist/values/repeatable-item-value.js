@@ -13,7 +13,6 @@ class RepeatableItemValue extends feature_1.default {
         super();
         this._index = index;
         this._element = element;
-        this._isRepeatableItem = true;
         this.updateFromAPIAttributes(attrs);
     }
     get isRecord() {

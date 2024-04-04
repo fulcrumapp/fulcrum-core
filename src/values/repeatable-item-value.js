@@ -10,7 +10,6 @@ export default class RepeatableItemValue extends Feature {
 
     this._index = index;
     this._element = element;
-    this._isRepeatableItem = true;
 
     this.updateFromAPIAttributes(attrs);
   }
