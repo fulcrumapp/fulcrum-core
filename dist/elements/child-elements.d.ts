@@ -12,4 +12,4 @@ export default class ChildElements extends Mixin {
     _flattenElements(elements: any, recurseRepeatables?: boolean): any;
     _flattenElementsByAttribute(elements: any, attr: any): {};
 }
-import Mixin from "mixmatch";
+import Mixin from 'mixmatch';
