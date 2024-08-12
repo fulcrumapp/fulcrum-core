@@ -31,6 +31,7 @@ export default class Role {
     this._canUpdateRecords = !!attributes.can_update_records;
     this._canDeleteRecords = !!attributes.can_delete_records;
     this._canBulkDeleteRecords = !!attributes.can_bulk_delete_records;
+    this._canBulkUpdateRecords = !!attributes.can_bulk_update_records;
     this._canExportRecords = !!attributes.can_export_records;
     this._canImportRecords = !!attributes.can_import_records;
     this._canManageAuthorizations = !!attributes.can_manage_authorizations;
@@ -136,6 +137,10 @@ export default class Role {
 
   get canBulkDeleteRecords() {
     return this._canBulkDeleteRecords;
+  }
+
+  get canBulkUpdateRecords() {
+    return this._canBulkUpdateRecords;
   }
 
   get canExportRecords() {
