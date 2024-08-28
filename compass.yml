@@ -1,0 +1,18 @@
+name: fulcrum-core
+id: ari:cloud:compass:9233df39-e597-47e6-ab42-e07f4d48709c:component/30d7834e-f829-4e6c-9b1b-cc6d8c1e56c5/067d8255-3895-4dcc-9b10-b872ae61dcfd
+description: Fulcrum Core
+configVersion: 1
+typeId: LIBRARY
+ownerId: ari:cloud:identity::team/090a5c3f-4fdf-4ff7-83f7-328d0baca3ad
+fields:
+  tier: 4
+links:
+  - name: null
+    type: REPOSITORY
+    url: https://github.com/fulcrumapp/fulcrum-core
+relationships:
+  DEPENDS_ON: []
+labels:
+  - language:javascript
+  - source:github
+customFields: null
