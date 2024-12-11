@@ -56,12 +56,17 @@ export default class DataSource {
 
   invoke(dataSource, method, params, callback) {
     const invokeCallback = (err, ...objects) => {
+      const thisIdx = this.sources.indexOf(dataSource);
       if (err) {
         return callback(err);
-      } else if (objects[0]) {
-        return this.process(dataSource.previous, method, params, objects, callback);
-      } else if (dataSource.next) {
-        return this.invoke(dataSource.next, method, params, callback);
+      }
+      if (objects[0]) {
+        if (thisIdx > 0) {
+          return this.process(this.sources[thisIdx - 1], method, params, objects, callback);
+        }
+      }
+      if (this.sources[thisIdx + 1]) {
+        return this.invoke(this.sources[thisIdx + 1], method, params, callback);
       }
 
       return callback(new Error('Unhandled request: ' + method));
@@ -82,8 +87,10 @@ export default class DataSource {
     const processCallback = (err) => {
       if (err) {
         return callback(err);
-      } else if (dataSource.previous) {
-        return this.process(dataSource.previous, method, params, objects, callback);
+      }
+      const thisIdx = this.sources.indexOf(dataSource);
+      if (thisIdx > 0 && this.sources[thisIdx - 1]) {
+        return this.process(this.sources[thisIdx - 1], method, params, objects, callback);
       }
 
       return callback.apply(null, [ null ].concat(objects));
@@ -97,11 +104,6 @@ export default class DataSource {
   }
 
   add(source) {
-    if (this.sources.length) {
-      this.sources[this.sources.length - 1].next = source;
-      source.previous = this.sources[this.sources.length - 1];
-    }
-
     this.sources.push(source);
 
     return this;
