@@ -61,14 +61,10 @@ export default class DataSource {
         return callback(err);
       }
       if (objects[0]) {
-        console.log("Should send to 'previous' data source");
-        if (thisIdx > 0) {
-          console.log("Sending to previous data source");
+        if (thisIdx >= 0) {
           return this.process(this.sources[thisIdx - 1], method, params, objects, callback);
         }
-      }
-      if (this.sources[thisIdx + 1]) {
-        console.log("Sending to next data source");
+      } else if (this.sources[thisIdx + 1]) {
         return this.invoke(this.sources[thisIdx + 1], method, params, callback);
       }
 
