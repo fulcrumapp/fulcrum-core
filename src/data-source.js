@@ -64,8 +64,11 @@ export default class DataSource {
         if (thisIdx > 0) {
           return this.process(this.sources[thisIdx - 1], method, params, objects, callback);
         }
-      }
-      if (this.sources[thisIdx + 1]) {
+        if (thisIdx === 0) {
+          // Closes the loop on data sources
+          return this.process(null, method, params, objects, callback);
+        }
+      } else if (this.sources[thisIdx + 1]) {
         return this.invoke(this.sources[thisIdx + 1], method, params, callback);
       }
 
