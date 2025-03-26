@@ -1,4 +1,4 @@
 export default class PatternValidationError extends ElementValidationError {
-    get message(): any;
+    get message(): string;
 }
 import ElementValidationError from "./element-validation-error";
