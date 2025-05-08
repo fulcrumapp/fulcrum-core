@@ -3,7 +3,7 @@ id: ari:cloud:compass:9233df39-e597-47e6-ab42-e07f4d48709c:component/30d7834e-f8
 description: Fulcrum Core
 configVersion: 1
 typeId: LIBRARY
-ownerId: ari:cloud:identity::team/090a5c3f-4fdf-4ff7-83f7-328d0baca3ad
+ownerId: ari:cloud:identity::team/2b2cfe77-b51c-4de5-a88c-8598ead54075-41
 fields:
   tier: 4
 links:
