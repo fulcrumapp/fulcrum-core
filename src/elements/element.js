@@ -106,6 +106,7 @@ export default class Element {
   }
 
   get isHidden() {
+    console.log("Am I hidden?")
     return this._overrideIsHidden != null ? this._overrideIsHidden : this._isHidden;
   }
 
