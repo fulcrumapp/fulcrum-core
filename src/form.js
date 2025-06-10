@@ -8,6 +8,7 @@ import DateUtils from './utils/date-utils';
 
 export default class Form {
   constructor(attributes) {
+    console.log("Initing Form");
     this.updateFromAPIAttributes(attributes);
   }
 
