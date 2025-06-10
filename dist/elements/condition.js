@@ -45,6 +45,7 @@ class Condition {
         return formValue.isGreaterThan(stringValue);
     }
     static shouldElementBeVisible(element, record, values, visibilityCache) {
+        console.log("HERE WE ARE!!!!!!");
         if (visibilityCache != null && visibilityCache[element.key] != null) {
             return visibilityCache[element.key];
         }

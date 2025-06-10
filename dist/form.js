@@ -12,6 +12,7 @@ const async_1 = __importDefault(require("async"));
 const date_utils_1 = __importDefault(require("./utils/date-utils"));
 class Form {
     constructor(attributes) {
+        console.log("Initing Form");
         this.updateFromAPIAttributes(attributes);
     }
     updateFromAPIAttributes(attrs) {
