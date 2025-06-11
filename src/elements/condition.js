@@ -48,7 +48,6 @@ export default class Condition {
   }
 
   static shouldElementBeVisible(element, record, values, visibilityCache) {
-    console.log("HERE WE ARE!!!!!!")
     if (visibilityCache != null && visibilityCache[element.key] != null) {
       return visibilityCache[element.key];
     }
@@ -57,6 +56,9 @@ export default class Condition {
 
     let shouldBeVisible = Condition.shouldElementBeVisibleRecursive(element, record, values, cache);
 
+    if (element.dataName === 'visibility_rule_2') {
+      console.log("Shouuld be visible????", shouldBeVisible);
+    }
     if (element.isSectionElement) {
       let hasVisibleChildren = false;
 
@@ -76,6 +78,11 @@ export default class Condition {
   }
 
   static shouldElementBeVisibleRecursive(element, record, values, cache) {
+    const log = element.dataName === 'visibility_rule_2';
+    if (log) {
+      console.log('Checking visibility for element:', element, 'with cache:', cache);
+    }
+
     if (cache != null && cache[element.key] != null) {
       return cache[element.key];
     }
@@ -91,9 +98,16 @@ export default class Condition {
       return !element.isHidden;
     }
 
+    if (log) {
+      console.log("Not overridden");
+    }
     if (element.isHidden || element.hasHiddenParent) {
       cache[element.key] = false;
       return false;
+    }
+
+    if (log) {
+      console.log("Not hiddden or hidden parent");
     }
 
     let shouldBeVisible = false;
@@ -103,20 +117,31 @@ export default class Condition {
     }
 
     if (element.visibleConditionsType === 'any') {
+      if (log) {
+        console.log("visibleConditionsType === 'any'")
+      }
       for (const condition of element.visibleConditions) {
         const isSatisfied = condition.isSatisfied(record, values, cache);
 
+        if (log) {
+          console.log("Checking condition:", condition, "; isSatisfied:", isSatisfied);
+        }
         if (isSatisfied) {
           shouldBeVisible = true;
           break;
         }
       }
     } else if (element.visibleConditionsType === 'all') {
+      if (log) {
+        console.log("visibleConditionsType === 'all'")
+      }
       shouldBeVisible = true;
 
       for (const condition of element.visibleConditions) {
         const isSatisfied = condition.isSatisfied(record, values, cache);
-
+        if (log) {
+          console.log("Checking condition:", condition, "; isSatisfied:", isSatisfied);
+        }
         if (!isSatisfied) {
           shouldBeVisible = false;
         }
