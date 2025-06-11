@@ -117,7 +117,7 @@ class Condition {
         }
         else if (element.visibleConditionsType === 'all') {
             if (log) {
-                console.log("visibleConditionsType === 'all'");
+                console.log("visibleConditionsType === 'all'", element.visibleConditions);
             }
             shouldBeVisible = true;
             for (const condition of element.visibleConditions) {
@@ -207,6 +207,7 @@ class Condition {
             // case and the referenced element should always be considered satisfied so that it's possible
             // to put conditions on explicitly hidden values.
             const skipElement = referencedElement.isHidden || referencedElement.hasHiddenParent;
+            console.log("Check Skip Element???:", skipElement, referencedElement);
             if (!skipElement) {
                 if (referencedElement.dataName === 'visibility_rule_1') {
                     console.log("CHECK 1:", referencedElement);
@@ -231,6 +232,7 @@ class Condition {
         }
         switch (this.operator) {
             case 'equal_to':
+                console.log("!!!Checking equal to", formValue, this.value);
                 return Condition.isEqual(formValue, this.value);
             case 'not_equal_to':
                 return !Condition.isEqual(formValue, this.value);
