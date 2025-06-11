@@ -69,6 +69,9 @@ class Condition {
     static shouldElementBeVisibleRecursive(element, record, values, cache) {
         const log = element.dataName === 'visibility_rule_2';
         if (log) {
+            console.log('Checking visibility for VR2!:', element, 'with cache:', cache);
+        }
+        else {
             console.log('Checking visibility for element:', element, 'with cache:', cache);
         }
         if (cache != null && cache[element.key] != null) {
@@ -196,7 +199,7 @@ class Condition {
         };
     }
     isSatisfied(record, values, cache) {
-        console.log("In isSatisfied", this);
+        console.log("In isSatisfied", this, record, values, cache);
         const referencedElement = Condition.elementForCondition(this, record);
         let isReferencedFieldSatisfied = true;
         if (referencedElement != null) {
@@ -214,7 +217,7 @@ class Condition {
                 isReferencedFieldSatisfied = Condition.shouldElementBeVisibleRecursive(referencedElement, record, values, cache);
             }
         }
-        console.log("RETTERING", this._isSatisfied(record, values, isReferencedFieldSatisfied));
+        console.log("RETTERING", record, values, isReferencedFieldSatisfied, " = ", this._isSatisfied(record, values, isReferencedFieldSatisfied));
         return this._isSatisfied(record, values, isReferencedFieldSatisfied);
     }
     _isSatisfied(record, values, isReferencedFieldSatisfied) {
