@@ -249,7 +249,10 @@ export default class Condition {
       // case and the referenced element should always be considered satisfied so that it's possible
       // to put conditions on explicitly hidden values.
 
-      const skipElement = referencedElement.isHidden || referencedElement.hasHiddenParent;
+      const skipElement = referencedElement.isHidden
+        || referencedElement.hasHiddenParent
+        || !(Condition.shouldElementBeVisible(referencedElement, record, values, cache));
+
       console.log("Check Skip Element???:", skipElement, referencedElement);
       if (!skipElement) {
         if (referencedElement.dataName === 'visibility_rule_1') {
