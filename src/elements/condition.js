@@ -237,6 +237,7 @@ export default class Condition {
   }
 
   isSatisfied(record, values, cache) {
+    console.log("In isSatisfied", this);
     const referencedElement = Condition.elementForCondition(this, record);
 
     let isReferencedFieldSatisfied = true;
@@ -249,9 +250,17 @@ export default class Condition {
       const skipElement = referencedElement.isHidden || referencedElement.hasHiddenParent;
 
       if (!skipElement) {
+        if (referencedElement.dataName === 'visibility_rule_1') {
+          console.log("CHECK 1:", referencedElement);
+        }
+        if (referencedElement.dataName === 'visibility_rule_2') {
+          console.log("CHECK 2:", referencedElement);
+        }
         isReferencedFieldSatisfied = Condition.shouldElementBeVisibleRecursive(referencedElement, record, values, cache);
       }
     }
+
+    console.log("RETTERING", this._isSatisfied(record, values, isReferencedFieldSatisfied));
 
     return this._isSatisfied(record, values, isReferencedFieldSatisfied);
   }

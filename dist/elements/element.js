@@ -78,7 +78,6 @@ class Element {
         return this._overrideIsRequired != null ? this._overrideIsRequired : this._isRequired;
     }
     get isHidden() {
-        console.log("Am I hidden?");
         return this._overrideIsHidden != null ? this._overrideIsHidden : this._isHidden;
     }
     get isDisabled() {
