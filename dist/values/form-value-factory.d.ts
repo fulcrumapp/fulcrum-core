@@ -22,6 +22,7 @@ export default class FormValueFactory {
         CheckboxField: typeof CheckboxValue;
         DynamicField: typeof DynamicValue;
         LocationField: typeof LocationValue;
+        SketchField: typeof SketchValue;
     };
 }
 import ChoiceValue from "./choice-value";
@@ -44,3 +45,4 @@ import RecordLinkValue from "./record-link-value";
 import CheckboxValue from "./checkbox-value";
 import DynamicValue from "./dynamic-value";
 import LocationValue from "./location-value";
+import SketchValue from "./sketch-value";
