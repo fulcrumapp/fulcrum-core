@@ -286,6 +286,9 @@ class Element {
     get isButtonElement() {
         return this.isType(element_types_1.default.ButtonElement);
     }
+    get isSketchElement() {
+        return this.isType(element_types_1.default.SketchElement);
+    }
 }
 exports.default = Element;
 //# sourceMappingURL=element.js.map

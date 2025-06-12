@@ -371,4 +371,8 @@ export default class Element {
   get isButtonElement() {
     return this.isType(Types.ButtonElement);
   }
+
+  get isSketchElement() {
+    return this.isType(Types.SketchElement);
+  }
 }

@@ -23,6 +23,7 @@ const record_link_value_1 = __importDefault(require("./record-link-value"));
 const checkbox_value_1 = __importDefault(require("./checkbox-value"));
 const dynamic_value_1 = __importDefault(require("./dynamic-value"));
 const location_value_1 = __importDefault(require("./location-value"));
+const sketch_value_1 = __importDefault(require("./sketch-value"));
 const Constructors = {
     ChoiceField: choice_value_1.default,
     TextField: text_value_1.default,
@@ -44,7 +45,8 @@ const Constructors = {
     RecordLinkField: record_link_value_1.default,
     CheckboxField: checkbox_value_1.default,
     DynamicField: dynamic_value_1.default,
-    LocationField: location_value_1.default
+    LocationField: location_value_1.default,
+    SketchField: sketch_value_1.default,
 };
 class FormValueFactory {
     static create(element, attributes) {
