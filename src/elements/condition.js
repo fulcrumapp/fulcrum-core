@@ -218,7 +218,7 @@ export default class Condition {
     if (referencedElement != null) {
       // If the referenced element or one its parents is explicitly marked as hidden, it's a special
       // case and the referenced element should always be considered satisfied so that it's possible
-      // to put conditions on explicitly hidden values.
+      // to put conditions on hidden values. Also applies to elements hidden by visibility rules.
       const skipElement = referencedElement.isHidden
         || referencedElement.hasHiddenParent
         || !(Condition.shouldElementBeVisible(referencedElement, record, values, cache));
