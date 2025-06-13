@@ -49,7 +49,7 @@ const Constructors = {
   DynamicField: DynamicElement,
   LocationField: LocationElement,
   ButtonField: ButtonElement,
-  SketchElement: SketchElement,
+  SketchField: SketchElement,
 };
 
 let initialized = false;

@@ -47,5 +47,5 @@ export default {
 
   ButtonElement: 'ButtonField',
 
-  SketchElement: 'SketchElement',
+  SketchElement: 'SketchField',
 };

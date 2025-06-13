@@ -4,16 +4,16 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const media_value_1 = __importDefault(require("./media-value"));
-const photo_item_value_1 = __importDefault(require("./photo-item-value"));
+const sketch_item_value_1 = __importDefault(require("./sketch-item-value"));
 class SketchValue extends media_value_1.default {
     get ItemClass() {
-        return photo_item_value_1.default;
+        return sketch_item_value_1.default;
     }
     get displayValue() {
         if (this.length === 1) {
-            return '1 Photo';
+            return '1 Sketch';
         }
-        return `${this.length} Photos`;
+        return `${this.length} Sketches`;
     }
 }
 exports.default = SketchValue;

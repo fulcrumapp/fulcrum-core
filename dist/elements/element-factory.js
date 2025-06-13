@@ -53,7 +53,7 @@ const Constructors = {
     DynamicField: dynamic_element_1.default,
     LocationField: location_element_1.default,
     ButtonField: button_element_1.default,
-    SketchElement: sketch_element_1.default,
+    SketchField: sketch_element_1.default,
 };
 let initialized = false;
 class ElementFactory {

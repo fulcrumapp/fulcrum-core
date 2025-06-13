@@ -25,7 +25,7 @@ export default class ElementFactory {
         DynamicField: typeof DynamicElement;
         LocationField: typeof LocationElement;
         ButtonField: typeof ButtonElement;
-        SketchElement: typeof SketchElement;
+        SketchField: typeof SketchElement;
     };
 }
 import SectionElement from "./section-element";
