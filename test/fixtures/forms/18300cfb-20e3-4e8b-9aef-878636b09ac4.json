@@ -708,6 +708,23 @@
             "data_name": "button",
             "default_value": null,
             "button_type": "Progress"
+          },
+          {
+            "type": "SketchField",
+            "key": "yui8",
+            "label": "Sketch",
+            "description": null,
+            "required": false,
+            "disabled": false,
+            "hidden": false,
+            "data_name": "sketch",
+            "default_value": null,
+            "visible_conditions_type": null,
+            "visible_conditions": null,
+            "required_conditions_type": null,
+            "required_conditions": null,
+            "min_length": null,
+            "max_length": null
           }
       ]
   }

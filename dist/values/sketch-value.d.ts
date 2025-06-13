@@ -1,6 +1,6 @@
 export default class SketchValue extends MediaValue {
-    get ItemClass(): typeof PhotoItemValue;
+    get ItemClass(): typeof SketchItemValue;
     get displayValue(): string;
 }
 import MediaValue from "./media-value";
-import PhotoItemValue from "./photo-item-value";
+import SketchItemValue from "./sketch-item-value";

@@ -25,6 +25,6 @@ exports.default = {
     DynamicElement: 'DynamicField',
     LocationElement: 'LocationField',
     ButtonElement: 'ButtonField',
-    SketchElement: 'SketchElement',
+    SketchElement: 'SketchField',
 };
 //# sourceMappingURL=element-types.js.map

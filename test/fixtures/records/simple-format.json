@@ -190,7 +190,13 @@
             "latitude": 1.2,
             "longitude": -1.2,
             "address": "City Test"
-        }
+        },
+        "sketch": [
+            {
+                "caption": "sketch caption",
+                "sketch_id": "2b1fa188-39f6-4540-8bcd-9c6641e77486"
+            }
+        ] 
     },
     "horizontal_accuracy": 88.0370385747084,
     "id": "20eda76b-90aa-4a6b-8a69-a5dca3db4d15",
