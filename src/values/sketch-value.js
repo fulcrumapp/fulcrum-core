@@ -1,16 +1,16 @@
 import MediaValue from './media-value';
-import PhotoItemValue from './photo-item-value';
+import SketchItemValue from './sketch-item-value';
 
 export default class SketchValue extends MediaValue {
   get ItemClass() {
-    return PhotoItemValue;
+    return SketchItemValue;
   }
 
   get displayValue() {
     if (this.length === 1) {
-      return '1 Photo';
+      return '1 Sketch';
     }
 
-    return `${this.length} Photos`;
+    return `${this.length} Sketches`;
   }
 }
