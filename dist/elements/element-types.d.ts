@@ -23,5 +23,6 @@ declare namespace _default {
     const DynamicElement: string;
     const LocationElement: string;
     const ButtonElement: string;
+    const SketchElement: string;
 }
 export default _default;

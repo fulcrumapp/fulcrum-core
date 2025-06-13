@@ -25,6 +25,7 @@ export default class ElementFactory {
         DynamicField: typeof DynamicElement;
         LocationField: typeof LocationElement;
         ButtonField: typeof ButtonElement;
+        SketchField: typeof SketchElement;
     };
 }
 import SectionElement from "./section-element";
@@ -50,3 +51,4 @@ import CheckboxElement from "./checkbox-element";
 import DynamicElement from "./dynamic-element";
 import LocationElement from "./location-element";
 import ButtonElement from "./button-element";
+import SketchElement from "./sketch-element";

@@ -22,6 +22,7 @@ import CheckboxElement from './checkbox-element';
 import DynamicElement from './dynamic-element';
 import LocationElement from './location-element';
 import ButtonElement from './button-element';
+import SketchElement from './sketch-element';
 
 const Constructors = {
   Section: SectionElement,
@@ -47,7 +48,8 @@ const Constructors = {
   CheckboxField: CheckboxElement,
   DynamicField: DynamicElement,
   LocationField: LocationElement,
-  ButtonField: ButtonElement
+  ButtonField: ButtonElement,
+  SketchField: SketchElement,
 };
 
 let initialized = false;

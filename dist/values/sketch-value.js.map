@@ -1,0 +1,1 @@
+{"version":3,"file":"sketch-value.js","sourceRoot":"","sources":["../../src/values/sketch-value.js"],"names":[],"mappings":";;;;;AAAA,gEAAuC;AACvC,4EAAkD;AAElD,MAAqB,WAAY,SAAQ,qBAAU;IACjD,IAAI,SAAS;QACX,OAAO,2BAAe,CAAC;IACzB,CAAC;IAED,IAAI,YAAY;QACd,IAAI,IAAI,CAAC,MAAM,KAAK,CAAC,EAAE;YACrB,OAAO,UAAU,CAAC;SACnB;QAED,OAAO,GAAG,IAAI,CAAC,MAAM,WAAW,CAAC;IACnC,CAAC;CACF;AAZD,8BAYC"}
