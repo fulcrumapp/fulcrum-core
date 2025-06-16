@@ -27,6 +27,7 @@ const checkbox_element_1 = __importDefault(require("./checkbox-element"));
 const dynamic_element_1 = __importDefault(require("./dynamic-element"));
 const location_element_1 = __importDefault(require("./location-element"));
 const button_element_1 = __importDefault(require("./button-element"));
+const sketch_element_1 = __importDefault(require("./sketch-element"));
 const Constructors = {
     Section: section_element_1.default,
     ChoiceField: choice_element_1.default,
@@ -51,7 +52,8 @@ const Constructors = {
     CheckboxField: checkbox_element_1.default,
     DynamicField: dynamic_element_1.default,
     LocationField: location_element_1.default,
-    ButtonField: button_element_1.default
+    ButtonField: button_element_1.default,
+    SketchField: sketch_element_1.default,
 };
 let initialized = false;
 class ElementFactory {

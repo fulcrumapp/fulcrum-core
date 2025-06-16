@@ -124,5 +124,6 @@ export default class Element {
     get isDynamicElement(): boolean;
     get isLocationElement(): boolean;
     get isButtonElement(): boolean;
+    get isSketchElement(): boolean;
 }
 import Condition from "./condition";

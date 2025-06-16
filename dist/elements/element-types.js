@@ -24,6 +24,7 @@ exports.default = {
     CheckboxElement: 'CheckboxField',
     DynamicElement: 'DynamicField',
     LocationElement: 'LocationField',
-    ButtonElement: 'ButtonField'
+    ButtonElement: 'ButtonField',
+    SketchElement: 'SketchField',
 };
 //# sourceMappingURL=element-types.js.map

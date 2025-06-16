@@ -45,5 +45,7 @@ export default {
 
   LocationElement: 'LocationField',
 
-  ButtonElement: 'ButtonField'
+  ButtonElement: 'ButtonField',
+
+  SketchElement: 'SketchField',
 };
