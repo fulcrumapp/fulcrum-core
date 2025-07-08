@@ -213,6 +213,8 @@ export default class Condition {
   isSatisfied(record, values, cache) {
     const referencedElement = Condition.elementForCondition(this, record);
 
+    console.log(referencedElement)
+
     let isReferencedFieldSatisfied = true;
 
     if (referencedElement != null) {
