@@ -29,7 +29,7 @@ export default class Changeset {
     get numberOfCreates(): any;
     get numberOfUpdates(): any;
     get numberOfDeletes(): any;
-    get displayValue(): any;
+    get displayValue(): string;
     get application(): any;
     get metadataIndexText(): string | null;
     get metadataDescription(): any;
