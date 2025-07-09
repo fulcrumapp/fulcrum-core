@@ -224,7 +224,7 @@ export default class Condition {
       const skipElement = referencedElement.isHidden
         || referencedElement.hasHiddenParent
         || !(Condition.shouldElementBeVisible(referencedElement, record, values, cache))
-        || referencedElement.visibleConditionsBehavior === 'clear';
+        || referencedElement.visibleConditionsBehavior !== 'preserve';
 
       if (!skipElement) {
         isReferencedFieldSatisfied = Condition.shouldElementBeVisibleRecursive(referencedElement, record, values, cache);

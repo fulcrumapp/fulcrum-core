@@ -172,6 +172,7 @@ class Condition {
     }
     isSatisfied(record, values, cache) {
         const referencedElement = Condition.elementForCondition(this, record);
+        console.log(referencedElement);
         let isReferencedFieldSatisfied = true;
         if (referencedElement != null) {
             // If the referenced element or one its parents is explicitly marked as hidden, it's a special
@@ -180,7 +181,7 @@ class Condition {
             const skipElement = referencedElement.isHidden
                 || referencedElement.hasHiddenParent
                 || !(Condition.shouldElementBeVisible(referencedElement, record, values, cache))
-                || referencedElement.visibleConditionsBehavior === 'clear';
+                || referencedElement.visibleConditionsBehavior !== 'preserve';
             if (!skipElement) {
                 isReferencedFieldSatisfied = Condition.shouldElementBeVisibleRecursive(referencedElement, record, values, cache);
             }
