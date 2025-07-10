@@ -181,7 +181,7 @@ class Condition {
             const skipElement = referencedElement.isHidden
                 || referencedElement.hasHiddenParent
                 || !(Condition.shouldElementBeVisible(referencedElement, record, values, cache))
-                || referencedElement.visibleConditionsBehavior !== 'preserve';
+                || referencedElement.visibleConditionsBehavior === 'clear';
             if (!skipElement) {
                 isReferencedFieldSatisfied = Condition.shouldElementBeVisibleRecursive(referencedElement, record, values, cache);
             }
