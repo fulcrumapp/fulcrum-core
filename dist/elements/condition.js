@@ -65,6 +65,7 @@ class Condition {
     }
     static shouldElementBeVisibleRecursive(element, record, values, cache) {
         console.log('element', element);
+        console.log('shouldElementbeVisible', Condition.shouldElementBeVisible(element, record, values, cache));
         if (cache != null && cache[element.key] != null) {
             return cache[element.key];
         }
@@ -173,6 +174,8 @@ class Condition {
     }
     isSatisfied(record, values, cache) {
         const referencedElement = Condition.elementForCondition(this, record);
+        console.log('referencedElement', referencedElement);
+        console.log(Condition.shouldElementBeVisible(referencedElement, record, values, cache));
         if (referencedElement != null) {
             const isHidden = referencedElement.isHidden ||
                 referencedElement.hasHiddenParent ||
@@ -184,7 +187,7 @@ class Condition {
             }
             // If field is hidden but *preserve* is set,
             // we still want to use its value — so we pass true
-            const shouldUseValue = behavior === 'preserve' || !isHidden;
+            const shouldUseValue = behavior === 'preserve';
             return this._isSatisfied(record, values, shouldUseValue);
         }
         return this._isSatisfied(record, values, true);
