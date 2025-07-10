@@ -75,6 +75,7 @@ export default class Condition {
   }
 
   static shouldElementBeVisibleRecursive(element, record, values, cache) {
+    console.log('element', element);
     if (cache != null && cache[element.key] != null) {
       return cache[element.key];
     }
@@ -213,23 +214,26 @@ export default class Condition {
   isSatisfied(record, values, cache) {
     const referencedElement = Condition.elementForCondition(this, record);
 
-    console.log(referencedElement)
-
-    let isReferencedFieldSatisfied = true;
-
     if (referencedElement != null) {
-      // If the referenced element or one its parents is explicitly marked as hidden, it's a special
-      // case and the referenced element should always be considered satisfied so that it's possible
-      // to put conditions on hidden values. Also applies to elements hidden by visibility rules.
-      const skipElement = referencedElement.isHidden
-        || referencedElement.hasHiddenParent
-        || !(Condition.shouldElementBeVisible(referencedElement, record, values, cache))
-        || referencedElement.visibleConditionsBehavior === 'clear';
+      const isHidden =
+        referencedElement.isHidden ||
+        referencedElement.hasHiddenParent ||
+        !Condition.shouldElementBeVisible(referencedElement, record, values, cache);
 
-      if (!skipElement) {
-        isReferencedFieldSatisfied = Condition.shouldElementBeVisibleRecursive(referencedElement, record, values, cache);
+      const shouldTreatAsCleared =
+        isHidden && referencedElement.visibleConditionsBehavior === 'clear';
+
+      if (shouldTreatAsCleared) {
+        // The referenced field should be treated as having no value
+        return this._isSatisfied(record, values, false);
       }
     }
+    // If the referenced element is not hidden, or if it is hidden but should not be treated as cleared,
+    // we proceed to check the condition normally.
+    const isReferencedFieldSatisfied =
+      referencedElement == null
+        ? true
+        : Condition.shouldElementBeVisibleRecursive(referencedElement, record, values, cache);
 
     return this._isSatisfied(record, values, isReferencedFieldSatisfied);
   }
