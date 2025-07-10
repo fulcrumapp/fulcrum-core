@@ -220,22 +220,20 @@ export default class Condition {
         referencedElement.hasHiddenParent ||
         !Condition.shouldElementBeVisible(referencedElement, record, values, cache);
 
-      const shouldTreatAsCleared =
-        isHidden && referencedElement.visibleConditionsBehavior === 'clear';
+      const behavior = referencedElement.visibleConditionsBehavior;
+      const shouldBeSkipped = isHidden && behavior === 'clear';
 
-      if (shouldTreatAsCleared) {
-        // The referenced field should be treated as having no value
+      if (shouldBeSkipped) {
         return this._isSatisfied(record, values, false);
       }
-    }
-    // If the referenced element is not hidden, or if it is hidden but should not be treated as cleared,
-    // we proceed to check the condition normally.
-    const isReferencedFieldSatisfied =
-      referencedElement == null
-        ? true
-        : Condition.shouldElementBeVisibleRecursive(referencedElement, record, values, cache);
 
-    return this._isSatisfied(record, values, isReferencedFieldSatisfied);
+      // If field is hidden but *preserve* is set,
+      // we still want to use its value — so we pass true
+      const shouldUseValue = behavior === 'preserve' || !isHidden;
+      return this._isSatisfied(record, values, shouldUseValue);
+    }
+
+    return this._isSatisfied(record, values, true);
   }
 
   _isSatisfied(record, values, isReferencedFieldSatisfied) {
