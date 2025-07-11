@@ -76,7 +76,6 @@ export default class Condition {
 
   static shouldElementBeVisibleRecursive(element, record, values, cache) {
     console.log('element', element);
-    console.log('shouldElementbeVisible',Condition.shouldElementBeVisible(element, record, values, cache));
     if (cache != null && cache[element.key] != null) {
       return cache[element.key];
     }
