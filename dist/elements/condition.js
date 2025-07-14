@@ -173,6 +173,7 @@ class Condition {
     isSatisfied(record, values, cache) {
         const referencedElement = Condition.elementForCondition(this, record);
         const valueShouldBePreserved = (referencedElement === null || referencedElement === void 0 ? void 0 : referencedElement.visibleConditionsBehavior) === 'preserve';
+        const valueShouldBeSkipped = !(Condition.shouldElementBeVisible(referencedElement, record, values, cache)) && !valueShouldBePreserved;
         let isReferencedFieldSatisfied = true;
         if (referencedElement != null) {
             // If the referenced element or one its parents is explicitly marked as hidden, it's a special
@@ -180,9 +181,9 @@ class Condition {
             // to put conditions on hidden values. Also applies to elements hidden by visibility rules.
             const skipElement = referencedElement.isHidden
                 || referencedElement.hasHiddenParent
-                || (!(Condition.shouldElementBeVisible(referencedElement, record, values, cache)) && !valueShouldBePreserved);
+                || valueShouldBeSkipped;
             if (!skipElement) {
-                isReferencedFieldSatisfied = Condition.shouldElementBeVisibleRecursive(referencedElement, record, values, cache);
+                isReferencedFieldSatisfied = false;
             }
         }
         return this._isSatisfied(record, values, isReferencedFieldSatisfied);
