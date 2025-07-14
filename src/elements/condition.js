@@ -222,22 +222,12 @@ export default class Condition {
         referencedElement.hasHiddenParent ||
         !Condition.shouldElementBeVisible(referencedElement, record, values, cache);
 
-      console.log('shouldElementBeVisible is ', Condition.shouldElementBeVisible(referencedElement, record, values, cache), 'for element', referencedElement?.label);
-
-
       if (isHidden && !valueShouldBePreserved) {
         return this._isSatisfied(record, values, false);
       }
     }
 
-    const isReferencedFieldSatisfied =
-      referencedElement == null
-        ? true
-        : (Condition.shouldElementBeVisibleRecursive(referencedElement, record, values, cache) && valueShouldBePreserved);
-
-    console.log('isReferencedFieldSatisfied is ', isReferencedFieldSatisfied, 'for element', referencedElement?.label);
-
-    return this._isSatisfied(record, values, isReferencedFieldSatisfied);
+    return this._isSatisfied(record, values, true);
   }
 
   _isSatisfied(record, values, isReferencedFieldSatisfied) {
