@@ -86,8 +86,10 @@ class Condition {
             shouldBeVisible = true;
         }
         if (element.visibleConditionsType === 'any') {
+            console.log(element);
             for (const condition of element.visibleConditions) {
                 const isSatisfied = condition.isSatisfied(record, values, cache);
+                console.log('condition', condition, 'isSatisfied', isSatisfied);
                 if (isSatisfied) {
                     shouldBeVisible = true;
                     break;
