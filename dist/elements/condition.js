@@ -64,7 +64,6 @@ class Condition {
         return shouldBeVisible;
     }
     static shouldElementBeVisibleRecursive(element, record, values, cache) {
-        console.log('element', element);
         if (cache != null && cache[element.key] != null) {
             return cache[element.key];
         }
@@ -86,10 +85,8 @@ class Condition {
             shouldBeVisible = true;
         }
         if (element.visibleConditionsType === 'any') {
-            console.log(element);
             for (const condition of element.visibleConditions) {
                 const isSatisfied = condition.isSatisfied(record, values, cache);
-                console.log('condition', condition, 'isSatisfied', isSatisfied);
                 if (isSatisfied) {
                     shouldBeVisible = true;
                     break;
@@ -97,12 +94,9 @@ class Condition {
             }
         }
         else if (element.visibleConditionsType === 'all') {
-            console.log(element);
             shouldBeVisible = true;
             for (const condition of element.visibleConditions) {
                 const isSatisfied = condition.isSatisfied(record, values, cache);
-                console.log('condition', condition, 'isSatisfied', isSatisfied);
-                // console.log(record, values);
                 if (!isSatisfied) {
                     shouldBeVisible = false;
                 }
@@ -182,8 +176,9 @@ class Condition {
             const isHidden = referencedElement.isHidden ||
                 referencedElement.hasHiddenParent ||
                 (!Condition.shouldElementBeVisible(referencedElement, record, values, cache)
-                    && referencedElement.visibleConditionsBehavior === 'clear');
-            console.log('isHidden is ', isHidden, 'for element', referencedElement.key);
+                    && referencedElement.visibleConditionsBehavior !== 'preserve');
+            console.log('shouldElementBeVisible is ', Condition.shouldElementBeVisible(referencedElement, record, values, cache), 'for element', referencedElement === null || referencedElement === void 0 ? void 0 : referencedElement.label);
+            console.log('isHidden is ', isHidden, 'for element', referencedElement === null || referencedElement === void 0 ? void 0 : referencedElement.label);
             if (isHidden) {
                 return this._isSatisfied(record, values, false);
             }
@@ -191,6 +186,7 @@ class Condition {
         const isReferencedFieldSatisfied = referencedElement == null
             ? true
             : Condition.shouldElementBeVisibleRecursive(referencedElement, record, values, cache);
+        console.log('isReferencedFieldSatisfied is ', isReferencedFieldSatisfied, 'for element', referencedElement === null || referencedElement === void 0 ? void 0 : referencedElement.label);
         return this._isSatisfied(record, values, isReferencedFieldSatisfied);
     }
     _isSatisfied(record, values, isReferencedFieldSatisfied) {
