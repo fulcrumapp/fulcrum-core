@@ -102,6 +102,7 @@ class Condition {
             for (const condition of element.visibleConditions) {
                 const isSatisfied = condition.isSatisfied(record, values, cache);
                 console.log('condition', condition, 'isSatisfied', isSatisfied);
+                // console.log(record, values);
                 if (!isSatisfied) {
                     shouldBeVisible = false;
                 }
@@ -180,9 +181,10 @@ class Condition {
         if (referencedElement != null) {
             const isHidden = referencedElement.isHidden ||
                 referencedElement.hasHiddenParent ||
-                !Condition.shouldElementBeVisible(referencedElement, record, values, cache);
-            const shouldTreatAsCleared = isHidden && referencedElement.visibleConditionsBehavior === 'clear';
-            if (shouldTreatAsCleared) {
+                (!Condition.shouldElementBeVisible(referencedElement, record, values, cache)
+                    && referencedElement.visibleConditionsBehavior === 'clear');
+            console.log('isHidden is ', isHidden, 'for element', referencedElement.key);
+            if (isHidden) {
                 return this._isSatisfied(record, values, false);
             }
         }
