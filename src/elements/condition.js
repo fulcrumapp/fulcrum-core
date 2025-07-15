@@ -221,7 +221,7 @@ export default class Condition {
 
     if (referencedElement != null) {
       const valueShouldBePreserved =
-        referencedElement.visibleConditionsBehavior === 'preserve';
+        referencedElement._visibleConditionsBehavior === 'preserve';
 
       console.log('valueShouldBePreserved for', referencedElement?.label, valueShouldBePreserved);
 

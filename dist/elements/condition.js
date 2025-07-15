@@ -178,7 +178,7 @@ class Condition {
         // let isHidden = false;
         // let valueShouldBeSkipped = false;
         if (referencedElement != null) {
-            const valueShouldBePreserved = referencedElement.visibleConditionsBehavior === 'preserve';
+            const valueShouldBePreserved = referencedElement._visibleConditionsBehavior === 'preserve';
             console.log('valueShouldBePreserved for', referencedElement === null || referencedElement === void 0 ? void 0 : referencedElement.label, valueShouldBePreserved);
             const isVisible = Condition.shouldElementBeVisible(referencedElement, record, values, cache);
             console.log('isVisible for', referencedElement === null || referencedElement === void 0 ? void 0 : referencedElement.label, isVisible);
