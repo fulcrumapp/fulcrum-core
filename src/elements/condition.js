@@ -213,7 +213,7 @@ export default class Condition {
   isSatisfied(record, values, cache) {
     const referencedElement = Condition.elementForCondition(this, record);
 
-    // let isReferencedFieldSatisfied = true;
+    let isReferencedFieldSatisfied = true;
     // let valueShouldBePreserved = false;
     // let isVisible = true;
     // let isHidden = false;
