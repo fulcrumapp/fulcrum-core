@@ -173,29 +173,19 @@ class Condition {
     isSatisfied(record, values, cache) {
         const referencedElement = Condition.elementForCondition(this, record);
         let isReferencedFieldSatisfied = true;
-        // let valueShouldBePreserved = false;
-        // let isVisible = true;
-        // let isHidden = false;
-        // let valueShouldBeSkipped = false;
         if (referencedElement != null) {
-            const valueShouldBePreserved = referencedElement._visibleConditionsBehavior === 'preserve';
-            console.log('valueShouldBePreserved for', referencedElement === null || referencedElement === void 0 ? void 0 : referencedElement.label, valueShouldBePreserved);
+            const valueShouldBePreserved = referencedElement.visibleConditionsBehavior === 'preserve';
             const isVisible = Condition.shouldElementBeVisible(referencedElement, record, values, cache);
-            console.log('isVisible for', referencedElement === null || referencedElement === void 0 ? void 0 : referencedElement.label, isVisible);
             const isHidden = !isVisible
                 || referencedElement.isHidden
                 || referencedElement.hasHiddenParent;
-            console.log('isHidden for', referencedElement === null || referencedElement === void 0 ? void 0 : referencedElement.label, isHidden);
             const valueShouldBeSkipped = isHidden && !valueShouldBePreserved;
-            console.log('valueShouldBeSkipped for', referencedElement === null || referencedElement === void 0 ? void 0 : referencedElement.label, valueShouldBeSkipped);
             // If value should be skipped (because field is hidden AND not preserved),
             // then we do NOT consider its value
             if (valueShouldBeSkipped) {
                 isReferencedFieldSatisfied = false;
             }
         }
-        // console.log(referencedElement?.label, valueShouldBePreserved, isVisible, isHidden, valueShouldBeSkipped, isReferencedFieldSatisfied);
-        console.log('record and values', record, values);
         return this._isSatisfied(record, values, isReferencedFieldSatisfied);
     }
     _isSatisfied(record, values, isReferencedFieldSatisfied) {
