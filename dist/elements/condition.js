@@ -186,6 +186,8 @@ class Condition {
                 isReferencedFieldSatisfied = false;
             }
         }
+        console.log(referencedElement.label, valueShouldBePreserved, isVisible, isHidden, valueShouldBeSkipped, isReferencedFieldSatisfied);
+        console.log('record and values', record, values);
         return this._isSatisfied(record, values, isReferencedFieldSatisfied);
     }
     _isSatisfied(record, values, isReferencedFieldSatisfied) {
