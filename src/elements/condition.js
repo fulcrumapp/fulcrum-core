@@ -216,7 +216,7 @@ export default class Condition {
     let isReferencedFieldSatisfied = true;
 
     if (referencedElement != null) {
-      const valueShouldBePreserved = referencedElement.visibleConditionsBehavior === 'preserve';
+      const valueShouldBePreserved = referencedElement._visibleConditionsBehavior === 'preserve';
       const isVisible = Condition.shouldElementBeVisible(referencedElement, record, values, cache);
       const isHidden = !isVisible
         || referencedElement.isHidden
