@@ -79,8 +79,6 @@ describe('isSatisfied', () => {
 
     element._visibleConditionsBehavior = 'preserve';
 
-    console.log(element)
-
     sinon.stub(Condition, 'shouldElementBeVisible').returns(false);
 
     const attributes = {
