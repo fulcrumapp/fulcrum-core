@@ -174,11 +174,17 @@ class Condition {
         const referencedElement = Condition.elementForCondition(this, record);
         let isReferencedFieldSatisfied = true;
         if (referencedElement != null) {
+            console.log(`full referencedElement: ${JSON.stringify(referencedElement)}`);
             const valueShouldBePreserved = referencedElement._visibleConditionsBehavior === 'preserve';
+            console.log(`for element ${referencedElement.label}, valueShouldBePreserved: ${valueShouldBePreserved}`);
             const isVisible = Condition.shouldElementBeVisible(referencedElement, record, values, cache);
+            console.log(`for element ${referencedElement.label}, isVisible: ${isVisible}`);
             const isHidden = !isVisible
                 || referencedElement.isHidden
                 || referencedElement.hasHiddenParent;
+            console.log(`for element ${referencedElement.label}, isHidden: ${isHidden}`);
+            console.log(`for element ${referencedElement.label}, referencedElement.isHidden: ${referencedElement.isHidden}`);
+            console.log(`for element ${referencedElement.label}, referencedElement._isHidden: ${referencedElement._isHidden}`);
             const valueShouldBeSkipped = isHidden && !valueShouldBePreserved;
             // If value should be skipped (because field is hidden AND not preserved),
             // then we do NOT consider its value
