@@ -218,25 +218,19 @@ export default class Condition {
     if (referencedElement != null) {
       console.log(`full referencedElement: ${JSON.stringify(referencedElement)}`);
       console.log(`for element ${referencedElement.label}, referencedElement.visibleConditionsBehavior: ${referencedElement.visibleConditionsBehavior}`);
-      const valueShouldBePreserved = referencedElement._visibleConditionsBehavior === 'preserve';
-      console.log(`for element ${referencedElement.label}, valueShouldBePreserved: ${valueShouldBePreserved}`);
+      console.log(`for element ${referencedElement.label}, referencedElement._visibleConditionsBehavior: ${referencedElement._visibleConditionsBehavior}`);
 
-      const isVisible = Condition.shouldElementBeVisible(referencedElement, record, values, cache);
-      console.log(`for element ${referencedElement.label}, isVisible: ${isVisible}`);
-      const isHidden = !isVisible
-        || referencedElement.isHidden
-        || referencedElement.hasHiddenParent;
+      // If the referenced element or one its parents is explicitly marked as hidden, it's a special
+      // case and the referenced element should always be considered satisfied so that it's possible
+      // to put conditions on explicitly hidden values.
 
-      console.log(`for element ${referencedElement.label}, isHidden: ${isHidden}`);
+      const skipElement = referencedElement.isHidden || referencedElement.hasHiddenParent;
+
+      console.log(`for element ${referencedElement.label}, skipElement: ${skipElement}`);
       console.log(`for element ${referencedElement.label}, referencedElement.isHidden: ${referencedElement.isHidden}`);
       console.log(`for element ${referencedElement.label}, referencedElement._isHidden: ${referencedElement._isHidden}`);
-
-      const valueShouldBeSkipped = isHidden && !valueShouldBePreserved;
-
-      // If value should be skipped (because field is hidden AND not preserved),
-      // then we do NOT consider its value
-      if (valueShouldBeSkipped) {
-        isReferencedFieldSatisfied = false;
+      if (!skipElement) {
+        isReferencedFieldSatisfied = Condition.shouldElementBeVisibleRecursive(referencedElement, record, values, cache);
       }
     }
 
