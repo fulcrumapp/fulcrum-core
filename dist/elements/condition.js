@@ -175,6 +175,7 @@ class Condition {
         let isReferencedFieldSatisfied = true;
         if (referencedElement != null) {
             console.log(`full referencedElement: ${JSON.stringify(referencedElement)}`);
+            console.log(`for element ${referencedElement.label}, referencedElement.visibleConditionsBehavior: ${referencedElement.visibleConditionsBehavior}`);
             const valueShouldBePreserved = referencedElement._visibleConditionsBehavior === 'preserve';
             console.log(`for element ${referencedElement.label}, valueShouldBePreserved: ${valueShouldBePreserved}`);
             const isVisible = Condition.shouldElementBeVisible(referencedElement, record, values, cache);

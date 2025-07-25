@@ -217,6 +217,7 @@ export default class Condition {
 
     if (referencedElement != null) {
       console.log(`full referencedElement: ${JSON.stringify(referencedElement)}`);
+      console.log(`for element ${referencedElement.label}, referencedElement.visibleConditionsBehavior: ${referencedElement.visibleConditionsBehavior}`);
       const valueShouldBePreserved = referencedElement._visibleConditionsBehavior === 'preserve';
       console.log(`for element ${referencedElement.label}, valueShouldBePreserved: ${valueShouldBePreserved}`);
 
