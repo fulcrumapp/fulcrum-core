@@ -224,7 +224,7 @@ export default class Condition {
       // case and the referenced element should always be considered satisfied so that it's possible
       // to put conditions on explicitly hidden values.
 
-      const skipElement = referencedElement.isHidden || referencedElement.hasHiddenParent;
+      const skipElement = referencedElement.isHidden || referencedElement.hasHiddenParent || referencedElement._visibleConditionsBehavior === 'preserve';
 
       console.log(`for element ${referencedElement.label}, skipElement: ${skipElement}`);
       console.log(`for element ${referencedElement.label}, referencedElement.isHidden: ${referencedElement.isHidden}`);
