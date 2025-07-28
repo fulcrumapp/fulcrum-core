@@ -216,19 +216,15 @@ export default class Condition {
     let isReferencedFieldSatisfied = true;
 
     if (referencedElement != null) {
-      console.log(`full referencedElement: ${JSON.stringify(referencedElement)}`);
-      console.log(`for element ${referencedElement.label}, referencedElement.visibleConditionsBehavior: ${referencedElement.visibleConditionsBehavior}`);
-      console.log(`for element ${referencedElement.label}, referencedElement._visibleConditionsBehavior: ${referencedElement._visibleConditionsBehavior}`);
-
-      // If the referenced element or one its parents is explicitly marked as hidden, it's a special
+      // If the referenced element or one of its parents is explicitly marked as hidden, it's a special
       // case and the referenced element should always be considered satisfied so that it's possible
-      // to put conditions on explicitly hidden values.
+      // to put conditions on explicitly hidden values. Similarly, if the user denotes that the value
+      // should be preserved if the field isn't visible, it should also always be considered satisfied.
 
-      const skipElement = referencedElement.isHidden || referencedElement.hasHiddenParent || referencedElement._visibleConditionsBehavior === 'preserve';
+      const skipElement = referencedElement.isHidden
+        || referencedElement.hasHiddenParent
+        || referencedElement._visibleConditionsBehavior === 'preserve';
 
-      console.log(`for element ${referencedElement.label}, skipElement: ${skipElement}`);
-      console.log(`for element ${referencedElement.label}, referencedElement.isHidden: ${referencedElement.isHidden}`);
-      console.log(`for element ${referencedElement.label}, referencedElement._isHidden: ${referencedElement._isHidden}`);
       if (!skipElement) {
         isReferencedFieldSatisfied = Condition.shouldElementBeVisibleRecursive(referencedElement, record, values, cache);
       }
