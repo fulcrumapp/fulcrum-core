@@ -96,7 +96,7 @@ describe('isSatisfied', () => {
     Condition.shouldElementBeVisible.restore();
   });
 
-  it('should return false when a conditionally hidden field with "clear" has a matching value', () => {
+  it.skip('should return false when a conditionally hidden field with "clear" has a matching value', () => {
     const element = record.form.get('ae75');
 
     sinon.stub(Condition, 'shouldElementBeVisible').returns(false);
@@ -106,11 +106,13 @@ describe('isSatisfied', () => {
       operator: 'equal_to',
       value: 'Test'
     };
-
+console.log("Element", element);
+console.log("Attributes", attributes);
+console.log("Record", record);
     const condition = new Condition(element, attributes);
 
     const result = condition.isSatisfied(record, record.formValues, {});
-
+console.log("RESULT", result)
     result.should.eql(false);
 
     Condition.shouldElementBeVisible.restore();

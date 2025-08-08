@@ -128,6 +128,7 @@ class Record extends feature_1.default {
         json.updated_duration = this.updatedDuration;
         json.edited_duration = this.editedDuration;
         json.geometry = this.geometry;
+        json.record_key = this._recordKey || null;
         return json;
     }
     updateFromAPIAttributes(attrs) {
@@ -185,6 +186,7 @@ class Record extends feature_1.default {
         if (attributes.geometry) {
             this._geometry = (_a = attributes.geometry) !== null && _a !== void 0 ? _a : null;
         }
+        this._recordKey = attributes.record_key || null;
     }
     updateTimestamps() {
         const now = new Date();

@@ -162,6 +162,8 @@ export default class Record extends Feature {
 
     json.geometry = this.geometry;
 
+    json.record_key = this._recordKey || null;
+
     return json;
   }
 
@@ -231,6 +233,8 @@ export default class Record extends Feature {
     if (attributes.geometry) {
       this._geometry = attributes.geometry ?? null;
     }
+
+    this._recordKey = attributes.record_key || null;
   }
 
   updateTimestamps() {

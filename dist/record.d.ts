@@ -77,6 +77,7 @@ export default class Record extends Feature {
         updated_duration: any;
         edited_duration: any;
         geometry: any;
+        record_key: any;
     };
     updateFromAPIAttributes(attrs: any): void;
     _version: any;
@@ -106,6 +107,7 @@ export default class Record extends Feature {
     _updatedLongitude: any;
     _updatedAltitude: any;
     _updatedAccuracy: any;
+    _recordKey: any;
     updateTimestamps(): void;
     get isGeometryEnabled(): any;
     get(key: any, formValues: any): any;

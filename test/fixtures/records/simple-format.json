@@ -203,6 +203,7 @@
     "latitude": 27.7695993399641,
     "longitude": -82.6439975202084,
     "project_id": null,
+    "record_key": null,
     "speed": -1,
     "status": "complete",
     "updated_at": "2015-12-03T19:06:16.000Z",
