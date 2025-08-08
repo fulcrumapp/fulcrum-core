@@ -113,6 +113,15 @@ export default class Record extends Feature {
     return this._changesetID;
   }
 
+
+  get recordKey() {
+    return this._recordKey;
+  }
+
+  get recordSequence() {
+    return this._recordSequence;
+  }
+
   loadChangeset(dataSource, callback) {
     return loadObject(this, dataSource, 'changeset', 'getChangeset', callback);
   }
@@ -163,6 +172,7 @@ export default class Record extends Feature {
     json.geometry = this.geometry;
 
     json.record_key = this._recordKey || null;
+    json.record_sequence = this._recordSequence || null;
 
     return json;
   }
@@ -235,6 +245,7 @@ export default class Record extends Feature {
     }
 
     this._recordKey = attributes.record_key || null;
+    this._recordSequence = attributes.record_sequence || null;
   }
 
   updateTimestamps() {
