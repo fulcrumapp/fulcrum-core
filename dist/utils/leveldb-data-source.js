@@ -103,6 +103,7 @@ class LevelDBDataSource {
         this.updateObject(this.key('classification-set', id), object, callback);
     }
     getFormComplete(id, object, callback) {
+        console.log("Completing", id, object);
         this.updateObject(this.key('form', id), object, callback);
     }
     updateObject(key, object, callback) {

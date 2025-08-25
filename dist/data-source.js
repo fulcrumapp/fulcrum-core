@@ -78,6 +78,7 @@ class DataSource {
         (dataSource[method] || noop).apply(dataSource, invokeArguments);
     }
     process(dataSource, method, params, objects, callback) {
+        console.log('Procssing!!!', method, params, objects);
         if (dataSource == null) {
             return callback.apply(null, [null].concat(objects));
         }
@@ -105,6 +106,7 @@ class DataSource {
         const tasks = {
             form: (callback) => {
                 this.getForm(formID, (err, form) => {
+                    console.log("Got the form, but probably too late", form);
                     if (err) {
                         callback(err);
                         return;
@@ -146,6 +148,7 @@ class DataSource {
         this.invoke(this.root, 'getClassificationSet', [id], callback);
     }
     getForm(id, callback) {
+        console.log("About to invoke");
         this.invoke(this.root, 'getForm', [id], callback);
     }
     getUser(id, callback) {

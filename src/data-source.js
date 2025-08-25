@@ -81,6 +81,7 @@ export default class DataSource {
   }
 
   process(dataSource, method, params, objects, callback) {
+    console.log('Procssing!!!', method, params, objects);
     if (dataSource == null) {
       return callback.apply(null, [ null ].concat(objects));
     }
@@ -118,6 +119,7 @@ export default class DataSource {
     const tasks = {
       form: (callback) => {
         this.getForm(formID, (err, form) => {
+          console.log("Got the form, but probably too late", form);
           if (err) {
             callback(err);
             return;
@@ -169,6 +171,7 @@ export default class DataSource {
   }
 
   getForm(id, callback) {
+    console.log("About to invoke");
     this.invoke(this.root, 'getForm', [ id ], callback);
   }
 

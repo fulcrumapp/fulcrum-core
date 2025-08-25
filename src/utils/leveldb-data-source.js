@@ -127,6 +127,7 @@ export default class LevelDBDataSource {
   }
 
   getFormComplete(id, object, callback) {
+    console.log("Completing", id, object)
     this.updateObject(this.key('form', id), object, callback);
   }
 
