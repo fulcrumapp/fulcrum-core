@@ -14,6 +14,8 @@ export default class Form {
   updateFromAPIAttributes(attrs) {
     const attributes = attrs || {};
 
+    console.log("Here is the form", attributes);
+
     this._id = attributes.id;
     this._name = attributes.name;
     this._description = attributes.description;
