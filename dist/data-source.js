@@ -78,7 +78,7 @@ class DataSource {
         (dataSource[method] || noop).apply(dataSource, invokeArguments);
     }
     process(dataSource, method, params, objects, callback) {
-        console.log('Procssing!!!', method, params, objects);
+        console.log('Procssing!!!', dataSource, method, params, objects);
         if (dataSource == null) {
             return callback.apply(null, [null].concat(objects));
         }

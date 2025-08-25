@@ -81,7 +81,7 @@ export default class DataSource {
   }
 
   process(dataSource, method, params, objects, callback) {
-    console.log('Procssing!!!', method, params, objects);
+    console.log('Procssing!!!', dataSource, method, params, objects);
     if (dataSource == null) {
       return callback.apply(null, [ null ].concat(objects));
     }

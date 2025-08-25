@@ -56,6 +56,7 @@ class LevelDBDataSource {
         delete this.callbacks[id];
     }
     get(key, callback) {
+        console.log("Gettttttting", key, callback);
         return this.db.get(key, (err, value) => {
             if (err && err.notFound) {
                 return callback(null, null);
@@ -70,6 +71,7 @@ class LevelDBDataSource {
         return this.db.put(key, JSON.stringify(value), callback);
     }
     key(type, id) {
+        console.log('Key returning', [type, id].join(':'));
         return [type, id].join(':');
     }
     getChoiceList(id, callback) {
@@ -89,10 +91,12 @@ class LevelDBDataSource {
         });
     }
     getForm(id, callback) {
+        console.log("In getForm", id, callback);
         if (this.checkAlreadyFetching(id, callback)) {
             return;
         }
         this.get(this.key('form', id), (err, json) => {
+            console.log("Here is where the Form is initialized", err, json);
             this.invokeCallbacks(id, err, json ? new form_1.default(json) : null);
         });
     }
