@@ -15,6 +15,8 @@ export default class LevelDBDataSource {
   initialize({formVersions, choiceListVersions, classificationSetVersions}, callback) {
     const objects = [];
 
+    console.log("Here are the form versions", formVersions);
+
     this.checkVersion(() => {
       for (const id of Object.keys(formVersions)) {
         objects.push({type: 'form', id, version: formVersions[id]});
@@ -60,6 +62,7 @@ export default class LevelDBDataSource {
 
   invokeCallbacks(id, err, object) {
     for (const handler of this.callbacks[id]) {
+      console.log("Here's a handler that might be called", handler, err, object);
       handler(err, object);
     }
 
@@ -67,12 +70,13 @@ export default class LevelDBDataSource {
   }
 
   get(key, callback) {
-    console.log("Gettttttting", key, callback)
+    console.log("Gettttttting", key, callback.toString(), this.db);
     return this.db.get(key, (err, value) => {
       if (err && err.notFound) {
         return callback(null, null);
       }
 
+      console.log("Here is the value returned", value, this.db, this.db.toString());
       return callback(err, value && JSON.parse(value));
     });
   }
@@ -86,7 +90,6 @@ export default class LevelDBDataSource {
   }
 
   key(type, id) {
-    console.log('Key returning', [ type, id ].join(':'));
     return [ type, id ].join(':');
   }
 
@@ -111,7 +114,7 @@ export default class LevelDBDataSource {
   }
 
   getForm(id, callback) {
-    console.log("In getForm", id, callback);
+    console.log("In getForm", id, callback.toString());
     if (this.checkAlreadyFetching(id, callback)) {
       return;
     }

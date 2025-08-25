@@ -16,6 +16,7 @@ class LevelDBDataSource {
     }
     initialize({ formVersions, choiceListVersions, classificationSetVersions }, callback) {
         const objects = [];
+        console.log("Here are the form versions", formVersions);
         this.checkVersion(() => {
             for (const id of Object.keys(formVersions)) {
                 objects.push({ type: 'form', id, version: formVersions[id] });
@@ -51,16 +52,18 @@ class LevelDBDataSource {
     }
     invokeCallbacks(id, err, object) {
         for (const handler of this.callbacks[id]) {
+            console.log("Here's a handler that might be called", handler, err, object);
             handler(err, object);
         }
         delete this.callbacks[id];
     }
     get(key, callback) {
-        console.log("Gettttttting", key, callback);
+        console.log("Gettttttting", key, callback.toString(), this.db);
         return this.db.get(key, (err, value) => {
             if (err && err.notFound) {
                 return callback(null, null);
             }
+            console.log("Here is the value returned", value, this.db, this.db.toString());
             return callback(err, value && JSON.parse(value));
         });
     }
@@ -71,7 +74,6 @@ class LevelDBDataSource {
         return this.db.put(key, JSON.stringify(value), callback);
     }
     key(type, id) {
-        console.log('Key returning', [type, id].join(':'));
         return [type, id].join(':');
     }
     getChoiceList(id, callback) {
@@ -91,7 +93,7 @@ class LevelDBDataSource {
         });
     }
     getForm(id, callback) {
-        console.log("In getForm", id, callback);
+        console.log("In getForm", id, callback.toString());
         if (this.checkAlreadyFetching(id, callback)) {
             return;
         }
