@@ -7,6 +7,7 @@ export default class MemoryDataSource {
     audio: {};
     videos: {};
     tracks: {};
+    sketches: {};
     getChoiceList(id: any, callback: any): any;
     getClassificationSet(id: any, callback: any): any;
     getForm(id: any, callback: any): any;
@@ -20,6 +21,7 @@ export default class MemoryDataSource {
     getAudioTrack(id: any, callback: any): any;
     getVideo(id: any, callback: any): any;
     getVideoTrack(id: any, callback: any): any;
+    getSketch(id: any, callback: any): any;
     getChoiceListComplete(id: any, object: any, callback: any): void;
     getClassificationSetComplete(id: any, object: any, callback: any): void;
     getFormComplete(id: any, object: any, callback: any): void;
@@ -33,4 +35,5 @@ export default class MemoryDataSource {
     getAudioTrackComplete(id: any, object: any, callback: any): void;
     getVideoComplete(id: any, object: any, callback: any): void;
     getVideoTrackComplete(id: any, object: any, callback: any): void;
+    getSketchComplete(id: any, object: any, callback: any): void;
 }
