@@ -7,6 +7,7 @@ export default class MemoryDataSource {
     this.audio = {};
     this.videos = {};
     this.tracks = {};
+    this.sketches = {};
   }
 
   getChoiceList(id, callback) {
@@ -59,6 +60,10 @@ export default class MemoryDataSource {
 
   getVideoTrack(id, callback) {
     return callback(null, this.tracks[id]);
+  }
+
+  getSketch(id, callback) {
+    return callback(null, this.sketches[id]);
   }
 
   getChoiceListComplete(id, object, callback) {
@@ -132,6 +137,13 @@ export default class MemoryDataSource {
 
   getVideoTrackComplete(id, object, callback) {
     this.tracks[id] = object;
+    callback();
+  }
+
+  getSketchComplete(id, object, callback) {
+    if (object.processed) {
+      this.sketches[id] = object;
+    }
     callback();
   }
 }

@@ -23,11 +23,13 @@ export default class DataSource {
     getAudioTrack(id: any, callback: any): void;
     getVideo(id: any, callback: any): void;
     getVideoTrack(id: any, callback: any): void;
+    getSketch(id: any, callback: any): void;
     createPhoto(accessKey: any, file: any, progress: any, callback: any): void;
     createAttachment(accessKey: any, file: any, progress: any, callback: any): void;
     createVideo(accessKey: any, file: any, progress: any, callback: any): void;
     createAudio(accessKey: any, file: any, progress: any, callback: any): void;
     createSignature(accessKey: any, file: any, progress: any, callback: any): void;
+    createSketch(accessKey: any, file: any, progress: any, callback: any): void;
     saveVideoTrack(accessKey: any, file: any, progress: any, callback: any): void;
     saveAudioTrack(accessKey: any, file: any, progress: any, callback: any): void;
     saveRecord(record: any, callback: any): void;

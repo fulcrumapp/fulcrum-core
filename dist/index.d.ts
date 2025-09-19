@@ -74,6 +74,7 @@ export { default as LocationElement } from "./elements/location-element";
 export { default as LocationValue } from "./values/location-value";
 export { default as ButtonElement } from "./elements/button-element";
 export { default as SketchElement } from "./elements/sketch-element";
+export { default as SketchItemValue } from "./values/sketch-item-value";
 export { default as SketchValue } from "./values/sketch-value";
 export { default as User } from "./user";
 export { default as Role } from "./role";

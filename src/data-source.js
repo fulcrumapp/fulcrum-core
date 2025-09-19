@@ -228,6 +228,10 @@ export default class DataSource {
     this.invoke(this.root, 'getVideoTrack', [ id ], callback);
   }
 
+  getSketch(id, callback) {
+    this.invoke(this.root, 'getSketch', [ id ], callback);
+  }
+
   createPhoto(accessKey, file, progress, callback) {
     this.invoke(this.root, 'createPhoto', [ accessKey, file, progress ], callback);
   }
@@ -246,6 +250,10 @@ export default class DataSource {
 
   createSignature(accessKey, file, progress, callback) {
     this.invoke(this.root, 'createSignature', [ accessKey, file, progress ], callback);
+  }
+
+  createSketch(accessKey, file, progress, callback) {
+    this.invoke(this.root, 'createSketch', [ accessKey, file, progress ], callback);
   }
 
   saveVideoTrack(accessKey, file, progress, callback) {
