@@ -1,10 +1,8 @@
 export default class RepeatableValue extends FormValue {
+    constructor(element: any, items: any);
     _items: import("./repeatable-item-value").default[];
-    get isEmpty(): boolean;
     get displayValue(): string;
-    get searchableValue(): string | null;
     format(options: any): string | number | null;
-    get length(): number;
     toJSON(): {
         id: any;
         created_at: string | null;

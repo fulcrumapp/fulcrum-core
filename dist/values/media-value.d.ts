@@ -1,8 +1,7 @@
 export default class MediaValue extends FormValue {
+    constructor(element: any, items: any);
     _items: any[];
-    get isEmpty(): boolean;
-    get searchableValue(): string | null;
-    get length(): number;
+    get displayValue(): string;
     format({ part, formatMediaURL, formatMediaViewerURL, formatMediaName, ...args }: {
         [x: string]: any;
         part?: null | undefined;

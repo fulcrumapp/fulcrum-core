@@ -22,7 +22,6 @@ export default class Record extends Feature {
     _clientUpdatedAt: any;
     get formValues(): FormValues;
     _formValues: FormValues | undefined;
-    get hasCoordinate(): boolean;
     get hasLocation(): boolean;
     set geometry(arg: any);
     get geometry(): any;
@@ -106,15 +105,12 @@ export default class Record extends Feature {
     _updatedLongitude: any;
     _updatedAltitude: any;
     _updatedAccuracy: any;
-    updateTimestamps(): void;
     get isGeometryEnabled(): any;
     get(key: any, formValues: any): any;
     set(key: any, value: any, formValues: any): void;
     set status(arg: any);
     get status(): any;
     get statusValue(): StatusValue;
-    get searchableValue(): string;
-    get displayValue(): string;
     get isStatusFieldEnabled(): any;
     get formID(): any;
     get projectName(): any;
@@ -168,8 +164,6 @@ export default class Record extends Feature {
     get updatedAltitude(): any;
     set updatedAccuracy(arg: any);
     get updatedAccuracy(): any;
-    get hasCreatedCoordinate(): boolean;
-    get hasUpdatedCoordinate(): boolean;
     get createdLocation(): {
         latitude: any;
         longitude: any;

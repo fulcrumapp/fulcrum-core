@@ -1,53 +1,53 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-const notImplemented = () => {
+function notImplemented() {
     throw new Error('Not implemented');
-};
+}
 class Feature {
     get id() {
-        notImplemented();
+        return notImplemented();
     }
     get createdAt() {
-        notImplemented();
+        return notImplemented();
     }
     get updatedAt() {
-        notImplemented();
+        return notImplemented();
     }
     get formValues() {
-        notImplemented();
+        return notImplemented();
     }
     get hasCoordinate() {
-        notImplemented();
+        return notImplemented();
     }
     get isGeometryEnabled() {
-        notImplemented();
+        return notImplemented();
     }
     get displayValue() {
-        notImplemented();
+        return notImplemented();
     }
     get searchableValue() {
-        notImplemented();
+        return notImplemented();
     }
-    toJSON() {
-        notImplemented();
+    toJSON(options) {
+        return notImplemented();
     }
-    updateTimetamps() {
+    updateTimestamps() {
         notImplemented();
     }
     get createdDuration() {
-        notImplemented();
+        return notImplemented();
     }
     get updatedDuration() {
-        notImplemented();
+        return notImplemented();
     }
     get editedDuration() {
-        notImplemented();
+        return notImplemented();
     }
     get hasCreatedCoordinate() {
-        notImplemented();
+        return notImplemented();
     }
     get hasUpdatedCoordinate() {
-        notImplemented();
+        return notImplemented();
     }
 }
 exports.default = Feature;

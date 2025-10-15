@@ -21,7 +21,6 @@ export default class RepeatableItemValue extends Feature {
     _geometry: any;
     _latitude: any;
     _longitude: any;
-    get hasCoordinate(): boolean;
     get hasLocation(): boolean;
     updateFromAPIAttributes(attrs: any): void;
     _id: any;
@@ -78,10 +77,7 @@ export default class RepeatableItemValue extends Feature {
         version: any;
         changeset_id: any;
     };
-    updateTimestamps(): void;
     get isGeometryEnabled(): any;
-    get displayValue(): string;
-    get searchableValue(): string;
     get geometryAsGeoJSON(): any;
     set latitude(arg: any);
     get latitude(): any;
@@ -118,8 +114,6 @@ export default class RepeatableItemValue extends Feature {
     get updatedAltitude(): any;
     set updatedAccuracy(arg: any);
     get updatedAccuracy(): any;
-    get hasCreatedCoordinate(): boolean;
-    get hasUpdatedCoordinate(): boolean;
     get createdLocation(): {
         latitude: any;
         longitude: any;

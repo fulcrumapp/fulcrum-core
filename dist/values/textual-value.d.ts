@@ -1,15 +1,13 @@
 export default class TextualValue extends FormValue {
+    constructor(element: any, textValue: any);
     textValue: any;
     format({ useDisplayValue }: {
         useDisplayValue?: boolean | undefined;
     }): any;
-    get isEmpty(): boolean;
     get displayValue(): any;
     get searchableValue(): any;
     get length(): any;
-    get columnValue(): any;
     get multipleValues(): null;
-    toJSON(): any;
     isEqual(stringValue: any): boolean;
     contains(stringValue: any): any;
     startsWith(stringValue: any): any;

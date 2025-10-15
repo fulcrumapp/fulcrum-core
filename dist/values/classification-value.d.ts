@@ -1,7 +1,7 @@
 export default class ClassificationValue extends FormValue {
+    constructor(element: any, attributes: any);
     _choiceValues: any[];
     _otherValues: any[];
-    get isEmpty(): boolean;
     isEqual(value: any): boolean;
     contains(value: any): boolean;
     startsWith(value: any): boolean;
@@ -12,7 +12,6 @@ export default class ClassificationValue extends FormValue {
     format({ useDisplayValue }: {
         useDisplayValue?: boolean | undefined;
     }): any[] | null;
-    get length(): number;
     toJSON(): {
         choice_values: any[];
         other_values: any[];

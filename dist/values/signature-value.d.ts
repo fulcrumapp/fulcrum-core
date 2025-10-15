@@ -1,4 +1,5 @@
 export default class SignatureValue extends FormValue {
+    constructor(element: any, attributes: any);
     _identifier: any;
     _timestamp: Date | null | undefined;
     set id(arg: any);
@@ -6,7 +7,6 @@ export default class SignatureValue extends FormValue {
     set timestamp(arg: Date | null | undefined);
     get timestamp(): Date | null | undefined;
     clear(): void;
-    get isEmpty(): boolean;
     get displayValue(): "1 Signature" | null;
     get searchableValue(): null;
     format({ part, formatSignatureURL, formatSignatureViewerURL, formatSignatureName, ...args }: {

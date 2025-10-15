@@ -1,7 +1,7 @@
 export default class ChoiceValue extends FormValue {
+    constructor(element: any, attributes: any);
     _choiceValues: any[];
     _otherValues: any[];
-    get isEmpty(): boolean;
     format({ useDisplayValue }: {
         useDisplayValue?: boolean | undefined;
     }): any;
@@ -9,7 +9,6 @@ export default class ChoiceValue extends FormValue {
     get valueStrings(): any[];
     get displayValue(): string;
     get searchableValue(): string;
-    get length(): number;
     toJSON(): {
         choice_values: any[];
         other_values: any[];
@@ -17,7 +16,6 @@ export default class ChoiceValue extends FormValue {
     toSimpleJSON({ labels }?: {
         labels: any;
     }): any;
-    get columnValue(): any;
     get multipleValues(): null;
     get hasOtherValue(): boolean;
     set selectedValues(arg: any[]);

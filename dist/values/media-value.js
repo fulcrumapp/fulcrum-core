@@ -46,6 +46,15 @@ class MediaValue extends form_value_1.default {
     get length() {
         return this._items.length;
     }
+    get displayValue() {
+        if (this.isEmpty) {
+            return '';
+        }
+        if (this.length === 1) {
+            return '1 Item';
+        }
+        return `${this.length} Items`;
+    }
     format(_a) {
         var { part = null, formatMediaURL, formatMediaViewerURL, formatMediaName } = _a, args = __rest(_a, ["part", "formatMediaURL", "formatMediaViewerURL", "formatMediaName"]);
         if (this.isEmpty) {
