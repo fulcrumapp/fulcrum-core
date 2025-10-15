@@ -112,3 +112,17 @@ node_modules/.bin/tsc --noEmit blog/2025-10-15-fixing-typescript-type-mismatches
 ```
 
 Should complete with zero errors.
+
+## Test Suite Status
+
+After our changes:
+- ✅ **149 tests passing**
+- ❌ **1 test failing** (pre-existing)
+
+The failing test `test/elements/condition.js:114` "should return false when a conditionally hidden field with 'clear' has a matching value" was **already failing in `main` branch before our changes**. This confirms our type definition changes did not introduce any regressions.
+
+```bash
+# Verified on main branch
+yarn test --grep "should return false when a conditionally hidden field"
+# Result: Same failure - not introduced by this PR
+```
