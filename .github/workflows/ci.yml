@@ -1,0 +1,46 @@
+name: CI
+
+on:
+  push:
+    branches: [ main, master, develop, 'poc/**' ]
+  pull_request:
+    branches: [ main, master, develop ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    
+    strategy:
+      matrix:
+        node-version: [18.x, 20.x]
+    
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Setup Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+      
+      - name: Install dependencies
+        run: yarn install --frozen-lockfile
+      
+      - name: Lint
+        run: yarn lint
+      
+      - name: Type check
+        run: yarn typecheck
+      
+      - name: Build
+        run: yarn build
+      
+      - name: Run tests
+        run: yarn test
+      
+      - name: Verify dist is not committed
+        run: |
+          if git ls-files --error-unmatch dist/ 2> /dev/null; then
+            echo "Error: dist/ directory should not be committed"
+            exit 1
+          fi
+          echo "✅ dist/ is correctly excluded from Git"
