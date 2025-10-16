@@ -23,6 +23,7 @@
     "no-restricted-syntax": 0,
     "no-prototype-builtins": 0,
     "max-classes-per-file": 0,
-    "class-methods-use-this": 0
+    "class-methods-use-this": 0,
+    "no-underscore-dangle": 0
   }
 }

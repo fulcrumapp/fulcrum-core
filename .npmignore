@@ -1,0 +1,31 @@
+# Source files
+src/
+test/
+blog/
+
+# Config files
+.eslintrc
+tsconfig.json
+tsconfig.*.json
+.tool-versions
+compass.yml
+
+# Git files
+.git/
+.github/
+.gitignore
+
+# Development files
+node_modules/
+coverage/
+*.log
+.DS_Store
+.env
+.env.local
+
+# Scripts
+console
+
+# Documentation (keep only README in package)
+docs/
+MODERNIZATION_PLAN.md
