@@ -78,46 +78,46 @@
 
 ---
 
-### **FASE 2: Crear Tipos TypeScript (Sin tocar código existente)** �
-**Duración estimada**: 3-5 días  
-**Riesgo**: Bajo  
-**Impacto**: Alto (habilita IntelliSense inmediatamente)
+### **PHASE 2: Create TypeScript Types (Without touching existing code)** 🟢
+**Estimated duration**: 3-5 days  
+**Risk**: Low  
+**Impact**: High (enables IntelliSense immediately)
 
-#### Objetivo:
-Crear SOLO las definiciones de tipos TypeScript que describen las entidades existentes, sin cambiar ningún código .js
+#### Goal:
+Create ONLY TypeScript type definitions that describe existing entities, without changing any .js code
 
-#### Tareas:
-1. **Crear archivo de tipos centralizados**
-   - [ ] Crear `/src/types/api-attributes.ts`
-   - [ ] Definir `FormAttributes` (basado en form.js)
-   - [ ] Definir `RecordAttributes` (basado en record.js)
-   - [ ] Definir `FeatureAttributes` (basado en feature.ts)
-   - [ ] Definir todos los `*ElementAttributes`
-   - [ ] Definir todos los `*ValueAttributes`
+#### Tasks:
+1. **Create centralized types file**
+   - [ ] Create `/src/types/api-attributes.ts`
+   - [ ] Define `FormAttributes` (based on form.js)
+   - [ ] Define `RecordAttributes` (based on record.js)
+   - [ ] Define `FeatureAttributes` (based on feature.ts)
+   - [ ] Define all `*ElementAttributes`
+   - [ ] Define all `*ValueAttributes`
 
-2. **Crear tipos de configuración**
+2. **Create configuration types**
    - [ ] `DataSourceConfig`
    - [ ] `ValidationConfig`
    - [ ] `LoadOptions`, `SaveOptions`, etc.
 
-3. **Exportar para uso externo**
-   - [ ] Crear `/src/types.ts` como entry point
-   - [ ] Configurar en package.json exports
-   - [ ] ⚠️ NINGÚN archivo .js es modificado
+3. **Export for external use**
+   - [ ] Create `/src/types.ts` as entry point
+   - [ ] Configure in package.json exports
+   - [ ] ⚠️ NO .js files are modified
 
-**Entregables**:
-- Archivo `types.ts` exportable
-- IntelliSense disponible vía `import type from 'fulcrum-core/types'`
-- Documentación de tipos con TSDoc
-- CERO cambios en código existente
+**Deliverables**:
+- Exportable `types.ts` file
+- IntelliSense available via `import type from 'fulcrum-core/types'`
+- Types documentation with TSDoc
+- ZERO changes to existing code
 
-**Ejemplo de uso inmediato**:
+**Immediate usage example**:
 ```typescript
-// Otros repos ahora pueden hacer:
+// Other repos can now do:
 import type { FormAttributes, RecordAttributes } from 'fulcrum-core/types';
 
 interface MyData {
-  form: FormAttributes;  // ✅ tipos oficiales, sin custom partials
+  form: FormAttributes;  // ✅ official types, no custom partials
   records: RecordAttributes[];
 }
 ```
@@ -504,7 +504,7 @@ New Files:
 
 **Next Steps:**
 - [ ] Create TypeScript type definitions
-- [ ] Export types via `@fulcrumapp/fulcrum-core/types`
+- [ ] Export types via `fulcrum-core/types`
 - [ ] Enable IntelliSense for consumers
 - [ ] Zero changes to existing .js code
 
