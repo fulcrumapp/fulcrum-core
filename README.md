@@ -150,16 +150,25 @@ yarn publish  # Publishes to GitHub Packages
 
 ## Project Status
 
-This library is undergoing modernization. See [MODERNIZATION_PLAN.md](./MODERNIZATION_PLAN.md) for details.
+This library is undergoing modernization to improve maintainability, TypeScript support, and developer experience. The modernization is split into 5 phases, each adding new capabilities without breaking existing code.
 
 ### Current Status (Phase 1 Complete ✅)
 - ✅ Configured for GitHub Packages
 - ✅ Removed dist/ from version control
-- ✅ Automated CI/CD workflows
-- 🔄 TypeScript types (Phase 2 - coming soon)
+- ✅ TypeScript declarations properly exposed
+- 🔄 TypeScript types export (Phase 2 - in progress)
 - 🔄 Separated models/services (Phase 3 - planned)
 
 ## Documentation
 
-- [Modernization Plan](./MODERNIZATION_PLAN.md) - Full roadmap and strategy
+### Modernization Docs
+- [Overview](./docs/OVERVIEW.md) - Problems, goals, and strategy
+- [Phase 1](./docs/PHASE_1.md) - Library Configuration ✅ Complete
+- [Phase 2](./docs/PHASE_2.md) - TypeScript Types 🔄 In Progress
+- [Phase 3-5](./docs/README.md) - Future phases
+- [Usage Patterns](./docs/USAGE_PATTERNS.md) - How to use both APIs
+- [Project Structure](./docs/PROJECT_STRUCTURE.md) - Final directory layout
+- [Versioning](./docs/VERSIONING.md) - Release strategy
+
+### API Documentation
 - [API Docs](http://fulcrumapp.github.io/fulcrum-core/) - Generated documentation
