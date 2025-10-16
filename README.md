@@ -50,7 +50,7 @@ This package is published to **GitHub Packages** (not npm).
 Create or update `.npmrc` in your project root:
 
 ```
-@fulcrumapp:registry=https://npm.pkg.github.com
+registry=https://npm.pkg.github.com/@fulcrumapp
 ```
 
 ### Authenticate
@@ -66,22 +66,22 @@ echo "//npm.pkg.github.com/:_authToken=YOUR_TOKEN" >> ~/.npmrc
 ```yaml
 - name: Configure GitHub Packages
   run: |
-    echo "@fulcrumapp:registry=https://npm.pkg.github.com" >> .npmrc
+    echo "registry=https://npm.pkg.github.com/@fulcrumapp" >> .npmrc
     echo "//npm.pkg.github.com/:_authToken=${{ secrets.GITHUB_TOKEN }}" >> .npmrc
 ```
 
 ### Install
 
 ```bash
-yarn add @fulcrumapp/fulcrum-core
+yarn add fulcrum-core
 # or
-npm install @fulcrumapp/fulcrum-core
+npm install fulcrum-core
 ```
 
 ## Usage
 
 ```javascript
-import { Form, Record } from '@fulcrumapp/fulcrum-core';
+import { Form, Record } from 'fulcrum-core';
 
 const form = new Form(formAttributes);
 const record = new Record(recordAttributes, form);

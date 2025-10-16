@@ -473,32 +473,32 @@ import type { RecordAttributes } from 'fulcrum-core/types'; // types only
 
 **Completed:**
 - ✅ Removed dist/ from version control (708 files)
-- ✅ Configured package for GitHub Packages (`@fulcrumapp/fulcrum-core`)
+- ✅ Configured package for GitHub Packages (kept name `fulcrum-core`)
 - ✅ Added TypeScript build configuration (`types` field)
-- ✅ Created CI/CD workflows (automated testing & publishing)
 - ✅ Updated documentation (README with installation guide)
+- ⏳ GitHub Packages publish workflow (to be added by infrastructure team)
 
 **Changes Made:**
 ```diff
 package.json:
-+ "name": "@fulcrumapp/fulcrum-core"
 + "types": "dist/index.d.ts"
-+ "publishConfig": { "registry": "https://npm.pkg.github.com" }
++ "publishConfig": { "registry": "https://npm.pkg.github.com/@fulcrumapp" }
 
 .gitignore:
 + dist/
 
 New Files:
-+ .github/workflows/ci.yml
-+ .github/workflows/publish.yml
 + .npmignore
++ MODERNIZATION_PLAN.md
 ```
 
 **Impact:**
 - 🎉 PRs are now much cleaner (no dist/ changes)
-- 🎉 Publishing simplified (GitHub Packages only)
-- 🎉 CI/CD automated (tests + publish on release)
-- ⚠️ Consumers need one-time update (package name + .npmrc)
+- 🎉 Package configured for GitHub Packages
+- 🎉 TypeScript types properly exposed
+- 🎉 Zero breaking changes (package name unchanged)
+- ⚠️ Consumers only need `.npmrc` configuration (when ready)
+- 📋 Next: Infrastructure team to add publish workflow
 
 ### 🔄 Phase 2: In Progress
 

@@ -1,5 +1,5 @@
 {
-  "name": "@fulcrumapp/fulcrum-core",
+  "name": "fulcrum-core",
   "version": "1.5.4",
   "description": "Fulcrum Core",
   "homepage": "http://github.com/fulcrumapp/fulcrum-core",
@@ -11,7 +11,7 @@
     "LICENSE"
   ],
   "publishConfig": {
-    "registry": "https://npm.pkg.github.com"
+    "registry": "https://npm.pkg.github.com/@fulcrumapp"
   },
   "exports": {
     ".": {
