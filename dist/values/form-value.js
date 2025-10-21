@@ -1,64 +1,61 @@
 "use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
+const form_value_factory_1 = __importDefault(require("./form-value-factory"));
 function notImplemented() {
     throw new Error('Not implemented');
 }
 class FormValue {
     constructor(element, value) {
-        this._element = element;
+        this.element = element;
         this._rawValue = value;
     }
-    get element() {
-        return this._element;
-    }
-    set element(element) {
-        this._element = element;
-    }
     get isEmpty() {
-        notImplemented();
+        return notImplemented();
     }
     get displayValue() {
-        notImplemented();
+        return notImplemented();
     }
     get searchableValue() {
-        notImplemented();
+        return notImplemented();
     }
     get length() {
-        notImplemented();
+        return notImplemented();
     }
     get columnValue() {
-        notImplemented();
+        return notImplemented();
     }
     get multipleValues() {
-        notImplemented();
+        return notImplemented();
     }
     format(options) {
-        notImplemented();
+        return notImplemented();
     }
     toJSON() {
-        notImplemented();
+        return notImplemented();
     }
     toSimpleJSON() {
         return this.toJSON();
     }
     isEqual(value) {
-        notImplemented();
+        return notImplemented();
     }
     contains(value) {
-        notImplemented();
+        return notImplemented();
     }
     startsWith(value) {
-        notImplemented();
+        return notImplemented();
     }
     isLessThan(value) {
-        notImplemented();
+        return notImplemented();
     }
     isGreaterThan(value) {
-        notImplemented();
+        return notImplemented();
     }
     static create(element, attributes) {
-        const FormValueFactory = require('./form-value-factory').default;
-        return FormValueFactory.create(element, attributes);
+        return form_value_factory_1.default.create(element, attributes);
     }
 }
 exports.default = FormValue;

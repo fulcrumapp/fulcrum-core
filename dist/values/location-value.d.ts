@@ -1,4 +1,5 @@
 export default class LocationValue extends FormValue {
+    constructor(element: any, attributes: any);
     _latitude: any;
     _longitude: any;
     _address: any;
@@ -14,6 +15,5 @@ export default class LocationValue extends FormValue {
     set address(arg: any);
     get address(): any;
     get columnValue(): {};
-    get isEmpty(): boolean;
 }
 import FormValue from "./form-value";

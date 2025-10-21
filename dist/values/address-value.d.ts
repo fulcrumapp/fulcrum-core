@@ -1,9 +1,8 @@
 export default class AddressValue extends FormValue {
+    constructor(element: any, attributes: any);
     address: Address;
-    get isEmpty(): boolean;
     get displayValue(): string;
     get searchableValue(): string;
-    get length(): number;
     get columnValue(): {};
     get multipleValues(): null;
     format({ part }: {

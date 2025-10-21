@@ -99,7 +99,7 @@ describe('isSatisfied', () => {
   it('should return false when a conditionally hidden field with "clear" has a matching value', () => {
     const element = record.form.get('ae75');
 
-    sinon.stub(Condition, 'shouldElementBeVisible').returns(false);
+    sinon.stub(Condition, 'shouldElementBeVisibleRecursive').returns(false);
 
     const attributes = {
       field_key: 'ae75',
@@ -113,6 +113,6 @@ describe('isSatisfied', () => {
 
     result.should.eql(false);
 
-    Condition.shouldElementBeVisible.restore();
+    Condition.shouldElementBeVisibleRecursive.restore();
   });
 });

@@ -1,9 +1,6 @@
 export default class RecordLinkValue extends FormValue {
+    constructor(element: any, items: any);
     _items: RecordLinkItemValue[];
-    get isEmpty(): boolean;
-    get displayValue(): string | null;
-    get searchableValue(): string | null;
-    get length(): number;
     format({ part }: {
         part?: null | undefined;
     }): any[] | null;

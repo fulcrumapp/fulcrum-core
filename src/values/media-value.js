@@ -40,6 +40,18 @@ export default class MediaValue extends FormValue {
     return this._items.length;
   }
 
+  get displayValue() {
+    if (this.isEmpty) {
+      return '';
+    }
+
+    if (this.length === 1) {
+      return '1 Item';
+    }
+
+    return `${this.length} Items`;
+  }
+
   format({part = null, formatMediaURL, formatMediaViewerURL, formatMediaName, ...args}) {
     if (this.isEmpty) {
       return null;
