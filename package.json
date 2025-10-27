@@ -4,10 +4,27 @@
   "description": "Fulcrum Core",
   "homepage": "http://github.com/fulcrumapp/fulcrum-core",
   "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com/@fulcrumapp"
+  },
+  "exports": {
+    ".": {
+      "require": "./dist/index.js",
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    }
+  },
   "scripts": {
     "test": "mocha -r ts-node/register ./test/setup.js ./test/test.js ./test/track.js ./test/elements/*.js ./test/values/*.js",
     "simpletest": "mocha -r ts-node/register ./test/setup.js ./test/test.js ./test/elements/*.js ./test/values/*.js",
-    "prepublish": "yarn run clean && yarn run build",
+    "prepublishOnly": "yarn run clean && yarn run build",
+    "prepare": "yarn run build",
     "lint": "eslint src/* src/**/*",
     "build": "tsc",
     "clean": "rm -rf dist",
