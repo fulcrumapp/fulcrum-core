@@ -114,12 +114,21 @@ src/
 
 ## ✅ Success Criteria
 
+### Functionality
 - [ ] All major entities have type definitions
 - [ ] Types exported via `fulcrum-core/types`
 - [ ] IntelliSense works in consuming projects
 - [ ] TypeScript strict mode passes
 - [ ] ZERO changes to existing .js files
 - [ ] Documentation with usage examples
+
+### Code Quality (see [CODE_STANDARDS.md](./CODE_STANDARDS.md))
+- [ ] Clean of any ESLint issues
+- [ ] 100% clean of SonarQube issues
+- [ ] 100% type coverage for new types
+- [ ] Dependencies up to date
+- [ ] No CodeQL issues
+- [ ] All types have TSDoc documentation
 
 ---
 

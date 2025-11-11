@@ -125,11 +125,21 @@ src/
 
 ## ✅ Success Criteria
 
+### Functionality
 - [ ] Type helpers available
 - [ ] Builders work fluently
 - [ ] Test utilities published
 - [ ] Documentation complete
-- [ ] Modern tooling configured
+- [ ] Modern tooling configured (Prettier, Husky)
+
+### Code Quality (see [CODE_STANDARDS.md](./CODE_STANDARDS.md))
+- [ ] Clean of any ESLint issues
+- [ ] 100% clean of SonarQube issues
+- [ ] 85%+ test coverage for utilities and builders
+- [ ] All dependencies current and maintained
+- [ ] No security vulnerabilities
+- [ ] Pre-commit hooks configured
+- [ ] All utilities have comprehensive documentation
 
 ---
 

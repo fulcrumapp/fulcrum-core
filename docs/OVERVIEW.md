@@ -93,6 +93,15 @@ Provide types without forcing refactors. Import types without runtime dependenci
 - [ ] Tree-shaking works
 - [ ] Both APIs working in parallel
 
+### Code Quality & Standards
+- [ ] Clean of any ESLint issues
+- [ ] 100% clean of SonarQube issues
+- [ ] Met code coverage requirements
+- [ ] Up to date dependencies
+- [ ] No abandoned or bespoke dependencies
+- [ ] No CodeQL issues
+- [ ] OpenTelemetry (OTEL) instrumentation considered
+
 ### Documentation
 - [ ] Clear migration guides
 - [ ] API documentation for both versions

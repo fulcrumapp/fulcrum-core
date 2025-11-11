@@ -149,12 +149,21 @@ src/
 
 ## ✅ Success Criteria
 
+### Functionality
 - [ ] New models without DataSource dependencies
 - [ ] 100% testable services
 - [ ] Original API works without changes (ZERO breaking changes)
 - [ ] Modern API available and documented
-- [ ] Test coverage for new code
 - [ ] Migration guide published
+
+### Code Quality (see [CODE_STANDARDS.md](./CODE_STANDARDS.md))
+- [ ] Clean of any ESLint issues
+- [ ] 100% clean of SonarQube issues
+- [ ] 90%+ test coverage for models and services
+- [ ] No abandoned or bespoke dependencies
+- [ ] No CodeQL security issues
+- [ ] OpenTelemetry instrumentation hooks considered
+- [ ] All public APIs have JSDoc/TSDoc documentation
 
 ---
 

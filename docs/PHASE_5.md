@@ -114,11 +114,21 @@ performance.measure('form-load', 'form-load-start', 'form-load-end');
 
 ## ✅ Success Criteria
 
+### Performance & Optimization
 - [ ] Bundle size reduced
 - [ ] Tree-shaking verified
-- [ ] 80%+ test coverage
 - [ ] Performance benchmarks established
 - [ ] Long-term plan documented
+
+### Code Quality (see [CODE_STANDARDS.md](./CODE_STANDARDS.md))
+- [ ] Clean of any ESLint issues
+- [ ] SonarQube A rating (zero bugs, vulnerabilities, code smells)
+- [ ] 80%+ overall test coverage
+- [ ] Zero abandoned packages
+- [ ] Zero security vulnerabilities (CodeQL clean)
+- [ ] All dependencies up to date
+- [ ] OpenTelemetry instrumentation evaluated and documented
+- [ ] Performance monitoring in place
 
 ---
 

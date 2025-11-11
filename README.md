@@ -163,6 +163,7 @@ This library is undergoing modernization to improve maintainability, TypeScript 
 
 ### Modernization Docs
 - [Overview](./docs/OVERVIEW.md) - Problems, goals, and strategy
+- [Code Standards](./docs/CODE_STANDARDS.md) - Quality requirements and compliance
 - [Phase 1](./docs/PHASE_1.md) - Library Configuration ✅ Complete
 - [Phase 2](./docs/PHASE_2.md) - TypeScript Types 🔄 In Progress
 - [Phase 3-5](./docs/README.md) - Future phases

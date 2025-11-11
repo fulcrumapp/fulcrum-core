@@ -9,6 +9,7 @@ The modernization is structured in 5 phases, each designed to improve the librar
 ## Documentation Structure
 
 - **[OVERVIEW.md](./OVERVIEW.md)** - Problems, goals, and high-level strategy
+- **[CODE_STANDARDS.md](./CODE_STANDARDS.md)** - Quality requirements and compliance
 - **[PHASE_1.md](./PHASE_1.md)** - Library Configuration ✅ COMPLETE
 - **[PHASE_2.md](./PHASE_2.md)** - TypeScript Types 🔄 IN PROGRESS
 - **[PHASE_3.md](./PHASE_3.md)** - Models & Services
@@ -32,3 +33,4 @@ The modernization is structured in 5 phases, each designed to improve the librar
 3. **Parallel Coexistence** - Both APIs work side by side
 4. **Optional Migration** - Adopt modern API at your own pace
 5. **Types as a Service** - Get TypeScript without refactoring
+6. **Quality First** - All code must meet Fulcrum standards (ESLint, SonarQube, CodeQL)
