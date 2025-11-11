@@ -62,14 +62,6 @@ registry=https://npm.pkg.github.com/@fulcrumapp
 echo "//npm.pkg.github.com/:_authToken=YOUR_TOKEN" >> ~/.npmrc
 ```
 
-**CI/CD (GitHub Actions):**
-```yaml
-- name: Configure GitHub Packages
-  run: |
-    echo "registry=https://npm.pkg.github.com/@fulcrumapp" >> .npmrc
-    echo "//npm.pkg.github.com/:_authToken=${{ secrets.GITHUB_TOKEN }}" >> .npmrc
-```
-
 ### Install
 
 ```bash
@@ -127,26 +119,22 @@ Starts an interactive node terminal with the library available to use:
 
 ## Publishing
 
-Publishing is automated via GitHub Actions. When you create a release:
+> ⚠️ **DEPRECATED**: Manual publishing is discouraged. Publishing is now fully automated via CI/CD. See [VERSIONING.md](./docs/VERSIONING.md) for the automated release process.
 
-1. Go to **Releases** → **Create a new release**
-2. Create a new tag (e.g., `v1.6.0`)
-3. Publish the release
-4. GitHub Actions will automatically:
-   - Run tests
-   - Build the project
-   - Publish to GitHub Packages
+### Manual Publishing (Not Recommended)
 
-### Manual Publishing (if needed)
+**Warning**: This method should only be used in exceptional circumstances. The automated CI/CD pipeline handles all releases.
+
+**DO NOT manually update version in package.json** - The CI determines versioning automatically based on commit messages.
 
 ```bash
 yarn clean && yarn build
-# Update version in package.json
-git commit -am "chore: bump version to x.x.x"
-git tag -a vx.x.x -m "x.x.x"
-git push --tags
 yarn publish  # Publishes to GitHub Packages
 ```
+
+For the proper release process, see [Release Process](./docs/VERSIONING.md#-release-process) documentation.
+
+---
 
 ## Project Status
 
