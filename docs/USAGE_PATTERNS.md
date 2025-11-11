@@ -11,7 +11,7 @@ This is the classic API that remains fully functional. Use it to maintain existi
 **Use Case**: Maintaining existing applications.
 
 ```javascript
-import { Form, Record } from 'fulcrum-core';
+import { Form, Record } from '@fulcrumapp/fulcrum-core';
 
 // Create and load a form using the ActiveRecord-style pattern
 const form = new Form(attributes);

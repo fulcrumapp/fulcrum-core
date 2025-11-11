@@ -1,5 +1,5 @@
 {
-  "name": "fulcrum-core",
+  "name": "@fulcrumapp/fulcrum-core",
   "version": "1.5.3",
   "description": "Fulcrum Core",
   "homepage": "http://github.com/fulcrumapp/fulcrum-core",

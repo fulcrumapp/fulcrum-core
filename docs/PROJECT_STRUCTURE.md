@@ -57,7 +57,7 @@ The `package.json` `exports` field allows consumers to import from different ent
 ### Original API
 The default entry point provides the original, backward-compatible API.
 ```javascript
-import { Form, Record } from 'fulcrum-core';
+import { Form, Record } from '@fulcrumapp/fulcrum-core';
 ```
 
 ### Modern API

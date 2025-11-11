@@ -31,7 +31,7 @@ The new API promotes a cleaner, more explicit pattern, while the original API re
 
 ### Original API (Still Works)
 ```javascript
-import { Form } from 'fulcrum-core';
+import { Form } from '@fulcrumapp/fulcrum-core';
 
 const form = new Form(attrs);
 await form.load(dataSource); // ActiveRecord-style

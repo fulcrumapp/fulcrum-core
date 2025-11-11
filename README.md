@@ -71,15 +71,15 @@ echo "//npm.pkg.github.com/:_authToken=YOUR_TOKEN" >> ~/.npmrc
 ### Install
 
 ```bash
-yarn add fulcrum-core
+yarn add @fulcrumapp/fulcrum-core
 # or
-npm install fulcrum-core
+npm install @fulcrumapp/fulcrum-core
 ```
 
 ## Usage
 
 ```javascript
-import { Form, Record } from 'fulcrum-core';
+import { Form, Record } from '@fulcrumapp/fulcrum-core';
 
 const form = new Form(formAttributes);
 const record = new Record(recordAttributes, form);
@@ -101,7 +101,6 @@ For more details, see the [Modernization Documentation](./docs/README.md).
 
 ## Documentation
 
-- [**Contributing Guide**](./CONTRIBUTING.md)
 - [**Modernization Plan**](./docs/OVERVIEW.md)
 - [**Code Standards**](./docs/CODE_STANDARDS.md)
 - [**Usage Patterns**](./docs/USAGE_PATTERNS.md)

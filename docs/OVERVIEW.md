@@ -1,6 +1,11 @@
 # Modernization Overview
 
-**Goal**: To transform `fulcrum-core` into a modern, maintainable, and reusable TypeScript library while maintaining backward compatibility.
+# Modernization Overview
+
+**Package**: @fulcrumapp/fulcrum-core  
+**Goal**: Transform fulcrum-core into a modern, maintainable, and reusable TypeScript library
+
+---
 
 ---
 

@@ -6,60 +6,65 @@ This document outlines the versioning, commit conventions, and release process f
 
 ## 🔢 Semantic Versioning
 
-We follow [Semantic Versioning (SemVer)](https://semver.org/). Version numbers follow the `MAJOR.MINOR.PATCH` format.
-- **MAJOR**: Breaking changes (none planned).
-- **MINOR**: Backward-compatible new features.
-- **PATCH**: Backward-compatible bug fixes.
+We follow [Semantic Versioning (SemVer)](https://semver.org/). Version numbers use the `MAJOR.MINOR.PATCH` format:
+- **MAJOR**: Breaking changes (API incompatibility).
+- **MINOR**: New features (backward-compatible).
+- **PATCH**: Bug fixes (backward-compatible).
 
 ---
 
-## 📝 Commit Message Convention
+## 📝 Commit Message Convention & Version Bump Rules
 
-We use the [Conventional Commits](https://www.conventionalcommits.org/) specification. Commit messages are used by our CI/CD pipeline to automatically determine version bumps and generate changelogs.
+The CI pipeline analyzes commit messages to automatically determine version bumps. Use these keywords:
 
-### Format
-`<type>(<scope>): <subject>`
-
-### Common Types
-- `feat`: A new feature (triggers a **minor** release).
-- `fix`: A bug fix (triggers a **patch** release).
-- `perf`: A code change that improves performance (triggers a **patch** release).
-- `docs`: Documentation-only changes (no release).
-- `test`: Adding or correcting tests (no release).
-- `refactor`: A code change that neither fixes a bug nor adds a feature (no release).
-- `chore`: Changes to the build process or auxiliary tools (no release).
+| Message Contains | Version Bump | Example |
+|-----------------|--------------|---------|
+| `major changes` | **Major** (1.0.0 → 2.0.0) | Breaking API changes |
+| `breaking changes` | **Minor** (1.0.0 → 1.1.0) | New features |
+| No keywords | **Patch** (1.0.0 → 1.0.1) | Bug fixes, improvements |
 
 ### Examples
-```bash
-# Triggers a patch release (e.g., 1.6.0 → 1.6.1)
-git commit -m "fix: resolve type inference issue in FormModel"
 
-# Triggers a minor release (e.g., 1.6.0 → 1.7.0)
-git commit -m "feat: add TypeScript types export"
+```bash
+# Major version bump (breaking changes)
+git commit -m "major changes: migrate to @fulcrumapp/fulcrum-core"
+
+# Minor version bump (new features)
+git commit -m "breaking changes: add TypeScript types export"
+
+# Patch version bump (bug fixes)
+git commit -m "fix: resolve validation error in FormModel"
 ```
+
+### Important Notes
+
+- The CI reads **all commit messages** in a PR/push, not just the merge commit.
+- Keywords are case-insensitive.
+- Multiple commits with different keywords use the highest version bump.
+- Use `major changes` only for true breaking changes (API incompatibility).
+- Use `breaking changes` for new features that remain backward-compatible.
 
 ---
 
 ## 🚢 Release Process
 
-Releases are fully automated by our CI/CD pipeline.
+Releases are fully automated by the CI/CD pipeline:
 
-1.  **Merge to `main`**: A pull request is merged into the `main` branch.
-2.  **CI Takes Over**: The CI pipeline automatically:
-    -   Analyzes commit messages since the last release to determine the new version.
-    -   Updates the `version` in `package.json`.
-    -   Builds the project.
-    -   Publishes the package to GitHub Packages.
-    -   Creates a new GitHub release with automatically generated release notes.
+1. **Merge to `main`**: A pull request is merged.
+2. **CI Takes Over**: The pipeline automatically:
+   - Analyzes commit messages to determine the version bump.
+   - Updates `package.json` with the new version.
+   - Builds the project.
+   - Publishes to GitHub Packages.
+   - Creates a GitHub release with generated release notes.
 
-**Important**: Never manually update the version in `package.json` or create version tags. The CI pipeline manages this process.
+**Important**: Never manually update the version in `package.json` or create version tags. The CI manages this automatically.
 
 ---
 
 ## 📅 Version Support
 
-We provide support for recent versions of the library:
-- **Current Version**: Receives active support, including new features and bug fixes.
-- **Previous Versions**: Receive critical bug and security fixes only.
+- **Current Version**: Full support (new features and bug fixes).
+- **Previous Versions**: Critical bug and security fixes only.
 
-We recommend staying on the latest version to get the best support and features.
+We recommend staying on the latest version for the best support and features.
