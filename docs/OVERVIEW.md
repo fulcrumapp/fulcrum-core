@@ -117,6 +117,7 @@ Provide types without forcing refactors. Import types without runtime dependenci
 3. **Tests first**: New code 100% tested before merge
 4. **Dual documentation**: Maintain docs for both APIs
 5. **Communication**: Slack/Email for significant changes
+6. **Documentation cleanup**: Once all phases are complete, phase-specific files (PHASE_1.md through PHASE_5.md) should be archived or removed to avoid documentation clutter. Focus on maintaining comprehensive API documentation, usage patterns, and migration guides instead.
 
 ---
 
