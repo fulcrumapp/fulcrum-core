@@ -1,36 +1,20 @@
 # Modernization Documentation
 
-This directory contains the complete modernization plan for fulcrum-core.
+This directory contains the complete modernization plan for `fulcrum-core`.
 
-## Overview
+-   [**Overview**](./OVERVIEW.md) - High-level goals, problems, and strategy.
+-   [**Phase 1: Library Configuration**](./PHASE_1.md) - ✅ Complete
+-   [**Phase 2: TypeScript Types**](./PHASE_2.md) - 🔄 In Progress
+-   [**Phase 3: Models & Services**](./PHASE_3.md) - 📅 Planned
+-   [**Phase 4: DX Improvements**](./PHASE_4.md) - 📅 Planned
+-   [**Phase 5: Optimization & Cleanup**](./PHASE_5.md) - 📅 Planned
 
-The modernization is structured in 5 phases, each designed to improve the library incrementally without breaking changes.
+---
 
-## Documentation Structure
+### Supporting Documents
 
-- **[OVERVIEW.md](./OVERVIEW.md)** - Problems, goals, and high-level strategy
-- **[CODE_STANDARDS.md](./CODE_STANDARDS.md)** - Quality requirements and compliance
-- **[PHASE_1.md](./PHASE_1.md)** - Library Configuration ✅ COMPLETE
-- **[PHASE_2.md](./PHASE_2.md)** - TypeScript Types 🔄 IN PROGRESS
-- **[PHASE_3.md](./PHASE_3.md)** - Models & Services
-- **[PHASE_4.md](./PHASE_4.md)** - DX Improvements
-- **[PHASE_5.md](./PHASE_5.md)** - Optimization & Cleanup
-- **[PROJECT_STRUCTURE.md](./PROJECT_STRUCTURE.md)** - Final directory structure
-- **[USAGE_PATTERNS.md](./USAGE_PATTERNS.md)** - How to use both APIs
-- **[VERSIONING.md](./VERSIONING.md)** - Versioning strategy and roadmap
+-   [**Code Standards**](./CODE_STANDARDS.md) - Quality requirements for all contributions.
+-   [**Project Structure**](./PROJECT_STRUCTURE.md) - The target directory structure.
+-   [**Usage Patterns**](./USAGE_PATTERNS.md) - How to use the original and modern APIs.
+-   [**Versioning**](./VERSIONING.md) - The versioning and release strategy.
 
-## Quick Links
-
-- **Current Status**: Phase 1 Complete, Phase 2 In Progress
-- **Strategy**: Additive only (zero breaking changes)
-- **Timeline**: ~5-7 weeks total
-- **Risk Level**: Low (parallel implementation)
-
-## Key Principles
-
-1. **Zero Breaking Changes** - Original code stays untouched
-2. **Additive Strategy** - Only add, never remove or change
-3. **Parallel Coexistence** - Both APIs work side by side
-4. **Optional Migration** - Adopt modern API at your own pace
-5. **Types as a Service** - Get TypeScript without refactoring
-6. **Quality First** - All code must meet Fulcrum standards (ESLint, SonarQube, CodeQL)

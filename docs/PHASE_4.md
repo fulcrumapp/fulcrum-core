@@ -1,169 +1,56 @@
-# Phase 4: DX and Utilities Improvement
+# Phase 4: DX and Utilities
 
-**Status**: 📅 PLANNED  
-**Duration**: 1 week  
-**Risk**: Low  
-**Impact**: Medium (quality of life)
+**Status**: 📅 Planned
 
----
-
-## 🎯 Goals
-
-1. Create reusable type helpers and utilities
-2. Build fluent APIs and builders
-3. Improve documentation
-4. Set up modern development tooling
+This phase focuses on improving the developer experience (DX) by creating reusable utilities, fluent builders, and better documentation.
 
 ---
 
-## 📋 Tasks
+## 🎯 Goal
 
-### 1. Type helpers and utilities
-- [ ] Create exportable utility types
-- [ ] Partial types for each entity
-- [ ] Type guards for runtime checking
-- [ ] Branded types where applicable
-
-### 2. Builders and factories
-- [ ] FormBuilder for fluent construction
-- [ ] RecordBuilder
-- [ ] Test helpers/fixtures
-
-### 3. Documentation
-- [ ] Updated README with examples
-- [ ] Detailed migration guide
-- [ ] API documentation (TypeDoc)
-- [ ] Common usage examples
-
-### 4. Tooling
-- [ ] Prettier configured
-- [ ] ESLint updated
-- [ ] Husky for pre-commit hooks
-- [ ] Commitlint
+To make `fulcrum-core` easier and more efficient to use, especially for common tasks and in test environments.
 
 ---
 
-## 📦 Deliverables
+## ✨ Key Deliverables
 
-- Reusable utilities
-- Complete documentation
-- Modern tooling
-- Usage examples
+-   **Fluent Builders**:
+    -   Implement builders (e.g., `FormBuilder`, `RecordBuilder`) to simplify the programmatic creation of complex objects.
+-   **Type Utilities**:
+    -   Provide helpful type guards (e.g., `isFormModel`) and utility types to make working with `fulcrum-core` objects in TypeScript easier.
+-   **Test Helpers**:
+    -   Export mock objects and test factories (e.g., `createMockForm`) to simplify writing tests in consuming projects. These will be available via a `fulcrum-core/testing` entry point.
+-   **Enhanced Documentation**:
+    -   Create comprehensive API documentation, usage examples, and a clear migration guide.
 
 ---
 
 ## 💡 Usage Examples
-
-### Type Helpers
-```typescript
-import type { 
-  PartialFormAttributes,
-  RequiredRecordAttributes,
-  FormAttributesWithElements
-} from 'fulcrum-core/types';
-
-// Partial updates
-function updateForm(id: string, updates: PartialFormAttributes) {
-  // Only include fields you want to update
-}
-
-// Type guards
-import { isFormModel, isRecordModel } from 'fulcrum-core/modern';
-
-if (isFormModel(data)) {
-  // TypeScript knows this is FormModel
-}
-```
 
 ### Builders
 ```typescript
 import { FormBuilder } from 'fulcrum-core/modern';
 
 const form = new FormBuilder()
-  .setName('Inspection Form')
-  .addTextField('inspector_name', 'Inspector Name')
-  .addDateField('inspection_date', 'Date')
+  .withName('Inspection Form')
+  .addTextField({ data_name: 'inspector_name', label: 'Inspector Name' })
   .build();
 ```
 
 ### Test Helpers
 ```typescript
-import { createMockForm, createMockRecord } from 'fulcrum-core/testing';
+import { createMockForm } from 'fulcrum-core/testing';
 
-describe('My Feature', () => {
-  it('should work with forms', () => {
-    const form = createMockForm({ name: 'Test Form' });
-    // Use in tests
-  });
+it('should handle form processing', () => {
+  const form = createMockForm({ name: 'Test Form' });
+  // ... use mock form in test
 });
 ```
 
 ---
 
-## 📂 File Structure
+## 📈 Impact
 
-```
-src/
-├── models/              # ✅ EXISTS from Phase 3
-├── services/            # ✅ EXISTS from Phase 3
-├── types/               # ✅ EXISTS from Phase 2
-│
-├── builders/            # ✨ NEW
-│   ├── form-builder.ts
-│   └── record-builder.ts
-│
-├── testing/             # ✨ NEW
-│   ├── mocks.ts
-│   └── fixtures.ts
-│
-└── utils/               # ✨ ENHANCED
-    ├── type-guards.ts
-    └── helpers.ts
-```
-
----
-
-## ✅ Success Criteria
-
-### Functionality
-- [ ] Type helpers available
-- [ ] Builders work fluently
-- [ ] Test utilities published
-- [ ] Documentation complete
-- [ ] Modern tooling configured (Prettier, Husky)
-
-### Code Quality (see [CODE_STANDARDS.md](./CODE_STANDARDS.md))
-- [ ] Clean of any ESLint issues
-- [ ] 100% clean of SonarQube issues
-- [ ] 85%+ test coverage for utilities and builders
-- [ ] All dependencies current and maintained
-- [ ] No security vulnerabilities
-- [ ] Pre-commit hooks configured
-- [ ] All utilities have comprehensive documentation
-
----
-
-## 📈 Expected Impact
-
-### Before Phase 4
-- 🔴 Manual object construction
-- 🔴 No type helpers
-- 🔴 Scattered documentation
-- 🔴 Inconsistent tooling
-
-### After Phase 4
-- 🟢 Fluent builders
-- 🟢 Reusable type utilities
-- 🟢 Comprehensive docs
-- 🟢 Modern dev tools
-- 🟢 Better DX
-
----
-
-## ⏭️ Next Steps
-
-After Phase 4 completion:
-1. Publish updated package
-2. Share documentation
-3. Gather feedback
-4. Begin Phase 5 (Optimization)
+-   **Increased Productivity**: Builders and utilities reduce boilerplate and simplify common tasks.
+-   **Improved Test Quality**: Test helpers make it easier to write robust and maintainable tests.
+-   **Better Onboarding**: Clearer documentation helps new developers get up to speed quickly.

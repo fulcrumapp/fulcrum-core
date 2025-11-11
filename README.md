@@ -2,40 +2,46 @@
 
 The JavaScript object model for Fulcrum.
 
-Includes:
-* Form schema parsing and definitions
-* Record parsing and field value definitions
-* Record (and child record) titles
-* Address field formatting
-* Date/time localization
-* Number localization (1.337,00 vs 1,337.00)
-* Currency formatting
-* Choice and classification set label lookups
-* Visibility and requirement conditions
-* Required field validations
-* Min/max validations
-* Pattern validations
-* Default values
-* Canonical definitions of "emptiness" / blank / length / etc
-* JSON serialization for all field types
-* Formatting calculation fields
-* Full support for record link fields and repeatables
+This library provides a comprehensive object model for Fulcrum data, including:
+* Form and record parsing
+* Record titles and address formatting
+* Date, time, and number localization
+* Choice and classification set lookups
+* Visibility, requirement, and validation rules
+* Default values and emptiness definitions
+* JSON serialization and calculation fields
+* Support for record links and repeatables
+
+## Development
+
+### Prerequisites
+- Node.js 16+
+- yarn
 
 ### Setup
 
 ```sh
+# Install dependencies
 yarn install
+```
+
+### Build
+
+```sh
+# Build the project
+yarn build
 ```
 
 ### Tests
 
 ```sh
+# Run all tests
 yarn test
 ```
 
 ### Console
 
-Starts an interactive node terminal with the library available to use
+Starts an interactive node terminal with the library available for use:
 
 ```sh
 ./console
@@ -43,22 +49,22 @@ Starts an interactive node terminal with the library available to use
 
 ## Installation
 
-This package is published to **GitHub Packages** (not npm).
+This package is published to **GitHub Packages**.
 
-### Configure npm
+### 1. Configure npm
 
 Create or update `.npmrc` in your project root:
 
 ```
-registry=https://npm.pkg.github.com/@fulcrumapp
+@fulcrumapp:registry=https://npm.pkg.github.com/
 ```
 
-### Authenticate
+### 2. Authenticate
 
-**Local Development:**
+Generate a [GitHub Personal Access Token](https://github.com/settings/tokens) with `read:packages` scope and configure it for npm.
+
+**For local development, add the token to your user `~/.npmrc` file:**
 ```bash
-# Generate a GitHub Personal Access Token with 'read:packages' scope
-# Then add to ~/.npmrc:
 echo "//npm.pkg.github.com/:_authToken=YOUR_TOKEN" >> ~/.npmrc
 ```
 
@@ -80,87 +86,24 @@ const record = new Record(recordAttributes, form);
 
 // Access record data
 console.log(record.id);
-console.log(record.formValues.get('field_key'));
+console.log(record.formValues.get('field_key').displayValue);
 ```
 
-## Development
+## Project Status: Modernization
 
-### Setup
+This library is being modernized to improve maintainability, adopt TypeScript, and enhance the developer experience. The project is split into several phases, adding new capabilities without breaking changes.
 
-```sh
-yarn install
-```
+- **Phase 1: Library Configuration (Complete)**
+- **Phase 2: TypeScript Types (In Progress)**
+- **Phase 3-5: Planned**
 
-### Build
-
-```sh
-yarn build
-```
-
-### Tests
-
-```sh
-yarn test
-```
-
-### Lint
-
-```sh
-yarn lint
-```
-
-### Console
-
-Starts an interactive node terminal with the library available to use:
-
-```sh
-./console
-```
-
-## Publishing
-
-> ⚠️ **DEPRECATED**: Manual publishing is discouraged. Publishing is now fully automated via CI/CD. See [VERSIONING.md](./docs/VERSIONING.md) for the automated release process.
-
-### Manual Publishing (Not Recommended)
-
-**Warning**: This method should only be used in exceptional circumstances. The automated CI/CD pipeline handles all releases.
-
-**DO NOT manually update version in package.json** - The CI determines versioning automatically based on commit messages.
-
-```bash
-yarn clean && yarn build
-yarn publish  # Publishes to GitHub Packages
-```
-
-For the proper release process, see [Release Process](./docs/VERSIONING.md#-release-process) documentation.
-
----
-
-## Project Status
-
-This library is undergoing modernization to improve maintainability, TypeScript support, and developer experience. The modernization is split into 5 phases, each adding new capabilities without breaking existing code.
-
-### Current Status (Phase 1 Complete ✅)
-- ✅ Configured for GitHub Packages
-- ✅ Removed dist/ from version control
-- ✅ TypeScript declarations properly exposed
-- 🔄 TypeScript types export (Phase 2 - in progress)
-- 🔄 Separated models/services (Phase 3 - planned)
+For more details, see the [Modernization Documentation](./docs/README.md).
 
 ## Documentation
 
-### Modernization Docs
-- [Overview](./docs/OVERVIEW.md) - Problems, goals, and strategy
-- [Code Standards](./docs/CODE_STANDARDS.md) - Quality requirements and compliance
-- [Phase 1](./docs/PHASE_1.md) - Library Configuration ✅ Complete
-- [Phase 2](./docs/PHASE_2.md) - TypeScript Types 🔄 In Progress
-- [Phase 3-5](./docs/README.md) - Future phases
-- [Usage Patterns](./docs/USAGE_PATTERNS.md) - How to use both APIs
-- [Project Structure](./docs/PROJECT_STRUCTURE.md) - Final directory layout
-- [Versioning](./docs/VERSIONING.md) - Release strategy
-
-### Contributing
-- [Contributing Guide](./CONTRIBUTING.md) - How to contribute to this project
-
-### API Documentation
-- [API Docs](http://fulcrumapp.github.io/fulcrum-core/) - Generated documentation
+- [**Contributing Guide**](./CONTRIBUTING.md)
+- [**Modernization Plan**](./docs/OVERVIEW.md)
+- [**Code Standards**](./docs/CODE_STANDARDS.md)
+- [**Usage Patterns**](./docs/USAGE_PATTERNS.md)
+- [**Versioning Strategy**](./docs/VERSIONING.md)
+- [**API Docs**](http://fulcrumapp.github.io/fulcrum-core/) (Generated)
