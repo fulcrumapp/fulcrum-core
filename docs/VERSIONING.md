@@ -137,7 +137,59 @@ MAJOR.MINOR.PATCH
 
 ---
 
-## 📦 Release Process
+## 📝 Commit Message Convention
+
+We use [Conventional Commits](https://www.conventionalcommits.org/) to enable automated versioning and changelog generation.
+
+**How it works**: The CI pipeline analyzes commit messages to automatically determine the appropriate version bump. See [.github/workflows/ci.yaml](../.github/workflows/ci.yaml) for the implementation details.
+
+### Format
+```
+<type>(<scope>): <subject>
+
+<body>
+
+<footer>
+```
+
+### Commit Types
+- `feat`: New feature (triggers MINOR version bump)
+- `fix`: Bug fix (triggers PATCH version bump)
+- `docs`: Documentation changes (no version bump)
+- `style`: Code style changes (no version bump)
+- `refactor`: Code refactoring (no version bump)
+- `perf`: Performance improvements (triggers PATCH version bump)
+- `test`: Test changes (no version bump)
+- `chore`: Build/tooling changes (no version bump)
+- `ci`: CI/CD changes (no version bump)
+
+### Breaking Changes
+Add `BREAKING CHANGE:` in the commit footer to trigger a MAJOR version bump:
+```
+feat(api): redesign authentication flow
+
+BREAKING CHANGE: auth tokens now require different format
+```
+
+### Examples
+```bash
+# Patch release (1.6.0 → 1.6.1)
+git commit -m "fix: resolve type inference issue in FormModel"
+
+# Minor release (1.6.0 → 1.7.0)
+git commit -m "feat: add TypeScript types export"
+
+# Major release (1.6.0 → 2.0.0) - unlikely for this project
+git commit -m "feat: redesign core API
+
+BREAKING CHANGE: FormModel constructor signature changed"
+```
+
+**Important**: The CI reads commit messages to determine version bumps, so following this convention is required.
+
+---
+
+## �📦 Release Process
 
 ### 1. Development
 - Work on feature branch
@@ -145,44 +197,39 @@ MAJOR.MINOR.PATCH
 - Update documentation
 - Code review
 
-### 2. Pre-release
-- Run full test suite
-- Build dist/
-- Verify package contents
-- Test in consuming project
+### 2. Pre-release Testing
+- Run full test suite locally
+- Verify all quality gates pass (ESLint, tests, coverage)
+- Test changes in consuming project if applicable
+- Ensure all CI checks are green
 
-### 3. Version Bump
-```bash
-# Patch release (bug fix)
-npm version patch
+### 3. Merge to Main
+- Create pull request
+- Get required approvals
+- Merge to main branch
+- **DO NOT manually update version in package.json** (CI handles this)
 
-# Minor release (new feature)
-npm version minor
+### 4. CI Automated Release
+Once merged to main, CI automatically:
+- Determines version bump based on commit messages (conventional commits)
+- Updates version in package.json
+- Builds dist/
+- Publishes to GitHub Packages
+- Creates GitHub release
+- Generates release notes from commits
 
-# Major release (breaking change)
-npm version major
-```
-
-### 4. Publish
-```bash
-# Build
-npm run build
-
-# Publish to GitHub Packages
-npm publish
-```
-
-### 5. Announcement
-- Update changelog
+### 5. Post-Release
+- Verify package published successfully
 - Announce in Slack
-- Update documentation
-- Create GitHub release
+- Update any dependent projects
+- Monitor for issues
 
 ---
 
 ## 🏷️ Version Tags
 
-### Git Tags
+### Git Tags (Created by CI)
+When CI publishes a release, it automatically creates and pushes tags:
 ```bash
 v1.6.0  # Phase 1 complete
 v1.7.0  # Phase 2 complete
@@ -191,9 +238,11 @@ v1.9.0  # Phase 4 complete
 v1.10.0 # Phase 5 complete
 ```
 
+**Note**: Do not manually create version tags. The CI handles this automatically.
+
 ### npm dist-tags
 ```bash
-latest   # Stable release
+latest   # Stable release (default)
 next     # Pre-release
 beta     # Beta testing
 ```

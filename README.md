@@ -171,5 +171,8 @@ This library is undergoing modernization to improve maintainability, TypeScript 
 - [Project Structure](./docs/PROJECT_STRUCTURE.md) - Final directory layout
 - [Versioning](./docs/VERSIONING.md) - Release strategy
 
+### Contributing
+- [Contributing Guide](./CONTRIBUTING.md) - How to contribute to this project
+
 ### API Documentation
 - [API Docs](http://fulcrumapp.github.io/fulcrum-core/) - Generated documentation
