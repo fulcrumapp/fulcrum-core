@@ -46,7 +46,7 @@ export default class FormValue {
     return notImplemented();
   }
 
-  toSimpleJSON() {
+  toSimpleJSON(): any {
     return this.toJSON();
   }
 
@@ -70,7 +70,7 @@ export default class FormValue {
     return notImplemented();
   }
 
-  static create(element: any, attributes: any) {
+  static create(element: any, attributes: any): FormValue {
     return FormValueFactory.create(element, attributes);
   }
 }
