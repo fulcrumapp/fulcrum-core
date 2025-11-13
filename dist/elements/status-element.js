@@ -16,8 +16,8 @@ const DEFAULT_STATUS_ELEMENT = {
 };
 class StatusElement extends textual_element_1.default {
     constructor(parent, attributes) {
-        attributes.type = 'StatusField';
         const attrs = Object.assign({}, DEFAULT_STATUS_ELEMENT, attributes);
+        attrs.type = 'StatusField';
         super(parent, attrs);
         this._statusFilter = null;
         this._choices = [];
