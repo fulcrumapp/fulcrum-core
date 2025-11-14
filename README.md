@@ -67,21 +67,3 @@ const record = new Record(recordAttributes, form);
 console.log(record.id);
 console.log(record.formValues.get('field_key').displayValue);
 ```
-
-## Project Status: Modernization
-
-This library is being modernized to improve maintainability, adopt TypeScript, and enhance the developer experience. The project is split into several phases, adding new capabilities without breaking changes.
-
-- **Phase 1: Library Configuration (Complete)**
-- **Phase 2: TypeScript Types (In Progress)**
-- **Phase 3-5: Planned**
-
-For more details, see the [Modernization Documentation](./docs/README.md).
-
-## Documentation
-
-- [**Modernization Plan**](./docs/OVERVIEW.md)
-- [**Code Standards**](./docs/CODE_STANDARDS.md)
-- [**Usage Patterns**](./docs/USAGE_PATTERNS.md)
-- [**Versioning Strategy**](./docs/VERSIONING.md)
-- [**API Docs**](http://fulcrumapp.github.io/fulcrum-core/) (Generated)
