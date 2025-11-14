@@ -47,28 +47,7 @@ Starts an interactive node terminal with the library available for use:
 ./console
 ```
 
-## Installation
-
-This package is published to **GitHub Packages**.
-
-### 1. Configure npm
-
-Create or update `.npmrc` in your project root:
-
-```
-@fulcrumapp:registry=https://npm.pkg.github.com/
-```
-
-### 2. Authenticate
-
-Generate a [GitHub Personal Access Token](https://github.com/settings/tokens) with `read:packages` scope and configure it for npm.
-
-**For local development, add the token to your user `~/.npmrc` file:**
-```bash
-echo "//npm.pkg.github.com/:_authToken=YOUR_TOKEN" >> ~/.npmrc
-```
-
-### Install
+## Install
 
 ```bash
 yarn add @fulcrumapp/fulcrum-core
