@@ -16,5 +16,5 @@ export default class FormValue {
     startsWith(value: any): boolean;
     isLessThan(value: any): boolean;
     isGreaterThan(value: any): boolean;
-    static create(element: any, attributes: any): any;
+    static create(element: any, attributes: any): FormValue;
 }

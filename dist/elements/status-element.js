@@ -8,6 +8,7 @@ const status_choice_1 = __importDefault(require("./status-choice"));
 const element_1 = __importDefault(require("./element"));
 const DEFAULT_STATUS_ELEMENT = {
     label: 'Status',
+    type: 'StatusField',
     key: '@status',
     data_name: 'status',
     enabled: false,
@@ -16,7 +17,6 @@ const DEFAULT_STATUS_ELEMENT = {
 };
 class StatusElement extends textual_element_1.default {
     constructor(parent, attributes) {
-        attributes.type = 'StatusField';
         const attrs = Object.assign({}, DEFAULT_STATUS_ELEMENT, attributes);
         super(parent, attrs);
         this._statusFilter = null;
