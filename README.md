@@ -2,60 +2,68 @@
 
 The JavaScript object model for Fulcrum.
 
-Includes:
-* Form schema parsing and definitions
-* Record parsing and field value definitions
-* Record (and child record) titles
-* Address field formatting
-* Date/time localization
-* Number localization (1.337,00 vs 1,337.00)
-* Currency formatting
-* Choice and classification set label lookups
-* Visibility and requirement conditions
-* Required field validations
-* Min/max validations
-* Pattern validations
-* Default values
-* Canonical definitions of "emptiness" / blank / length / etc
-* JSON serialization for all field types
-* Formatting calculation fields
-* Full support for record link fields and repeatables
+This library provides a comprehensive object model for Fulcrum data, including:
+* Form and record parsing
+* Record titles and address formatting
+* Date, time, and number localization
+* Choice and classification set lookups
+* Visibility, requirement, and validation rules
+* Default values and emptiness definitions
+* JSON serialization and calculation fields
+* Support for record links and repeatables
+
+## Development
+
+### Prerequisites
+- Node.js 16+
+- yarn
 
 ### Setup
 
 ```sh
+# Install dependencies
 yarn install
+```
+
+### Build
+
+```sh
+# Build the project
+yarn build
 ```
 
 ### Tests
 
 ```sh
+# Run all tests
 yarn test
 ```
 
 ### Console
 
-Starts an interactive node terminal with the library available to use
+Starts an interactive node terminal with the library available for use:
 
 ```sh
 ./console
 ```
 
-### Publishing
+## Install
 
-- `yarn clean && yarn build`
-- Bump package.json version
-- Merge to main
-- Checkout main, `git pull`
-- `git tag -a vx.x.x -m "x.x.x"`
-- `git push origin --tags`
-- Create vx.x.x release for tag in github
-  - Choose the tag and use tag as the release title
-  - Auto-generate release nots
-  - Click the "Publish release" button
-- Publish to the public NPM registry
-  - `mv $HOME/.npmrc $HOME/fulcrum.npmrc`
-  - `npm login`
-  - `yarn publish`
-- Restore your .npmrc file
-  - `mv $HOME/fulcrum.npmrc $HOME/.npmrc`
+```bash
+yarn add @fulcrumapp/fulcrum-core
+# or
+npm install @fulcrumapp/fulcrum-core
+```
+
+## Usage
+
+```javascript
+import { Form, Record } from '@fulcrumapp/fulcrum-core';
+
+const form = new Form(formAttributes);
+const record = new Record(recordAttributes, form);
+
+// Access record data
+console.log(record.id);
+console.log(record.formValues.get('field_key').displayValue);
+```
