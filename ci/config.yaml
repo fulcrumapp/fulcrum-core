@@ -57,4 +57,4 @@ run_sonar_scanner: True
 # test_coverage_dir: Custom directory for test coverage output files
 # Default: "" (uses standard /app directory)
 # Example: "coverage" for projects that output to ./coverage/
-test_coverage_dir: "coverage"
+test_coverage_dir: ""
