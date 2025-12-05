@@ -52,7 +52,7 @@ lint:
 # run_sonar_scanner: Enables SonarQube static code analysis
 # Values: True | False
 # Default: False (requires sonar-project.properties file to be created first)
-run_sonar_scanner: True
+run_sonar_scanner: False
 
 # test_coverage_dir: Custom directory for test coverage output files
 # Default: "" (uses standard /app directory)
