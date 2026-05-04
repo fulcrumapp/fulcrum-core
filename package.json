@@ -1,6 +1,10 @@
 {
   "name": "@fulcrumapp/fulcrum-core",
+<<<<<<< HEAD
   "version": "1.5.9",
+=======
+  "version": "1.6.0",
+>>>>>>> ebb47f5 ([bump] fulcrum core version)
   "description": "Fulcrum Core",
   "homepage": "http://github.com/fulcrumapp/fulcrum-core",
   "main": "dist/index.js",
