@@ -34,6 +34,8 @@ export default class LengthValidationError extends ElementValidationError {
       return this.audioElementMessage;
     } else if (this.element.isAttachmentElement) {
       return this.attachmentElementMessage;
+    } else if (this.element.isSketchElement) {
+      return this.sketchElementMessage;
     } else if (this.element.isRepeatableElement) {
       return this.repeatableElementMessage;
     }
@@ -189,6 +191,29 @@ export default class LengthValidationError extends ElementValidationError {
     } else if (this.isExactlyError) {
       return this.messageWithFormats("The field '%s' must have exactly 1 choice.",
                                      "The field '%s' must have exactly %s choices.",
+                                     this.element.minLength);
+    }
+
+    return '';
+  }
+
+  get sketchElementMessage() {
+    if (this.isAtLeastError) {
+      return this.messageWithFormats("The field '%s' must have at least 1 sketch.",
+                                     "The field '%s' must have at least %s sketches.",
+                                     this.element.minLength);
+    } else if (this.isAtMostError) {
+      return this.messageWithFormats("The field '%s' cannot have more than 1 sketch.",
+                                     "The field '%s' cannot have more than %s sketches.",
+                                     this.element.maxLength);
+    } else if (this.isBetweenError) {
+      return format("The field '%s' must have between %s and %s sketches.",
+                    this.label,
+                    this.element.minLength,
+                    this.element.maxLength);
+    } else if (this.isExactlyError) {
+      return this.messageWithFormats("The field '%s' must have exactly 1 sketch.",
+                                     "The field '%s' must have exactly %s sketches.",
                                      this.element.minLength);
     }
 
