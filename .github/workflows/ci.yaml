@@ -2,7 +2,6 @@ name: 🧪 CI
 on: [pull_request]
 
 permissions:
-  actions: write
   contents: read
 
 jobs:
@@ -10,9 +9,6 @@ jobs:
     name: ⬣ ESLint
     runs-on: ubuntu-latest
     steps:
-      - name: 🛑 Cancel Previous Runs
-        uses: styfle/cancel-workflow-action@0.11.0
-
       - name: ⬇️ Checkout Repository
         uses: actions/checkout@v3
 
@@ -32,9 +28,6 @@ jobs:
     name: ʦ TypeScript
     runs-on: ubuntu-latest
     steps:
-      - name: 🛑 Cancel Previous Runs
-        uses: styfle/cancel-workflow-action@0.11.0
-
       - name: ⬇️ Checkout Repository
         uses: actions/checkout@v3
 
@@ -54,9 +47,6 @@ jobs:
     name: ⚡ Tests
     runs-on: ubuntu-latest
     steps:
-      - name: 🛑 Cancel Previous Runs
-        uses: styfle/cancel-workflow-action@0.11.0
-
       - name: ⬇️ Checkout Repository
         uses: actions/checkout@v3
 
