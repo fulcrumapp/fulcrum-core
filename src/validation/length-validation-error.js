@@ -245,7 +245,7 @@ export default class LengthValidationError extends ElementValidationError {
 
   messageWithFormats(singularFormat, pluralFormat, length) {
     if (length === 1) {
-      return format(singularFormat, this.label, length);
+      return format(singularFormat, this.label);
     }
 
     return format(pluralFormat, this.label, length);

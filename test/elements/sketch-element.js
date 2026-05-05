@@ -47,7 +47,7 @@ describe('SketchElement length validation', () => {
     field._minLength = 1;
     field._maxLength = null;
     const error = new LengthValidationError(field);
-    error.message.should.eql("The field 'Sketch' must have at least 1 sketch. 1");
+    error.message.should.eql("The field 'Sketch' must have at least 1 sketch.");
   });
 
   it('returns an at-most message when maxLength is set', () => {
@@ -61,7 +61,7 @@ describe('SketchElement length validation', () => {
     field._minLength = null;
     field._maxLength = 1;
     const error = new LengthValidationError(field);
-    error.message.should.eql("The field 'Sketch' cannot have more than 1 sketch. 1");
+    error.message.should.eql("The field 'Sketch' cannot have more than 1 sketch.");
   });
 
   it('returns a between message when both min and max length are set', () => {
@@ -82,6 +82,6 @@ describe('SketchElement length validation', () => {
     field._minLength = 1;
     field._maxLength = 1;
     const error = new LengthValidationError(field);
-    error.message.should.eql("The field 'Sketch' must have exactly 1 sketch. 1");
+    error.message.should.eql("The field 'Sketch' must have exactly 1 sketch.");
   });
 });
