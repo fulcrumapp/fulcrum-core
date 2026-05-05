@@ -10,7 +10,8 @@
     "esModuleInterop": true,
     "noImplicitAny": true,
     "declaration": true,
-    "target": "ES6"
+    "target": "ES6",
+    "skipLibCheck": true
   },
   "include": [
     "src/"
