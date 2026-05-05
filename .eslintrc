@@ -8,9 +8,6 @@
     "es2020": true,
     "mocha": true
   },
-  "extends": [
-    "airbnb-base"
-  ],
   "parserOptions": {
     "sourceType": "module",
     "project": "./tsconfig.json"

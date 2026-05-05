@@ -43,8 +43,6 @@
     "@typescript-eslint/parser": "^6.21.0",
     "chai": "^4.3.7",
     "eslint": "^8.28.0",
-    "eslint-config-airbnb-base": "^15.0.0",
-    "eslint-plugin-import": "^2.26.0",
     "mocha": "^11.1.0",
     "sinon": "^21.0.0",
     "source-map-support": "^0.5.21",
