@@ -1,8 +1,9 @@
-## Fulcrum Core
+# Fulcrum Core
 
 The JavaScript object model for Fulcrum.
 
 This library provides a comprehensive object model for Fulcrum data, including:
+
 * Form and record parsing
 * Record titles and address formatting
 * Date, time, and number localization
@@ -15,8 +16,9 @@ This library provides a comprehensive object model for Fulcrum data, including:
 ## Development
 
 ### Prerequisites
-- Node.js 16+
-- yarn
+
+* Node.js 22+
+* yarn
 
 ### Setup
 
