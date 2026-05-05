@@ -223,7 +223,7 @@ export default class Condition {
 
       const skipElement = referencedElement.isHidden
         || referencedElement.hasHiddenParent
-        || referencedElement._visibleConditionsBehavior === 'preserve';
+        || referencedElement.isPreserved;
 
       if (!skipElement) {
         isReferencedFieldSatisfied = Condition.shouldElementBeVisibleRecursive(referencedElement, record, values, cache);
