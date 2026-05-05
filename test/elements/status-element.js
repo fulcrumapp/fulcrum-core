@@ -1,4 +1,4 @@
-import { Form, StatusElement } from '../../src';
+import { StatusElement } from '../../src';
 
 describe('StatusElement', () => {
   it('handles null attributes without crashing', () => {
