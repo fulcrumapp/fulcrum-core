@@ -1,6 +1,7 @@
 import setup from '../helper';
 
 import { ChoiceElement, ChoiceValue, Choice } from '../../src';
+import LengthValidationError from '../../src/validation/length-validation-error';
 
 let record = null;
 
@@ -160,5 +161,41 @@ describe('choice fields', () => {
     value.otherValues.should.eql(['Another']);
 
     value.otherValue.should.eql('Another');
+  });
+});
+
+describe('ChoiceElement length validation (messageWithFormats regression)', () => {
+  let field;
+
+  beforeEach(() => {
+    field = record.form.find('single_choice');
+  });
+
+  it('returns a singular at-least message without trailing artifact', () => {
+    field._minLength = 1;
+    field._maxLength = null;
+    const error = new LengthValidationError(field);
+    error.message.should.eql("The field 'Single Choice' must have at least 1 choice.");
+  });
+
+  it('returns a singular at-most message without trailing artifact', () => {
+    field._minLength = null;
+    field._maxLength = 1;
+    const error = new LengthValidationError(field);
+    error.message.should.eql("The field 'Single Choice' cannot have more than 1 choice.");
+  });
+
+  it('returns a singular exactly message without trailing artifact', () => {
+    field._minLength = 1;
+    field._maxLength = 1;
+    const error = new LengthValidationError(field);
+    error.message.should.eql("The field 'Single Choice' must have exactly 1 choice.");
+  });
+
+  it('returns a plural at-least message with the count', () => {
+    field._minLength = 3;
+    field._maxLength = null;
+    const error = new LengthValidationError(field);
+    error.message.should.eql("The field 'Single Choice' must have at least 3 choices.");
   });
 });
