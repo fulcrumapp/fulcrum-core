@@ -1,4 +1,6 @@
-import FormValueFactory from './form-value-factory';
+// Required for the lazy require() in FormValue.create — see comment there.
+// Using declare avoids adding @types/node as a dependency for a library package.
+declare const require: (id: string) => any;
 
 function notImplemented(): never {
   throw new Error('Not implemented');
@@ -71,6 +73,11 @@ export default class FormValue {
   }
 
   static create(element: any, attributes: any): FormValue {
-    return FormValueFactory.create(element, attributes);
+    // Lazy require to break the FormValue → FormValueFactory → subclasses → FormValue cycle.
+    // A top-level import is evaluated eagerly; Rollup cannot safely linearize the cycle in
+    // production builds, causing "Class extends value undefined" at runtime. The original
+    // form-value.js used this same pattern intentionally.
+    // eslint-disable-next-line @typescript-eslint/no-require-imports
+    return require('./form-value-factory').default.create(element, attributes);
   }
 }
