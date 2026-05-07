@@ -13,9 +13,7 @@ const DEFAULT_STATUS_ELEMENT = {
 
 export default class StatusElement extends TextualElement {
   constructor(parent, attributes) {
-    attributes.type = 'StatusField';
-
-    const attrs = Object.assign({}, DEFAULT_STATUS_ELEMENT, attributes);
+    const attrs = { ...DEFAULT_STATUS_ELEMENT, ...attributes, type: 'StatusField' };
 
     super(parent, attrs);
 
