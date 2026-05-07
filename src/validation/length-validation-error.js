@@ -243,6 +243,15 @@ export default class LengthValidationError extends ElementValidationError {
     return '';
   }
 
+  /**
+   * Returns a formatted validation message using singular or plural form based on length.
+   *
+   * @param {string} singularFormat - Format string with exactly one %s placeholder (label).
+   *   The length is NOT passed to this format because it is always 1 in the singular case.
+   *   Including a second %s here will produce a literal "%s" in the output.
+   * @param {string} pluralFormat - Format string with two %s placeholders (label, length).
+   * @param {number} length - The numeric length value; determines which format is used.
+   */
   messageWithFormats(singularFormat, pluralFormat, length) {
     if (length === 1) {
       return format(singularFormat, this.label);
