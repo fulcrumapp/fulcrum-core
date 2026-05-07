@@ -1,5 +1,4 @@
 import setup from '../helper';
-import sinon from 'sinon';
 
 import Condition from '../../src/elements/condition';
 
@@ -79,41 +78,47 @@ describe('isSatisfied', () => {
 
     element._visibleConditionsBehavior = 'preserve';
 
-    sinon.stub(Condition, 'shouldElementBeVisible').returns(false);
+    const original = Condition.shouldElementBeVisible;
+    try {
+      Condition.shouldElementBeVisible = () => false;
 
-    const attributes = {
-      field_key: 'ae75',
-      operator: 'equal_to',
-      value: 'Test'
-    };
+      const attributes = {
+        field_key: 'ae75',
+        operator: 'equal_to',
+        value: 'Test'
+      };
 
-    const condition = new Condition(element, attributes);
+      const condition = new Condition(element, attributes);
 
-    const result = condition.isSatisfied(record, record.formValues, {});
+      const result = condition.isSatisfied(record, record.formValues, {});
 
-    result.should.eql(true);
-
-    Condition.shouldElementBeVisible.restore();
+      result.should.eql(true);
+    } finally {
+      Condition.shouldElementBeVisible = original;
+    }
   });
 
   it('should return false when a conditionally hidden field with "clear" has a matching value', () => {
     const element = record.form.get('ae75');
 
-    sinon.stub(Condition, 'shouldElementBeVisibleRecursive').returns(false);
+    const original = Condition.shouldElementBeVisibleRecursive;
+    try {
+      Condition.shouldElementBeVisibleRecursive = () => false;
 
-    const attributes = {
-      field_key: 'ae75',
-      operator: 'equal_to',
-      value: 'Test'
-    };
+      const attributes = {
+        field_key: 'ae75',
+        operator: 'equal_to',
+        value: 'Test'
+      };
 
-    const condition = new Condition(element, attributes);
+      const condition = new Condition(element, attributes);
 
-    const result = condition.isSatisfied(record, record.formValues, {});
+      const result = condition.isSatisfied(record, record.formValues, {});
 
-    result.should.eql(false);
-
-    Condition.shouldElementBeVisibleRecursive.restore();
+      result.should.eql(false);
+    } finally {
+      Condition.shouldElementBeVisibleRecursive = original;
+    }
   });
 
   it('should return true when a field inside a preserve section is conditionally hidden (inherited preserve)', () => {
@@ -124,21 +129,24 @@ describe('isSatisfied', () => {
     // is 'clear'. After the fix, isPreserved walks up and finds the parent, returning true.
     element._parent = { isPreserved: true };
 
-    sinon.stub(Condition, 'shouldElementBeVisibleRecursive').returns(false);
+    const original = Condition.shouldElementBeVisibleRecursive;
+    try {
+      Condition.shouldElementBeVisibleRecursive = () => false;
 
-    const attributes = {
-      field_key: 'ae75',
-      operator: 'equal_to',
-      value: 'Test'
-    };
+      const attributes = {
+        field_key: 'ae75',
+        operator: 'equal_to',
+        value: 'Test'
+      };
 
-    const condition = new Condition(element, attributes);
+      const condition = new Condition(element, attributes);
 
-    const result = condition.isSatisfied(record, record.formValues, {});
+      const result = condition.isSatisfied(record, record.formValues, {});
 
-    result.should.eql(true);
-
-    Condition.shouldElementBeVisibleRecursive.restore();
+      result.should.eql(true);
+    } finally {
+      Condition.shouldElementBeVisibleRecursive = original;
+    }
   });
 
   it('should return true when inner section has preserve and outer section has clear and is hidden (S7)', () => {
@@ -149,21 +157,24 @@ describe('isSatisfied', () => {
     // section's clear behavior does not override it.
     element._parent = { isPreserved: true };
 
-    sinon.stub(Condition, 'shouldElementBeVisibleRecursive').returns(false);
+    const original = Condition.shouldElementBeVisibleRecursive;
+    try {
+      Condition.shouldElementBeVisibleRecursive = () => false;
 
-    const attributes = {
-      field_key: 'ae75',
-      operator: 'equal_to',
-      value: 'Test'
-    };
+      const attributes = {
+        field_key: 'ae75',
+        operator: 'equal_to',
+        value: 'Test'
+      };
 
-    const condition = new Condition(element, attributes);
+      const condition = new Condition(element, attributes);
 
-    const result = condition.isSatisfied(record, record.formValues, {});
+      const result = condition.isSatisfied(record, record.formValues, {});
 
-    result.should.eql(true);
-
-    Condition.shouldElementBeVisibleRecursive.restore();
+      result.should.eql(true);
+    } finally {
+      Condition.shouldElementBeVisibleRecursive = original;
+    }
   });
 
   it('should return true when grandparent section has preserve and inner section and field have clear (transitive inheritance)', () => {
@@ -177,21 +188,24 @@ describe('isSatisfied', () => {
     };
     element._parent = innerSection;
 
-    sinon.stub(Condition, 'shouldElementBeVisibleRecursive').returns(false);
+    const original = Condition.shouldElementBeVisibleRecursive;
+    try {
+      Condition.shouldElementBeVisibleRecursive = () => false;
 
-    const attributes = {
-      field_key: 'ae75',
-      operator: 'equal_to',
-      value: 'Test'
-    };
+      const attributes = {
+        field_key: 'ae75',
+        operator: 'equal_to',
+        value: 'Test'
+      };
 
-    const condition = new Condition(element, attributes);
+      const condition = new Condition(element, attributes);
 
-    const result = condition.isSatisfied(record, record.formValues, {});
+      const result = condition.isSatisfied(record, record.formValues, {});
 
-    result.should.eql(true);
-
-    Condition.shouldElementBeVisibleRecursive.restore();
+      result.should.eql(true);
+    } finally {
+      Condition.shouldElementBeVisibleRecursive = original;
+    }
   });
 
   it('should return false when a field with no preserve ancestor is conditionally hidden', () => {
@@ -199,20 +213,23 @@ describe('isSatisfied', () => {
 
     // Neither the field nor any ancestor has preserve. isPreserved returns false,
     // so the visibility check runs and the hidden field's value is treated as blank.
-    sinon.stub(Condition, 'shouldElementBeVisibleRecursive').returns(false);
+    const original = Condition.shouldElementBeVisibleRecursive;
+    try {
+      Condition.shouldElementBeVisibleRecursive = () => false;
 
-    const attributes = {
-      field_key: 'ae75',
-      operator: 'equal_to',
-      value: 'Test'
-    };
+      const attributes = {
+        field_key: 'ae75',
+        operator: 'equal_to',
+        value: 'Test'
+      };
 
-    const condition = new Condition(element, attributes);
+      const condition = new Condition(element, attributes);
 
-    const result = condition.isSatisfied(record, record.formValues, {});
+      const result = condition.isSatisfied(record, record.formValues, {});
 
-    result.should.eql(false);
-
-    Condition.shouldElementBeVisibleRecursive.restore();
+      result.should.eql(false);
+    } finally {
+      Condition.shouldElementBeVisibleRecursive = original;
+    }
   });
 });
