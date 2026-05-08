@@ -34,6 +34,8 @@ export default class LengthValidationError extends ElementValidationError {
       return this.audioElementMessage;
     } else if (this.element.isAttachmentElement) {
       return this.attachmentElementMessage;
+    } else if (this.element.isSketchElement) {
+      return this.sketchElementMessage;
     } else if (this.element.isRepeatableElement) {
       return this.repeatableElementMessage;
     }
@@ -195,6 +197,29 @@ export default class LengthValidationError extends ElementValidationError {
     return '';
   }
 
+  get sketchElementMessage() {
+    if (this.isAtLeastError) {
+      return this.messageWithFormats("The field '%s' must have at least 1 sketch.",
+                                     "The field '%s' must have at least %s sketches.",
+                                     this.element.minLength);
+    } else if (this.isAtMostError) {
+      return this.messageWithFormats("The field '%s' cannot have more than 1 sketch.",
+                                     "The field '%s' cannot have more than %s sketches.",
+                                     this.element.maxLength);
+    } else if (this.isBetweenError) {
+      return format("The field '%s' must have between %s and %s sketches.",
+                    this.label,
+                    this.element.minLength,
+                    this.element.maxLength);
+    } else if (this.isExactlyError) {
+      return this.messageWithFormats("The field '%s' must have exactly 1 sketch.",
+                                     "The field '%s' must have exactly %s sketches.",
+                                     this.element.minLength);
+    }
+
+    return '';
+  }
+
   get repeatableElementMessage() {
     if (this.isAtLeastError) {
       return this.messageWithFormats("The field '%s' must have at least 1 item.",
@@ -218,9 +243,18 @@ export default class LengthValidationError extends ElementValidationError {
     return '';
   }
 
+  /**
+   * Returns a formatted validation message using singular or plural form based on length.
+   *
+   * @param {string} singularFormat - Format string with exactly one %s placeholder (label).
+   *   The length is NOT passed to this format because it is always 1 in the singular case.
+   *   Including a second %s here will produce a literal "%s" in the output.
+   * @param {string} pluralFormat - Format string with two %s placeholders (label, length).
+   * @param {number} length - The numeric length value; determines which format is used.
+   */
   messageWithFormats(singularFormat, pluralFormat, length) {
     if (length === 1) {
-      return format(singularFormat, this.label, length);
+      return format(singularFormat, this.label);
     }
 
     return format(pluralFormat, this.label, length);
