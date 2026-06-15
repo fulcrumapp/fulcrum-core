@@ -234,8 +234,9 @@ export default class Record extends Feature {
     }
 
     // Parse GPS device capture (accept both snake_case and camelCase for compatibility)
-    const gpsDeviceCaptureRaw = (attributes.gps_device_capture !== undefined) ? attributes.gps_device_capture : attributes.gpsDeviceCapture;
-    this._gpsDeviceCapture = (gpsDeviceCaptureRaw && typeof gpsDeviceCaptureRaw === 'object' && !Array.isArray(gpsDeviceCaptureRaw)) ? gpsDeviceCaptureRaw : {};
+    const hasSnakeCaseGpsDeviceCapture = Object.prototype.hasOwnProperty.call(attributes, 'gps_device_capture');
+    const gpsDeviceCaptureRaw = hasSnakeCaseGpsDeviceCapture ? attributes.gps_device_capture : attributes.gpsDeviceCapture;
+    this.gpsDeviceCapture = gpsDeviceCaptureRaw;
   }
 
   updateTimestamps() {

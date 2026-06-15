@@ -227,6 +227,11 @@ describe('Record', () => {
       record.gpsDeviceCapture.should.eql({});
     });
 
+    it('normalizes array payloads to empty object in constructor', () => {
+      const rec = new Record({gps_device_capture: ['bad', 'value']}, form);
+      rec.gpsDeviceCapture.should.eql({});
+    });
+
     it('preserves complex GPS capture object structure', () => {
       const capture = {
         device_id: 'GPS123',
