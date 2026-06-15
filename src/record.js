@@ -563,8 +563,8 @@ export default class Record extends Feature {
   }
 
   set gpsDeviceCapture(value) {
-    // Normalize null/undefined to empty object
-    this._gpsDeviceCapture = (value && typeof value === 'object') ? value : {};
+    // Normalize null/undefined and non-object values to an empty object
+    this._gpsDeviceCapture = (value && typeof value === 'object' && !Array.isArray(value)) ? value : {};
   }
 
   get hasCreatedCoordinate() {
