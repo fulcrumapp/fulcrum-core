@@ -211,16 +211,6 @@ describe('Record', () => {
       rec.gpsDeviceCapture.latitude.should.eql(40.7128);
     });
 
-    it('accepts fallback camelCase property', () => {
-      const rec = new Record({gpsDeviceCapture: {device_id: 'CAMEL'}}, form);
-      rec.gpsDeviceCapture.should.eql({device_id: 'CAMEL'});
-    });
-
-    it('prefers snake_case over camelCase', () => {
-      const rec = new Record({gps_device_capture: {device_id: 'SNAKE'}, gpsDeviceCapture: {device_id: 'CAMEL'}}, form);
-      rec.gpsDeviceCapture.should.eql({device_id: 'SNAKE'});
-    });
-
     it('normalizes setter to empty object when set to null', () => {
       record.gpsDeviceCapture = {device_id: 'ABC'};
       record.gpsDeviceCapture = null;
