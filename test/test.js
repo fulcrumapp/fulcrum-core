@@ -172,6 +172,70 @@ describe('Record', () => {
     child.hasLocation.should.eql(false);
     shouldBeNull(child.geometryAsGeoJSON);
   });
+
+  describe('GPS Device Capture', () => {
+    it('returns empty object by default', () => {
+      const rec = new Record({}, form);
+      rec.gpsDeviceCapture.should.eql({});
+    });
+
+    it('can be set and retrieved', () => {
+      record.gpsDeviceCapture = {device_id: 'GPS123', timestamp: '2026-06-12T10:00:00Z'};
+      record.gpsDeviceCapture.should.eql({device_id: 'GPS123', timestamp: '2026-06-12T10:00:00Z'});
+    });
+
+    it('parses gps_device_capture from API payload', () => {
+      const payload = {gps_device_capture: {device_id: 'ABC456'}};
+      const rec = new Record(payload, form);
+      rec.gpsDeviceCapture.should.eql({device_id: 'ABC456'});
+    });
+
+    it('normalizes null GPS capture to empty object', () => {
+      const rec = new Record({gps_device_capture: null}, form);
+      rec.gpsDeviceCapture.should.eql({});
+    });
+
+    it('includes gps_device_capture in toJSON output', () => {
+      record.gpsDeviceCapture = {device_id: 'DEF789'};
+      const json = record.toJSON();
+      json.gps_device_capture.should.eql({device_id: 'DEF789'});
+    });
+
+    it('initializes correctly from API payload in constructor', () => {
+      const payload = {
+        id: 'rec-123',
+        gps_device_capture: {device_id: 'DEVICE', latitude: 40.7128, longitude: -74.0060}
+      };
+      const rec = new Record(payload, form);
+      rec.gpsDeviceCapture.device_id.should.eql('DEVICE');
+      rec.gpsDeviceCapture.latitude.should.eql(40.7128);
+    });
+
+    it('normalizes setter to empty object when set to null', () => {
+      record.gpsDeviceCapture = {device_id: 'ABC'};
+      record.gpsDeviceCapture = null;
+      record.gpsDeviceCapture.should.eql({});
+    });
+
+    it('normalizes array payloads to empty object in constructor', () => {
+      const rec = new Record({gps_device_capture: ['bad', 'value']}, form);
+      rec.gpsDeviceCapture.should.eql({});
+    });
+
+    it('preserves complex GPS capture object structure', () => {
+      const capture = {
+        device_id: 'GPS123',
+        latitude: 40.7128,
+        longitude: -74.0060,
+        accuracy: 5.5,
+        geometry_matches_capture: true,
+        captured_at: '2026-06-12T10:00:00Z'
+      };
+      record.gpsDeviceCapture = capture;
+      const json = record.toJSON();
+      json.gps_device_capture.should.eql(capture);
+    });
+  });
 });
 
 describe('Form', () => {
@@ -311,4 +375,5 @@ describe('FeatureValidator', () => {
       errors.length.should.eql(0);
     });
   });
+
 });

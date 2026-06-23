@@ -198,6 +198,7 @@
             }
         ] 
     },
+    "gps_device_capture": {},
     "horizontal_accuracy": 88.0370385747084,
     "id": "20eda76b-90aa-4a6b-8a69-a5dca3db4d15",
     "latitude": 27.7695993399641,

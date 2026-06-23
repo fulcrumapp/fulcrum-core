@@ -161,6 +161,7 @@ export default class Record extends Feature {
     json.edited_duration = this.editedDuration;
 
     json.geometry = this.geometry;
+    json.gps_device_capture = this.gpsDeviceCapture;
 
     return json;
   }
@@ -231,6 +232,8 @@ export default class Record extends Feature {
     if (attributes.geometry) {
       this._geometry = attributes.geometry ?? null;
     }
+
+    this.gpsDeviceCapture = attributes.gps_device_capture != null ? attributes.gps_device_capture : null;
   }
 
   updateTimestamps() {
@@ -551,6 +554,15 @@ export default class Record extends Feature {
 
   set updatedAccuracy(value) {
     this._updatedAccuracy = (value != null ? +value : null);
+  }
+
+  get gpsDeviceCapture() {
+    return this._gpsDeviceCapture || {};
+  }
+
+  set gpsDeviceCapture(value) {
+    // Normalize null/undefined and non-object values to an empty object
+    this._gpsDeviceCapture = (value && typeof value === 'object' && !Array.isArray(value)) ? value : {};
   }
 
   get hasCreatedCoordinate() {
