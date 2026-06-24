@@ -69,3 +69,8 @@ const record = new Record(recordAttributes, form);
 console.log(record.id);
 console.log(record.formValues.get('field_key').displayValue);
 ```
+
+## Release
+
+All verison updates are done automatically via CI, please do not change
+the version value in package.json manually.
