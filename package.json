@@ -1,6 +1,6 @@
 {
   "name": "@fulcrumapp/fulcrum-core",
-  "version": "1.6.0",
+  "version": "1.6.3",
   "description": "Fulcrum Core",
   "homepage": "http://github.com/fulcrumapp/fulcrum-core",
   "main": "dist/index.js",
@@ -10,9 +10,6 @@
     "README.md",
     "LICENSE"
   ],
-  "publishConfig": {
-    "registry": "https://npm.pkg.github.com"
-  },
   "exports": {
     ".": {
       "require": "./dist/index.js",
@@ -25,6 +22,9 @@
     "simpletest": "mocha -r ts-node/register ./test/setup.js ./test/test.js ./test/elements/*.js ./test/values/*.js",
     "prepublishOnly": "yarn clean && yarn build",
     "prepare": "yarn build",
+    "publish:npm": "npm publish --access public",
+    "publish:github": "npm publish --registry=https://npm.pkg.github.com",
+    "publish:all": "yarn publish:npm && yarn publish:github",
     "lint": "eslint src/* src/**/*",
     "build": "tsc",
     "clean": "rm -rf dist",
@@ -35,7 +35,7 @@
   "license": "BSD-3-Clause",
   "repository": {
     "type": "git",
-    "url": "git://github.com/fulcrumapp/fulcrum-core.git"
+    "url": "https://github.com/fulcrumapp/fulcrum-core.git"
   },
   "devDependencies": {
     "@types/node": "^22.0.0",
