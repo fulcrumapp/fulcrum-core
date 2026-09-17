@@ -20,7 +20,7 @@ dependency or a database/API call.
 
 - Make valid `PhotoField.fastfill_settings` available through a single
   `getFastfillSettings()` method returning a defensive object.
-- Emit the agreed snake_case contract from element and form serialization.
+- Emit the agreed snake_case contract from `PhotoElement.toJSON()`.
 - Tolerate absent and malformed server metadata without breaking form loading.
 - Keep the change local to PhotoFields, preserve unrelated raw element fields,
   and publish the next semver minor.
@@ -71,31 +71,27 @@ object contains exactly `type` and `target_fields`; unknown input properties
 are not copied. A missing, null, or invalid setting is omitted, preserving the
 serializer's existing behavior for PhotoFields that predate FastFill.
 
-`Form.toJSON()` must retain valid FastFill settings in its `elements` output
-and must not reintroduce invalid/unknown keys. Because it currently
-deep-copies `_elementsJSON`, the implementation should make a focused
-recursive copy that replaces only each `PhotoField`'s `fastfill_settings`
-with the corresponding parsed/canonical value, while leaving every other
-element attribute byte-for-byte equivalent. This handles nested repeatables
-without switching all form serialization to `Element.toJSON()`.
+`Form.toJSON()` remains generic and continues to deep-copy its raw
+`_elementsJSON`. It must not inspect or canonicalize individual field types.
+Element-level callers that need the canonical contract use the
+`PhotoElement.toJSON()` path.
 
 ### 3. Be tolerant on input and strict at the output boundary
 
-Form parsing SHALL not throw solely because a server payload contains an
-invalid FastFill object. `getFastfillSettings()` returns `undefined` and
-invalid data is omitted from canonical output. Valid data is emitted with the
-same semantic values, not silently coerced. This is consistent with the
-library's tolerant form loading behavior and prevents malformed metadata from
-taking down consumers.
+PhotoElement parsing SHALL not throw solely because a server payload contains
+an invalid FastFill object. `getFastfillSettings()` returns `undefined` and
+`PhotoElement.toJSON()` omits invalid data. Form parsing and generic form
+serialization remain unchanged. Valid data is emitted with the same semantic
+values, not silently coerced.
 
 ### 4. Test through the existing JavaScript test harness
 
 Add focused tests under `test/elements/photo-element.js` using the existing
-Mocha/Chai setup and direct `Form` construction for form round-trips. Cover
-valid modes, defensive copies, all invalid boundary classes, nested
-repeatables, omission for legacy PhotoFields, and preservation of unrelated
-attributes. Run `yarn test`, `yarn lint`, and `yarn build`; the latter also
-verifies generated declarations remain consumable.
+Mocha/Chai setup. Cover valid modes, defensive copies, all invalid boundary
+classes, omission for legacy PhotoFields, and preservation of unrelated
+attributes in element serialization. Run `yarn test`, `yarn lint`, and
+`yarn build`; the latter also verifies generated declarations remain
+consumable.
 
 ### 5. Release through existing automation
 
