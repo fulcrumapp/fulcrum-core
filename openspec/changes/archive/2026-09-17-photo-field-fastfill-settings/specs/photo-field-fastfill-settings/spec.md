@@ -15,7 +15,7 @@ the settings; there MUST NOT be individual getters for `type` or
 - **WHEN** a `PhotoField` is constructed with
   `fastfill_settings: { type: "text_extraction", target_fields: ["a1b2", "c3d4"] }`
 - **THEN** `photoElement.getFastfillSettings()` equals an object with the same
-  mode and ordered target fields
+  `type` and ordered target fields
 
 #### Scenario: Parse each supported mode
 
