@@ -13,10 +13,10 @@
 - [x] 3.2 Add form round-trip coverage for top-level and nested PhotoFields, invalid-setting omission, legacy PhotoFields, and preservation of unrelated metadata.
 - [x] 3.3 Run `yarn test`, `yarn lint`, and `yarn build`; resolve regressions without broadening the change.
 
-## 4. Release verification
+## 4. CI release verification
 
-- [ ] 4.1 Confirm the CI release produces the next minor version (`1.7.0` from the current `1.6.3` baseline, or the next minor if main has advanced) without manually editing `package.json`.
-- [ ] 4.2 Verify the published package version exactly matches its `v<version>` tag and exposes the FastFill contract after installation.
+- [ ] 4.1 Confirm the CI release workflow produces the next minor version (`1.7.0` from the current `1.6.3` baseline, or the next minor if main has advanced); do not build `dist`, edit `package.json`, or create a tag manually.
+- [ ] 4.2 After CI completes, verify the published package version exactly matches the CI-created `v<version>` tag and exposes the FastFill contract after installation.
 
 ## Parallelization
 
