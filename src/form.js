@@ -1,10 +1,38 @@
 import ChildElements from './elements/child-elements';
 import StatusElement from './elements/status-element';
 import ProjectElement from './elements/project-element';
+import PhotoElement from './elements/photo-element';
 import DefaultValues from './values/default-values';
 import Record from './record';
 import async from 'async';
 import DateUtils from './utils/date-utils';
+
+function serializeElements(elements) {
+  if (!Array.isArray(elements)) {
+    return JSON.parse(JSON.stringify(elements));
+  }
+
+  return elements.map((element) => {
+    const serializedElement = JSON.parse(JSON.stringify(element));
+
+    if (element && element.type === 'PhotoField') {
+      const photoElement = new PhotoElement(null, element);
+      const fastfillSettings = photoElement.getFastfillSettings();
+
+      if (fastfillSettings === undefined) {
+        delete serializedElement.fastfill_settings;
+      } else {
+        serializedElement.fastfill_settings = fastfillSettings;
+      }
+    }
+
+    if (element && Array.isArray(element.elements)) {
+      serializedElement.elements = serializeElements(element.elements);
+    }
+
+    return serializedElement;
+  });
+}
 
 export default class Form {
   constructor(attributes) {
@@ -176,7 +204,7 @@ export default class Form {
     json.description = this.description || null;
     json.script = this.script || null;
     json.field_effects = this.fieldEffects || null;
-    json.elements = JSON.parse(JSON.stringify(this._elementsJSON));
+    json.elements = serializeElements(this._elementsJSON);
     json.assignment_enabled = this.isAssignmentEnabled;
     json.hidden_on_dashboard = this.isHiddenOnDashboard;
     json.auto_assign = this.isAutoAssign;

@@ -1,17 +1,17 @@
 ## 1. FastFill model boundary
 
-- [ ] 1.1 Add PhotoElement parsing for `fastfill_settings`, including supported-mode validation, non-empty string target-field validation, `undefined` for missing/invalid settings, and defensive copies without imposing a cardinality limit.
-- [ ] 1.2 Add the single `getFastfillSettings()` method and canonical `PhotoElement.toJSON()` output without changing generic media-element behavior or unrelated serialized attributes.
+- [x] 1.1 Add PhotoElement parsing for `fastfill_settings`, including supported-mode validation, non-empty string target-field validation, `undefined` for missing/invalid settings, and defensive copies without imposing a cardinality limit.
+- [x] 1.2 Add the single `getFastfillSettings()` method and canonical `PhotoElement.toJSON()` output without changing generic media-element behavior or unrelated serialized attributes.
 
 ## 2. Form serialization
 
-- [ ] 2.1 Update the focused `Form.toJSON()` element-copy path so valid PhotoField settings are retained canonically at top level and inside repeatables, while invalid settings and unknown nested properties are omitted and all other element attributes remain unchanged.
+- [x] 2.1 Update the focused `Form.toJSON()` element-copy path so valid PhotoField settings are retained canonically at top level and inside repeatables, while invalid settings and unknown nested properties are omitted and all other element attributes remain unchanged.
 
 ## 3. Tests
 
-- [ ] 3.1 Add PhotoElement unit coverage for all three supported modes, missing/null input, unsupported modes, malformed target arrays, large valid target arrays, opaque keys, order preservation, and defensive-copy behavior.
-- [ ] 3.2 Add form round-trip coverage for top-level and nested PhotoFields, invalid-setting omission, legacy PhotoFields, and preservation of unrelated metadata.
-- [ ] 3.3 Run `yarn test`, `yarn lint`, and `yarn build`; resolve regressions without broadening the change.
+- [x] 3.1 Add PhotoElement unit coverage for all three supported modes, missing/null input, unsupported modes, malformed target arrays, large valid target arrays, opaque keys, order preservation, and defensive-copy behavior.
+- [x] 3.2 Add form round-trip coverage for top-level and nested PhotoFields, invalid-setting omission, legacy PhotoFields, and preservation of unrelated metadata.
+- [x] 3.3 Run `yarn test`, `yarn lint`, and `yarn build`; resolve regressions without broadening the change.
 
 ## 4. Release verification
 
