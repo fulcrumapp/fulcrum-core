@@ -8,7 +8,7 @@ function createPhotoElement(fastfillSettings) {
     data_name: 'photos'
   };
 
-  if (arguments.length > 0) {
+  if (fastfillSettings !== undefined) {
     attributes.fastfill_settings = fastfillSettings;
   }
 
@@ -164,5 +164,11 @@ describe('PhotoElement', () => {
     shouldBeUndefined(json.elements[2].fastfill_settings);
     json.elements[0].label.should.eql('Top-level');
     json.elements[1].elements[0].data_name.should.eql('nested');
+  });
+
+  it('preserves forms without elements during serialization', () => {
+    const form = new Form({});
+
+    shouldBeUndefined(form.toJSON().elements);
   });
 });

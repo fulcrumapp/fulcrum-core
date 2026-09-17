@@ -1,7 +1,7 @@
 import ChildElements from './elements/child-elements';
 import StatusElement from './elements/status-element';
 import ProjectElement from './elements/project-element';
-import PhotoElement from './elements/photo-element';
+import {canonicalizeFastfillSettings} from './elements/photo-element';
 import DefaultValues from './values/default-values';
 import Record from './record';
 import async from 'async';
@@ -9,29 +9,28 @@ import DateUtils from './utils/date-utils';
 
 function serializeElements(elements) {
   if (!Array.isArray(elements)) {
-    return JSON.parse(JSON.stringify(elements));
+    return elements;
   }
 
-  return elements.map((element) => {
-    const serializedElement = JSON.parse(JSON.stringify(element));
+  for (const element of elements) {
+    if (element == null || typeof element !== 'object') {
+      continue;
+    }
 
-    if (element && element.type === 'PhotoField') {
-      const photoElement = new PhotoElement(null, element);
-      const fastfillSettings = photoElement.getFastfillSettings();
+    if (element.type === 'PhotoField') {
+      const fastfillSettings = canonicalizeFastfillSettings(element.fastfill_settings);
 
       if (fastfillSettings === undefined) {
-        delete serializedElement.fastfill_settings;
+        delete element.fastfill_settings;
       } else {
-        serializedElement.fastfill_settings = fastfillSettings;
+        element.fastfill_settings = fastfillSettings;
       }
     }
 
-    if (element && Array.isArray(element.elements)) {
-      serializedElement.elements = serializeElements(element.elements);
-    }
+    serializeElements(element.elements);
+  }
 
-    return serializedElement;
-  });
+  return elements;
 }
 
 export default class Form {
@@ -204,7 +203,10 @@ export default class Form {
     json.description = this.description || null;
     json.script = this.script || null;
     json.field_effects = this.fieldEffects || null;
-    json.elements = serializeElements(this._elementsJSON);
+    const serializedElements = this._elementsJSON == null
+      ? this._elementsJSON
+      : JSON.parse(JSON.stringify(this._elementsJSON));
+    json.elements = serializeElements(serializedElements);
     json.assignment_enabled = this.isAssignmentEnabled;
     json.hidden_on_dashboard = this.isHiddenOnDashboard;
     json.auto_assign = this.isAutoAssign;

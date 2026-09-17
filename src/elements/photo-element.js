@@ -2,7 +2,7 @@ import MediaElement from './media-element';
 
 const SUPPORTED_FASTFILL_TYPES = new Set(['off', 'text_extraction', 'generic']);
 
-function parseFastfillSettings(settings) {
+export function canonicalizeFastfillSettings(settings) {
   if (settings == null || typeof settings !== 'object') {
     return undefined;
   }
@@ -26,20 +26,13 @@ function parseFastfillSettings(settings) {
 
 export default class PhotoElement extends MediaElement {
   constructor(parent, attributes) {
-    super(parent, attributes);
+    super(parent, attributes || {});
 
-    this._fastfillSettings = parseFastfillSettings(attributes.fastfill_settings);
+    this._fastfillSettings = canonicalizeFastfillSettings(attributes && attributes.fastfill_settings);
   }
 
   getFastfillSettings() {
-    if (this._fastfillSettings === undefined) {
-      return undefined;
-    }
-
-    return {
-      type: this._fastfillSettings.type,
-      target_fields: this._fastfillSettings.target_fields.slice()
-    };
+    return canonicalizeFastfillSettings(this._fastfillSettings);
   }
 
   toJSON() {
