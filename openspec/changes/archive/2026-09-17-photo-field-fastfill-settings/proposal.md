@@ -11,9 +11,8 @@ settings without inspecting private/raw form payloads.
 
 - Add a `getFastfillSettings()` method to `PhotoElement` for the
   `fastfill_settings` API object.
-- Define the supported contract as:
-  - `type`: the API-provided FastFill mode string; current modes include
-    `off`, `text_extraction`, and `generic`.
+- Define the contract with an API-provided mode string; current modes include
+  `off`, `text_extraction`, and `generic`.
   - `target_fields`: an array of field keys.
 - Define boundary validation for malformed and unsupported settings without
   changing unrelated media-field behavior or imposing an application-level
