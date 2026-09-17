@@ -46,7 +46,7 @@ settings without inspecting private/raw form payloads.
 - **Form schema handling:** `src/form.js` remains unchanged; it continues to
   deep-copy raw API element JSON without field-specific knowledge.
 - **Tests:** add PhotoField-focused coverage alongside the existing element
-  and form serialization tests.
+  serialization tests.
 - **Release:** the npm package's semver minor release and the existing
   tag-driven publish workflow in `.github/workflows/publish-npmjs.yml`.
 - **No new runtime dependency or database/API endpoint is required.**
