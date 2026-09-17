@@ -21,8 +21,8 @@ function createPhotoElement(fastfillSettings) {
 }
 
 describe('PhotoElement', () => {
-  it('returns the complete FastFill settings object for supported modes', () => {
-    for (const type of ['off', 'text_extraction', 'generic']) {
+  it('returns the complete FastFill settings object without a closed type list', () => {
+    for (const type of ['off', 'text_extraction', 'generic', 'future_mode']) {
       const {element} = createPhotoElement({
         type,
         target_fields: ['a1b2', 'c3d4']
@@ -61,7 +61,6 @@ describe('PhotoElement', () => {
       undefined,
       null,
       'invalid',
-      {type: 'unsupported', target_fields: []},
       {type: 'generic'},
       {type: 'generic', target_fields: 'a1b2'},
       {type: 'generic', target_fields: ['']}

@@ -1,7 +1,5 @@
 import MediaElement from './media-element';
 
-const SUPPORTED_FASTFILL_TYPES = new Set(['off', 'text_extraction', 'generic']);
-
 function parseFastfillSettings(settings) {
   if (settings == null || typeof settings !== 'object') {
     return undefined;
@@ -12,7 +10,7 @@ function parseFastfillSettings(settings) {
     return undefined;
   }
 
-  if (!SUPPORTED_FASTFILL_TYPES.has(settings.type) ||
+  if (typeof settings.type !== 'string' ||
       !Array.isArray(settings.target_fields) ||
       settings.target_fields.some((targetField) => typeof targetField !== 'string' || targetField.length === 0)) {
     return undefined;
