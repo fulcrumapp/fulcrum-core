@@ -108,39 +108,6 @@ serialize unknown properties from the input settings object.
 - **THEN** serialized `fastfill_settings` contains only `type` and
   `target_fields`
 
-### Requirement: Form round-trips valid PhotoField settings
-
-`Form` parsing and `Form.toJSON()` MUST preserve valid FastFill settings for
-PhotoFields at any supported nesting level, while leaving unrelated element
-attributes unchanged. Invalid settings MUST be omitted from canonical form
-serialization rather than copied as unvalidated metadata.
-
-#### Scenario: Round-trip a top-level PhotoField
-
-- **WHEN** a Form is constructed from a payload containing a valid
-  top-level PhotoField setting and then serialized
-- **THEN** the corresponding serialized element contains the same canonical
-  `fastfill_settings` contract
-
-#### Scenario: Round-trip a nested PhotoField
-
-- **WHEN** a valid PhotoField with FastFill settings is nested inside a
-  Repeatable element
-- **THEN** the nested serialized element contains the canonical settings and
-  form loading does not require resolving record values or external data
-
-#### Scenario: Preserve unrelated form metadata
-
-- **WHEN** a form containing a PhotoField with FastFill settings is serialized
-- **THEN** existing attributes such as `key`, `label`, `data_name`, conditions,
-  and media length limits remain unchanged
-
-#### Scenario: Remove invalid metadata during form serialization
-
-- **WHEN** a form payload contains malformed PhotoField settings
-- **THEN** the form serializes successfully with that `fastfill_settings` key
-  omitted
-
 ### Requirement: The package ships the contract in a minor release
 
 The implementation MUST pass the repository's build and test checks and MUST

@@ -18,7 +18,7 @@ settings without inspecting private/raw form payloads.
   changing unrelated media-field behavior or imposing an application-level
   cardinality limit. Missing settings return `undefined`.
 - Include the canonical `fastfill_settings` shape when a `PhotoElement` is
-  serialized, and preserve it through `Form` parsing/serialization.
+  serialized.
 - Add focused tests for parsing, access, serialization, invalid input, and
   backward compatibility with PhotoFields that do not contain the setting.
 - Publish the implementation as the next minor `@fulcrumapp/fulcrum-core`
@@ -43,11 +43,10 @@ settings without inspecting private/raw form payloads.
 
 - **Object model:** `src/elements/photo-element.js` and the existing
   `Element.toJSON()` path.
-- **Form schema round-trip:** `src/form.js` currently deep-copies the API
-  element JSON; the design must ensure the new setting is retained without
-  changing the serialization of unrelated element types.
+- **Form schema handling:** `src/form.js` remains unchanged; it continues to
+  deep-copy raw API element JSON without field-specific knowledge.
 - **Tests:** add PhotoField-focused coverage alongside the existing element
-  and form serialization tests.
+  serialization tests.
 - **Release:** the npm package's semver minor release and the existing
   tag-driven publish workflow in `.github/workflows/publish-npmjs.yml`.
 - **No new runtime dependency or database/API endpoint is required.**
