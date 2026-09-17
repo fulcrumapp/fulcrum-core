@@ -4,11 +4,12 @@
 
 The `PhotoElement` created for a `PhotoField` MUST expose a
 `getFastfillSettings()` method. For valid input, the method MUST return a
-defensive object with exactly `type` and `target_fields`, where `type` is
-`off`, `text_extraction`, or `generic`, and `target_fields` is an ordered
-array of field-key strings. The method is the sole object-model accessor for
-the settings; there MUST NOT be individual getters for `type` or
-`target_fields`.
+defensive object with exactly `type` and `target_fields`, where `type` is the
+API-provided mode string and `target_fields` is an ordered array of field-key
+strings. Current API modes include `off`, `text_extraction`, and `generic`;
+the library MUST NOT enforce a closed mode allowlist. The method is the sole
+object-model accessor for the settings; there MUST NOT be individual getters
+for `type` or `target_fields`.
 
 #### Scenario: Parse a valid text extraction setting
 
@@ -17,12 +18,13 @@ the settings; there MUST NOT be individual getters for `type` or
 - **THEN** `photoElement.getFastfillSettings()` equals an object with the same
   `type` and ordered target fields
 
-#### Scenario: Parse each supported mode
+#### Scenario: Preserve current and future mode strings
 
 - **WHEN** a `PhotoField` is constructed with each of `off`, `text_extraction`,
-  and `generic` and a valid target-field array
-- **THEN** `photoElement.getFastfillSettings().type` equals the supplied
-  supported mode for each case
+  `generic`, and a future mode such as `future_mode`, each with a valid
+  target-field array
+- **THEN** `photoElement.getFastfillSettings().type` equals the supplied mode
+  string for each case
 
 #### Scenario: Getter does not expose mutable API input
 
@@ -35,10 +37,11 @@ the settings; there MUST NOT be individual getters for `type` or
 
 `getFastfillSettings()` MUST return `undefined` when settings are missing or
 `null`, and MUST also return `undefined` for an invalid settings value. A
-settings value is invalid when it is not a plain object, has an unsupported
-`type`, lacks an array `target_fields`, or contains a non-empty-string
+settings value is invalid when it is not a plain object, does not have a
+string `type`, lacks an array `target_fields`, or contains a non-empty-string
 violation in that array. Invalid settings MUST NOT throw during form
-construction. The parser MUST preserve valid string values and their order
+construction. The parser MUST preserve valid type and target-field values and
+their order
 without trimming or deduplicating them. It MUST NOT impose an
 application-level cardinality limit on `target_fields`; cardinality policy is
 owned by the server/admin surface.
@@ -54,13 +57,6 @@ owned by the server/admin surface.
 - **WHEN** a PhotoField payload contains `fastfill_settings: null`
 - **THEN** form loading succeeds and `photoElement.getFastfillSettings()` is
   `undefined`
-
-#### Scenario: Unsupported mode is rejected
-
-- **WHEN** `fastfill_settings.type` is any value other than `off`,
-  `text_extraction`, or `generic`
-- **THEN** `photoElement.getFastfillSettings()` is `undefined` and form loading
-  does not throw
 
 #### Scenario: Invalid target-field collection is rejected
 

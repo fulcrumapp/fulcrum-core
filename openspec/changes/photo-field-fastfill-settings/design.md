@@ -50,8 +50,9 @@ the generic `Element` or `MediaElement` classes.
 The parser will:
 
 - Return `undefined` when `fastfill_settings` is missing or `null`.
-- Accept only a plain object with `type` equal to `off`,
-  `text_extraction`, or `generic`.
+- Accept only a plain object with a string `type`. Do not maintain a closed
+  allowlist of modes; new server-defined modes must pass through without a
+  library release.
 - Require `target_fields` to be an array of non-empty strings. Strings are
   preserved exactly and in input order; no trimming, sorting, or deduplication
   is performed because field keys are opaque identifiers.
