@@ -97,12 +97,12 @@ consumable.
 ### 5. Release through existing automation
 
 The repository documents that versions are updated by CI, and
-`.github/workflows/publish-npmjs.yml` publishes a matching version tag after
-building. The implementation PR must therefore not manually edit
-`package.json`. Release verification will require the next minor from the
-current `1.6.3` baseline (`1.7.0`, unless main has advanced), a matching
-`v<version>` tag, a successful build, and publication to both configured
-registries according to the existing pipeline.
+`.github/workflows/publish-npmjs.yml` builds the distribution, creates the
+matching version tag, and publishes it. No local or manual dist build,
+package-version edit, tag, or publication is part of this change. Release
+verification will require the next minor from the current `1.6.3` baseline
+(`1.7.0`, unless main has advanced), with the CI-created `v<version>` tag,
+successful build, and publication to both configured registries.
 
 ## Risks / Trade-offs
 
