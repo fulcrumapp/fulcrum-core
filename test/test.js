@@ -236,6 +236,52 @@ describe('Record', () => {
       json.gps_device_capture.should.eql(capture);
     });
   });
+
+  describe('Repeatable Item GPS Device Capture', () => {
+    function createRepeatableItem(attributes = {}) {
+      const item = record.formValues.find('rooms').createNewItem();
+
+      item.updateFromAPIAttributes({
+        id: item.id,
+        form_values: {},
+        ...attributes
+      });
+
+      return item;
+    }
+
+    it('parses gps_device_capture from API attributes', () => {
+      const capture = {device_id: 'ITEM-GPS-123'};
+      const item = createRepeatableItem({gps_device_capture: capture});
+
+      item.gpsDeviceCapture.should.eql(capture);
+    });
+
+    it('defaults missing, null, and non-object API values to an empty object', () => {
+      for (const attributes of [
+        {},
+        {gps_device_capture: null},
+        {gps_device_capture: 'invalid'},
+        {gps_device_capture: ['invalid']}
+      ]) {
+        createRepeatableItem(attributes).gpsDeviceCapture.should.eql({});
+      }
+    });
+
+    it('normalizes assigned values and serializes gps_device_capture', () => {
+      const item = createRepeatableItem();
+      const capture = {device_id: 'ITEM-GPS-456', latitude: 40.7128};
+
+      item.gpsDeviceCapture = null;
+      item.gpsDeviceCapture.should.eql({});
+      item.gpsDeviceCapture = ['invalid'];
+      item.gpsDeviceCapture.should.eql({});
+
+      item.gpsDeviceCapture = capture;
+      item.gpsDeviceCapture.should.eql(capture);
+      item.toJSON().gps_device_capture.should.eql(capture);
+    });
+  });
 });
 
 describe('Form', () => {

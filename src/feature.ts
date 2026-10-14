@@ -19,6 +19,10 @@ export default class Feature {
     return notImplemented();
   }
 
+  get gpsDeviceCapture(): any {
+    return notImplemented();
+  }
+
   get hasCoordinate(): boolean {
     return notImplemented();
   }

@@ -70,6 +70,14 @@ export default class RepeatableItemValue extends Feature {
     return this._formValues;
   }
 
+  get gpsDeviceCapture() {
+    return this._gpsDeviceCapture || {};
+  }
+
+  set gpsDeviceCapture(value) {
+    this._gpsDeviceCapture = (value && typeof value === 'object' && !Array.isArray(value)) ? value : {};
+  }
+
   get geometry() {
     return this._geometry;
   }
@@ -159,6 +167,8 @@ export default class RepeatableItemValue extends Feature {
       this._updatedAltitude = updatedLocation.altitude;
       this._updatedAccuracy = updatedLocation.horizontal_accuracy;
     }
+
+    this.gpsDeviceCapture = attrs.gps_device_capture != null ? attrs.gps_device_capture : null;
   }
 
   toJSON({simple} = {}) {
@@ -178,6 +188,7 @@ export default class RepeatableItemValue extends Feature {
     json.updated_by_id = this._updatedByID != null ? this._updatedByID : null;
     json.version = this._version != null ? this._version : null;
     json.changeset_id = this._changesetID != null ? this._changesetID : null;
+    json.gps_device_capture = this.gpsDeviceCapture;
 
     return json;
   }

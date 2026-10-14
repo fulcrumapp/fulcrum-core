@@ -83,6 +83,7 @@
                     ],
                     "type": "Point"
                 },
+                "gps_device_capture": {},
                 "id": "4b7b79e3-6748-4952-9d05-d79f398eed26",
                 "updated_at": "1449108890.000",
                 "updated_by_id": "4f7e6dd114414027bd000032",
@@ -107,6 +108,7 @@
                     ],
                     "type": "Point"
                 },
+                "gps_device_capture": {},
                 "id": "78acb22d-32fa-44f5-a1f0-57e587440530",
                 "updated_at": "1449108895.000",
                 "updated_by_id": "4f7e6dd114414027bd000032",
@@ -131,6 +133,7 @@
                     ],
                     "type": "Point"
                 },
+                "gps_device_capture": {},
                 "id": "f1731544-ef6e-4c0b-aa4a-4b1d11d6d354",
                 "updated_at": "1449108900.000",
                 "updated_by_id": "4f7e6dd114414027bd000032",
