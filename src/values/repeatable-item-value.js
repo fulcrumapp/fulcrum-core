@@ -168,7 +168,7 @@ export default class RepeatableItemValue extends Feature {
       this._updatedAccuracy = updatedLocation.horizontal_accuracy;
     }
 
-    this.gpsDeviceCapture = attrs.gps_device_capture != null ? attrs.gps_device_capture : null;
+    this.gpsDeviceCapture = attrs.gps_device_capture;
   }
 
   toJSON({simple} = {}) {
