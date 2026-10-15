@@ -19,8 +19,13 @@ export default class Feature {
     return notImplemented();
   }
 
-  get gpsDeviceCapture(): any {
+  get gpsDeviceCapture(): Record<string, unknown> | null {
     return notImplemented();
+  }
+
+  set gpsDeviceCapture(value: Record<string, unknown> | null) {
+    void value;
+    notImplemented();
   }
 
   get hasCoordinate(): boolean {
