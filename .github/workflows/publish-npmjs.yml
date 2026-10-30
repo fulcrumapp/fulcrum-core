@@ -1,160 +1,106 @@
-# Publish @fulcrumapp/fulcrum-core to public npmjs.org via Trusted Publisher (OIDC)
-# No long-lived tokens: npm authenticates the workflow via GitHub OIDC.
-# Requires Trusted Publisher configured on https://www.npmjs.com/package/@fulcrumapp/fulcrum-core
-# Settings -> Trusted Publishers:
-#   Publisher: GitHub Actions
-#   Organization: fulcrumapp
-#   Repository: fulcrum-core
-#   Workflow file name: publish-npmjs.yml
-#   Allowed action: npm publish (or npm stage publish + npm publish)
-#
-# Triggers on version tags v* pushed by Tekton ci-npm pipeline (which bumps
-# package.json, publishes to GitHub Packages, and pushes tag v<version>).
-# Also triggerable via release published and manual dispatch.
-#
-# Requirements per https://docs.npmjs.com/trusted-publishers:
-#   - Node >=22.14, npm >=11.5.1
-#   - GitHub-hosted runner only (ubuntu-latest), no self-hosted
-#   - Workflow file name must exactly match configured name
-#   - package.json repository.url must exactly match github repo URL (https form)
-#   - permissions: id-token: write
-#
-# Provenance is auto-enabled for public packages from public repos on npmjs.org.
-
 name: Publish to npmjs.org (Trusted Publisher)
 
 on:
   push:
-    tags:
-      - "v*"  # Tekton pushes vX.Y.Z
-  release:
-    types: [published]
+    tags: ['v*.*.*']
   workflow_dispatch:
     inputs:
       tag:
-        description: "Tag to publish. If empty, uses current ref."
-        required: false
+        description: Stable version tag to publish, for example v1.2.3.
+        required: true
 
 permissions:
-  id-token: write   # REQUIRED for npm Trusted Publishing OIDC
-  contents: read    # for checkout + reading tag
+  contents: read
+  id-token: write
+
+concurrency:
+  group: publish-npmjs-${{ inputs.tag || github.ref_name }}
+  cancel-in-progress: false
+  queue: max
 
 jobs:
   publish:
-    runs-on: ubuntu-latest  # MUST be GitHub-hosted for Trusted Publisher
-    timeout-minutes: 10
-    defaults:
-      run:
-        shell: bash
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
+      - name: Checkout tag
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
         with:
-          # If workflow_dispatch with tag input, checkout that tag
-          ref: ${{ inputs.tag || github.ref }}
+          ref: ${{ inputs.tag && format('refs/tags/{0}', inputs.tag) || github.ref }}
+          fetch-depth: 0
+          persist-credentials: false
 
-      - name: Setup Node (Trusted Publisher – no token)
-        uses: actions/setup-node@v4
+      - name: Set up Node
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
         with:
-          node-version: "22"
-          registry-url: "https://registry.npmjs.org"
-          # Intentionally NO token / NODE_AUTH_TOKEN – OIDC provides auth via id-token
-          # See https://docs.npmjs.com/trusted-publishers
+          node-version: '22.14.0'
+          registry-url: https://registry.npmjs.org/
 
-      - name: Guard – tag must match package version (fail-hard)
+      - name: Install package managers
+        run: npm install --global npm@11.5.1 yarn@1.22.22 --ignore-scripts
+
+      - name: Verify release tag and commit
+        env:
+          TAG: ${{ inputs.tag || github.ref_name }}
+          EVENT_NAME: ${{ github.event_name }}
         run: |
           set -euo pipefail
-          PKG_VER=$(node -p "require('./package.json').version")
-          TAG="${{ inputs.tag || github.ref_name }}"
-
-          # Strip leading v
-          TAG_VER="${TAG#v}"
-
-          # If we were triggered by release, TAG may be the release tag; else push tag ref_name
-          if [[ "${TAG}" == refs/* ]]; then
-            # Fallback shouldn't happen with ref_name, but handle
-            TAG_VER="${TAG_VER#refs/tags/}"
+          [[ "$TAG" =~ ^v(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)$ ]] || {
+            echo "::error::A stable SemVer tag is required"
+            exit 1
+          }
+          version=$(node -p "require('./package.json').version")
+          [[ "$version" == "${TAG#v}" ]] || {
+            echo "::error::package.json version $version does not match $TAG"
+            exit 1
+          }
+          if [[ "$EVENT_NAME" == "workflow_dispatch" ]]; then
+            export GITHUB_REF="refs/tags/$TAG"
+            export GITHUB_SHA="$(git rev-parse --verify "refs/tags/$TAG^{commit}")"
           fi
+          node .github/actions/npm-publish-github/publish.js verify
 
-          if [[ "${GITHUB_EVENT_NAME}" == "release" ]]; then
-            # Release tag is in github.event.release.tag_name
-            REL_TAG="${{ github.event.release.tag_name }}"
-            if [[ -n "$REL_TAG" ]]; then
-              TAG_VER="${REL_TAG#v}"
-            fi
-          fi
+      - name: Install dependencies
+        run: yarn install --frozen-lockfile --production=false --ignore-scripts --non-interactive
 
-          # Allow manual dispatch without tag – then require exact version match is skipped only if tag input empty
-          if [[ -n "${{ inputs.tag }}" ]]; then
-            if [[ "$PKG_VER" != "$TAG_VER" ]]; then
-              echo "ERROR: package.json version $PKG_VER != tag version $TAG_VER (${{ inputs.tag }}). Failing closed."
-              exit 1
-            fi
-          elif [[ "${GITHUB_REF_TYPE}" == "tag" ]]; then
-            if [[ "$PKG_VER" != "$TAG_VER" ]]; then
-              echo "ERROR: package.json version $PKG_VER != tag version $TAG_VER (ref ${{ github.ref }}). This indicates a mismatch."
-              echo "Tekton should have bumped package.json before tagging. Failing hard."
-              exit 1
-            fi
-          else
-            echo "No tag ref – running for release or dispatch without version guard; proceeding with package version $PKG_VER"
-          fi
-
-          echo "Version check OK: $PKG_VER"
-
-      - name: Install (yarn frozen)
-        run: |
-          set -euo pipefail
-          # Use yarn 1.x classic as per packageManager field (yarn@1.22.22)
-          # setup-node does not manage yarn classic; use corepack or npm i -g yarn
-          npm i -g yarn@1.22.22
-          yarn --version
-          yarn install --frozen-lockfile
-
-      - name: Build
+      - name: Build package
         run: yarn build
 
-      - name: Verify dist/ exists (fail-hard)
+      - name: Pack package
+        id: pack
+        env:
+          TAG: ${{ inputs.tag || github.ref_name }}
         run: |
-          if [ ! -d dist ] || [ ! -f dist/index.js ] || [ ! -f dist/index.d.ts ]; then
-            echo "ERROR: dist/ incomplete after build – failing"
-            ls -la dist || true
+          set -euo pipefail
+          npm pack --ignore-scripts --json --pack-destination "$RUNNER_TEMP" > "$RUNNER_TEMP/npm-pack.json"
+          file=$(node -e 'const p=require(process.argv[1]); if (!Array.isArray(p) || p.length !== 1 || !/^[A-Za-z0-9._-]+\.tgz$/.test(p[0].filename)) process.exit(1); console.log(p[0].filename)' "$RUNNER_TEMP/npm-pack.json")
+          tar -xOzf "$RUNNER_TEMP/$file" package/package.json > "$RUNNER_TEMP/npm-pack-package.json"
+          node -e 'const p=require(process.argv[1]); if(p.name !== "@fulcrumapp/fulcrum-core" || p.version !== process.env.TAG.slice(1)) { console.error("Packed package does not match the tag"); process.exit(1); }' "$RUNNER_TEMP/npm-pack-package.json"
+          echo "file=$RUNNER_TEMP/$file" >> "$GITHUB_OUTPUT"
+
+      - name: Check existing version
+        id: existing
+        env:
+          TARBALL: ${{ steps.pack.outputs.file }}
+        run: |
+          set -euo pipefail
+          name=$(node -p "require('./package.json').name")
+          version=$(node -p "require('./package.json').version")
+          if response=$(npm view "$name@$version" version --json --registry=https://registry.npmjs.org/ --@fulcrumapp:registry=https://registry.npmjs.org/); then
+            [[ "$(jq -r . <<<"$response")" == "$version" ]] || { echo "::error::Registry returned a mismatched version"; exit 1; }
+            stored=$(npm view "$name@$version" dist.integrity --json --registry=https://registry.npmjs.org/ --@fulcrumapp:registry=https://registry.npmjs.org/)
+            expected=$(node -e 'const fs=require("fs"),c=require("crypto"); console.log("sha512-"+c.createHash("sha512").update(fs.readFileSync(process.env.TARBALL)).digest("base64"))')
+            [[ "$(jq -r . <<<"$stored")" == "$expected" ]] || { echo "::error::Existing npm version has different package contents"; exit 1; }
+            echo "published=true" >> "$GITHUB_OUTPUT"
+          elif jq -e '.error.code == "E404"' <<<"$response" >/dev/null 2>&1; then
+            echo "published=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "::error::Unable to query npmjs.org for $name@$version"
             exit 1
           fi
 
-      # Stage-then-publish pattern recommended by npm docs for Trusted Publishers
-      # to ensure the tarball is uploaded under OIDC auth.
-      - name: npm stage publish (OIDC staging per docs)
-        run: |
-          set -euo pipefail
-          # npm version printed for debugging – must be >=11.5.1 for OIDC
-          npm --version
-          # Stage package under OIDC – creates tokenless staged publish
-          npm publish --dry-run --provenance --access public || true  # dry-run always allowed, validates we can publish
-          # Real staging: per npm blog post, use `npm publish` is default allowed action,
-          # but `npm stage publish` + `npm publish` both should be allowed in TP config if using staging flow.
-          # If TP is configured for `npm publish` only, the direct publish below suffices.
-          # Try staged publish for best-practice OIDC; fallback will be the next step.
-          npx --yes npm@latest stage publish --provenance --access public || {
-            echo "::warning::npm stage publish not available / not allowed, will do direct npm publish in next step (ensure TP allows 'npm publish')"
-            exit 0
-          }
-
-      - name: Publish to npmjs.org (Trusted Publisher OIDC)
-        # Direct publish – works when TP allowed action includes 'npm publish'.
-        # If staging flow above succeeded, this second publish may be idempotent/no-op or update? npm docs say
-        # to use stage publish then publish. To be safe, we run publish and allow already-published to be caught?
-        # Safer: run publish; if package@version already exists due to stage publish auto-publishing (?) we handle 403 gracefully?
-        # Actually stage publish docs: it holds the package behind a flag until you run `npm publish` again.
-        # So we always run this second publish as the finalization.
-        run: |
-          set -euo pipefail
-          # --provenance auto for public packages from public repos on npm >=11.5.1; explicit anyway
-          # --access public required for scoped @fulcrumapp packages first publish
-          npm publish --provenance --access public
-
-      - name: Summary
-        run: |
-          PKG=$(node -p "require('./package.json').name")
-          VER=$(node -p "require('./package.json').version")
-          echo "Published $PKG@$VER to https://registry.npmjs.org via Trusted Publisher OIDC"
+      - name: Publish to npmjs.org
+        if: steps.existing.outputs.published != 'true'
+        env:
+          TARBALL: ${{ steps.pack.outputs.file }}
+        run: npm publish "$TARBALL" --ignore-scripts --registry=https://registry.npmjs.org/ --@fulcrumapp:registry=https://registry.npmjs.org/ --provenance --access public
