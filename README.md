@@ -34,6 +34,23 @@ yarn install
 yarn build
 ```
 
+The build compiles JavaScript and TypeScript from `src/` into CommonJS modules
+in `dist/`, with declaration files and source maps. JavaScript remains unchecked
+(`allowJs: true`, `checkJs: false`); TypeScript uses strict checking. A build with
+type errors fails without emitting new files.
+
+```sh
+# Check types without generating build output
+yarn typecheck
+
+# Lint JavaScript and TypeScript source files
+yarn lint
+```
+
+CI runs typechecking and the build before the existing test suite. Source
+conversion is separate work; these commands support the current mixed-source
+layout without requiring JavaScript files to be converted.
+
 ### Tests
 
 ```sh
