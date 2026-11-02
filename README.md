@@ -72,5 +72,10 @@ console.log(record.formValues.get('field_key').displayValue);
 
 ## Release
 
-All verison updates are done automatically via CI, please do not change
-the version value in package.json manually.
+Do not manually change the root `package.json` version. GitHub Actions creates
+the version change on a separate release-only commit. PR, merge-queue and main
+validation compare the version with the event's base commit and fail if it
+changes; revert only that field if the check fails.
+
+Configure the CI check as required and protect workflow changes with trusted
+review: a PR can otherwise alter or remove its own workflow check.
