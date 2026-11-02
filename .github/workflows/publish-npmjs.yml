@@ -43,8 +43,14 @@ jobs:
         env:
           TAG: ${{ inputs.tag || github.ref_name }}
           EVENT_NAME: ${{ github.event_name }}
+          REF_NAME: ${{ github.ref_name }}
+          REF_TYPE: ${{ github.ref_type }}
         run: |
           set -euo pipefail
+          if [[ "$EVENT_NAME" == "workflow_dispatch" && ( "$REF_TYPE" != tag || "$REF_NAME" != "$TAG" ) ]]; then
+            echo "::error::Manual dispatch must use the same tag as its workflow ref."
+            exit 1
+          fi
           [[ "$TAG" =~ ^v(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)$ ]] || {
             echo "::error::A stable SemVer tag is required"
             exit 1
@@ -54,10 +60,6 @@ jobs:
             echo "::error::package.json version $version does not match $TAG"
             exit 1
           }
-          if [[ "$EVENT_NAME" == "workflow_dispatch" ]]; then
-            export GITHUB_REF="refs/tags/$TAG"
-            export GITHUB_SHA="$(git rev-parse --verify "refs/tags/$TAG^{commit}")"
-          fi
           node .github/actions/npm-publish-github/publish.js verify
 
       - name: Install dependencies
