@@ -24,18 +24,18 @@ jobs:
     timeout-minutes: 20
     steps:
       - name: Checkout
-        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        uses: actions/checkout@v7.0.1
         with:
           persist-credentials: false
 
       - name: Set up Node
-        uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        uses: actions/setup-node@v7.1.0
         with:
           node-version: "22"
           cache: yarn
 
       - name: Preserve CI configuration
-        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        uses: actions/upload-artifact@v7.0.2
         with:
           name: npm-ci-config-${{ github.run_id }}-${{ github.run_attempt }}
           path: ci/config.yaml
@@ -64,23 +64,23 @@ jobs:
       cancel-in-progress: false
       queue: max
     steps:
-      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: actions/checkout@v7.0.1
         with:
           fetch-depth: 0
           persist-credentials: false
-      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+      - uses: actions/setup-node@v7.1.0
         with:
           node-version: '22.14.0'
           package-manager-cache: false
       - name: Create scoped GitHub App token
         id: app-token
-        uses: actions/create-github-app-token@64ab729a6294000f5aa4a4bc0b73d1f32bc45510 # v3.3.0
+        uses: actions/create-github-app-token@v3.3.0
         with:
           app-id: ${{ secrets.FULCRUM_CI_APP_ID }}
           private-key: ${{ secrets.FULCRUM_CI_APP_PRIVATE_KEY }}
           permission-contents: write
       - name: Create release-only commit and tag
-        uses: ./.github/actions/npm-create-tag
+        uses: $/.github/actions/npm-create-tag
         env:
           GH_TOKEN: ${{ steps.app-token.outputs.token }}
           CHECK_NPMJS: 'true'
