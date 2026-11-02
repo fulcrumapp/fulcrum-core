@@ -72,5 +72,17 @@ console.log(record.formValues.get('field_key').displayValue);
 
 ## Release
 
-All verison updates are done automatically via CI, please do not change
-the version value in package.json manually.
+Do not manually change the root `package.json` version. GitHub Actions creates
+the version-only commit on `main` after validation, with `[skip ci]`, then
+creates a tag that starts publication. PR, merge-queue and main validation
+compare the version with the event's base commit and fail if it changes;
+revert only that field if the check fails.
+
+The GitHub App needs permission to bypass the rules protecting `main` and
+create release tags. Release writes are queued; if a newer merge advances
+`main`, the newer validated run releases the combined changes. If tag creation
+fails after the version commit, rerun the original main CI workflow to recover
+the tag before releasing newer changes.
+
+Configure the CI check as required and protect workflow changes with trusted
+review: a PR can otherwise alter or remove its own workflow check.

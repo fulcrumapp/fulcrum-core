@@ -1,8 +1,7 @@
 name: Publish to npmjs.org (Trusted Publisher)
 
 on:
-  push:
-    tags: ['v*.*.*']
+  create:
   workflow_dispatch:
     inputs:
       tag:
@@ -20,6 +19,7 @@ concurrency:
 
 jobs:
   publish:
+    if: (github.event_name == 'create' && github.ref_type == 'tag' && startsWith(github.ref_name, 'v')) || github.event_name == 'workflow_dispatch'
     runs-on: ubuntu-latest
     timeout-minutes: 20
     steps:
