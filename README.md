@@ -85,10 +85,11 @@ compare the version with the event's base commit and fail if it changes;
 revert only that field if the check fails.
 
 Release versioning uses the highest stable tag and the changes since its
-common ancestor. If no stable tag exists, the stable version in the tested
-commit's `package.json` is the baseline and all commit messages in its history
+common ancestor. The baseline is the greatest of the highest stable tag, the
+tested commit's stable `package.json` version, and release-commit versions in
+the examined history. With no stable tag, all commit messages in its history
 determine the bump. Reconcile existing registry versions before the first
-release; a missing or invalid baseline fails.
+release; a missing or invalid version fails.
 
 The GitHub App needs permission to bypass the rules protecting `main` and
 create release tags. Tagging, recovery and publication require a
@@ -96,8 +97,9 @@ GitHub-signed commit, regardless of the App author. Protect branch and tag
 access to control who can create releases. Release writes
 are queued; if a newer merge advances
 `main`, the newer validated run releases the combined changes. If tag creation
-fails after the version commit, rerun the original main CI workflow to recover
-the tag before releasing newer changes.
+fails after the version commit, the original CI run can recover it if its code
+supports recovery. Otherwise, a newer validated run warns and supersedes the
+untagged version without automatically publishing it.
 
 Configure the CI check as required and protect workflow changes with trusted
 review: a PR can otherwise alter or remove its own workflow check.
