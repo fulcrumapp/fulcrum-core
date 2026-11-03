@@ -84,6 +84,12 @@ creates a tag that starts publication. PR, merge-queue and main validation
 compare the version with the event's base commit and fail if it changes;
 revert only that field if the check fails.
 
+Release versioning uses the highest stable tag and the changes since its
+common ancestor. If no stable tag exists, the stable version in the tested
+commit's `package.json` is the baseline and all commit messages in its history
+determine the bump. Reconcile existing registry versions before the first
+release; a missing or invalid baseline fails.
+
 The GitHub App needs permission to bypass the rules protecting `main` and
 create release tags. Tagging, recovery and publication require a
 GitHub-signed commit authored by `fulcrum-ci-public[bot]`. Release writes
