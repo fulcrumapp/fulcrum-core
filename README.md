@@ -72,11 +72,10 @@ console.log(record.formValues.get('field_key').displayValue);
 
 ## Release
 
-Validation and GitHub Packages publishing use internal `flcrm-gh-*` runners;
-npmjs.org publishing remains on GitHub-hosted runners because npm trusted
-publishing does not support self-hosted runners. Before enabling internal
-runners for this public repository, verify fork approval, runner isolation,
-network access and ephemeral cleanup: fork PRs can run untrusted code.
+Validation, release and publication jobs use GitHub-hosted `ubuntu-latest`
+runners. npm trusted publishing does not support self-hosted runners. Fork
+approval settings are configured separately in GitHub and must be verified
+before relying on them.
 
 Do not manually change the root `package.json` version. GitHub Actions creates
 the version-only commit on `main` after validation, with `[skip ci]`, then
