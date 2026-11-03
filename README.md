@@ -77,6 +77,9 @@ runners. npm trusted publishing does not support self-hosted runners. Fork
 approval settings are configured separately in GitHub and must be verified
 before relying on them.
 
+The GitHub Packages publisher installs npm 11.5.1 before packing so
+`--ignore-scripts` also prevents `prepare` from running.
+
 Do not manually change the root `package.json` version. GitHub Actions creates
 the version-only commit on `main` after validation, with `[skip ci]`, then
 creates a tag that starts publication. PR, merge-queue and main validation
