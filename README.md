@@ -92,7 +92,8 @@ release; a missing or invalid baseline fails.
 
 The GitHub App needs permission to bypass the rules protecting `main` and
 create release tags. Tagging, recovery and publication require a
-GitHub-signed commit authored by `fulcrum-ci-public[bot]`. Release writes
+GitHub-signed commit, regardless of the App author. Protect branch and tag
+access to control who can create releases. Release writes
 are queued; if a newer merge advances
 `main`, the newer validated run releases the combined changes. If tag creation
 fails after the version commit, rerun the original main CI workflow to recover
