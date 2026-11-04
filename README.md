@@ -77,6 +77,18 @@ runners. npm trusted publishing does not support self-hosted runners. Fork
 approval settings are configured separately in GitHub and must be verified
 before relying on them.
 
+The GitHub Packages publisher installs npm 11.5.1 before packing so
+`--ignore-scripts` also prevents `prepare` from running.
+
+For npmjs.org, configure a GitHub Actions trusted publisher in the
+`@fulcrumapp/fulcrum-core` package settings with organization `fulcrumapp`,
+repository `fulcrum-core`, workflow filename `publish-npmjs.yml`, and no
+environment. Allow direct `npm publish`. The workflow uses a GitHub-hosted
+runner with `id-token: write`; it does not need an npm publish token. See
+[npm's trusted publishing documentation](https://docs.npmjs.com/trusted-publishers/).
+Check these settings if publication fails; npm does not validate them when
+they are saved.
+
 Do not manually change the root `package.json` version. GitHub Actions creates
 the version-only commit on `main` after validation, with `[skip ci]`, then
 creates a tag that starts publication. PR, merge-queue and main validation
