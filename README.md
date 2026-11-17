@@ -89,5 +89,45 @@ console.log(record.formValues.get('field_key').displayValue);
 
 ## Release
 
-All verison updates are done automatically via CI, please do not change
-the version value in package.json manually.
+Validation, release and publication jobs use GitHub-hosted `ubuntu-latest`
+runners. npm trusted publishing does not support self-hosted runners. Fork
+approval settings are configured separately in GitHub and must be verified
+before relying on them.
+
+The GitHub Packages publisher installs npm 11.5.1 before packing so
+`--ignore-scripts` also prevents `prepare` from running.
+
+For npmjs.org, configure a GitHub Actions trusted publisher in the
+`@fulcrumapp/fulcrum-core` package settings with organization `fulcrumapp`,
+repository `fulcrum-core`, workflow filename `publish-npmjs.yml`, and no
+environment. Allow direct `npm publish`. The workflow uses a GitHub-hosted
+runner with `id-token: write`; it does not need an npm publish token. See
+[npm's trusted publishing documentation](https://docs.npmjs.com/trusted-publishers/).
+Check these settings if publication fails; npm does not validate them when
+they are saved.
+
+Do not manually change the root `package.json` version. GitHub Actions creates
+the version-only commit on `main` after validation, with `[skip ci]`, then
+creates a tag that starts publication. PR, merge-queue and main validation
+compare the version with the event's base commit and fail if it changes;
+revert only that field if the check fails.
+
+Release versioning uses the highest stable tag and the changes since its
+common ancestor. The baseline is the greatest of the highest stable tag, the
+tested commit's stable `package.json` version, and release-commit versions in
+the examined history. With no stable tag, all commit messages in its history
+determine the bump. Reconcile existing registry versions before the first
+release; a missing or invalid version fails.
+
+The GitHub App needs permission to bypass the rules protecting `main` and
+create release tags. Tagging, recovery and publication require a
+GitHub-signed commit, regardless of the App author. Protect branch and tag
+access to control who can create releases. Release writes
+are queued; if a newer merge advances
+`main`, the newer validated run releases the combined changes. If tag creation
+fails after the version commit, the original CI run can recover it if its code
+supports recovery. Otherwise, a newer validated run warns and supersedes the
+untagged version without automatically publishing it.
+
+Configure the CI check as required and protect workflow changes with trusted
+review: a PR can otherwise alter or remove its own workflow check.
