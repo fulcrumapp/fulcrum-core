@@ -25,10 +25,10 @@
     "publish:npm": "npm publish --registry=https://registry.npmjs.org --@fulcrumapp:registry=https://registry.npmjs.org --access public",
     "publish:github": "npm publish --registry=https://npm.pkg.github.com --@fulcrumapp:registry=https://npm.pkg.github.com",
     "publish:all": "yarn publish:npm && yarn publish:github",
-    "lint": "eslint src/* src/**/*",
+    "lint": "eslint --ext .js,.ts src",
     "build": "tsc",
     "clean": "rm -rf dist",
-    "typecheck": "tsc -b"
+    "typecheck": "tsc --noEmit"
   },
   "packageManager": "yarn@1.22.22",
   "author": "Fulcrum",
