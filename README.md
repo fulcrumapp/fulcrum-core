@@ -37,7 +37,8 @@ yarn build
 The build compiles JavaScript and TypeScript from `src/` into CommonJS modules
 in `dist/`, with declaration files and source maps. JavaScript remains unchecked
 (`allowJs: true`, `checkJs: false`); TypeScript uses strict checking. A build with
-type errors fails without emitting new files.
+type errors does not emit or overwrite output, but existing `dist/` files remain.
+Run `yarn clean` before building if you need to remove stale artifacts.
 
 ```sh
 # Check types without generating build output
